@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2462,
+  "id": "bcbexpand_BigCodeBench/554_vagueness",
+  "questions": [
+    "Is the sentence length inclusive of both MIN_WORDS and MAX_WORDS? The prompt says 'between', but the test uses <= and the reference uses randint with MAX_WORDS+1.",
+    "Should the function generate a new random sentence each call, or can it be deterministic? The prompt says 'random' but doesn't specify seeding.",
+    "What happens if MIN_WORDS > MAX_WORDS? Should it raise an error, swap, or produce empty output?",
+    "Is the WORDS_POOL guaranteed to be non-empty? If empty, should it raise an error or return empty string?",
+    "Can words be repeated in the sentence? The reference repeats, but is that required or just allowed?",
+    "Should the sentence have exactly the randomly chosen length, or can it be shorter if duplicates cause collapse? (Not applicable here as words are used directly.)",
+    "Is the POOL_SIZE parameter used? The signature includes it but prompt and reference don't mention it.",
+    "For odd-length sentences, must the middle word be distinct from the mirrored halves? The reference allows any choice."
+  ]
+}

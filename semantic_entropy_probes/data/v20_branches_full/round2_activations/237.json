@@ -1,0 +1,14 @@
+{
+  "branch_idx": 237,
+  "id": "bcbexpand_BigCodeBench/493_vagueness",
+  "questions": [
+    "Should the x-axis label include the full start datetime with hours/minutes/seconds, or just the date? The prompt says 'days since the start date' but the reference uses start_time.strftime('%Y-%m-%d %H:%M:%S').",
+    "If the start timestamp is exactly at midnight and the current time is exactly at midnight, should days_diff be zero or one? The reference uses .days which truncates, potentially giving zero days for same-day start and end.",
+    "Is the random float for each team each day generated with random.uniform(0.1, 1) inclusive of both endpoints? The prompt says 'between 0.1 and 1' but uniform's inclusivity is language-specific.",
+    "Should the performance data dictionary have keys in the same order as the input teams list? The reference uses dict comprehension but order is not guaranteed in older Python.",
+    "If the start timestamp is in the future, the reference raises ValueError. Should the function also handle start timestamp equal to current time (days_diff=0)?",
+    "Does 'days since the start date' mean calendar days or 24-hour periods from the exact start timestamp? The reference uses .days which is calendar days, ignoring time of day.",
+    "Should the plot include a title? The prompt does not specify, and the reference does not add one.",
+    "Is the random seed applied globally (random.seed) as in the reference, or should it only affect the function's internal randomness? The prompt mentions random_seed but not scope."
+  ]
+}

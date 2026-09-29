@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2308,
+  "id": "bcbexpand_BigCodeBench/178_semantic",
+  "questions": [
+    "Should the function accept a JSON string, a bytes object, or a dict? The prompt says 'JSON response' and the tests pass bytes, but the canonical solution uses json.loads on a variable named 'response' that is assigned the input ip_address directly.",
+    "Is the IP_REGEX pattern intended to validate that the IP address consists of four decimal octets each in range 0-255, or just that it matches the pattern of four dot-separated number groups?",
+    "If the JSON parsing fails (e.g., malformed JSON), should the function return the exception's string representation (as in the canonical solution) or a fixed error message like 'Invalid IP address received'?",
+    "If the 'ip' key is missing from the JSON, should the function raise a KeyError, return a specific error string, or return the exception's string representation?",
+    "Should the function treat an empty string under the 'ip' key as invalid (as test_case_4 suggests) or as a valid IP address?",
+    "Is the IP address considered 'public' in the sense that private/reserved ranges should be rejected? The prompt mentions 'public IP address' but the tests include private IPs like 192.168.1.1.",
+    "Should the function handle IPv6 addresses? The regex only matches IPv4 pattern.",
+    "If the 'ip' value is a non-string type (e.g., integer or null), should the function attempt to convert it to a string or treat it as invalid?"
+  ]
+}

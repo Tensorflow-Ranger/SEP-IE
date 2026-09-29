@@ -1,0 +1,14 @@
+{
+  "branch_idx": 3156,
+  "id": "bcbexpand_BigCodeBench/403_vagueness",
+  "questions": [
+    "Should the function display the images side-by-side as described in the first sentence, or is displaying optional/not required? The clarification says 'displaying is not specified beyond what's given, so assume standard behavior', but 'standard behavior' is ambiguous.",
+    "What is the 'display format' conversion mentioned in the prompt? The reference solution converts to grayscale via cv2.COLOR_RGB2GRAY, but the prompt says 'convert it to display format' which is vague.",
+    "Is the blur filter applied before or after conversion to display format? The prompt order suggests blur then convert, but the reference does blur then grayscale conversion.",
+    "What color space should the original image array be in? The reference converts to RGB via img.convert('RGB'), but the prompt says 'Open an RGB image'\u2014should we assume input is already RGB or enforce conversion?",
+    "What should be the dtype and value range (e.g., 0-255 vs. 0.0-1.0) of the returned numpy arrays? The reference uses uint8 0-255, but not explicitly stated.",
+    "Should the function handle non-image files or corrupt image files? Only FileNotFoundError is mentioned, but other errors (e.g., PIL.UnidentifiedImageError) could occur.",
+    "Is the blur radius applied as the standard deviation or radius of the Gaussian blur? PIL's GaussianBlur takes radius, but other libraries might use sigma.",
+    "Should the function preserve the aspect ratio or dimensions of the images when displaying? The prompt mentions displaying side by side, but the reference does not resize."
+  ]
+}

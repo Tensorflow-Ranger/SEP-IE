@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2919,
+  "id": "bcb_BigCodeBench/130_semantic",
+  "questions": [
+    "Should the salt be appended before or after the hex data? The prompt says 'appends it to the byte representation' but the reference solution does salt + data. Is the order fixed as salt then data?",
+    "Does the hex string need to be stripped of whitespace or other non-hex characters before unhexlifying, or is it assumed to be clean?",
+    "Should the hex string be validated as containing only valid hex digits (0-9, a-f, A-F) and possibly '\\x' prefixes, or can it contain arbitrary characters that unhexlify will handle or error on?",
+    "Is the salt size in bits or bytes? The prompt says 'size' and reference uses os.urandom(salt_size) directly, implying bytes, but is that explicit?",
+    "Should the base64-encoded salt be returned as a string (decoded) or as bytes? The prompt says 'base64-encoded salt' and reference uses .decode('utf-8'), but is that required?",
+    "Is the SHA256 hash output required to be in hexadecimal lowercase, or is any hexdigest format (e.g., uppercase) acceptable?",
+    "If the hex string contains '\\x' escape sequences, should they be removed before unhexlifying? The reference solution does .replace('\\x', ''), but is that part of the specification or an implementation detail?",
+    "Should the function raise an exception for invalid hex strings (e.g., odd length, non-hex characters) or return some error value?"
+  ]
+}

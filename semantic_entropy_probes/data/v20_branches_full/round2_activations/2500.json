@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2500,
+  "id": "bcbexpand_BigCodeBench/642_semantic",
+  "questions": [
+    "Does 'first occurrence of each unique content' mean we should deduplicate by content hash, storing only the first file path encountered for each hash, or does it mean we should compute hash only for the first file with that content and skip later duplicates? The prompt says 'considering only the first occurrence of each unique content' but the reference solution does not deduplicate by content.",
+    "Should the pattern be matched against the full file path (including directory) or only the file name? The reference solution matches against file name only, but the prompt doesn't specify.",
+    "What should happen if a file cannot be read (e.g., permission error, broken symlink)? Should it be silently skipped, raise an exception, or include a placeholder?",
+    "Should the function follow symbolic links to directories during os.walk? The clarification says recursive using os.walk, but os.walk's default behavior with symlinks is system-dependent unless topdown or followlinks is specified.",
+    "Is the pattern matching case-sensitive? The regex pattern default includes uppercase letters, but the prompt doesn't specify re.IGNORECASE or default behavior.",
+    "Should the output dictionary keys be absolute paths or relative to the input directory? The reference solution uses full paths from os.path.join, but it's not explicit.",
+    "What encoding should be used for reading files? The reference solution uses binary mode ('rb'), but the prompt doesn't specify, and text mode could change hash.",
+    "Does 'first occurrence' refer to traversal order of os.walk, which is depth-first, and if so, is it guaranteed to be consistent across runs? The prompt mentions first occurrence but doesn't define order."
+  ]
+}

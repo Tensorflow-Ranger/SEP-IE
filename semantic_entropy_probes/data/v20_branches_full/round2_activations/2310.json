@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2310,
+  "id": "bcbexpand_BigCodeBench/178_semantic",
+  "questions": [
+    "Is the input ip_address a JSON string, a bytes object, or a dict? The test cases show bytes, but the canonical solution treats it as a string for json.loads.",
+    "Should the function validate that each octet is between 0 and 255, or just match the regex pattern? The regex only checks format, not valid ranges.",
+    "What should be returned if the JSON parsing fails? The canonical solution returns str(e), but the prompt says return 'Invalid IP address received' for invalid IP.",
+    "Does the JSON response always have a top-level key 'ip', or could it be nested or have a different key? The prompt says 'containing the IP address or its location'.",
+    "If the IP address is valid but private (e.g., 192.168.1.1), should it still be returned, or is the function only for public IPs? The prompt mentions 'public IP address'.",
+    "Should the function handle IPv4-mapped IPv6 addresses or only strict IPv4? The clarification says IPv4, but ambiguous if mixed forms are allowed.",
+    "What if the JSON contains additional fields like 'location'? Should the function ignore them or use them for validation?",
+    "Is the IP address considered invalid if it contains leading zeros (e.g., 192.168.001.001)? The regex would match, but some interpretations reject them."
+  ]
+}

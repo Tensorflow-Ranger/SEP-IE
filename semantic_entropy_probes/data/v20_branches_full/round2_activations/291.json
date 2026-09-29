@@ -1,0 +1,14 @@
+{
+  "branch_idx": 291,
+  "id": "bcbexpand_BigCodeBench/570_semantic",
+  "questions": [
+    "For type annotations that are not simple types (e.g., List[int], custom classes), should they be converted to their __name__ if they are a type, or always to str(v)? The reference solution uses v.__name__ if isinstance(v, type) else str(v), but is that the intended behavior for all possible annotation values?",
+    "How should defaults be represented when there are none? The reference solution returns None, but the prompt says 'default values' and the clarification only mentions None becoming null. Is returning null (None) for no defaults the required behavior, or should it be an empty list or omitted?",
+    "Should the 'args' list include 'self' for bound methods or instance methods? The prompt says 'function', but inspect.getfullargspec on a method includes 'self'.",
+    "What about functions with *args or **kwargs? The prompt mentions 'arguments' but doesn't specify handling varargs or keywords. Should they be included in the output, and if so, under which keys?",
+    "The prompt says 'and a boolean indicating if it's a lambda function or has nested functions.' The reference solution only checks isinstance(f, types.LambdaType). Should the boolean also be true for functions that contain nested functions, or is the phrasing ambiguous?",
+    "For lambda functions, the function name is '<lambda>'. Is that the exact expected string, or should it be something else like 'lambda' or empty?",
+    "Should the output JSON be pretty-printed or compact? The prompt says 'JSON string' but doesn't specify formatting.",
+    "What about functions with default values that are not at the end? inspect.getfullargspec.defaults aligns with trailing args. Is that the intended mapping, or should defaults be paired with args explicitly?"
+  ]
+}

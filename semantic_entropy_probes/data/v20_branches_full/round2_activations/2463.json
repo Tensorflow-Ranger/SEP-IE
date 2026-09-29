@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2463,
+  "id": "bcbexpand_BigCodeBench/554_vagueness",
+  "questions": [
+    "Is the random sentence length inclusive of MAX_WORDS? The prompt says 'between a minimum (MIN_WORDS) and maximum (MAX_WORDS) number of words' and the test uses '<= MAX_WORDS', but the reference solution uses np.random.randint(MIN_WORDS, MAX_WORDS + 1) which is inclusive of MAX_WORDS. Should the function generate sentences of length exactly MAX_WORDS?",
+    "Should the function handle the case where MIN_WORDS > MAX_WORDS? If so, what should happen (e.g., raise ValueError, swap them, return empty string)?",
+    "Is WORDS_POOL guaranteed to be non-empty? If it's empty, what should the function do (e.g., raise ValueError, return empty string)?",
+    "The signature includes POOL_SIZE but it's not mentioned in the prompt docstring. Should POOL_SIZE be used to limit the number of words selected from WORDS_POOL, or is it a redundant parameter?",
+    "Should the function ensure the generated palindrome is a proper sentence (e.g., capitalize first word, end with punctuation)? The prompt says 'palindrome sentence' but output is just a space-joined string.",
+    "Is the random selection uniform over WORDS_POOL? The clarification says 'independent random choice' but doesn't specify distribution.",
+    "Should the function use numpy.random or Python's random module? The reference uses both, but the prompt imports numpy and random. Which should be primary for randomness?",
+    "For odd-length sentences, is the middle word required to be distinct from the mirrored halves? The reference picks it independently, so it could match a mirrored word."
+  ]
+}

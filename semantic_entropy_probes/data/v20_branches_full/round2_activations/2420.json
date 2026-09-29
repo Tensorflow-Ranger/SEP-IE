@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2420,
+  "id": "bcbexpand_BigCodeBench/486_vagueness",
+  "questions": [
+    "Are the timestamps (start_time, end_time, step) in milliseconds, seconds, or some other unit? The reference solution divides by 1000, implying milliseconds, but the prompt does not specify.",
+    "Should the trend be added as trend * i (where i is the index) as in the reference, or trend * step * i (trend per time unit)? The clarification says 'per data point index', but is that the intended meaning of 'trend'?",
+    "Is the step parameter in the same unit as start_time and end_time? The reference uses np.arange with step as-is, but if timestamps are milliseconds, step is also milliseconds.",
+    "Should the datetime conversion always use the format '%Y-%m-%d %H:%M:%S.%f'? The prompt mentions plotting timestamps on x-axis but does not specify format.",
+    "Is the normal distribution mean 0 and standard deviation 1, or should parameters be configurable? The prompt says 'normal distribution' without parameters.",
+    "Should the plot x-axis use the formatted datetime strings, or numeric timestamps? The reference uses strings, but plotting with strings may affect scale.",
+    "If start_time and end_time are such that (start_time - end_time) > 0, should we raise a ValueError? The reference does, but prompt does not specify error handling.",
+    "Should the step be required to exactly divide the interval (end_time - start_time), or is the last timestamp excluded if step doesn't fit exactly? The reference uses np.arange which excludes end_time."
+  ]
+}

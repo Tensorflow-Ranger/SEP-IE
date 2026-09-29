@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2595,
+  "id": "bcbexpand_BigCodeBench/807_vagueness",
+  "questions": [
+    "When the standard deviation is 0, the function returns an empty list for outliers, but what should be returned for the variance? The prompt says 'float: The variance of the fitted normal distribution' and the reference solution returns std_dev**2 (which would be 0). Is returning 0.0 for variance in that case required, or is any behavior acceptable as long as outliers are empty?",
+    "The distribution is fitted using norm.fit from scipy.stats. Does the function assume a normal distribution fit, or should it be generic to any distribution? The prompt says 'a distribution is fitted', but the reference uses norm.fit. Is the normal distribution assumption part of the specification?",
+    "Should the mean and variance returned be the sample mean/variance or the parameters from the fitted distribution? For a normal distribution, norm.fit returns MLE parameters, which for variance is the biased MLE (dividing by n, not n-1). The reference uses norm.fit, but the prompt says 'mean and standard deviation is used to calculate the z scores'. Is the MLE variance required, or could a sample variance be used?",
+    "The threshold is compared to absolute z-score. Is the threshold inclusive or exclusive? That is, if |z| == threshold exactly, is the point an outlier or not? The prompt says 'larger than threshold', but the reference uses '>' (exclusive). Should it be strictly greater?",
+    "The function returns a list of indices. Should the indices be in ascending order? The reference uses np.where which returns indices in order of appearance, but if order matters (e.g., for consistency), it's unspecified.",
+    "What should happen if the input array is empty? The prompt doesn't specify behavior for empty data, and the reference solution would cause errors with norm.fit.",
+    "The function signature returns only a list, but the docstring says it outputs list, float, float. Should the function actually return a tuple (list, float, float) as shown in examples? The signature says -> list, which contradicts returning three values.",
+    "Is the threshold parameter guaranteed to be positive? If threshold is negative, does the function still use absolute z-score > threshold? For negative threshold, all points might be outliers, but behavior is unspecified."
+  ]
+}

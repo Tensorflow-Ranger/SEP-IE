@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2424,
+  "id": "bcbexpand_BigCodeBench/497_vagueness",
+  "questions": [
+    "Should the function use the system's local timezone (converted to UTC) or directly use UTC system time? The prompt says 'current system time in UTC' but datetime.now(pytz.UTC) uses UTC regardless of system timezone; is that correct?",
+    "Is 'days_in_past' expected to be an integer, or should it accept floats (e.g., 1.5 days)? The clarification mentions timedelta raising error for non-numeric, but timedelta(days=float) works.",
+    "Should the weekday name be in English (as per calendar.day_name) or localized to the system locale?",
+    "For large values of days_in_past (e.g., millions), should the function handle potential overflow or performance issues, or rely on timedelta's behavior?",
+    "If days_in_past is zero, should the function return the weekday of the current moment, or the start of today in UTC?",
+    "Should the function raise ValueError only for negative days, or also for non-integer types? The clarification says timedelta raises error for non-numeric, but should we pre-validate?",
+    "Is the output expected to be capitalized exactly as in calendar.day_name (e.g., 'Monday') or could it be lowercased?",
+    "Should daylight saving time adjustments be considered? The prompt uses UTC, so DST is irrelevant."
+  ]
+}

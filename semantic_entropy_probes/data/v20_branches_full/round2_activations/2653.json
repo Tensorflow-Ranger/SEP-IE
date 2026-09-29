@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2653,
+  "id": "bcbexpand_BigCodeBench/958_semantic",
+  "questions": [
+    "Should the scrambling be deterministic given a seed? The prompt mentions a seed parameter but does not specify that random.seed(seed) should be called, nor whether the scrambling should be reproducible across runs.",
+    "What constitutes a 'word'? The clarification says it's the matched word (\\w+), which includes letters and digits but not punctuation. However, does \\w+ include underscores? In regex, \\w typically matches [a-zA-Z0-9_]. Should underscores be considered part of words?",
+    "For words longer than three characters, are the outer letters defined as the first and last characters of the matched word (including digits/underscores), or only alphabetic characters? For example, in 'a1b2c', are outer letters 'a' and 'c' or 'a' and '2'?",
+    "Should the scrambling preserve the original case of the middle letters after shuffling, or is case irrelevant? For example, if the middle is 'AbC', shuffling could produce 'bAC'\u2014should uppercase letters stay uppercase in their new positions?",
+    "What about words with non-ASCII letters (e.g., accented characters)? Does \\w+ match them? The regex behavior may vary by locale/flags.",
+    "If a word contains digits, should digits be scrambled along with letters in the middle? The clarification includes digits in the matched word, but does not specify if they are treated as 'letters' for scrambling.",
+    "Should the function handle multiple lines or preserve whitespace exactly? The regex \\b\\w+\\b may behave differently across line boundaries.",
+    "Is the scrambling applied only to words consisting solely of \\w characters, or should it also apply to hyphenated compounds like 'state-of-the-art'? The regex would match each component separately."
+  ]
+}

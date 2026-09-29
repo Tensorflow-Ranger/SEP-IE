@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2519,
+  "id": "bcbexpand_BigCodeBench/658_semantic",
+  "questions": [
+    "Should the regex pattern 'ALPHANUMERIC' replace non-alphanumeric characters with a single space, or with nothing (empty string)? The prompt says 'removing non-alphanumeric characters (excluding spaces)', but the reference uses ALPHANUMERIC.sub(' ', text), which replaces with a space.",
+    "The prompt says 'preserving only terms that appear in at least two documents.' Does this mean the CountVectorizer should be configured with a min_df parameter (e.g., min_df=2), or should filtering be applied after constructing the full DTM?",
+    "Are numbers considered 'alphanumeric' for the purpose of the regex? The clarification says numbers are included, but does the regex pattern '\\W' (which matches non-word characters) treat digits as word characters? In Python regex, '\\W' excludes digits and underscores, so clarification may conflict with pattern.",
+    "Should the stopword removal occur before or after the alphanumeric filtering and lowercasing? The reference does cleaning first (regex+lower), then stopword removal on split words.",
+    "Does 'excluding spaces' in the non-alphanumeric removal mean spaces are preserved as separators, or that spaces are not considered non-alphanumeric and thus not removed? The regex '\\W_' includes underscore but not space, so spaces remain; but is this explicit enough?",
+    "Should the DTM include terms that appear only once across all documents but are not stopwords? The 'at least two documents' condition suggests no, but is it enforced per document occurrence or per document presence?",
+    "Are terms split solely on whitespace, or does CountVectorizer's default tokenizer (which splits on non-alphanumeric) interfere? The reference uses manual splitting after cleaning, but CountVectorizer may apply its own tokenization.",
+    "Should the function handle empty documents or documents that become empty after preprocessing? If so, how should they be represented in the DTM?"
+  ]
+}

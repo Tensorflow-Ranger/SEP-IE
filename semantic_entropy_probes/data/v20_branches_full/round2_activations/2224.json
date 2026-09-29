@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2224,
+  "id": "bcb_BigCodeBench/52_semantic",
+  "questions": [
+    "Should the function consider only the first occurrence of each word in the text after stopword removal, or does 'first occurrence' refer to something else? The prompt says 'considering only their first occurrence in the text', but the reference solution counts all occurrences after stopword removal.",
+    "What should be done with punctuation and non-alphabetic characters? The regex uses \\b\\w+\\b, which includes digits and underscores; is that intended?",
+    "Should the text be lowercased before processing? The reference solution uses text.lower(), but the prompt does not specify.",
+    "Is the STOPWORDS list case-sensitive? Should 'A' be removed if 'a' is in STOPWORDS?",
+    "What should happen if the text is empty or contains only stopwords? The reference solution returns an empty Series; is that required?",
+    "Should the Series index (words) be of a specific data type (e.g., string) or sorted in a particular order? The clarification says value_counts() sorts by frequency descending, but what about ties?",
+    "Are contractions (e.g., 'don't') considered one word or split? The regex \\b\\w+\\b would split 'don't' into 'don' and 't'.",
+    "Should the function handle Unicode characters (e.g., accented letters) as part of words? The regex \\w matches [a-zA-Z0-9_], excluding many Unicode letters."
+  ]
+}

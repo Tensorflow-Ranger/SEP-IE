@@ -1,0 +1,14 @@
+{
+  "branch_idx": 228,
+  "id": "bcbexpand_BigCodeBench/484_vagueness",
+  "questions": [
+    "Are the timestamps (start_time, end_time, step) in milliseconds, seconds, or some other unit? The reference solution divides by 1000, but the prompt doesn't specify.",
+    "Should the generated timestamps range include the start_time but exclude the end_time (like range()), or include both endpoints?",
+    "The clarification says noise follows normal distribution with mean 0 and standard deviation 0.1, but does not specify if the same noise instance should be used per sensor per timestamp, or independent draws?",
+    "The prompt says 'sensor readings for Sensor1, Sensor2, and Sensor3 (or their corresponding named columns in the supplied column list)'. If a custom column list is provided, which columns correspond to which sensor functions? Must the list have exactly 5 columns in a fixed order?",
+    "The Timestamp column output is a formatted string. Should the formatting always be exactly '%Y-%m-%d %H:%M:%S.%f' (as in reference), or is any datetime representation acceptable?",
+    "Is the random seed applied globally (np.random.seed) or only to the noise generation? Should it also affect the random choice of sensor status?",
+    "If step is not an integer divisor of (end_time - start_time), should the last timestamp be included if start_time + n*step < end_time?",
+    "Should the function raise an error if step is zero, or treat it as infinite loop?"
+  ]
+}

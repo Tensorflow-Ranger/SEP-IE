@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2263,
+  "id": "bcbexpand_BigCodeBench/1039_semantic",
+  "questions": [
+    "If the client sends a path that is a directory, not a regular file, should the function return 'File not found' or compute the hash of the directory (somehow) or raise an error?",
+    "Should the function handle relative paths relative to the current working directory of the server process, or treat them as absolute paths only?",
+    "If the client sends an empty request (zero bytes after decoding), what should the function do? Treat it as a non-existent file path or return an error?",
+    "Is the buffer_size parameter used only for receiving the request, or also for reading the file? The reference uses a hardcoded 4096 for file reading.",
+    "If the client disconnects before sending any data, should the function raise an exception and return an error message, or handle it as a specific error?",
+    "Should the function verify that the received request string is a valid UTF-8 sequence? The clarification says UTF-8 is used, but what if decoding fails?",
+    "If the file exists but cannot be opened (e.g., permission denied), should the function return 'File not found' or an error message?",
+    "Should the function send the response back to the client only if no exception occurs before the send call? The reference sends in try block, but error handling may affect whether send is attempted."
+  ]
+}
