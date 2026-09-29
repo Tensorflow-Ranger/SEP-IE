@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2422,
+  "id": "bcbexpand_BigCodeBench/497_vagueness",
+  "questions": [
+    "Should the function use the system's local timezone and convert to UTC, or directly use UTC system time? The prompt says 'current system time in UTC', but datetime.now(pytz.UTC) uses UTC directly, while datetime.now() with conversion could differ.",
+    "Is the 'days_in_past' parameter required to be an integer, or should it also accept floats (e.g., 1.5 days)?",
+    "What should happen if days_in_past is a very large number (e.g., 10^9) that could cause overflow or performance issues?",
+    "Should the weekday name be in English only, or should it respect the system's locale? The example uses English names like 'Monday'.",
+    "Does 'days ago' mean exactly 24-hour periods, or calendar days? For example, crossing a DST boundary could affect the weekday if using naive datetime arithmetic.",
+    "Should the function handle leap seconds or microsecond precision? The subtraction might produce a datetime with non-zero time component; does that affect the weekday?",
+    "Is the function expected to be deterministic for a given input at a specific moment, or can it be mocked in tests? The prompt mentions 'current system time', but tests rely on actual time.",
+    "Should the function raise an error for non-numeric inputs (e.g., string, None)? The prompt only specifies ValueError for negative."
+  ]
+}

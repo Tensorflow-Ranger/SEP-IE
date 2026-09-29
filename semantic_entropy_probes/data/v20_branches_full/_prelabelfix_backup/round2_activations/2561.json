@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2561,
+  "id": "bcbexpand_BigCodeBench/752_semantic",
+  "questions": [
+    "Which scoring metric should be used? The prompt says 'using the specified metric' but no metric is specified; the reference solution uses LinearRegression's default score (R\u00b2). Should we assume R\u00b2?",
+    "Should the data be split with stratification? The prompt does not mention stratification; train_test_split default is no stratification. Should we assume default?",
+    "Should the data be shuffled before splitting? train_test_split default shuffle=True. Should we assume default?",
+    "What should happen if the test split results in zero samples in the test set (e.g., due to small data and test_size rounding)? The function might crash on model.score with empty arrays.",
+    "Should the function handle single-feature DataFrames? The prompt example uses one feature, but the reference solution works for any number. Is that intended?",
+    "Should the function raise an error if target_column is the only column? That would leave X empty after dropping.",
+    "Should the function check for NaN/infinity values in the data? The prompt only checks for non-numeric, but numeric NaNs are allowed.",
+    "Should random_state be validated as non-negative? The prompt says integer, but negative integers are allowed by train_test_split."
+  ]
+}

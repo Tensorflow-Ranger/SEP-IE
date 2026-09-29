@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1954,
+  "id": "bcbexpand_BigCodeBench/843_semantic",
+  "questions": [
+    "Should the function remove digits (0-9) as 'non-alphanumeric characters'? The prompt says remove non-alphanumeric characters, but alphanumeric includes digits, so digits should remain. However, the reference solution's regex [^\\w\\s.] includes \\w which matches digits, so digits would stay. Is this intended?",
+    "What should happen if WORD_LIST contains words with uppercase letters, punctuation, or spaces? Should they be lowercased and stripped of non-alphanumerics before use, or only in the final cleanup?",
+    "Is the sentence length (5-10) inclusive of the period? The reference uses sentence_len for number of words, then adds '.', but the prompt says 'joining words until reaching a specified length for each sentence' - does 'length' mean word count or character count?",
+    "Should the function guarantee that consecutive sentences are different? The reference uses random choices independently, so duplicates are possible. Is that acceptable, or should we avoid identical consecutive sentences?",
+    "What is the character set for 'non-alphanumeric characters'? Does it include underscores? \\w includes underscore, but alphanumeric typically does not. The reference regex [^\\w\\s.] keeps underscores.",
+    "Should the function ensure that the final string has exactly one space between sentences? The clarification says sentences are separated by a single space, but what if cleanup removes spaces? Should we enforce exactly one space even if regex reduces multiple?",
+    "Is the WORD_LIST constant guaranteed to be non-empty? If empty, what should happen when trying to choose random words?",
+    "Should the period at the end of each sentence be included before or after the non-alphanumeric removal? The reference adds period before cleanup, so periods are preserved. But if cleanup removed periods, behavior would differ."
+  ]
+}

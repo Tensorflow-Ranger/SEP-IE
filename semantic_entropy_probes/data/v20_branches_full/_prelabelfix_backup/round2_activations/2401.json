@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2401,
+  "id": "bcbexpand_BigCodeBench/463_semantic",
+  "questions": [
+    "Should the conversion to int64 happen before or after checking for empty data? The prompt says raise ValueError if data is empty or fails to convert, but the reference solution uses np.fromstring which returns an empty array for an empty string, then checks size. Does 'empty data' mean an empty input string, or a string that yields no valid numbers after parsing?",
+    "The clarification says non-integer numeric values will be truncated to integers. Does truncation mean floor (toward negative infinity) or round toward zero? For example, should -3.7 become -3 or -4?",
+    "What should happen if the input string contains non-numeric tokens (e.g., '1,2,abc,4')? The prompt says 'fails to convert the data' raises ValueError, but does that mean any single conversion failure fails the whole operation, or should it skip/ignore non-numeric tokens?",
+    "The prompt says 'draw a histogram of the data using the default bins unless specified.' The function signature has bins=20. Is 20 the default, or is there a separate matplotlib default? Should the function use bins=20 when bins parameter is not provided, or should it use matplotlib's default (which is 10)?",
+    "Should the function close the matplotlib figure after returning, or leave it open for the caller to display/save? The reference solution returns the Axes object but doesn't show or close it.",
+    "The prompt specifies color: '#607c8e'. Should this color apply to all bars uniformly, or is it just the face color? Could edge color be different?",
+    "What is the expected behavior if the input string contains leading/trailing whitespace around numbers or separators? For example, '1, 2, 3' with a space after comma.",
+    "The function returns a tuple (Series, Axes). Should the Series index be default (0..n-1) or preserve any ordering? The reference solution uses default index."
+  ]
+}

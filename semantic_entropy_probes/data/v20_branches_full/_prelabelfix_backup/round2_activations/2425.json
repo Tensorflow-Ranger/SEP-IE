@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2425,
+  "id": "bcbexpand_BigCodeBench/502_vagueness",
+  "questions": [
+    "Should the date range be inclusive of today? The prompt says 'days in the past' and the canonical solution uses datetime.now().date() - timedelta(days=i) for i from 0 to days_in_past-1, which excludes today and includes days_in_past days starting from yesterday. Is that the intended behavior?",
+    "What is the order of dates in the DataFrame? The clarification says 'date-descending', but does that mean the DataFrame rows are sorted by date descending (most recent first) overall, or just that the generation loop iterates in that order? The canonical solution generates in descending order but the DataFrame is not explicitly sorted, so the order of rows could vary.",
+    "Should the lineplot have any specific styling or title? The prompt only specifies a Seaborn lineplot with date, duration, and hue, but leaves out details like title, axis labels, legend position, or grid, which could affect the returned Axes object appearance.",
+    "Is the random integer generation inclusive of both 0 and 120? The prompt says 'from 0 to 120', which is ambiguous about inclusivity, though the canonical solution uses randint(0, 120) which is inclusive.",
+    "What timezone should be used for datetime.now()? The prompt does not specify, and using local vs. UTC could affect the date if run near midnight, potentially changing the generated dates for some inputs.",
+    "Should the function handle large values of days_in_past that might cause performance issues or date overflow? The prompt does not specify limits, and the canonical solution only checks for days_in_past < 1.",
+    "Is the ACTIVITIES list fixed as given, or should it be parameterizable? The prompt says 'activities from the list' but does not specify if the list is hardcoded or could change; the canonical solution uses a fixed list.",
+    "Should the returned Axes object have any specific properties, like being from a current figure or a new figure? The prompt does not specify figure creation or management, which could affect integration with other plotting code."
+  ]
+}

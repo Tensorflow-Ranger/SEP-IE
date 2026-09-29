@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2579,
+  "id": "bcbexpand_BigCodeBench/777_semantic",
+  "questions": [
+    "Should the extraction directory be created only if it doesn't already exist, or should it be recreated/cleared? The code uses exist_ok=True, but is that the intended behavior?",
+    "If a zip file's extracted directory already exists and contains files, should extraction proceed (potentially overwriting) or skip?",
+    "Should the function extract only files matching the pattern, or also consider subdirectories? The pattern is applied to filenames in the top-level directory.",
+    "What should happen if the pattern match yields an empty string as the base_name (e.g., filename '-123.zip')? Should it extract to a directory named empty string, skip, or raise error?",
+    "Is the extraction directory path relative to the input directory (as shown) or absolute? The reference uses os.path.join(directory, base_name).",
+    "Should the function return directories in the order they were processed (e.g., alphabetical by filename) or any order? The reference uses list order of os.listdir which is filesystem-dependent.",
+    "If multiple zip files yield the same base_name (e.g., 'a-1.zip' and 'a-2.zip'), should they extract to the same directory (overwriting) or separate directories? The reference adds to extracted_dirs only if not already present.",
+    "Should the function handle symlinks to zip files in the directory? The reference uses os.listdir which returns names without following symlinks."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2516,
+  "id": "bcbexpand_BigCodeBench/656_semantic",
+  "questions": [
+    "Should the cleaning steps be applied in the exact order specified (remove non-alphanumeric except spaces/underscores, then lowercase, then remove punctuation), or can they be reordered as long as the final result is equivalent?",
+    "Does 'removing all non-alphanumeric characters except spaces and underscores' mean we keep only [a-zA-Z0-9_ ] and remove everything else, or does it mean we remove characters matching regex [\\W_] (which would also remove underscores)?",
+    "Should punctuation removal via text.translate(str.maketrans('', '', PUNCTUATIONS)) happen after the ALPHANUMERIC substitution, or is it redundant?",
+    "What should happen with non-ASCII alphanumeric characters (e.g., accented letters like '\u00e9' or Cyrillic)? Are they considered 'alphanumeric' and kept, or removed?",
+    "Should multiple consecutive spaces created by removing non-alphanumeric characters be collapsed to a single space, or preserved as multiple spaces?",
+    "Is the SentimentIntensityAnalyzer instance guaranteed to have a polarity_scores method, or should we handle cases where it doesn't?",
+    "Should we strip leading/trailing whitespace from the cleaned text before passing to sia.polarity_scores?",
+    "If the cleaned text becomes empty after all removals, what should be returned? Should we call sia.polarity_scores('') or return a default dict?"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1965,
+  "id": "bcbexpand_BigCodeBench/872_semantic",
+  "questions": [
+    "When handling uneven tuple lengths, the prompt says 'missing values are treated as zeros or ignored based on their position.' Does this mean missing values are filled with np.nan (as in the reference solution) or with 0, and does the choice affect the mean calculation (since np.nanmean ignores NaN)?",
+    "Are boolean values (True/False) considered numeric? They are instances of int in Python, but the prompt says 'numeric values' and the reference uses isinstance(val, (int, float)).",
+    "What about complex numbers or other numeric types like numpy.int32? Should they be considered numeric?",
+    "The prompt says 'non-numeric values are ignores' (ignored). Does this mean they are excluded from the mean calculation entirely, or treated as NaN in the column list?",
+    "If all values at a position are non-numeric, the mean is set to np.nan. What if there are no values at a position because all tuples are shorter than that position (i.e., missing due to uneven lengths)?",
+    "Should the function handle nested tuples or lists within the tuples, or only flat tuples with atomic values?",
+    "The output is a list of mean values for each numeric position. Does 'position' refer to the index across tuples after unzipping, and are positions counted from 0 even if all values at that position are non-numeric?",
+    "What should happen if the input list contains non-tuple elements (e.g., lists or other iterables)?"
+  ]
+}

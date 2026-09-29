@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2369,
+  "id": "bcbexpand_BigCodeBench/371_semantic",
+  "questions": [
+    "Should the input be a numpy array, a list, or any iterable? The prompt says 'input field' and the reference solution uses .reshape(-1,1), which implies a numpy array, but the function signature 'def task_func(l)' doesn't specify.",
+    "Does 'by column or across all values' mean the user chooses, or is it fixed? The prompt says 'by column or across all values' but the reference solution scales the entire array as a single column.",
+    "What shape should the output DataFrame have? The reference solution produces a single column, but the prompt doesn't explicitly forbid multi-column output if input is 2D.",
+    "If the input is a 2D array, should scaling be per column (axis=0) or across all values (flattened)? The reference solution reshapes to (-1,1), treating it as a single column.",
+    "Should the function handle non-numeric inputs or NaN values? The prompt doesn't mention data type constraints.",
+    "Is the input guaranteed to be one-dimensional? The tests use 1D arrays, but the prompt doesn't state this restriction.",
+    "Should the index of the output DataFrame be reset or match the input index? The reference solution uses default index, but if input is a pandas Series, indexing might matter.",
+    "What should happen if all values are identical? The reference solution returns zeros, which is standard MinMaxScaler behavior, but the prompt doesn't confirm this expectation."
+  ]
+}

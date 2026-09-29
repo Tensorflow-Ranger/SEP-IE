@@ -1,0 +1,14 @@
+{
+  "branch_idx": 2630,
+  "id": "bcbexpand_BigCodeBench/921_semantic",
+  "questions": [
+    "Should the scaling be applied independently per column (each column scaled to its own min/max) or jointly across all specified columns (using the global min/max across all those columns)? The prompt says 'independently or jointly' but doesn't specify which to use.",
+    "If a column is constant (all identical values), MinMaxScaler returns 0.0 by default. Is this acceptable, or should we handle constant columns differently (e.g., return 0.5, keep original, or raise warning)?",
+    "Should the function accept a single column name as a string, or must columns always be provided as a list? The signature says 'columns' but tests use lists.",
+    "What should happen if 'columns' contains a column name not present in the DataFrame? Should we raise an error, ignore it, or add a column of NaNs?",
+    "Should the function preserve the original DataFrame's index, or can it reset the index? The reference solution preserves index, but not explicitly stated.",
+    "Is the input 'data' guaranteed to be a dictionary, or could it be a pandas DataFrame directly? The reference solution uses pd.DataFrame(data).",
+    "Should the function handle duplicate column names in 'columns' (e.g., ['a', 'a'])? If so, should it scale the column once or twice?",
+    "What data types are allowed in the columns to be normalized? The tests show ints and floats, but what about datetime, string, or mixed types?"
+  ]
+}
