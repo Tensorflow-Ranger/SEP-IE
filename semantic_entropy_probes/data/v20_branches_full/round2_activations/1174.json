@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1174,
+  "id": "bcbexpand_BigCodeBench/870_semantic",
+  "questions": [
+    "Should the mean be computed as a simple arithmetic mean (sum/count) or using numpy's nanmean (which ignores NaN but not other non-numeric values)? The reference uses nanmean, but the prompt says 'non-numeric values are ignored' and 'means are computed only from available data'.",
+    "If all values at a position are non-numeric, should the result be NaN (as in reference) or 0 (since 'treating non-numeric values as missing or zero' could imply zero mean)?",
+    "How should tuples of varying lengths be handled? The prompt mentions 'missing data in some of the tuples is simply ignored', but does that mean positions beyond the shortest tuple are considered missing (NaN) or not included in the mean calculation for that position?",
+    "Are complex numbers (e.g., 1+2j) considered numeric? The prompt only mentions 'numerical values', but Python's isinstance(val, (int, float)) excludes complex.",
+    "Should the index be zero-based 'Position 0' or one-based 'Position 1'? The example shows 'Position 0' but the prompt says 'Position i' where i is the current position, which could be interpreted as starting from 0 or 1.",
+    "If a position has only one numeric value, should the mean be that value (as usual) or require multiple values? The prompt doesn't specify a minimum count.",
+    "Should the function handle nested numeric structures (e.g., lists of numbers) as numeric or non-numeric? The prompt says 'non-numeric values' and example includes ['d'] as non-numeric.",
+    "Is the output DataFrame required to have a specific dtype for the 'Mean Value' column (e.g., float64)? The prompt doesn't specify, but NaN suggests float."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1937,
+  "id": "bcbexpand_BigCodeBench/799_vagueness",
+  "questions": [
+    "How many rows should each generated DataFrame have? The prompt says 'rows sampled from L' but doesn't specify the number of rows per DataFrame.",
+    "What does 'sampled from L' mean? Is it sampling with replacement (choices) or without replacement? If without replacement, what if the requested number of rows exceeds len(L)?",
+    "For the common rows detection, should it consider rows identical only if all column values match exactly, including data types (e.g., string '65' vs integer 65)?",
+    "When L is non-empty but L[0] has length > 26, the clarification says columns = min(26, len(L[0])). Which 26 letters are used? All lowercase a-z, but are they chosen randomly for each DataFrame or fixed across all DataFrames?",
+    "Should the random_seed control all randomness (both column name selection and row sampling) or only row sampling? The reference uses seed(random_seed) at start, which would affect both if choices uses random.",
+    "The output common rows DataFrame: should it preserve the original column names from the generated DataFrames, and should it keep the original row order from the concatenated DataFrames or be sorted?",
+    "If there are duplicate rows within a single generated DataFrame, should they be considered for the 'common rows between all generated DataFrames'? The reference uses duplicated(keep=False) which marks all duplicates across the concatenation.",
+    "What should happen if num_dataframes is 0? The prompt doesn't specify behavior for zero DataFrames."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1038,
+  "id": "bcbexpand_BigCodeBench/586_semantic",
+  "questions": [
+    "Should the encrypted Fernet key be saved as raw bytes or base64-encoded bytes? The clarification says 'encrypted Fernet key should be saved in 'fernet_key.encrypted'', but the reference solution base64-encodes it, while the prompt only mentions encryption with RSA.",
+    "What RSA key size should be used? The prompt says 'generates RSA public and private keys' without specifying size, and the reference uses 512 bits.",
+    "Should the function return the public key as an object (rsa.PublicKey) or in some serialized format (e.g., PEM string)? The prompt says 'PublicKey: The RSA public key.' and the reference returns an object.",
+    "If the input file path includes directories (e.g., 'data/test.txt'), should the '.encrypted' file be placed in the same directory? The clarification says 'appending '.encrypted' to the original file path' which could be ambiguous for paths with extensions.",
+    "Does the function need to handle or clean up the private RSA key? The prompt mentions generating private key but only uses public key; should private key be saved or discarded?",
+    "Should the function read the file in binary mode ('rb') as in the reference, or text mode? The prompt says 'encrypt the contents of a specified file' without specifying mode.",
+    "Is the encrypted file content written as raw bytes (from Fernet.encrypt) or should it be base64-encoded? The prompt doesn't specify, and the reference writes raw bytes.",
+    "Should the function raise an exception for non-existent files (as tested), or handle it silently? The prompt doesn't specify error handling."
+  ]
+}

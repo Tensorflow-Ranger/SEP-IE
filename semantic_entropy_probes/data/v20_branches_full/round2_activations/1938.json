@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1938,
+  "id": "bcbexpand_BigCodeBench/799_vagueness",
+  "questions": [
+    "Does 'common rows' mean rows that appear in every single generated DataFrame (intersection across all), or rows that appear at least twice across the entire concatenated set of rows? The clarification says 'at least twice across all DataFrames', but the example with num_dataframes=1 shows a common row that appears three times within the single DataFrame, which is at least twice but not across multiple DataFrames.",
+    "When sampling rows for each DataFrame, is the number of rows per DataFrame fixed (e.g., always 3 as in the reference solution) or should it be randomly determined? The prompt says 'rows sampled from L' but doesn't specify count.",
+    "Should column names be randomly chosen per DataFrame, or the same set of column names for all DataFrames? The prompt says 'Each DataFrame has column names randomly chosen...' but the example shows same columns across DataFrames.",
+    "Is the length of column names list equal to the number of columns in L (i.e., len(L[0])), or is it a random subset? The reference uses min(len(LETTERS), len(L[0])), but prompt doesn't specify.",
+    "If L contains rows with different lengths, how should that be handled? The prompt assumes uniform row length.",
+    "Should the common rows DataFrame preserve the original order from L, order of first appearance in concatenated DataFrames, or some other order?",
+    "If a row appears multiple times within a single DataFrame, does that count toward the 'at least twice' threshold? The clarification seems to allow it.",
+    "When random_seed is provided, should it control both the column name selection and the row sampling, or only one of them? The reference seeds random.choices globally."
+  ]
+}

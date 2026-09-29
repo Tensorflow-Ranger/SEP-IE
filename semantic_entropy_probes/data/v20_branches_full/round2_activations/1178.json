@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1178,
+  "id": "bcbexpand_BigCodeBench/871_semantic",
+  "questions": [
+    "Should the function handle tuples of varying lengths? If so, how should missing positions be treated? The prompt mentions fill/replace with np.nan, but the reference uses zip_longest with fillvalue=np.nan, which pads missing positions across tuples. Is that the intended behavior?",
+    "What should be the order of positions in the output? The prompt says 'x is the current tuple position' and reference uses enumerate starting at 1. Does position indexing refer to the original tuple positions (1-indexed after the string) or the column index in the unzipped data?",
+    "Are complex numbers considered numeric? The reference checks isinstance(val, (int, float)), which excludes complex. Should complex numbers be included or treated as non-numeric?",
+    "Should the function handle numpy numeric types (e.g., np.int64, np.float32) as numeric? The reference uses isinstance(val, (int, float)) which may exclude numpy scalars.",
+    "What file encoding should be used when writing the file? The reference uses open without specifying encoding, which is system-dependent. Should it be UTF-8 or something else?",
+    "How should the function handle the case where the first element (string) is missing or non-string? The prompt says first value is a string, but if it's not, should it be treated as non-numeric and excluded from means?",
+    "Should the function overwrite an existing file with the same name, or append to it? The reference uses 'w' mode which overwrites, but prompt doesn't specify.",
+    "What precision/format should be used for writing mean values to the file? The reference uses default string conversion, but should it be rounded or formatted to a specific number of decimal places?"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1756,
+  "id": "bcbexpand_BigCodeBench/440_vagueness",
+  "questions": [
+    "Should the matrix-tensor multiplication be performed as P @ T (treating T as a 3D array where the first dimension is contracted) or as a different contraction (e.g., tensordot with axes=[1,0] as in the reference)?",
+    "After multiplication, should the result be reshaped to (T.shape[1], -1) as in the reference, or should it be kept as a 3D array and then flattened differently?",
+    "Should the normalization be applied per feature (column) across all samples (rows) as StandardScaler default, or per sample (row) across features?",
+    "If the multiplication result has zero variance in some column, does the function allow that column to remain all zeros after scaling, or should it handle it differently (e.g., skip scaling)?",
+    "Should the DataFrame index be set to a default RangeIndex or something else (e.g., based on T.shape[1])?",
+    "Is the function required to handle non-numeric inputs (e.g., strings) or only numeric arrays as implied?",
+    "Should the function raise an error if P or T are not 2D and 3D respectively, or should it attempt to broadcast/reshape?",
+    "Should the output DataFrame columns be named feature_0...feature_n where n is based on the flattened result's second dimension, or should they reflect original tensor dimensions?"
+  ]
+}

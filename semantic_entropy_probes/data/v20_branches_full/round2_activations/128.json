@@ -1,0 +1,14 @@
+{
+  "branch_idx": 128,
+  "id": "bcbexpand_BigCodeBench/242_semantic",
+  "questions": [
+    "What should happen if kernel_size is not an integer (e.g., a float like 3.5)? The prompt says raise ValueError if not a positive integer, but does 'not a positive integer' include non-integer types, or should it be cast/rounded?",
+    "Should the function apply the blur to grayscale images as well as color images? The clarification mentions 'it works with grayscale as cv2.blur and the conversion handle it', but does that mean we should convert grayscale images to BGR for consistency, or leave them as is?",
+    "What is the 'default if invalid' kernel size? The prompt says 'Applies a blur effect to an image using a specified kernel size or the default if invalid', but the reference solution raises ValueError instead of using a default.",
+    "Should the function close or show the matplotlib figure? The reference solution returns axes but doesn't show or close the plot; is the caller responsible for managing the figure lifecycle?",
+    "What color space should the returned blurred image array be in? The reference converts to RGB for display but returns the BGR blurred image; should the returned array be BGR or RGB?",
+    "How should the function handle images with alpha channels (RGBA)? Should they be converted to RGB/BGR, processed as-is, or raise an error?",
+    "What should be the exact error message format for the raised exceptions? The reference uses specific strings; is that required or just illustrative?",
+    "Should the function normalize or clip pixel values after blurring? cv2.blur may produce floats; should the output be converted back to uint8?"
+  ]
+}

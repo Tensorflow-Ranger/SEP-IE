@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1574,
+  "id": "bcbexpand_BigCodeBench/1071_vagueness",
+  "questions": [
+    "What should the x-values be? The prompt says 'sequential x-values starting from 1', but the reference solution uses np.arange(1, len(list_) + 1) as y-values and plots y_values against what? The plot call is ax.plot(y_values, ...), which implies y_values are the first argument (y) and default x (0,1,...) are used, contradicting the prompt.",
+    "Should the function accept any type of elements in the inner lists (e.g., strings, numbers), or are they just placeholders? The shuffling and plotting may depend on numeric conversion.",
+    "Is the shuffling applied to the original list elements or to their indices? The prompt says 'shuffles the y-values of each inner list', but the reference solution shuffles np.arange(1, len(list_) + 1), which are indices, not the list elements.",
+    "What should happen if list_of_lists is empty? The prompt only specifies skipping empty inner lists, but not the top-level empty case.",
+    "Should the function set any plot title, labels, or other axes properties? The prompt only mentions plotting lines, but the return includes axes objects that might be expected to have certain defaults.",
+    "Is the random seed expected to be set within the function, or only externally as mentioned? The reference solution uses shuffle without seeding, so each call is independent unless seeded globally.",
+    "Should the function handle nested lists with varying lengths correctly? The prompt implies it does, but the reference solution uses len(list_) to generate y-values, which works for any length.",
+    "What is the exact order of colors in the cycle? The COLORS constant is defined, but is the cycle order exactly as listed, starting from 'b'?"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1963,
+  "id": "bcbexpand_BigCodeBench/869_semantic",
+  "questions": [
+    "Should the grade_range parameter be interpreted as inclusive of its upper bound? The range function in Python is exclusive, but randint is inclusive. The prompt says 'predefined range based on their position' and uses range(1, 11) as default, but the canonical solution uses max(grade_range). Is the intent that grade_range defines the inclusive min and max? Or should it be treated as a Python range object where the upper bound is exclusive?",
+    "When rng_seed is None, should the random number generator be seeded (e.g., with None) or left unseeded, producing non-reproducible results across runs?",
+    "Is the order of rows in the output DataFrame guaranteed to match the order of assignment (i.e., the order in which students are cycled), as stated in the clarification, or could it be sorted differently?",
+    "If n_grades is zero, should the function return an empty DataFrame with columns 'Student' and 'Grade', or raise an error? The prompt says 'specified number of grades' and the canonical solution's loop would run zero times, producing an empty list.",
+    "Should the function validate that grade_range is non-empty (i.e., has at least one integer)? If grade_range is empty (e.g., range(5, 5)), min and max would raise ValueError.",
+    "Are the student names required to be unique in the input list? The cycling behavior works with duplicates, but the prompt doesn't specify if duplicates are allowed.",
+    "Should the grade_range parameter accept any iterable that can be passed to min and max, or strictly a range object? The signature shows grade_range=range(1, 11), but the canonical solution uses min/max.",
+    "Is the random grade generation per student independent of previous assignments? The prompt says 'assigning each a random grade from a predefined range based on their position' \u2013 does 'based on their position' imply the grade depends on the student's index in the cycle, or is it just random?"
+  ]
+}

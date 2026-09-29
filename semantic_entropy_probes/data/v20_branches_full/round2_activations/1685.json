@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1685,
+  "id": "bcbexpand_BigCodeBench/299_semantic",
+  "questions": [
+    "When subset_size > len(elements) or subset_size == 0, should the function return (1, []) or (1, Series([]))? The reference solution returns [] but the docstring says list: The top_n sums of the subsets as a pandas Series.",
+    "For the top_n sums, when there are duplicate sum values, should we return only distinct sums (ignoring duplicates) or keep duplicates? The prompt says 'ignoring duplicates' but the reference solution sorts all sums and takes top_n without deduplication.",
+    "Should the top_n sums be returned in descending order? The reference solution uses reverse=True, but the prompt doesn't specify order.",
+    "If top_n is larger than the number of available sums (after any deduplication), should we return fewer than top_n values or pad with something?",
+    "Are negative numbers allowed in the input tuple? The reference solution doesn't handle them specially, but product of sums could be negative or zero.",
+    "What should happen if the product of sums overflows Python's integer range? The reference uses math.prod which handles big integers, but is that required?",
+    "Should the function handle floating point numbers in the tuple? The reference uses sum() which works, but product of sums might be float.",
+    "Is the input guaranteed to be a tuple, or should it work with any iterable? The signature says tuple but reference uses len() and itertools.combinations which work on any sequence."
+  ]
+}

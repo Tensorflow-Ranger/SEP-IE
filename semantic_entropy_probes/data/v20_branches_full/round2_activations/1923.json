@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1923,
+  "id": "bcbexpand_BigCodeBench/770_vagueness",
+  "questions": [
+    "What is the exact relation between the feature and the target before adding noise? The prompt says 'computed from the feature using a relation', but the reference uses y = 2*X + 1. Is that relation fixed or should it be inferred from the prompt?",
+    "Should the feature be a single column (shape (n,1)) or a 1D array (shape (n,))? The prompt says 'single feature', but sklearn's LinearRegression expects 2D array for X.",
+    "Is the Gaussian noise added to the target before or after splitting the dataset? The prompt says 'added to the target' but doesn't specify timing relative to split.",
+    "Should the random_seed control both the feature generation and the train_test_split, or also the Gaussian noise? The reference uses it for both via np.random.seed.",
+    "Is the test_size interpreted as a proportion (float) or an absolute number (int)? The prompt says 'test_size=0.2' but doesn't clarify type handling.",
+    "Should the LinearRegression model be fitted with any non-default parameters (e.g., fit_intercept=True)? The prompt doesn't specify.",
+    "What is the exact condition for raising the ValueError? The prompt says 'test set size is smaller than 2', but does that mean after splitting (rounding) or based on num_samples * test_size?",
+    "Should the function return the R-squared score as a Python float or a numpy float? The prompt says 'float' but doesn't specify type."
+  ]
+}
