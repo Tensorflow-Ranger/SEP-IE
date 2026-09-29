@@ -1,0 +1,24 @@
+```python
+import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+def task_func(texts):
+    # Remove URLs using regex substitution
+    processed_texts = []
+    url_pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
+    for text in texts:
+        text_without_urls = url_pattern.sub('', text)
+        processed_texts.append(text_without_urls)
+    
+    # Initialize TF-IDF vectorizer
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform(processed_texts)
+    
+    # Extract feature names and convert TF-IDF matrix to dense format
+    feature_names = vectorizer.get_feature_names_out()
+    dense_matrix = tfidf_matrix.toarray()
+    
+    # Round scores to 8 decimal places
+    rounded_matrix = [[round(score, 8) for score in row] for row in dense_matrix]
+    
+    return (rounded_matrix, feature_names.tolist())
+```

@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_118_semantic",
+  "round_depth": 1,
+  "questions": [
+    "Are 'y' and 'Y' considered vowels or consonants?",
+    "Does 'between two consonants' require the surrounding characters to be consonants strictly, or just non-vowels?",
+    "When scanning from the right side, does 'closest' mean the first vowel encountered from the right that satisfies the condition, or the vowel with minimal distance to the right end?",
+    "Should the function consider the entire word case-sensitively, meaning vowel matching is case-sensitive, but does case affect consonant determination?",
+    "What if the vowel is at index 0 or len(word)-1? Are those considered 'beginning and ending' and thus excluded?",
+    "For words with multiple vowels between consonants from the right, which one should be returned?",
+    "Does 'stands between two consonants' require the consonants to be immediately adjacent to the vowel?",
+    "What should be returned if the word has exactly three characters and the middle is a vowel between two consonants?"
+  ],
+  "answers": [
+    "Only 'a', 'e', 'i', 'o', 'u' and their uppercase versions are vowels; 'y' and 'Y' are consonants.",
+    "It requires the characters immediately before and after the vowel to not be vowels, which means they are consonants given the input contains only English letters.",
+    "It means the first vowel encountered when scanning from right to left (excluding ends) that is between two consonants.",
+    "Yes, vowel matching is case-sensitive, and consonants are determined by not being in the set of vowels (case-sensitive).",
+    "Yes, vowels at the first or last index are excluded.",
+    "Return the first such vowel encountered when scanning from right to left (excluding ends).",
+    "Yes, the vowel must have a consonant immediately before and immediately after it.",
+    "Return that vowel, as it is not at the beginning or ending."
+  ],
+  "inline_prompts": [
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). Only 'a', 'e', \n    'i', 'o', 'u' and their uppercase versions are vowels; 'y' and 'Y' are consonants.\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). It requires the characters \n    immediately before and after the vowel to not be vowels, which means they are consonants \n    given the input contains only English letters.\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). It means the first vowel encountered when scanning from right to left (excluding ends) that is between two consonants.\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). Vowel matching is case-sensitive, \n    and consonants are determined by not being in the set of vowels (case-sensitive). \n\n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Yes, vowels at the first or last index are excluded. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive), returning the first \n    such vowel encountered when scanning from right to left (excluding ends).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). Yes, the vowel must have a consonant immediately before and immediately after it.\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return that vowel, as it is not at the beginning or ending. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\""
+  ]
+}

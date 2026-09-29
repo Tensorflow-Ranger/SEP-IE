@@ -1,0 +1,135 @@
+```python
+import sys
+import bisect
+
+def solve() -> None:
+    it = iter(sys.stdin.read().strip().split())
+    N = int(next(it))
+    W = int(next(it))
+
+    blocks = []
+    for _ in range(N):
+        x = int(next(it))
+        y = int(next(it))
+        blocks.append((x, y))
+
+    # Precompute for each column the sorted list of row positions
+    col_to_rows = [[] for _ in range(W + 1)]
+    for i, (x, y) in enumerate(blocks):
+        col_to_rows[x].append(y)
+
+    for lst in col_to_rows:
+        lst.sort()
+
+    # For each block, compute its final stable row after infinite time
+    # ignoring bottom-row removal (we'll handle removal separately).
+    # Actually, we need to know for each block whether it will ever be removed.
+    # A block is removed only if it ends up in a full bottom row.
+    # Let's think: after enough time, each block either:
+    # - reaches a row where below it is either ground or another block,
+    #   and stays there forever unless that row becomes the bottom row
+    #   and gets cleared.
+    # The bottom row is cleared only if all W columns have a block in row 1.
+    # So a block is removed iff it ends up in row 1 at some time when all W
+    # columns have a block in row 1.
+    # But because blocks move down only if below is empty, the final
+    # configuration (without removal) is like stacking blocks in each column.
+    # Let's compute for each column the "height" of the stack of blocks
+    # after they've fallen as far as possible, ignoring removal.
+    # This is equivalent to sorting blocks in that column by their original row,
+    # then assigning final rows from bottom up: the smallest original row
+    # goes to row 1, next to row 2, etc., but only if there's no gap.
+    # Actually, because they move down one per time step, the final row of
+    # a block is: its original row minus the number of blocks originally below it
+    # that are still below it after falling? Wait, better to simulate per column:
+    # In a column, sort blocks by original row ascending.
+    # The lowest block will fall to row 1 (if nothing below), the next will
+    # try to fall to row 2, but if there's a gap, it might fall further?
+    # Let's think example: blocks at rows 3 and 5 in same column.
+    # At t=0: (3), (5).
+    # t=1: bottom row not full, move down: row3→row2 (since below empty),
+    #      row5→row4 (since below empty).
+    # t=2: row2→row1, row4→row3.
+    # t=3: row1 stays (bottom row), row3→row2.
+    # t=4: row2→row1, now two blocks in row1? No, same column, they can't
+    #      both be in row1 because they'd stack? But they are 1x1 blocks,
+    #      only one per cell. So actually they cannot occupy same cell.
+    # Therefore the movement stops when a block reaches a cell just above
+    # another block. So final configuration: block originally at row3 ends at
+    # row1, block originally at row5 ends at row2.
+    # So final row = rank in sorted list (1‑based) within column.
+    # Indeed, if we have blocks at rows y1<y2<...<yk in a column,
+    # after infinite time they will occupy rows 1,2,...,k from bottom up.
+    # Because each block falls until it sits on top of the previous one.
+    # Therefore final_row = index_in_sorted + 1.
+
+    # So for each block i, final_row = 1 + (number of blocks in same column
+    # with original row < Y_i).
+
+    # Now, the bottom row removal happens only when all W columns have a block
+    # in row 1 at the same time. That means in the final configuration,
+    # if every column has at least one block, then row1 is full, and those
+    # blocks will be removed at the next time step.
+    # After removal, the blocks that were in row2 become row1, and the process
+    # repeats. So effectively, the whole bottom layer of blocks is removed
+    # repeatedly as long as each column has at least one block remaining.
+    # This is like removing the lowest remaining block from each column
+    # simultaneously, repeatedly.
+
+    # Let’s define for each column the sorted list of final rows (which are
+    # just 1,2,3,...). Actually we already have that: the k-th block in column x
+    # (sorted by original row) will end at row k.
+    # Now, the removal process: at each "round", if every column has at least
+    # one block, remove the smallest final row from each column (i.e., remove
+    # row1 from each column). Then the remaining blocks shift down: what was
+    # row2 becomes row1, etc.
+    # So a block with final_row r in its column will survive removal rounds
+    # as long as r > number_of_rounds where its column still had a block.
+    # The number of rounds before a block is removed equals the minimum
+    # over all columns of the count of blocks in that column? Wait, let's
+    # think: removal happens only when all columns have at least one block.
+    # So if a column has c blocks total, then it can participate in at most c
+    # removal rounds (because each round removes one from it). The process
+    # stops when any column runs out of blocks.
+    # Therefore total rounds = min over columns of (number of blocks in that column).
+    # Let total_rounds = min_{x=1..W} len(col_to_rows[x]).
+    # Then any block whose final_row <= total_rounds will be removed eventually.
+    # Actually careful: if total_rounds = R, then after R rounds, each column
+    # has lost R blocks, so the smallest remaining final_row in each column is R+1.
+    # So blocks with final_row <= R are removed, blocks with final_row > R survive.
+    # But wait: what if a column has more than R blocks? Then after R rounds,
+    # it still has blocks, but the block with final_row = R+1 is now at row1
+    # (since rows shifted down), and the process continues? No, because now
+    # there might be a column with exactly R blocks, which now has zero blocks,
+    # so the condition "all columns have a block" fails, so no more removals.
+    # Therefore indeed only blocks with final_row <= total_rounds are removed.
+
+    # So for each block i:
+    #   col = X_i
+    #   rank = number of blocks in same column with original Y < Y_i (0‑based)
+    #   final_row = rank + 1
+    #   total_rounds = min over all columns of column block count.
+    # If final_row <= total_rounds, block will be removed at time = ???
+    # Actually removal happens at discrete times t=1,2,... after movement.
+    # At time t, after movement, if bottom row full, remove.
+    # The first removal round happens at time t = 1 if initially (after falling)
+    # row1 is full. Since falling takes time, we need to compute when the
+    # configuration first has row1 full.
+    # But because blocks move down one per time step, the final configuration
+    # is reached only after the highest block has fallen enough.
+    # However, the removal condition only cares about row1 being full.
+    # Row1 being full means: for each column x, there exists a block whose
+    # final_row is 1 and that has already reached row1 by that time.
+    # Since blocks fall at speed 1 per time step, a block with original row y
+    # and final_row r will reach row r at time = y - r.
+    # Because it starts at row y, needs to move down (y - r) steps.
+    # So the time when row1 first becomes full is max over columns of
+    # (time when the lowest block in that column reaches row1).
+    # Let for each column x, let lowest_block_original_row = min(col_to_rows[x]).
+    # Its final_row = 1, so time to reach row1 = lowest_block_original_row - 1.
+    # So row1 becomes full at time T_full = max_x (lowest_block_original_row - 1).
+    # If T_full < 0? Actually original rows >=1, so T_full >=0.
+    # At time T_full, after movement, row1 is full, then removal happens.
+    # Then at time T_full+1, after movement, if row1 full again, remove again.
+    # But after first removal, the second lowest block in each column now
+    # becomes the new

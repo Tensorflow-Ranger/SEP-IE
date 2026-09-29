@@ -1,0 +1,32 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1 + n]))
+
+    # Count distinct from left and right
+    left_distinct = [0] * (n + 1)
+    right_distinct = [0] * (n + 1)
+
+    seen = set()
+    for i in range(n):
+        seen.add(arr[i])
+        left_distinct[i + 1] = len(seen)
+
+    seen.clear()
+    for i in range(n - 1, -1, -1):
+        seen.add(arr[i])
+        right_distinct[i] = len(seen)
+
+    ans = 0
+    for i in range(1, n):
+        ans = max(ans, left_distinct[i] + right_distinct[i])
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

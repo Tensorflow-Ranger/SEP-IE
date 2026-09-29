@@ -1,0 +1,15 @@
+```python
+import warnings
+import sqlite3
+import pandas as pd
+def task_func(db_path, query, warn_large_dataset=True):
+    try:
+        conn = sqlite3.connect(db_path)
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        if warn_large_dataset and len(df) > 10000:
+            warnings.warn("Warning: Retrieved dataset exceeds 10,000 rows.", UserWarning)
+        return df
+    except Exception as e:
+        raise Exception(f"Error fetching data from the database: {str(e)}")
+```

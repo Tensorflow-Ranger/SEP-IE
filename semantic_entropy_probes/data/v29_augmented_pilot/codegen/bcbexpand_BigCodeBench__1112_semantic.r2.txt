@@ -1,0 +1,37 @@
+```python
+import csv
+import random
+import os
+from datetime import datetime
+# Constants
+DATA = ['Temperature', 'Humidity', 'Pressure']
+RANGE = {
+    'Temperature': (-50, 50),
+    'Humidity': (0, 100),
+    'Pressure': (980, 1040)
+}
+def task_func(file_name="data.csv"):
+    # Generate 24 hours of data
+    hours = list(range(24))
+    data_rows = []
+    
+    for hour in hours:
+        row = {'Time': f"{hour:02d}:00"}
+        for param in DATA:
+            min_val, max_val = RANGE[param]
+            # Generate random value within the specified range
+            value = random.uniform(min_val, max_val)
+            # Round to 2 decimal places for readability
+            row[param] = round(value, 2)
+        data_rows.append(row)
+    
+    # Write to CSV file
+    with open(file_name, 'w', newline='') as csvfile:
+        fieldnames = ['Time'] + DATA
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(data_rows)
+    
+    # Return absolute path to the created file
+    return os.path.abspath(file_name)
+```

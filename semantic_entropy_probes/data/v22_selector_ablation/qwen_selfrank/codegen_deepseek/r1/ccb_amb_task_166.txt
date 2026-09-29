@@ -1,0 +1,35 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+
+    # We need the shortest subarray with a repeated value.
+    # That means two equal numbers with minimal distance between them.
+    # The shortest possible length is 2 (adjacent equal numbers).
+    # We can store the last seen index of each value.
+    last_seen = {}
+    min_len = N + 1  # larger than any possible
+
+    for i, x in enumerate(A):
+        if x in last_seen:
+            length = i - last_seen[x] + 1
+            if length < min_len:
+                min_len = length
+                if min_len == 2:  # cannot get shorter
+                    break
+        last_seen[x] = i
+
+    if min_len == N + 1:
+        print(-1)
+    else:
+        print(min_len)
+
+if __name__ == "__main__":
+    solve()
+```

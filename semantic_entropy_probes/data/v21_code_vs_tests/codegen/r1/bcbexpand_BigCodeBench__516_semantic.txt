@@ -1,0 +1,29 @@
+```python
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+def task_func(
+    array: list, random_seed: int = 0
+) -> (pd.DataFrame, sm.regression.linear_model.RegressionResultsWrapper):
+    # Validate input
+    if not array or not all(len(row) == 5 for row in array):
+        raise ValueError("Input array must be a 2D list with exactly 5 columns.")
+    
+    # Create DataFrame
+    df = pd.DataFrame(array, columns=['A', 'B', 'C', 'D', 'Response'])
+    
+    # Separate independent and dependent variables
+    X = df[['A', 'B', 'C', 'D']]
+    y = df['Response']
+    
+    # Set random seed for reproducibility
+    np.random.seed(random_seed)
+    
+    # Add a constant to the model
+    X = sm.add_constant(X)
+    
+    # Fit the linear regression model
+    model = sm.OLS(y, X).fit()
+    
+    return df, model
+```

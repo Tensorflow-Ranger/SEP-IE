@@ -1,0 +1,14 @@
+```python
+from collections import Counter
+import itertools
+import string
+def task_func(word: str) -> dict:
+    all_combinations = [''.join(pair) for pair in itertools.permutations(string.ascii_lowercase, 2)]
+    counts = Counter()
+    for i in range(len(word) - 1):
+        pair = word[i:i+2]
+        if len(pair) == 2:
+            counts[pair] += 1
+    result = {combo: counts.get(combo, 0) for combo in all_combinations}
+    return result
+```

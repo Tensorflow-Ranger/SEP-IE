@@ -1,0 +1,74 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    W = int(data[idx])
+    idx += 1
+    
+    blocks = []
+    for _ in range(N):
+        x = int(data[idx])
+        idx += 1
+        y = int(data[idx])
+        idx += 1
+        blocks.append((x, y))
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        T = int(data[idx])
+        idx += 1
+        A = int(data[idx]) - 1  # 0-based index
+        idx += 1
+        queries.append((T, A))
+    
+    # Sort blocks by Y descending
+    blocks.sort(key=lambda x: -x[1])
+    
+    # For each column, track the positions of blocks
+    col_blocks = [[] for _ in range(W)]
+    for x, y in blocks:
+        col_blocks[x - 1].append(y)
+    
+    # For each column, sort the Y positions
+    for i in range(W):
+        col_blocks[i].sort()
+    
+    # For each query, determine if block A exists at time T+0.5
+    results = []
+    for T, A in queries:
+        x, y = blocks[A]
+        col = x - 1
+        ys = col_blocks[col]
+        # Find the index of y in ys
+        pos = bisect.bisect_left(ys, y)
+        if pos >= len(ys) or ys[pos] != y:
+            results.append("No")
+            continue
+        
+        # Calculate how many blocks are below or equal to y in this column
+        count = pos + 1
+        # Each block below or equal to y will be removed if there are enough blocks
+        # The number of blocks that will be removed in this column is the number of blocks below or equal to y
+        # Each such block will be removed after T steps
+        # So, if count <= T, then the block is removed
+        if count <= T:
+            results.append("No")
+        else:
+            results.append("Yes")
+    
+    print("\n".join(results))
+
+if __name__ == "__main__":
+    main()
+```

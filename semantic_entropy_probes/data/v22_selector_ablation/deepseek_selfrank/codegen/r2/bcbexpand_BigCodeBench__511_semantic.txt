@@ -1,0 +1,29 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame({column: data})
+    numeric_data = pd.to_numeric(df[column], errors='coerce')
+    sum_val = numeric_data.sum()
+    mean_val = numeric_data.mean()
+    min_val = numeric_data.min()
+    max_val = numeric_data.max()
+    
+    stats = {
+        'sum': sum_val,
+        'mean': mean_val,
+        'min': min_val,
+        'max': max_val
+    }
+    
+    if column == 'Age':
+        plt.figure(figsize=(8, 6))
+        plt.pie(numeric_data, labels=df['Age'], autopct='%1.1f%%')
+        plt.title(f'{column} Distribution')
+        ax = plt.gca()
+    else:
+        ax = None
+    
+    return (stats, ax)
+```

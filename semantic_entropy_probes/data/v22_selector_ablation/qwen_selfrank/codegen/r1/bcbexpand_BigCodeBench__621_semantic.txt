@@ -1,0 +1,21 @@
+```python
+from itertools import chain
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+def task_func(L):
+    # Flatten the list of lists into a single list of integers
+    flattened = list(chain.from_iterable(L))
+    # Convert to a numpy array and reshape to a single column
+    data = np.array(flattened).reshape(-1, 1)
+    # Standardize the data
+    scaler = StandardScaler()
+    standardized = scaler.fit_transform(data)
+    # Plot the standardized values
+    fig, ax = plt.subplots()
+    ax.plot(standardized, marker='o', linestyle='-', color='b')
+    ax.set_title('Standardized Values')
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Standardized Value')
+    return ax
+```

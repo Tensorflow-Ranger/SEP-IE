@@ -1,0 +1,21 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    data = np.genfromtxt(file_name, delimiter=',', dtype=None, encoding='utf-8', names=True)
+    if data.size == 0:
+        return {}
+    result = {}
+    for col_name in data.dtype.names:
+        col_data = data[col_name]
+        counter = collections.Counter(col_data)
+        most_common = counter.most_common(1)
+        if not most_common:
+            result[col_name] = ''
+        else:
+            value, _ = most_common[0]
+            # Sort alphabetically if there's a tie
+            sorted_values = sorted(counter.keys())
+            result[col_name] = sorted_values[0]
+    return result
+```

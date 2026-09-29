@@ -1,0 +1,54 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from itertools import cycle
+
+def task_func(df, groups=['A', 'B', 'C', 'D', 'E']):
+    """
+    Analyzes the groups in a DataFrame by plotting a scatter plot of the ordinals against the values for each group,
+    where all groups are plotted on a single shared axis.
+
+    Parameters:
+    - df (pd.DataFrame): DataFrame containing columns 'Date', 'Group', and 'Value'.
+    - groups (list): List of group identifiers to plot. Default is ['A', 'B', 'C', 'D', 'E'].
+
+    Returns:
+    - matplotlib.axes.Axes: The Axes object with the scatter plot.
+
+    Raises:
+    - ValueError: If 'df' is not a DataFrame or lacks required columns.
+    """
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("'df' must be a pandas DataFrame")
+    required_columns = {'Date', 'Group', 'Value'}
+    if not required_columns.issubset(df.columns):
+        raise ValueError("DataFrame must contain 'Date', 'Group', and 'Value' columns")
+
+    df_filtered = df[df['Group'].isin(groups)].copy()
+    df_filtered['Date_ordinal'] = pd.to_datetime(df_filtered['Date']).map(pd.Timestamp.toordinal)
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    colors = cycle(['b', 'g', 'r', 'c', 'm', 'y', 'k'])
+    markers = cycle(['o', 's', '^', 'D', 'v', '<', '>', 'p', '*', 'h'])
+
+    for group in groups:
+        group_data = df_filtered[df_filtered['Group'] == group]
+        if not group_data.empty:
+            ax.scatter(
+                group_data['Date_ordinal'],
+                group_data['Value'],
+                label=group,
+                color=next(colors),
+                marker=next(markers),
+                alpha=0.7
+            )
+
+    ax.set_title('Scatterplot of Values for Each Group Over Time')
+    ax.set_xlabel('Date (ordinal)')
+    ax.set_ylabel('Value')
+    ax.legend(title='Group')
+    ax.grid(True, linestyle='--', alpha=0.5)
+
+    plt.tight_layout()
+    return ax
+```

@@ -1,0 +1,24 @@
+```python
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+def task_func(
+    array: list, random_seed: int = 0
+) -> (pd.DataFrame, sm.regression.linear_model.RegressionResultsWrapper):
+    np.random.seed(random_seed)
+    if not array:
+        raise ValueError("Input list cannot be empty")
+    if not all(isinstance(row, list) for row in array):
+        raise ValueError("Input must be a list of lists")
+    if not all(len(row) == 5 for row in array):
+        raise ValueError("Each inner list must have exactly 5 integers")
+    if not all(isinstance(val, int) for row in array for val in row):
+        raise ValueError("All elements must be integers")
+    df = pd.DataFrame(array, columns=['A', 'B', 'C', 'D', 'Response'])
+    X = df[['A', 'B', 'C', 'D']]
+    y = df['Response']
+    X = sm.add_constant(X)
+    model = sm.OLS(y, X)
+    results = model.fit()
+    return df, results
+```

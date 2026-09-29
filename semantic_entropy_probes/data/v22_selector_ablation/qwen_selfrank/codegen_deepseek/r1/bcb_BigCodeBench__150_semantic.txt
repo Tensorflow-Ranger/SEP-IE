@@ -1,0 +1,64 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(product_dict, product_keys):
+    """
+    Create a profit report for a list of products based on a specific product dictionary
+    that includes the quantity and price of each product. Additionally, calculate the
+    average price and profit for all considered products, and plot a bar chart of the
+    profit for each product, combining duplicates before calculating averages.
+
+    Parameters:
+    product_dict (dict): Dictionary with product names as keys and a tuple (quantity, price) as values.
+    product_keys (list): List of product names to include in the report.
+
+    Returns:
+    tuple: A tuple containing:
+        DataFrame: A pandas DataFrame with columns
+        ['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit'].
+        Axes: A matplotlib Axes object representing the plotted bar chart of profit for each product
+        (None if no products).
+    """
+    if not product_keys:
+        return pd.DataFrame(columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit']), None
+
+    # Aggregate quantities and prices for duplicate products
+    agg_dict = {}
+    for key in product_keys:
+        if key in product_dict:
+            quantity, price = product_dict[key]
+            if key in agg_dict:
+                agg_dict[key][0] += quantity
+            else:
+                agg_dict[key] = [quantity, price]
+
+    if not agg_dict:
+        return pd.DataFrame(columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit']), None
+
+    # Prepare data for DataFrame
+    data = []
+    for product, (quantity, price) in agg_dict.items():
+        profit = quantity * price
+        data.append([product, quantity, price, profit])
+
+    df = pd.DataFrame(data, columns=['Product', 'Quantity', 'Price', 'Profit'])
+
+    # Calculate overall averages
+    avg_price = df['Price'].mean()
+    avg_profit = df['Profit'].mean()
+
+    # Add average columns
+    df['Average Price'] = avg_price
+    df['Average Profit'] = avg_profit
+
+    # Plot bar chart
+    fig, ax = plt.subplots()
+    ax.bar(df['Product'], df['Profit'])
+    ax.set_xlabel('Product')
+    ax.set_ylabel('Profit')
+    ax.set_title('Profit per Product')
+
+    return df, ax
+```

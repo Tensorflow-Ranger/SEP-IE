@@ -1,0 +1,27 @@
+```python
+import os
+import glob
+import csv
+def task_func(directory_path, file_extension='.csv'):
+    """
+    Reads all files with a specified extension in a given directory and returns their data in a dictionary.
+    
+    Parameters:
+    - directory_path (str): The path to the directory containing the files.
+    - file_extension (str): The file extension to filter by (default is '.csv').
+    
+    Returns:
+    - dict: A dictionary where each key is the filename (without extension) and the value is a list of rows from the file.
+    """
+    data_dict = {}
+    pattern = os.path.join(directory_path, f'*{file_extension}')
+    for file_path in glob.glob(pattern):
+        if os.path.isfile(file_path):
+            filename = os.path.basename(file_path)
+            key = filename[:-len(file_extension)] if filename.endswith(file_extension) else filename
+            with open(file_path, 'r', newline='', encoding='utf-8') as file:
+                reader = csv.reader(file)
+                rows = [row for row in reader]
+                data_dict[key] = rows
+    return data_dict
+```

@@ -1,0 +1,209 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Ambiguity-Degree Probe: A Single Forward Pass Encodes Some Signal}
+\label{sec:results:k-probe}
+
+On ClarifyCodeBench restricted to $K \in \{1,2,3\}$ (excluding any
+constructed $K{=}0$ class, since every tested construction of a
+``no-ambiguity'' class introduced a detectable confound -- see
+Section~\ref{sec:discussion}), the ambiguity-degree probe achieves test
+Spearman $\rho = 0.312$ (5-fold cross-validated $\rho = 0.21 \pm 0.05$) at
+its best layer (layer 32 of 37), against a random baseline of $\rho =
+0.007$ and a prompt-length-only baseline of $\rho = 0.043$. The
+layer-by-layer curve rises smoothly from $\rho \approx 0.08$ at layer 1 to
+its layer-32 peak, consistent with a property that is progressively
+constructed through the network's depth rather than a surface feature
+available immediately from the embedding layer. This result is modest but
+reproducible: an independent re-run with a differently-cleaned prompt
+template reproduced $\rho = 0.31230908$ to eight decimal places.
+
+Extending this probe to a pooled, four-source binary (clear-vs-ambiguous)
+task spanning ClarifyCodeBench and all three Orchid sources, a
+PCA-reduced logistic-regression probe reaches pooled in-distribution AUROC
+of $0.75$--$0.77$; the same probe's leave-one-source-out AUROC falls to
+$0.52$--$0.64$, indicating the signal generalizes only partially across
+benchmark construction methodologies. A supervised-contrastive variant
+trained on raw (non-PCA) activations improves leave-one-source-out AUROC to
+$0.60 \pm 0.01$ (5 seeds) at some cost to pooled accuracy -- a genuine
+generalization/accuracy tradeoff we revisit for the ranking probe below.
+
+\subsection{Ranking Probe vs.\ Zero-Shot: A Cost-Quality Tradeoff, Not an Accuracy Win}
+\label{sec:results:ranking}
+
+Table~\ref{tab:ranking} reports rank-1 hit rate (did the pipeline's top
+choice match the benchmark's labeled ambiguity) for the trained ranking
+probe (PCA + logistic regression, the best-performing configuration) and
+for zero-shot self-rank, both evaluated on the identical 1,229-group,
+four-source pool under leave-one-source-out splitting.
+
+\begin{table}[htbp]
+\caption{Ranking probe vs.\ zero-shot self-rank, rank-1 hit rate, leave-one-source-out evaluation (1,229 groups).}
+\label{tab:ranking}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Evaluation & Probe (PCA+LR) & Zero-shot Qwen \\
+\midrule
+LODO mean (4 folds) & 0.637 & \textbf{0.710} \\
+\quad held-out ClarifyCodeBench ($n{=}187$) & \textbf{0.701} & 0.663 \\
+\quad held-out Orchid-HEval ($n{=}187$) & 0.738 & 0.743 \\
+\quad held-out Orchid-BCB ($n{=}110$) & 0.582 & \textbf{0.691} \\
+\quad held-out Orchid-BCB-Expand ($n{=}745$) & 0.525 & \textbf{0.742} \\
+Pooled, proportional split ($n{=}246$) & 0.581 & \textbf{0.679} \\
+Pooled, equal-per-source ($n{=}94$) & 0.638 & \textbf{0.713} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The trained probe does not uniformly beat zero-shot self-rank: zero-shot
+wins on 6 of the 7 rows in Table~\ref{tab:ranking}, most substantially on
+Orchid-BCB-Expand ($0.742$ vs.\ $0.525$, a 22-point gap). The probe's one
+clear win is on ClarifyCodeBench, its closest-to-training-distribution
+source. We note this result explicitly reverses an earlier, smaller-scale
+finding in our own development process, where the probe appeared to beat
+zero-shot by 13 points on a looser, 121-group evaluation split; that
+earlier result did not survive evaluation on the larger, more stringently
+filtered pool used here (Section~\ref{sec:discussion}).
+
+We therefore frame the ranking probe's contribution as a
+\textbf{cost-quality tradeoff} rather than an accuracy win: it reaches
+ranking quality within a few points of zero-shot self-rank on two of four
+sources and its own training source, and trails meaningfully on the two
+BigCodeBench-derived sources, whose prompts are long and free-form relative
+to the size of the injected ambiguous edit (Section~\ref{sec:discussion}).
+
+\subsection{Inference Cost}
+\label{sec:results:cost}
+
+% TODO(paper): replace with the fresh, apples-to-apples benchmark (batched
+% N-candidate probe extraction vs. zero-shot generation, same hardware/groups)
+% once GPU access is confirmed -- see plan Step 2. The number below is a
+% preliminary measurement that compares zero-shot generation to a probe
+% forward pass over the BARE PROMPT ONLY, not the full batched N-candidate
+% extraction the deployed ranking pipeline actually performs, and should be
+% treated as provisional until replaced.
+On native GPU hardware (no CPU weight offload), a single probe forward pass
+measures $0.079$s mean / $0.065$s median per problem, against $0.38$s mean
+/ $0.37$s median for zero-shot generation with the full candidate list
+inlined ($n{=}20$) -- a $4.8\times$ speedup. \textbf{[Placeholder pending a
+fresh benchmark of the actual batched $N$-candidate extraction the deployed
+ranking pipeline performs, per Section~\ref{sec:approach:rank-probe}; the
+measurement above compares zero-shot generation to a single bare-prompt
+forward pass, which is not quite the right comparison and should be treated
+as provisional.]} We note that this measured advantage vanished entirely on
+a memory-constrained GPU requiring CPU weight offload
+(Section~\ref{sec:experimental_setup:compute}), underscoring that the
+compute-efficiency argument for this class of method depends on deployment
+hardware, not only on the underlying FLOP count.
+
+\subsection{Does Ranking Quality Predict Downstream Correctness?}
+\label{sec:results:correctness}
+
+We evaluate the live two-round elicit-rank-clarify-code loop
+(Section~\ref{sec:approach:loop}) against real, executable test suites on
+244 problems spanning all four sources, using DeepSeek V3.2 as the coding
+model. Table~\ref{tab:hit-vs-pass} reports the relationship between
+round-1 ranking success (\texttt{hit1}: did the top-ranked candidate match
+the labeled ambiguity) and round-1 fractional test-case pass rate,
+restricted to the three Orchid sources (ClarifyCodeBench lacks Orchid's
+one-injected-ambiguity, targeted-test design and is excluded from this
+specific comparison).
+
+\begin{table}[htbp]
+\caption{Round-1 fractional pass rate by ranking outcome, Orchid sources, DeepSeek V3.2 coding model ($n{=}213$).}
+\label{tab:hit-vs-pass}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Source & hit1=1 & hit1=0 & Gap \\
+\midrule
+Orchid-BCB ($n{=}21$) & 88.6\% & 67.2\% & $+21.5$pp \\
+Orchid-HEval ($n{=}47$) & 100.0\% & 97.9\% & $+2.1$pp \\
+Orchid-BCB-Expand ($n{=}145$) & 77.5\% & 65.7\% & $+11.8$pp \\
+\textbf{All Orchid combined} & \textbf{83.3\%} & \textbf{73.3\%} & \textbf{$+9.9$pp} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The all-Orchid-combined gap of $+9.9$ percentage points is statistically
+significant by Welch's $t$-test ($p = 0.035$) and by a 10,000-resample
+bootstrap 95\% confidence interval on the mean difference, $[1.2, 19.1]$pp,
+which excludes zero. A Mann-Whitney U test on the same data is more
+conservative ($p = 0.10$); we report both rather than the more favorable
+test alone. This is a materially stronger result than the same
+relationship measured with the all-or-nothing pass metric on the same
+data ($+7.6$pp, Fisher's exact $p = 0.31$, not significant) -- the
+fractional metric recovers a real effect that the coarser binary metric
+was not sensitive enough to detect at this sample size. We regard this
+discrepancy as a methodological finding in its own right: whether an
+agentic clarification pipeline appears to ``work'' can depend on which
+correctness metric an evaluation uses, independent of anything about the
+pipeline itself.
+
+The effect is round-1-specific. Recomputed on round-1+2 (after a second
+clarification round), the all-Orchid-combined gap falls to $+7.4$pp
+($p = 0.11$, bootstrap CI includes zero); per-source, Orchid-BCB alone
+strengthens to $+25.2$pp ($p = 0.05$, bootstrap CI $[5.7, 47.9]$pp,
+significant) while Orchid-BCB-Expand weakens to $+8.0$pp (not
+significant). We do not have a single clean explanation for this
+round-to-round variability at the current sample size and report it as an
+open question rather than force a narrative onto it.
+
+We separately identify why the effect is markedly weaker for
+Orchid-BCB-Expand than for the other sources: an independent LLM-judged
+analysis of 1,952 candidate clarifying questions for this source finds
+that, while the officially labeled ambiguity is functionally relevant to
+correctness at essentially the same rate as every other source
+($91.3\%$, vs.\ $91.8$--$92.4\%$ elsewhere), it is rarely the \emph{only}
+relevant detail: on average $3.09$ other candidate clarifications are
+independently functionally relevant to the same problem (vs.\ $1.48$ for
+ClarifyCodeBench and $2.43$ for Orchid-HEval), and the label is the sole
+relevant detail in only $7.0\%$ of rows (vs.\ $26.7\%$ and $14.1\%$
+respectively). Resolving the one labeled ambiguity correctly therefore
+caps, but does not determine, whether the generated code passes, because
+most Orchid-BCB-Expand problems are underspecified in several independent
+ways at once and the current pipeline resolves at most two (one per
+round).
+
+\subsection{Asking Any Question Beats Asking None}
+\label{sec:results:any-question}
+
+Independent of \emph{which} clarifying question is asked, we find that
+asking any question at all is a robust, statistically significant
+improvement over asking none. Comparing the same 244 problems with vs.\
+without any clarification (a matched, paired comparison), round-1
+clarification improves the mean fractional pass rate by $+4.0$pp (Wilcoxon
+signed-rank $p = 0.0021$, paired bootstrap 95\% CI $[1.6, 6.6]$pp), and
+round-1+2 by $+6.3$pp (Wilcoxon $p < 0.0001$, CI $[3.7, 9.1]$pp). Both
+results are significant under every test we applied, in contrast to the
+more marginal, metric-dependent ranking-quality effect in
+Section~\ref{sec:results:correctness}. This suggests that, for this task
+family, the decision to clarify at all carries more of the achievable
+correctness gain than the precision of the ranking step that decides
+\emph{which} clarification to make -- a finding with direct design
+implications for agentic coding pipelines operating under a compute
+budget that cannot afford a highly precise ranking step.
+
+\subsection{A Cheap, Orthogonal Fix: Prompt Augmentation}
+\label{sec:results:augmentation}
+
+Separately from the ranking pipeline, we identify and fix a source of
+trivial, crash-class failures unrelated to clarification quality: the
+Orchid-BCB and Orchid-BCB-Expand ambiguity injections rewrite BigCodeBench's
+free-text instruction prompt, which never carried parameter type
+information to begin with, causing the coding model to guess incorrect
+types for under-specified parameters (e.g., assuming a millisecond-epoch
+integer timestamp was a \texttt{datetime} object). Reinstating bare
+parameter types, requirements, and a worked example -- without
+reinstating the full parameter-description text that would re-leak the
+injected ambiguity -- and holding the ranking/clarification pipeline
+completely fixed, on the 106 problems where the exact round-1/round-2
+clarified prompt text could be reconstructed without a new GPU run:
+round-1 mean fractional pass rate rises from $0.796$ to $0.863$, with the
+zero-pass (complete-crash) rate falling from $2.8\%$ to $0.0\%$; round-2
+rises from $0.804$ to $0.854$, zero-pass from $3.8\%$ to $0.9\%$. This
+improvement is concentrated almost entirely in Orchid-BCB-Expand and is
+orthogonal to the ranking-quality question in
+Section~\ref{sec:results:correctness}: it changes prompt content only, with
+the identical clarifying question selected in both conditions.

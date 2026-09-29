@@ -1,0 +1,33 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    a = list(map(int, data[1:1 + n]))
+
+    # We need the shortest subarray with a repeated value.
+    # That means two equal numbers with minimal distance between them.
+    # The shortest possible length is 2 (adjacent equal numbers).
+    # We can track the last occurrence of each value.
+
+    last_pos = {}
+    min_len = n + 1  # larger than any possible
+
+    for i, val in enumerate(a):
+        if val in last_pos:
+            dist = i - last_pos[val] + 1
+            if dist < min_len:
+                min_len = dist
+        last_pos[val] = i
+
+    if min_len == n + 1:
+        print(-1)
+    else:
+        print(min_len)
+
+if __name__ == "__main__":
+    solve()
+```

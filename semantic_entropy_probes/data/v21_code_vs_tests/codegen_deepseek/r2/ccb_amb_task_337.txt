@@ -1,0 +1,33 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    p = list(map(int, data[1:]))
+
+    pos = [0] * (n + 1)
+    for i, val in enumerate(p):
+        pos[val] = i  # position of value val in p (0‑based)
+
+    total_cost = 0
+    i = 1
+    while i < n:
+        if pos[i] > pos[i + 1]:
+            # need to move i+1 before i
+            total_cost += i
+            # swap values i and i+1 in positions
+            pi, pj = pos[i], pos[i + 1]
+            pos[i], pos[i + 1] = pj, pi
+            # now i+1 is before i, continue from i+1
+            i += 2
+        else:
+            i += 1
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

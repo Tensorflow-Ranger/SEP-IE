@@ -1,0 +1,22 @@
+```python
+import csv
+import random
+# Constants
+DATA = ['Temperature', 'Humidity', 'Pressure']
+RANGE = {
+    'Temperature': (-50, 50),
+    'Humidity': (0, 100),
+    'Pressure': (980, 1040)
+}
+def task_func(file_name="data.csv"):
+    with open(file_name, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Time', 'Temperature', 'Humidity', 'Pressure'])
+        for hour in range(24):
+            time = f"{hour}:00"
+            temperature = random.randint(*RANGE['Temperature'])
+            humidity = random.randint(*RANGE['Humidity'])
+            pressure = random.randint(*RANGE['Pressure'])
+            writer.writerow([time, temperature, humidity, pressure])
+    return file_name
+```

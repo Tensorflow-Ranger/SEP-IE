@@ -1,0 +1,39 @@
+```python
+import csv
+import os
+from datetime import datetime
+from random import randint
+import matplotlib.pyplot as plt
+import pandas as pd
+# Constants
+VEHICLE_TYPES = ['Car', 'Bus', 'Truck', 'Bike']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    # Generate data
+    data = []
+    for hour in range(hours):
+        time = datetime.strptime(f"{hour}:00", "%H:%M").time()
+        row = [time]
+        for vehicle_type in VEHICLE_TYPES:
+            row.append(randint(0, 50))
+        data.append(row)
+    # Save to CSV
+    csv_file_path = os.path.join(output_dir, f'traffic_data_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv')
+    with open(csv_file_path, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Time'] + VEHICLE_TYPES)
+        writer.writerows(data)
+    # Plot the data
+    fig, ax = plt.subplots()
+    for i, vehicle_type in enumerate(VEHICLE_TYPES):
+        vehicle_counts = [row[i+1] for row in data]
+        ax.plot([row[0] for row in data], vehicle_counts, label=vehicle_type)
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Vehicle Count')
+    ax.set_title('Traffic Data Over Time')
+    ax.legend()
+    # Return the tuple
+    return (csv_file_path, ax)
+```

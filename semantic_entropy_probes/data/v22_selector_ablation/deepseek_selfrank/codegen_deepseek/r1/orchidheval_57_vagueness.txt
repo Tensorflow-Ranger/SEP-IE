@@ -1,0 +1,10 @@
+```python
+def monotonic(l: list):
+    """Return True is list elements exhibit a pattern of increase or decrease.
+    """
+    if len(l) <= 2:
+        return True
+    non_decreasing = all(l[i] <= l[i+1] for i in range(len(l)-1))
+    non_increasing = all(l[i] >= l[i+1] for i in range(len(l)-1))
+    return non_decreasing or non_increasing
+```

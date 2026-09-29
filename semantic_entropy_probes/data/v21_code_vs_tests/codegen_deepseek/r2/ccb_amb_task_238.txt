@@ -1,0 +1,30 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    grid = [['.' for _ in range(N)] for _ in range(N)]
+
+    for i in range(1, N + 1):
+        j = N + 1 - i
+        if i > j:
+            continue
+        # fill rectangle (i,i) to (j,j) inclusive (1‑based)
+        top = i - 1
+        bottom = j - 1
+        left = i - 1
+        right = j - 1
+        color = '#' if i % 2 == 1 else '.'
+        for r in range(top, bottom + 1):
+            for c in range(left, right + 1):
+                grid[r][c] = color
+
+    for row in grid:
+        print(''.join(row))
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,36 @@
+```python
+import pandas as pd
+from sklearn.cluster import KMeans
+def task_func(data, n_clusters=3, seed=None):
+    """
+    Perform K-Means clustering on the given DataFrame using the sklearn KMeans algorithm,
+    handling duplicate rows as a single data point. The function expects a DataFrame with
+    numerical values, as KMeans cannot handle categorical data. It applies standard KMeans
+    clustering from the sklearn library to form clusters. The number of clusters is configurable
+    via the 'n_clusters' parameter, defaulting to 3. The Number of times the k-means algorithm
+    is run with different centroid seeds (n_init) is set to 10. The function returns an array
+    of cluster labels corresponding to each data point in the input as well as the fitted KMeans model.
+
+    Parameters:
+    - data (pd.DataFrame): Input data for clustering.
+    - n_clusters (int): Number of clusters to form. Default is 3.
+    - seed (int): Random seed for reproducibility. Default is None.
+
+    Returns:
+    - numpy.ndarray: An array of integers (cluster labels) corresponding to the input data.
+    - sklearn.cluster.KMeans: The fitted KMeans Model.
+
+    Raises:
+    - ValueError: If the DataFrame contains non numeric entries.
+    """
+    if not data.select_dtypes(include=[pd.np.number]).shape[1] == data.shape[1]:
+        raise ValueError("If the DataFrame contains non numeric entries.")
+    data_unique = data.drop_duplicates()
+    model = KMeans(n_clusters=n_clusters, n_init=10, random_state=seed)
+    model.fit(data_unique)
+    if len(data) == len(data_unique):
+        labels = model.labels_
+    else:
+        labels = model.predict(data)
+    return labels, model
+```

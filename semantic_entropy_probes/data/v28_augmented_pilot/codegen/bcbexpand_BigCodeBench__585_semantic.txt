@@ -1,0 +1,42 @@
+```python
+import rsa
+import os
+import zipfile
+from base64 import b64encode
+def task_func(directory):
+    # Generate RSA keys
+    (pub_key, priv_key) = rsa.newkeys(512)
+    
+    # Create a temporary directory for encrypted files
+    import tempfile
+    temp_dir = tempfile.mkdtemp()
+    
+    # Encrypt each file in the directory
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        if os.path.isfile(filepath):
+            with open(filepath, 'rb') as f:
+                file_data = f.read()
+            
+            # Encrypt the file data with RSA public key
+            encrypted_data = rsa.encrypt(file_data, pub_key)
+            
+            # Save encrypted file to temp directory
+            encrypted_filename = filename + '.encrypted'
+            encrypted_filepath = os.path.join(temp_dir, encrypted_filename)
+            with open(encrypted_filepath, 'wb') as f:
+                f.write(encrypted_data)
+    
+    # Create zip file containing all encrypted files
+    zip_filename = 'encrypted_files.zip'
+    with zipfile.ZipFile(zip_filename, 'w') as zipf:
+        for filename in os.listdir(temp_dir):
+            filepath = os.path.join(temp_dir, filename)
+            zipf.write(filepath, filename)
+    
+    # Clean up temporary directory
+    import shutil
+    shutil.rmtree(temp_dir)
+    
+    return pub_key, zip_filename
+```

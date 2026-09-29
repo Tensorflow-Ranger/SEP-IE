@@ -1,0 +1,44 @@
+```python
+import mechanize
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+
+def task_func(url):
+    br = mechanize.Browser()
+    br.set_handle_robots(False)
+    br.addheaders = [('User-agent', 'Mozilla/5.0')]
+    
+    try:
+        response = br.open(url)
+        html_content = response.read()
+    except Exception:
+        return []
+    
+    soup = BeautifulSoup(html_content, 'html.parser')
+    links = []
+    
+    # Extract links from the main page
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        absolute_url = urljoin(url, href)
+        links.append(absolute_url)
+    
+    # Extract links from frames and iframes
+    for frame_tag in soup.find_all(['frame', 'iframe'], src=True):
+        frame_src = frame_tag['src']
+        frame_url = urljoin(url, frame_src)
+        
+        try:
+            frame_response = br.open(frame_url)
+            frame_html = frame_response.read()
+            frame_soup = BeautifulSoup(frame_html, 'html.parser')
+            
+            for a_tag in frame_soup.find_all('a', href=True):
+                href = a_tag['href']
+                absolute_url = urljoin(frame_url, href)
+                links.append(absolute_url)
+        except Exception:
+            continue
+    
+    return list(set(links))
+```

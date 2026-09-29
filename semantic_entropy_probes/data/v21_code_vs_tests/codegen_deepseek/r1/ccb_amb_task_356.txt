@@ -1,0 +1,165 @@
+```python
+import sys
+sys.setrecursionlimit(1 << 25)
+
+def solve() -> None:
+    data = sys.stdin.buffer.read().split()
+    it = iter(data)
+    N = int(next(it))
+    W = [0] + [int(next(it)) for _ in range(N)]
+    intervals = [(0, 0)]  # dummy for 1‑based indexing
+    for _ in range(N):
+        L = int(next(it))
+        R = int(next(it))
+        intervals.append((L, R))
+
+    # Build interval graph connectivity via sweep line
+    events = []
+    for i in range(1, N + 1):
+        L, R = intervals[i]
+        events.append((L, 0, i))   # open
+        events.append((R, 1, i))   # close
+    events.sort(key=lambda x: (x[0], x[1]))
+
+    parent = list(range(N + 1))
+    size = [1] * (N + 1)
+    comp_min_weight = [0] * (N + 1)
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(a, b):
+        ra, rb = find(a), find(b)
+        if ra == rb:
+            return
+        if size[ra] < size[rb]:
+            ra, rb = rb, ra
+        parent[rb] = ra
+        size[ra] += size[rb]
+        if comp_min_weight[ra] > comp_min_weight[rb]:
+            comp_min_weight[ra] = comp_min_weight[rb]
+
+    # Initialize component min weight
+    for i in range(1, N + 1):
+        comp_min_weight[i] = W[i]
+
+    active = []
+    for _, typ, idx in events:
+        if typ == 0:  # open
+            for a in active:
+                union(a, idx)
+            active.append(idx)
+        else:  # close
+            active.remove(idx)
+
+    # Re‑compute component representatives and min weights
+    comp_rep = [0] * (N + 1)
+    comp_weight = [0] * (N + 1)
+    for i in range(1, N + 1):
+        r = find(i)
+        comp_rep[i] = r
+        if comp_weight[r] == 0 or W[i] < comp_weight[r]:
+            comp_weight[r] = W[i]
+
+    # Build compressed tree (bipartite: component – interval endpoint)
+    # Each component gets a node, each unique endpoint gets a node.
+    # Connect component to its L and R endpoints.
+    point_to_node = {}
+    comp_nodes = set(comp_rep[1:])
+    node_cnt = len(comp_nodes)
+    comp_id = {}
+    for idx, c in enumerate(comp_nodes, start=1):
+        comp_id[c] = idx
+    # re‑index components 1..node_cnt
+    # total nodes: node_cnt + 2*N (worst case all endpoints distinct)
+    # but we map endpoints via dict to reuse same endpoint node.
+    g = [[] for _ in range(node_cnt + 2 * N + 5)]
+    endpoint_counter = node_cnt + 1
+
+    for i in range(1, N + 1):
+        comp = comp_id[comp_rep[i]]
+        L, R = intervals[i]
+        if L not in point_to_node:
+            point_to_node[L] = endpoint_counter
+            endpoint_counter += 1
+        if R not in point_to_node:
+            point_to_node[R] = endpoint_counter
+            endpoint_counter += 1
+        ln = point_to_node[L]
+        rn = point_to_node[R]
+        g[comp].append((ln, 0))
+        g[ln].append((comp, 0))
+        g[comp].append((rn, 0))
+        g[rn].append((comp, 0))
+
+    # BFS/01‑BFS for shortest path on this bipartite graph
+    # Edge weight: 0 for component–endpoint, W_comp for component–component via same endpoint.
+    # Actually we can model as: moving from component A to endpoint e cost 0,
+    # from endpoint e to component B cost comp_weight[B].
+    # But we want min sum of component weights on path, excluding start weight? Wait:
+    # Path weight in original graph = sum of vertex weights visited.
+    # In compressed graph, visiting a component corresponds to paying its min vertex weight.
+    # Start component weight must be included, end component weight must be included.
+    # So we can do Dijkstra on compressed graph where nodes are components and endpoints,
+    # edges: comp–endpoint weight 0, endpoint–comp weight comp_weight[comp].
+
+    total_nodes = endpoint_counter
+    dist = [10**18] * (total_nodes + 2)
+    from collections import deque
+
+    Q = int(next(it))
+    out_lines = []
+    for _ in range(Q):
+        s = int(next(it))
+        t = int(next(it))
+        start_comp = comp_id[comp_rep[s]]
+        target_comp = comp_id[comp_rep[t]]
+        if start_comp == target_comp:
+            # same component: min path weight is min weight in that component
+            out_lines.append(str(comp_weight[comp_rep[s]]))
+            continue
+
+        # Dijkstra from start_comp
+        dist[start_comp] = comp_weight[comp_rep[s]]
+        pq = [(dist[start_comp], start_comp)]
+        visited = [False] * (total_nodes + 2)
+
+        while pq:
+            d, u = pq[0]
+            heapq.heappop(pq)
+            if visited[u]:
+                continue
+            visited[u] = True
+            if u == target_comp:
+                break
+            for v, w in g[u]:
+                if u <= node_cnt:  # u is component
+                    nd = d + (0 if w == 0 else comp_weight[comp_rep[v]])
+                else:  # u is endpoint
+                    nd = d + (comp_weight[comp_rep[v]] if v <= node_cnt else 0)
+                if nd < dist[v]:
+                    dist[v] = nd
+                    heapq.heappush(pq, (nd, v))
+
+        ans = dist[target_comp]
+        if ans >= 10**18:
+            out_lines.append("-1")
+        else:
+            out_lines.append(str(ans))
+        # reset distances for next query (only touched nodes)
+        for u in [start_comp, target_comp]:
+            dist[u] = 10**18
+        for u, _, _ in g[start_comp]:
+            dist[u] = 10**18
+        for u, _, _ in g[target_comp]:
+            dist[u] = 10**18
+
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    import heapq
+    solve()
+```

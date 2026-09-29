@@ -1,0 +1,24 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(file_path="data.csv", columns=["A", "B", "C"]):
+    # Read CSV file into a DataFrame
+    df = pd.read_csv(file_path)
+    
+    # Convert numeric values to float
+    df = df.apply(pd.to_numeric, errors='coerce')
+    
+    # Select specified columns
+    df_selected = df[columns]
+    
+    # Plot the data
+    fig, ax = plt.subplots()
+    df_selected.plot(kind='line', ax=ax)
+    
+    # Compute cube-root of the selected columns
+    cube_root_df = df_selected.apply(np.cbrt)
+    
+    return df_selected, ax, cube_root_df
+```

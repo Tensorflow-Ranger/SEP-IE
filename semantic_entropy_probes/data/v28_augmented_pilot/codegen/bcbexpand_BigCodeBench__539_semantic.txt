@@ -1,0 +1,48 @@
+```python
+import sqlite3
+from random import choice, seed
+import os
+
+def task_func(db_name, table_name, num_entries, random_seed=None):
+    """
+    Create an SQLite3 table and fill it with random data using the provided database and table names.
+    The function populates the table with columns 'name', 'age', 'height' using random data from:
+    - NAMES: List of names ['John', 'Jane', 'Steve', 'Emma', 'Liam', 'Olivia']
+    - AGES: Range of ages from 18 to 65.
+    - HEIGHTS: Range of heights from 150cm to 200cm, selecting exactly one per row.
+    """
+    if num_entries < 0:
+        raise ValueError("num_entries cannot be negative")
+    
+    if random_seed is not None:
+        seed(random_seed)
+    
+    NAMES = ['John', 'Jane', 'Steve', 'Emma', 'Liam', 'Olivia']
+    
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+    
+    cursor.execute(f'''
+        CREATE TABLE IF NOT EXISTS {table_name} (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            age INTEGER,
+            height INTEGER
+        )
+    ''')
+    
+    cursor.execute(f'DELETE FROM {table_name}')
+    
+    for _ in range(num_entries):
+        name = choice(NAMES)
+        age = choice(range(18, 66))
+        height = choice(range(150, 201))
+        cursor.execute(f'''
+            INSERT INTO {table_name} (name, age, height) VALUES (?, ?, ?)
+        ''', (name, age, height))
+    
+    conn.commit()
+    conn.close()
+    
+    return os.path.abspath(db_name)
+```

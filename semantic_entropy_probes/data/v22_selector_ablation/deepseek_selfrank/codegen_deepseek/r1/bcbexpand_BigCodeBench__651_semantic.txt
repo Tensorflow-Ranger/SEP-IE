@@ -1,0 +1,31 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+def task_func(df, target_value):
+    """
+    Convert the input dic of list to DataFrame and searcher in this DataFrame for rows with cells matching the provided target_value by either exact or partial matching. It then plots the count of such rows per column.
+    The function should output with:
+        tuple: A tuple containing:
+        A pandas Series with counts of the target value per column.
+        A matplotlib Axes object representing the plot (None if dataframe is empty).
+    """
+    df = pd.DataFrame(df)
+    if df.empty:
+        return pd.Series(dtype=int), None
+    target_str = str(target_value)
+    counts = {}
+    for col in df.columns:
+        count = 0
+        for val in df[col]:
+            if target_str in str(val):
+                count += 1
+        counts[col] = count
+    series = pd.Series(counts)
+    fig, ax = plt.subplots()
+    series.plot(kind='bar', ax=ax)
+    ax.set_title(f"Count of rows containing '{target_str}' per column")
+    ax.set_xlabel("Columns")
+    ax.set_ylabel("Count")
+    plt.tight_layout()
+    return series, ax
+```

@@ -1,0 +1,54 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(product_dict, product_keys):
+    """
+    Create a profit report for a list of products based on a specific product dictionary that includes the quantity and price of each product. Additionally, calculate the average price and profit for all considered products, and plot a bar chart of the profit for each product.
+
+    Parameters:
+    product_dict (dict): A dictionary where keys are product names and values are dictionaries with 'quantity' and 'price'.
+    product_keys (list): A list of product names to include in the report.
+
+    Returns:
+    tuple: A tuple containing:
+        DataFrame: A pandas DataFrame with columns ['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit'].
+        Axes: A matplotlib Axes object representing the plotted bar chart of profit for each product (None if no products).
+    """
+    if not product_keys:
+        return pd.DataFrame(columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit']), None
+
+    data = []
+    total_price = 0
+    total_profit = 0
+
+    for key in product_keys:
+        if key in product_dict:
+            quantity = product_dict[key]['quantity']
+            price = product_dict[key]['price']
+            profit = quantity * price
+            total_price += price
+            total_profit += profit
+            data.append([key, quantity, price, profit, None, None])
+
+    if not data:
+        return pd.DataFrame(columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit']), None
+
+    avg_price = total_price / len(data)
+    avg_profit = total_profit / len(data)
+
+    for i in range(len(data)):
+        data[i][4] = avg_price
+        data[i][5] = avg_profit
+
+    df = pd.DataFrame(data, columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit'])
+
+    fig, ax = plt.subplots()
+    ax.bar(df['Product'], df['Profit'])
+    ax.set_xlabel('Product')
+    ax.set_ylabel('Profit')
+    ax.set_title('Profit per Product')
+
+    return df, ax
+```

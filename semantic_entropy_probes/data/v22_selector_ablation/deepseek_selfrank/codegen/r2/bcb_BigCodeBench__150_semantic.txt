@@ -1,0 +1,42 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(product_dict, product_keys):
+    try:
+        # Extract data for the given product keys
+        data = []
+        for key in product_keys:
+            if key not in product_dict:
+                raise KeyError(f"Product key '{key}' not found in the dictionary.")
+            data.append({
+                'Product': key,
+                'Quantity': product_dict[key]['quantity'],
+                'Price': product_dict[key]['price'],
+                'Profit': product_dict[key]['profit']
+            })
+        
+        # Create DataFrame
+        df = pd.DataFrame(data)
+        
+        # Calculate average price and profit
+        avg_price = df['Price'].mean()
+        avg_profit = df['Profit'].mean()
+        
+        # Add average columns to the DataFrame
+        df['Average Price'] = avg_price
+        df['Average Profit'] = avg_profit
+        
+        # Plot bar chart of profit for each product
+        fig, ax = plt.subplots()
+        df.set_index('Product')['Profit'].plot(kind='bar', ax=ax)
+        ax.set_xlabel('Product')
+        ax.set_ylabel('Profit')
+        ax.set_title('Profit per Product')
+        
+        return (df, ax)
+    
+    except KeyError as e:
+        return (pd.DataFrame(), None)
+```

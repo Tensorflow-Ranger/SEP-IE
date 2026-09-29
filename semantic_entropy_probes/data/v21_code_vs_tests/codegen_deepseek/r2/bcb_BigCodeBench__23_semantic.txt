@@ -1,0 +1,16 @@
+```python
+import numpy as np
+from itertools import zip_longest
+def task_func(l1, l2,THRESHOLD = 0.5):
+    combined = []
+    for a, b in zip_longest(l1, l2):
+        if a is not None:
+            combined.append(a)
+        if b is not None:
+            combined.append(b)
+    if not combined:
+        return None
+    distances = [abs(x - THRESHOLD) for x in combined]
+    min_index = np.argmin(distances)
+    return float(combined[min_index])
+```

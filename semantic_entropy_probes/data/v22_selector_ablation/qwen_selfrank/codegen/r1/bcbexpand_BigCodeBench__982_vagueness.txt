@@ -1,0 +1,15 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+def task_func(df, column, bins=30, density=True, alpha=0.6, color="g", seed=None):
+    np.random.seed(seed)
+    data = df[column].dropna().values
+    fig, ax = plt.subplots()
+    ax.hist(data, bins=bins, density=density, alpha=alpha, color=color, edgecolor='black')
+    counts, bins = np.histogram(data, bins=bins)
+    bin_centers = (bins[:-1] + bins[1:]) / 2
+    mu, std = norm.fit(data)
+    ax.plot(bin_centers, norm.pdf(bin_centers, mu, std), 'r--', linewidth=2)
+    return ax
+```

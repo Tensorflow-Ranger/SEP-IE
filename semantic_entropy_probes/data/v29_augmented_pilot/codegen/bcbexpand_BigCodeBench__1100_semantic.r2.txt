@@ -1,0 +1,26 @@
+```python
+import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+def task_func(texts):
+    # Remove URLs from each text
+    url_pattern = re.compile(r'https?://\S+')
+    cleaned_texts = [url_pattern.sub('', text) for text in texts]
+    
+    # Initialize TF-IDF Vectorizer with default parameters
+    vectorizer = TfidfVectorizer()
+    
+    # Fit and transform the cleaned texts
+    tfidf_matrix = vectorizer.fit_transform(cleaned_texts)
+    
+    # Convert sparse matrix to dense and round to 8 decimal places
+    dense_matrix = tfidf_matrix.toarray().round(8)
+    
+    # Convert each document's scores to tuple
+    scores = [tuple(row) for row in dense_matrix]
+    
+    # Get feature names (unique words)
+    features = vectorizer.get_feature_names_out().tolist()
+    
+    return (scores, features)
+```

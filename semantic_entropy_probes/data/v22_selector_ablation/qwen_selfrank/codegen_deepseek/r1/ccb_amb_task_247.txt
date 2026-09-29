@@ -1,0 +1,143 @@
+```python
+import sys
+from collections import defaultdict
+
+def solve() -> None:
+    it = iter(sys.stdin.read().split())
+    n = int(next(it))
+    arr = [int(next(it)) for _ in range(n)]
+
+    # Step 1: compute prefix distinct counts
+    prefix_distinct = [0] * n
+    seen = set()
+    for i in range(n):
+        seen.add(arr[i])
+        prefix_distinct[i] = len(seen)
+
+    # Step 2: compute suffix distinct counts
+    suffix_distinct = [0] * n
+    seen.clear()
+    for i in range(n - 1, -1, -1):
+        seen.add(arr[i])
+        suffix_distinct[i] = len(seen)
+
+    # Step 3: compute max prefix up to each position
+    max_prefix = [0] * n
+    max_prefix[0] = prefix_distinct[0]
+    for i in range(1, n):
+        max_prefix[i] = max(max_prefix[i - 1], prefix_distinct[i])
+
+    # Step 4: compute max suffix from each position
+    max_suffix = [0] * n
+    max_suffix[n - 1] = suffix_distinct[n - 1]
+    for i in range(n - 2, -1, -1):
+        max_suffix[i] = max(max_suffix[i + 1], suffix_distinct[i])
+
+    # Step 5: compute middle distinct counts using sliding window
+    # We need to consider all j such that i < j < n-1 (1-indexed)
+    # In 0-indexed: i in [0, n-3], j in [i+1, n-2]
+    # We'll fix the middle start index ms (i+1 in 1-indexed) and expand end
+    # But better: for each middle start ms, we can compute distinct in middle
+    # using a sliding window with a frequency map.
+
+    # We'll iterate over possible middle start positions ms (0-indexed)
+    # ms corresponds to A_{i+1} where i = ms-1, so ms >=1 and ms <= n-2
+    # We'll keep a frequency map for the current middle window [ms, me]
+    freq = defaultdict(int)
+    distinct = 0
+    ms = 1
+    me = ms
+    ans = 0
+
+    # For each middle start, we try to extend middle end as far as possible
+    # while keeping middle distinct <= prefix_distinct[ms-1] + suffix_distinct[me+1]
+    # Actually we want to maximize total = prefix_distinct[ms-1] + middle_distinct + suffix_distinct[me+1]
+    # We can try to maximize middle_distinct while me goes forward.
+    # But we must also consider that middle_distinct can be at most (me-ms+1) obviously.
+    # However, the optimal might not be the longest middle, because suffix distinct may drop later.
+    # We can use two pointers: for each ms, increase me until adding arr[me] would increase distinct beyond
+    # some limit? Not directly.
+
+    # Alternative approach: iterate over possible middle end positions me (0-indexed)
+    # me corresponds to A_j where j = me, and we need i = ms-1 < me, so me >=1 and me <= n-2
+    # For each me, we want the best ms <= me such that total is maximized.
+    # total = max_prefix[ms-1] + middle_distinct(ms, me) + max_suffix[me+1]
+    # We can precompute for each me the best max_prefix[ms-1] + middle_distinct(ms, me) over ms.
+    # Let’s define best_left[me] = max over ms in [1, me] of (max_prefix[ms-1] + distinct(ms, me))
+    # Then answer = max over me in [1, n-2] of (best_left[me] + max_suffix[me+1])
+
+    # Compute best_left using a sweep where we maintain for each value the last index it appeared.
+    last_seen = [-1] * (n + 1)  # 1-based values
+    best_left = [0] * n
+    current_best = 0
+    # We'll iterate me from 0 to n-1, but we only need me >=1 for middle end.
+    # For me = 0, middle would start at ms=0? Actually ms must be at least 1 because i>=0 and i<me.
+    # So we start me from 0 but best_left[0] won't be used.
+    for me in range(n):
+        val = arr[me]
+        # Update current_best: when we extend me, new ms can be last_seen[val] + 2
+        # Actually, if we include val, any ms <= last_seen[val] + 1 will have duplicate val in middle.
+        # The distinct count for window [ms, me] is (me - ms + 1) - duplicates.
+        # But we want to maximize max_prefix[ms-1] + distinct(ms, me).
+        # We can think of it as: for each me, we consider ms from 1 to me.
+        # Let’s define dp[me] = max over ms of (max_prefix[ms-1] + distinct(ms, me))
+        # When we go from me-1 to me, for each ms <= me, distinct(ms, me) = distinct(ms, me-1) + (1 if arr[me] is new in [ms, me] else 0).
+        # It's new if last occurrence of arr[me] < ms.
+        # So for ms > last_seen[arr[me]], distinct increases by 1.
+        # Therefore, dp[me] = max( dp[me-1] + 1, max_{ms > last_seen[arr[me]]} (max_prefix[ms-1] + (distinct(ms, me-1)+1)) )
+        # But also we can start new middle at ms = me: then distinct=1, max_prefix[me-1] + 1.
+        # Actually simpler: we can maintain a segment tree of max_prefix[ms-1] + distinct(ms, me) over ms.
+        # When me increases, for all ms <= last_seen[val], distinct doesn't change; for ms > last_seen[val], distinct +=1.
+        # So we can add 1 to range [last_seen[val]+1, me] in the segment tree.
+        # Then dp[me] = max over ms in [1, me] of that value.
+        # We need a data structure that supports range add and range max. Use lazy segment tree.
+
+    # Given constraints, we need O(n) or O(n log n). Let's implement lazy segment tree.
+
+    class LazySegTree:
+        def __init__(self, n):
+            self.size = 1
+            while self.size < n:
+                self.size <<= 1
+            self.data = [0] * (2 * self.size)
+            self.lazy = [0] * (2 * self.size)
+
+        def _push(self, idx):
+            if self.lazy[idx] != 0:
+                self.data[2 * idx] += self.lazy[idx]
+                self.data[2 * idx + 1] += self.lazy[idx]
+                self.lazy[2 * idx] += self.lazy[idx]
+                self.lazy[2 * idx + 1] += self.lazy[idx]
+                self.lazy[idx] = 0
+
+        def _update(self, l, r, v, idx, seg_l, seg_r):
+            if r <= seg_l or seg_r <= l:
+                return
+            if l <= seg_l and seg_r <= r:
+                self.data[idx] += v
+                self.lazy[idx] += v
+                return
+            self._push(idx)
+            mid = (seg_l + seg_r) // 2
+            self._update(l, r, v, 2 * idx, seg_l, mid)
+            self._update(l, r, v, 2 * idx + 1, mid, seg_r)
+            self.data[idx] = max(self.data[2 * idx], self.data[2 * idx + 1])
+
+        def update(self, l, r, v):
+            self._update(l, r, v, 1, 0, self.size)
+
+        def query(self, l, r, idx, seg_l, seg_r):
+            if r <= seg_l or seg_r <= l:
+                return -10**9
+            if l <= seg_l and seg_r <= r:
+                return self.data[idx]
+            self._push(idx)
+            mid = (seg_l + seg_r) // 2
+            left = self.query(l, r, 2 * idx, seg_l, mid)
+            right = self.query(l, r, 2 * idx + 1, mid, seg_r)
+            return max(left, right)
+
+        def range_max(self, l, r):
+            return self.query(l, r, 1, 0, self.size)
+
+   

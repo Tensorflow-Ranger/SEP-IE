@@ -1,0 +1,127 @@
+```python
+import sys
+
+def solve() -> None:
+    it = iter(sys.stdin.read().split())
+    n = int(next(it))
+    a = [int(next(it)) for _ in range(n)]
+
+    # Precompute prefix distinct counts
+    seen = set()
+    prefix_distinct = [0] * n
+    for i in range(n):
+        seen.add(a[i])
+        prefix_distinct[i] = len(seen)
+
+    # Precompute suffix distinct counts
+    seen.clear()
+    suffix_distinct = [0] * n
+    for i in range(n - 1, -1, -1):
+        seen.add(a[i])
+        suffix_distinct[i] = len(seen)
+
+    # For each possible middle start index i+1 (where i from 1 to n-2)
+    # we need the maximum distinct count in prefix ending at i
+    # and suffix starting at j+1 (where j from i+1 to n-2)
+    # We can precompute max_suffix_distinct[i] = max suffix distinct from i to n-1
+    max_suffix_distinct = [0] * n
+    max_suffix_distinct[n - 1] = suffix_distinct[n - 1]
+    for i in range(n - 2, -1, -1):
+        max_suffix_distinct[i] = max(suffix_distinct[i], max_suffix_distinct[i + 1])
+
+    # For middle subarray from i+1 to j, we need distinct count in that range.
+    # We can compute distinct counts for all subarrays ending at j quickly
+    # by maintaining last occurrence of each value.
+    last_occurrence = [-1] * (n + 1)
+    # distinct_from_k[j] = distinct count in subarray starting at k and ending at j
+    # We need for each j, the best middle distinct count for some i < j.
+    # Actually we need to iterate i from 1 to n-2, and for each i,
+    # find best j from i+1 to n-2, maximizing prefix_distinct[i] + middle_distinct(i+1,j) + suffix_distinct[j+1]
+    # We can rewrite as:
+    # prefix_distinct[i] + suffix_distinct[j+1] + middle_distinct(i+1,j)
+    # For fixed i, suffix_distinct[j+1] is known, middle_distinct(i+1,j) is distinct count in a[i+1..j].
+    # We can compute middle distinct counts using a sliding window and a segment tree or BIT.
+    # But O(N^2) is too slow. Need O(N log N) or O(N).
+
+    # Alternative approach: iterate j from 2 to n-2 (as end of middle subarray),
+    # and find best i (start of middle subarray) before j.
+    # For each j, we want max over i (prefix_distinct[i] + middle_distinct(i+1,j)).
+    # Let’s define f(j) = max over i < j of (prefix_distinct[i] + distinct(a[i+1..j])).
+    # Then answer = max over j from 2 to n-2 of (f(j) + suffix_distinct[j+1]).
+    # Now we need to compute f(j) efficiently.
+
+    # We can maintain a segment tree where for each possible start index i,
+    # we store value = prefix_distinct[i] + distinct(a[i+1..current_j]).
+    # When moving j forward, the distinct count for subarrays ending at j changes:
+    # For all i such that a[i+1..j-1] didn't contain a[j], distinct increases by 1.
+    # Actually, for all i >= last_occurrence[a[j]], the subarray a[i+1..j] includes a[j] for the first time.
+    # Wait: distinct(a[i+1..j]) = distinct(a[i+1..j-1]) + (1 if a[j] not in a[i+1..j-1] else 0).
+    # The condition "a[j] not in a[i+1..j-1]" is equivalent to last_occurrence[a[j]] < i+1.
+    # So for i < last_occurrence[a[j]], a[j] already appeared, so no change.
+    # For i >= last_occurrence[a[j]], distinct increases by 1.
+    # Thus we can maintain a segment tree over i (0..n-2) with range add and range max.
+
+    # We'll index i from 0 to n-2 (since i must be at least 1? Actually i is split position, 1 <= i <= n-2.
+    # But prefix_distinct[i] uses index i (1-based). We'll store values for i from 0 to n-2 (i = split position - 1?).
+    # Let's define idx = i-1, so idx from 0 to n-3? Wait i from 1 to n-2, so idx from 0 to n-3.
+    # But easier: we'll just use i as 0-based index of the last element of first subarray.
+    # So i ranges from 0 to n-3 (since i < j and j <= n-2).
+    # Let's re-index:
+    # Let first_end = i (0-based), so first subarray is a[0..i], second is a[i+1..j], third a[j+1..n-1].
+    # Conditions: 0 <= i <= n-3, i+1 <= j <= n-2.
+    # prefix_distinct[i] = distinct(a[0..i]).
+    # suffix_distinct[j+1] = distinct(a[j+1..n-1]).
+    # middle distinct = distinct(a[i+1..j]).
+    # We need max over i,j of prefix_distinct[i] + middle + suffix_distinct[j+1].
+
+    # We'll compute f(j) = max over i from 0 to j-1 of (prefix_distinct[i] + distinct(a[i+1..j])).
+    # Then answer = max over j from 1 to n-2 of (f(j) + suffix_distinct[j+1]).
+    # Note j from 1 to n-2 because middle must be non-empty and third non-empty.
+
+    # Segment tree for range add and range max.
+    size = 1
+    while size < n:
+        size <<= 1
+    seg = [0] * (2 * size)
+    lazy = [0] * (2 * size)
+
+    def apply(node, val):
+        seg[node] += val
+        lazy[node] += val
+
+    def push(node):
+        if lazy[node] != 0:
+            apply(node * 2, lazy[node])
+            apply(node * 2 + 1, lazy[node])
+            lazy[node] = 0
+
+    def range_add(l, r, val, node=1, nl=0, nr=size-1):
+        if r < nl or nr < l:
+            return
+        if l <= nl and nr <= r:
+            apply(node, val)
+            return
+        push(node)
+        mid = (nl + nr) // 2
+        range_add(l, r, val, node * 2, nl, mid)
+        range_add(l, r, val, node * 2 + 1, mid + 1, nr)
+        seg[node] = max(seg[node * 2], seg[node * 2 + 1])
+
+    def range_max(l, r, node=1, nl=0, nr=size-1):
+        if r < nl or nr < l:
+            return -10**18
+        if l <= nl and nr <= r:
+            return seg[node]
+        push(node)
+        mid = (nl + nr) // 2
+        return max(range_max(l, r, node * 2, nl, mid),
+                   range_max(l, r, node * 2 + 1, mid + 1, nr))
+
+    # Initialize segment tree: for each i (0..n-2), value = prefix_distinct[i] + distinct(a[i+1..0]).
+    # But distinct(a[i+1..0]) is 0 when i+1 > 0, actually for j=0 (middle end at 0) not valid.
+    # We'll start with j = 0, but middle must have at least one element, so j >= i+1.
+    # We'll build initial tree for j = 0? Actually we will iterate j from 0 to n-1, but we only query when j >=1.
+    # At j=0, middle subarray a[i+1..0] is empty unless i+1 <=0, i.e., i <= -1, not possible.
+    # So we can initialize all values to -inf except when i < j? Simpler: we start with j = 0 and update as we go.
+    # Initially, for each i, distinct(a[i+1..j]) is 0 only if i+1 <= j, i.e., i <= j-1.
+    # For i > j-1, the subarray is empty, but we never consider those because j must be >= i+

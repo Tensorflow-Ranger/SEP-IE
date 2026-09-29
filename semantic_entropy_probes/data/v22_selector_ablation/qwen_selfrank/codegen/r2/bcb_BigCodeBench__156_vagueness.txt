@@ -1,0 +1,21 @@
+```python
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+def task_func(data):
+    # Convert numpy array to DataFrame
+    df = pd.DataFrame(data)
+    # Initialize and fit MinMaxScaler
+    scaler = MinMaxScaler()
+    # Normalize the data
+    normalized_data = scaler.fit_transform(df)
+    # Convert back to DataFrame
+    normalized_df = pd.DataFrame(normalized_data, columns=df.columns)
+    # Calculate row averages
+    normalized_df['Average'] = normalized_df.mean(axis=1)
+    # Plot the averages
+    fig, ax = plt.subplots()
+    normalized_df['Average'].plot(kind='bar', ax=ax)
+    # Return the DataFrame and Axes object
+    return normalized_df, ax
+```

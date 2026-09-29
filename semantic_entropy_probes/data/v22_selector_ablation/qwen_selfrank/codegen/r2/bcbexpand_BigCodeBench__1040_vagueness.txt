@@ -1,0 +1,66 @@
+```python
+import socket
+import select
+import queue
+from datetime import datetime, timedelta
+def task_func(
+    server_address="localhost", server_port=12345, buffer_size=1024, run_duration=5
+):
+    end_time = datetime.now() + timedelta(seconds=run_duration)
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setblocking(False)
+    server_socket.bind((server_address, server_port))
+    server_socket.listen(5)
+    inputs = [server_socket]
+    outputs = []
+    message_queue = queue.Queue()
+    
+    try:
+        while datetime.now() < end_time:
+            readable, writable, exceptional = select.select(inputs, outputs, inputs, 0)
+            for s in exceptional:
+                if s == server_socket:
+                    print("Server socket encountered an error.")
+                else:
+                    print(f"Client socket {s} encountered an error.")
+                inputs.remove(s)
+                if s in outputs:
+                    outputs.remove(s)
+                s.close()
+            
+            for s in readable:
+                if s is server_socket:
+                    client_socket, client_address = s.accept()
+                    client_socket.setblocking(False)
+                    inputs.append(client_socket)
+                    print(f"Accepted connection from {client_address}")
+                else:
+                    data = s.recv(buffer_size)
+                    if data:
+                        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        response = data + current_time.encode()
+                        message_queue.put((s, response))
+                    else:
+                        print(f"Client {s} disconnected")
+                        inputs.remove(s)
+                        if s in outputs:
+                            outputs.remove(s)
+                        s.close()
+            
+            while not message_queue.empty():
+                s, response = message_queue.get()
+                if s not in outputs:
+                    outputs.append(s)
+                try:
+                    s.sendall(response)
+                except socket.error:
+                    print(f"Error sending data to {s}")
+                    outputs.remove(s)
+                    inputs.remove(s)
+                    s.close()
+    finally:
+        for s in inputs:
+            s.close()
+        server_socket.close()
+        return f"Server ran for {run_duration} seconds and shut down."
+```

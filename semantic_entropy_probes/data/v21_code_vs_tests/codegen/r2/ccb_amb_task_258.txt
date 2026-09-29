@@ -1,0 +1,43 @@
+```python
+import sys
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    A = list(map(int, data[1:]))
+
+    # Precompute prefix distinct counts
+    prefix = [0] * N
+    seen = set()
+    count = 0
+    for i in range(N):
+        if A[i] not in seen:
+            seen.add(A[i])
+            count += 1
+        prefix[i] = count
+
+    # Precompute suffix distinct counts
+    suffix = [0] * N
+    seen = set()
+    count = 0
+    for i in range(N-1, -1, -1):
+        if A[i] not in seen:
+            seen.add(A[i])
+            count += 1
+        suffix[i] = count
+
+    # Find the maximum sum of prefix[i] + suffix[i+1]
+    max_sum = 0
+    for i in range(N-1):
+        current = prefix[i] + suffix[i+1]
+        if current > max_sum:
+            max_sum = current
+
+    print(max_sum)
+
+if __name__ == "__main__":
+    main()
+```

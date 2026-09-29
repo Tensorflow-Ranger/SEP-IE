@@ -1,0 +1,48 @@
+```python
+import sys
+import bisect
+
+def main():
+    input = sys.stdin.read
+    data = input().split()
+    idx = 0
+    T = int(data[idx])
+    idx += 1
+    results = []
+    
+    for _ in range(T):
+        N = int(data[idx])
+        idx += 1
+        A = list(map(int, data[idx:idx + 2 * N]))
+        idx += 2 * N
+        
+        pos = [0] * (N + 1)
+        for i in range(2 * N):
+            pos[A[i]] = i
+        
+        adjacent = [False] * (N + 1)
+        for i in range(2 * N - 1):
+            if A[i] == A[i + 1]:
+                adjacent[A[i]] = True
+        
+        count = 0
+        for a in range(1, N + 1):
+            for b in range(a + 1, N + 1):
+                if adjacent[a] or adjacent[b]:
+                    continue
+                i1, i2 = pos[a], pos[a] + 1
+                if i1 > i2:
+                    i1, i2 = i2, i1
+                j1, j2 = pos[b], pos[b] + 1
+                if j1 > j2:
+                    j1, j2 = j2, j1
+                if i1 <= j1 and i2 >= j2:
+                    count += 1
+        
+        results.append(str(count))
+    
+    print('\n'.join(results))
+
+if __name__ == "__main__":
+    main()
+```

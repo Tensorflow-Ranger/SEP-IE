@@ -1,0 +1,19 @@
+```python
+import inspect
+import types
+import json
+def task_func(f):
+    spec = {
+        "name": f.__name__,
+        "args": [],
+        "defaults": {},
+        "annotations": str(f.__annotations__),
+        "is_lambda": isinstance(f, types.LambdaType),
+        "has_nested_functions": any(isinstance(obj, types.FunctionType) for obj in inspect.getmembers(f, inspect.isfunction))
+    }
+    argspec = inspect.getfullargspec(f)
+    spec["args"] = argspec.args
+    if argspec.defaults:
+        spec["defaults"] = dict(zip(argspec.args[-len(argspec.defaults):], argspec.defaults))
+    return json.dumps(spec)
+```

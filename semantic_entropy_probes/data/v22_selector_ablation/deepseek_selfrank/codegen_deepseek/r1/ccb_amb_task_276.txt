@@ -1,0 +1,25 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    cards = list(map(int, data))
+    freq = {}
+    for c in cards:
+        freq[c] = freq.get(c, 0) + 1
+
+    # Check all possible triples and pairs
+    for x in freq:
+        if freq[x] >= 3:
+            # Try to find a different y with at least 2 occurrences
+            for y in freq:
+                if x != y and freq[y] >= 2:
+                    print("Yes")
+                    return
+    print("No")
+
+if __name__ == "__main__":
+    solve()
+```

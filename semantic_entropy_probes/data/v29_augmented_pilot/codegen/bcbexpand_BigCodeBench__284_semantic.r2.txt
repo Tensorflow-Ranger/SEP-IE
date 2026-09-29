@@ -1,0 +1,18 @@
+```python
+import mechanize
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+def task_func(url):
+    br = mechanize.Browser()
+    br.set_handle_robots(False)
+    br.addheaders = [('User-agent', 'Mozilla/5.0')]
+    response = br.open(url)
+    html = response.read()
+    soup = BeautifulSoup(html, 'html.parser')
+    links = []
+    for a_tag in soup.find_all('a', href=True):
+        href = a_tag['href']
+        absolute_url = urljoin(url, href)
+        links.append(absolute_url)
+    return links
+```

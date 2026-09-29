@@ -1,0 +1,19 @@
+```python
+from collections import Counter
+import itertools
+import string
+
+def task_func(word: str) -> dict:
+    # Generate all possible two-letter combinations of lowercase alphabets
+    all_combinations = [''.join(pair) for pair in itertools.product(string.ascii_lowercase, repeat=2)]
+    # Initialize dictionary with all combinations set to 0
+    result = {comb: 0 for comb in all_combinations}
+    # Convert word to lowercase to handle case insensitivity
+    word_lower = word.lower()
+    # Count overlapping two-letter pairs
+    for i in range(len(word_lower) - 1):
+        pair = word_lower[i:i+2]
+        if pair in result:
+            result[pair] += 1
+    return result
+```

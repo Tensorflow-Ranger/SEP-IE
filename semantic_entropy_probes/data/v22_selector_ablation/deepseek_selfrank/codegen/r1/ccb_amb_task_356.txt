@@ -1,0 +1,96 @@
+```python
+import sys
+import heapq
+from collections import defaultdict
+
+def main():
+    input = sys.stdin.read
+    data = input().split()
+    idx = 0
+
+    N = int(data[idx])
+    idx += 1
+
+    W = list(map(int, data[idx:idx+N]))
+    idx += N
+
+    intervals = []
+    for _ in range(N):
+        L = int(data[idx])
+        R = int(data[idx+1])
+        intervals.append((L, R))
+        idx += 2
+
+    Q = int(data[idx])
+    idx += 1
+
+    queries = []
+    for _ in range(Q):
+        s = int(data[idx])
+        t = int(data[idx+1])
+        queries.append((s, t))
+        idx += 2
+
+    # Build interval graph
+    # For each interval, collect all nodes that overlap with it
+    # But since we need to check for non-overlapping intervals, we'll build adjacency list for non-overlapping nodes
+    # To do this efficiently, we can use a sweep line approach
+
+    # First, collect all events
+    events = []
+    for i in range(N):
+        L, R = intervals[i]
+        events.append((L, i, 'start'))
+        events.append((R + 1, i, 'end'))
+
+    # Sort events
+    events.sort()
+
+    # Build adjacency list
+    adj = [[] for _ in range(N)]
+    active = set()
+    prev = -1
+    for event in events:
+        pos, i, typ = event
+        if prev != pos:
+            for j in active:
+                adj[i].append(j)
+                adj[j].append(i)
+            prev = pos
+        if typ == 'start':
+            active.add(i)
+        else:
+            active.remove(i)
+
+    # Dijkstra's algorithm to find minimum weight path
+    import heapq
+
+    def dijkstra(start, end):
+        dist = [float('inf')] * N
+        dist[start] = W[start - 1]
+        heap = [(W[start - 1], start)]
+        visited = set()
+        while heap:
+            d, u = heapq.heappop(heap)
+            if u in visited:
+                continue
+            visited.add(u)
+            if u == end:
+                return d
+            for v in adj[u]:
+                if dist[v] > d + W[v - 1]:
+                    dist[v] = d + W[v - 1]
+                    heapq.heappush(heap, (dist[v], v))
+        return -1
+
+    # Process queries
+    output = []
+    for s, t in queries:
+        res = dijkstra(s - 1, t - 1)
+        output.append(str(res))
+
+    print('\n'.join(output))
+
+if __name__ == "__main__":
+    main()
+```

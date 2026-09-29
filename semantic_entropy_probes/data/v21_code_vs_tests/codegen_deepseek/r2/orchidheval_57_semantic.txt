@@ -1,0 +1,20 @@
+```python
+def monotonic(l: list):
+    """Return True if list elements form a monotonic sequence of increasing or decreasing values.
+    """
+    if len(l) <= 2:
+        return True
+    direction = None
+    for i in range(1, len(l)):
+        if l[i] > l[i-1]:
+            if direction is None:
+                direction = 'increasing'
+            elif direction == 'decreasing':
+                return False
+        elif l[i] < l[i-1]:
+            if direction is None:
+                direction = 'decreasing'
+            elif direction == 'increasing':
+                return False
+    return True
+```

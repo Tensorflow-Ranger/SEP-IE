@@ -1,0 +1,33 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1+n]))
+    arr.sort()
+    
+    max_val = arr[-1]
+    present = [0] * (max_val + 1)
+    for x in arr:
+        present[x] = 1
+    
+    count = 0
+    # Iterate over possible A and C, compute B = (A + C) / 2
+    # Since A, B, C are distinct and B must be integer, A + C must be even
+    for i in range(n):
+        a = arr[i]
+        for j in range(i + 1, n):
+            c = arr[j]
+            total = a + c
+            if total % 2 == 0:
+                b = total // 2
+                if b > a and b < c and b <= max_val and present[b]:
+                    count += 1
+    print(count)
+
+if __name__ == "__main__":
+    main()
+```

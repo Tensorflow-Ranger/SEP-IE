@@ -1,0 +1,138 @@
+```python
+import sys
+
+def solve():
+    input = sys.stdin.readline
+    N, M = map(int, input().split())
+    A = list(map(int, input().split()))
+
+    # Fenwick tree (1-indexed internally)
+    class Fenwick:
+        def __init__(self, n):
+            self.n = n
+            self.bit = [0] * (n + 1)
+
+        def add(self, idx, delta):
+            i = idx + 1
+            while i <= self.n:
+                self.bit[i] += delta
+                i += i & -i
+
+        def sum(self, idx):
+            # sum of [0, idx]
+            res = 0
+            i = idx + 1
+            while i > 0:
+                res += self.bit[i]
+                i -= i & -i
+            return res
+
+        def range_sum(self, l, r):
+            # sum of [l, r]
+            if l > r:
+                return 0
+            return self.sum(r) - (self.sum(l - 1) if l > 0 else 0)
+
+    # Step 1: compute base inversion count for k = 0
+    bit = Fenwick(M)
+    inv0 = 0
+    for val in A:
+        inv0 += bit.range_sum(val + 1, M - 1)
+        bit.add(val, 1)
+
+    # Step 2: compute contribution of each element when k increases
+    # For each a in A, when k increases by 1, a becomes (a+1) mod M.
+    # Inversion changes when a wraps around from M-1 to 0.
+    # Let’s think of the process: for k from 0 to M-1, each a moves upward,
+    # and when it passes M-1 it goes to 0.
+    # We can compute for each a the k where it wraps: wrap_k = M - a.
+    # For k < wrap_k, a+k stays in [a, M-1].
+    # For k >= wrap_k, a+k wraps to [0, a-1].
+    # The inversion change at wrap_k is:
+    #   before wrap: a is larger than numbers < a (since it's in upper part)
+    #   after wrap: a becomes 0, so it's smaller than all numbers > 0.
+    # Actually, we can think of the total inversion as:
+    #   inv(k) = inv0 + sum over each a of (change due to a's movement).
+    # Let’s compute delta[k] = inv(k) - inv(k-1).
+
+    delta = [0] * M
+
+    # We need to know, for each a, how many numbers are less than a and greater than a.
+    # Let cnt[x] = frequency of x in A.
+    cnt = [0] * M
+    for val in A:
+        cnt[val] += 1
+
+    # prefix sums of cnt
+    pref = [0] * (M + 1)
+    for i in range(M):
+        pref[i + 1] = pref[i] + cnt[i]
+
+    # For each a, when it wraps at k = M - a:
+    # Before wrap, a contributes as a "large" element relative to smaller ones.
+    # After wrap, it becomes 0 and contributes as a "small" element relative to larger ones.
+    # The change in inversion count at the moment of wrap is:
+    #   lose inversions where a was the larger: count of numbers < a
+    #   gain inversions where a (now 0) is the smaller: count of numbers > 0
+    # But careful: at the exact k = wrap_k, a becomes 0, so for pairs (i,j) where i corresponds to a,
+    # we need to recompute. Actually, it's easier to think of the derivative:
+    # When k increases by 1, each a increases by 1 (mod M). If a+k < M, then a's value increases,
+    # so it becomes larger relative to numbers that are between old and new value? Wait, not exactly.
+    # Better to compute total inversion as sum over pairs (i,j) of indicator( (A_i+k) mod M > (A_j+k) mod M ).
+    # For a fixed pair (a_i, a_j), define f(k) = 1 if (a_i+k) mod M > (a_j+k) mod M else 0.
+    # As k runs from 0 to M-1, f(k) changes only when one of the two wraps.
+    # Let d = (a_j - a_i) mod M. If d == 0, never changes.
+    # If d > 0, then initially (k=0) we compare a_i and a_j.
+    # As k increases, both increase until one wraps.
+    # Actually, we can think in terms of circular order.
+    # Let’s sort all a_i. But we need O(N+M) solution.
+
+    # Alternative approach: inversion count = total pairs - pairs where B_i <= B_j.
+    # But maybe we can use the fact that M up to 2e5, so we can afford O(M log M).
+
+    # Let’s compute for each possible value x (0..M-1) its positions in sorted A.
+    # For each a, we want to know how many numbers are less than a (call L) and greater than a (call G).
+    # L = pref[a], G = N - pref[a+1].
+    # When a wraps at k = M - a:
+    #   before wrap, a is in [a, M-1], so it is larger than all numbers in [0, a-1] (L of them)
+    #   and smaller than all numbers in [a+1, M-1] (G of them).
+    #   after wrap, a becomes 0, so it is larger than none, smaller than all positive numbers.
+    # At the moment of wrap, the change in inversion count contributed by a is:
+    #   lose L (since a is no longer larger than those)
+    #   gain G (since a is now smaller than those)
+    # So net change = G - L.
+    # But careful: this change happens exactly at k = M - a.
+    # For k from 0 to M-1, each a wraps exactly once.
+    # So we can accumulate delta[wrap_k] += G - L.
+
+    for a in range(M):
+        if cnt[a] == 0:
+            continue
+        L = pref[a]  # numbers < a
+        G = N - pref[a + 1]  # numbers > a
+        wrap = (M - a) % M
+        delta[wrap] += G - L
+
+    # Also, there is an effect when k increases by 1 without wrapping:
+    # Actually, if no element wraps, the relative order stays the same, so inversion count unchanged.
+    # So the only changes happen at wrap points.
+    # Therefore, inv(k) = inv0 + prefix sum of delta up to k.
+    # Wait: delta[wrap] is the change when k reaches wrap, i.e., going from k-1 to k.
+    # So inv(k) = inv0 + sum_{t=1..k} delta[t] (where indices mod M).
+    # But we need inv(0) = inv0, so delta[0] is change from k=M-1 to k=0? Actually, k loops 0..M-1.
+    # Let's define inv(0) = inv0.
+    # For k from 1 to M-1, inv(k) = inv(k-1) + delta[k].
+    # So we can compute sequentially.
+
+    ans = [0] * M
+    ans[0] = inv0
+    for k in range(1, M):
+        ans[k] = ans[k - 1] + delta[k]
+
+    # Output
+    out = '\n'.join(str(x) for x in ans)
+    sys.stdout.write(out)
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,45 @@
+```python
+import pandas as pd
+import pytz
+def task_func(articles, timezone):
+    if not isinstance(articles, list):
+        raise TypeError("articles is not a list of dictionaries")
+    if not articles:
+        raise ValueError("empty list is passed as articles")
+    if not isinstance(timezone, str):
+        raise ValueError("timezone must be a string")
+    
+    required_keys = {'category', 'published_time'}
+    for article in articles:
+        if not required_keys.issubset(article.keys()):
+            raise ValueError("dictionary keys do not match the requirements")
+    
+    # Convert published_time to datetime and timezone
+    for article in articles:
+        article['published_time'] = pd.to_datetime(article['published_time'])
+    
+    # Convert to specified timezone
+    for article in articles:
+        article['published_time'] = article['published_time'].dt.tz_localize('UTC').dt.tz_convert(timezone)
+    
+    # Extract hour from published_time
+    for article in articles:
+        article['hour'] = article['published_time'].dt.hour
+    
+    # Group by category and calculate statistics
+    grouped = pd.DataFrame(articles).groupby('category')
+    result = grouped.agg(
+        count=('hour', 'size'),
+        mean_hour=('hour', 'mean'),
+        min_hour=('hour', 'min'),
+        max_hour=('hour', 'max')
+    ).round(1)
+    
+    # Convert mean_hour to float
+    result['mean_hour'] = result['mean_hour'].astype(float)
+    
+    # Set category as index
+    result = result.reset_index().set_index('category')
+    
+    return result
+```

@@ -1,0 +1,15 @@
+```python
+import collections
+import json
+import os
+def task_func(directory_path: str) -> dict:
+    counter = collections.Counter()
+    for filename in os.listdir(directory_path):
+        file_path = os.path.join(directory_path, filename)
+        if os.path.isfile(file_path) and filename.endswith('.json'):
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+                if isinstance(data, dict):
+                    counter.update(data.keys())
+    return dict(counter)
+```

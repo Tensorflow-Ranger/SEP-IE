@@ -1,0 +1,31 @@
+```python
+import urllib.request
+import os
+import csv
+import collections
+def task_func(url, column_name, csv_file_path):
+    try:
+        # Download the CSV file
+        urllib.request.urlretrieve(url, csv_file_path)
+    except Exception as e:
+        raise Exception(f"Failed to download CSV file: {e}") from e
+
+    try:
+        # Read the CSV file
+        with open(csv_file_path, 'r', newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            if column_name not in reader.fieldnames:
+                os.remove(csv_file_path)
+                raise ValueError(f"The provided column_name '{column_name}' does not exist in the CSV file.")
+            # Count occurrences of each value in the specified column
+            counts = collections.defaultdict(int)
+            for row in reader:
+                value = row[column_name]
+                counts[value] += 1
+    finally:
+        # Delete the downloaded CSV file
+        if os.path.exists(csv_file_path):
+            os.remove(csv_file_path)
+
+    return dict(counts)
+```

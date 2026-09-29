@@ -1,0 +1,22 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    try:
+        data = np.genfromtxt(file_name, delimiter=',', dtype=str, skip_header=1, encoding='utf-8')
+    except:
+        return {}
+    if data.size == 0:
+        return {}
+    with open(file_name, 'r', encoding='utf-8') as f:
+        header = f.readline().strip().split(',')
+    result = {}
+    for col_idx in range(data.shape[1]):
+        col_data = data[:, col_idx]
+        counter = collections.Counter(col_data)
+        max_count = max(counter.values())
+        most_common_items = [item for item, count in counter.items() if count == max_count]
+        most_common_items_sorted = sorted(most_common_items, key=lambda x: str(x))
+        result[header[col_idx]] = most_common_items_sorted[0]
+    return result
+```

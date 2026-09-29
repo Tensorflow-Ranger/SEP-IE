@@ -1,0 +1,22 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from itertools import cycle
+def task_func(df, groups=['A', 'B', 'C', 'D', 'E']):
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("df is not a DataFrame")
+    required_columns = ['date', 'value', 'group']
+    if not all(col in df.columns for col in required_columns):
+        raise ValueError("df lacks required columns")
+    df['date_ordinal'] = df['date'].apply(lambda x: x.toordinal())
+    fig, ax = plt.subplots()
+    colors = cycle(['blue', 'green', 'red', 'purple', 'orange'])
+    for group in groups:
+        group_data = df[df['group'] == group]
+        ax.scatter(group_data['date_ordinal'], group_data['value'], color=next(colors), label=group)
+    ax.set_title('Scatterplot of Values for Each Group Over Time')
+    ax.set_xlabel('Date (ordinal)')
+    ax.set_ylabel('Value')
+    ax.legend()
+    return ax
+```

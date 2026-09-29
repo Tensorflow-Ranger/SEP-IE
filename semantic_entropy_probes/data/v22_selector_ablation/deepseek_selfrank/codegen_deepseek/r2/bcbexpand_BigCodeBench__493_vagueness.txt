@@ -1,0 +1,45 @@
+```python
+from datetime import datetime
+import random
+import matplotlib.pyplot as plt
+def task_func(
+    epoch_milliseconds,
+    teams=["Team1", "Team2", "Team3", "Team4", "Team5"],
+    random_seed=0,
+):
+    """
+    Generate and plot a performance trend for different teams from a given epoch timestamp to the current time.
+
+    Parameters:
+    - epoch_milliseconds (int): The start timestamp in milliseconds since epoch.
+    - teams (list): List of team names. Default is ["Team1", "Team2", "Team3", "Team4", "Team5"].
+    - random_seed (int): Seed for random number generation. Default is 0.
+
+    Returns:
+    - dict: A dictionary with team names as keys and lists of performance values (floats) as values.
+    - matplotlib.figure.Figure: A figure object showing the performance trend of each team.
+
+    Raises:
+    - ValueError: If the start timestamp is in the future.
+    """
+    random.seed(random_seed)
+    start_time = datetime.fromtimestamp(epoch_milliseconds / 1000.0)
+    current_time = datetime.now()
+    if start_time > current_time:
+        raise ValueError("Start timestamp cannot be in the future.")
+    days_diff = (current_time - start_time).days
+    performance_data = {}
+    for team in teams:
+        performance = [random.uniform(0.1, 1.0) for _ in range(days_diff + 1)]
+        performance_data[team] = performance
+    fig, ax = plt.subplots()
+    days = list(range(days_diff + 1))
+    for team in teams:
+        ax.plot(days, performance_data[team], label=team)
+    ax.set_xlabel("Days since start date")
+    ax.set_ylabel("Performance")
+    ax.set_title("Team Performance Trends")
+    ax.legend()
+    ax.grid(True)
+    return performance_data, fig
+```

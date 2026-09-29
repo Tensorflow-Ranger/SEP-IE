@@ -1,0 +1,47 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+def task_func(array, features=None, seed=None):
+    """
+    Shuffles the columns of a given 2D numpy array and visualizes it as a heatmap based on their order.
+    
+    Parameters:
+    - array (np.ndarray): The input 2D array.
+    - features (list, optional): List of feature names for x-axis labels. Must match number of columns.
+    - seed (int, optional): Random seed for reproducibility.
+    
+    Returns:
+    - matplotlib.axes.Axes: The Axes object containing the heatmap.
+    
+    Raises:
+    - ValueError: If 'array' is empty, not 2D, or if 'features' length doesn't match number of columns.
+    """
+    if array.size == 0:
+        raise ValueError("Input array is empty.")
+    if array.ndim != 2:
+        raise ValueError("Input array must be 2-dimensional.")
+    
+    n_cols = array.shape[1]
+    
+    if features is not None:
+        if len(features) != n_cols:
+            raise ValueError("Length of 'features' must match number of columns in 'array'.")
+        col_labels = features
+    else:
+        col_labels = [str(i + 1) for i in range(n_cols)]
+    
+    if seed is not None:
+        np.random.seed(seed)
+    
+    shuffled_indices = np.random.permutation(n_cols)
+    shuffled_array = array[:, shuffled_indices]
+    shuffled_labels = [col_labels[i] for i in shuffled_indices]
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.heatmap(shuffled_array, ax=ax, cbar_kws={'label': 'Value'}, xticklabels=shuffled_labels, yticklabels=False)
+    ax.set_xlabel("Features (shuffled order)")
+    ax.set_title("Heatmap of Shuffled Columns")
+    
+    return ax
+```

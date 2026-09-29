@@ -1,0 +1,50 @@
+```python
+import pandas as pd
+from datetime import datetime
+import random
+def task_func(
+    epoch_milliseconds,
+    random_seed=0,
+    products=["Product1", "Product2", "Product3", "Product4", "Product5"],
+):
+    """
+    Generate sales data for five products from a given time up to the current time.
+    
+    Parameters:
+    - epoch_milliseconds (int): Start time in milliseconds since epoch.
+    - random_seed (int): Seed for random number generation (default 0).
+    - products (list): List of product names (default 5 products).
+    
+    Returns:
+    - pd.DataFrame: DataFrame with columns 'Product', 'Date', 'Sales'.
+    
+    Raises:
+    - ValueError: If epoch_milliseconds is not an integer, is negative, or if unique products are not exactly 5.
+    """
+    random.seed(random_seed)
+    if not isinstance(epoch_milliseconds, int):
+        raise ValueError("epoch_milliseconds must be an integer.")
+    if epoch_milliseconds < 0:
+        raise ValueError("epoch_milliseconds must be non‑negative.")
+    unique_products = list(set(products))
+    if len(unique_products) != 5:
+        raise ValueError("There must be exactly 5 unique products.")
+    start_date = datetime.fromtimestamp(epoch_milliseconds / 1000.0).date()
+    end_date = datetime.now().date()
+    if start_date > end_date:
+        date_range = pd.date_range(end=end_date, start=start_date, freq='D')
+    else:
+        date_range = pd.date_range(start=start_date, end=end_date, freq='D')
+    data = []
+    for date in date_range:
+        date_only = date.date()
+        for product in unique_products:
+            sales = random.randint(10, 50)
+            data.append({
+                'Product': product,
+                'Date': datetime.combine(date_only, datetime.min.time()),
+                'Sales': sales
+            })
+    df = pd.DataFrame(data, columns=['Product', 'Date', 'Sales'])
+    return df
+```

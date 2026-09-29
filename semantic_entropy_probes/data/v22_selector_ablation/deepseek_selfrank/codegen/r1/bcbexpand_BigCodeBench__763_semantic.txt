@@ -1,0 +1,34 @@
+```python
+import numpy as np
+from collections import defaultdict
+import json
+import csv
+# Constants
+def task_func(input_file, output_file):
+    with open(input_file, 'r') as f:
+        data = json.load(f)
+    
+    result = defaultdict(lambda: {'mean': 0, 'median': 0})
+    
+    # Collect all values for each key
+    key_values = defaultdict(list)
+    for item in data:
+        for key, value in item.items():
+            key_values[key].append(value)
+    
+    # Calculate mean and median for each key
+    for key, values in key_values.items():
+        mean = np.mean(values)
+        median = np.median(values)
+        result[key]['mean'] = mean
+        result[key]['median'] = median
+    
+    # Write results to CSV
+    with open(output_file, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['field', 'mean', 'median'])
+        for key, stats in result.items():
+            writer.writerow([key, stats['mean'], stats['median']])
+    
+    return dict(result)
+```

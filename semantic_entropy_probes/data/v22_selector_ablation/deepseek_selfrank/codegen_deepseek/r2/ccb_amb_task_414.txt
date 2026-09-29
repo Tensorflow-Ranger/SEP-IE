@@ -1,0 +1,119 @@
+```python
+import sys
+sys.setrecursionlimit(1 << 25)
+MOD = 998244353
+
+def modinv(x):
+    return pow(x, MOD - 2, MOD)
+
+def solve():
+    data = sys.stdin.read().split()
+    it = iter(data)
+    H = int(next(it))
+    W = int(next(it))
+    N = H * W
+    A = [0] * N
+    for i in range(N):
+        A[i] = int(next(it))
+    Q = int(next(it))
+    sh = int(next(it)) - 1
+    sw = int(next(it)) - 1
+    queries = []
+    for _ in range(Q):
+        d = next(it)
+        a = int(next(it))
+        queries.append((d, a))
+
+    # Precompute factorials and inverse factorials for binomial coefficients
+    max_n = H + W + 5
+    fact = [1] * (max_n)
+    inv_fact = [1] * (max_n)
+    for i in range(1, max_n):
+        fact[i] = fact[i-1] * i % MOD
+    inv_fact[max_n-1] = modinv(fact[max_n-1])
+    for i in range(max_n-2, -1, -1):
+        inv_fact[i] = inv_fact[i+1] * (i+1) % MOD
+
+    def nCr(n, r):
+        if r < 0 or r > n:
+            return 0
+        return fact[n] * inv_fact[r] % MOD * inv_fact[n-r] % MOD
+
+    # Precompute path counts for each cell
+    # path_to[i][j] = number of ways from (1,1) to (i,j)
+    # path_from[i][j] = number of ways from (i,j) to (H,W)
+    # We'll store them in 1D arrays indexed by i*W + j
+    path_to = [0] * N
+    path_from = [0] * N
+
+    for i in range(H):
+        for j in range(W):
+            idx = i * W + j
+            if i == 0 and j == 0:
+                path_to[idx] = 1
+            else:
+                ways = 0
+                if i > 0:
+                    ways += path_to[idx - W]
+                if j > 0:
+                    ways += path_to[idx - 1]
+                path_to[idx] = ways % MOD
+
+    for i in range(H-1, -1, -1):
+        for j in range(W-1, -1, -1):
+            idx = i * W + j
+            if i == H-1 and j == W-1:
+                path_from[idx] = 1
+            else:
+                ways = 0
+                if i < H-1:
+                    ways += path_from[idx + W]
+                if j < W-1:
+                    ways += path_from[idx + 1]
+                path_from[idx] = ways % MOD
+
+    # Total number of paths from (1,1) to (H,W)
+    total_paths = nCr(H + W - 2, H - 1)
+
+    # Contribution of each cell: path_to * path_from * A[cell]
+    # We'll maintain the current sum S = sum_{cell} contribution[cell]
+    # But careful: contribution[cell] = path_to[cell] * path_from[cell] * A[cell]
+    # However, note that path_to[cell] * path_from[cell] = C(H+W-2, H-1) * (ways to choose cell in a random path)?
+    # Actually, for a fixed cell (i,j), the number of paths passing through it is:
+    # ways_to = C(i+j-2, i-1), ways_from = C(H-i+W-j, H-i)
+    # So contribution = ways_to * ways_from * A[i][j]
+    # We precompute coeff[cell] = ways_to * ways_from % MOD
+    coeff = [0] * N
+    for i in range(H):
+        for j in range(W):
+            idx = i * W + j
+            ways_to = nCr(i + j, i)  # from (0,0) to (i,j) with i down, j right
+            ways_from = nCr(H - 1 - i + W - 1 - j, H - 1 - i)
+            coeff[idx] = ways_to * ways_from % MOD
+
+    # Initial sum
+    S = 0
+    for idx in range(N):
+        S = (S + coeff[idx] * A[idx]) % MOD
+
+    # Directions
+    dir_map = {'L': (0, -1), 'R': (0, 1), 'U': (-1, 0), 'D': (1, 0)}
+    out_lines = []
+    cur_h, cur_w = sh, sw
+    for d, a in queries:
+        dh, dw = dir_map[d]
+        cur_h += dh
+        cur_w += dw
+        idx = cur_h * W + cur_w
+        # Update S: remove old contribution, add new
+        old_val = A[idx]
+        new_val = a
+        S = (S - coeff[idx] * old_val + coeff[idx] * new_val) % MOD
+        A[idx] = new_val
+        out_lines.append(str(S % MOD))
+
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    solve()
+```

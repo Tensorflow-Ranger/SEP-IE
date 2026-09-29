@@ -1,0 +1,20 @@
+```python
+import re
+import os
+import shutil
+def task_func(source_dir, target_dir, file_pattern=r'\b[A-Za-z0-9]+\.(txt|doc|docx)\b'):
+    moved_files_count = 0
+    # Compile the regex pattern for faster matching
+    pattern = re.compile(file_pattern)
+    # Iterate through all files in the source directory
+    for filename in os.listdir(source_dir):
+        file_path = os.path.join(source_dir, filename)
+        # Check if it's a file (not a directory)
+        if os.path.isfile(file_path):
+            # Check if the filename matches the pattern
+            if pattern.search(filename):
+                # Move the file to the target directory
+                shutil.move(file_path, target_dir)
+                moved_files_count += 1
+    return moved_files_count
+```

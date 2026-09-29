@@ -1,0 +1,55 @@
+```python
+import pandas as pd
+from datetime import datetime
+import random
+def task_func(
+    epoch_milliseconds,
+    random_seed=0,
+    products=["Product1", "Product2", "Product3", "Product4", "Product5"],
+):
+    """
+    Generate sales data for five products from a given time up to the current time.
+    
+    Parameters:
+    - epoch_milliseconds (int): Start time in milliseconds since epoch.
+    - random_seed (int): Seed for random number generator (default 0).
+    - products (list): List of product names (default 5 products).
+    
+    Returns:
+    - pd.DataFrame: DataFrame with columns 'Product', 'Date', 'Sales'.
+    """
+    if not isinstance(epoch_milliseconds, (int, float)):
+        raise ValueError("epoch_milliseconds must be a number")
+    if epoch_milliseconds < 0:
+        raise ValueError("epoch_milliseconds must be non-negative")
+    if not isinstance(random_seed, int):
+        raise ValueError("random_seed must be an integer")
+    if not isinstance(products, list) or not all(isinstance(p, str) for p in products):
+        raise ValueError("products must be a list of strings")
+    if len(products) == 0:
+        raise ValueError("products list must not be empty")
+    
+    random.seed(random_seed)
+    
+    start_dt = datetime.fromtimestamp(epoch_milliseconds / 1000.0)
+    end_dt = datetime.now()
+    
+    start_date = start_dt.date()
+    end_date = end_dt.date()
+    
+    data = []
+    current_date = start_date
+    while current_date <= end_date:
+        for product in products:
+            sales = random.randint(10, 50)
+            data.append({
+                'Product': product,
+                'Date': datetime.combine(current_date, datetime.min.time()),
+                'Sales': sales
+            })
+        current_date = pd.Timestamp(current_date) + pd.Timedelta(days=1)
+        current_date = current_date.date()
+    
+    df = pd.DataFrame(data, columns=['Product', 'Date', 'Sales'])
+    return df
+```

@@ -1,0 +1,97 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    A = data[1].strip()
+    length = 3 ** N
+
+    # Precompute the number of changes needed to make a group of 3 become all 0 or all 1
+    # For a group of 3 bits, to make majority 0 we need at most 2 changes (if all 1 -> change two of them)
+    # Actually we can compute exactly: count ones -> changes = ones (to make all 0)
+    # count zeros -> changes = zeros (to make all 1)
+    # But we need the minimal changes to make the group yield a given majority.
+    # For majority 0: need at least two 0's -> changes = number of 1's (since each 1 must become 0)
+    # For majority 1: changes = number of 0's.
+    # So for a group, cost0 = number of '1's, cost1 = number of '0's.
+
+    # We can think recursively: at each level we have a string of length 3^k.
+    # We want to know minimal changes to make the final bit 0 or 1.
+    # Let dp[k][target] = minimal changes for substring of length 3^k to yield target at the top.
+    # Base: k=0, length 1, dp[0][bit] = 0 if current bit == target else 1.
+    # For k>0: split into 3 subblocks of size 3^(k-1).
+    # To get target at level k, each of the 3 subblocks must yield a majority equal to target.
+    # But wait: the operation takes majority of three bits, each bit coming from subblock's result.
+    # So we need to compute for each subblock the cost to make its final bit 0 or 1.
+    # Then for the three subblocks we choose for each either 0 or 1 such that majority of the three chosen bits = target.
+    # Minimal cost = min over triples (b1,b2,b3) in {0,1}^3 with majority = target of sum cost_subblock[i][bi].
+
+    # We can implement recursively with memoization on (start, length_power, target).
+    # Since N <= 13, 3^13 = 1594323, recursion depth 13 is fine.
+
+    # Precompute powers of 3
+    pow3 = [1] * (N + 1)
+    for i in range(1, N + 1):
+        pow3[i] = pow3[i - 1] * 3
+
+    # Memoization dictionary
+    memo = {}
+
+    def dfs(start: int, k: int, target: int) -> int:
+        # substring A[start: start + 3^k]
+        if k == 0:
+            # single character
+            return 0 if int(A[start]) == target else 1
+
+        key = (start, k, target)
+        if key in memo:
+            return memo[key]
+
+        sublen = pow3[k - 1]
+        # costs for the three subblocks
+        costs = [[0, 0] for _ in range(3)]
+        for i in range(3):
+            substart = start + i * sublen
+            costs[i][0] = dfs(substart, k - 1, 0)
+            costs[i][1] = dfs(substart, k - 1, 1)
+
+        # Now choose b1,b2,b3 in {0,1} with majority = target
+        best = float('inf')
+        for b1 in (0, 1):
+            for b2 in (0, 1):
+                for b3 in (0, 1):
+                    if (b1 + b2 + b3) >= 2:
+                        majority = 1
+                    else:
+                        majority = 0
+                    if majority != target:
+                        continue
+                    total = costs[0][b1] + costs[1][b2] + costs[2][b3]
+                    if total < best:
+                        best = total
+        memo[key] = best
+        return best
+
+    # We want to change A'_1 from its current value to the opposite.
+    # First compute current A'_1 value by simulating the operation.
+    def get_current(start: int, k: int) -> int:
+        if k == 0:
+            return int(A[start])
+        sublen = pow3[k - 1]
+        bits = []
+        for i in range(3):
+            bits.append(get_current(start + i * sublen, k - 1))
+        # majority of three bits
+        return 1 if sum(bits) >= 2 else 0
+
+    current = get_current(0, N)
+    target = 1 - current
+    answer = dfs(0, N, target)
+    print(answer)
+
+if __name__ == "__main__":
+    solve()
+```

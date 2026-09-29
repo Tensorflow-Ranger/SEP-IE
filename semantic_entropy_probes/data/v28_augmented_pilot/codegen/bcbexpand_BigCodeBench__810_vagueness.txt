@@ -1,0 +1,26 @@
+```python
+import re
+import os
+import subprocess
+def task_func(dir_path, exe_pattern, execute_files=True):
+    found_files = []
+    results = []
+    try:
+        for root, dirs, files in os.walk(dir_path):
+            for file in files:
+                if re.search(exe_pattern, file):
+                    full_path = os.path.join(root, file)
+                    found_files.append(full_path)
+    except Exception:
+        return []
+    if execute_files:
+        for file_path in found_files:
+            try:
+                result = subprocess.run([file_path], capture_output=True, text=True, timeout=30)
+                results.append(result.stdout)
+            except Exception:
+                results.append("")
+    else:
+        results = found_files
+    return results
+```

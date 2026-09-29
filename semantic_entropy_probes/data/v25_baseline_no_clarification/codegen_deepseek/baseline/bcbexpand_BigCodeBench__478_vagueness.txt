@@ -1,0 +1,26 @@
+```python
+import pandas as pd
+import re
+import random
+def task_func(data_list, seed=None):
+    if seed is not None:
+        random.seed(seed)
+    original = []
+    modified = []
+    for s in data_list:
+        if not isinstance(s, str) or len(s) == 0:
+            original.append(s)
+            modified.append(s)
+            continue
+        start = random.randint(0, len(s) - 1)
+        length = random.randint(1, len(s) - start)
+        substring = s[start:start + length]
+        new_s = s.replace(substring, '', 1)
+        original.append(s)
+        modified.append(new_s)
+    df = pd.DataFrame({
+        'Original String': original,
+        'Modified String': modified
+    })
+    return df
+```

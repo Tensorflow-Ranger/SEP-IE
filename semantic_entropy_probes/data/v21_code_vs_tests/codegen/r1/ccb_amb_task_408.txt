@@ -1,0 +1,65 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    M = int(data[1])
+    ops = []
+    for i in range(M):
+        L = int(data[2 + 2*i])
+        R = int(data[3 + 2*i])
+        ops.append((L, R))
+    
+    # For each position, track which operations can set it to 1
+    # We'll use a list of sets to track which operations affect each position
+    # But since N can be up to 1e6, we need an efficient way
+    # Instead, we'll track for each operation, the range it affects
+    # And then determine which operations are necessary to cover all positions
+    
+    # We'll use a greedy approach: for each position from left to right,
+    # if it's not yet set to 1, choose the operation that covers it and extends the furthest right
+    # This ensures minimal cost (we use operation 1 or 2 with minimal cost)
+    
+    # To track which positions are already set to 1
+    covered = [False] * (N + 2)  # 1-based indexing
+    # To track which operations we use
+    selected = [0] * M
+    
+    # We'll use a list to track the rightmost position covered by the last operation
+    last = 0
+    
+    for i in range(M):
+        L, R = ops[i]
+        if last >= R:
+            continue  # This operation is redundant
+        # Find the first position not yet covered
+        pos = bisect.bisect_left(covered, False, lo=last + 1)
+        if pos > R:
+            continue  # This operation can't help
+        # Choose the operation that covers this position and extends the furthest
+        # We can use operation 1 (set [L, R] to 1) or operation 2 (set [1, L-1] and [R+1, N] to 1)
+        # But since we are going left to right, we only need to cover from pos to R
+        # So we can use operation 1
+        selected[i] = 1
+        # Mark all positions from pos to R as covered
+        for j in range(pos, R + 1):
+            covered[j] = True
+        last = R
+    
+    # Check if all positions are covered
+    if not all(covered[1:N+1]):
+        print(-1)
+        return
+    
+    # Output the selected operations
+    print(sum(selected))
+    print(' '.join(map(str, selected)))
+
+if __name__ == "__main__":
+    main()
+```

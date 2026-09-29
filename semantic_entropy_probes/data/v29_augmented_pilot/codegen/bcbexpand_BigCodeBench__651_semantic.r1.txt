@@ -1,0 +1,30 @@
+```python
+import pandas as pd
+import time
+def task_func(df, target_value):
+    """
+    Convert the input dict of lists to DataFrame and search in this DataFrame for rows with cells matching the provided target_value by exact string matching. It then plots the count of such rows per column.
+
+    Parameters:
+    df (dict): A dictionary where keys are column names and values are lists of strings.
+    target_value (str): The target string to search for.
+
+    Returns:
+    tuple: A tuple containing:
+        - A pandas Series with counts of the target value per column.
+        - A matplotlib Axes object representing the plot (None if dataframe is empty).
+    """
+    if not df:
+        return pd.Series(), None
+    df = pd.DataFrame(df)
+    counts = {}
+    for col in df.columns:
+        count = 0
+        for cell in df[col]:
+            if str(cell) == target_value:
+                count += 1
+        counts[col] = count
+    series = pd.Series(counts)
+    ax = series.plot(kind='bar', title=f"Count of '{target_value}' per column")
+    return series, ax
+```

@@ -1,0 +1,17 @@
+```python
+def count_nums(arr):
+    import math
+    count = 0
+    for num in arr:
+        sign = -1 if num < 0 else 1
+        sum_digits = 0
+        abs_num = abs(num)
+        while abs_num > 0:
+            digit = abs_num % 10
+            sum_digits += digit * sign
+            abs_num = abs_num // 10
+            sign = 1
+        if sum_digits > 0:
+            count += 1
+    return count
+```

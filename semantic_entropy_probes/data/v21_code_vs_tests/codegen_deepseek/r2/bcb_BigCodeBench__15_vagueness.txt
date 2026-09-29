@@ -1,0 +1,35 @@
+```python
+import subprocess
+import csv
+import os
+def task_func(commands_file_path, output_dir_path):
+    if not os.path.exists(commands_file_path):
+        raise FileNotFoundError(f"The file {commands_file_path} does not exist.")
+    
+    if not os.path.exists(output_dir_path):
+        os.makedirs(output_dir_path)
+    
+    with open(commands_file_path, 'r') as f:
+        commands = [line.strip() for line in f if line.strip()]
+    
+    output_files = []
+    
+    for idx, cmd in enumerate(commands):
+        output_file_path = os.path.join(output_dir_path, f'command_{idx}_output.txt')
+        output_files.append(output_file_path)
+        
+        with open(output_file_path, 'w') as out_file:
+            try:
+                result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
+                out_file.write(result.stdout)
+                if result.stderr:
+                    out_file.write(result.stderr)
+                if result.returncode != 0:
+                    out_file.write(f"\nCommand failed with exit code {result.returncode}")
+            except subprocess.TimeoutExpired:
+                out_file.write("Command timed out after 30 seconds")
+            except Exception as e:
+                out_file.write(f"Unexpected error: {str(e)}")
+    
+    return output_files
+```

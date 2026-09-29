@@ -1,0 +1,15 @@
+```python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+def task_func(num_samples=100, num_features=5):
+    # Generate random data with uniform distribution between 0 and 1
+    data = np.random.rand(num_samples, num_features)
+    # Create a DataFrame
+    df = pd.DataFrame(data, columns=[f'Feature_{i+1}' for i in range(num_features)])
+    # Calculate the correlation matrix
+    corr_matrix = df.corr()
+    # Visualize the correlation matrix using a heatmap
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
+    return df, sns.axes_grid1.axes_grid
+```

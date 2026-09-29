@@ -1,0 +1,39 @@
+```python
+import pandas as pd
+import re
+import random
+def task_func(data_list, seed=None):
+    """
+    Removes a random value (treated as a "substring") from each string in a list and returns a pandas DataFrame containing the original and modified strings.
+    
+    Parameters:
+    data_list (list): List of strings with comma-separated values.
+    seed (int, optional): Random seed for reproducibility.
+    
+    Returns:
+    pandas.DataFrame: DataFrame with columns 'Original String' and 'Modified String'.
+    """
+    if seed is not None:
+        random.seed(seed)
+    original = []
+    modified = []
+    for s in data_list:
+        original.append(s)
+        stripped = s.strip()
+        if stripped == "":
+            modified.append("")
+            continue
+        parts = [part.strip() for part in stripped.split(',') if part.strip() != '']
+        if len(parts) <= 1:
+            modified.append(stripped)
+            continue
+        idx_to_remove = random.randint(0, len(parts) - 1)
+        removed = parts.pop(idx_to_remove)
+        modified_string = ', '.join(parts)
+        modified.append(modified_string)
+    df = pd.DataFrame({
+        'Original String': original,
+        'Modified String': modified
+    })
+    return df
+```

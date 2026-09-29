@@ -1,0 +1,93 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.buffer.read().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    M = int(next(it))
+    L = [0] * M
+    R = [0] * M
+    for i in range(M):
+        L[i] = int(next(it))
+        R[i] = int(next(it))
+
+    # We need to cover every position j with at least one operation that sets it to 1.
+    # Operation 1 covers [L,R], operation 2 covers complement of [L,R].
+    # We can think of each operation as offering two possible covering sets.
+    # We must choose for each operation either:
+    #   - do nothing (cost 0, covers nothing)
+    #   - use operation 1 (cost 1, covers [L,R])
+    #   - use operation 2 (cost 1, covers complement of [L,R])
+    # Goal: cover all positions {1..N} with minimum number of chosen operations (cost = number of chosen ops).
+    # This is a set cover problem, but with special structure: each operation offers two intervals
+    # (one normal, one complement). Complement of [L,R] is two intervals: [1, L-1] and [R+1, N].
+    # So each operation can be seen as offering either:
+    #   - a single interval [L,R] (op1)
+    #   - two intervals [1,L-1] and [R+1,N] (op2)
+    # We need to cover all points 1..N with a union of chosen intervals (each chosen op contributes its chosen set).
+    # This is equivalent to covering the line [1,N] with intervals from a collection where each original operation
+    # gives two possible covering patterns.
+    # We can model as a graph problem: each position must be covered by at least one chosen interval.
+    # Let's think differently: For each position j, consider which operations can cover it.
+    # Operation i covers j if:
+    #   - we choose op1 and L_i <= j <= R_i
+    #   - we choose op2 and (j < L_i or j > R_i)
+    # So each operation can cover some positions if we choose op1, and the rest if we choose op2.
+    # We need to assign to each operation a choice (0,1,2) such that every j is covered.
+    # This is like a 2-SAT variant? Not exactly.
+    # Another viewpoint: Let’s define for each operation i a binary variable t_i:
+    #   t_i = 0 means we choose op1 (cover [L,R])
+    #   t_i = 1 means we choose op2 (cover complement)
+    #   (we can also choose to not use it, which is like not covering anything, but that's wasteful if we need coverage)
+    # Then position j is covered if there exists i such that:
+    #   (t_i == 0 and L_i <= j <= R_i) OR (t_i == 1 and (j < L_i or j > R_i))
+    # We want to minimize number of i with t_i in {0,1} (i.e., we count only when we actually use the operation).
+    # But we can also skip operation entirely (cost 0) which is equivalent to not covering anything from that operation.
+    # So we can think of t_i in { -1 (skip), 0 (op1), 1 (op2) }.
+    # This looks like a hitting set problem.
+    # However, constraints: N up to 1e6, M up to 2e5.
+    # We need a more efficient approach.
+    # Observation: The complement operation covers almost everything except a contiguous block.
+    # So if we choose op2 for operation i, we cover everything except [L_i,R_i].
+    # That means the only uncovered positions are inside [L_i,R_i].
+    # So if we pick some operations with op2, the union of their uncovered blocks must be covered by op1 of other operations.
+    # Let S be set of indices where we choose op2. Then the uncovered set after all op2 is intersection of [L_i,R_i] over i in S?
+    # Wait: If we choose op2 for operation i, it sets x_j=1 for j NOT in [L_i,R_i]. So after applying all chosen op2,
+    # a position j is 1 if there exists at least one chosen op2 with j outside its [L,R]. If j is inside [L,R] for every chosen op2, then j might still be 0.
+    # Actually, applying multiple operations: each operation sets some positions to 1, never back to 0.
+    # So final x_j = 1 if there exists at least one chosen operation (op1 or op2) that covers j.
+    # So we need to cover each j by at least one chosen operation's covering set.
+    # Let’s define for each operation i two covering sets: A_i = [L_i,R_i], B_i = [1,L_i-1] ∪ [R_i+1,N].
+    # We need to pick for each i either nothing, A_i, or B_i, to cover [1,N].
+    # This is a set cover with each set being a union of at most two intervals.
+    # We can try greedy: always pick the set that covers the most uncovered positions.
+    # But that may be O(N*M) if implemented naively.
+    # However, because intervals are contiguous (or two contigu pieces), we can think in terms of covering from left to right.
+    # Classic interval covering: to cover [1,N] with intervals, we can greedily pick the interval that starts <= current_pos and extends farthest right.
+    # Here each operation gives two options: an interval that covers a contiguous block (op1) or two intervals covering left and right parts (op2).
+    # The op2 is not a single contiguous interval, so the classic greedy doesn't directly apply.
+    # But note: op2 covers everything except a hole [L,R]. So if we pick op2, we cover almost everything, leaving only [L,R] uncovered.
+    # That means if we pick one op2, we only need to cover its hole with other operations.
+    # So a possible strategy: pick one op2 that covers most, then cover its hole with op1 intervals.
+    # But we could pick multiple op2.
+    # Let’s think differently: For each position j, we need at least one operation that covers it.
+    # Consider the complement: positions that are NOT covered by an operation i if we choose op1 are those outside [L,R]; if we choose op2 are those inside [L,R].
+    # So for each operation, the uncovered set is the opposite of its chosen covering set.
+    # We want to avoid having any position uncovered by all chosen operations.
+    # This is equivalent to: for each j, there exists i such that j is in the covering set of operation i.
+    # Let’s define for each j, let C_j be set of operations that can cover j if we choose the appropriate type.
+    # Operation i can cover j either via op1 (if j in [L,R]) or via op2 (if j not in [L,R]).
+    # So actually, for fixed j, operation i can always cover j by choosing the appropriate type, because either j in [L,R] or j not in [L,R].
+    # Wait: That's true! For any operation i and any position j, exactly one of op1 or op2 covers j.
+    # Because op1 covers j iff j in [L,R]; op2 covers j iff j not in [L,R]. So for each (i,j), there is exactly one choice (op1 or op2) that covers j.
+    # Therefore, if we are allowed to choose per operation either op1 or op2, we can cover all positions by using every operation with the appropriate choice per position.
+    # But we must choose one type per operation globally, not per position.
+    # So the problem reduces to: can we assign each operation i a type (0: op1, 1: op2) such that for every position j, there exists at least one operation i where the type chosen covers j?
+    # Because if we can, we can achieve the goal with cost M (using all operations). But we want minimum cost, so we can skip some operations (cost 0) as long as coverage holds.
+    # So we want a subset S of operations, and for each i in S a choice of type, such that all positions covered, minimizing |S|.
+    # Now, note that if we choose no operation, we cover nothing, so we need at least one.
+    # Observation: If we choose exactly one operation i, we can cover all positions by choosing op2 (since op2 covers all except [L,R]), but then positions in [L,R] are uncovered. So one operation is enough only if its [L,R] is empty? But L<=R, so [L,R] nonempty unless L>R which never happens. So one operation cannot cover all positions because its complement leaves a non-empty interval uncovered.
+    #

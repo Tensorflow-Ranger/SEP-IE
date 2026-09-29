@@ -1,0 +1,22 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame(data)
+    numeric_data = pd.to_numeric(df[column], errors='coerce')
+    result = {}
+    if numeric_data.empty:
+        result['sum'] = np.nan
+        result['mean'] = np.nan
+        result['min'] = np.inf
+        result['max'] = -np.inf
+    else:
+        result['sum'] = numeric_data.sum()
+        result['mean'] = numeric_data.mean()
+        result['min'] = numeric_data.min()
+        result['max'] = numeric_data.max()
+    plt.hist(numeric_data.dropna())
+    result['plot'] = plt.gca().get_children()[1]
+    return result
+```

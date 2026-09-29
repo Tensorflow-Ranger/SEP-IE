@@ -1,0 +1,32 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    a = list(map(int, data[1:1 + n]))
+
+    total_moves = sum(a)
+    # The game ends when S becomes {1,2,...,N}, which happens exactly when
+    # we have performed N distinct-index moves.
+    # Each move reduces some A_i by 1 and possibly adds i to S if not already there.
+    # The number of moves needed to finish the game is:
+    #   N (to add all indices) + sum_{i=1..N} max(0, A_i - 1)
+    # Because after adding index i, we can still subtract from A_i (A_i-1) more times.
+    # So total moves = N + sum(A_i - 1) = N + (sum(A_i) - N) = sum(A_i)
+    # Wait, that's just total_moves. So the game always lasts exactly total_moves moves.
+    # But careful: The game ends immediately when S becomes complete.
+    # The last move that completes S is counted among the total_moves.
+    # So the number of moves played is exactly total_moves.
+    # Therefore, if total_moves is odd, Fennec (first player) wins; else Snuke wins.
+
+    if total_moves % 2 == 1:
+        print("Fennec")
+    else:
+        print("Snuke")
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,57 @@
+```python
+import pandas as pd
+import re
+# Constants
+STOPWORDS = set([
+    "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself",
+    "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself",
+    "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that",
+    "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
+    "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because",
+    "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into",
+    "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out",
+    "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where",
+    "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no",
+    "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just",
+    "don", "should", "now"
+])
+def task_func(data, column):
+    """
+    Removes English stopwords from a text column in a DataFrame and returns the modified DataFrame.
+    Words are defined as sequences of alphanumeric characters (and underscores) as per \b\w+\b.
+    
+    Parameters:
+    - data (pd.DataFrame): The input DataFrame.
+    - column (str): The name of the text column to process.
+    
+    Returns:
+    - pd.DataFrame: The DataFrame with stopwords removed from the specified column.
+    """
+    if not isinstance(data, pd.DataFrame):
+        raise TypeError("data must be a pandas DataFrame")
+    if column not in data.columns:
+        raise ValueError(f"Column '{column}' not found in DataFrame")
+    
+    def remove_stopwords(text):
+        if not isinstance(text, str):
+            return text
+        # Use regex to find all words (alphanumeric + underscore)
+        words = re.findall(r'\b\w+\b', text)
+        # Filter out stopwords
+        filtered_words = [word for word in words if word.lower() not in STOPWORDS]
+        # Reconstruct the text with the same whitespace/punctuation structure
+        # by replacing each word while preserving the original separators
+        result = text
+        for word in words:
+            if word.lower() in STOPWORDS:
+                # Replace only the first occurrence to avoid issues with duplicate words
+                result = result.replace(word, '', 1)
+        # Clean up extra spaces that might result from removal
+        result = re.sub(r'\s+', ' ', result).strip()
+        return result
+    
+    # Apply the function to the specified column
+    data = data.copy()
+    data[column] = data[column].apply(remove_stopwords)
+    return data
+```

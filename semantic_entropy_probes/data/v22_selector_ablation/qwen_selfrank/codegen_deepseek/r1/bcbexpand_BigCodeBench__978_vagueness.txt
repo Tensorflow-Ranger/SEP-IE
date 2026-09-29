@@ -1,0 +1,28 @@
+```python
+import numpy as np
+import pandas as pd
+from sklearn.decomposition import PCA
+def task_func(array, seed=None):
+    if not isinstance(array, np.ndarray):
+        array = np.array(array)
+    if array.ndim != 2:
+        raise ValueError("If the input array is not 2D.")
+    if array.size == 0:
+        return pd.DataFrame(columns=['PC1', 'PC2'])
+    n_features = array.shape[1]
+    if n_features == 0:
+        return pd.DataFrame(columns=['PC1', 'PC2'])
+    if seed is not None:
+        np.random.seed(seed)
+    shuffled_array = array.copy()
+    np.random.shuffle(shuffled_array.T)
+    n_components = min(2, n_features)
+    pca = PCA(n_components=n_components)
+    principal_components = pca.fit_transform(shuffled_array)
+    if n_components == 1:
+        principal_components = np.hstack([principal_components, np.zeros((principal_components.shape[0], 1))])
+    df = pd.DataFrame(principal_components, columns=['PC1', 'PC2'][:n_components])
+    if n_components == 1:
+        df['PC2'] = 0.0
+    return df
+```

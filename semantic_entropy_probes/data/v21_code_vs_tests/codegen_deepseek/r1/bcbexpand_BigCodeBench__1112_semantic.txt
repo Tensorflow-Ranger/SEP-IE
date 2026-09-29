@@ -1,0 +1,34 @@
+```python
+import csv
+import random
+from datetime import datetime
+# Constants
+DATA = ['Temperature', 'Humidity', 'Pressure']
+RANGE = {
+    'Temperature': (-50, 50),
+    'Humidity': (0, 100),
+    'Pressure': (980, 1040)
+}
+def task_func(file_name="data.csv"):
+    """
+    Generate a CSV file with weather data for each hour of the current day.
+    Each row corresponds to an hour (0-23) and contains random values for
+    Temperature, Humidity, and Pressure within their specified ranges.
+    
+    Parameters:
+    - file_name (str): The name of the CSV file to create. Default is "data.csv".
+    
+    Returns:
+    - str: The path to the created file.
+    """
+    with open(file_name, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Hour'] + DATA)
+        for hour in range(24):
+            row = [hour]
+            for key in DATA:
+                min_val, max_val = RANGE[key]
+                row.append(random.uniform(min_val, max_val))
+            writer.writerow(row)
+    return file_name
+```

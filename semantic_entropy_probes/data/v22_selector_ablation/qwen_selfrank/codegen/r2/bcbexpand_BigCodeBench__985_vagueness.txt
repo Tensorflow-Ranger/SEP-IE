@@ -1,0 +1,35 @@
+```python
+import pandas as pd
+import json
+import os
+import math
+def task_func(json_data, output_dir=".", file_name="country_population_report.csv"):
+    try:
+        data = json.loads(json_data)
+    except json.JSONDecodeError:
+        raise ValueError("JSON data is malformed")
+    if not data:
+        raise ValueError("JSON data is empty")
+    
+    countries = []
+    for entry in data:
+        if not isinstance(entry, dict):
+            raise ValueError("Invalid entry in JSON data")
+        country = entry.get("Country")
+        population = entry.get("Population")
+        if not isinstance(country, str):
+            raise ValueError("Non-string country name found")
+        if not isinstance(population, (int, float)) or population < 0:
+            raise ValueError("Non-numeric or negative population found")
+        population = math.floor(population)
+        countries.append({"Country": country, "Population": population})
+    
+    df = pd.DataFrame(countries)
+    file_path = os.path.join(output_dir, file_name)
+    try:
+        df.to_csv(file_path, index=False)
+    except IOError:
+        raise IOError("File cannot be written to the specified directory")
+    
+    return file_path, df
+```

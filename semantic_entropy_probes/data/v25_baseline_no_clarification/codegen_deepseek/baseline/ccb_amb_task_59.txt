@@ -1,0 +1,49 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1 + n]))
+    max_val = 10 ** 6
+    present = [False] * (max_val + 1)
+    for x in arr:
+        present[x] = True
+
+    count = 0
+    # Iterate over possible A and B, compute C = A * B, check if C is in S
+    # Since S_i <= 1e6, A * B must be <= 1e6
+    for a in arr:
+        # To avoid double counting, we can iterate b >= a? Actually the problem doesn't require ordered triplets,
+        # but (A,B,C) with A,B,C in S. If we count all pairs (a,b) and check a*b in S, we count each triplet
+        # (A,B,C) multiple times? Let's see: condition is just A,B,C in S and C = A*B.
+        # So for each ordered pair (A,B) we can check if A*B in S. That counts each triplet once per ordered (A,B).
+        # But the problem statement says "fine triplet (A,B,C)" – typically triplet implies ordered triple,
+        # but let's assume order matters (i.e., (A,B,C) distinct from (B,A,C) if A≠B).
+        # We'll count all ordered pairs (A,B) with A,B in S and A*B in S.
+        # Since N up to 1e6, O(N^2) is impossible. We need a better approach.
+        # We can iterate over possible products up to 1e6.
+        # For each a in S, we can iterate over multiples of a up to 1e6.
+        # For each multiple m = a * b, if m in S and b in S, then (a,b,m) is a fine triplet.
+        # But we must ensure b is in S. We can check presence[b].
+        # This is like iterating a over S, and for each a, iterate over b in S? No, we can't loop over S again.
+        # Instead, for each a in S, we iterate over possible b such that a*b <= 1e6.
+        # b can be any integer, but we only care if b in S. So we can loop over all numbers b from 1 to max_val//a,
+        # and check if present[b] and present[a*b]. That's O(sum_{a in S} (max_val//a)).
+        # Since S_i up to 1e6 and N up to 1e6, worst case a=1 -> 1e6 iterations, a=2 -> 5e5, etc.
+        # Sum_{a in S} max_val/a can be large if many small a. But N can be 1e6 and all numbers from 1 to 1e6.
+        # Then sum_{a=1}^{1e6} 1e6/a ≈ 1e6 * log(1e6) ≈ 1e6 * 14 ≈ 1.4e7, which is acceptable.
+        # However, we must avoid double counting? We are counting ordered pairs (a,b) where a,b in S and a*b in S.
+        # That's exactly what we want if triplet is ordered.
+        # So we can do:
+        for b in range(1, max_val // a + 1):
+            if present[b] and present[a * b]:
+                count += 1
+
+    print(count)
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,41 @@
+```python
+import math
+import numpy as np
+from datetime import datetime
+import pandas as pd
+def task_func(
+    start_time,
+    end_time,
+    step,
+    columns=["Timestamp", "Sensor1", "Sensor2", "Sensor3", "SensorStatus"],
+    sensor_statuses=["OK", "MAINTENANCE_REQUIRED", "ERROR"],
+    random_seed=42,
+):
+    np.random.seed(random_seed)
+    
+    # Convert start and end times from milliseconds to seconds
+    start_time_sec = start_time / 1000.0
+    end_time_sec = end_time / 1000.0
+    
+    # Generate timestamps
+    timestamps = np.arange(start_time_sec, end_time_sec + step, step)
+    
+    # Generate sensor readings
+    sensor1 = np.sin(timestamps) + np.random.normal(0, 0.1, len(timestamps))
+    sensor2 = np.cos(timestamps) + np.random.normal(0, 0.1, len(timestamps))
+    sensor3 = np.tan(timestamps) + np.random.normal(0, 0.1, len(timestamps))
+    
+    # Generate sensor statuses
+    sensor_status = np.random.choice(sensor_statuses, len(timestamps))
+    
+    # Create DataFrame
+    data = {
+        columns[0]: timestamps,
+        columns[1]: sensor1,
+        columns[2]: sensor2,
+        columns[3]: sensor3,
+        columns[4]: sensor_status
+    }
+    
+    return pd.DataFrame(data)
+```

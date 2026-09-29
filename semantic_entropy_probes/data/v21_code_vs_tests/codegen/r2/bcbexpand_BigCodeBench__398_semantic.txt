@@ -1,0 +1,13 @@
+```python
+import json
+import os
+def task_func(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        if isinstance(data, list):
+            return all(isinstance(item, dict) for item in data)
+        return False
+    except (json.JSONDecodeError, OSError):
+        return False
+```

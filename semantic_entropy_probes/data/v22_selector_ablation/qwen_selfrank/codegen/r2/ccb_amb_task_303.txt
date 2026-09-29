@@ -1,0 +1,40 @@
+```python
+import sys
+import sys
+input = sys.stdin.read
+
+def main():
+    data = input().split()
+    idx = 0
+    T = int(data[idx])
+    idx += 1
+    results = []
+    
+    for _ in range(T):
+        N = int(data[idx])
+        idx += 1
+        A = list(map(int, data[idx:idx + 2 * N]))
+        idx += 2 * N
+        
+        pos = [0] * (N + 1)
+        for i in range(2 * N):
+            pos[A[i]] = i
+        
+        # Count pairs (a, b) where a < b
+        # and neither a nor b are adjacent in original array
+        total = 0
+        for a in range(1, N + 1):
+            for b in range(a + 1, N + 1):
+                i_a, i_b = pos[a], pos[b]
+                if abs(i_a - i_b) != 1:
+                    # Check if they can be made adjacent by swapping
+                    # Check if they are in the same 4 positions
+                    if (i_a < i_b and i_b - i_a <= 3) or (i_b < i_a and i_a - i_b <= 3):
+                        total += 1
+        results.append(str(total))
+    
+    print('\n'.join(results))
+
+if __name__ == "__main__":
+    main()
+```

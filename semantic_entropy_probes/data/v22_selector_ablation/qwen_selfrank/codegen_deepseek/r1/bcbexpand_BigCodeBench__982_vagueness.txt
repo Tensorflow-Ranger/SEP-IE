@@ -1,0 +1,23 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+def task_func(df, column, bins=30, density=True, alpha=0.6, color="g", seed=None):
+    if seed is not None:
+        np.random.seed(seed)
+    data = df[column].dropna()
+    if data.empty:
+        raise ValueError("Column contains no valid data after dropping NaN values.")
+    fig, ax = plt.subplots()
+    ax.hist(data, bins=bins, density=density, alpha=alpha, color=color, edgecolor='black')
+    mu, std = norm.fit(data)
+    xmin, xmax = ax.get_xlim()
+    x = np.linspace(xmin, xmax, 1000)
+    p = norm.pdf(x, mu, std)
+    ax.plot(x, p, 'k', linewidth=2)
+    ax.set_xlabel(column)
+    ax.set_ylabel('Density' if density else 'Frequency')
+    ax.set_title(f'Histogram with Fitted Normal Distribution for {column}')
+    plt.tight_layout()
+    return ax
+```

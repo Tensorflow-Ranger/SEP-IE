@@ -1,0 +1,14 @@
+```python
+from collections import Counter
+import heapq
+# Constants
+LETTERS = list('abcdefghijklmnopqrstuvwxyz')
+def task_func(my_dict):
+    if not my_dict:
+        return []
+    # Use heapq.nlargest to get the 3 letters with largest values
+    most_common = heapq.nlargest(3, my_dict.items(), key=lambda x: x[1])
+    # Extract just the letters from the result
+    most_common_letters = [letter for letter, value in most_common]
+    return most_common_letters
+```

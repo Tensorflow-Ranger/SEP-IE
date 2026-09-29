@@ -1,0 +1,13 @@
+```python
+from collections import Counter
+import hashlib
+def task_func(word: str) -> dict:
+    pairs = []
+    for i in range(len(word) - 1):
+        pair = word[i] + word[i+1]
+        pairs.append(pair)
+    pairs_count = Counter(pairs)
+    result_dict = dict(pairs_count)
+    md5_hash = hashlib.md5(str(result_dict).encode()).hexdigest()
+    return result_dict
+```

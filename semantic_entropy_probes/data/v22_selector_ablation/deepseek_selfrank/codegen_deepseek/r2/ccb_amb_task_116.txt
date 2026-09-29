@@ -1,0 +1,23 @@
+```python
+import sys
+
+def main():
+    S = sys.stdin.readline().strip()
+    n = len(S)
+    count = 0
+    
+    for j in range(1, n - 1):
+        if S[j] != 'B':
+            continue
+        max_step = min(j, n - 1 - j)
+        for step in range(1, max_step + 1):
+            i = j - step
+            k = j + step
+            if S[i] == 'A' and S[k] == 'C':
+                count += 1
+    
+    print(count)
+
+if __name__ == "__main__":
+    main()
+```

@@ -1,0 +1,155 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    M = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+
+    # Coordinate compression for A
+    sorted_unique = sorted(set(A))
+    val_to_idx = {v: i for i, v in enumerate(sorted_unique)}
+    comp_A = [val_to_idx[a] for a in A]
+    max_val = len(sorted_unique) - 1
+
+    # Fenwick tree (1-indexed)
+    class Fenwick:
+        def __init__(self, n):
+            self.n = n
+            self.bit = [0] * (n + 2)
+        def add(self, idx, delta):
+            i = idx + 1
+            while i <= self.n + 1:
+                self.bit[i] += delta
+                i += i & -i
+        def sum(self, idx):
+            # sum of [0, idx]
+            i = idx + 1
+            s = 0
+            while i > 0:
+                s += self.bit[i]
+                i -= i & -i
+            return s
+        def range_sum(self, l, r):
+            # sum of [l, r]
+            if l > r:
+                return 0
+            return self.sum(r) - (self.sum(l - 1) if l > 0 else 0)
+
+    # Initial inversion count for k = 0
+    bit = Fenwick(max_val)
+    inv0 = 0
+    for val in comp_A:
+        inv0 += bit.range_sum(val + 1, max_val)
+        bit.add(val, 1)
+
+    # Prepare events: for each A_i, when does it cross M-1 -> 0?
+    events = []
+    for a in A:
+        # B_i = (a + k) % M
+        # When k increases, B_i increases until it wraps.
+        # Inversion changes when a pair (i, j) has B_i > B_j and then after wrap B_i < B_j.
+        # We'll handle per element: for each a, when k = M - a, it becomes M-1, next step wraps to 0.
+        # So at k = M - a, all elements with value > a will stop being inversions with this element,
+        # and all elements with value < a will start being inversions with this element.
+        # But careful: we need to count ordered pairs (i, j) with i < j.
+        # We'll count for each a how many smaller and larger elements are before/after it.
+        pass
+
+    # Better approach: treat each pair (i, j) separately.
+    # For i < j, compare a_i and a_j.
+    # Let x = a_i, y = a_j.
+    # B_i = (x + k) % M, B_j = (y + k) % M.
+    # Inversion exists if B_i > B_j.
+    # There are two cases:
+    # 1. x <= y:
+    #    Initially (k=0): x <= y -> no inversion.
+    #    As k increases, (x+k) mod M may become > (y+k) mod M when wrap occurs.
+    #    Wrap condition: x+k >= M before y+k, i.e., k in [M-x, M-y-1] (if M-x <= M-y-1).
+    #    So for k in [M-x, M-y-1] we have inversion.
+    # 2. x > y:
+    #    Initially inversion exists.
+    #    It disappears when both wrap, i.e., when k >= M-y (since then y+k >= M, wraps to small),
+    #    but x still not wrapped? Actually need B_i <= B_j.
+    #    Let's derive: we want (x+k)%M <= (y+k)%M.
+    #    Since x > y, without wrap we have x+k > y+k -> inversion.
+    #    Inversion disappears when y wraps but x does not, i.e., when y+k >= M and x+k < M.
+    #    That is k in [M-y, M-x-1].
+    #    Also if both wrap (k >= M-x), then (x+k)%M = x+k-M, (y+k)%M = y+k-M, and since x>y, still inversion.
+    #    So only in interval [M-y, M-x-1] inversion disappears.
+    # So each pair contributes +1 or -1 to inversion count for a range of k.
+
+    # We'll use difference array of size M.
+    diff = [0] * M
+    total_pairs = N * (N - 1) // 2
+
+    # Process all pairs efficiently using Fenwick to count smaller/larger elements.
+    # For each a_j, we want to know among previous elements how many are < a_j, > a_j, = a_j.
+    # But we need per value, not per index.
+    # We can process sorted list of indices grouped by value.
+    # Another way: for each value v, count how many elements have value = v.
+    cnt = [0] * M
+    for a in A:
+        cnt[a] += 1
+
+    # prefix sum of counts
+    prefix = [0] * (M + 1)
+    for i in range(M):
+        prefix[i + 1] = prefix[i] + cnt[i]
+
+    # For each pair of distinct values x, y with x != y.
+    # Number of pairs (i, j) with i < j and a_i = x, a_j = y is cnt[x] * cnt[y] if x < y?
+    # Wait, ordering matters: i < j.
+    # If x != y, the number of ordered pairs (i, j) with i < j and a_i = x, a_j = y is cnt[x] * cnt[y] (since any i with x can be before any j with y).
+    # But careful: if x > y, then for k=0 inversion exists for all such pairs.
+    # If x < y, inversion exists only when wrap condition holds.
+    # So we can process each ordered pair of distinct values (x, y) with x != y.
+    # For x > y: initial inversion count contribution = cnt[x] * cnt[y].
+    # They disappear for k in [M-y, M-x-1] (if M-y <= M-x-1).
+    # For x < y: initial inversion count contribution = 0.
+    # They appear for k in [M-x, M-y-1] (if M-x <= M-y-1).
+    # Also need to consider x == y: no inversion change, since B_i == B_j always.
+
+    # Process x > y case:
+    for x in range(M):
+        for y in range(x):
+            if cnt[x] == 0 or cnt[y] == 0:
+                continue
+            pairs = cnt[x] * cnt[y]
+            l = M - y
+            r = M - x - 1
+            if l <= r:
+                diff[l] -= pairs
+                if r + 1 < M:
+                    diff[r + 1] += pairs
+    # Process x < y case:
+    for x in range(M):
+        for y in range(x + 1, M):
+            if cnt[x] == 0 or cnt[y] == 0:
+                continue
+            pairs = cnt[x] * cnt[y]
+            l = M - x
+            r = M - y - 1
+            if l <= r:
+                diff[l] += pairs
+                if r + 1 < M:
+                    diff[r + 1] -= pairs
+
+    # Build answer array
+    ans = [0] * M
+    cur = inv0
+    for k in range(M):
+        cur += diff[k]
+        ans[k] = cur
+
+    # Output
+    out = '\n'.join(str(v) for v in ans)
+    sys.stdout.write(out)
+
+if __name__ == "__main__":
+    solve()
+```

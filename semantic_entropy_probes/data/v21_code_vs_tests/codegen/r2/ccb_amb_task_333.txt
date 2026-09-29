@@ -1,0 +1,50 @@
+```python
+import sys
+input = sys.stdin.read
+
+def main():
+    data = input().split()
+    N = int(data[0])
+    P = list(map(int, data[1:]))
+
+    # Create a list to store the position of each value
+    pos = [0] * (N + 1)
+    for i in range(N):
+        pos[P[i]] = i
+
+    # Initialize Fenwick Tree
+    class FenwickTree:
+        def __init__(self, size):
+            self.n = size
+            self.tree = [0] * (self.n + 2)
+
+        def update(self, idx, delta):
+            while idx <= self.n:
+                self.tree[idx] += delta
+                idx += idx & -idx
+
+        def query(self, idx):
+            res = 0
+            while idx > 0:
+                res += self.tree[idx]
+                idx -= idx & -idx
+            return res
+
+    ft = FenwickTree(N)
+
+    total_cost = 0
+    for i in range(N, 0, -1):
+        # Current position of value i
+        current_pos = pos[i]
+        # Number of elements already placed (i.e., those > i)
+        already_placed = ft.query(current_pos)
+        # Cost to move i to its correct position is (current_pos - already_placed)
+        total_cost += (current_pos - already_placed)
+        # Update Fenwick Tree
+        ft.update(current_pos + 1, 1)
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    main()
+```

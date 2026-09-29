@@ -1,0 +1,17 @@
+```python
+import numpy as np
+import pandas as pd
+def task_func(country_dict):
+    """
+    Generates a DataFrame representing the GDP for a predefined set of countries based on their presence in the provided dictionary, using either the keys or values as country names. The GDP values are simulated with random integers to model economic data.
+    The function should output with:
+        DataFrame: A pandas DataFrame with each country's name from the input as the index and a randomly generated GDP
+        value as the column. GDP values range between 1,000,000,000 and 100,000,000,000.
+    """
+    if not country_dict:
+        return pd.DataFrame()
+    countries = list(country_dict.keys()) if len(country_dict) > 0 else list(country_dict.values())
+    gdp_data = np.random.randint(1_000_000_000, 100_000_000_001, size=len(countries))
+    df = pd.DataFrame({'GDP': gdp_data}, index=countries)
+    return df
+```

@@ -1,0 +1,88 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [int(next(it)) for _ in range(N)]
+
+    # We need to sort the permutation with swaps of adjacent elements,
+    # where swapping P[i] and P[i+1] costs i (1-indexed).
+    # This is equivalent to: for each element x, count how many larger elements
+    # are to its left, and sum i * (number of inversions that involve position i).
+    # Actually, each time we swap adjacent elements, the cost is the left index.
+    # The total cost equals the sum over all inversions (i, j) of i (1-indexed).
+    # We can compute this with a Fenwick tree that stores positions of values.
+
+    # Let pos[v] = index of value v in P (1-indexed).
+    pos = [0] * (N + 1)
+    for idx, val in enumerate(P, 1):
+        pos[val] = idx
+
+    # Fenwick tree (1-indexed internally) to count how many positions are occupied.
+    size = N + 2
+    bit = [0] * size
+
+    def bit_add(i: int, delta: int) -> None:
+        while i < size:
+            bit[i] += delta
+            i += i & -i
+
+    def bit_sum(i: int) -> int:
+        s = 0
+        while i > 0:
+            s += bit[i]
+            i -= i & -i
+        return s
+
+    total_cost = 0
+    # Process values from 1 to N in order.
+    for v in range(1, N + 1):
+        p = pos[v]          # current position of v (1-indexed)
+        # Number of already placed smaller values that are to the right of p
+        # = total placed - those placed with position <= p
+        placed = v - 1
+        left_placed = bit_sum(p)
+        right_placed = placed - left_placed
+        # Each such smaller value to the right will eventually need to cross v
+        # from left to right, and each crossing involves a swap at each intermediate
+        # position. But thinking directly in inversions is easier:
+        # For each already placed smaller value that is to the right of p,
+        # it forms an inversion (p, pos[smaller]) with cost p (since p is the left index).
+        # However, careful: when we later move v leftwards, the costs incurred are
+        # the positions where v swaps leftward, which are the positions of the larger
+        # elements that are to the left of v at that time.
+        # Actually known result: total cost = sum over all inversions of the left index.
+        # We can compute by iterating values from N down to 1 and counting how many
+        # larger values are already seen to the left.
+        # Let's do that instead to avoid confusion.
+
+    # Recompute with clearer approach:
+    # For each position i (1-indexed), we want to know how many elements
+    # among P[i+1..N] are smaller than P[i] (inversions where i is left index).
+    # Then add i * that count.
+    # We can process values from 1 to N, marking their positions, and for each
+    # position we query how many smaller values are to the right.
+    # But that's equivalent to: for each value v, count how many smaller values
+    # are to its right, and sum pos[v] * that count.
+    # Let's implement that with a Fenwick tree on positions.
+
+    bit = [0] * (N + 2)
+    total_cost = 0
+    # Process values from 1 to N (ascending)
+    for v in range(1, N + 1):
+        p = pos[v]
+        # Number of smaller values already placed that are to the right of p
+        # = total placed smaller values - those placed with position <= p
+        smaller_to_right = (v - 1) - bit_sum(p)
+        total_cost += p * smaller_to_right
+        bit_add(p, 1)
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

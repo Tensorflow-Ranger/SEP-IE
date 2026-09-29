@@ -1,0 +1,23 @@
+```python
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+def task_func(num_samples, countries=['Russia', 'China', 'USA', 'India', 'Brazil'], 
+           ages=np.arange(18, 60), genders=['Male', 'Female'], rng_seed=None):
+    if not isinstance(num_samples, int):
+        raise ValueError("num_samples must be an integer")
+    if num_samples <= 0:
+        raise ValueError("num_samples must be a positive integer")
+    rng = np.random.default_rng(rng_seed)
+    country = rng.choice(countries, size=num_samples)
+    age = rng.choice(ages, size=num_samples)
+    gender = rng.choice(genders, size=num_samples)
+    le = LabelEncoder()
+    gender_encoded = le.fit_transform(gender)
+    demographics = pd.DataFrame({
+        'Country': country,
+        'Age': age,
+        'Gender': gender_encoded
+    })
+    return demographics
+```

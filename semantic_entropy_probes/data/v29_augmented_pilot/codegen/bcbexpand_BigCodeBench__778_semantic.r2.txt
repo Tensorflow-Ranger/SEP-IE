@@ -1,0 +1,21 @@
+```python
+from collections import defaultdict
+from operator import itemgetter
+from itertools import groupby
+def task_func(news_articles):
+    if not news_articles:
+        return defaultdict(list)
+    
+    required_keys = {'title', 'title_url', 'id', 'category'}
+    for article in news_articles:
+        if not isinstance(article, dict) or set(article.keys()) != required_keys:
+            raise ValueError("If dictionary keys do not match the requirements.")
+    
+    sorted_articles = sorted(news_articles, key=itemgetter('category', 'title'))
+    
+    result = defaultdict(list)
+    for category, group in groupby(sorted_articles, key=itemgetter('category')):
+        result[category].extend(list(group))
+    
+    return result
+```

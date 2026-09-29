@@ -1,0 +1,12 @@
+```python
+from collections import defaultdict
+from operator import itemgetter
+from itertools import groupby
+def task_func(news_articles):
+    if not all('category' in article and 'title' in article for article in news_articles):
+        raise ValueError("Dictionary keys do not match the requirements.")
+    sorted_articles = defaultdict(list)
+    for article in sorted(news_articles, key=itemgetter('category', 'title')):
+        sorted_articles[article['category']].append(article)
+    return sorted_articles
+```

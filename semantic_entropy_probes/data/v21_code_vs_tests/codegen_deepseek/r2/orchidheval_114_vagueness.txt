@@ -1,0 +1,16 @@
+```python
+def minSubArraySum(nums):
+    """
+    Given an array of integers nums, find the minimal sum of a sub-array
+    of nums.
+    """
+    if not nums:
+        return 0
+    # Kadane's algorithm for minimum subarray sum
+    current_min = nums[0]
+    global_min = nums[0]
+    for num in nums[1:]:
+        current_min = min(num, current_min + num)
+        global_min = min(global_min, current_min)
+    return global_min
+```

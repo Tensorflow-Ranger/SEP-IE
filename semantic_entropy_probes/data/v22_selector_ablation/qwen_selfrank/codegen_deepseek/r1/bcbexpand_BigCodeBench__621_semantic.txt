@@ -1,0 +1,36 @@
+```python
+from itertools import chain
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+def task_func(L):
+    """
+    Convert a list of lists 'L' into a single list of integers, standardize the integers,
+    and plot the standardized values.
+    
+    Parameters:
+    L (list of lists): A list containing sublists of integers.
+    
+    Returns:
+    matplotlib.axes._axes.Axes: A plot displaying the standardized values.
+    """
+    if not L:
+        raise ValueError("Input list must not be empty")
+    
+    flattened = list(chain.from_iterable(L))
+    if not flattened:
+        raise ValueError("Flattened list must not be empty")
+    
+    arr = np.array(flattened).reshape(-1, 1)
+    scaler = StandardScaler()
+    standardized = scaler.fit_transform(arr)
+    
+    fig, ax = plt.subplots()
+    ax.plot(standardized, marker='o', linestyle='-')
+    ax.set_title('Standardized Values')
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Standardized Value')
+    ax.grid(True)
+    
+    return ax
+```

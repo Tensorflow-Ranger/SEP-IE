@@ -1,0 +1,56 @@
+```python
+import pandas as pd
+import json
+import os
+import math
+def task_func(json_data, output_dir=".", file_name="country_population_report.csv"):
+    """
+    Generates a population report DataFrame and CSV file based on provided JSON data.
+    
+    Parameters:
+    - json_data (str): JSON string containing country-population data.
+    - output_dir (str): Directory to save the CSV file. Default is current directory.
+    - file_name (str): Name of the output CSV file. Default is "country_population_report.csv".
+    
+    Returns:
+    - str: The file path of the generated CSV report.
+    - pd.DataFrame: The country-population data with columns "Country" and "Population".
+    
+    Raises:
+    - ValueError: If JSON data is malformed, empty, contains non-string country names,
+                  non-numeric populations, or negative populations.
+    - IOError: If the file cannot be written to the specified directory.
+    """
+    try:
+        data = json.loads(json_data)
+    except json.JSONDecodeError:
+        raise ValueError("Malformed JSON data")
+    
+    if not data:
+        raise ValueError("JSON data is empty")
+    
+    countries = []
+    populations = []
+    
+    for country, population in data.items():
+        if not isinstance(country, str):
+            raise ValueError("Country name must be a string")
+        if not isinstance(population, (int, float)):
+            raise ValueError("Population must be numeric")
+        if population < 0:
+            raise ValueError("Population cannot be negative")
+        
+        countries.append(country)
+        populations.append(round(population))
+    
+    df = pd.DataFrame({"Country": countries, "Population": populations})
+    
+    try:
+        os.makedirs(output_dir, exist_ok=True)
+        file_path = os.path.join(output_dir, file_name)
+        df.to_csv(file_path, index=False)
+    except (OSError, IOError) as e:
+        raise IOError(f"Cannot write file to directory: {e}")
+    
+    return file_path, df
+```

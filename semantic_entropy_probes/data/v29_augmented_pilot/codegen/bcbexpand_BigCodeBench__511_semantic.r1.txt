@@ -1,0 +1,31 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    if not data:
+        stats = {'sum': 0, 'mean': np.nan, 'min': np.nan, 'max': np.nan}
+        fig, ax = plt.subplots()
+        ax.pie([], labels=[])
+        return stats, ax
+    
+    df = pd.DataFrame(data, columns=['Age', 'Salary', 'Experience'])
+    
+    if column not in df.columns:
+        raise ValueError(f"Column '{column}' not found in data")
+    
+    column_data = df[column]
+    
+    stats = {
+        'sum': column_data.sum(),
+        'mean': column_data.mean(),
+        'min': column_data.min(),
+        'max': column_data.max()
+    }
+    
+    fig, ax = plt.subplots()
+    ax.pie(column_data, labels=df['Age'].astype(str).tolist())
+    ax.set_title(f'{column} Distribution by Age')
+    
+    return stats, ax
+```

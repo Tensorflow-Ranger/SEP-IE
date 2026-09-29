@@ -1,0 +1,45 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(column, data):
+    """
+    Analyze a list of employee data and calculate statistics for a given column.
+    The data is expected to be a list of dictionaries. Non-numeric values are not
+    expected in the specified column. The function also creates a pie chart of the
+    column data using the Age column as labels.
+
+    Parameters:
+    column (str): The column name to analyze (e.g., 'Age', 'Salary', 'Experience').
+    data (list): A list of dictionaries containing employee data.
+
+    Returns:
+    tuple: A tuple containing:
+        dict: A dictionary with the 'sum', 'mean', 'min', and 'max' of the column.
+        Axes object: The pie chart visualizing the column data.
+    """
+    if not data:
+        stats = {'sum': 0, 'mean': np.nan, 'min': np.nan, 'max': np.nan}
+        fig, ax = plt.subplots()
+        ax.text(0.5, 0.5, 'No data', horizontalalignment='center', verticalalignment='center')
+        ax.set_title(f'Pie chart of {column}')
+        return stats, ax
+
+    df = pd.DataFrame(data)
+    values = pd.to_numeric(df[column], errors='coerce')
+    values = values.fillna(0)
+
+    stats = {
+        'sum': values.sum(),
+        'mean': values.mean(),
+        'min': values.min(),
+        'max': values.max()
+    }
+
+    fig, ax = plt.subplots()
+    ax.pie(values, labels=df['Age'].astype(str), autopct='%1.1f%%')
+    ax.set_title(f'Pie chart of {column}')
+
+    return stats, ax
+```

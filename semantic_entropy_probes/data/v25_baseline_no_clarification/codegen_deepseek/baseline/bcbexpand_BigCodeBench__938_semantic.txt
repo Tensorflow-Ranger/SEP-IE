@@ -1,0 +1,15 @@
+```python
+import re
+import pandas as pd
+def task_func(input_df):
+    if 'text' not in input_df.columns:
+        raise ValueError("DataFrame must contain a 'text' column")
+    def clean_text(text):
+        if pd.isna(text):
+            return ''
+        cleaned = re.sub(r'[^a-zA-Z0-9]', '', str(text))
+        return cleaned
+    input_df['clean_text'] = input_df['text'].apply(clean_text)
+    input_df['text_length'] = input_df['clean_text'].str.len()
+    return input_df
+```

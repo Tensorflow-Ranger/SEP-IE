@@ -1,0 +1,42 @@
+```python
+from datetime import datetime
+import random
+import matplotlib.pyplot as plt
+def task_func(
+    epoch_milliseconds,
+    teams=["Team1", "Team2", "Team3", "Team4", "Team5"],
+    random_seed=0,
+):
+    # Convert epoch milliseconds to datetime object
+    start_time = datetime.fromtimestamp(epoch_milliseconds / 1000)
+    current_time = datetime.now()
+    
+    # Check if start time is in the future
+    if start_time > current_time:
+        raise ValueError("Start timestamp cannot be in the future.")
+    
+    # Set random seed for reproducibility
+    random.seed(random_seed)
+    
+    # Calculate the number of days between start and current time
+    delta = current_time - start_time
+    num_days = delta.days
+    
+    # Generate performance data for each team
+    performance_data = {}
+    for team in teams:
+        performance_data[team] = [random.uniform(0.1, 1) for _ in range(num_days)]
+    
+    # Plot the performance trend
+    plt.figure(figsize=(12, 6))
+    for team in teams:
+        plt.plot(range(num_days), performance_data[team], label=team)
+    
+    plt.xlabel('Days since start')
+    plt.ylabel('Performance')
+    plt.title('Team Performance Trend')
+    plt.legend()
+    plt.grid(True)
+    
+    return performance_data, plt.gcf()
+```

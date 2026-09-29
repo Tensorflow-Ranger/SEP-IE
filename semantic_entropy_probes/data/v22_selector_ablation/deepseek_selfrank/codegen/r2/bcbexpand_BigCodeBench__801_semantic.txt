@@ -1,0 +1,30 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    try:
+        with open(file_name, 'r') as f:
+            headers = f.readline().strip().split(',')
+            data = [line.strip().split(',') for line in f]
+    except FileNotFoundError:
+        return {}
+    
+    if not headers or not data:
+        return {}
+    
+    result = {}
+    for col_idx, header in enumerate(headers):
+        column = [row[col_idx] for row in data]
+        counter = collections.Counter(column)
+        most_common = counter.most_common(1)
+        if not most_common:
+            result[header] = ''
+            continue
+        count, value = most_common[0]
+        if count > 1:
+            result[header] = value
+        else:
+            unique_values = sorted([v for v, _ in counter.items()])
+            result[header] = unique_values[0]
+    return result
+```

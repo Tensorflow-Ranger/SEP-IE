@@ -1,0 +1,18 @@
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+def task_func(myList):
+    if not myList:
+        raise ValueError("Input list cannot be empty")
+    unique_vals = np.unique(myList)
+    if len(unique_vals) == 1:
+        bins = [unique_vals[0] - 0.5, unique_vals[0] + 0.5]
+    else:
+        bins = np.append(unique_vals, unique_vals[-1] + 1) - 0.5
+    fig, ax = plt.subplots()
+    ax.hist(myList, bins=bins, edgecolor='black')
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Histogram of Values')
+    return ax
+```

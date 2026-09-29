@@ -1,0 +1,17 @@
+```python
+import os
+import glob
+import csv
+def task_func(directory_path, file_extension='.csv'):
+    data = {}
+    # Find all files with the specified extension in the directory
+    files = glob.glob(os.path.join(directory_path, f'*{file_extension}'))
+    for file_path in files:
+        # Extract the filename without the extension
+        filename = os.path.splitext(os.path.basename(file_path))[0]
+        # Read the CSV file and store its data
+        with open(file_path, 'r') as file:
+            csv_reader = csv.reader(file)
+            data[filename] = [row for row in csv_reader]
+    return data
+```

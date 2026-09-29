@@ -1,0 +1,42 @@
+```python
+import csv
+import os
+from datetime import datetime
+from random import randint
+import matplotlib.pyplot as plt
+import pandas as pd
+# Constants
+VEHICLE_TYPES = ['Car', 'Bus', 'Truck', 'Bike']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    # Ensure output directory exists
+    os.makedirs(output_dir, exist_ok=True)
+    # Generate data
+    data = []
+    time_start = datetime.now()
+    for hour in range(hours):
+        time = time_start + timedelta(hours=hour)
+        row = {'Time': time.strftime('%Y-%m-%d %H:%M:%S')}
+        for vehicle_type in VEHICLE_TYPES:
+            row[vehicle_type] = randint(0, 50)
+        data.append(row)
+    # Save to CSV
+    csv_file_path = os.path.join(output_dir, f'traffic_data_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv')
+    with open(csv_file_path, 'w', newline='') as csvfile:
+        fieldnames = ['Time'] + VEHICLE_TYPES
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(data)
+    # Plot data
+    plt.figure(figsize=(12, 6))
+    for vehicle_type in VEHICLE_TYPES:
+        plt.plot(data, [row[vehicle_type] for row in data], label=vehicle_type)
+    plt.xlabel('Time')
+    plt.ylabel('Vehicle Count')
+    plt.title('Traffic Data Over Time')
+    plt.legend()
+    plt.grid(True)
+    axes = plt.gca()
+    # Return the path to the CSV file and the matplotlib axes object
+    return csv_file_path, axes
+```

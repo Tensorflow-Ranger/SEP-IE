@@ -1,0 +1,58 @@
+```python
+import socket
+import select
+import queue
+from datetime import datetime, timedelta
+def task_func(
+    server_address="localhost", server_port=12345, buffer_size=1024, run_duration=5
+):
+    end_time = datetime.now() + timedelta(seconds=run_duration)
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setblocking(False)
+    server_socket.bind((server_address, server_port))
+    server_socket.listen(5)
+    inputs = [server_socket]
+    outputs = []
+    message_queue = queue.Queue()
+    
+    try:
+        while datetime.now() < end_time:
+            readable, writable, exceptional = select.select(inputs, outputs, inputs, 0)
+            for sock in readable:
+                if sock is server_socket:
+                    client_socket, client_address = sock.accept()
+                    client_socket.setblocking(False)
+                    inputs.append(client_socket)
+                else:
+                    data = sock.recv(buffer_size)
+                    if data:
+                        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        response = data.decode() + " " + current_time
+                        message_queue.put((sock, response.encode()))
+                    else:
+                        inputs.remove(sock)
+                        if sock in outputs:
+                            outputs.remove(sock)
+            for sock in exceptional:
+                print(f"Handling exception for {sock}")
+                inputs.remove(sock)
+                if sock in outputs:
+                    outputs.remove(sock)
+                sock.close()
+            while not message_queue.empty():
+                sock, response = message_queue.get()
+                if sock not in inputs:
+                    continue
+                try:
+                    sock.sendall(response)
+                except:
+                    inputs.remove(sock)
+                    if sock in outputs:
+                        outputs.remove(sock)
+                    sock.close()
+    finally:
+        for sock in inputs:
+            sock.close()
+        server_socket.close()
+        return f"Server ran for {run_duration} seconds and handled client connections."
+```

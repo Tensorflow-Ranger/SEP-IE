@@ -1,0 +1,14 @@
+```python
+import pandas as pd
+import regex as re
+from sklearn.feature_extraction.text import CountVectorizer
+def task_func(text):
+    sentences = [s.strip() for s in text.split('.') if s.strip()]
+    if not sentences:
+        return pd.DataFrame()
+    vectorizer = CountVectorizer()
+    dtm = vectorizer.fit_transform(sentences)
+    feature_names = vectorizer.get_feature_names_out()
+    df = pd.DataFrame(dtm.toarray(), columns=feature_names)
+    return df
+```

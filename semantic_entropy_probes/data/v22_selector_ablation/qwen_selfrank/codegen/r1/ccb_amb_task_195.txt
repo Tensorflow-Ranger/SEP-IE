@@ -1,0 +1,46 @@
+```python
+import sys
+import itertools
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    H = int(data[0])
+    W = int(data[1])
+    grid = data[2:2+H]
+    
+    # Convert each row to a list of integers
+    grid = [list(map(int, list(row))) for row in grid]
+    
+    # Precompute all possible combinations of column flips (since W <= 18)
+    # Each combination is a bitmask of W bits
+    min_sum = float('inf')
+    
+    for mask in range(1 << W):
+        # Apply column flips according to the mask
+        temp = [row[:] for row in grid]
+        for j in range(W):
+            if (mask >> j) & 1:
+                for i in range(H):
+                    temp[i][j] = 1 - temp[i][j]
+        
+        # Now apply row flips optimally
+        # For each row, flip if it has more 1s than 0s
+        for i in range(H):
+            cnt = sum(temp[i])
+            if cnt > H - cnt:
+                for j in range(W):
+                    temp[i][j] = 1 - temp[i][j]
+        
+        # Calculate the sum
+        current_sum = sum(sum(row) for row in temp)
+        if current_sum < min_sum:
+            min_sum = current_sum
+    
+    print(min_sum)
+
+if __name__ == "__main__":
+    main()
+```

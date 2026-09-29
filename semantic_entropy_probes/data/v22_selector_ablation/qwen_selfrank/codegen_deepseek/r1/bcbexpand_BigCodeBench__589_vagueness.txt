@@ -1,0 +1,41 @@
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.cluster import KMeans
+# Constants for configuration
+RANGE = 100
+SIZE = 1000
+CLUSTERS = 5
+def task_func():
+    # Generate random 2D points
+    np.random.seed(42)
+    data = np.random.randint(0, RANGE, size=(SIZE, 2))
+    
+    # Apply KMeans clustering
+    kmeans = KMeans(n_clusters=CLUSTERS, random_state=42, n_init=10)
+    kmeans.fit(data)
+    labels = kmeans.labels_
+    centroids = kmeans.cluster_centers_
+    
+    # Create scatter plot
+    plt.figure(figsize=(8, 6))
+    colors = plt.cm.tab10(np.arange(CLUSTERS) / CLUSTERS)
+    
+    for i in range(CLUSTERS):
+        cluster_points = data[labels == i]
+        plt.scatter(cluster_points[:, 0], cluster_points[:, 1], 
+                   color=colors[i], label=f'Cluster {i}', alpha=0.6)
+    
+    # Plot centroids
+    plt.scatter(centroids[:, 0], centroids[:, 1], 
+               color='black', marker='X', s=200, label='Centroids', linewidths=2)
+    
+    plt.title('KMeans Clustering of Random 2D Points')
+    plt.xlabel('X coordinate')
+    plt.ylabel('Y coordinate')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.show()
+    
+    return (data, kmeans)
+```

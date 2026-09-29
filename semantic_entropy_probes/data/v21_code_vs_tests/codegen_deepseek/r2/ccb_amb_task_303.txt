@@ -1,0 +1,105 @@
+```python
+import sys
+
+def solve():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    t = int(next(it))
+    out_lines = []
+    for _ in range(t):
+        n = int(next(it))
+        A = [int(next(it)) for _ in range(2 * n)]
+        pos = [[] for _ in range(n + 1)]
+        for idx, val in enumerate(A):
+            pos[val].append(idx)
+        
+        # adjacency check and precompute gaps
+        adj = [False] * (n + 1)
+        for x in range(1, n + 1):
+            p1, p2 = pos[x]
+            if abs(p1 - p2) == 1:
+                adj[x] = True
+        
+        # Build permutation graph: each couple is a node, edges if their intervals interleave
+        # We only care about couples that are not adjacent originally.
+        # We'll count pairs (a,b) with a<b, both non‑adjacent, and interleaving.
+        # Interleaving means: positions of a are i1,i2, positions of b are j1,j2,
+        # and i1 < j1 < i2 < j2 or j1 < i1 < j2 < i2.
+        # This is equivalent to checking if the intervals (min(pos[a]), max(pos[a])) and
+        # (min(pos[b]), max(pos[b])) intersect but neither contains the other.
+        
+        # We'll process couples in increasing order of left endpoint.
+        events = []
+        for x in range(1, n + 1):
+            l, r = pos[x]
+            if l > r:
+                l, r = r, l
+            events.append((l, r, x))
+        events.sort()  # sort by left endpoint
+        
+        # Fenwick tree to count active right endpoints
+        # We need coordinate compression of right endpoints because positions are up to 2n.
+        rights = [r for (_, r, _) in events]
+        rights.sort()
+        rank = {v: i+1 for i, v in enumerate(rights)}  # 1‑based for Fenwick
+        m = len(rights)
+        
+        bit = [0] * (m + 2)
+        def bit_add(idx, delta):
+            while idx <= m + 1:
+                bit[idx] += delta
+                idx += idx & -idx
+        def bit_sum(idx):
+            s = 0
+            while idx > 0:
+                s += bit[idx]
+                idx -= idx & -idx
+            return s
+        def bit_range_sum(l, r):
+            # sum in [l, r]
+            return bit_sum(r) - bit_sum(l - 1)
+        
+        total = 0
+        # Process events from left to right
+        for l, r, x in events:
+            if adj[x]:
+                # skip adjacent couples, they are not allowed
+                continue
+            # Count active intervals whose right endpoint is between l and r (exclusive of r?)
+            # Actually we want intervals that started earlier (left < current left)
+            # and whose right endpoint is between current left and current right.
+            # But since we process in increasing left order, all active intervals have left < current left.
+            # We need those with right in (l, r)  (strictly between l and r)
+            # because then they interleave: left_other < l < right_other < r.
+            # Also we must exclude those that are adjacent themselves.
+            # We'll query bit for rank(l) .. rank(r-1) (since right endpoints are integers)
+            # But rank is based on sorted distinct rights; we need to find the index of the largest right < r.
+            # Binary search in rights.
+            lo, hi = 0, m - 1
+            target = r - 1
+            while lo <= hi:
+                mid = (lo + hi) // 2
+                if rights[mid] <= target:
+                    lo = mid + 1
+                else:
+                    hi = mid - 1
+            # hi is the last index with value <= r-1
+            if hi >= 0:
+                max_idx = hi
+                # we need rank(l)+1 .. rank(rights[max_idx])
+                # but rank(l) corresponds to l itself, we want > l, so start from rank(l)+1
+                left_rank = rank[l] + 1
+                right_rank = rank[rights[max_idx]]
+                if left_rank <= right_rank:
+                    cnt = bit_range_sum(left_rank, right_rank)
+                    total += cnt
+            # Add current interval to BIT if it's non‑adjacent
+            bit_add(rank[r], 1)
+        out_lines.append(str(total))
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    solve()
+```

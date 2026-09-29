@@ -1,0 +1,17 @@
+```python
+def max_fill(grid, capacity):
+    import math
+    """
+    You are given a rectangular grid of wells. Each row represents a single well,
+    and each 1 in a row represents a single unit of water.
+    Each well has a corresponding bucket that can be used to extract water from it,
+    and all buckets have the same capacity.
+    Your task is to calculate the number of operations needed to handle all water in the wells.
+    """
+    total_operations = 0
+    for well in grid:
+        water = sum(well)
+        if water > 0:
+            total_operations += math.ceil(water / capacity)
+    return total_operations
+```

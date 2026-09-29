@@ -1,0 +1,33 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1 + n]))
+    arr.sort()
+    
+    max_val = arr[-1]
+    count = [0] * (max_val + 1)
+    for x in arr:
+        count[x] = 1
+    
+    ans = 0
+    for i in range(n):
+        a = arr[i]
+        for b in range(a + 1, max_val + 1):
+            if count[b] == 0:
+                continue
+            diff = b - a
+            c = b + diff
+            if c > max_val:
+                break
+            if count[c] == 1:
+                ans += 1
+    print(ans)
+
+if __name__ == "__main__":
+    main()
+```

@@ -1,0 +1,22 @@
+```python
+import seaborn as sns
+from random import sample
+# Constants
+COLUMNS = ['A', 'B', 'C', 'D', 'E']
+def task_func(df, tuples, n_plots):
+    # Remove rows based on exact matches of tuples
+    df['tuple_key'] = df.apply(tuple, axis=1)
+    df = df[~df['tuple_key'].isin(tuples)]
+    df = df.drop(columns=['tuple_key'])
+    
+    # Generate random pairs of columns for pairplots
+    column_pairs = sample(list(itertools.combinations(COLUMNS, 2)), n_plots)
+    
+    # Create pairplots for each selected column pair
+    pairplots = []
+    for pair in column_pairs:
+        pairplot = sns.pairplot(data=df, vars=pair)
+        pairplots.append(pairplot.axes)
+    
+    return df, pairplots
+```

@@ -1,0 +1,27 @@
+```python
+def compare_one(a, b):
+    """
+    Create a function that takes different representing
+    real numbers, and returns the larger variable in its given variable type.
+    Return None if the values are equal.
+    """
+    # Convert both to float for comparison, but keep original values
+    def to_float(x):
+        if isinstance(x, str):
+            # Handle comma as decimal separator
+            return float(x.replace(',', '.'))
+        return float(x)
+    
+    try:
+        a_float = to_float(a)
+        b_float = to_float(b)
+    except (ValueError, TypeError):
+        return None
+    
+    if abs(a_float - b_float) < 1e-12:  # Handle floating point precision
+        return None
+    elif a_float > b_float:
+        return a
+    else:
+        return b
+```

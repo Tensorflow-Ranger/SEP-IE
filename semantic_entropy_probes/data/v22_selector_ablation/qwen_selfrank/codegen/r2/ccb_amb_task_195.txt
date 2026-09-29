@@ -1,0 +1,49 @@
+```python
+import sys
+from itertools import product
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    H = int(data[0])
+    W = int(data[1])
+    grid = data[2:2+H]
+    
+    # Convert each row to a list of integers
+    grid = [list(map(int, list(row))) for row in grid]
+    
+    # Precompute the sum of each row
+    row_sums = [sum(row) for row in grid]
+    
+    # Since W is small (<=18), we can try all possible combinations of flipping columns
+    min_total = float('inf')
+    
+    # Try all possible combinations of flipping columns (0 or 1 for each column)
+    for bits in product([0, 1], repeat=W):
+        total = 0
+        for i in range(H):
+            row_sum = row_sums[i]
+            # For each column, if we flip it, the number of 1s in that column is W - count of 1s
+            # So for each row, the contribution is row_sum if we don't flip the column, or (W - row_sum) if we flip
+            # But since we can flip any subset of columns, we need to calculate the total sum after flipping
+            # For each row, the sum after flipping columns is sum(1 - A[i][j] for j in flipped columns)
+            # Which is equal to W - sum(A[i][j] for j in flipped columns)
+            # So for each row, the contribution is W - sum( A[i][j] for j in flipped columns )
+            # So we can precompute the sum of each row for each possible subset of columns
+            # But since W is small, we can compute it on the fly
+            current_sum = 0
+            for j in range(W):
+                if bits[j]:
+                    current_sum += (1 - grid[i][j])
+                else:
+                    current_sum += grid[i][j]
+            total += current_sum
+        min_total = min(min_total, total)
+    
+    print(min_total)
+
+if __name__ == "__main__":
+    main()
+```

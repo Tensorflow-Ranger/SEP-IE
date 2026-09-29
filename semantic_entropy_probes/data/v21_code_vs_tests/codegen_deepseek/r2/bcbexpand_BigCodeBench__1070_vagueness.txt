@@ -1,0 +1,18 @@
+```python
+import pandas as pd
+from random import shuffle
+# Constants
+POSSIBLE_VALUES = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+def task_func(list_of_lists):
+    result = []
+    for sublist in list_of_lists:
+        if not sublist:
+            df = pd.DataFrame()
+        else:
+            shuffled_values = POSSIBLE_VALUES.copy()
+            shuffle(shuffled_values)
+            data = {col: shuffled_values for col in sublist}
+            df = pd.DataFrame(data)
+        result.append(df)
+    return result
+```

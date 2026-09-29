@@ -1,0 +1,24 @@
+```python
+import xlwt
+import os
+# Constants
+FIELDS = ['ID', 'Name', 'Age']
+def task_func(values, filename):
+    workbook = xlwt.Workbook()
+    worksheet = workbook.add_sheet('Sheet1')
+    
+    # Write headers
+    for col_num, field in enumerate(FIELDS):
+        worksheet.write(0, col_num, field)
+    
+    # Write data rows
+    for row_num, row_data in enumerate(values):
+        for col_num, field in enumerate(FIELDS):
+            worksheet.write(row_num + 1, col_num, row_data.get(field, ""))
+    
+    # Save the workbook
+    file_path = os.path.abspath(filename)
+    workbook.save(file_path)
+    
+    return file_path
+```

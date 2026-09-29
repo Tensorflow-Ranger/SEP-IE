@@ -1,0 +1,24 @@
+```python
+import numpy as np
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+def task_func(
+    P: np.ndarray,
+    T: np.ndarray,
+    n_clusters: int = 3,
+    random_state: int = 0,
+    n_init: int = 10,
+) -> (np.ndarray, plt.Axes):
+    # Compute the tensor product along the first matching dimension
+    product = np.tensordot(P, T, axes=[1, 1])
+    # Flatten the result into a 1D array
+    flattened_data = product.flatten()
+    # Apply KMeans clustering
+    kmeans = KMeans(n_clusters=n_clusters, random_state=random_state, n_init=n_init)
+    cluster_result = kmeans.fit_predict(flattened_data.reshape(-1, 1))
+    # Create a visualization
+    fig, ax = plt.subplots()
+    ax.hist(flattened_data, bins=30, color='blue', alpha=0.7)
+    ax.set_title('KMeans Clustering Visualization')
+    return cluster_result, ax
+```

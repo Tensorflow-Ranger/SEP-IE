@@ -1,0 +1,27 @@
+```python
+import pandas as pd
+import numpy as np
+from random import choice
+# Constants
+DATA_TYPES = [str, int, float, list, tuple, dict, set]
+def task_func(rows, columns):
+    data = {}
+    for col in range(columns):
+        col_name = f'col{col}'
+        data_type = choice(DATA_TYPES)
+        if data_type == str:
+            data[col_name] = [choice('abcdefghijklmnopqrstuvwxyz') for _ in range(rows)]
+        elif data_type == int:
+            data[col_name] = [choice(range(10)) for _ in range(rows)]
+        elif data_type == float:
+            data[col_name] = [float(choice(range(10))) for _ in range(rows)]
+        elif data_type == list:
+            data[col_name] = [[choice(range(10)) for _ in range(choice(range(1, 6)))] for _ in range(rows)]
+        elif data_type == tuple:
+            data[col_name] = [(choice(range(10)) for _ in range(choice(range(1, 6)))) for _ in range(rows)]
+        elif data_type == dict:
+            data[col_name] = [{choice(range(10)): choice(range(10)) for _ in range(choice(range(1, 6)))} for _ in range(rows)]
+        elif data_type == set:
+            data[col_name] = [set(choice(range(10)) for _ in range(choice(range(1, 6)))) for _ in range(rows)]
+    return pd.DataFrame(data)
+```

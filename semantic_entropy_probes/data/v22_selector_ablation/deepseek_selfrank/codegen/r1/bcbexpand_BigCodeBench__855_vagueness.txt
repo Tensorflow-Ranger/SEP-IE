@@ -1,0 +1,18 @@
+```python
+import random
+import string
+import collections
+# Constants
+VALID_CHARACTERS = string.ascii_letters + string.digits
+def task_func(n_strings, string_length):
+    # Generate n_strings random strings of given length
+    random_strings = [''.join(random.choices(VALID_CHARACTERS, k=string_length)) for _ in range(n_strings)]
+    
+    # Count the frequency of each character across all strings
+    char_count = collections.defaultdict(int)
+    for s in random_strings:
+        for char in s:
+            char_count[char] += 1
+    
+    return dict(char_count)
+```

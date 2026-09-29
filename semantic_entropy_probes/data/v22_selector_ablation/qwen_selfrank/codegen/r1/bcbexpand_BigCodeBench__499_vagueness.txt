@@ -1,0 +1,23 @@
+```python
+import xlwt
+import os
+import io
+import csv
+def task_func(csv_content, filename):
+    # Create a new Excel workbook and worksheet
+    workbook = xlwt.Workbook()
+    worksheet = workbook.add_sheet('Sheet1')
+    
+    # Parse CSV content
+    csv_data = csv_content.strip().split('\n')
+    for row_idx, row in enumerate(csv_data):
+        cells = row.split(',')
+        for col_idx, cell in enumerate(cells):
+            worksheet.write(row_idx, col_idx, cell)
+    
+    # Save the workbook to the specified filename
+    workbook.save(filename)
+    
+    # Return the absolute path of the created file
+    return os.path.abspath(filename)
+```

@@ -1,0 +1,46 @@
+```python
+import sys
+import math
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    K = int(data[1])
+    A = list(map(int, data[2:2+N]))
+    
+    max_val = max(A)
+    freq = defaultdict(int)
+    for num in A:
+        freq[num] += 1
+    
+    # Precompute GCDs for all possible subsets of size K
+    # We'll use a frequency map and dynamic programming approach
+    # dp[g] = number of elements in A that are divisible by g
+    dp = defaultdict(int)
+    for num in A:
+        g = num
+        while g > 0:
+            dp[g] += 1
+            g //= 2
+    
+    # We need to find for each A[i], the maximum g such that there are at least K elements divisible by g
+    # We'll iterate from max_val down to 1 and track the maximum g that satisfies the condition
+    result = [0] * N
+    for i in range(N):
+        current = A[i]
+        max_gcd = current
+        for g in range(current, 0, -1):
+            if dp[g] >= K:
+                max_gcd = g
+                break
+        result[i] = max_gcd
+    
+    print(' '.join(map(str, result)))
+
+if __name__ == "__main__":
+    main()
+```

@@ -1,0 +1,27 @@
+```python
+import pandas as pd
+import random
+def task_func(data, columns=['Name', 'Age', 'Occupation'], fill_missing=False, num_range=(0, 100), seed=None):
+    if seed is not None:
+        random.seed(seed)
+    max_len = max(len(t) for t in data) if data else 0
+    padded_data = []
+    for t in data:
+        if len(t) < max_len:
+            padded_data.append(t + (None,) * (max_len - len(t)))
+        else:
+            padded_data.append(t)
+    if len(columns) < max_len:
+        columns = columns + [f'col_{i}' for i in range(len(columns), max_len)]
+    elif len(columns) > max_len:
+        columns = columns[:max_len]
+    df = pd.DataFrame(padded_data, columns=columns)
+    if fill_missing:
+        for col in df.columns:
+            if pd.api.types.is_numeric_dtype(df[col]):
+                missing_mask = df[col].isna()
+                if missing_mask.any():
+                    random_values = [random.randint(num_range[0], num_range[1]) for _ in range(missing_mask.sum())]
+                    df.loc[missing_mask, col] = random_values
+    return df
+```

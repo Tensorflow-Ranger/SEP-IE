@@ -1,0 +1,51 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    p = list(map(int, data[1:1 + n]))
+
+    pos = [0] * (n + 1)
+    for i, val in enumerate(p):
+        pos[val] = i  # position of value val in p
+
+    total_cost = 0
+    i = 1
+    while i < n:
+        # find the longest consecutive increasing segment starting from i
+        start = i
+        while i < n and pos[i] < pos[i + 1]:
+            i += 1
+        # now i is the last element of the increasing run
+        length = i - start + 1
+        # we need to move i to the correct position relative to start-1?
+        # Actually, we process each decreasing adjacency.
+        # But simpler: for each j from start to i, if it's not in correct order with j+1, fix it.
+        # However, the known solution: sum of costs for each j where pos[j] > pos[j+1].
+        i += 1
+
+    # Correct approach:
+    # We only need to pay when we swap adjacent elements in the permutation.
+    # The optimal strategy is to bubble each number to its correct place,
+    # but because costs are i for swapping at position i, we want to avoid
+    # moving large numbers far. Actually, known solution:
+    # For each j from 1 to N-1, if pos[j] > pos[j+1], we must pay cost j.
+    # Because in the final sorted order, j must come before j+1.
+    # If they are inverted now, at some point we must pay to fix that inversion.
+    # The cheapest way is to pay exactly j when we finally swap them into order.
+    # This is a known problem: minimum cost to sort by adjacent swaps with weight i.
+    # Answer = sum_{j=1}^{N-1} j * I(pos[j] > pos[j+1]).
+
+    total_cost = 0
+    for j in range(1, n):
+        if pos[j] > pos[j + 1]:
+            total_cost += j
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

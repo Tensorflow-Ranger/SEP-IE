@@ -1,0 +1,37 @@
+```python
+import csv
+import os
+from datetime import datetime
+from random import randint
+import matplotlib.pyplot as plt
+import pandas as pd
+# Constants
+VEHICLE_TYPES = ['Car', 'Bus', 'Truck', 'Bike']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    # Ensure output directory exists
+    os.makedirs(output_dir, exist_ok=True)
+    # Generate data
+    data = []
+    start_time = datetime.now()
+    for hour in range(hours):
+        current_time = start_time + timedelta(hours=hour)
+        vehicle_counts = {vehicle: randint(0, 50) for vehicle in VEHICLE_TYPES}
+        data.append([current_time.strftime('%Y-%m-%d %H:%M:%S'), *vehicle_counts.values()])
+    # Save to CSV
+    csv_file_path = os.path.join(output_dir, f'traffic_data_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv')
+    with open(csv_file_path, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Time', 'Car', 'Bus', 'Truck', 'Bike'])
+        writer.writerows(data)
+    # Plot the data
+    df = pd.DataFrame(data, columns=['Time', 'Car', 'Bus', 'Truck', 'Bike'])
+    df['Time'] = pd.to_datetime(df['Time'])
+    fig, ax = plt.subplots()
+    for vehicle in VEHICLE_TYPES:
+        df.plot(x='Time', y=vehicle, label=vehicle, ax=ax)
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Vehicle Count')
+    ax.legend()
+    return csv_file_path, ax
+```

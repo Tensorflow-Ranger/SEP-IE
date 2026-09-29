@@ -1,0 +1,29 @@
+```python
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+def task_func(
+    array: list, random_seed: int = 0
+) -> (pd.DataFrame, sm.regression.linear_model.RegressionResultsWrapper):
+    # Validate input
+    if not all(len(sublist) == 5 for sublist in array):
+        raise ValueError("Each sub-list must have exactly 5 elements.")
+    
+    # Create DataFrame
+    df = pd.DataFrame(array, columns=['A', 'B', 'C', 'D', 'Response'])
+    
+    # Separate independent and dependent variables
+    X = df[['A', 'B', 'C', 'D']]
+    y = df['Response']
+    
+    # Add constant to the model
+    X = sm.add_constant(X)
+    
+    # Set random seed for reproducibility
+    np.random.seed(random_seed)
+    
+    # Fit the linear regression model
+    results = sm.OLS(y, X).fit()
+    
+    return df, results
+```

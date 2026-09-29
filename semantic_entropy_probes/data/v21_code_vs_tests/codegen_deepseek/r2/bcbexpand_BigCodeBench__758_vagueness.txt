@@ -1,0 +1,47 @@
+```python
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+
+def task_func(num_samples, countries=['Russia', 'China', 'USA', 'India', 'Brazil'], 
+           ages=np.arange(18, 60), genders=['Male', 'Female'], rng_seed=None):
+    """
+    Generate a demographic dataset with information about people from different countries,
+    their age, and gender. Genders are encoded using sklearn LabelEncoder.
+    
+    Parameters:
+    - num_samples (int): Number of samples to generate. Must be positive.
+    - countries (list): List of country names. Default: ['Russia', 'China', 'USA', 'India', 'Brazil'].
+    - ages (array-like): Array of possible ages. Default: 18 to 59.
+    - genders (list): List of gender categories. Default: ['Male', 'Female'].
+    - rng_seed (int): Seed for random number generator.
+    
+    Returns:
+    - pd.DataFrame: DataFrame with columns: Country, Age, Gender.
+    
+    Raises:
+    - ValueError: If num_samples is not valid.
+    """
+    if not isinstance(num_samples, int) or num_samples <= 0:
+        raise ValueError("num_samples must be a positive integer")
+    
+    rng = np.random.default_rng(rng_seed)
+    
+    # Generate random samples
+    sampled_countries = rng.choice(countries, size=num_samples)
+    sampled_ages = rng.choice(ages, size=num_samples)
+    sampled_genders = rng.choice(genders, size=num_samples)
+    
+    # Encode genders
+    le = LabelEncoder()
+    encoded_genders = le.fit_transform(sampled_genders)
+    
+    # Create DataFrame
+    df = pd.DataFrame({
+        'Country': sampled_countries,
+        'Age': sampled_ages,
+        'Gender': encoded_genders
+    })
+    
+    return df
+```

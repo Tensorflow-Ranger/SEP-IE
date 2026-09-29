@@ -1,0 +1,57 @@
+```python
+import math
+import numpy as np
+from datetime import datetime
+import pandas as pd
+
+def task_func(
+    start_time,
+    end_time,
+    step,
+    columns=["Timestamp", "Sensor1", "Sensor2", "Sensor3", "SensorStatus"],
+    sensor_statuses=["OK", "MAINTENANCE_REQUIRED", "ERROR"],
+    random_seed=42,
+):
+    np.random.seed(random_seed)
+    
+    # Generate timestamps
+    timestamps = []
+    current_time = start_time
+    while current_time <= end_time:
+        timestamps.append(current_time)
+        current_time += step
+    
+    # Generate sensor readings
+    sensor1 = []
+    sensor2 = []
+    sensor3 = []
+    sensor_status = []
+    
+    for timestamp in timestamps:
+        # Convert timestamp to seconds since epoch
+        timestamp_seconds = (timestamp - datetime(1970, 1, 1)).total_seconds()
+        
+        # Generate sensor values with noise
+        sensor1_val = math.sin(timestamp_seconds) + np.random.normal(0, 0.1)
+        sensor2_val = math.cos(timestamp_seconds) + np.random.normal(0, 0.1)
+        sensor3_val = math.tan(timestamp_seconds) + np.random.normal(0, 0.1)
+        
+        # Randomly select sensor status
+        status = np.random.choice(sensor_statuses)
+        
+        sensor1.append(sensor1_val)
+        sensor2.append(sensor2_val)
+        sensor3.append(sensor3_val)
+        sensor_status.append(status)
+    
+    # Create DataFrame
+    data = {
+        columns[0]: timestamps,
+        columns[1]: sensor1,
+        columns[2]: sensor2,
+        columns[3]: sensor3,
+        columns[4]: sensor_status
+    }
+    
+    return pd.DataFrame(data)
+```

@@ -1,0 +1,47 @@
+```python
+import seaborn as sns
+from random import sample
+# Constants
+COLUMNS = ['A', 'B', 'C', 'D', 'E']
+def task_func(df, tuples, n_plots):
+    """
+    Remove rows from a dataframe based on values of multiple columns, and then create n random pairs of two columns against each other or with each other to generate pairplots.
+    The function should output with:
+        tuple: A tuple containing:
+        DataFrame: The modified DataFrame after removing specified rows.
+        list of Axes: A list containing the generated pairplots.
+    """
+    if df.empty:
+        return df, []
+    for t in tuples:
+        if len(t) == 3:
+            col, op, val = t
+            if op == '>':
+                df = df[df[col] > val]
+            elif op == '<':
+                df = df[df[col] < val]
+            elif op == '>=':
+                df = df[df[col] >= val]
+            elif op == '<=':
+                df = df[df[col] <= val]
+            elif op == '==':
+                df = df[df[col] == val]
+            elif op == '!=':
+                df = df[df[col] != val]
+    if df.empty or n_plots <= 0:
+        return df, []
+    available_cols = [col for col in COLUMNS if col in df.columns]
+    if len(available_cols) < 2:
+        return df, []
+    n_plots = min(n_plots, len(available_cols) * (len(available_cols) - 1) // 2)
+    pairs = []
+    while len(pairs) < n_plots:
+        col_pair = sample(available_cols, 2)
+        if col_pair not in pairs and col_pair[::-1] not in pairs:
+            pairs.append(col_pair)
+    axes_list = []
+    for pair in pairs:
+        g = sns.pairplot(df, vars=pair)
+        axes_list.append(g.axes)
+    return df, axes_list
+```

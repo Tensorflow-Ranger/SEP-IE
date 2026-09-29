@@ -1,0 +1,53 @@
+```python
+import sys
+import math
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    A = data[1]
+
+    length = 3 ** N
+    target = 1 - int(A[0])  # We want to change A'_1 to the opposite of its current value
+
+    def apply_operation(s):
+        n = len(s)
+        result = []
+        for i in range(0, n, 3):
+            group = s[i:i+3]
+            count0 = group.count('0')
+            count1 = group.count('1')
+            if count0 > count1:
+                result.append('0')
+            else:
+                result.append('1')
+        return ''.join(result)
+
+    # We need to find the minimum number of changes to make A'_1 different from its original value
+    # Start with the original string and apply the operation
+    current = A
+    for _ in range(N):
+        current = apply_operation(current)
+
+    original_value = current[0]
+    min_changes = float('inf')
+
+    # Try all possible values of the first character (0 or 1)
+    for first_char in ['0', '1']:
+        if first_char == original_value:
+            continue  # Skip the original value
+        # Try changing the first character to first_char and compute the number of changes needed
+        temp = A[:0] + first_char + A[1:]
+        changes = 0
+        for i in range(len(temp)):
+            if temp[i] != A[i]:
+                changes += 1
+        min_changes = min(min_changes, changes)
+
+    print(min_changes)
+
+if __name__ == "__main__":
+    main()
+```

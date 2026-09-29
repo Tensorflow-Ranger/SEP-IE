@@ -1,0 +1,111 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    M = int(next(it))
+    L = [0] * M
+    R = [0] * M
+    for i in range(M):
+        L[i] = int(next(it))
+        R[i] = int(next(it))
+
+    # We need to cover every position j with at least one operation that sets it to 1.
+    # Operation 1 covers [L_i, R_i], operation 2 covers [1, L_i-1] ∪ [R_i+1, N].
+    # We can think of each operation as offering two intervals: the "inside" and the "outside".
+    # We must pick for each operation either inside, outside, or skip, so that every j is covered by at least one chosen interval.
+
+    # Transform to event-based coverage checking.
+    # For each j, we need to know if there exists an operation i such that:
+    #   (op_i == 1 and L_i <= j <= R_i)   OR   (op_i == 2 and (j < L_i or j > R_i))
+
+    # This is equivalent to: for each j, there exists i with:
+    #   (op_i == 1 and L_i <= j <= R_i)   OR   (op_i == 2 and (j <= R_i and j >= L_i) is false)
+
+    # We can think of each operation as a clause: we can choose to cover its inside, or its outside, or skip.
+    # We want to choose a subset of operations (with cost 1 each) to cover all j.
+
+    # This is a classic covering problem that can be reduced to a graph problem:
+    # Consider each position j as needing coverage.
+    # Each operation i gives two intervals: inside [L_i, R_i] and outside [1, L_i-1] ∪ [R_i+1, N].
+    # We need to pick for each operation one of the two intervals (or none) to "activate", so that every j is in at least one activated interval.
+
+    # This is equivalent to: for each operation i, we can choose to cover its inside or its outside (or skip).
+    # Let’s define for each operation i two possible covering sets: A_i = [L_i, R_i], B_i = complement of A_i.
+    # We need to select a family of sets (each from {A_i, B_i} for some i) that covers [1, N].
+
+    # This can be solved greedily by scanning from left to right:
+    # At each position j, we need to cover it. Look at all operations i where j is in A_i or B_i.
+    # But B_i is huge (two parts), so direct scanning is tricky.
+
+    # Alternative viewpoint: We need to cover each j. For a given j, which operations can cover it?
+    #   - If j is inside [L_i, R_i], then operation i can cover j if we choose op=1.
+    #   - If j is outside [L_i, R_i], then operation i can cover j if we choose op=2.
+    # So for each j, the set of operations that can cover j is exactly all operations i except those where j is inside and we choose op=2, or j is outside and we choose op=1.
+    # But we choose op per operation globally.
+
+    # This is like a 2-SAT style: For each operation i, variable x_i = 1 means choose op=1, x_i = 0 means choose op=2 (skip is like not using it, cost 0).
+    # For each position j, we need at least one operation i such that:
+    #   (j in [L_i, R_i] and x_i = 1)   OR   (j not in [L_i, R_i] and x_i = 0)
+    # Let’s define for each operation i, for each j, whether choosing x_i=1 covers j (if j in interval) or choosing x_i=0 covers j (if j not in interval).
+    # So for each j, the condition is: OR over i of [ (j in I_i and x_i=1) or (j not in I_i and x_i=0) ].
+
+    # This is a covering problem that can be transformed to a graph of size O(N+M) and solved with BFS/DP.
+
+    # However, constraints are large: N up to 1e6, M up to 2e5.
+    # We need O((N+M) log N) or similar.
+
+    # Let's think differently: The goal is to have all ones. Initially all zeros.
+    # Operation 1 sets a segment to 1. Operation 2 sets everything except a segment to 1.
+    # So after all operations, each position j is 1 if there exists at least one operation i where:
+    #   (op_i = 1 and L_i <= j <= R_i)   OR   (op_i = 2 and (j < L_i or j > R_i))
+
+    # We can think of the final value at j as OR over i of f(i, j), where f(i, j) = 1 if (op_i=1 and j in [L_i,R_i]) or (op_i=2 and j not in [L_i,R_i]).
+
+    # We want f(i, j) = 1 for all j.
+
+    # Let’s define for each operation i, the set of positions that become 1 if we choose op=1: S_i^1 = [L_i, R_i].
+    # The set if we choose op=2: S_i^2 = [1, L_i-1] ∪ [R_i+1, N].
+
+    # We need to pick for each i either S_i^1, S_i^2, or ∅ (skip), such that union of chosen sets = [1, N].
+
+    # This is a set cover problem, NP-hard in general, but here the sets have special structure: each S_i^1 is an interval, each S_i^2 is complement of an interval (two intervals).
+
+    # We can solve with greedy interval covering: sort operations by L_i, then try to cover from left to right.
+    # But we have two types of intervals per operation.
+
+    # Idea: For each position j, we can cover it by either:
+    #   - an operation i with op=1 where j in [L_i, R_i]
+    #   - an operation i with op=2 where j not in [L_i, R_i] (i.e., j < L_i or j > R_i)
+
+    # So for covering j, we can either pick an operation whose inside contains j, or an operation whose outside contains j.
+
+    # Let’s consider covering from left to right. Suppose we are at position j. We need to cover it.
+    # Look at all operations i where L_i <= j <= R_i (inside). If we pick op=1 for any such i, j is covered.
+    # Otherwise, we must pick op=2 for some operation i where j is outside its interval, i.e., j < L_i or j > R_i.
+    # If j < L_i, then picking op=2 covers j because j is outside (since j < L_i <= R_i).
+    # If j > R_i, similarly.
+
+    # So for covering j, we can either:
+    #   - choose op=1 for an operation i with L_i <= j <= R_i
+    #   - choose op=2 for an operation i with L_i > j   (since then j < L_i <= R_i, so j outside)
+    #   - choose op=2 for an operation i with R_i < j   (since then j > R_i >= L_i, so j outside)
+
+    # This suggests we can treat the problem as: we need to assign each operation either 1, 2, or skip, such that for every j, there exists i with (L_i <= j <= R_i and assigned 1) or (L_i > j and assigned 2) or (R_i < j and assigned 2).
+
+    # Let’s define for each operation i two possible covering "events":
+    #   Type1: covers interval [L_i, R_i] if assigned 1.
+    #   Type2: covers (-∞, L_i-1] and [R_i+1, +∞) if assigned 2.
+
+    # We can think of covering positions from 1 to N.
+    # At position j, we can cover it by a Type1 interval that contains j, or by a Type2 interval that has L_i > j (covers left side) or R_i < j (covers right side).
+
+    # But Type2 covering is tricky because it covers two separate infinite intervals.
+
+    # Let's think of the complement: A position j is NOT covered if for every operation i:
+    #   - if we assign op=1, then j not in [L_i, R_i] (i.e., j < L_i or j > R_i)
+    #   - if we assign op=2,

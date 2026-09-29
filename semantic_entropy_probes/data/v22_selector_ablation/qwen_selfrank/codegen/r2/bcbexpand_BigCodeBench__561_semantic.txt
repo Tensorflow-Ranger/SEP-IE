@@ -1,0 +1,15 @@
+```python
+import pytz
+from dateutil import parser
+def task_func(date_str, from_tz, to_tz):
+    # Parse the input date string as a naive datetime
+    dt = parser.parse(date_str)
+    # Localize the datetime to the from_tz timezone
+    from_timezone = pytz.timezone(from_tz)
+    dt_from = from_timezone.localize(dt, is_dst=None)
+    # Convert to the to_tz timezone
+    to_timezone = pytz.timezone(to_tz)
+    dt_to = dt_from.astimezone(to_timezone)
+    # Format the converted datetime as a string
+    return dt_to.strftime("%Y-%m-%d %H:%M:%S")
+```

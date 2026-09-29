@@ -1,0 +1,109 @@
+\section{Approach}
+\label{sec:approach}
+
+\subsection{Hidden-State Extraction}
+
+All probes read the residual stream of Qwen3-8B, run in bf16 precision with
+thinking mode explicitly disabled. For a given prompt, we apply the model's
+chat template, run a forward pass with \texttt{output\_hidden\_states=True}
+and no key-value caching, and extract the hidden state at the last token of
+the templated input (before any generation) at every one of the model's 37
+residual-stream checkpoints (layer 0, the embedding output, through layer
+36, the final block's output). No text is generated at any point in this
+extraction; the only computation performed is the forward pass itself.
+
+\subsection{Ambiguity-Degree Probe}
+\label{sec:approach:k-probe}
+
+The first probe answers a coarser question: given a coding prompt, how much
+unresolved specification ambiguity does it contain, expressed as an ordinal
+count $K \in \{1, 2, 3\}$ of independently ambiguous details? We extract the
+last-token hidden state of the raw, unmodified prompt at each layer and fit
+an independent multinomial logistic regression per layer on top of a
+100-component PCA plus standardization pipeline, with the regularization
+strength $C$ swept on a validation split. Layer and configuration selection
+use grouped cross-validation, splitting by source-problem identifier
+(\texttt{StratifiedGroupKFold}) so that no two rows derived from the same
+underlying problem appear on both sides of a split -- a leakage guard that
+is load-bearing for this task, since near-duplicate prompts sharing a
+source problem would otherwise let a probe memorize surface features of a
+specific problem rather than learning a general ambiguity signal. We report
+ordinal correlation (Spearman's $\rho$ between the predicted expected value
+$E[K]$ under the probe's class-probability output and the true $K$) as the
+primary metric, alongside majority-class, random, and prompt-length-only
+baselines computed on the identical split.
+
+\subsection{Clarifying-Question Ranking Probe}
+\label{sec:approach:rank-probe}
+
+The second, and practically more important, probe addresses a different
+problem: given a pool of $N$ candidate clarifying questions (with
+LLM-elicited answers) for an ambiguous prompt, which one should the agent
+actually ask? We treat this as pairwise ranking cast as classification, in
+the style of RankSVM/RankNet: each candidate's answer is concatenated onto
+the base prompt (\texttt{"\{prompt\}\textbackslash n\textbackslash
+nClarification: \{answer\}"}), and a batched forward pass over all $N$
+concatenated variants (one GPU call, $N$ sequences) extracts $N$ hidden
+states at a single selected layer. A classifier trained on
+tier-difference vectors between higher- and lower-quality candidates --
+where candidate quality tiers (0/1/2, unrelated/plausible/matches-the-
+labeled-ambiguity) are assigned by an independent LLM judge -- scores each
+candidate, and the pipeline asks the top-scored one. We additionally
+evaluate a supervised-contrastive (SupCon) variant of this probe, which
+trains directly on raw (non-PCA-reduced) activations with a contrastive
+objective and, as reported in Section~\ref{sec:results}, improves
+cross-source generalization at some cost to in-distribution accuracy
+relative to the PCA-based classifier.
+
+Critically, this ranking probe's inference cost is $O(N)$ forward passes
+executed as a single batched GPU call, not the $O(1)$ single forward pass
+of the ambiguity-degree probe in Section~\ref{sec:approach:k-probe} --
+each candidate's answer text must be present in the input for its
+hidden state to reflect that candidate specifically. The relevant cost
+comparison is therefore not ``one forward pass vs.\ one generation call''
+but ``one batched forward pass over $N$ short sequences vs.\ one
+generation call that reasons over all $N$ candidates inline,'' which we
+measure directly in Section~\ref{sec:results:cost}.
+
+\subsection{The Two-Round Elicit-Rank-Clarify-Code Loop}
+\label{sec:approach:loop}
+
+We deploy the ranking probe in an agentic pipeline that mirrors how a
+clarify-then-code assistant would operate in practice:
+
+\begin{enumerate}
+\item \textbf{Elicit}: given an ambiguous prompt, generate a pool of
+candidate clarifying questions and, for each, an oracle answer (an
+independent LLM answers the question as if it were the ground-truth
+requirement author).
+\item \textbf{Rank}: score all candidates with the trained probe (or, for
+the zero-shot baseline in Section~\ref{sec:experimental_setup}, ask the
+coding model to pick directly from a single inlined list) and select the
+top-ranked candidate.
+\item \textbf{Clarify}: append the selected candidate's question-answer
+pair to the prompt.
+\item \textbf{Code}: generate code conditioned on the clarified prompt, and
+run the real, executable test suite associated with the problem.
+\end{enumerate}
+
+This constitutes round one. Round two repeats steps 1--4 once more,
+conditioned on the round-one clarified prompt, to model an agent that gets
+a second opportunity to resolve any remaining ambiguity before finalizing
+its code. We report both round-1 and round-1+2 correctness throughout
+Section~\ref{sec:results}, since, as we show, the value of a second
+clarification round does not straightforwardly track the value of the
+first.
+
+\subsection{Design Rationale for the Probe-Host Model}
+
+We use Qwen3-8B as the probe-host model throughout due to compute
+constraints in this study; the ranking probe's forward-pass cost scales
+with this model's size, not with the size of whichever model ultimately
+writes the code. This decoupling is itself part of the approach's intended
+value proposition: ambiguity localization can, in principle, be performed
+by a small, cheap model regardless of which (possibly much larger and more
+expensive) model is used for code generation, whereas a self-consistency
+baseline built on the coding model's own repeated sampling ties uncertainty
+estimation cost directly to that larger model's per-token cost. We evaluate
+this decoupling directly in Section~\ref{sec:results} by pairing the same
+ranking decisions with two different coding models of different capability.

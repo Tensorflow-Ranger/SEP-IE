@@ -1,0 +1,24 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+def task_func(array, features=None, seed=None):
+    if not isinstance(array, np.ndarray) or array.ndim != 2:
+        raise ValueError("'array' must be a 2-dimensional numpy array")
+    if array.size == 0:
+        raise ValueError("'array' cannot be empty")
+    if features is not None:
+        if len(features) != array.shape[1]:
+            raise ValueError("Length of 'features' must match number of columns in 'array'")
+    if seed is not None:
+        np.random.seed(seed)
+    shuffled_indices = np.random.permutation(array.shape[1])
+    shuffled_array = array[:, shuffled_indices]
+    if features is not None:
+        shuffled_features = [features[i] for i in shuffled_indices]
+    else:
+        shuffled_features = [str(i+1) for i in shuffled_indices]
+    fig, ax = plt.subplots()
+    sns.heatmap(shuffled_array, ax=ax, xticklabels=shuffled_features, yticklabels=False)
+    return ax
+```

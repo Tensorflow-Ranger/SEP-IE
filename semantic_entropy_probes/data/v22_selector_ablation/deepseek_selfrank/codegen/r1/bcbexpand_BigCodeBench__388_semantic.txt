@@ -1,0 +1,17 @@
+```python
+import collections
+import pandas as pd
+def task_func(my_tuple, path_csv_files):
+    result = collections.defaultdict(dict)
+    for file_path in path_csv_files:
+        df = pd.read_csv(file_path)
+        for col in df.columns:
+            if col in my_tuple:
+                col_values = df[col].astype(str)
+                for value in col_values:
+                    if value in result[col]:
+                        result[col][value] += 1
+                    else:
+                        result[col][value] = 1
+    return dict(result)
+```

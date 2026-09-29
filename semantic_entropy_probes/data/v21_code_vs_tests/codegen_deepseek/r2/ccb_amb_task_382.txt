@@ -1,0 +1,29 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    a = list(map(int, data[1:1 + n]))
+
+    total = sum(a)
+    # The game ends when all indices are in S, i.e., after exactly N moves of adding a new index.
+    # Between those N "new-index" moves, there can be many "already-in-S" moves.
+    # The total number of moves = total sum of A.
+    # The N "new-index" moves are forced in some order.
+    # The rest (total - N) moves are "already-in-S" moves and can be distributed freely.
+    # The winner is determined by parity of total moves.
+    # But careful: the game ends immediately after the N-th new-index move,
+    # so the last move is always a new-index move (since after that S becomes complete).
+    # So the total number of moves is exactly (total - N) + N = total.
+    # The parity of total decides the winner: if total is odd, Fennec (first player) wins, else Snuke.
+    if total % 2 == 1:
+        print("Fennec")
+    else:
+        print("Snuke")
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,40 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [int(next(it)) for _ in range(N)]
+
+    # Fenwick tree (1-indexed internally)
+    size = N + 2
+    bit = [0] * size
+
+    def bit_add(idx: int, delta: int) -> None:
+        while idx < size:
+            bit[idx] += delta
+            idx += idx & -idx
+
+    def bit_sum(idx: int) -> int:
+        s = 0
+        while idx > 0:
+            s += bit[idx]
+            idx -= idx & -idx
+        return s
+
+    total_cost = 0
+    # Process from left to right
+    for pos, val in enumerate(P, start=1):
+        # count how many numbers greater than val have already appeared
+        greater = bit_sum(N) - bit_sum(val)
+        total_cost += greater * (val - 1)
+        bit_add(val, 1)
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

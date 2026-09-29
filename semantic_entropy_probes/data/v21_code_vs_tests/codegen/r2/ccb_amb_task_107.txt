@@ -1,0 +1,46 @@
+```python
+import sys
+import math
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    K = int(data[1])
+    A = list(map(int, data[2:2+N]))
+    
+    max_val = max(A)
+    freq = defaultdict(int)
+    for num in A:
+        freq[num] += 1
+    
+    # Sieve-like approach to compute GCD counts
+    count = [0] * (max_val + 1)
+    for num in A:
+        count[num] += 1
+    
+    # For each possible GCD value, compute how many numbers are divisible by it
+    for d in range(max_val, 0, -1):
+        cnt = 0
+        for multiple in range(d, max_val + 1, d):
+            cnt += count[multiple]
+        count[d] = cnt
+    
+    # For each element A[i], find the maximum d such that count[d] >= K and d divides A[i]
+    result = []
+    for num in A:
+        max_gcd = 0
+        for d in range(num, 0, -1):
+            if num % d == 0 and count[d] >= K:
+                max_gcd = d
+                break
+        result.append(str(max_gcd))
+    
+    print('\n'.join(result))
+
+if __name__ == "__main__":
+    main()
+```

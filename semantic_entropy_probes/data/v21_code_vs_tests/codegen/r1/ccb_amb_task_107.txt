@@ -1,0 +1,51 @@
+```python
+import sys
+import math
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    K = int(data[1])
+    A = list(map(int, data[2:2+N]))
+    
+    max_val = max(A)
+    freq = defaultdict(int)
+    for num in A:
+        freq[num] += 1
+    
+    # Precompute all divisors for numbers up to max_val
+    divisors = defaultdict(list)
+    for i in range(1, max_val + 1):
+        for j in range(i, max_val + 1, i):
+            divisors[j].append(i)
+    
+    # Count occurrences of each divisor in the array
+    count = defaultdict(int)
+    for num in A:
+        for d in divisors[num]:
+            count[d] += 1
+    
+    # For each element, find the GCD of all K elements that include it
+    result = []
+    for i in range(N):
+        val = A[i]
+        # Find all divisors of val
+        divs = divisors[val]
+        # For each divisor d, check if there are at least K elements divisible by d
+        # and if so, the GCD is at least d
+        # We need the maximum such d
+        max_gcd = 0
+        for d in divs:
+            if count[d] >= K:
+                max_gcd = max(max_gcd, d)
+        result.append(str(max_gcd))
+    
+    print('\n'.join(result))
+
+if __name__ == "__main__":
+    main()
+```

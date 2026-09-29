@@ -1,0 +1,122 @@
+```python
+import sys
+
+def solve():
+    input = sys.stdin.readline
+    N, M = map(int, input().split())
+    intervals = [tuple(map(int, input().split())) for _ in range(M)]
+
+    # Step 1: Find the minimal covering interval for operation type 2
+    # For type 2 to be useful, its uncovered part must be covered by type 1 operations.
+    # We need to find if there exists a set of intervals whose union is [1, N]
+    # when we take the complement of type 2 intervals.
+
+    # Let’s think differently: We can model each operation as either:
+    # 0: no change
+    # 1: set [L,R] to 1
+    # 2: set outside [L,R] to 1
+    # Goal: all positions = 1 at the end.
+
+    # Equivalent condition: For each position p, there must be at least one operation
+    # that covers it with a 1-setting.
+    # Operation 1 covers positions in [L,R].
+    # Operation 2 covers positions outside [L,R], i.e., [1, L-1] ∪ [R+1, N].
+
+    # We can think of each operation as offering two possible covering sets (if we choose type 1 or type 2).
+    # Choosing type 0 offers no coverage.
+
+    # This is a covering problem. Since N and M are large, we need an efficient method.
+
+    # Observation: If we choose type 2 for an operation, it covers everything except [L,R].
+    # So to cover a position inside [L,R], we must use another operation that covers it.
+    # This is similar to: the positions NOT covered by any type 2 operation must be covered by type 1 operations.
+
+    # Let S be the set of positions that are NOT covered by any chosen type 2 operation.
+    # Then we must cover S entirely by chosen type 1 operations.
+
+    # If we choose no type 2 operations, then S = [1,N], and we must cover [1,N] with type 1 operations.
+    # That is possible iff the union of some type 1 intervals is [1,N].
+
+    # If we choose some type 2 operations, S is the intersection of their [L,R] intervals
+    # (because a position is uncovered by type 2 iff it lies inside every chosen type 2's [L,R]).
+    # Wait: For a position to be NOT covered by type 2 operation i, it must be inside [L_i,R_i] (since type 2 covers outside).
+    # So if we choose type 2 for operation i, then positions inside [L_i,R_i] are NOT covered by that operation.
+    # Thus, the set of positions NOT covered by ANY chosen type 2 operation is the intersection of all [L_i,R_i] for which we chose type 2.
+    # Let that intersection be [a,b]. Then we must cover [a,b] completely by type 1 operations.
+
+    # So the problem reduces to: choose a subset of operations to assign type 2, let the intersection of their intervals be I.
+    # Cover I completely by type 1 operations from the remaining operations (those not chosen as type 2).
+    # Minimize total cost = number of type 1 chosen + number of type 2 chosen.
+
+    # We can think of it as: we want to cover [1,N] with a combination of:
+    # - type 1 intervals (direct coverage)
+    # - type 2 intervals (cover everything except [L,R], so they cover the complement)
+    # This is a classic covering problem that can be solved with min-cut / max-flow or greedy.
+
+    # But there is known approach: This is equivalent to checking if the whole line can be covered by the union of:
+    #   For each operation, either interval [L,R] (if choose type 1) or its complement (if choose type 2).
+    # Since complement is two intervals: [1, L-1] and [R+1, N], which may be empty.
+    # This becomes a covering with intervals that can wrap around.
+
+    # Alternative viewpoint: Let’s define for each operation two possible intervals:
+    #   A_i = [L_i, R_i] (cost 1)
+    #   B_i = [1, L_i-1] ∪ [R_i+1, N] (cost 1)
+    # We need to pick at most one of A_i or B_i per operation (or none) so that the union of chosen intervals covers [1,N].
+    # Minimize number chosen.
+
+    # This is a set cover problem, NP-hard in general, but here intervals have special structure.
+
+    # Wait: The union of B_i is tricky because it's two intervals. But we can think of it on a circle? Not straightforward.
+
+    # Let's think differently: Since N ≤ 1e6, M ≤ 2e5, we can try greedy with events.
+
+    # Known solution approach from similar problems (like ARC 142 F?):
+    # We can model as a graph problem: each position is a node, each operation gives edges between positions?
+    # Actually, there is a known reduction to checking if the whole array can be covered by the given intervals if we allow complement intervals.
+
+    # Let's consider the complement of the problem: At the end, all positions are 1, so no position is 0.
+    # That means for each position p, there is at least one operation that sets it to 1.
+    # For operation i, if we choose type 1, it sets positions in [L_i,R_i] to 1.
+    # If we choose type 2, it sets positions outside [L_i,R_i] to 1.
+    # So for each position p, we need that among all operations, either:
+    #   there exists an operation i with type 1 and p in [L_i,R_i], OR
+    #   there exists an operation i with type 2 and p not in [L_i,R_i].
+
+    # This is equivalent to: For each position p, the set of operations that can cover p (by type 1) plus the set of operations that can cover p (by type 2) must have at least one chosen.
+
+    # Let’s define for each operation i, its "type 1 cover set" = [L_i,R_i], and its "type 2 cover set" = complement.
+    # Then we need to pick for each operation either type 1, type 2, or none, such that for every position p, the union of chosen cover sets contains p.
+
+    # This is a hitting set / covering problem.
+
+    # Given constraints, maybe there is a simpler necessary and sufficient condition.
+
+    # Let's try to think about extremes:
+    # If we choose type 2 for all operations, then a position p is covered iff there exists an operation i such that p not in [L_i,R_i].
+    # That means p must be outside at least one interval. If p is inside every interval, then p is never covered.
+    # So if there exists a position p that lies in every interval, then choosing all type 2 fails.
+    # But we could choose type 1 for some operations to cover such p.
+
+    # Let I = intersection of all intervals [L_i,R_i] over all i.
+    # If I is non-empty, then any position in I is inside every interval.
+    # To cover positions in I, we must choose type 1 for at least one operation that covers I.
+    # That means we need an operation whose [L,R] covers I.
+    # Since I is intersection, every operation's interval covers I, so any operation chosen as type 1 will cover I.
+    # So if we choose at least one type 1, then I is covered.
+
+    # Now consider positions outside I. For a position q outside I, there exists some operation j such that q not in [L_j,R_j].
+    # If we choose type 2 for operation j, then q is covered.
+    # So if we choose type 2 for at least one operation that excludes q, q is covered.
+    # But we need to cover all q.
+
+    # Actually, if we choose type 2 for an operation i, it covers all positions except [L_i,R_i].
+    # So to cover a position q, we need either a type 1 covering q, or a type 2 whose [L_i,R_i] does not contain q.
+
+    # This suggests a strategy: Choose one operation as type 1 (to cover the intersection I), and choose all others as type 2.
+    # Then:
+    # - Positions in I are covered by the type 1.
+    # - Positions outside I: for each such q, there exists some operation i (the one whose interval does not contain q). If we choose type 2 for that i, then q is covered.
+    # But we are choosing type 2 for all except one operation. So for each q outside I, since there exists an operation i where q not in [L_i,R_i], and we choose type 2 for i, then q is covered.
+    # Thus, this strategy covers all positions.
+    # Total cost = 1 (type 1) + (M-1) (type 2) = M.
+

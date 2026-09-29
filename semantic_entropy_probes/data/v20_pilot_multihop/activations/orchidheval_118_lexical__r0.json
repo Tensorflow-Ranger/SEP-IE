@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_118_lexical",
+  "round_depth": 0,
+  "questions": [
+    "Does \"right side of the word\" mean strictly excluding the first and last characters, or something more specific?",
+    "When multiple vowels satisfy the condition, does \"closest\" mean nearest to the end of the word?",
+    "Is 'y' ever treated as a vowel in this context?",
+    "Should consecutive vowel clusters be considered, or only single vowels flanked directly by consonants?",
+    "Is the word guaranteed to be non-empty and contain only letters?",
+    "Does \"case sensitive\" mean uppercase and lowercase vowels are matched as distinct characters?",
+    "What should be returned if the word has fewer than 3 characters?",
+    "Should the returned vowel preserve its original case from the input word?"
+  ],
+  "answers": [
+    "It means scanning from the right side (end) of the word, excluding the first and last characters, as the solution iterates from len(word)-2 down to 1.",
+    "Yes, because the solution scans from right to left and returns the first vowel found that meets the condition.",
+    "No, only 'a', 'e', 'i', 'o', 'u' and their uppercase counterparts are considered vowels.",
+    "Only single vowels directly flanked by consonants are considered, as the condition checks the immediate neighbors.",
+    "Yes, the specification states the string contains English letters only, and the solution handles empty or short words by returning an empty string.",
+    "Yes, case sensitivity means vowels are matched exactly as in the input, and the returned vowel preserves its original case.",
+    "Return an empty string, as the solution explicitly checks for len(word) < 3 and returns \"\".",
+    "Yes, the returned vowel is the character from the input word, so its case is preserved."
+  ],
+  "inline_prompts": [
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). It means scanning from the right side (end) of the word, excluding the first and last characters, as the solution iterates from len(word)-2 down to 1.\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). Yes, because the solution scans from right to left and returns the first vowel found that meets the condition.\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). Vowels are defined \n    as 'a', 'e', 'i', 'o', 'u' and their uppercase counterparts. Vowels in the beginning \n    and ending doesn't count. Return empty string if you didn't find any vowel met the \n    above condition. \n\n    You may assume that the given string contains English letter only. \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). Only single vowels directly flanked by consonants are considered, as the condition checks the immediate neighbors.\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. You may assume that the given string contains\n    English letter only, and the solution handles empty or short words by returning an\n    empty string. \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). Yes, case sensitivity means vowels are matched exactly as in the input, and the returned vowel preserves its original case.\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition or if the word length is less than 3. \n\n    You may assume that the given string contains English letter only.\n    \"\"\"",
+    "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive). Yes, the returned vowel is the character from the input word, so its case is preserved.\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n    \"\"\""
+  ]
+}

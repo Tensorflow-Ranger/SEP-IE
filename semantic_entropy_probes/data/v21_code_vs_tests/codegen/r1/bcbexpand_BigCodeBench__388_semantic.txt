@@ -1,0 +1,14 @@
+```python
+import collections
+import pandas as pd
+def task_func(my_tuple, path_csv_files):
+    result = collections.defaultdict(dict)
+    for file_path in path_csv_files:
+        df = pd.read_csv(file_path)
+        for col_name in my_tuple:
+            if col_name in df.columns:
+                value_counts = df[col_name].value_counts()
+                for value, count in value_counts.items():
+                    result[col_name][value] = count
+    return dict(result)
+```

@@ -1,0 +1,29 @@
+```python
+import xlwt
+import os
+import io
+import csv
+def task_func(csv_content, filename):
+    # Create a new Excel workbook and worksheet
+    workbook = xlwt.Workbook()
+    worksheet = workbook.add_sheet('Sheet1')
+    
+    # Parse the CSV content into rows and columns
+    csv_file = io.StringIO(csv_content)
+    reader = csv.reader(csv_file)
+    
+    # Write the CSV data into the Excel worksheet
+    row_index = 0
+    for row in reader:
+        col_index = 0
+        for cell in row:
+            worksheet.write(row_index, col_index, cell)
+            col_index += 1
+        row_index += 1
+    
+    # Save the workbook to the specified filename
+    workbook.save(filename)
+    
+    # Return the absolute path of the created Excel file
+    return os.path.abspath(filename)
+```

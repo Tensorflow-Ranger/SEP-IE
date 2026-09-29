@@ -1,0 +1,33 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    import csv
+    if not file_name:
+        return {}
+    try:
+        with open(file_name, 'r') as f:
+            reader = csv.reader(f)
+            rows = list(reader)
+    except:
+        return {}
+    if not rows:
+        return {}
+    headers = rows[0]
+    data = {h: [] for h in headers}
+    for row in rows[1:]:
+        for i, val in enumerate(row):
+            if i >= len(headers):
+                break
+            data[headers[i]].append(val)
+    result = {}
+    for col in headers:
+        if not data[col]:
+            continue
+        counter = collections.Counter(data[col])
+        max_count = max(counter.values())
+        most_common_vals = [val for val, cnt in counter.items() if cnt == max_count]
+        most_common_vals.sort()
+        result[col] = most_common_vals[0]
+    return result
+```

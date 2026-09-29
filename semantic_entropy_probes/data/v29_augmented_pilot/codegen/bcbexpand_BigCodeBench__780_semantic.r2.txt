@@ -1,0 +1,48 @@
+```python
+import pandas as pd
+import pytz
+from datetime import datetime
+
+def task_func(articles, timezone):
+    if not isinstance(articles, list):
+        raise TypeError("articles must be a list")
+    if len(articles) == 0:
+        raise ValueError("articles list cannot be empty")
+    if not all(isinstance(article, dict) for article in articles):
+        raise TypeError("articles must be a list of dictionaries")
+    
+    required_keys = {'title', 'title_url', 'id', 'category', 'published_time'}
+    for article in articles:
+        if not required_keys.issubset(article.keys()):
+            raise ValueError("Each dictionary must contain the required keys")
+    
+    try:
+        tz = pytz.timezone(timezone)
+    except pytz.exceptions.UnknownTimeZoneError:
+        raise ValueError("Invalid timezone")
+    
+    data = []
+    for article in articles:
+        pub_time = article['published_time']
+        if not isinstance(pub_time, datetime):
+            raise TypeError("published_time must be a datetime object")
+        if pub_time.tzinfo is None:
+            raise ValueError("published_time must be timezone-aware")
+        
+        converted_time = pub_time.astimezone(tz)
+        hour = converted_time.hour
+        data.append({
+            'category': article['category'],
+            'hour': hour
+        })
+    
+    df = pd.DataFrame(data)
+    
+    if df.empty:
+        return pd.DataFrame(columns=['count', 'mean', 'min', 'max'])
+    
+    grouped = df.groupby('category')['hour'].agg(['count', 'mean', 'min', 'max'])
+    grouped = grouped.rename_axis('category')
+    
+    return grouped
+```

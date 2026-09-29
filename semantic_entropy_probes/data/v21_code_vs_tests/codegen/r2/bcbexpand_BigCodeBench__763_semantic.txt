@@ -1,0 +1,29 @@
+```python
+import numpy as np
+from collections import defaultdict
+import json
+import csv
+# Constants
+def task_func(input_file, output_file):
+    with open(input_file, 'r') as f:
+        data = json.load(f)
+    
+    stats = defaultdict(list)
+    for item in data:
+        for key, value in item.items():
+            stats[key].append(value)
+    
+    result = {}
+    for key, values in stats.items():
+        mean = np.mean(values)
+        median = np.median(values)
+        result[key] = {'mean': mean, 'median': median}
+    
+    with open(output_file, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['field', 'mean', 'median'])
+        for key, values in result.items():
+            writer.writerow([key, values['mean'], values['median']])
+    
+    return result
+```

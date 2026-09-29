@@ -1,0 +1,21 @@
+```python
+from collections import OrderedDict
+from prettytable import PrettyTable
+def task_func(my_dict):
+    """
+    Sorts a given dictionary by its keys in ascending order and returns a PrettyTable object
+    displaying the sorted items with column names 'Key' and 'Value'.
+    
+    Parameters:
+    my_dict (dict): The dictionary to be sorted and displayed.
+    
+    Returns:
+    PrettyTable: A PrettyTable object representing the sorted dictionary.
+    """
+    sorted_dict = OrderedDict(sorted(my_dict.items()))
+    table = PrettyTable()
+    table.field_names = ["Key", "Value"]
+    for key, value in sorted_dict.items():
+        table.add_row([key, value])
+    return table
+```

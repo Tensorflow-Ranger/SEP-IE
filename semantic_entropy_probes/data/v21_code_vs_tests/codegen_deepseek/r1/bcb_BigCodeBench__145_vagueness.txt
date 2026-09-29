@@ -1,0 +1,11 @@
+```python
+import csv
+from ipaddress import IPv4Network
+def task_func(ip_range, csv_path):
+    network = IPv4Network(ip_range)
+    with open(csv_path, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for ip in network:
+            writer.writerow([str(ip)])
+    return csv_path
+```

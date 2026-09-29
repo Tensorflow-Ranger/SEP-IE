@@ -1,0 +1,11 @@
+```python
+import matplotlib.pyplot as plt  
+import numpy as np  
+import seaborn as sns  
+def task_func(mu, sigma, seed=0):
+    np.random.seed(seed)
+    data = np.random.normal(mu, sigma, 1000)
+    sns.kdeplot(data, shade=True, cmap="viridis")
+    plt.colorbar(label='Density')
+    return plt.gca()
+```

@@ -1,0 +1,77 @@
+```python
+import socket
+import select
+import queue
+from datetime import datetime, timedelta
+def task_func(
+    server_address="localhost", server_port=12345, buffer_size=1024, run_duration=5
+):
+    # Create a TCP/IP socket
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setblocking(0)  # Non-blocking mode
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    
+    # Bind the socket to the address and port
+    server.bind((server_address, server_port))
+    server.listen(5)
+    
+    # Lists for select()
+    inputs = [server]
+    outputs = []
+    message_queues = {}  # socket -> queue
+    
+    end_time = datetime.now() + timedelta(seconds=run_duration)
+    
+    while datetime.now() < end_time:
+        # Wait for at least one socket to be ready
+        readable, writable, exceptional = select.select(inputs, outputs, inputs, 1.0)
+        
+        # Handle readable sockets
+        for s in readable:
+            if s is server:
+                # New connection
+                connection, client_address = s.accept()
+                connection.setblocking(0)
+                inputs.append(connection)
+                message_queues[connection] = queue.Queue()
+            else:
+                # Existing client sending data
+                data = s.recv(buffer_size)
+                if data:
+                    # Append current time and echo back
+                    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    response = data.decode() + " " + current_time
+                    message_queues[s].put(response.encode())
+                    if s not in outputs:
+                        outputs.append(s)
+                else:
+                    # No data means client disconnected
+                    if s in outputs:
+                        outputs.remove(s)
+                    inputs.remove(s)
+                    s.close()
+                    del message_queues[s]
+        
+        # Handle writable sockets
+        for s in writable:
+            try:
+                next_msg = message_queues[s].get_nowait()
+            except queue.Empty:
+                outputs.remove(s)
+            else:
+                s.send(next_msg)
+        
+        # Handle exceptional conditions
+        for s in exceptional:
+            inputs.remove(s)
+            if s in outputs:
+                outputs.remove(s)
+            s.close()
+            del message_queues[s]
+    
+    # Clean up all sockets
+    for s in inputs:
+        s.close()
+    
+    return f"Server ran for {run_duration} seconds and is now shut down."
+```

@@ -1,0 +1,10 @@
+```python
+from collections import Counter
+import hashlib
+def task_func(word: str) -> dict:
+    if len(word) < 2:
+        return hashlib.md5(str({}).encode()).hexdigest()
+    pairs = [word[i:i+2] for i in range(len(word)-1)]
+    pair_counts = Counter(pairs)
+    return hashlib.md5(str(dict(pair_counts)).encode()).hexdigest()
+```

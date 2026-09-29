@@ -1,0 +1,34 @@
+```python
+import pandas as pd
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+
+def task_func(df):
+    """
+    Processes a DataFrame containing dates and lists of numbers. It converts the lists into separate columns,
+    performs Principal Component Analysis (PCA) on the raw data (without standardization), and returns the
+    explained variance ratio of the principal components along with a bar chart visualizing this ratio.
+    Returns (0, 0) if the input DataFrame is empty.
+
+    Parameters:
+    df (pd.DataFrame): DataFrame with columns 'Date' and 'Value' where 'Value' contains lists of numbers.
+
+    Returns:
+    tuple: (explained_variance_ratio, ax)
+        explained_variance_ratio (np.ndarray): The explained variance ratio of the principal components.
+        ax (plt.Axes): The matplotlib Axes object for the variance ratio bar chart.
+    """
+    if df.empty:
+        return 0, 0
+    expanded_df = pd.DataFrame(df['Value'].tolist())
+    expanded_df = expanded_df.fillna(0)
+    pca = PCA()
+    pca.fit(expanded_df)
+    explained_variance_ratio = pca.explained_variance_ratio_
+    fig, ax = plt.subplots()
+    ax.bar(range(1, len(explained_variance_ratio) + 1), explained_variance_ratio)
+    ax.set_title('Explained Variance Ratio of Principal Components')
+    ax.set_xlabel('Principal Component')
+    ax.set_ylabel('Explained Variance Ratio')
+    return explained_variance_ratio, ax
+```

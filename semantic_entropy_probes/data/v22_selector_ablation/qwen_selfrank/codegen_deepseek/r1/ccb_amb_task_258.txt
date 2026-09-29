@@ -1,0 +1,35 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1 + n]))
+
+    # Count distinct from left for each split position i (1 <= i <= n-1)
+    # left_distinct[i] = distinct count in arr[0:i]
+    seen = set()
+    left_distinct = [0] * (n + 1)
+    for i in range(1, n):
+        seen.add(arr[i - 1])
+        left_distinct[i] = len(seen)
+
+    # Count distinct from right for each split position i
+    # right_distinct[i] = distinct count in arr[i:n]
+    seen.clear()
+    right_distinct = [0] * (n + 1)
+    for i in range(n - 1, 0, -1):
+        seen.add(arr[i])
+        right_distinct[i] = len(seen)
+
+    # Find maximum sum
+    ans = 0
+    for i in range(1, n):
+        ans = max(ans, left_distinct[i] + right_distinct[i])
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

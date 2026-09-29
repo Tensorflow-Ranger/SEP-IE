@@ -1,0 +1,38 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [0] * (N + 1)
+    for i in range(1, N + 1):
+        P[i] = int(next(it))
+    Q = [0] * (N + 1)
+    for i in range(1, N + 1):
+        q = int(next(it))
+        Q[q] = i  # Q[bib_number] = person_id
+    result = []
+    for bib in range(1, N + 1):
+        person = Q[bib]
+        target_person = P[person]
+        target_bib = Q.index(target_person)  # this is O(N) and too slow
+    # The above is too slow, we need a reverse mapping:
+    # We have Q_inv[person_id] = bib_number
+    Q_inv = [0] * (N + 1)
+    for bib_num in range(1, N + 1):
+        person_id = Q[bib_num]
+        Q_inv[person_id] = bib_num
+    result = []
+    for bib in range(1, N + 1):
+        person = Q[bib]
+        target_person = P[person]
+        target_bib = Q_inv[target_person]
+        result.append(str(target_bib))
+    print(" ".join(result))
+
+if __name__ == "__main__":
+    main()
+```

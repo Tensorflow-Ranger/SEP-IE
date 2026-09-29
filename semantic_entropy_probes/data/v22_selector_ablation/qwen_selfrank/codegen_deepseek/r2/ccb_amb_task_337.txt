@@ -1,0 +1,44 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [int(next(it)) for _ in range(N)]
+
+    # position of each value (1-indexed)
+    pos = [0] * (N + 1)
+    for idx, val in enumerate(P, start=1):
+        pos[val] = idx
+
+    total_cost = 0
+    # We consider each number from 1 to N-1
+    for val in range(1, N):
+        p = pos[val]
+        if p > val:
+            # need to move left across positions val, val+1, ..., p-1
+            # cost = sum of indices where swaps happen
+            # moving left means swapping with left neighbor repeatedly
+            # each swap at position i costs i
+            # positions traversed: from p down to val+1
+            # swaps happen at positions p-1, p-2, ..., val
+            # cost = sum_{i=val}^{p-1} i
+            # arithmetic series sum
+            left = val
+            right = p - 1
+            total_cost += (left + right) * (right - left + 1) // 2
+            # update positions for all numbers that were shifted
+            # numbers that were in [val, p-1] move one step right
+            for x in range(val + 1, N + 1):
+                if val <= pos[x] <= p - 1:
+                    pos[x] += 1
+            pos[val] = val
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

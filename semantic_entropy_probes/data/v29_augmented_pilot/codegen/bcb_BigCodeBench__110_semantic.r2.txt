@@ -1,0 +1,46 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def task_func(df):
+    """
+    Draw and return the daily turnover line chart from a pandas DataFrame.
+    
+    Parameters:
+    df (pd.DataFrame): DataFrame containing at least 'Date' and 'Sales' columns.
+    
+    Returns:
+    matplotlib.axes.Axes: Axes object with the line chart.
+    
+    Raises:
+    ValueError: If 'df' is not a DataFrame or lacks required columns, or has no data.
+    """
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("Input must be a pandas DataFrame")
+    
+    required_cols = {'Date', 'Sales'}
+    if not required_cols.issubset(df.columns):
+        raise ValueError("DataFrame must contain 'Date' and 'Sales' columns")
+    
+    if df.empty:
+        raise ValueError("DataFrame has no data to plot")
+    
+    df = df.copy()
+    df['Date'] = pd.to_datetime(df['Date'])
+    df.set_index('Date', inplace=True)
+    daily_sales = df['Sales'].resample('D').sum()
+    
+    if daily_sales.empty:
+        raise ValueError("No data available after resampling")
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.plot(daily_sales.index, daily_sales.values, marker='o', linestyle='-', linewidth=2, markersize=4)
+    ax.set_title('Daily Turnover')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Sales')
+    ax.grid(True, linestyle='--', alpha=0.7)
+    ax.tick_params(axis='x', rotation=45)
+    plt.tight_layout()
+    
+    return ax
+```

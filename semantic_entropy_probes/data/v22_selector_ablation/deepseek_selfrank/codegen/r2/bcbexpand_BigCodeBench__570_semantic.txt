@@ -1,0 +1,22 @@
+```python
+import inspect
+import types
+import json
+def task_func(f):
+    spec = {}
+    spec['name'] = f.__name__ if not isinstance(f, types.LambdaType) else '<lambda>'
+    spec['is_lambda'] = isinstance(f, types.LambdaType)
+    sig = inspect.signature(f)
+    parameters = []
+    for name, param in sig.parameters.items():
+        param_info = {
+            'name': name,
+            'default': param.default if param.default is not inspect.Parameter.empty else None,
+            'annotation': str(param.annotation) if param.annotation is not inspect.Parameter.empty else ''
+        }
+        parameters.append(param_info)
+    spec['arguments'] = parameters
+    spec['annotations'] = str(sig.return_annotation) if sig.return_annotation is not inspect.Parameter.empty else ''
+    spec['has_nested_functions'] = any(isinstance(obj, types.FunctionType) and obj.__name__ != f.__name__ for obj in inspect.getmembers(f, inspect.isfunction))
+    return json.dumps(spec)
+```

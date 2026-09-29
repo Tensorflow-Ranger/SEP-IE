@@ -1,0 +1,96 @@
+```python
+import sys
+import bisect
+
+def solve() -> None:
+    it = iter(sys.stdin.read().strip().split())
+    N = int(next(it))
+    W = int(next(it))
+
+    blocks = []
+    for _ in range(N):
+        x = int(next(it))
+        y = int(next(it))
+        blocks.append((x, y))
+
+    # Preprocess: group by column
+    by_col = [[] for _ in range(W + 1)]
+    for idx, (x, y) in enumerate(blocks):
+        by_col[x].append((y, idx))
+
+    # Sort each column's list by y
+    for col in range(1, W + 1):
+        by_col[col].sort()
+
+    # For each block, compute its "final" y after infinite time without row removal
+    # Actually, we only need to know for each column the sequence of y's,
+    # and for a given y, how many blocks are below it (including itself) in that column.
+    # The block will disappear if at some moment it reaches y=1 and the whole bottom row is full.
+    # A block reaches y=1 exactly when all blocks originally below it have already reached y=1 and been removed.
+    # More precisely: Let cnt = number of blocks in this column with original y <= Y.
+    # Then after cnt-1 steps, this block will be at y = Y - (cnt-1) = Y - cnt + 1.
+    # It reaches y=1 when Y - cnt + 1 = 1  => Y = cnt.
+    # So block reaches bottom exactly when its original Y equals the number of blocks in its column with y <= Y.
+    # That means it's the k-th block from bottom in its column where k = Y.
+    # Wait, careful: blocks are distinct, so for a given column, sort by y ascending.
+    # Let positions be y1 < y2 < ... < ym for that column.
+    # The bottommost block (y1) will reach y=1 after y1-1 steps? Actually, it starts at y1, each step moves down if possible.
+    # But there may be gaps: if y1 > 1, it moves down each step until y=1, taking y1-1 steps.
+    # However, if there is another block above it, that block only starts moving after the bottom one leaves y=1? No.
+    # The rules: all blocks try to move simultaneously, but a block only moves if the cell below is empty.
+    # So they will stack directly on top of each other at the bottom eventually.
+    # The time for the i-th block from bottom to reach y=1 is: y_i - i (because i-1 blocks below it must clear first).
+    # Indeed, the i-th block from bottom (i=1 is lowest) has original y = y_i.
+    # After each step, if it can move, it moves down. It can move only when the cell below is empty.
+    # The bottommost block moves immediately each step until y=1, taking y1-1 steps.
+    # The second block starts at y2, and must wait until the bottom block leaves y=1? Actually, no:
+    # The bottom block moves down, so after one step, bottom block is at y1-1, second block is still at y2.
+    # The second block can move only if the cell below (y2-1) is empty. Since y1 < y2, y1-1 may be < y2-1, so not necessarily blocking.
+    # But eventually, when bottom block reaches y=1, second block is at y2 - (y1-1) ? Let's simulate mentally:
+    # After t steps, bottom block is at max(1, y1 - t). Second block is at max(1, y2 - t) but only if cell below empty.
+    # Actually, they will never collide because they move in lockstep? Wait, they move simultaneously.
+    # If y2 - t == y1 - t + 1, then second block is exactly above first, so cannot move because cell below has first block.
+    # So the second block will be stuck until first block moves away from the cell below.
+    # This is exactly like the classic "falling blocks" where they end up stacked consecutively from bottom.
+    # The final resting y of the i-th block from bottom will be i (since they stack from y=1 upward).
+    # The time for i-th block to reach its final position y = i is y_i - i steps.
+    # So block i reaches y=1 when? That's when its final y is 1, i.e., i=1. So only the bottommost block reaches y=1.
+    # But the problem says: "If the entire bottom row is filled with blocks, then all blocks in the bottom row are removed."
+    # That means if at some time t, every column has a block at y=1, then all those blocks are removed.
+    # After removal, the blocks above will continue falling, and eventually new blocks may reach y=1.
+    # So a block disappears if at the moment it reaches y=1, the bottom row is full.
+    # When does a block reach y=1? As argued, only the bottommost block of a column can ever reach y=1.
+    # Actually, after removal, the next block becomes bottommost and will later reach y=1.
+    # So we can think of each column as a queue: blocks sorted by y ascending.
+    # The first block reaches y=1 at time y1 - 1.
+    # If at that exact time, all other columns also have a block reaching y=1 (i.e., their first block's arrival time equals same t),
+    # then all are removed. Otherwise, if some column's first block reaches y=1 earlier, it will sit at y=1 until others catch up.
+    # But the rule: removal happens first at each time step, before movement.
+    # So at time t, we check if all columns have a block at y=1. If yes, remove all those blocks.
+    # Then remaining blocks move down if possible.
+    # This is complex, but we can think in terms of "rounds" of removal.
+    # Let’s define for each column the sequence of arrival times at y=1 for its blocks in order.
+    # For the k-th block in column c (k=1-indexed from bottom), its arrival time at y=1 is:
+    #   t_c[k] = y_c[k] - k   (because it must wait for k-1 blocks below to be removed first)
+    # But careful: after previous blocks are removed, this block becomes the new bottom, and its distance to y=1 is y_c[k] - (k-1)?
+    # Let's derive properly:
+    # Suppose we have blocks in column c with y1 < y2 < ... < ym.
+    # The first block reaches y=1 at time y1 - 1.
+    # If it is removed at that time (because all columns had arrival at same time), then the second block becomes bottom.
+    # At the moment of removal, second block is at y2 - (y1 - 1) ? Actually, second block has been falling simultaneously:
+    # After t steps, second block is at y2 - t, provided it wasn't blocked. It is blocked only when it would be exactly above first block.
+    # Since first block moves down each step until y=1, second block is never blocked because first block is always below it.
+    # So second block also moves down each step until first block reaches y=1.
+    # Thus after y1 - 1 steps, second block is at y2 - (y1 - 1).
+    # Then after removal, second block is now the bottom block at y = y2 - (y1 - 1).
+    # It needs to fall to y=1, which takes (y2 - (y1 - 1)) - 1 = y2 - y1 steps.
+    # So total time from start for second block to reach y=1 is (y1 - 1) + (y2 - y1) = y2 - 1.
+    # That's independent of y1! Interesting. Similarly, third block would reach y=1 at y3 - 1?
+    # Let's check: after second block reaches y=1 at time y2 - 1, if removed, third block is at y3 - (y2 - 1).
+    # Then needs y3 - y2 steps to fall to y=1, total y3 - 1.
+    # So indeed, the k-th block reaches y=1 at time y_k - 1, provided all previous blocks have been removed exactly when they reached y=1.
+    # But removal only happens when all columns have a block reaching y=1 at same time.
+    # If a column's block reaches y=1 earlier, it stays there until other columns catch up.
+    # During that waiting, the blocks above in that column are blocked because the cell below is occupied.
+    # So the arrival time for the k-th block is not simply y_k - 1, but rather the time when the k-th "global removal round" happens.
+    # This becomes a problem of matching

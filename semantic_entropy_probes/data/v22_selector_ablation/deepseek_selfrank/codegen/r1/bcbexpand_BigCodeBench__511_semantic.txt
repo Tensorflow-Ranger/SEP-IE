@@ -1,0 +1,38 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame(data)
+    if column not in df.columns:
+        raise ValueError(f"Column '{column}' not found in data")
+    
+    values = df[column]
+    numeric_values = pd.to_numeric(values, errors='coerce')
+    
+    sum_val = numeric_values.sum()
+    mean_val = numeric_values.mean()
+    min_val = numeric_values.min()
+    max_val = numeric_values.max()
+    
+    stats = {
+        'sum': sum_val,
+        'mean': mean_val,
+        'min': min_val,
+        'max': max_val
+    }
+    
+    if 'Age' in df.columns:
+        labels = df['Age']
+    else:
+        labels = [f'Label_{i}' for i in range(len(df))]
+    
+    plt.figure(figsize=(8, 6))
+    plt.pie(numeric_values, labels=labels, autopct='%1.1f%%')
+    plt.title(f'{column} Distribution')
+    pie_chart = plt.gca()
+    
+    plt.close()
+    
+    return (stats, pie_chart)
+```

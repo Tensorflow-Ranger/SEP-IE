@@ -1,0 +1,30 @@
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.stats as stats
+# Constants
+TARGET_VALUE = '332'
+ARRAY = np.array([['0', '1', '2'], ['a', 'bb', 'ccc'], ['332', '33', '2'], ['33', '22', '332']])
+def task_func(target_value=TARGET_VALUE, array=ARRAY):
+    indices = []
+    for i, row in enumerate(array):
+        if row[0] == target_value:
+            indices.append(i)
+    if not indices:
+        plt.clf()
+        return 'N/A'
+    indices = np.array(indices)
+    mean = np.mean(indices)
+    variance = np.var(indices)
+    skewness = stats.skew(indices)
+    kurtosis = stats.kurtosis(indices)
+    plt.figure()
+    plt.hist(indices, bins=range(0, array.shape[0] + 2), align='left', rwidth=0.8, edgecolor='black')
+    plt.xlabel('Row Index')
+    plt.ylabel('Frequency')
+    plt.title('Distribution of Row Indices with Target Value')
+    plt.xticks(range(0, array.shape[0]))
+    plt.grid(axis='y', alpha=0.75)
+    plt.show()
+    return (mean, variance, skewness, kurtosis)
+```

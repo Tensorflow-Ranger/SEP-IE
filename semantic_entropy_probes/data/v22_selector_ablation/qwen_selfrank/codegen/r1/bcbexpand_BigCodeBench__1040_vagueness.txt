@@ -1,0 +1,65 @@
+```python
+import socket
+import select
+import queue
+from datetime import datetime, timedelta
+def task_func(
+    server_address="localhost", server_port=12345, buffer_size=1024, run_duration=5
+):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind((server_address, server_port))
+    server_socket.listen(5)
+    server_socket.setblocking(False)
+
+    inputs = [server_socket]
+    outputs = []
+    message_queue = queue.Queue()
+
+    start_time = datetime.now()
+
+    try:
+        while (datetime.now() - start_time) < timedelta(seconds=run_duration):
+            readable, writable, exceptional = select.select(inputs, outputs, inputs, 0.1)
+
+            for sock in exceptional:
+                print(f"Handling exception for {sock}")
+                sock.close()
+                inputs.remove(sock)
+
+            for sock in readable:
+                if sock is server_socket:
+                    client_socket, client_address = sock.accept()
+                    client_socket.setblocking(False)
+                    inputs.append(client_socket)
+                else:
+                    try:
+                        data = sock.recv(buffer_size)
+                        if data:
+                            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            response = data + timestamp.encode()
+                            message_queue.put((sock, response))
+                            outputs.append(sock)
+                        else:
+                            sock.close()
+                            inputs.remove(sock)
+                    except Exception as e:
+                        print(f"Error receiving data: {e}")
+                        sock.close()
+                        inputs.remove(sock)
+
+            while not message_queue.empty():
+                sock, response = message_queue.get()
+                try:
+                    sock.sendall(response)
+                    outputs.remove(sock)
+                except Exception as e:
+                    print(f"Error sending data: {e}")
+                    sock.close()
+                    inputs.remove(sock)
+
+    finally:
+        for sock in inputs:
+            sock.close()
+        return f"Echo server ran for {run_duration} seconds."
+```

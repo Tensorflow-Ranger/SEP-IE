@@ -1,0 +1,30 @@
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+PRODUCTS = ['Product' + str(i) for i in range(1, 6)]
+MONTHS = ['Month' + str(i) for i in range(1, 13)]
+def task_func():
+    np.random.seed(42)
+    sales_data = np.random.randint(100, 1001, size=(len(MONTHS), len(PRODUCTS)))
+    df = pd.DataFrame(sales_data, index=MONTHS, columns=PRODUCTS)
+    
+    plt.figure(figsize=(10, 4))
+    plt.subplot(1, 2, 1)
+    df.sum().plot(kind='line', marker='o')
+    plt.title('Total Sales per Product')
+    plt.xlabel('Product')
+    plt.ylabel('Total Sales')
+    plt.xticks(rotation=45)
+    
+    plt.subplot(1, 2, 2)
+    sns.heatmap(df, annot=True, fmt='d', cmap='YlOrRd')
+    plt.title('Sales Heatmap')
+    plt.xlabel('Product')
+    plt.ylabel('Month')
+    plt.tight_layout()
+    plt.show()
+    
+    return df
+```

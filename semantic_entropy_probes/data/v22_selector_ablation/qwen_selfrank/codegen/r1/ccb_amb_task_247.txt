@@ -1,0 +1,38 @@
+```python
+import sys
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    A = list(map(int, data[1:N+1]))
+    
+    prefix = [0] * (N + 1)
+    suffix = [0] * (N + 1)
+    
+    # Compute prefix distinct counts
+    seen = set()
+    for i in range(N):
+        seen.add(A[i])
+        prefix[i+1] = len(seen)
+    
+    # Compute suffix distinct counts
+    seen = set()
+    for i in range(N-1, -1, -1):
+        seen.add(A[i])
+        suffix[i] = len(seen)
+    
+    max_sum = 0
+    for i in range(1, N-1):
+        for j in range(i+1, N):
+            sum_counts = prefix[i] + suffix[j] + (N - j)
+            if sum_counts > max_sum:
+                max_sum = sum_counts
+    
+    print(max_sum)
+
+if __name__ == "__main__":
+    main()
+```

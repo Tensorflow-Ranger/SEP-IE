@@ -1,0 +1,33 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1+n]))
+    arr.sort()
+    
+    max_val = arr[-1]
+    freq = [0] * (max_val + 1)
+    for x in arr:
+        freq[x] = 1
+    
+    count = 0
+    for i in range(n):
+        A = arr[i]
+        for B in range(A + 1, max_val + 1):
+            if not freq[B]:
+                continue
+            diff = B - A
+            C = B + diff
+            if C > max_val:
+                break
+            if freq[C]:
+                count += 1
+    print(count)
+
+if __name__ == "__main__":
+    main()
+```

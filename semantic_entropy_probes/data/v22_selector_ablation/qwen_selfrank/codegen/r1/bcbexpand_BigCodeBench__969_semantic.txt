@@ -1,0 +1,18 @@
+```python
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+import pandas as pd
+def task_func(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        raise ValueError("The DataFrame is empty")
+    if df.isnull().values.any():
+        raise ValueError("The DataFrame contains NaN values")
+    if not df.select_dtypes(include=np.number).shape[1] == df.shape[1]:
+        raise TypeError("The DataFrame contains non-numeric data types")
+    numeric_df = df.select_dtypes(include=np.number)
+    cumulative_sums = numeric_df.cumsum()
+    scaler = MinMaxScaler()
+    normalized_cumulative_sums = scaler.fit_transform(cumulative_sums)
+    normalized_df = pd.DataFrame(normalized_cumulative_sums, columns=numeric_df.columns, index=df.index)
+    return normalized_df
+```

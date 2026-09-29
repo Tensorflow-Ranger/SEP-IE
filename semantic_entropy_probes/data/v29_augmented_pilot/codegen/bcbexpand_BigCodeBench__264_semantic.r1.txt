@@ -1,0 +1,20 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+def task_func(dictionary, key, value, n=100, bins=30, seed=0):
+    try:
+        float_value = float(value)
+    except ValueError:
+        raise ValueError("If the provided value is not a number.")
+    dictionary[key] = value
+    np.random.seed(seed)
+    data = np.random.normal(loc=float_value, scale=float_value, size=n)
+    series_data = pd.Series(data)
+    fig, ax = plt.subplots()
+    ax.hist(data, bins=bins, edgecolor='black')
+    ax.set_title(f'Histogram of Normal Distribution (mean=std={float_value})')
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Frequency')
+    return dictionary, series_data, ax
+```

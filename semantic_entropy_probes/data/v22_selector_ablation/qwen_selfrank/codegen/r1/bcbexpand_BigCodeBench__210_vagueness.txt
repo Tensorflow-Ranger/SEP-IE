@@ -1,0 +1,38 @@
+```python
+import collections
+from operator import itemgetter
+import matplotlib.pyplot as plt
+def task_func(data):
+    # Count the frequency of each letter
+    letter_counts = collections.Counter(data)
+    
+    # Sort the letters by their count in descending order
+    sorted_counts = sorted(letter_counts.items(), key=itemgetter(1), reverse=True)
+    
+    # Extract letters and counts for plotting
+    letters = [item[0] for item in sorted_counts]
+    counts = [item[1] for item in sorted_counts]
+    
+    # Find the maximum count and the corresponding letter
+    max_count = max(counts)
+    max_letter = [letter for letter, count in sorted_counts if count == max_count][0]
+    
+    # Create the bar plot
+    fig, ax = plt.subplots()
+    bars = ax.bar(letters, counts, color='skyblue')
+    
+    # Highlight the bar corresponding to the max value letter
+    for bar, letter in zip(bars, letters):
+        if letter == max_letter:
+            bar.set_color('red')
+    
+    # Set labels and title
+    ax.set_xlabel('Letter')
+    ax.set_ylabel('Count')
+    ax.set_title('Letter Counts with Max Value Letter Highlighted')
+    
+    # Add legend
+    ax.legend(['Letter Counts', 'Max Value Letter'])
+    
+    return ax
+```

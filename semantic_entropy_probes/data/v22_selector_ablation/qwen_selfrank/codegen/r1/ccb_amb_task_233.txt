@@ -1,0 +1,28 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    M = int(data[1])
+    A = list(map(int, data[2:2+N]))
+    
+    inv_count = [0] * M
+    inv_count[0] = 0
+    
+    for k in range(1, M):
+        inv_count[k] = inv_count[k-1]
+        for i in range(N):
+            if (A[i] + k) % M > (A[i] + k-1) % M:
+                inv_count[k] += 1
+    
+    for k in range(M):
+        print(inv_count[k])
+
+if __name__ == "__main__":
+    main()
+```

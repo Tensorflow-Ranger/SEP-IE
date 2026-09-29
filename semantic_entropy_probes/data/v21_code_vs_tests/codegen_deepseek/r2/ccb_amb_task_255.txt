@@ -1,0 +1,36 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    A = list(map(int, data[1:1 + n]))
+
+    # Count distinct from left for each prefix
+    seen_left = set()
+    distinct_left = [0] * n
+    for i in range(n):
+        seen_left.add(A[i])
+        distinct_left[i] = len(seen_left)
+
+    # Count distinct from right for each suffix
+    seen_right = set()
+    distinct_right = [0] * n
+    for i in range(n - 1, -1, -1):
+        seen_right.add(A[i])
+        distinct_right[i] = len(seen_right)
+
+    # For split after index i (0-based), left part is A[0..i], right part A[i+1..n-1]
+    best = 0
+    for i in range(n - 1):
+        total = distinct_left[i] + distinct_right[i + 1]
+        if total > best:
+            best = total
+
+    print(best)
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,106 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    A = data[1]
+    length = 3 ** N
+
+    # Precompute powers of 3 up to N
+    pow3 = [1] * (N + 1)
+    for i in range(1, N + 1):
+        pow3[i] = pow3[i - 1] * 3
+
+    # DP table: dp[level][pos][majority] = min changes to make subtree rooted at pos
+    # at given level have given majority (0 or 1) at its top.
+    # level goes from 0 (leaf) to N (root).
+    # We'll compute bottom-up.
+    # For leaves (level 0), dp[0][pos][val] = 0 if A[pos] == str(val) else 1.
+    dp = [[[0, 0] for _ in range(pow3[N])] for _ in range(N + 1)]
+
+    # Initialize leaves
+    for pos in range(length):
+        dp[0][pos][0] = 0 if A[pos] == '0' else 1
+        dp[0][pos][1] = 0 if A[pos] == '1' else 1
+
+    # Process each level
+    for level in range(1, N + 1):
+        block_size = pow3[level]          # size of subtree at this level
+        prev_size = pow3[level - 1]       # size of each child subtree
+        blocks = length // block_size
+        for block in range(blocks):
+            start = block * block_size
+            # three child subtrees
+            child_starts = [start, start + prev_size, start + 2 * prev_size]
+            # For each majority value m for the current block (0 or 1)
+            for m in (0, 1):
+                # We need to choose majority for each child subtree.
+                # Each child subtree can be forced to have majority 0 or 1 (with some cost).
+                # Then we take the majority of the three child majorities.
+                # We want the overall majority to be m with minimal total cost.
+                best = float('inf')
+                # Enumerate all 2^3 = 8 possibilities for child majorities
+                for mask in range(8):
+                    child_maj = [(mask >> i) & 1 for i in range(3)]
+                    # Check if majority of child_maj is m
+                    cnt = sum(1 for cm in child_maj if cm == m)
+                    if cnt >= 2:   # m is the majority among the three child majorities
+                        total_cost = 0
+                        for i in range(3):
+                            child_pos = child_starts[i]
+                            total_cost += dp[level - 1][child_pos][child_maj[i]]
+                        if total_cost < best:
+                            best = total_cost
+                dp[level][start][m] = best
+
+    root_start = 0
+    # We want to change the root's majority from its current value.
+    # Compute current root majority without changes? Actually we compute minimal changes to make root majority 0 or 1.
+    # The answer is min changes to make root majority opposite of what it would be if we did nothing.
+    # But we don't know what the root majority would be without changes.
+    # However, we can compute minimal changes to make root majority 0 and minimal to make it 1.
+    # Let original_root_majority be determined by applying the operation without any changes.
+    # But we can avoid simulating: we just need min changes to flip the root majority.
+    # So compute cost0 = dp[N][0][0], cost1 = dp[N][0][1].
+    # If we change nothing, the root majority is whichever of cost0, cost1 is smaller? No, that's cost to force that majority.
+    # Actually, the original root majority is determined by the original string.
+    # We can compute it by recursively applying the operation on the original string.
+    # But we can also deduce: if cost0 < cost1 then original majority is more likely 0? Not necessarily.
+    # Let's compute original root majority by simulating the operation on the original string.
+    # Since N <= 13, length <= 3^13 ≈ 1.6 million, which is okay for simulation.
+    # But we can compute it directly from dp: the original root majority is the majority of the three child majorities
+    # at level N-1, each of which is determined by original string.
+    # We can compute recursively using the same DP but without changes: i.e., for each subtree,
+    # the original majority is simply the majority of its three child majorities.
+    # We'll compute original_majority for each subtree bottom-up.
+
+    # original_majority[level][start] = majority of subtree at given level and start in original string.
+    original_majority = [[-1] * pow3[N] for _ in range(N + 1)]
+    # level 0 leaves
+    for pos in range(length):
+        original_majority[0][pos] = int(A[pos])
+    for level in range(1, N + 1):
+        block_size = pow3[level]
+        prev_size = pow3[level - 1]
+        blocks = length // block_size
+        for block in range(blocks):
+            start = block * block_size
+            child_starts = [start, start + prev_size, start + 2 * prev_size]
+            child_maj = [original_majority[level - 1][cs] for cs in child_starts]
+            # majority of three values
+            if sum(child_maj) >= 2:
+                original_majority[level][start] = 1
+            else:
+                original_majority[level][start] = 0
+
+    original_root = original_majority[N][0]
+    # We need minimal changes to make root majority = 1 - original_root.
+    answer = dp[N][0][1 - original_root]
+    print(answer)
+
+if __name__ == "__main__":
+    solve()
+```

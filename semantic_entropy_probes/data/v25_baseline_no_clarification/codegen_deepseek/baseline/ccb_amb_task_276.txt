@@ -1,0 +1,39 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    cards = list(map(int, data))
+    from collections import Counter
+    cnt = Counter(cards)
+    
+    # Check for a full house: two of one rank and three of another
+    values = list(cnt.values())
+    if 2 in values and 3 in values:
+        print("Yes")
+    else:
+        # Also check if we have >=3 of one rank and >=2 of another (since we can choose 5 out of 7)
+        # For example, counts like [4, 3] or [3, 2, 2] also allow a full house.
+        # Sort counts descending
+        sorted_counts = sorted(cnt.values(), reverse=True)
+        # Simulate picking 5 cards: we need at least 2 of one rank and 3 of another.
+        # If the largest count is >=3 and the second largest is >=2, it's possible.
+        if len(sorted_counts) >= 2 and sorted_counts[0] >= 3 and sorted_counts[1] >= 2:
+            print("Yes")
+        else:
+            # Also handle cases like [3, 2, 2] (three of a kind + two pairs) -> we can pick the triple and one pair.
+            # Or [2, 2, 2, 1] -> we can pick two pairs? Actually need triple and pair, so not possible.
+            # But [3, 2, 2] works because we have triple and at least one pair.
+            # Check if there is a count >=3 and sum of other counts that are >=2 is at least 2.
+            triple_found = any(v >= 3 for v in cnt.values())
+            pair_count = sum(1 for v in cnt.values() if v >= 2)
+            if triple_found and pair_count >= 2:
+                print("Yes")
+            else:
+                print("No")
+
+if __name__ == "__main__":
+    main()
+```

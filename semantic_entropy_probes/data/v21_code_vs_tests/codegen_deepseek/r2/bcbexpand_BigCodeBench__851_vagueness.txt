@@ -1,0 +1,13 @@
+```python
+import textwrap
+import re
+def task_func(input_string, width):
+    lines = input_string.split('\n')
+    wrapped_lines = []
+    for line in lines:
+        wrapped_line = textwrap.fill(line, width=width)
+        wrapped_lines.append(wrapped_line)
+    result = '\n'.join(wrapped_lines)
+    result = re.sub(r'\bis\b', 'was', result)
+    return result
+```

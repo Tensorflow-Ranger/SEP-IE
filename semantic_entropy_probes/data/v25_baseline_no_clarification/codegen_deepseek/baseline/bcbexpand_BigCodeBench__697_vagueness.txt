@@ -1,0 +1,32 @@
+```python
+import numpy as np
+from sklearn.linear_model import LinearRegression
+def task_func(df):
+    """
+    Use a linear regression model to predict the value of feature in the given dataframe and return the coefficients and intercept.
+    
+    Parameters:
+    df (pd.DataFrame): The input dataframe containing numerical features.
+    
+    Returns:
+    dict: A dictionary with the coefficients and the intercept of the fitted linear regression model.
+    """
+    if df.empty or len(df.columns) < 2:
+        raise ValueError("DataFrame must have at least two columns for features and target.")
+    
+    # Assume the last column is the target variable
+    X = df.iloc[:, :-1].values
+    y = df.iloc[:, -1].values
+    
+    # Fit linear regression model
+    model = LinearRegression()
+    model.fit(X, y)
+    
+    # Prepare result dictionary
+    result = {
+        'coefficients': model.coef_.tolist(),
+        'intercept': float(model.intercept_)
+    }
+    
+    return result
+```

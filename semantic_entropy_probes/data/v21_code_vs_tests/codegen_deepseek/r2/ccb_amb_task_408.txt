@@ -1,0 +1,63 @@
+```python
+import sys
+
+def solve():
+    input = sys.stdin.readline
+    N, M = map(int, input().split())
+    intervals = [tuple(map(int, input().split())) for _ in range(M)]
+
+    # Step 1: Check feasibility using union of all intervals
+    leftmost = N + 1
+    rightmost = 0
+    for L, R in intervals:
+        if L < leftmost:
+            leftmost = L
+        if R > rightmost:
+            rightmost = R
+    if leftmost > 1 or rightmost < N:
+        print(-1)
+        return
+
+    # Step 2: Find minimal covering intervals
+    # We need to cover [1, N] with intervals where each interval can be chosen as "type 1"
+    # This is a classic interval covering problem: choose minimal number of intervals to cover [1, N]
+    # Sort by left endpoint, then greedy choose the one that extends furthest
+    intervals_with_idx = [(L, R, i) for i, (L, R) in enumerate(intervals)]
+    intervals_with_idx.sort(key=lambda x: (x[0], -x[1]))
+
+    cover = []
+    current = 1
+    i = 0
+    best_idx = -1
+    best_right = 0
+    while current <= N:
+        # Find all intervals with L <= current
+        while i < M and intervals_with_idx[i][0] <= current:
+            L, R, idx = intervals_with_idx[i]
+            if R > best_right:
+                best_right = R
+                best_idx = idx
+            i += 1
+        if best_right < current:
+            # Cannot cover
+            print(-1)
+            return
+        cover.append(best_idx)
+        current = best_right + 1
+        # Reset best for next round
+        best_right = 0
+
+    # Step 3: Build answer
+    # All operations not in cover are type 0 (cost 0)
+    # Operations in cover are type 1 (cost 1)
+    # We never need type 2 because we can always achieve full coverage with type 1 only
+    ops = ['0'] * M
+    for idx in cover:
+        ops[idx] = '1'
+
+    print(len(cover))
+    print(' '.join(ops))
+
+if __name__ == "__main__":
+    solve()
+```

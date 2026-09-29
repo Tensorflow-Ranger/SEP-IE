@@ -1,0 +1,45 @@
+```python
+import sys
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    A = list(map(int, data[1:]))
+
+    # Precompute distinct counts from left and right
+    left_counts = [0] * N
+    right_counts = [0] * N
+
+    # Left to right
+    seen = set()
+    count = 0
+    for i in range(N):
+        if A[i] not in seen:
+            seen.add(A[i])
+            count += 1
+        left_counts[i] = count
+
+    # Right to left
+    seen = set()
+    count = 0
+    for i in range(N-1, -1, -1):
+        if A[i] not in seen:
+            seen.add(A[i])
+            count += 1
+        right_counts[i] = count
+
+    # Find maximum sum of left_counts[i] + right_counts[i+1]
+    max_sum = 0
+    for i in range(N-1):
+        current_sum = left_counts[i] + right_counts[i+1]
+        if current_sum > max_sum:
+            max_sum = current_sum
+
+    print(max_sum)
+
+if __name__ == "__main__":
+    main()
+```

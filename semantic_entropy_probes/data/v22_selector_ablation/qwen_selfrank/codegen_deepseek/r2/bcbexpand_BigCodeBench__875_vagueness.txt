@@ -1,0 +1,25 @@
+```python
+import pandas as pd
+import random
+def task_func(data, columns=['Name', 'Age', 'Occupation'], fill_missing=False, num_range=(0, 100), seed=None):
+    if seed is not None:
+        random.seed(seed)
+    max_len = max(len(row) for row in data) if data else 0
+    padded_data = []
+    for row in data:
+        padded_row = list(row) + [None] * (max_len - len(row))
+        padded_data.append(padded_row)
+    df = pd.DataFrame(padded_data, columns=columns[:max_len])
+    if len(columns) > max_len:
+        for col in columns[max_len:]:
+            df[col] = None
+    if fill_missing:
+        for col in df.columns:
+            for i in range(len(df)):
+                if pd.isna(df.at[i, col]):
+                    if df[col].dtype == 'object':
+                        df.at[i, col] = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz', k=5))
+                    else:
+                        df.at[i, col] = random.randint(num_range[0], num_range[1])
+    return df
+```

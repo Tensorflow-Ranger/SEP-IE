@@ -1,0 +1,14 @@
+```python
+from collections import Counter
+import math
+def task_func(nested_dict):
+    aggregated = Counter()
+    for inner_dict in nested_dict.values():
+        for key, value in inner_dict.items():
+            if key != 'ele':
+                aggregated[key] += value
+    result = {}
+    for key, total in aggregated.items():
+        result[key] = math.sin(total)
+    return result
+```

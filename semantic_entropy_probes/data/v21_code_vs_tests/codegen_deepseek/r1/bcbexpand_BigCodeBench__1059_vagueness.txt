@@ -1,0 +1,38 @@
+```python
+import numpy as np
+import random
+import itertools
+import pandas as pd
+# Constants
+PLANETS = [
+    "Mercury",
+    "Venus",
+    "Earth",
+    "Mars",
+    "Jupiter",
+    "Saturn",
+    "Uranus",
+    "Neptune",
+]
+ELEMENTS = [
+    "Hydrogen",
+    "Helium",
+    "Oxygen",
+    "Carbon",
+    "Nitrogen",
+    "Magnesium",
+    "Silicon",
+    "Iron",
+    "Nickel",
+]
+def task_func():
+    data = []
+    for _ in range(len(PLANETS)):
+        row = []
+        shuffled_planets = random.sample(PLANETS, len(PLANETS))
+        for planet, element in zip(shuffled_planets, ELEMENTS):
+            row.append(f"{planet}:{element}")
+        data.append(row)
+    df = pd.DataFrame(data, columns=ELEMENTS)
+    return df
+```

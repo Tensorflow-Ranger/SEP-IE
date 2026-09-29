@@ -1,0 +1,24 @@
+```python
+import random
+import statistics
+# Constants
+AGE_RANGE = (22, 60)
+def task_func(dict1):
+    if "EMP$$" not in dict1:
+        return (0, 0, [])
+    ages = dict1["EMP$$"]
+    if not ages:
+        return (0, 0, [])
+    mean = statistics.mean(ages)
+    median = statistics.median(ages)
+    try:
+        mode_val = statistics.mode(ages)
+        modes = [mode_val]
+    except statistics.StatisticsError:
+        freq = {}
+        for age in ages:
+            freq[age] = freq.get(age, 0) + 1
+        max_freq = max(freq.values())
+        modes = [age for age, count in freq.items() if count == max_freq]
+    return (mean, median, modes)
+```

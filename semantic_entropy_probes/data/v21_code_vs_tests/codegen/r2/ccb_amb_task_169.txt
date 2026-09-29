@@ -1,0 +1,28 @@
+```python
+import sys
+from collections import defaultdict
+
+def main():
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    A = list(map(int, data[1:N+1]))
+    
+    last_occurrence = defaultdict(int)
+    min_length = float('inf')
+    
+    for i in range(N):
+        num = A[i]
+        if num in last_occurrence:
+            prev = last_occurrence[num]
+            min_length = min(min_length, i - prev)
+        last_occurrence[num] = i
+    
+    if min_length == float('inf'):
+        print(-1)
+    else:
+        print(min_length)
+
+if __name__ == "__main__":
+    main()
+```

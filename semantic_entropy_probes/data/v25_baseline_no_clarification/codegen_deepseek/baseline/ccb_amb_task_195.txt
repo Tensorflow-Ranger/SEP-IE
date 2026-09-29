@@ -1,0 +1,33 @@
+```python
+import sys
+
+def solve() -> None:
+    it = iter(sys.stdin.read().split())
+    H = int(next(it))
+    W = int(next(it))
+    rows = [int(next(it), 2) for _ in range(H)]
+
+    # Count how many rows have each mask
+    freq = {}
+    for mask in rows:
+        freq[mask] = freq.get(mask, 0) + 1
+
+    # For each column subset, compute total number of 1s if we flip those columns
+    # We'll try all 2^W column flip masks
+    best = 0
+    for col_flip in range(1 << W):
+        total = 0
+        # For each distinct row mask, compute contribution
+        for row_mask, cnt in freq.items():
+            flipped = row_mask ^ col_flip
+            ones = bin(flipped).count("1")
+            # We can flip the row if it gives more ones
+            total += cnt * max(ones, W - ones)
+        if total > best:
+            best = total
+
+    print(best)
+
+if __name__ == "__main__":
+    solve()
+```

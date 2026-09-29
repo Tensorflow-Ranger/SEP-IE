@@ -1,0 +1,15 @@
+```python
+import hashlib
+import base64
+def task_func(filename, data, password):
+    key = hashlib.sha256(password.encode()).digest()
+    encrypted = bytearray()
+    key_index = 0
+    for byte in data.encode():
+        encrypted.append(byte ^ key[key_index])
+        key_index = (key_index + 1) % len(key)
+    encrypted_str = base64.b64encode(encrypted).decode()
+    with open(filename, 'w') as f:
+        f.write(encrypted_str)
+    return encrypted_str
+```

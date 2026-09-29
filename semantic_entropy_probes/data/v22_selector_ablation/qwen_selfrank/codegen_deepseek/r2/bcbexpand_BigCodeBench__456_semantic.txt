@@ -1,0 +1,12 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import MinMaxScaler
+def task_func(data: pd.DataFrame) -> (pd.DataFrame, plt.Axes):
+    scaler = MinMaxScaler()
+    normalized_data = pd.DataFrame(scaler.fit_transform(data), columns=data.columns, index=data.index)
+    fig, ax = plt.subplots()
+    sns.heatmap(normalized_data, cmap="YlGnBu", cbar_kws={'label': 'Normalized Value'}, ax=ax)
+    return normalized_data, ax
+```

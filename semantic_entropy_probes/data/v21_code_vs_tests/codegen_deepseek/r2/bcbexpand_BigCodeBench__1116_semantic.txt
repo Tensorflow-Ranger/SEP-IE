@@ -1,0 +1,35 @@
+```python
+import random
+import statistics
+# Constants
+AGE_RANGE = (22, 60)
+def task_func(dict1):
+    """
+    Calculate the mean, the median, and the mode(s) of the age of the employees in the department "EMP$$," where each employee's age is generated either uniformly or normally distributed within the range [22, 60]. 
+    The function should output with:
+        tuple: A tuple of mean, median, and a list of mode(s) of employee ages.
+    """
+    ages = []
+    for key, value in dict1.items():
+        if isinstance(key, str) and key.startswith("EMP$$"):
+            if isinstance(value, list):
+                for age in value:
+                    if isinstance(age, (int, float)) and AGE_RANGE[0] <= age <= AGE_RANGE[1]:
+                        ages.append(age)
+            elif isinstance(value, (int, float)) and AGE_RANGE[0] <= value <= AGE_RANGE[1]:
+                ages.append(value)
+    if not ages:
+        return (0, 0, [])
+    mean = statistics.mean(ages)
+    median = statistics.median(ages)
+    try:
+        mode_val = statistics.mode(ages)
+        mode = [mode_val]
+    except statistics.StatisticsError:
+        freq_dict = {}
+        for age in ages:
+            freq_dict[age] = freq_dict.get(age, 0) + 1
+        max_freq = max(freq_dict.values())
+        mode = [age for age, freq in freq_dict.items() if freq == max_freq]
+    return (mean, median, mode)
+```

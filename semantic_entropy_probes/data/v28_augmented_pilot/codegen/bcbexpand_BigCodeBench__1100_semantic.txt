@@ -1,0 +1,38 @@
+```python
+import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+def task_func(texts):
+    """
+    Processes a collection of text documents to compute the TF-IDF (Term Frequency-Inverse Document Frequency) scores for each word,
+    excluding any URLs present in the texts but including their anchor text.
+    
+    Parameters:
+    - texts (list of str): The list of text documents to process.
+    
+    Returns:
+    - tuple of (list of tuples, list of str):
+        The first element is a list of tuples, each tuple representing a document with its words' TF-IDF scores in a dense matrix format.
+        The second element is a list of strings, representing the unique words (features) across all documents.
+    """
+    # Remove URLs from the texts
+    url_pattern = re.compile(r'https?://\S+|www\.\S+')
+    cleaned_texts = [url_pattern.sub('', text) for text in texts]
+    
+    # Initialize the TF-IDF Vectorizer
+    vectorizer = TfidfVectorizer()
+    
+    # Fit and transform the cleaned texts
+    tfidf_matrix = vectorizer.fit_transform(cleaned_texts)
+    
+    # Convert the sparse matrix to a dense array and round to 8 decimal places
+    tfidf_dense = tfidf_matrix.toarray().round(8)
+    
+    # Convert each document's scores to a tuple
+    scores = [tuple(row) for row in tfidf_dense]
+    
+    # Get the feature names (unique words)
+    feature_names = vectorizer.get_feature_names_out().tolist()
+    
+    return (scores, feature_names)
+```

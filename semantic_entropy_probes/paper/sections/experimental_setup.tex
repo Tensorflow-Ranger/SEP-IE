@@ -1,0 +1,89 @@
+\section{Experimental Setup}
+\label{sec:experimental_setup}
+
+\subsection{Datasets}
+
+We evaluate on four sources of ambiguity-injected coding problems:
+
+\begin{itemize}
+\item \textbf{ClarifyCodeBench}~\cite{clarifycodebench}: 419 problems
+derived from LiveCodeBench, each annotated with $K \in \{1,2,3\}$
+deliberately deleted specification details.
+\item \textbf{Orchid-HEval}: HumanEval~\cite{humaneval} problems rewritten
+with a single injected ambiguous edit (lexical, vagueness, semantic, or
+syntactic), paired with the original hidden tests.
+\item \textbf{Orchid-BCB} and \textbf{Orchid-BCB-Expand}: BigCodeBench
+\cite{bigcodebench} problems rewritten the same way, with BCB-Expand a
+larger, semi-automatically constructed extension of the original BCB
+subset.
+\end{itemize}
+
+All source-problem groupings are preserved under splitting: no two prompt
+variants derived from the same underlying problem appear on opposite sides
+of a train/validation/test or leave-one-source-out (LODO) split. We use
+grouped, stratified splits throughout the ambiguity-degree probe
+evaluation, and full leave-one-source-out evaluation (train on three
+sources, test on the fourth, held out entirely) for the ranking probe, to
+measure whether ranking quality generalizes across benchmark construction
+methodologies rather than only within one.
+
+\subsection{Models}
+
+The probe-host model is Qwen3-8B (bf16, thinking mode disabled) throughout.
+For code generation, we use two models of different capability: Qwen3-8B
+itself, and DeepSeek V3.2 (accessed via Bedrock), to test whether findings
+about clarification quality are specific to a particular coding model or
+hold across models of different capability. Candidate clarifying-question
+elicitation and independent quality judging (assigning tiers 0/1/2 to
+candidates relative to the benchmark's labeled ambiguity) use DeepSeek V3.2
+as an independent judge, separate from whichever model generates the code
+under test.
+
+\subsection{Baselines}
+
+\textbf{Zero-shot self-rank}: the coding model is prompted with the
+ambiguous prompt and the full numbered list of candidate clarifying
+questions in a single message, and asked to output the number of the one it
+would ask. This requires exactly one generation call per problem (greedy
+decoding, no sampling), with the entire candidate pool inlined -- not one
+call per candidate. \textbf{No-clarification}: the raw ambiguous prompt is
+passed directly to the coding model with no clarification step at all,
+establishing the baseline value of clarifying at all, independent of which
+question is chosen.
+
+\subsection{Correctness Metric}
+
+We report correctness as the \textbf{fractional test-case pass rate}: the
+number of individual test assertions a generated solution passes divided by
+the total number of test assertions for that problem, averaged across
+groups. This is distinct from -- and, as shown in
+Section~\ref{sec:results}, statistically more sensitive than -- an
+all-or-nothing metric that scores a group as passing only if every test
+assertion succeeds. Both metrics are computable from the same underlying
+per-group pass/total counts; we report the fractional metric as primary
+throughout and note where it diverges from the all-or-nothing metric's
+conclusions.
+
+\subsection{Significance Testing}
+
+For between-groups comparisons (e.g., groups where the probe ranked the
+labeled ambiguity first vs.\ groups where it did not), we report
+Mann-Whitney U and Welch's $t$-test alongside a 10,000-resample bootstrap
+95\% confidence interval on the mean difference. For within-groups,
+paired comparisons (e.g., the same 244 problems with vs.\ without any
+clarification), we report the Wilcoxon signed-rank test, a paired $t$-test,
+and a paired bootstrap 95\% CI on the mean of per-group differences. We
+disclose cases where these tests disagree at the margin rather than
+reporting only the test that reaches $p < 0.05$.
+
+\subsection{Compute Environment}
+
+\label{sec:experimental_setup:compute}
+All hidden-state extraction and generation runs on a single GPU
+(NVIDIA A10G, 23\,GB, native bf16, no CPU weight offload). We note that an
+earlier measurement on a memory-constrained T4 GPU requiring CPU offload
+showed no measurable speedup between the probe and zero-shot generation, an
+artifact of a fixed CPU$\leftrightarrow$GPU weight-transfer cost dominating
+both paths equally; we report only native-GPU timings here, and describe
+the exact benchmarked comparison in
+Section~\ref{sec:results:cost}.

@@ -1,0 +1,32 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1 + n]))
+    arr.sort()
+
+    max_val = arr[-1]
+    present = [False] * (max_val + 1)
+    for v in arr:
+        present[v] = True
+
+    count = 0
+    # Iterate over possible A and C, compute B = (A + C) / 2
+    for i in range(n):
+        a = arr[i]
+        for j in range(i + 2, n):
+            c = arr[j]
+            total = a + c
+            if total % 2 == 0:
+                b = total // 2
+                if b <= max_val and present[b]:
+                    count += 1
+    print(count)
+
+if __name__ == "__main__":
+    main()
+```

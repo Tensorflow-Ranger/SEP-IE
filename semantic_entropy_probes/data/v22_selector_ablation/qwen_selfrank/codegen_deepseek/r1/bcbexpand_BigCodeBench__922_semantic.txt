@@ -1,0 +1,45 @@
+```python
+import pandas as pd
+import re
+# Constants
+STOPWORDS = set([
+    "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself",
+    "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself",
+    "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that",
+    "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
+    "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because",
+    "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into",
+    "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out",
+    "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where",
+    "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no",
+    "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just",
+    "don", "should", "now"
+])
+def task_func(data, column):
+    """
+    Removes English stopwords from a text column in a DataFrame and returns the modified DataFrame.
+    Punctuation is removed before stopword removal, and the output joins remaining words with a single space.
+    
+    Parameters:
+    data (pd.DataFrame): The input DataFrame.
+    column (str): The name of the text column to process.
+    
+    Returns:
+    pd.DataFrame: A DataFrame with the stopwords removed from the specified column.
+    """
+    def remove_stopwords(text):
+        if pd.isna(text):
+            return text
+        # Remove punctuation and split into words
+        words = re.findall(r'\b\w+\b', str(text).lower())
+        # Filter out stopwords
+        filtered_words = [word for word in words if word not in STOPWORDS]
+        # Join with single space
+        return ' '.join(filtered_words)
+    
+    # Create a copy to avoid modifying the original DataFrame
+    result_df = data.copy()
+    # Apply the stopword removal function to the specified column
+    result_df[column] = result_df[column].apply(remove_stopwords)
+    return result_df
+```

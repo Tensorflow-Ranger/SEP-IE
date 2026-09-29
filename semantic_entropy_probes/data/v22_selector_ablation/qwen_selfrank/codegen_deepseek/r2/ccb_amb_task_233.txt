@@ -1,0 +1,122 @@
+```python
+import sys
+import bisect
+
+def solve():
+    input = sys.stdin.readline
+    N, M = map(int, input().split())
+    A = list(map(int, input().split()))
+
+    # Step 1: Sort A and compute prefix sums for later use
+    sorted_A = sorted(A)
+    prefix_sums = [0] * (N + 1)
+    for i in range(N):
+        prefix_sums[i + 1] = prefix_sums[i] + sorted_A[i]
+
+    # Step 2: Precompute inversion count for k = 0 using BIT
+    # We'll compute inversions in B when k = 0 (B_i = A_i % M, but A_i < M so B_i = A_i)
+    # Use coordinate compression for BIT
+    coord = sorted(set(A))
+    comp = {v: i + 1 for i, v in enumerate(coord)}
+    size = len(coord) + 2
+    bit = [0] * (size + 1)
+
+    def bit_add(idx, val):
+        while idx <= size:
+            bit[idx] += val
+            idx += idx & -idx
+
+    def bit_sum(idx):
+        s = 0
+        while idx > 0:
+            s += bit[idx]
+            idx -= idx & -idx
+        return s
+
+    inv0 = 0
+    for i in range(N - 1, -1, -1):
+        idx = comp[A[i]]
+        inv0 += bit_sum(idx - 1)
+        bit_add(idx, 1)
+
+    # Step 3: For each possible threshold t, count how many A_i >= t
+    # We'll need for each k: inversions caused by pairs where one wraps around
+    # Total inversions = inv0 + contributions from pairs (i, j) where A_i < A_j but (A_i + k) % M > (A_j + k) % M
+    # This happens when A_i + k >= M and A_j + k < M, i.e., A_i >= M - k and A_j < M - k
+    # For such a pair, originally A_i < A_j (since A_i >= M - k > A_j), but after mod, B_i = A_i + k - M, B_j = A_j + k
+    # So B_i > B_j iff (A_i + k - M) > (A_j + k)  => A_i - M > A_j => A_i > A_j + M (always false because A_i < M)
+    # Wait, careful: The condition for inversion after shift is:
+    # (A_i + k) % M > (A_j + k) % M while originally A_i <= A_j (since we want extra inversions beyond inv0)
+    # Actually, inv0 counts pairs with A_i > A_j. After shift, some pairs that were not inversions may become inversions.
+    # These are exactly pairs with A_i < A_j but (A_i + k) % M > (A_j + k) % M.
+    # That happens when A_i + k >= M and A_j + k < M, i.e., A_i >= M - k and A_j < M - k.
+    # For such a pair, B_i = A_i + k - M, B_j = A_j + k, and indeed B_i > B_j because A_i - M > A_j? Let's check:
+    # B_i > B_j <=> A_i + k - M > A_j + k <=> A_i - M > A_j <=> A_i > A_j + M. Since A_i < M, this is false.
+    # Hmm, so maybe my earlier reasoning is flawed. Let's think differently.
+
+    # Let’s derive formula:
+    # For fixed k, B_i = (A_i + k) % M.
+    # Inversion count = sum_{i<j} [B_i > B_j].
+    # Write B_i > B_j as:
+    # If A_i + k < M and A_j + k < M: then condition is A_i > A_j.
+    # If A_i + k >= M and A_j + k >= M: then condition is A_i > A_j.
+    # If A_i + k >= M and A_j + k < M: then B_i = A_i + k - M, B_j = A_j + k.
+    #   B_i > B_j <=> A_i + k - M > A_j + k <=> A_i > A_j + M (impossible since A_i < M, A_j >= 0).
+    #   So no inversion in this case.
+    # If A_i + k < M and A_j + k >= M: then B_i = A_i + k, B_j = A_j + k - M.
+    #   B_i > B_j <=> A_i + k > A_j + k - M <=> A_i > A_j - M, which is always true because A_i >= 0 and A_j - M < 0.
+    #   So always inversion in this case.
+    # Therefore, extra inversions beyond inv0 come from pairs where A_i < A_j (so not counted in inv0) but A_i + k < M and A_j + k >= M.
+    # That is: A_i < M - k and A_j >= M - k, and i < j (but since condition is symmetric? Actually i<j in original index order).
+    # Wait, the inversion definition uses original indices i<j, not sorted by value.
+    # So we need to count, for each k, the number of pairs (i,j) with i<j, A_i < M - k, A_j >= M - k.
+    # That's independent of the relative order of A_i and A_j values; it's just about which side of threshold they fall.
+    # Let’s denote threshold t = M - k.
+    # Then extra inversions = number of pairs (i,j) with i<j, A_i < t, A_j >= t.
+    # Let prefix_count_less[i] = number of indices p <= i with A_p < t.
+    # Then for each j with A_j >= t, contribution = prefix_count_less[j-1].
+    # So total extra = sum_{j: A_j >= t} prefix_count_less[j-1].
+    # We can compute this efficiently for all t by processing in order of original array.
+
+    # Let’s create an array of (A_i, original_index).
+    arr = [(A[i], i) for i in range(N)]
+    # Sort by A_i descending, so we process larger A_i first.
+    arr.sort(key=lambda x: -x[0])
+
+    # We'll use a Fenwick tree over indices to count how many indices have been marked as "less".
+    # Initially, all indices are "greater or equal" (since we start with t = M, no one is less).
+    # As we decrease t, we mark indices with A_i < t as "less".
+    # For each index j with A_j = val, when we process val, we are at threshold t = val + 1 (since we are about to mark all indices with A_i = val as less).
+    # At that moment, indices with A_i > val are already marked as "greater or equal", indices with A_i < val are already marked as "less".
+    # We need to compute for this threshold t = val + 1, the extra inversions contributed by pairs where A_i < t and A_j >= t.
+    # But careful: extra inversions are counted for each k, and k = M - t.
+    # We'll compute answer for each k in increasing order of k (i.e., decreasing t).
+
+    # Let’s create an array extra[t] = extra inversions when threshold is t (t from 0 to M).
+    # Actually t = M - k ranges from M down to 1 (k from 0 to M-1). For t=0 (k=M), all A_i < M, so no extra.
+    # We'll compute extra[t] for t = 1..M.
+
+    # We'll process distinct values in descending order.
+    distinct_vals = sorted(set(A), reverse=True)
+    idx_bit = [0] * (N + 2)
+
+    def add_idx(pos, val):
+        pos += 1
+        while pos <= N + 1:
+            idx_bit[pos] += val
+            pos += pos & -pos
+
+    def sum_idx(pos):
+        pos += 1
+        s = 0
+        while pos > 0:
+            s += idx_bit[pos]
+            pos -= pos & -pos
+        return s
+
+    # Initially, no index is marked as "less".
+    # We'll iterate over distinct values v from high to low.
+    # For current v, we are about to mark all indices with A_i = v as "less".
+    # Threshold t = v + 1 (since A_i < t means A_i <= v).
+    # So for k = M - t = M - (v + 1), extra inversions = ?
+    # Let’s compute: For each index j with A_j = v, before marking, it is considered "greater or equal" (

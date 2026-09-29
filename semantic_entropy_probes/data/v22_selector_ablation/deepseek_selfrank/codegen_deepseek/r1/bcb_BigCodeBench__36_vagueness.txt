@@ -1,0 +1,31 @@
+```python
+import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+TARGET_VALUES = np.array([1, 3, 4])
+def task_func(df):
+    df = df.copy()
+    for col in df.columns:
+        mask = df[col].isin(TARGET_VALUES)
+        df.loc[~mask, col] = 0
+    for col in df.columns:
+        col_data = df[col]
+        if col_data.nunique() <= 1:
+            continue
+        if (col_data <= 0).any():
+            col_data = col_data + 1
+        try:
+            transformed_data, _ = stats.boxcox(col_data)
+            df[col] = transformed_data
+        except:
+            continue
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for col in df.columns:
+        if df[col].nunique() > 1:
+            df[col].plot(kind='kde', ax=ax, label=col)
+    ax.set_title('KDE Plots of Transformed Columns')
+    ax.legend()
+    ax.grid(True)
+    plt.close(fig)
+    return df, fig
+```

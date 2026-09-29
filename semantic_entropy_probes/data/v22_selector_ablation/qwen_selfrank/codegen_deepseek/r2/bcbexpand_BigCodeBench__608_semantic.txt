@@ -1,0 +1,32 @@
+```python
+import seaborn as sns
+from random import sample
+# Constants
+COLUMNS = ['A', 'B', 'C', 'D', 'E']
+def task_func(df, tuples, n_plots):
+    """
+    Remove rows from a dataframe based on values of multiple columns, and then create n random pairs of two columns against each other or with each other to generate pairplots.
+
+    Parameters:
+    df (DataFrame): The input DataFrame.
+    tuples (list of tuples): List of tuples representing rows to remove.
+    n_plots (int): Number of pairplots to generate.
+
+    Returns:
+    tuple: A tuple containing:
+        DataFrame: The modified DataFrame after removing specified rows.
+        list of Axes: A list containing the generated pairplots.
+    """
+    if not df.empty and tuples:
+        mask = df.apply(tuple, axis=1).isin(tuples)
+        df = df[~mask].reset_index(drop=True)
+    plots = []
+    if n_plots > 0 and not df.empty:
+        available_columns = [col for col in COLUMNS if col in df.columns]
+        if len(available_columns) >= 2:
+            for _ in range(min(n_plots, len(available_columns) * (len(available_columns) - 1) // 2)):
+                pair = sample(available_columns, 2)
+                pairplot = sns.pairplot(df, vars=pair)
+                plots.append(pairplot)
+    return df, plots
+```

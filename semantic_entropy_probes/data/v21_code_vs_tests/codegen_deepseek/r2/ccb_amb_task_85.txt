@@ -1,0 +1,39 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [0] * (N + 1)
+    for i in range(1, N + 1):
+        P[i] = int(next(it))
+    Q = [0] * (N + 1)
+    for i in range(1, N + 1):
+        Q[i] = int(next(it))
+
+    # person index -> bib number is given by Q
+    # We need: for each bib number i, find the person k with Q[k] = i,
+    # then that person stares at P[k], and we need the bib of that stared-at person,
+    # which is Q[P[k]].
+    # So we need a mapping from bib number i to the stared-at person's bib.
+    # Let revQ[bib] = index of person wearing that bib.
+    revQ = [0] * (N + 1)
+    for idx in range(1, N + 1):
+        bib = Q[idx]
+        revQ[bib] = idx
+
+    result = [0] * (N + 1)
+    for bib in range(1, N + 1):
+        person_idx = revQ[bib]
+        stared_at_idx = P[person_idx]
+        stared_at_bib = Q[stared_at_idx]
+        result[bib] = stared_at_bib
+
+    print(' '.join(map(str, result[1:])))
+
+if __name__ == "__main__":
+    main()
+```

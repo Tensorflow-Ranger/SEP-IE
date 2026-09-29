@@ -1,0 +1,26 @@
+```python
+import inspect
+import types
+import json
+def task_func(f):
+    spec = {
+        "name": f.__name__,
+        "is_lambda": isinstance(f, types.LambdaType),
+        "args": [],
+        "defaults": {},
+        "annotations": {}
+    }
+    
+    sig = inspect.signature(f)
+    for name, param in sig.parameters.items():
+        spec["args"].append(name)
+        if param.default is not inspect.Parameter.empty:
+            spec["defaults"][name] = str(param.default)
+        if param.annotation is not inspect.Parameter.empty:
+            if isinstance(param.annotation, type):
+                spec["annotations"][name] = param.annotation.__name__
+            else:
+                spec["annotations"][name] = str(param.annotation)
+    
+    return json.dumps(spec)
+```

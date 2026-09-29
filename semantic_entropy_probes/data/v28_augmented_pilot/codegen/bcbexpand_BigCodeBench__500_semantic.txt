@@ -1,0 +1,24 @@
+```python
+import xlwt
+import os
+# Constants
+FIELDS = ['ID', 'Name', 'Age']
+def task_func(values, filename):
+    workbook = xlwt.Workbook()
+    sheet = workbook.add_sheet('Sheet1')
+    if values:
+        all_keys = set()
+        for row in values:
+            all_keys.update(row.keys())
+        headers = sorted(all_keys)
+        for col_idx, header in enumerate(headers):
+            sheet.write(0, col_idx, header)
+        for row_idx, row in enumerate(values, start=1):
+            for col_idx, header in enumerate(headers):
+                sheet.write(row_idx, col_idx, row.get(header, ''))
+    else:
+        for col_idx, header in enumerate(FIELDS):
+            sheet.write(0, col_idx, header)
+    workbook.save(filename)
+    return os.path.abspath(filename)
+```

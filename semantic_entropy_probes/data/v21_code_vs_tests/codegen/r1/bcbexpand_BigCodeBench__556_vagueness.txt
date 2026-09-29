@@ -1,0 +1,10 @@
+```python
+import numpy as np
+import random
+from difflib import SequenceMatcher
+def task_func(s, min_length, max_length, letters):
+    length = random.randint(min_length, max_length)
+    generated = ''.join(random.choice(letters) for _ in range(length))
+    similarity = SequenceMatcher(None, s, generated).ratio()
+    return (generated, similarity >= 0.5)
+```

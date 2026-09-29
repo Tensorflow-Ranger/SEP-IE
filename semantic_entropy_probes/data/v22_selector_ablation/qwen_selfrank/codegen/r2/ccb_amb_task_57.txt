@@ -1,0 +1,23 @@
+```python
+import sys
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    S = list(map(int, data[1:]))
+    S.sort()
+    count = 0
+    for i in range(N):
+        for j in range(i + 1, N):
+            diff = S[j] - S[i]
+            k = j + 1
+            while k < N and S[k] - S[j] == diff:
+                k += 1
+            count += k - j - 1
+    print(count)
+
+if __name__ == "__main__":
+    main()
+```

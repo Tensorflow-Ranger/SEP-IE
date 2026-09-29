@@ -1,0 +1,28 @@
+```python
+import collections
+import pandas as pd
+def task_func(my_tuple, path_csv_files):
+    """
+    Count the occurrences of each value in the specified columns in multiple CSV files,
+    treating empty strings and NULL values as distinct categories.
+    
+    Parameters:
+    my_tuple (tuple): A tuple of column names to count values for.
+    path_csv_files (list): A list of paths to CSV files.
+    
+    Returns:
+    dict: A dictionary where keys are column names and values are dictionaries
+          with unique values in the column as keys and their counts as values.
+    """
+    result = {col: collections.Counter() for col in my_tuple}
+    for path in path_csv_files:
+        try:
+            df = pd.read_csv(path)
+        except Exception:
+            continue
+        for col in my_tuple:
+            if col in df.columns:
+                for val in df[col]:
+                    result[col][val] += 1
+    return {col: dict(counter) for col, counter in result.items()}
+```

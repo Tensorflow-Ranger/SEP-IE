@@ -1,0 +1,31 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    if not data:
+        stats = {'sum': 0, 'mean': np.nan, 'min': np.nan, 'max': np.nan}
+        fig, ax = plt.subplots()
+        ax.text(0.5, 0.5, 'No data', horizontalalignment='center', verticalalignment='center')
+        ax.set_title(f'Pie Chart of {column}')
+        return stats, ax
+    
+    df = pd.DataFrame(data)
+    column_data = df[column]
+    numeric_series = pd.to_numeric(column_data, errors='coerce')
+    numeric_series = numeric_series.fillna(0)
+    
+    stats = {
+        'sum': float(numeric_series.sum()),
+        'mean': float(numeric_series.mean()),
+        'min': float(numeric_series.min()),
+        'max': float(numeric_series.max())
+    }
+    
+    fig, ax = plt.subplots()
+    labels = df['Age'].astype(str).tolist()
+    ax.pie(numeric_series, labels=labels, autopct='%1.1f%%')
+    ax.set_title(f'Pie Chart of {column}')
+    
+    return stats, ax
+```

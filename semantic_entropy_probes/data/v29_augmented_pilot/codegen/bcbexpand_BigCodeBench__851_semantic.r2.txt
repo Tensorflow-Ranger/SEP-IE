@@ -1,0 +1,14 @@
+```python
+import textwrap
+import re
+def task_func(input_string, width):
+    lines = input_string.splitlines(keepends=False)
+    wrapped_lines = []
+    for line in lines:
+        if len(line) <= width:
+            wrapped_lines.append(line)
+        else:
+            wrapped = textwrap.fill(line, width=width)
+            wrapped_lines.append(wrapped)
+    return '\n'.join(wrapped_lines)
+```

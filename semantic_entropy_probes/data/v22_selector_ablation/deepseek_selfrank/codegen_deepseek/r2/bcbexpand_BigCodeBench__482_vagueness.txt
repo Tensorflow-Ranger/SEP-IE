@@ -1,0 +1,37 @@
+```python
+import pandas as pd
+import random
+import re
+def task_func(data_list, seed=None):
+    if seed is not None:
+        random.seed(seed)
+    operations = ['remove', 'replace', 'shuffle', 'randomize']
+    original = []
+    modified = []
+    for s in data_list:
+        original.append(s)
+        substrings = s.split(', ')
+        if len(substrings) == 0:
+            modified.append(s)
+            continue
+        op = random.choice(operations)
+        if op == 'remove':
+            if len(substrings) > 1:
+                idx = random.randrange(len(substrings))
+                substrings.pop(idx)
+            modified_str = ', '.join(substrings)
+        elif op == 'replace':
+            idx = random.randrange(len(substrings))
+            replacement = ''.join(random.choices('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', k=random.randint(3, 8)))
+            substrings[idx] = replacement
+            modified_str = ', '.join(substrings)
+        elif op == 'shuffle':
+            random.shuffle(substrings)
+            modified_str = ', '.join(substrings)
+        else:  # randomize
+            new_order = random.sample(substrings, len(substrings))
+            modified_str = ', '.join(new_order)
+        modified.append(modified_str)
+    df = pd.DataFrame({'Original String': original, 'Modified String': modified})
+    return df
+```

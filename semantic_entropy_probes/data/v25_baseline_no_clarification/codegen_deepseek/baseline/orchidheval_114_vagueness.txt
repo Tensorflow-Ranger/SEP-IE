@@ -1,0 +1,18 @@
+```python
+def minSubArraySum(nums):
+    """
+    Given an array of integers nums, find the minimal sum of a sub-array
+    of nums.
+    """
+    if not nums:
+        return 0
+    
+    min_ending_here = nums[0]
+    min_so_far = nums[0]
+    
+    for num in nums[1:]:
+        min_ending_here = min(num, min_ending_here + num)
+        min_so_far = min(min_so_far, min_ending_here)
+    
+    return min_so_far
+```

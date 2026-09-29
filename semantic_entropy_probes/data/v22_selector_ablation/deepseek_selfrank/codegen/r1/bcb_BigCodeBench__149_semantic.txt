@@ -1,0 +1,14 @@
+```python
+import pandas as pd
+import numpy as np
+DEFAULT_COLUMNS = ['Element', 'Count']
+def task_func(elements, include_index=False):
+    counts = [len(element) for element in elements]
+    data = {'Element': elements, 'Count': counts}
+    if include_index:
+        data['Index'] = range(len(elements))
+        df = pd.DataFrame(data, columns=['Index', 'Element', 'Count'])
+    else:
+        df = pd.DataFrame(data, columns=['Element', 'Count'])
+    return df
+```

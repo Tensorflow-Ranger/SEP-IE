@@ -1,0 +1,121 @@
+```python
+import sys
+import bisect
+
+def solve() -> None:
+    it = iter(sys.stdin.read().strip().split())
+    N = int(next(it))
+    W = int(next(it))
+
+    blocks = []
+    for _ in range(N):
+        x = int(next(it))
+        y = int(next(it))
+        blocks.append((x, y))
+
+    # Preprocess: sort blocks by (y, x)
+    sorted_by_y = sorted(blocks, key=lambda b: (b[1], b[0]))
+
+    # For each column, store sorted list of y-coordinates
+    col_blocks = [[] for _ in range(W + 1)]
+    for idx, (x, y) in enumerate(blocks):
+        col_blocks[x].append((y, idx + 1))  # idx+1 is block id
+
+    for lst in col_blocks:
+        lst.sort()
+
+    # Precompute for each block: the time it disappears (or INF if never)
+    disappear_time = [10**20] * (N + 1)  # 1-indexed
+
+    # Process from bottom to top
+    # We'll simulate column by column, tracking the current "surface" height in each column
+    # surface_height[col] = smallest y such that (col, y) is occupied at some processed time
+    # Actually we need to know for each block when it will be cleared.
+    # A block disappears if at some time t, it is in bottom row and bottom row is full.
+    # Equivalent: block reaches y=1 at time (original_y - 1) + delay, and at that moment bottom row full.
+    # Delay comes from waiting for blocks below it in same column to clear first.
+
+    # We can think: each block moves down only when the cell below is empty.
+    # So in its column, blocks act like a stack: lower blocks must clear before upper ones can reach bottom.
+    # Also, bottom row full condition: all W columns have a block at y=1 at the same time.
+
+    # Let’s compute for each column the sequence of times when a block reaches y=1.
+    # For a block at (x, y), the time it reaches y=1 = (y - 1) + (number of blocks below it that reached y=1 before it).
+    # Because each block below delays it by 1 step (since they occupy y=1 before being removed).
+
+    # So for column x, let blocks sorted by increasing y: (y1, id1), (y2, id2), ...
+    # time_to_reach_bottom[k] = y_k - 1 + k - 1 = y_k + k - 2.
+    # Because before this block, k-1 blocks below it each took 1 step at bottom before removal.
+
+    # Now, a block is removed exactly when it reaches y=1 AND the bottom row is full at that moment.
+    # Bottom row is full when for each column x, there is some block that reaches y=1 at exactly that same time.
+    # So we need to match times across columns.
+
+    # This becomes: we have W lists of times (sorted). At each distinct time t where some column has a block reaching y=1,
+    # check if all columns have a block reaching y=1 at exactly t. If yes, all those blocks are removed.
+    # If not, that block stays at y=1 until later when maybe row becomes full? Actually once at y=1, it stays until row full.
+    # But if row not full at that t, later another block from another column may reach y=1 at later t, making row full then.
+    # However, the earlier block at y=1 will still be there at that later time, so row full can happen later.
+
+    # So we need to simulate global events: times when a block reaches y=1.
+    # Maintain for each column the index of next block to reach bottom.
+    # Also maintain current set of columns that have a block sitting at y=1 (waiting).
+    # When a new block reaches y=1 at time t, add its column to waiting set.
+    # If now |waiting| == W, then at this exact time t, all those waiting blocks are removed.
+    # Clear waiting set, and also mark those blocks as disappeared at time t.
+    # But careful: if multiple blocks reach y=1 at same time t from different columns, they all become waiting simultaneously.
+    # The bottom row becomes full at that t, so they are all removed at same t.
+    # So we need to process all events at same time together.
+
+    # Let's gather all events (time, column, block_id) sorted by time.
+    events = []
+    for x in range(1, W + 1):
+        lst = col_blocks[x]
+        for k, (y, bid) in enumerate(lst):
+            t_reach = y + k - 1  # y - 1 + k
+            events.append((t_reach, x, bid))
+    events.sort()
+
+    # Process events in order of time
+    waiting_cols = set()
+    current_time = -1
+    same_time_events = []
+
+    def process_same_time():
+        # First, add all columns to waiting set
+        for _, x, _ in same_time_events:
+            waiting_cols.add(x)
+        # If full, remove all waiting blocks at this time
+        if len(waiting_cols) == W:
+            for _, x, bid in same_time_events:
+                disappear_time[bid] = current_time
+            waiting_cols.clear()
+        else:
+            # Not full, blocks stay waiting
+            pass
+
+    for t, x, bid in events:
+        if t != current_time:
+            if same_time_events:
+                process_same_time()
+                same_time_events = []
+            current_time = t
+        same_time_events.append((t, x, bid))
+    if same_time_events:
+        process_same_time()
+
+    # Answer queries
+    Q = int(next(it))
+    out_lines = []
+    for _ in range(Q):
+        T = int(next(it))
+        A = int(next(it))
+        if T < disappear_time[A]:
+            out_lines.append("Yes")
+        else:
+            out_lines.append("No")
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    solve()
+```

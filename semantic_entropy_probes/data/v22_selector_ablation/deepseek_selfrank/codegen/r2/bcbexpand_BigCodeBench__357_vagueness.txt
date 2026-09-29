@@ -1,0 +1,15 @@
+```python
+import numpy as np
+from scipy.stats import norm
+import matplotlib.pyplot as plt
+def task_func(x):
+    if not isinstance(x, np.ndarray):
+        raise TypeError("x must be a numpy.ndarray")
+    real_dist = norm.pdf(x, loc=0, scale=1)
+    imag_dist = norm.pdf(x, loc=2, scale=2)
+    complex_dist = real_dist + 1j * imag_dist
+    plt.plot(x, np.abs(complex_dist), label='Magnitude')
+    plt.legend()
+    plt.show()
+    return complex_dist
+```

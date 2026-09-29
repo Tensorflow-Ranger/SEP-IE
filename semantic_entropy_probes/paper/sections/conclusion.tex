@@ -1,0 +1,47 @@
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+We investigated whether a lightweight linear probe over a small,
+decoupled model's hidden states -- extracted without sampling or
+generating any text -- can detect specification ambiguity in coding
+prompts and rank candidate clarifying questions for an agentic
+clarify-then-code pipeline, as a lower-cost alternative to uncertainty
+estimation via repeated sampling of the coding model itself. Evaluated
+against a zero-shot self-rank baseline under grouped, leave-one-source-out
+splits across four benchmark sources, the probe reaches ranking quality
+close to, and on its training-distribution source above, the baseline, at
+substantially lower measured per-decision inference cost, framing this as
+a cost-quality tradeoff rather than an unconditional accuracy improvement.
+Deployed in a live, two-round elicit-rank-clarify-code loop against real
+executable test suites, we found that ranking the labeled ambiguity
+correctly is associated with a statistically significant round-1
+correctness gain when measured by fractional test-case pass rate, though
+not when measured by an all-or-nothing pass metric on the same data -- a
+discrepancy we treat as evidence that correctness-metric choice materially
+affects what an agentic clarification pipeline's evaluation can detect.
+We further found that asking any clarifying question at all, independent
+of ranking precision, is itself a robust and significant correctness
+improvement, and that a cheap, targeted prompt augmentation addressing a
+separate, orthogonal source of crash-class failures further improves
+outcomes.
+
+We reported several points where earlier-stage conclusions in this
+investigation -- most notably an initial finding that the probe
+outperformed zero-shot ranking -- did not survive evaluation at larger
+scale and under stricter filtering, and disclose these reversals as part
+of the record rather than reporting only the final numbers. We believe
+this level of disclosure is necessary for agentic software engineering
+research broadly, where pipelines with several interacting stages (elicit,
+rank, clarify, generate, test) create many opportunities for an early,
+underpowered, or confounded result to look like a finding.
+
+Future work includes: benchmarking directly against a repeated-sampling,
+self-consistency baseline on identical problems to substantiate the
+cost-efficiency argument empirically rather than by citation; measuring
+the actual batched $N$-candidate extraction cost against zero-shot
+generation, rather than the bare-prompt-only forward pass reported here;
+characterizing the tradeoff between probe-host model size and both ranking
+quality and inference cost; and improving cross-source generalization for
+long, free-form prompts where the ambiguous edit constitutes a small
+fraction of the total prompt, which we identified as the ranking probe's
+principal weakness.

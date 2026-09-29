@@ -1,0 +1,30 @@
+```python
+from datetime import datetime
+import random
+import matplotlib.pyplot as plt
+def task_func(
+    epoch_milliseconds,
+    teams=["Team1", "Team2", "Team3", "Team4", "Team5"],
+    random_seed=0,
+):
+    random.seed(random_seed)
+    start_date = datetime.fromtimestamp(epoch_milliseconds / 1000.0)
+    current_date = datetime.now()
+    days_diff = (current_date - start_date).days
+    if days_diff <= 0:
+        days_diff = 1
+    days = list(range(days_diff))
+    performance_data = {}
+    for team in teams:
+        performance = [random.uniform(0.1, 1) for _ in range(days_diff)]
+        performance_data[team] = performance
+    fig, ax = plt.subplots()
+    for team in teams:
+        ax.plot(days, performance_data[team], label=team)
+    ax.set_xlabel("Days since start date")
+    ax.set_ylabel("Performance")
+    ax.set_title("Team Performance Trends")
+    ax.legend()
+    ax.grid(True)
+    return performance_data, fig
+```

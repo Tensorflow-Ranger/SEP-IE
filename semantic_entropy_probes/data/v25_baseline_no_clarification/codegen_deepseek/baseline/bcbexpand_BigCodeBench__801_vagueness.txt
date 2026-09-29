@@ -1,0 +1,27 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    import csv
+    result = {}
+    try:
+        with open(file_name, 'r') as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames is None:
+                return result
+            columns = {field: [] for field in reader.fieldnames}
+            for row in reader:
+                for field in reader.fieldnames:
+                    columns[field].append(row[field])
+    except FileNotFoundError:
+        return result
+    for col_name, values in columns.items():
+        if not values:
+            continue
+        counter = collections.Counter(values)
+        max_count = max(counter.values())
+        most_common_vals = [val for val, cnt in counter.items() if cnt == max_count]
+        most_common_vals.sort()
+        result[col_name] = most_common_vals[0]
+    return result
+```

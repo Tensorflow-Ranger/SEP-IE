@@ -1,0 +1,62 @@
+```python
+import csv
+import os
+from datetime import datetime
+from random import randint
+import matplotlib.pyplot as plt
+import pandas as pd
+# Constants
+VEHICLE_TYPES = ['Car', 'Bus', 'Truck', 'Bike']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    """
+    Generates traffic data for different vehicle types over a specified number of hours,
+    saves the data to a CSV file, and plots the combined vehicle count data in a line chart.
+    
+    Parameters:
+    hours (int): Number of hours to generate data for.
+    output_dir (str): Directory to save the CSV file. Default is OUTPUT_DIR.
+    
+    Returns:
+    tuple: Path to the CSV file and the matplotlib axes object of the line plot.
+    """
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    # Generate time points
+    base_time = datetime.now().replace(minute=0, second=0, microsecond=0)
+    times = [base_time.replace(hour=(base_time.hour + i) % 24) for i in range(hours)]
+    
+    # Generate data
+    data = []
+    for time in times:
+        row = {'Time': time.strftime('%Y-%m-%d %H:%M:%S')}
+        for vehicle in VEHICLE_TYPES:
+            row[vehicle] = randint(0, 50)
+        data.append(row)
+    
+    # Save to CSV
+    file_path = os.path.join(output_dir, 'traffic_data.csv')
+    with open(file_path, 'w', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=['Time'] + VEHICLE_TYPES)
+        writer.writeheader()
+        writer.writerows(data)
+    
+    # Create plot
+    df = pd.DataFrame(data)
+    df['Time'] = pd.to_datetime(df['Time'])
+    df.set_index('Time', inplace=True)
+    
+    fig, ax = plt.subplots()
+    for vehicle in VEHICLE_TYPES:
+        ax.plot(df.index, df[vehicle], label=vehicle)
+    
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Vehicle Count')
+    ax.set_title('Traffic Data Over Time')
+    ax.legend()
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    
+    return file_path, ax
+```

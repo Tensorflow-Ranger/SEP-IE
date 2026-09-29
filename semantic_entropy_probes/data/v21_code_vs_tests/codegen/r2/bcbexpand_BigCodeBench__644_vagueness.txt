@@ -1,0 +1,22 @@
+```python
+import hashlib
+import base64
+def task_func(filename, data, password):
+    # Generate SHA-256 hash of the password
+    password_bytes = password.encode()
+    password_hash = hashlib.sha256(password_bytes).digest()
+    
+    # XOR encryption
+    encrypted = bytearray()
+    for byte in data.encode():
+        encrypted.append(byte ^ password_hash[0])
+    
+    # Base64 encode the encrypted data
+    encrypted_str = base64.b64encode(encrypted).decode()
+    
+    # Write to file
+    with open(filename, 'w') as f:
+        f.write(encrypted_str)
+    
+    return encrypted_str
+```

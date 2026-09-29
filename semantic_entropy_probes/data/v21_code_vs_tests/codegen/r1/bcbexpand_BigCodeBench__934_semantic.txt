@@ -1,0 +1,16 @@
+```python
+from collections import Counter
+import hashlib
+def task_func(word: str) -> dict:
+    # Normalize the word to lowercase
+    normalized_word = word.lower()
+    # Generate adjacent letter pairs
+    pairs = [normalized_word[i] + normalized_word[i+1] for i in range(len(normalized_word)-1)]
+    # Count occurrences of each pair
+    pairs_count = Counter(pairs)
+    # Convert the counter to a dictionary
+    result_dict = dict(pairs_count)
+    # Encode the dictionary's string representation as MD5 hash
+    hash_object = hashlib.md5(str(result_dict).encode())
+    return result_dict
+```

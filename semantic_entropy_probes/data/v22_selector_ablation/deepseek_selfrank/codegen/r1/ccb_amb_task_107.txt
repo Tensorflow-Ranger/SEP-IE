@@ -1,0 +1,49 @@
+```python
+import sys
+import math
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    K = int(data[1])
+    A = list(map(int, data[2:2+N]))
+    
+    max_val = max(A)
+    freq = defaultdict(int)
+    for num in A:
+        freq[num] += 1
+    
+    # Precompute the maximum GCD for each possible value
+    max_gcd = [0] * (max_val + 1)
+    for d in range(max_val, 0, -1):
+        cnt = 0
+        for multiple in range(d, max_val + 1, d):
+            cnt += freq[multiple]
+        if cnt >= K:
+            max_gcd[d] = d
+    
+    # For each element, find the maximum GCD of any subset of size K that includes it
+    result = []
+    for num in A:
+        # Find all divisors of num
+        divisors = set()
+        for i in range(1, int(num**0.5) + 1):
+            if num % i == 0:
+                divisors.add(i)
+                divisors.add(num // i)
+        # Find the maximum divisor that has enough multiples in the array
+        max_gcd_val = 0
+        for d in divisors:
+            if max_gcd[d] > max_gcd_val:
+                max_gcd_val = max_gcd[d]
+        result.append(str(max_gcd_val))
+    
+    print(' '.join(result))
+
+if __name__ == "__main__":
+    main()
+```

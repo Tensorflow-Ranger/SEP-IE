@@ -1,0 +1,45 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    p = list(map(int, data[1:1 + n]))
+
+    pos = [0] * (n + 1)
+    for i, val in enumerate(p):
+        pos[val] = i + 1  # 1‑based index
+
+    total_cost = 0
+    i = 1
+    while i <= n:
+        if pos[i] == i:
+            i += 1
+            continue
+        # find the length of the consecutive decreasing run starting at i
+        start = i
+        while start <= n and pos[start] != start:
+            start += 1
+        # now from i to start-1 is a block that needs to be fixed
+        # we process each decreasing chain within this block
+        j = i
+        while j < start:
+            if pos[j] > pos[j + 1]:
+                # j and j+1 are in wrong relative order, need to swap them
+                total_cost += j
+                # swap positions of j and j+1 in pos
+                pos[j], pos[j + 1] = pos[j + 1], pos[j]
+                # after swapping, we might have fixed j, so we can move forward
+                if pos[j] == j:
+                    j += 1
+            else:
+                j += 1
+        i = start
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

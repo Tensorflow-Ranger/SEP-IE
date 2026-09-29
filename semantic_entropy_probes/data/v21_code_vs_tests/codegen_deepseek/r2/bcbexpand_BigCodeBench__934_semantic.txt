@@ -1,0 +1,13 @@
+```python
+from collections import Counter
+import hashlib
+def task_func(word: str) -> dict:
+    if len(word) < 2:
+        pairs_count = {}
+    else:
+        pairs = [word[i:i+2] for i in range(len(word) - 1)]
+        pairs_count = dict(Counter(pairs))
+    dict_str = str(pairs_count)
+    hash_object = hashlib.md5(dict_str.encode())
+    return {'pairs': pairs_count, 'hash': hash_object.hexdigest()}
+```

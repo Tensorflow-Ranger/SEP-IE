@@ -1,0 +1,37 @@
+```python
+import re
+import os
+import subprocess
+def task_func(dir_path, exe_pattern, execute_files=True):
+    """
+    Searches for executable files in a specified directory that match a given pattern.
+    Optionally executes any matching files and returns a list of standard outputs from
+    the executed files or the paths of the found files.
+
+    Parameters:
+    dir_path (str): The directory path to search for executable files.
+    exe_pattern (str): The regular expression pattern to match executable filenames.
+    execute_files (bool): If True, execute matching files and return their outputs.
+                          If False, return paths of matching files.
+
+    Returns:
+    list: If execute_files is True, a list of standard outputs from executed files.
+          If execute_files is False, a list of paths of the found files.
+    """
+    results = []
+    if not os.path.isdir(dir_path):
+        return results
+    for filename in os.listdir(dir_path):
+        filepath = os.path.join(dir_path, filename)
+        if os.path.isfile(filepath) and os.access(filepath, os.X_OK):
+            if re.search(exe_pattern, filename):
+                if execute_files:
+                    try:
+                        output = subprocess.check_output(filepath, stderr=subprocess.STDOUT, shell=True)
+                        results.append(output.decode('utf-8').strip())
+                    except subprocess.CalledProcessError as e:
+                        results.append(e.output.decode('utf-8').strip())
+                else:
+                    results.append(filepath)
+    return results
+```

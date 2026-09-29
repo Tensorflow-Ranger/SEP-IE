@@ -1,0 +1,35 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [int(next(it)) for _ in range(N)]
+
+    # position[x] = index (0‑based) where value x is located in P
+    position = [0] * (N + 1)
+    for idx, val in enumerate(P):
+        position[val] = idx
+
+    total_cost = 0
+    i = 1
+    while i < N:
+        if position[i] > position[i + 1]:
+            # need to swap them, cost = i
+            total_cost += i
+            # swap positions of i and i+1
+            pos_i = position[i]
+            pos_i1 = position[i + 1]
+            position[i], position[i + 1] = pos_i1, pos_i
+            # also swap the actual values in P (though not strictly needed for further computation)
+            P[pos_i], P[pos_i1] = i + 1, i
+        i += 1
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

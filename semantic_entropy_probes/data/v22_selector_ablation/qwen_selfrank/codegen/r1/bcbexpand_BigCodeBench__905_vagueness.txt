@@ -1,0 +1,14 @@
+```python
+import os
+import glob
+import csv
+def task_func(directory_path, file_extension='.csv'):
+    data = {}
+    file_pattern = os.path.join(directory_path, f'*{file_extension}')
+    for file_path in glob.glob(file_pattern):
+        filename = os.path.splitext(os.path.basename(file_path))[0]
+        with open(file_path, 'r') as file:
+            reader = csv.reader(file)
+            data[filename] = [row for row in reader]
+    return data
+```

@@ -1,0 +1,28 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    import csv
+    result = {}
+    try:
+        with open(file_name, 'r', newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames is None:
+                return result
+            columns = reader.fieldnames
+            column_data = {col: [] for col in columns}
+            for row in reader:
+                for col in columns:
+                    column_data[col].append(row[col])
+    except FileNotFoundError:
+        return result
+    for col in columns:
+        if not column_data[col]:
+            continue
+        counter = collections.Counter(column_data[col])
+        max_count = max(counter.values())
+        most_common_items = [item for item, count in counter.items() if count == max_count]
+        most_common_items.sort(key=lambda x: (x is not None, str(x)))
+        result[col] = most_common_items[0]
+    return result
+```

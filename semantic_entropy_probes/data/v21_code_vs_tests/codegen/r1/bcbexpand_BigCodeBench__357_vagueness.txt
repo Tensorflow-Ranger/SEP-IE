@@ -1,0 +1,20 @@
+```python
+import numpy as np
+from scipy.stats import norm
+import matplotlib.pyplot as plt
+def task_func(x):
+    if not isinstance(x, np.ndarray):
+        raise TypeError("x must be a numpy.ndarray")
+    real_part = norm.pdf(x, loc=0, scale=1)
+    imag_part = norm.pdf(x, loc=2, scale=2)
+    complex_distribution = real_part + 1j * imag_part
+    plt.plot(x, np.real(complex_distribution), label='Real Part')
+    plt.plot(x, np.imag(complex_distribution), label='Imaginary Part')
+    plt.legend()
+    plt.title('Complex Distribution from Gaussian Components')
+    plt.xlabel('x')
+    plt.ylabel('Density')
+    plt.grid(True)
+    plt.show()
+    return complex_distribution
+```

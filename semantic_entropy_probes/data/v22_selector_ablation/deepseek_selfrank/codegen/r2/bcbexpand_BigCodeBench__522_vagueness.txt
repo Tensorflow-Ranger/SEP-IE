@@ -1,0 +1,27 @@
+```python
+import collections
+import matplotlib.pyplot as plt
+def task_func(data):
+    if not data:
+        return None
+    
+    student_scores = collections.defaultdict(list)
+    
+    for d in data:
+        for key, value in d.items():
+            if isinstance(value, (int, float)):
+                if value < 0:
+                    raise ValueError("Negative scores are invalid.")
+                student_scores[key].append(value)
+    
+    average_scores = {student: sum(scores) / len(scores) for student, scores in student_scores.items()}
+    
+    fig, ax = plt.subplots()
+    bars = ax.bar(average_scores.keys(), average_scores.values(), color='blue')
+    
+    ax.set_xlabel('Student')
+    ax.set_ylabel('Average Score')
+    ax.set_title('Average Student Scores')
+    
+    return ax
+```

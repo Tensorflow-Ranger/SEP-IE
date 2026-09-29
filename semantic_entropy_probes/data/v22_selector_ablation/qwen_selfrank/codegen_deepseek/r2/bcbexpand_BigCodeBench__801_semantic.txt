@@ -1,0 +1,30 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    try:
+        data = np.genfromtxt(file_name, delimiter=',', dtype=str, names=True, encoding='utf-8')
+    except (IOError, StopIteration):
+        return {}
+    
+    if data.shape == ():
+        return {}
+    
+    result = {}
+    for col_name in data.dtype.names:
+        col_data = data[col_name]
+        col_data_filled = np.where(col_data == '', 'NaN', col_data)
+        counter = collections.Counter(col_data_filled)
+        if not counter:
+            result[col_name] = None
+            continue
+        max_count = max(counter.values())
+        most_common_values = [val for val, cnt in counter.items() if cnt == max_count]
+        most_common_values_sorted = sorted(most_common_values)
+        most_common = most_common_values_sorted[0]
+        if most_common == 'NaN':
+            most_common = ''
+        result[col_name] = most_common
+    
+    return result
+```

@@ -1,0 +1,84 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    W = int(data[idx])
+    idx += 1
+    
+    # For each column, store the sorted list of Y positions of blocks
+    col_blocks = [[] for _ in range(W + 1)]
+    for i in range(N):
+        X = int(data[idx])
+        idx += 1
+        Y = int(data[idx])
+        idx += 1
+        col_blocks[X].append(Y)
+    
+    # Sort each column's Y positions
+    for x in range(1, W + 1):
+        col_blocks[x].sort()
+    
+    # Preprocess for each column: for each Y, compute how many blocks are below it
+    # and how many would be removed after T steps
+    # For each column, we can compute for each Y how many blocks are above it
+    # and determine if it would be removed at a certain time
+    # We'll use a binary indexed tree or a prefix sum approach to answer queries efficiently
+    
+    # For each column, we can precompute the number of blocks that would be removed
+    # after T steps, using the fact that each block can fall down as long as there is space
+    # and the bottom row is cleared when full
+    
+    # For each column, we can compute the time it takes for the block at position Y to fall
+    # to the bottom row, and how many blocks are removed before it reaches there
+    # This is a bit complex, so we'll use a binary search approach
+    
+    # For each query, we need to determine if the block A_j exists at time T_j + 0.5
+    # This is equivalent to checking if the block is still present after T_j steps
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        T = int(data[idx])
+        idx += 1
+        A = int(data[idx]) - 1  # 0-based index
+        queries.append((T, A))
+    
+    # For each block, precompute the time it would be removed
+    # We can do this by simulating the process for each block
+    # However, with N up to 2e5, we need an efficient way
+    
+    # For each column, we can compute the time each block would be removed
+    # We'll use a binary indexed tree approach for each column
+    # But for now, we'll use a simpler approach
+    
+    # For each block, compute how many blocks are below it in the same column
+    # The number of blocks below determines how many steps it takes to fall down
+    # and when it would be removed
+    
+    # For each column, we'll process the blocks in reverse order (from bottom to top)
+    # and compute for each block the time it would be removed
+    # We'll store this in an array
+    
+    # Initialize an array to store the time when each block is removed
+    remove_time = [0] * N
+    
+    for x in range(1, W + 1):
+        ys = col_blocks[x]
+        if not ys:
+            continue
+        # Sort the Y positions
+        ys.sort()
+        # For each Y in ys, compute the number of blocks below it
+        # and the time it would be removed
+        # We'll use a binary indexed tree approach
+        # For each Y, the number of blocks below is the number of blocks with Y' <

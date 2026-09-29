@@ -1,0 +1,33 @@
+```python
+import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+TARGET_VALUES = np.array([1, 3, 4])
+def task_func(df):
+    if (df <= 0).any().any():
+        raise ValueError("DataFrame contains non-positive values")
+    df_transformed = df.copy()
+    df_transformed = df_transformed.where(df_transformed.isin(TARGET_VALUES), 0)
+    transformed_columns = []
+    for col in df_transformed.columns:
+        col_data = df_transformed[col]
+        if col_data.nunique() > 1:
+            min_val = col_data.min()
+            if min_val <= 0:
+                col_data = col_data + 1
+            transformed_data, _ = stats.boxcox(col_data)
+            df_transformed[col] = transformed_data
+            transformed_columns.append(col)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for col in transformed_columns:
+        stats.gaussian_kde(df_transformed[col]).evaluate
+        ax.plot(np.linspace(df_transformed[col].min(), df_transformed[col].max(), 100),
+                stats.gaussian_kde(df_transformed[col])(np.linspace(df_transformed[col].min(), df_transformed[col].max(), 100)),
+                label=col)
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Density')
+    ax.set_title('KDE Plots of Transformed Columns')
+    ax.legend()
+    plt.tight_layout()
+    return df_transformed, fig
+```

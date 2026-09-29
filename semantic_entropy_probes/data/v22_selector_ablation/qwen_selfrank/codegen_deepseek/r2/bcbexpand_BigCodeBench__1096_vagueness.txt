@@ -1,0 +1,21 @@
+```python
+from nltk.tokenize import RegexpTokenizer
+from string import punctuation
+import csv
+import os
+PUNCTUATION = set(punctuation)
+def task_func(text, filename):
+    tokenizer = RegexpTokenizer(r'\$\w+')
+    tokens = tokenizer.tokenize(text)
+    filtered_tokens = []
+    for token in tokens:
+        word_part = token[1:]
+        if not all(char in PUNCTUATION for char in word_part):
+            filtered_tokens.append(token)
+    with open(filename, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Word'])
+        for token in filtered_tokens:
+            writer.writerow([token])
+    return os.path.abspath(filename)
+```

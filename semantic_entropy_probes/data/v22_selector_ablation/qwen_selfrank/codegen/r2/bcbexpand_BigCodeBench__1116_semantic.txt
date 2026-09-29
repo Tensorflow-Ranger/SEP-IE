@@ -1,0 +1,17 @@
+```python
+import random
+import statistics
+# Constants
+AGE_RANGE = (22, 60)
+def task_func(dict1):
+    if "EMP$$" not in dict1 or not dict1["EMP$$"]:
+        return (0, 0, [])
+    ages = [random.randint(AGE_RANGE[0], AGE_RANGE[1]) for _ in range(len(dict1["EMP$$"]))]
+    mean = statistics.mean(ages)
+    median = statistics.median(ages)
+    try:
+        mode = statistics.mode(ages)
+    except statistics.StatisticsError:
+        mode = []
+    return (mean, median, mode)
+```

@@ -1,0 +1,25 @@
+```python
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+# Constants
+COLUMNS = ['Date', 'Value']
+def task_func(df, plot=False):
+    if not all(col in df.columns for col in COLUMNS):
+        raise KeyError("DataFrame must contain 'Date' and 'Value' columns")
+    df = df.copy()
+    df['Date'] = pd.to_datetime(df['Date'])
+    value_df = pd.DataFrame(df['Value'].tolist())
+    scaler = StandardScaler()
+    scaled_values = scaler.fit_transform(value_df)
+    scaled_df = pd.DataFrame(scaled_values, columns=[f'Value_{i}' for i in range(scaled_values.shape[1])])
+    result_df = pd.concat([df['Date'], scaled_df], axis=1)
+    if plot:
+        fig, ax = plt.subplots()
+        result_df.set_index('Date').plot(kind='bar', ax=ax)
+        ax.set_title('Scaled Values Over Time')
+        ax.set_xlabel('Date')
+        ax.set_ylabel('Scaled Value')
+        return result_df, ax
+    return result_df
+```

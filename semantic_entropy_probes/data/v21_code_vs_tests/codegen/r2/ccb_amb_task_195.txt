@@ -1,0 +1,41 @@
+```python
+import sys
+from itertools import product
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    H = int(data[0])
+    W = int(data[1])
+    grid = data[2:2+H]
+    
+    # Convert each row to a list of integers
+    grid = [list(map(int, list(row))) for row in grid]
+    
+    # Precompute the sum of each row
+    row_sums = [sum(row) for row in grid]
+    
+    # Try all possible combinations of flipping columns (since W <= 18)
+    min_total = float('inf')
+    for mask in product([0, 1], repeat=W):
+        total = 0
+        for i in range(H):
+            row_sum = row_sums[i]
+            # For each column, if mask[j] is 1, flip the column
+            # Flipping a column changes the sum of the row by (H - 2 * count)
+            # where count is the number of 1s in that column
+            # So we compute the number of 1s in each column
+            col_ones = 0
+            for j in range(W):
+                if mask[j]:
+                    col_ones += grid[i][j]
+            total += (H - 2 * col_ones)
+        min_total = min(min_total, total)
+    
+    print(min_total)
+
+if __name__ == "__main__":
+    main()
+```

@@ -1,0 +1,111 @@
+```python
+import sys
+
+MOD = 998244353
+
+def modinv(x):
+    return pow(x, MOD - 2, MOD)
+
+def main():
+    data = sys.stdin.read().strip().split()
+    it = iter(data)
+    H = int(next(it))
+    W = int(next(it))
+    total_cells = H * W
+    A = []
+    for _ in range(H):
+        row = [int(next(it)) for _ in range(W)]
+        A.append(row)
+
+    Q = int(next(it))
+    sh = int(next(it)) - 1
+    sw = int(next(it)) - 1
+
+    queries = []
+    for _ in range(Q):
+        d = next(it)
+        a = int(next(it))
+        queries.append((d, a))
+
+    # Precompute factorials and inverse factorials up to H+W
+    max_n = H + W + 5
+    fact = [1] * (max_n)
+    inv_fact = [1] * (max_n)
+    for i in range(1, max_n):
+        fact[i] = fact[i-1] * i % MOD
+    inv_fact[max_n-1] = modinv(fact[max_n-1])
+    for i in range(max_n-2, -1, -1):
+        inv_fact[i] = inv_fact[i+1] * (i+1) % MOD
+
+    def comb(n, k):
+        if k < 0 or k > n:
+            return 0
+        return fact[n] * inv_fact[k] % MOD * inv_fact[n-k] % MOD
+
+    # Precompute path counts for each cell
+    path_to = [[0] * W for _ in range(H)]
+    path_from = [[0] * W for _ in range(H)]
+    for r in range(H):
+        for c in range(W):
+            # number of paths from (1,1) to (r,c)
+            if r == 0 and c == 0:
+                path_to[r][c] = 1
+            else:
+                ways = 0
+                if r > 0:
+                    ways += path_to[r-1][c]
+                if c > 0:
+                    ways += path_to[r][c-1]
+                path_to[r][c] = ways % MOD
+    for r in range(H-1, -1, -1):
+        for c in range(W-1, -1, -1):
+            # number of paths from (r,c) to (H,W)
+            if r == H-1 and c == W-1:
+                path_from[r][c] = 1
+            else:
+                ways = 0
+                if r < H-1:
+                    ways += path_from[r+1][c]
+                if c < W-1:
+                    ways += path_from[r][c+1]
+                path_from[r][c] = ways % MOD
+
+    # Compute total sum
+    total = 0
+    for r in range(H):
+        for c in range(W):
+            ways = path_to[r][c] * path_from[r][c] % MOD
+            total = (total + ways * A[r][c]) % MOD
+
+    out_lines = []
+    r, c = sh, sw
+    for d, a in queries:
+        # remove old contribution of (r,c)
+        ways_old = path_to[r][c] * path_from[r][c] % MOD
+        total = (total - ways_old * A[r][c]) % MOD
+        # update cell value
+        A[r][c] = a
+        # add new contribution
+        total = (total + ways_old * a) % MOD
+
+        # move
+        if d == 'L':
+            c -= 1
+        elif d == 'R':
+            c += 1
+        elif d == 'U':
+            r -= 1
+        else:  # 'D'
+            r += 1
+
+        # remove old contribution of new (r,c) (before we update it in next iteration)
+        ways_new = path_to[r][c] * path_from[r][c] % MOD
+        total = (total - ways_new * A[r][c]) % MOD
+
+        out_lines.append(str(total % MOD))
+
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    main()
+```

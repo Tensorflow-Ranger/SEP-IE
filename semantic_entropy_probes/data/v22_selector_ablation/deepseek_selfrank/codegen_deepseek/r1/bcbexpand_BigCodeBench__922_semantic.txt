@@ -1,0 +1,52 @@
+```python
+import pandas as pd
+import re
+# Constants
+STOPWORDS = set([
+    "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself",
+    "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself",
+    "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that",
+    "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
+    "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because",
+    "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into",
+    "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out",
+    "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where",
+    "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no",
+    "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just",
+    "don", "should", "now"
+])
+def task_func(data, column):
+    """
+    Removes English stopwords from a text column in a DataFrame and returns the modified DataFrame.
+    Words are treated as sequences between whitespace or punctuation.
+    
+    Parameters:
+    data (pandas.DataFrame): The input DataFrame.
+    column (str): The name of the text column to process.
+    
+    Returns:
+    pandas.DataFrame: A DataFrame with the stopwords removed from the specified column.
+    """
+    if not isinstance(data, pd.DataFrame) or column not in data.columns:
+        return data
+    
+    def remove_stopwords(text):
+        if not isinstance(text, str):
+            return text
+        # Split by word boundaries (whitespace/punctuation)
+        words = re.findall(r'\b\w+\b', text.lower())
+        # Filter out stopwords
+        filtered_words = [word for word in words if word not in STOPWORDS]
+        # Reconstruct text preserving original word boundaries
+        # We'll use a regex substitution approach
+        pattern = re.compile(r'\b(' + '|'.join(map(re.escape, STOPWORDS)) + r')\b', re.IGNORECASE)
+        result = pattern.sub('', text)
+        # Clean up extra spaces and punctuation artifacts
+        result = re.sub(r'\s+', ' ', result).strip()
+        result = re.sub(r'\s+([.,;!?])', r'\1', result)  # Fix punctuation spacing
+        return result
+    
+    data = data.copy()
+    data[column] = data[column].apply(remove_stopwords)
+    return data
+```

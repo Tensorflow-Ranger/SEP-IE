@@ -1,0 +1,18 @@
+```python
+import nltk
+from string import punctuation
+import pandas as pd
+def task_func(text):
+    if not isinstance(text, str):
+        raise ValueError("text is not a string")
+    words = text.split()
+    result = {}
+    for word in words:
+        if word.startswith('$') and any(c.isalnum() for c in word):
+            if word in result:
+                result[word] += 1
+            else:
+                result[word] = 1
+    df = pd.DataFrame(list(result.items()), columns=["Word", "Frequency"])
+    return df
+```

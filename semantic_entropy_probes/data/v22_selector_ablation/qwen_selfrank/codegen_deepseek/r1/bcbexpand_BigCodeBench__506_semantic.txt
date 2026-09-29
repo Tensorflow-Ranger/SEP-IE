@@ -1,0 +1,43 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame(data)
+    if df.empty:
+        result = {
+            'sum': 0,
+            'mean': np.nan,
+            'min': np.inf,
+            'max': -np.inf,
+            'plot': None
+        }
+        return result
+    numeric_data = pd.to_numeric(df[column], errors='coerce')
+    numeric_data = numeric_data.dropna()
+    if numeric_data.empty:
+        result = {
+            'sum': 0,
+            'mean': np.nan,
+            'min': np.inf,
+            'max': -np.inf,
+            'plot': None
+        }
+        return result
+    sum_val = numeric_data.sum()
+    mean_val = numeric_data.mean()
+    min_val = numeric_data.min()
+    max_val = numeric_data.max()
+    plot_obj = plt.hist(numeric_data, bins=10, edgecolor='black')
+    plt.xlabel(column)
+    plt.ylabel('Frequency')
+    plt.title(f'Histogram of {column}')
+    result = {
+        'sum': sum_val,
+        'mean': mean_val,
+        'min': min_val,
+        'max': max_val,
+        'plot': plot_obj[2]
+    }
+    return result
+```

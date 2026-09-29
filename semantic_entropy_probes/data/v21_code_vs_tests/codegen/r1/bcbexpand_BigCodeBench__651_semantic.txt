@@ -1,0 +1,31 @@
+```python
+import pandas as pd
+import time
+import matplotlib.pyplot as plt
+
+def task_func(df, target_value):
+    # Convert input dict of lists to DataFrame
+    df = pd.DataFrame(df)
+    
+    # Check if DataFrame is empty
+    if df.empty:
+        return pd.Series(), None
+    
+    # Initialize a Series to count matches per column
+    counts = pd.Series(index=df.columns, dtype=int)
+    
+    # Iterate over each column and count matches
+    for col in df.columns:
+        # Convert each cell to string and compare to target_value
+        matches = df[col].astype(str) == str(target_value)
+        counts[col] = matches.sum()
+    
+    # Plot the counts
+    fig, ax = plt.subplots()
+    counts.plot(kind='bar', ax=ax)
+    ax.set_title('Count of Target Value per Column')
+    ax.set_xlabel('Columns')
+    ax.set_ylabel('Count')
+    
+    return counts, ax
+```

@@ -1,0 +1,50 @@
+```python
+import numpy as np
+from collections import defaultdict
+import json
+import csv
+# Constants
+def task_func(input_file, output_file):
+    """
+    Read a list of dictionaries from a JSON file, calculate the mean and median 
+    for each key across all dictionaries (global aggregation), and write the 
+    results to a CSV file.
+    
+    Parameters:
+    input_file (str): Path to the input JSON file.
+    output_file (str): Path to the output CSV file.
+    
+    Returns:
+    dict: A dictionary where each key is a field from the input JSON and each 
+          value is another dictionary with the mean and median of that field.
+    """
+    with open(input_file, 'r') as f:
+        data = json.load(f)
+    
+    if not data:
+        result = {}
+        with open(output_file, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['Key', 'Mean', 'Median'])
+        return result
+    
+    aggregated = defaultdict(list)
+    for d in data:
+        for key, value in d.items():
+            if isinstance(value, (int, float)):
+                aggregated[key].append(value)
+    
+    result = {}
+    for key, values in aggregated.items():
+        mean_val = np.mean(values)
+        median_val = np.median(values)
+        result[key] = {'mean': mean_val, 'median': median_val}
+    
+    with open(output_file, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Key', 'Mean', 'Median'])
+        for key, stats in result.items():
+            writer.writerow([key, stats['mean'], stats['median']])
+    
+    return result
+```

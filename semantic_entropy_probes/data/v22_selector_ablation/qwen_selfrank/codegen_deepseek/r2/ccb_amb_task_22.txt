@@ -1,0 +1,110 @@
+```python
+import sys
+import bisect
+
+def main():
+    input = sys.stdin.readline
+    N, W = map(int, input().split())
+    blocks = []
+    for _ in range(N):
+        x, y = map(int, input().split())
+        blocks.append((x, y))
+    
+    # Preprocess: sort blocks by (x, y)
+    blocks_by_x = [[] for _ in range(W + 1)]
+    for idx, (x, y) in enumerate(blocks):
+        blocks_by_x[x].append((y, idx))
+    for x in range(1, W + 1):
+        blocks_by_x[x].sort()
+    
+    # For each column, compute the final "height" of each block after infinite time
+    # ignoring the bottom-row clearing. Actually, we only need to know for each block
+    # the time when it reaches the bottom row (if ever) and whether it gets removed.
+    # The movement is deterministic: a block falls until it hits another block or bottom.
+    # In a column, blocks act like a stack: the lowest block (smallest y) lands at y=1,
+    # the next lands at y=2 if it was originally at least 2, etc.
+    # But careful: because of bottom-row clearing, a block may disappear if the whole
+    # bottom row fills. That happens when every column has a block at y=1 at some moment.
+    # The bottom row fills exactly when the lowest block in each column has reached y=1.
+    # Let’s denote for each column the time when its lowest block reaches y=1.
+    # The first time the bottom row fills is max over columns of that time.
+    # After that, the bottom row is cleared, and the process repeats.
+    # This is periodic with period W (because each clearing removes W blocks, one per column).
+    # Actually, the process is equivalent to: each block has a "final height" in its column
+    # equal to its rank among blocks in that column when sorted by original y.
+    # Let rank be r (1-indexed). Then if it can reach y = r before the bottom row clears,
+    # it will survive; otherwise it may be removed.
+    # More precisely, let t_reach = original_y - r (number of steps to fall to y=r).
+    # The block reaches y=r at time t_reach. It will stay there until possibly cleared.
+    # The bottom row clears at times t = t0, t0+W, t0+2W, ... where t0 is the first time
+    # every column has a block at y=1. t0 = max over columns of (lowest_block_y - 1).
+    # Let first_clear_time = max_col (min_y_in_col - 1).
+    # Then clearings occur at times first_clear_time + k*W for k >= 0.
+    # A block survives if at the time just after the last clearing before its arrival
+    # at y=1, it is not at y=1. Actually, a block is removed if it is at y=1 exactly at a clearing time.
+    # So we need to know: does the block ever reach y=1? And if so, when?
+    # Let arrival_time = original_y - rank. (Because it starts at y, needs to fall rank-1 steps? Wait:
+    # The block's final height is rank. It falls from original_y to rank, so steps = original_y - rank.
+    # So arrival_time = original_y - rank.
+    # At that time, it reaches y=rank. It will never fall further because there are rank-1 blocks below.
+    # So it reaches y=1 only if rank=1. For rank>1, it never reaches y=1, so never removed.
+    # For rank=1, arrival_time = original_y - 1.
+    # This block will be at y=1 from time arrival_time onward.
+    # It will be removed at the next clearing time >= arrival_time.
+    # So it exists at time T if either rank>1, or if rank=1 and T < next_clear_time(arrival_time).
+    # But careful: if arrival_time < first_clear_time, then the first clearing is at first_clear_time,
+    # so it survives until that time. So for rank=1, block exists at time T if T < first_clear_time + k*W
+    # where k is smallest such that first_clear_time + k*W > arrival_time.
+    # Actually, we need to compare T with the removal time.
+    # Let removal_time = first_clear_time + ceil((arrival_time - first_clear_time) / W) * W,
+    # but only if arrival_time >= first_clear_time? Wait, if arrival_time < first_clear_time,
+    # then the first clearing is after arrival_time, so removal_time = first_clear_time.
+    # So removal_time = first_clear_time if arrival_time < first_clear_time,
+    # else first_clear_time + ((arrival_time - first_clear_time + W - 1) // W) * W.
+    # Then block exists at time T if T < removal_time.
+    
+    # Compute first_clear_time
+    first_clear_time = 0
+    for x in range(1, W + 1):
+        if blocks_by_x[x]:
+            min_y = blocks_by_x[x][0][0]
+            first_clear_time = max(first_clear_time, min_y - 1)
+    
+    # Precompute for each block: rank, arrival_time (if rank=1), and whether it ever reaches y=1.
+    block_info = [None] * N
+    for x in range(1, W + 1):
+        col = blocks_by_x[x]
+        for idx_in_col, (y, block_idx) in enumerate(col):
+            rank = idx_in_col + 1
+            if rank == 1:
+                arrival = y - 1
+                # compute removal_time
+                if arrival < first_clear_time:
+                    removal = first_clear_time
+                else:
+                    gap = arrival - first_clear_time
+                    steps = (gap + W - 1) // W
+                    removal = first_clear_time + steps * W
+                block_info[block_idx] = (rank, arrival, removal)
+            else:
+                block_info[block_idx] = (rank, None, None)  # never removed
+    
+    # Answer queries
+    Q = int(input())
+    out_lines = []
+    for _ in range(Q):
+        T, A = map(int, input().split())
+        A -= 1
+        rank, arrival, removal = block_info[A]
+        if rank > 1:
+            out_lines.append("Yes")
+        else:
+            if T < removal:
+                out_lines.append("Yes")
+            else:
+                out_lines.append("No")
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    main()
+```

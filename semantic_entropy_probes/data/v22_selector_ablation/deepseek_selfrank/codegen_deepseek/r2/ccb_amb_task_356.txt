@@ -1,0 +1,155 @@
+```python
+import sys
+sys.setrecursionlimit(1 << 25)
+
+def solve() -> None:
+    data = sys.stdin.buffer.read().split()
+    it = iter(data)
+    N = int(next(it))
+    W = [0] + [int(next(it)) for _ in range(N)]
+    intervals = [(0, 0)]  # dummy
+    for _ in range(N):
+        L = int(next(it))
+        R = int(next(it))
+        intervals.append((L, R))
+
+    # Build interval graph connectivity via union-find
+    parent = list(range(N + 1))
+    size = [1] * (N + 1)
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(a, b):
+        ra, rb = find(a), find(b)
+        if ra == rb:
+            return
+        if size[ra] < size[rb]:
+            ra, rb = rb, ra
+        parent[rb] = ra
+        size[ra] += size[rb]
+
+    # Sweep line to connect overlapping intervals
+    events = []
+    for i in range(1, N + 1):
+        L, R = intervals[i]
+        events.append((L, 0, i))   # open
+        events.append((R, 1, i))   # close
+    events.sort(key=lambda x: (x[0], x[1]))
+
+    active = []
+    for _, typ, idx in events:
+        if typ == 0:  # open
+            for act in active:
+                union(act, idx)
+            active.append(idx)
+        else:  # close
+            active.remove(idx)
+
+    # For each component, compute the minimum vertex weight
+    comp_min = {}
+    for i in range(1, N + 1):
+        r = find(i)
+        if r not in comp_min:
+            comp_min[r] = W[i]
+        else:
+            comp_min[r] = min(comp_min[r], W[i])
+
+    # Process queries
+    Q = int(next(it))
+    out_lines = []
+    for _ in range(Q):
+        s = int(next(it))
+        t = int(next(it))
+        if find(s) != find(t):
+            out_lines.append("-1")
+        else:
+            root = find(s)
+            # Path weight = W[s] + W[t] + (min in component except endpoints)
+            # But we can take a path that goes through the minimum vertex of the component,
+            # so total = W[s] + W[t] + min_in_component if min is not s or t,
+            # but if min is s or t, we still need second smallest? Actually,
+            # if min is s or t, we can still use min (itself) in path, but we must not double count.
+            # The minimal path is: go from s to min_vertex to t.
+            # Weight = W[s] + W[t] + min_in_component if min_vertex not in {s,t},
+            # else = W[s] + W[t] if min_vertex is s or t? Wait, if min is s, then path s -> t
+            # can be s-t directly if edge exists, but we don't know edges, only connectivity.
+            # In a connected interval graph, we can always arrange a path that visits each vertex at most once.
+            # The minimal possible total weight of a path from s to t in a connected component
+            # is W[s] + W[t] + (sum of weights of internal vertices on path).
+            # To minimize, we want internal vertices to be the smallest possible.
+            # We can always choose a path that goes through the globally smallest vertex in the component
+            # (call it m). Then total = W[s] + W[t] + W[m] if m not in {s,t}.
+            # If m == s, then total = W[s] + W[t] (we don't need to add s again).
+            # Similarly if m == t.
+            # But if m is neither, we must add it once.
+            # However, what if the component's smallest vertex is not on any shortest path?
+            # In an interval graph, the graph is chordal and connected, so there exists a path
+            # that visits any vertex we want (since it's connected).
+            # So minimal possible = W[s] + W[t] + (min_in_component if min_in_component not in {s,t} else 0).
+            min_w = comp_min[root]
+            total = W[s] + W[t]
+            if min_w != W[s] and min_w != W[t]:
+                # We need to check if min vertex is different from s and t
+                # But min_w is just the value, we need to know if there exists a vertex with that value
+                # that is not s or t. Since min_w is the minimum in component, there is at least one vertex
+                # with that weight. If that vertex is s or t, then we cannot add extra.
+                # We'll store for each component the minimum weight and also the second minimum
+                # to handle case where min is s or t.
+                pass
+
+    # Actually, we need second minimum because if min is s or t, we might need second min as internal.
+    # Let's compute for each component: min1, min2, and their representative vertices.
+    comp_min1 = {}
+    comp_min2 = {}
+    comp_min1_vertex = {}
+    for i in range(1, N + 1):
+        r = find(i)
+        w = W[i]
+        if r not in comp_min1:
+            comp_min1[r] = w
+            comp_min1_vertex[r] = i
+            comp_min2[r] = 10**18
+        else:
+            if w < comp_min1[r]:
+                comp_min2[r] = comp_min1[r]
+                comp_min1[r] = w
+                comp_min1_vertex[r] = i
+            elif w < comp_min2[r]:
+                comp_min2[r] = w
+
+    # Now answer queries
+    out_lines = []
+    for _ in range(Q):
+        s = int(next(it))
+        t = int(next(it))
+        if find(s) != find(t):
+            out_lines.append("-1")
+            continue
+        root = find(s)
+        m1 = comp_min1[root]
+        m2 = comp_min2[root]
+        total = W[s] + W[t]
+        # If the global minimum vertex is not s and not t, we can add it
+        min_vertex = comp_min1_vertex[root]
+        if min_vertex != s and min_vertex != t:
+            total += m1
+        else:
+            # min is s or t, try second minimum if exists
+            if m2 < 10**18:
+                total += m2
+            # else no internal vertex needed (path is direct edge if exists, but we don't know,
+            # but in a connected component with at least 2 vertices, there is always some internal vertex
+            # unless component size = 2. If size = 2 and they are connected, then path is direct edge,
+            # weight = W[s]+W[t]. That's already total.
+            # So we do nothing.
+        out_lines.append(str(total))
+
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    solve()
+```

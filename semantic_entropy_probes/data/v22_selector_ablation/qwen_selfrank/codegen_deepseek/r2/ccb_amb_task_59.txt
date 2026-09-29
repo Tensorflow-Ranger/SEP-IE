@@ -1,0 +1,33 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1 + n]))
+    max_val = max(arr)
+    
+    present = [False] * (max_val + 1)
+    for x in arr:
+        present[x] = True
+    
+    count = 0
+    for i in range(len(arr)):
+        A = arr[i]
+        # iterate over possible B such that B > A and C = 2*B - A exists
+        # Instead of iterating over B directly, iterate over possible step d = B - A
+        # Then B = A + d, C = A + 2d
+        # We need A + 2d <= max_val
+        max_d = (max_val - A) // 2
+        for d in range(1, max_d + 1):
+            B = A + d
+            C = A + 2 * d
+            if present[B] and present[C]:
+                count += 1
+    print(count)
+
+if __name__ == "__main__":
+    main()
+```

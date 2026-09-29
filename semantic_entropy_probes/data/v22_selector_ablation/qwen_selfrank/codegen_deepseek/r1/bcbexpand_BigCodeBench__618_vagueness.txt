@@ -1,0 +1,47 @@
+```python
+from random import randint
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+# Constants
+TEAMS = ['Team A', 'Team B', 'Team C', 'Team D', 'Team E']
+PENALTY_COST = 1000  # in dollars
+def task_func(goals, penalties):
+    """
+    Generate and visualize a Pandas DataFrame of the results of football matches for multiple teams 'Team' with random goals 'Goals' and penalties 'Penalty Cost'. Penalties are converted according to penalty costs.
+    
+    Parameters:
+    goals (int): The maximum number of goals to generate randomly for each team.
+    penalties (int): The maximum number of penalties to generate randomly for each team.
+    
+    Returns:
+    pd.DataFrame: A dataframe containing match results.
+    list: A list containing two seaborn plot objects (Axes) for goals and penalty costs.
+    """
+    if goals < 0 or penalties < 0:
+        raise ValueError("goals and penalties must be non-negative integers")
+    
+    data = []
+    for team in TEAMS:
+        team_goals = randint(0, goals)
+        team_penalties = randint(0, penalties)
+        penalty_cost = team_penalties * PENALTY_COST
+        data.append({
+            'Team': team,
+            'Goals': team_goals,
+            'Penalties': team_penalties,
+            'Penalty Cost': penalty_cost
+        })
+    
+    df = pd.DataFrame(data)
+    
+    fig1, ax1 = plt.subplots()
+    goals_plot = sns.barplot(x='Team', y='Goals', data=df, ax=ax1)
+    ax1.set_title('Goals per Team')
+    
+    fig2, ax2 = plt.subplots()
+    penalty_plot = sns.barplot(x='Team', y='Penalty Cost', data=df, ax=ax2)
+    ax2.set_title('Penalty Cost per Team')
+    
+    return df, [goals_plot, penalty_plot]
+```

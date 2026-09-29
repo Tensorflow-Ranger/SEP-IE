@@ -1,0 +1,11 @@
+```python
+import pytz
+from dateutil import parser
+def task_func(date_str, from_tz, to_tz):
+    naive_dt = parser.parse(date_str)
+    from_timezone = pytz.timezone(from_tz)
+    to_timezone = pytz.timezone(to_tz)
+    localized_dt = from_timezone.localize(naive_dt) if naive_dt.tzinfo is None else naive_dt.replace(tzinfo=from_timezone)
+    converted_dt = localized_dt.astimezone(to_timezone)
+    return converted_dt.strftime("%Y-%m-%d %H:%M:%S")
+```

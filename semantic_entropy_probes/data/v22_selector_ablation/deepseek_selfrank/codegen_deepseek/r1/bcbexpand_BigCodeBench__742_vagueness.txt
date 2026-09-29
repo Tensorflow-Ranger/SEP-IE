@@ -1,0 +1,19 @@
+```python
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+def task_func(list_of_pairs):
+    if not list_of_pairs:
+        raise Exception("If the input array is empty.")
+    categories = []
+    values = []
+    for pair in list_of_pairs:
+        categories.append(pair[0])
+        try:
+            values.append(float(pair[1]))
+        except ValueError:
+            raise ValueError("If Values are not numeric.")
+    df = pd.DataFrame({'Category': categories, 'Value': values})
+    scaler = MinMaxScaler()
+    df['Value'] = scaler.fit_transform(df[['Value']])
+    return df
+```

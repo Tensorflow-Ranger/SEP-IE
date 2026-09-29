@@ -1,0 +1,18 @@
+```python
+import pandas as pd
+from scipy.stats import chi2_contingency
+def task_func(df, columns=['A', 'B', 'C'], larger=50, equal=900):
+    if len(columns) != 3:
+        raise ValueError("The number of specified columns must be 3.")
+    for col in columns:
+        if col not in df.columns:
+            raise ValueError("Specified columns are not contained in df.")
+    second_col = columns[1]
+    third_col = columns[2]
+    filtered_df = df[(df[second_col] > larger) & (df[third_col] == equal)]
+    if filtered_df.empty:
+        raise ValueError("Insufficient data for the test (no rows meeting the criteria).")
+    contingency_table = filtered_df[[columns[0], columns[1]]].value_counts().unstack()
+    p_value = chi2_contingency(contingency_table)[1]
+    return p_value
+```

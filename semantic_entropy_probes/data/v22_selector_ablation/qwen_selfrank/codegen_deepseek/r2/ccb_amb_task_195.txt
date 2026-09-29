@@ -1,0 +1,50 @@
+```python
+import sys
+
+def solve() -> None:
+    it = iter(sys.stdin.read().split())
+    H = int(next(it))
+    W = int(next(it))
+    rows = [int(next(it), 2) for _ in range(H)]
+
+    # Precompute column masks and their counts
+    col_masks = [1 << j for j in range(W)]
+    # For each row value, we can think of flipping some columns globally,
+    # then each row can be flipped independently.
+    # Let’s fix a column flip mask `cmask` (0..2^W-1).
+    # After applying column flips, each row becomes row ^ cmask.
+    # Then we can decide to flip that row or not.
+    # For a given row value r, after column flips we have r' = r ^ cmask.
+    # If we flip the row, we get ~r' (in W bits) = (1<<W)-1 - r'.
+    # So the contribution of this row is min(popcount(r'), W - popcount(r')).
+    # We need to compute this for all cmask efficiently.
+
+    # Precompute popcount for all possible row values (0..2^W-1)
+    max_val = 1 << W
+    popcnt = [0] * max_val
+    for i in range(1, max_val):
+        popcnt[i] = popcnt[i >> 1] + (i & 1)
+
+    # Count how many rows have each value
+    row_count = [0] * max_val
+    for r in rows:
+        row_count[r] += 1
+
+    # For each possible cmask, compute total sum
+    best = H * W  # upper bound
+    for cmask in range(max_val):
+        total = 0
+        # Iterate over all row values that actually appear
+        for r_val, cnt in enumerate(row_count):
+            if cnt == 0:
+                continue
+            r_after = r_val ^ cmask
+            pc = popcnt[r_after]
+            total += cnt * min(pc, W - pc)
+        if total < best:
+            best = total
+    print(best)
+
+if __name__ == "__main__":
+    solve()
+```

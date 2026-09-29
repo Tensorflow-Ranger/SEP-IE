@@ -1,0 +1,28 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    data = np.genfromtxt(file_name, delimiter=',', dtype=str, filling_values=np.nan)
+    column_names = data[0, :]
+    data = data[1:, :]
+    result = {}
+    for i in range(data.shape[1]):
+        column = data[:, i]
+        counts = collections.Counter()
+        nan_count = 0
+        for val in column:
+            if np.isnan(val):
+                nan_count += 1
+            else:
+                counts[val] += 1
+        if nan_count == len(column):
+            result[column_names[i]] = ''
+        else:
+            most_common = counts.most_common(1)
+            if most_common:
+                most_common_val, _ = most_common[0]
+                result[column_names[i]] = most_common_val
+            else:
+                result[column_names[i]] = ''
+    return result
+```

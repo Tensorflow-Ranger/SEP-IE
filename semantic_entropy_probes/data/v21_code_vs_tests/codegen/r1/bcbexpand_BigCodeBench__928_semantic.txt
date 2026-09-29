@@ -1,0 +1,15 @@
+```python
+from collections import Counter
+import itertools
+import string
+def task_func(word: str) -> dict:
+    # Generate all possible two-letter combinations
+    all_combinations = ["".join(pair) for pair in itertools.product(string.ascii_lowercase, repeat=2)]
+    # Generate overlapping two-letter combinations from the word
+    overlapping_combinations = [word[i:i+2] for i in range(len(word) - 1)]
+    # Count the frequency of each combination in the word
+    counts = Counter(overlapping_combinations)
+    # Create the result dictionary with all combinations, setting missing ones to 0
+    result = {combo: counts.get(combo, 0) for combo in all_combinations}
+    return result
+```

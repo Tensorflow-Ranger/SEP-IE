@@ -1,0 +1,26 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    A = list(map(int, data[1:1 + n]))
+
+    # The game is equivalent to Nim on the values (A_i - 1) for each i,
+    # plus an extra move for each index the first time it's chosen.
+    # The extra moves are always available exactly once per index,
+    # so they contribute n extra moves total.
+    # The total number of moves = sum(A_i) - n + n = sum(A_i).
+    # But the parity of total moves determines the winner:
+    # Fennec moves first, so if total moves is odd, Fennec wins.
+    total_moves = sum(A)
+    if total_moves % 2 == 1:
+        print("Fennec")
+    else:
+        print("Snuke")
+
+if __name__ == "__main__":
+    solve()
+```

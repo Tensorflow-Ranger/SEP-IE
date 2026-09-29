@@ -1,0 +1,27 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [0] * (N + 1)
+    for i in range(1, N + 1):
+        P[i] = int(next(it))
+    Q = [0] * (N + 1)
+    for i in range(1, N + 1):
+        q_val = int(next(it))
+        Q[q_val] = i  # Q[bib_number] = person_index
+    result = []
+    for bib in range(1, N + 1):
+        person = Q[bib]
+        target_person = P[person]
+        target_bib = Q.index(target_person)
+        result.append(str(target_bib))
+    print(' '.join(result))
+
+if __name__ == "__main__":
+    main()
+```

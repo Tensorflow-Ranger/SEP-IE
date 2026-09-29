@@ -1,0 +1,10 @@
+```python
+import numpy as np
+import pandas as pd
+def task_func(country_dict):
+    predefined_countries = {"USA", "China", "India", "Germany", "Japan", "Brazil", "Russia", "Canada", "France", "UK"}
+    country_names = [value for value in country_dict.values() if value in predefined_countries]
+    gdp_values = np.random.randint(1_000_000_000, 100_000_000_000, size=len(country_names))
+    df = pd.DataFrame({'GDP': gdp_values}, index=country_names)
+    return df
+```

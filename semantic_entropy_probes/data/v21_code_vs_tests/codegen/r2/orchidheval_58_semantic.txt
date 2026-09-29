@@ -1,0 +1,21 @@
+```python
+def common(l1: list, l2: list):
+    """Return unique sorted elements common to the lists."""
+    import sys
+    import functools
+
+    def make_set(lst):
+        seen = set()
+        result = []
+        for item in lst:
+            if item not in seen:
+                seen.add(item)
+                result.append(item)
+        return result
+
+    set1 = make_set(l1)
+    set2 = make_set(l2)
+    common_elements = list(set(set1) & set(set2))
+    common_elements.sort()
+    return common_elements
+```

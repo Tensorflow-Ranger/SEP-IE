@@ -1,0 +1,32 @@
+```python
+import csv
+import os
+import shutil
+from datetime import datetime
+from random import randint
+# Constants
+WEATHER_CONDITIONS = ['Sunny', 'Cloudy', 'Rainy', 'Snowy', 'Stormy']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    # Generate CSV file path
+    csv_filename = f'weather_data_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
+    csv_path = os.path.join(output_dir, csv_filename)
+    # Generate weather data
+    with open(csv_path, 'w', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=['Time', 'Condition'])
+        writer.writeheader()
+        for _ in range(hours * 60):  # 60 minutes per hour
+            current_time = datetime.now().strftime('%H:%M:%S.%f')
+            weather_condition = WEATHER_CONDITIONS[randint(0, len(WEATHER_CONDITIONS) - 1)]
+            writer.writerow({'Time': current_time, 'Condition': weather_condition})
+    # Create backup directory if it doesn't exist
+    backup_dir = os.path.join(output_dir, 'backup')
+    os.makedirs(backup_dir, exist_ok=True)
+    # Backup the CSV file
+    backup_path = os.path.join(backup_dir, csv_filename)
+    shutil.copy2(csv_path, backup_path)
+    # Return the path of the generated CSV file
+    return csv_path
+```

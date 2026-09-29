@@ -1,0 +1,52 @@
+```python
+import rsa
+import os
+import zipfile
+from base64 import b64encode
+
+def task_func(directory):
+    """
+    Generates RSA public and private keys, encrypts all files in the specified directory 
+    using the public key, and saves the encrypted files into a zip file named 'encrypted_files.zip'.
+    
+    Parameters:
+    directory (str): The path to the directory containing files to encrypt.
+    
+    Returns:
+    tuple: 
+        rsa.PublicKey: The RSA public key.
+        str: The filename of the zip file containing the encrypted files.
+    """
+    if not os.path.exists(directory):
+        raise ValueError(f"Directory '{directory}' does not exist.")
+    
+    # Generate RSA keys
+    (pub_key, priv_key) = rsa.newkeys(512)  # Small key size for speed; not for production
+    
+    # List all files in the directory
+    files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+    
+    # Create zip file
+    zip_filename = 'encrypted_files.zip'
+    with zipfile.ZipFile(zip_filename, 'w') as zipf:
+        for filename in files:
+            filepath = os.path.join(directory, filename)
+            with open(filepath, 'rb') as f:
+                file_data = f.read()
+            
+            # Encrypt the file data with RSA public key
+            encrypted_data = rsa.encrypt(file_data, pub_key)
+            
+            # Encode encrypted data to base64 for safe storage in zip
+            encoded_data = b64encode(encrypted_data)
+            
+            # Write encrypted data to a temporary file, then add to zip
+            temp_filename = f"{filename}.enc"
+            with open(temp_filename, 'wb') as temp_file:
+                temp_file.write(encoded_data)
+            
+            zipf.write(temp_filename, arcname=temp_filename)
+            os.remove(temp_filename)  # Clean up temporary file
+    
+    return pub_key, zip_filename
+```

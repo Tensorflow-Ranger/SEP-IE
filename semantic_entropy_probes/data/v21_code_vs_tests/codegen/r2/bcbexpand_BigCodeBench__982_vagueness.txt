@@ -1,0 +1,17 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+def task_func(df, column, bins=30, density=True, alpha=0.6, color="g", seed=None):
+    np.random.seed(seed)
+    data = df[column].dropna().values
+    fig, ax = plt.subplots()
+    counts, bins, patches = ax.hist(data, bins=bins, density=density, alpha=alpha, color=color, edgecolor='black')
+    if density:
+        pdf = norm.pdf(bins, np.mean(data), np.std(data))
+        ax.plot(bins, pdf * np.max(counts), color='r', linewidth=2)
+    else:
+        pdf = norm.pdf(bins, np.mean(data), np.std(data))
+        ax.plot(bins, pdf * np.max(counts), color='r', linewidth=2)
+    return ax
+```

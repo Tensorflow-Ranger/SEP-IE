@@ -1,0 +1,78 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    M = int(data[1])
+    ops = []
+    for i in range(M):
+        L = int(data[2 + 2*i])
+        R = int(data[3 + 2*i])
+        ops.append((L, R))
+    
+    # For each position, track which operations can set it to 1
+    # We'll use a list of sets to track which operations can set each position
+    # Also, track which operations are used to minimize cost
+    # We'll use a greedy approach to select the minimal cost operations
+    
+    # For each position, find the earliest operation that can set it to 1
+    # and mark it as set
+    # We'll use a union-find (disjoint set) approach to find the minimal cost operations
+    
+    parent = list(range(N + 1))
+    cost = [0] * (N + 1)
+    
+    def find(u):
+        while parent[u] != u:
+            parent[u] = parent[parent[u]]
+            u = parent[u]
+        return u
+    
+    def union(u, v):
+        pu = find(u)
+        pv = find(v)
+        if pu != pv:
+            parent[pv] = pu
+            cost[pu] += cost[pv]
+    
+    # For each operation, determine which positions it affects
+    # and union the positions that can be set by this operation
+    # We'll process operations in reverse order to prioritize cheaper operations
+    # Operation 0 has cost 0, so we should use it first if possible
+    
+    # We'll track for each position the earliest operation that can set it
+    # We'll use a list to track the earliest operation index for each position
+    earliest = [-1] * (N + 1)
+    
+    for i in range(M - 1, -1, -1):
+        L, R = ops[i]
+        # For this operation, all positions from L to R can be set to 1
+        # We'll mark these positions if they haven't been set yet
+        for j in range(L, R + 1):
+            if earliest[j] == -1:
+                earliest[j] = i
+    
+    # Now, we can collect the operations that are used
+    used = [False] * M
+    for j in range(1, N + 1):
+        if earliest[j] != -1:
+            used[earliest[j]] = True
+    
+    # Now, check if all positions are covered
+    for j in range(1, N + 1):
+        if earliest[j] == -1:
+            print(-1)
+            return
+    
+    # Output the result
+    print(sum(1 for i in range(M) if used[i]))
+    print(' '.join('1' if used[i] else '0' for i in range(M)))
+
+if __name__ == "__main__":
+    main()
+```

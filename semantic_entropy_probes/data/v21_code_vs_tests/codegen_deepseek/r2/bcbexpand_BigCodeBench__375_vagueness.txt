@@ -1,0 +1,22 @@
+```python
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+def task_func(l):
+    """
+    Perform Principal Component Analysis (PCA) on the given array and record the main components.
+    
+    Parameters:
+    l (array-like): Input data array.
+    
+    Returns:
+    ax (matplotlib.axes._axes.Axes): Axes object of the generated plot.
+    """
+    pca = PCA(n_components=2)
+    principal_components = pca.fit_transform(l)
+    fig, ax = plt.subplots()
+    ax.scatter(principal_components[:, 0], principal_components[:, 1])
+    ax.set_title("PCA Result")
+    ax.set_xlabel("First Principal Component")
+    ax.set_ylabel("Second Principal Component")
+    return ax
+```

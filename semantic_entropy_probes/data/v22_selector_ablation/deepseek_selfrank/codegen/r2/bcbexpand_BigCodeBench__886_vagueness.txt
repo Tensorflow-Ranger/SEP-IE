@@ -1,0 +1,28 @@
+```python
+import pandas as pd
+from collections import Counter
+def task_func(data):
+    required_keys = {'Name', 'Age', 'Score'}
+    if not required_keys.issubset(data.keys()):
+        raise ValueError("The dictionary does not have the required keys.")
+    
+    names = data['Name']
+    ages = data['Age']
+    scores = data['Score']
+    
+    if len(names) != len(ages) or len(names) != len(scores):
+        raise ValueError("Mismatched lengths in the input data.")
+    
+    df = pd.DataFrame({
+        'Name': names,
+        'Age': ages,
+        'Score': scores
+    }).sort_values(by=['Name', 'Age'])
+    
+    avg_scores = df.groupby('Name')['Score'].mean()
+    
+    age_counts = Counter(ages)
+    most_common_age = age_counts.most_common(1)[0][0] if ages else None
+    
+    return df, avg_scores, most_common_age
+```

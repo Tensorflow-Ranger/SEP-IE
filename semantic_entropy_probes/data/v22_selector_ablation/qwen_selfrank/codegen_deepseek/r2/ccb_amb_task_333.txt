@@ -1,0 +1,61 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [int(next(it)) for _ in range(N)]
+
+    # We want to bring each number i to position i.
+    # For each i, if P[pos] = i and pos > i, we need to move it left.
+    # Moving left across index j costs j each swap.
+    # So moving from position pos to position i costs i + (i+1) + ... + (pos-1)
+    # That's the sum of indices we cross when moving left.
+    # But we can do multiple moves simultaneously; the optimal strategy is:
+    # For each i, if it is to the right of its target, we must eventually
+    # swap it left across every index from i to pos-1.
+    # Each such index j will be crossed by every element that needs to move
+    # from right of j to left of j.
+    # So total cost = sum over j of j * (number of elements that must cross index j from right to left).
+
+    # For each j (1-indexed), count how many numbers x with x <= j are currently to the right of position j.
+    # Because in sorted order, numbers <= j should be in positions 1..j.
+    # So if a number <= j is at position > j, it must cross index j from right to left.
+
+    # We'll use a Fenwick tree to count how many numbers <= j are seen so far.
+    # Traverse from left to right, for current index j (1-indexed):
+    #   add current value P[j-1] to BIT (point update)
+    #   total numbers <= j seen so far = BIT.query(j)
+    #   numbers <= j that are to the right of j = j - BIT.query(j)  (since there should be j numbers <= j in total)
+    #   if that count > 0, we need to cross index j that many times, cost += j * count.
+
+    bit = [0] * (N + 2)
+
+    def bit_add(idx: int, delta: int) -> None:
+        while idx <= N:
+            bit[idx] += delta
+            idx += idx & -idx
+
+    def bit_sum(idx: int) -> int:
+        s = 0
+        while idx > 0:
+            s += bit[idx]
+            idx -= idx & -idx
+        return s
+
+    total_cost = 0
+    for pos in range(1, N + 1):
+        val = P[pos - 1]
+        bit_add(val, 1)
+        cnt = pos - bit_sum(pos)  # numbers <= pos that are to the right of position pos
+        if cnt > 0:
+            total_cost += pos * cnt
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

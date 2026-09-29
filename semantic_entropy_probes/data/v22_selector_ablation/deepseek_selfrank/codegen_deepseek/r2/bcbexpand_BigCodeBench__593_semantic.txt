@@ -1,0 +1,68 @@
+```python
+import csv
+import os
+from datetime import datetime
+from random import randint
+import matplotlib.pyplot as plt
+import pandas as pd
+# Constants
+VEHICLE_TYPES = ['Car', 'Bus', 'Truck', 'Bike']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    """
+    Generates traffic data for different vehicle types over a specified number of hours,
+    saves the data to a CSV file, and plots the combined vehicle count data in a line chart.
+    
+    Parameters:
+    - hours (int): Number of hours to generate data for.
+    - output_dir (str): Directory to save the CSV file and plot. Default is './output'.
+    
+    Returns:
+    - tuple: Path to the CSV file and the matplotlib axes object of the line plot.
+    """
+    # Create output directory if it doesn't exist
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    # Generate data
+    data = []
+    for hour in range(hours):
+        time_str = f"{hour:02d}:00"
+        row = {'Time': time_str}
+        for vehicle in VEHICLE_TYPES:
+            row[vehicle] = randint(0, 50)
+        data.append(row)
+    
+    # Save to CSV
+    csv_filename = f"traffic_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    csv_path = os.path.join(output_dir, csv_filename)
+    
+    with open(csv_path, 'w', newline='') as csvfile:
+        fieldnames = ['Time'] + VEHICLE_TYPES
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(data)
+    
+    # Create plot
+    df = pd.DataFrame(data)
+    df.set_index('Time', inplace=True)
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for vehicle in VEHICLE_TYPES:
+        ax.plot(df.index, df[vehicle], label=vehicle, marker='o')
+    
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Vehicle Count')
+    ax.set_title('Vehicle Counts Over Time')
+    ax.legend(title='Vehicle Type')
+    ax.grid(True, linestyle='--', alpha=0.7)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    
+    # Save plot
+    plot_filename = f"traffic_plot_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+    plot_path = os.path.join(output_dir, plot_filename)
+    plt.savefig(plot_path)
+    
+    return csv_path, ax
+```

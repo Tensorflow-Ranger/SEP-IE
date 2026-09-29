@@ -1,0 +1,79 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [int(next(it)) for _ in range(N)]
+
+    # position of each value (1-indexed)
+    pos = [0] * (N + 1)
+    for idx, val in enumerate(P, 1):
+        pos[val] = idx
+
+    total_cost = 0
+    i = 1
+    while i <= N:
+        if pos[i] == i:
+            i += 1
+            continue
+        # find the segment where values are misplaced
+        start = i
+        while i <= N and pos[i] != i:
+            i += 1
+        end = i - 1  # last misplaced value in this segment
+        # within [start, end], we need to swap adjacent positions
+        # the cost is the sum of positions that need to be swapped
+        # each position j (1-indexed) between start and end-1 will be used
+        # exactly (value_at_j - j) times? Let's think simpler:
+        # We can simulate greedily: always swap the largest i possible?
+        # Actually known fact: minimum swaps to sort with cost i per swap
+        # is equivalent to summing (j * (number of times position j is swapped))
+        # Optimal strategy: bubble the largest number to its place from the right.
+        # But we can compute directly:
+        # For each value v in [start, end], it must move from pos[v] to v.
+        # The swaps happen along the path between pos[v] and v.
+        # Each swap at position k costs k.
+        # We can think of counting how many times each adjacent pair (k, k+1) is swapped.
+        # That equals the number of values that need to cross that gap.
+        # For each k from start to end-1, the number of values that are <= k but currently
+        # on the right side of k+1, or values > k but on the left side of k+1.
+        # Simpler: Let’s compute crossings.
+        # We'll mark current positions and desired positions.
+        # Actually, known solution: answer = sum_{v=1..N} (v - start_of_its_block) * v
+        # Wait, let's implement the standard greedy:
+        # Process from N down to 1: if P[i] != i, bubble it up.
+        # But that is O(N^2). Need O(N).
+        # Alternative: count for each adjacent pair how many times it must be swapped.
+        # For each value x, it must move from pos[x] to x.
+        # If pos[x] > x, it must move left across each adjacent pair (k, k+1) for k from x to pos[x]-1.
+        # If pos[x] < x, it must move right across each adjacent pair (k, k+1) for k from pos[x] to x-1.
+        # So we can add +1 to each gap for each crossing.
+        # Then total cost = sum_{k=1}^{N-1} k * gap_count[k].
+        # Let's implement that.
+
+    # Reinitialize for gap counting approach
+    gap = [0] * (N + 1)  # gap[k] = number of swaps between k and k+1
+    for v in range(1, N + 1):
+        cur = pos[v]
+        if cur == v:
+            continue
+        if cur > v:
+            for k in range(v, cur):
+                gap[k] += 1
+        else:
+            for k in range(cur, v):
+                gap[k] += 1
+
+    total_cost = 0
+    for k in range(1, N):
+        total_cost += k * gap[k]
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

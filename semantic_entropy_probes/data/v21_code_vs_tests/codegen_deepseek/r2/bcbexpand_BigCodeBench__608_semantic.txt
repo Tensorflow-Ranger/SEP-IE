@@ -1,0 +1,35 @@
+```python
+import seaborn as sns
+from random import sample
+# Constants
+COLUMNS = ['A', 'B', 'C', 'D', 'E']
+def task_func(df, tuples, n_plots):
+    # Remove rows where the tuple of all column values matches any in the given tuples
+    mask = df.apply(tuple, axis=1).isin(tuples)
+    df_filtered = df[~mask].copy()
+    
+    # Determine available columns for pairplots
+    available_columns = [col for col in COLUMNS if col in df_filtered.columns]
+    
+    # Calculate number of plots to generate
+    n_pairs = min(n_plots, len(available_columns) // 2)
+    
+    # Generate random unique pairs without repetition
+    plots = []
+    if n_pairs > 0 and len(available_columns) >= 2:
+        # Create all possible unique pairs
+        all_pairs = []
+        for i in range(len(available_columns)):
+            for j in range(i + 1, len(available_columns)):
+                all_pairs.append((available_columns[i], available_columns[j]))
+        
+        # Randomly select n_pairs unique pairs
+        selected_pairs = sample(all_pairs, min(n_pairs, len(all_pairs)))
+        
+        # Generate pairplots for each selected pair
+        for col1, col2 in selected_pairs:
+            pairplot = sns.pairplot(df_filtered, vars=[col1, col2])
+            plots.append(pairplot)
+    
+    return (df_filtered, plots)
+```

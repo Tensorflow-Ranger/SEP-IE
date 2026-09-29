@@ -1,0 +1,47 @@
+```python
+import sys
+from itertools import product
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    H = int(data[0])
+    W = int(data[1])
+    grid = data[2:2+H]
+    
+    # Convert each row to a list of integers
+    grid = [list(map(int, list(row))) for row in grid]
+    
+    # Since W is small (<=18), we can try all possible combinations of Y operations
+    # Each Y operation flips a column, and we can represent the state of columns as a bitmask
+    # For each possible bitmask (0 to 2^W - 1), we compute the optimal X operations
+    
+    min_sum = float('inf')
+    
+    for mask in range(1 << W):
+        # Apply Y operations according to the mask
+        temp_grid = [row[:] for row in grid]
+        for j in range(W):
+            if (mask >> j) & 1:
+                for i in range(H):
+                    temp_grid[i][j] = 1 - temp_grid[i][j]
+        
+        # Now, for each row, decide whether to flip it (X operation)
+        # We can flip a row if it has more 1s than 0s
+        total = 0
+        for i in range(H):
+            ones = sum(temp_grid[i])
+            if ones > H - ones:
+                total += (H - ones)
+            else:
+                total += ones
+        
+        min_sum = min(min_sum, total)
+    
+    print(min_sum)
+
+if __name__ == "__main__":
+    main()
+```

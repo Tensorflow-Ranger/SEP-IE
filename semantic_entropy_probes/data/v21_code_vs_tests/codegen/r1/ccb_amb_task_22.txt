@@ -1,0 +1,76 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    W = int(data[idx])
+    idx += 1
+    
+    blocks = []
+    for _ in range(N):
+        x = int(data[idx])
+        idx += 1
+        y = int(data[idx])
+        idx += 1
+        blocks.append((x, y))
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        t = int(data[idx])
+        idx += 1
+        a = int(data[idx]) - 1  # convert to 0-based index
+        idx += 1
+        queries.append((t, a))
+    
+    # Sort blocks by Y coordinate
+    blocks.sort(key=lambda x: x[1])
+    
+    # For each column, keep track of the Y positions of blocks
+    col_y = [[] for _ in range(W)]
+    for x, y in blocks:
+        col_y[x - 1].append(y)
+    
+    # Sort each column's Y positions
+    for i in range(W):
+        col_y[i].sort()
+    
+    # For each query, determine if the block exists at time T
+    results = []
+    for t, a in queries:
+        x, y = blocks[a]
+        col = x - 1
+        ys = col_y[col]
+        # Find the position of the original Y in the column
+        pos = bisect.bisect_left(ys, y)
+        if pos >= len(ys) or ys[pos] != y:
+            results.append("No")
+            continue
+        
+        # Compute how many blocks have fallen below this one
+        # The number of blocks that have been removed is the number of blocks that were originally below this one
+        # and have been removed due to the bottom row being full
+        # Since the blocks fall down, the effective Y position after time t is y + t - (number of blocks removed)
+        # But since the blocks fall one by one, we can compute how many blocks have fallen below this one
+        # The number of blocks that have been removed is the number of blocks in the same column that are below this one
+        # and have been removed due to the bottom row being full
+        # To compute this, we can think of the blocks as falling down, and each time the bottom row is full, all blocks in it are removed
+        # So the number of blocks removed is the number of full rows below the original Y
+        # But since the blocks fall down, the effective Y after time t is y + t - (number of blocks removed)
+        # However, the number of blocks removed is the number of blocks that were originally in the same column and have Y < y
+        # So the number of blocks removed is the number of blocks in the same column with Y < y
+        # But we need to account for the fact that each time the bottom row is full, all blocks in that row are removed
+        # So the number of blocks removed is the number of full rows below the original Y
+        # Since each row can hold W blocks, the number of full rows below the original Y is floor((y - 1) / W)
+        # So the effective Y after time t is y + t - (number of full rows below original Y)
+        # Wait, this is not correct. Let's think differently.
+        # The number of blocks that have been removed is the number of blocks in the same column with Y

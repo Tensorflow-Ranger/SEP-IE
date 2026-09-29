@@ -1,0 +1,66 @@
+```python
+import socket
+import select
+import queue
+from datetime import datetime, timedelta
+def task_func(
+    server_address="localhost", server_port=12345, buffer_size=1024, run_duration=5
+):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind((server_address, server_port))
+    server_socket.listen(5)
+    server_socket.setblocking(False)
+
+    inputs = [server_socket]
+    outputs = []
+    message_queue = queue.Queue()
+
+    end_time = datetime.now() + timedelta(seconds=run_duration)
+
+    try:
+        while datetime.now() < end_time:
+            readable, writable, exceptional = select.select(inputs, outputs, inputs, 0.1)
+
+            for s in exceptional:
+                if s is server_socket:
+                    server_socket.close()
+                    inputs.remove(s)
+                else:
+                    print(f"Handling exception for {s}")
+                    message_queue.put(f"Exception on socket {s}")
+                    inputs.remove(s)
+                    if s in outputs:
+                        outputs.remove(s)
+
+            for s in readable:
+                if s is server_socket:
+                    client_socket, client_address = s.accept()
+                    client_socket.setblocking(False)
+                    inputs.append(client_socket)
+                    print(f"Accepted connection from {client_address}")
+                else:
+                    data = s.recv(buffer_size)
+                    if data:
+                        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        response = data.decode() + " " + current_time
+                        message_queue.put(f"Sent to {s.getpeername()}: {response}")
+                        s.sendall(response.encode())
+                    else:
+                        print(f"Closing connection to {s.getpeername()}")
+                        inputs.remove(s)
+                        if s in outputs:
+                            outputs.remove(s)
+                        s.close()
+
+            while not message_queue.empty():
+                msg = message_queue.get()
+                print(msg)
+
+    except KeyboardInterrupt:
+        print("Server interrupted by user.")
+    finally:
+        for s in inputs:
+            s.close()
+        return f"Echo server ran for {run_duration} seconds and handled all connections."
+```

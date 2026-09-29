@@ -1,0 +1,84 @@
+```python
+import sys
+import bisect
+
+def solve() -> None:
+    it = iter(sys.stdin.read().strip().split())
+    N = int(next(it))
+    W = int(next(it))
+
+    blocks = []
+    for _ in range(N):
+        x = int(next(it))
+        y = int(next(it))
+        blocks.append((x, y))
+
+    # Preprocess: sort blocks by (x, y)
+    blocks_by_x = [[] for _ in range(W + 1)]
+    for idx, (x, y) in enumerate(blocks):
+        blocks_by_x[x].append((y, idx + 1))  # store (y, block_id)
+
+    for x in range(1, W + 1):
+        blocks_by_x[x].sort()
+
+    # For each column, compute for each block the time it disappears
+    disappear_time = [0] * (N + 1)  # 0 means never disappears (or > max T)
+
+    for x in range(1, W + 1):
+        col = blocks_by_x[x]
+        if not col:
+            continue
+        m = len(col)
+        # Process from bottom to top
+        stack = []
+        for pos in range(m):
+            y, bid = col[pos]
+            # Find how many consecutive from this block downward
+            # using stack to maintain current run
+            if stack and stack[-1][0] == y - len(stack):
+                # consecutive
+                stack.append((y, bid))
+            else:
+                stack = [(y, bid)]
+            # If run length reaches W, these W blocks disappear at time y
+            if len(stack) == W:
+                disappear_time_y = y
+                for _, b in stack:
+                    disappear_time[b] = disappear_time_y
+                stack = []
+        # Remaining in stack never disappear within column x alone
+        # They could disappear if combined with other columns, but that's impossible
+        # because a full row requires all columns, and we process per column.
+        # Actually, a full row requires all columns filled at same y-level.
+        # So we must consider rows across columns.
+        # We need to detect when a horizontal full row appears.
+
+    # To detect full rows, we need to consider all blocks with same y.
+    # Group blocks by y.
+    blocks_by_y = {}
+    for idx, (x, y) in enumerate(blocks):
+        blocks_by_y.setdefault(y, []).append((x, idx + 1))
+
+    # For each y that has exactly W blocks (one in each column), those blocks disappear at time y.
+    for y, lst in blocks_by_y.items():
+        if len(lst) == W:
+            for _, bid in lst:
+                disappear_time[bid] = y
+
+    # Read queries
+    Q = int(next(it))
+    out_lines = []
+    for _ in range(Q):
+        T = int(next(it))
+        A = int(next(it))
+        dt = disappear_time[A]
+        if dt == 0 or T < dt:
+            out_lines.append("Yes")
+        else:
+            out_lines.append("No")
+
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,18 @@
+```python
+import pandas as pd
+import random
+# Constants
+N_DATA_POINTS = 10000
+MIN_VALUE = 0.0
+MAX_VALUE = 10.0
+def task_func(n_data_points=N_DATA_POINTS):
+    if n_data_points <= 0:
+        return pd.DataFrame(columns=['Value'])
+    data = []
+    for _ in range(n_data_points):
+        value = random.uniform(MIN_VALUE, MAX_VALUE)
+        truncated_value = round(value, 3)
+        data.append(truncated_value)
+    df = pd.DataFrame(data, columns=['Value'])
+    return df
+```

@@ -1,0 +1,21 @@
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+def task_func(myList):
+    if not myList:
+        fig, ax = plt.subplots()
+        ax.set_xlabel('Value')
+        ax.set_ylabel('Frequency')
+        ax.set_title('Histogram of Values')
+        return ax
+    unique_vals = np.unique(myList)
+    min_val = min(myList)
+    max_val = max(myList)
+    bin_edges = np.arange(min_val - 0.5, max_val + 1.5, 1)
+    fig, ax = plt.subplots()
+    ax.hist(myList, bins=bin_edges, edgecolor='black')
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Histogram of Values')
+    return ax
+```

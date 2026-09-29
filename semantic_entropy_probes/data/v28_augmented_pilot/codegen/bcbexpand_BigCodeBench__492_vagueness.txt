@@ -1,0 +1,44 @@
+```python
+import pandas as pd
+from datetime import datetime
+import random
+def task_func(
+    epoch_milliseconds,
+    random_seed=0,
+    products=["Product1", "Product2", "Product3", "Product4", "Product5"],
+):
+    if not isinstance(epoch_milliseconds, int):
+        raise ValueError("epoch_milliseconds must be an integer")
+    if epoch_milliseconds < 0:
+        raise ValueError("epoch_milliseconds must be non-negative")
+    if not isinstance(random_seed, int):
+        raise ValueError("random_seed must be an integer")
+    if not isinstance(products, list) or not all(isinstance(p, str) for p in products):
+        raise ValueError("products must be a list of strings")
+    
+    random.seed(random_seed)
+    
+    start_date = datetime.fromtimestamp(epoch_milliseconds / 1000.0)
+    end_date = datetime.now()
+    
+    if start_date > end_date:
+        raise ValueError("epoch_milliseconds corresponds to a future date")
+    
+    start_date = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    current_date = start_date
+    data = []
+    
+    while current_date <= end_date:
+        for product in products:
+            sales = random.randint(10, 50)
+            data.append({
+                'Product': product,
+                'Date': current_date,
+                'Sales': sales
+            })
+        current_date = current_date.replace(hour=0, minute=0, second=0, microsecond=0)
+        current_date += pd.Timedelta(days=1)
+    
+    df = pd.DataFrame(data)
+    return df
+```

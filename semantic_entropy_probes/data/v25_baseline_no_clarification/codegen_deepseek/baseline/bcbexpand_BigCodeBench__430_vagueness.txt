@@ -1,0 +1,32 @@
+```python
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+def task_func(df1, df2, column1="feature1", column2="feature2"):
+    import pandas as pd
+    import numpy as np
+    
+    # Extract the relevant columns
+    data1 = df1[[column1]].copy()
+    data2 = df2[[column2]].copy()
+    
+    # Reset indices to align rows
+    data1 = data1.reset_index(drop=True)
+    data2 = data2.reset_index(drop=True)
+    
+    # Merge the two columns into a single DataFrame
+    merged_data = pd.concat([data1, data2], axis=1)
+    
+    # Perform KMeans clustering with default parameters
+    kmeans = KMeans()
+    labels = kmeans.fit_predict(merged_data)
+    
+    # Create scatter plot
+    fig, ax = plt.subplots()
+    scatter = ax.scatter(merged_data[column1], merged_data[column2], c=labels, cmap='viridis')
+    ax.set_xlabel(column1)
+    ax.set_ylabel(column2)
+    ax.set_title(f'KMeans Clustering: {column1} vs {column2}')
+    plt.colorbar(scatter, ax=ax, label='Cluster')
+    
+    return labels, ax
+```

@@ -1,0 +1,20 @@
+```python
+def count_nums(arr):
+    import math
+    count = 0
+    for num in arr:
+        digits_sum = 0
+        if num < 0:
+            num = -num
+            first_digit = -1
+            num_str = str(num)
+            first_digit = -int(num_str[0])
+            digits_sum += first_digit
+            for d in num_str[1:]:
+                digits_sum += int(d)
+        else:
+            digits_sum = sum(int(d) for d in str(num))
+        if digits_sum > 0:
+            count += 1
+    return count
+```

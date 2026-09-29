@@ -1,0 +1,32 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+# Constants
+ARRAY_SIZE = 10000
+def task_func():
+    # Generate random integers between 1 and 100 (inclusive of 1, exclusive of 100)
+    random_array = np.random.randint(1, 100, size=ARRAY_SIZE)
+    
+    # Calculate mean and standard deviation (population standard deviation)
+    mean = np.mean(random_array)
+    std_dev = np.std(random_array, ddof=0)
+    
+    # Create histogram
+    fig, ax = plt.subplots()
+    ax.hist(random_array, bins=20, edgecolor='black')
+    ax.set_title("Histogram of Random Integers")
+    ax.set_xlabel("Value")
+    ax.set_ylabel("Frequency")
+    
+    # Plot mean as red dashed line
+    ax.axvline(mean, color='red', linestyle='dashed', linewidth=2)
+    
+    # Plot standard deviation as purple dashed lines
+    mean_minus_std = mean - std_dev
+    mean_plus_std = mean + std_dev
+    ax.axvline(mean_minus_std, color='purple', linestyle='dashed', linewidth=1)
+    ax.axvline(mean_plus_std, color='purple', linestyle='dashed', linewidth=1)
+    
+    # Return tuple with array, mean, standard deviation, and plot
+    return (random_array, mean, std_dev, ax)
+```

@@ -1,0 +1,58 @@
+```python
+import sys
+import math
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    K = int(data[1])
+    A = list(map(int, data[2:2+N]))
+    
+    max_val = max(A)
+    freq = defaultdict(int)
+    for num in A:
+        freq[num] += 1
+    
+    # Compute frequency of each number
+    # Then compute for each possible GCD value
+    # We'll use a sieve-like approach to compute the maximum GCD for each possible value
+    
+    # Initialize a dictionary to store the maximum GCD for each number
+    max_gcd = [0] * (max_val + 1)
+    
+    # First, compute the frequency of each number
+    for num in A:
+        freq[num] += 1
+    
+    # Now, for each number, we'll propagate its frequency to its divisors
+    # This helps us compute the maximum GCD for each possible value
+    for num in range(1, max_val + 1):
+        if freq[num] == 0:
+            continue
+        # Propagate to all multiples of num
+        for multiple in range(num, max_val + 1, num):
+            freq[multiple] += freq[num]
+    
+    # Now, for each number, we can compute the maximum GCD
+    # We need to find the maximum number x such that freq[x] >= K
+    # We'll do this by checking from the largest to the smallest
+    result = [0] * N
+    for i in range(N):
+        val = A[i]
+        # Find the maximum divisor of val that has at least K elements
+        max_gcd_val = 0
+        for d in range(val, 0, -1):
+            if val % d == 0 and freq[d] >= K:
+                max_gcd_val = d
+                break
+        result[i] = max_gcd_val
+    
+    print(' '.join(map(str, result)))
+
+if __name__ == "__main__":
+    main()
+```

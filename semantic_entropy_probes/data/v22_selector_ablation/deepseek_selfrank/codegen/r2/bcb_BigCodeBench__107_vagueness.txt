@@ -1,0 +1,20 @@
+```python
+import pandas as pd
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+def task_func(df, n_clusters=3, random_state=0):
+    if df.empty or 'date' not in df.columns or 'value' not in df.columns or 'group' not in df.columns:
+        raise ValueError("DataFrame is empty or lacks required columns.")
+    df['date'] = pd.to_datetime(df['date']).map(pd.Timestamp.toordinal)
+    X = df[['date', 'value']]
+    kmeans = KMeans(n_clusters=n_clusters, random_state=random_state).fit(X)
+    df['cluster'] = kmeans.labels_
+    fig, ax = plt.subplots()
+    for name, group in df.groupby('cluster'):
+        ax.scatter(group['date'], group['value'], label=f'Cluster {name}')
+    ax.set_xlabel('Date (ordinal)')
+    ax.set_ylabel('Value')
+    ax.set_title('KMeans Clustering of Value vs Date')
+    ax.legend()
+    return ax
+```

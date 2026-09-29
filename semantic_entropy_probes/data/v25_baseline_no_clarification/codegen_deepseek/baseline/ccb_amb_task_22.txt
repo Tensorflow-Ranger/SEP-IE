@@ -1,0 +1,151 @@
+```python
+import sys
+import bisect
+
+def solve() -> None:
+    it = iter(sys.stdin.read().strip().split())
+    N = int(next(it))
+    W = int(next(it))
+
+    blocks = []
+    for _ in range(N):
+        x = int(next(it))
+        y = int(next(it))
+        blocks.append((x, y))
+
+    # Group blocks by column
+    col_blocks = [[] for _ in range(W + 1)]
+    for idx, (x, y) in enumerate(blocks):
+        col_blocks[x].append((y, idx + 1))  # (row, block_id)
+
+    # Sort each column's blocks by row (ascending)
+    for col in range(1, W + 1):
+        col_blocks[col].sort()
+
+    # Precompute for each block:
+    #   - initial row
+    #   - the time it reaches the bottom (if ever) -> "landing time"
+    #   - the time it gets removed (if ever) -> "removal time"
+    # Actually we only need to know for each block:
+    #   - initial row
+    #   - the time it would reach row 1 if no clearing happens
+    #   - then adjust for clearing events
+
+    # For each column, simulate clearing events:
+    # A clearing happens when all columns have a block at row 1 at the same time.
+    # This is equivalent to: the minimum row among the lowest block of each column is 1.
+    # We can think in terms of "waves": each time the lowest block in every column reaches row 1,
+    # they are removed together.
+
+    # We'll compute for each block the time it reaches row 1 (if it ever does) ignoring clears.
+    # Then we'll compute how many clears happen before that time.
+    # If number_of_clears_before >= initial_row, then the block is gone before reaching bottom.
+
+    # Step 1: For each column, compute the sorted list of rows.
+    rows_by_col = [None] * (W + 1)
+    for col in range(1, W + 1):
+        rows_by_col[col] = [y for y, _ in col_blocks[col]]
+
+    # Step 2: Simulate clears.
+    # We maintain for each column the index of the next block that will become the lowest.
+    # We'll advance time by the smallest difference to bring some block to row 1.
+    # But N and W up to 2e5, we need O(N log N) or similar.
+
+    # Alternative approach known from editorial:
+    # Let f(col, k) = the row of the k-th block in column col (1-indexed).
+    # The k-th block in column col will reach row 1 at time f(col, k) - 1 (if no clears).
+    # But clears happen when all columns have a block at row 1 simultaneously.
+    # That means: for each column, we look at its current lowest block's row.
+    # The time until next clear is max(0, min_row_in_each_column - 1).
+    # Actually, we can think of the process as:
+    #   time advances until the smallest row among the lowest blocks of all columns.
+    #   Let that be r_min. Then after r_min-1 steps, all those blocks reach row 1.
+    #   Then a clear happens, and those blocks are removed.
+    #   Then we repeat with the next block in each column.
+
+    # So we can simulate clears in O(N log W) using a priority queue.
+    # We'll compute for each block the "clear_id" when it is removed.
+    # If a block never reaches row 1, it never gets removed.
+
+    import heapq
+
+    # For each column, keep index of current lowest block.
+    idx_ptr = [0] * (W + 1)
+    # Min-heap of (row, col)
+    heap = []
+    for col in range(1, W + 1):
+        if rows_by_col[col]:
+            row = rows_by_col[col][0]
+            heapq.heappush(heap, (row, col))
+
+    clear_times = []  # list of times when clears happen (1-indexed time of clear)
+    # We'll record the time of each clear.
+    # The k-th clear happens at time = (sum of r_min over first k steps)???
+    # Actually, let's simulate:
+    #   Let current time t = 0.
+    #   While heap is not empty:
+    #       Take smallest row r_min.
+    #       All lowest blocks need r_min - 1 steps to reach row 1.
+    #       So they reach row 1 at time t + (r_min - 1).
+    #       Then a clear happens at time t + r_min.
+    #       So clear time = t + r_min.
+    #       Then we remove those blocks, advance t to t + r_min.
+    #       For each column, move to next block, adjust its row by subtracting r_min??
+    # Wait, after clearing, the blocks above haven't moved during those r_min steps?
+    # Actually, during those r_min steps, all blocks move down as much as possible.
+    # So after r_min steps, every block has moved down by r_min rows, except those that were blocked.
+    # But the key is: after clearing the bottom row, the blocks that were in row 2 become row 1,
+    # but they don't get cleared until the next time all columns have a block at row 1.
+    # This is messy.
+
+    # Known trick: Let’s define for each block its "effective row" after considering clears.
+    # If a block is the k-th block in its column, then it will be cleared at the k-th clear
+    # of its column? Not exactly, because clears are global.
+
+    # Let's think differently: The process is equivalent to:
+    #   Each column independently: blocks fall until they hit row 1 or a block below.
+    #   When all columns have a block at row 1, those are removed.
+    # This is like a Tetris stacking: each column's blocks stack from bottom up.
+    # The removal condition is that every column has at least one block in the stack.
+    # When removal happens, the bottom block of each column is removed.
+    # So the bottom block of each column is removed together in batches.
+    # Therefore, the i-th block from the bottom in column col will be removed at the i-th global clear
+    # that involves column col? But clears are simultaneous across all columns.
+
+    # Actually, the process is: Let b_{col, i} be the i-th block in column col (sorted by row ascending).
+    # Define t_{col, i} = b_{col, i} - i + 1? Let's test small.
+
+    # Let's simulate mentally:
+    # Column 1: blocks at rows 3, 5
+    # Column 2: block at row 2
+    # At time 0: col1: [3,5], col2:[2]
+    # t=1: move down: col1: [2,4], col2:[1]
+    # t=2: col1: [1,3], col2:[1] -> bottom row full? yes, clear. Remove row1 from both.
+    # After clear: col1: [3], col2:[]
+    # t=3: col1: [2], col2:[]
+    # t=4: col1: [1], col2:[]
+    # t=5: col1: [1], col2:[] -> bottom row full? no, because col2 empty.
+    # So block at row5 in col1 never cleared.
+
+    # Let's compute: For col1, block at row3 (first) reached row1 at time2, cleared at time2.
+    # Block at row5 (second) reached row1 at time4? Actually at time4 it's at row1, but no clear because col2 empty.
+    # So it stays.
+
+    # So a block is removed iff when it reaches row1, all other columns have a block at row1 at the same time.
+    # That is exactly when its "landing time" equals the landing time of the current lowest block in every other column.
+
+    # We can compute for each block the time it would land (row-1) ignoring clears.
+    # Then we need to know how many clears occur before that landing time.
+    # If number of clears before landing >= its position in column (i.e., it's the k-th block from bottom),
+    # then it gets cleared immediately upon landing.
+
+    # Let's formalize:
+    # Let landing_time = initial_row - 1.
+    # Let pos = index in column (1-indexed from bottom).
+    # Let C(t) = number of clears that have happened by time t (inclusive?).
+    # A block is removed at its landing time if C(landing_time) >= pos.
+    # Actually, at the moment it lands, if there have been at least pos clears, then it's gone.
+    # Because each clear removes the bottom block of each column.
+
+    # So we need to compute C(t) for arbitrary t.
+    # How

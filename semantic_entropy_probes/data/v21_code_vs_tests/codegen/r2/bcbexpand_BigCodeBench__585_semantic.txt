@@ -1,0 +1,31 @@
+```python
+import rsa
+import os
+import zipfile
+from base64 import b64encode
+def task_func(directory):
+    # Generate RSA key pair
+    (pubkey, privkey) = rsa.newkeys(512)
+    
+    # Create a zip file
+    zip_filename = 'encrypted_files.zip'
+    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        # Iterate over all files in the directory
+        for filename in os.listdir(directory):
+            file_path = os.path.join(directory, filename)
+            if os.path.isfile(file_path):
+                # Read the file content
+                with open(file_path, 'rb') as f:
+                    file_data = f.read()
+                
+                # Encrypt the file data using the public key
+                encrypted_data = rsa.encrypt(file_data, pubkey)
+                
+                # Encode encrypted data to base64 for storage in zip
+                encoded_data = b64encode(encrypted_data).decode('utf-8')
+                
+                # Write the encrypted data to the zip file
+                zipf.writestr(filename, encoded_data)
+    
+    return pubkey, zip_filename
+```

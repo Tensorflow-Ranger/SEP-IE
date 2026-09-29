@@ -1,0 +1,30 @@
+```python
+import pandas as pd
+import pytz
+def task_func(articles, timezone):
+    if not isinstance(articles, list):
+        raise TypeError("articles must be a list")
+    if not articles:
+        raise ValueError("articles list cannot be empty")
+    if not all(isinstance(item, dict) for item in articles):
+        raise TypeError("articles must be a list of dictionaries")
+    required_keys = {'published_time', 'category'}
+    for article in articles:
+        if not required_keys.issubset(article.keys()):
+            raise ValueError("Each dictionary must contain 'published_time' and 'category' keys")
+    
+    df = pd.DataFrame(articles)
+    try:
+        df['published_time'] = pd.to_datetime(df['published_time'])
+    except Exception:
+        raise ValueError("'published_time' must be convertible to datetime")
+    
+    tz = pytz.timezone(timezone)
+    df['published_time'] = df['published_time'].dt.tz_convert(tz)
+    df['hour'] = df['published_time'].dt.hour
+    
+    grouped = df.groupby('category')['hour']
+    stats = grouped.agg(['count', 'mean', 'min', 'max'])
+    
+    return stats
+```

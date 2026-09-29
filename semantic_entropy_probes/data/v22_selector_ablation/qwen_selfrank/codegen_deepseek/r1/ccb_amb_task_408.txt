@@ -1,0 +1,124 @@
+```python
+import sys
+
+def solve():
+    input = sys.stdin.readline
+    N, M = map(int, input().split())
+    intervals = []
+    for _ in range(M):
+        L, R = map(int, input().split())
+        intervals.append((L, R))
+
+    # We need to cover every position with at least one "set to 1" operation.
+    # Operation 1 sets positions in [L,R] to 1.
+    # Operation 2 sets positions outside [L,R] to 1.
+    # Operation 0 does nothing.
+
+    # Think of each interval as offering two ways to cover positions:
+    #   - Cover inside (cost 1)
+    #   - Cover outside (cost 1)
+    # We need to choose a subset of these coverings (each interval at most one active operation)
+    # such that every position 1..N is covered by at least one chosen covering.
+
+    # This is a set cover problem with two types of sets per interval.
+    # But we can transform: Let’s define for each interval i:
+    #   inside cover: covers positions L_i..R_i
+    #   outside cover: covers positions 1..L_i-1 and R_i+1..N
+    # We need to cover all N positions.
+
+    # Observation: If we pick an outside cover for interval i, then the only uncovered positions
+    # are exactly L_i..R_i (since outside cover covers everything else).
+    # So picking an outside cover is equivalent to "I cover everything except [L_i,R_i]".
+    # Therefore, if we pick outside cover for i, then we must cover [L_i,R_i] by some other interval's inside cover
+    # (or another outside cover that leaves a smaller gap).
+
+    # This becomes: We need to select a collection of intervals such that:
+    #   - For each chosen interval where we use outside cover, its [L,R] must be covered by inside covers of other intervals.
+    #   - The union of inside covers of chosen intervals must cover all positions.
+
+    # But we can think differently: Let’s decide which intervals we use inside cover for.
+    # Let S be the set of positions covered by inside covers.
+    # Then the remaining positions (N \ S) must be covered by outside covers.
+    # For an outside cover of interval i to cover a position p not in S, we need p ∉ [L_i,R_i].
+    # That means p must be < L_i or > R_i.
+    # So to cover all positions not in S, we need that for every p not in S, there exists an interval i
+    # with outside cover such that p is outside [L_i,R_i] (i.e., p < L_i or p > R_i).
+
+    # This is getting complex. Let's try another angle.
+
+    # Consider the complement: We want to avoid having any position never set to 1.
+    # A position j is never set to 1 if:
+    #   - For every interval i where we choose inside cover, j is NOT in [L_i,R_i]
+    #   - For every interval i where we choose outside cover, j IS in [L_i,R_i]
+    #   - And we never choose operation 0? Actually operation 0 does nothing, so it doesn't affect.
+
+    # So for each position j, we must avoid the situation where all chosen operations leave it at 0.
+    # That means: For each j, there must exist at least one interval i such that either:
+    #   - We choose inside cover and j ∈ [L_i,R_i], OR
+    #   - We choose outside cover and j ∉ [L_i,R_i].
+
+    # This is a 2-SAT-like condition per position? Not exactly.
+
+    # Let's think of each interval as a variable with 3 values: 0 (do nothing), 1 (inside), 2 (outside).
+    # For each position j, we need at least one interval i satisfying:
+    #   (value_i = 1 AND j in [L_i,R_i]) OR (value_i = 2 AND j not in [L_i,R_i]).
+
+    # This is a covering problem that can be reduced to a graph problem.
+
+    # Known solution approach (from similar problems): 
+    # We can model as a bipartite graph between positions and intervals, with edges meaning "interval can cover position".
+    # Then we need to select for each interval either inside or outside (or none) to cover all positions.
+    # This is a set cover which is NP-hard in general, but here the sets have special structure.
+
+    # However, constraints are large (N up to 1e6, M up to 2e5), so we need O(N+M) or O((N+M) log N).
+
+    # Let's consider greedy: 
+    # For each position, we need at least one covering interval.
+    # Suppose we try to cover using only inside covers. Then we need the union of chosen inside intervals = [1,N].
+    # That's a classic interval covering problem: choose minimal number of intervals to cover [1,N].
+    # But we can also use outside covers.
+
+    # Using outside cover of interval i covers all except [L_i,R_i]. So if we pick outside cover for i, then we only need to cover [L_i,R_i] with inside covers.
+    # So the problem reduces to: choose a set of intervals for outside cover, and then cover the intersection of their [L,R] with inside covers.
+
+    # Actually, if we pick multiple outside covers, the positions that remain uncovered are the intersection of all corresponding [L,R] (because each outside cover removes its complement).
+    # Wait: If we pick outside cover for i, it covers positions where j ∉ [L_i,R_i].
+    # If we pick outside cover for multiple intervals, the covered positions are union of those complements, i.e., positions that are outside at least one [L_i,R_i].
+    # The uncovered positions are the intersection of all [L_i,R_i] for which we chose outside cover.
+    # So let O be the set of intervals where we choose outside cover. Then uncovered positions are ∩_{i in O} [L_i,R_i].
+    # We must cover these uncovered positions using inside covers from intervals not in O (or in O? but if we choose outside for i, we cannot also choose inside for same i).
+
+    # So we need to choose O ⊆ {1..M} such that:
+    #   Let U = ∩_{i in O} [L_i,R_i] (if O empty, U = [1,N]).
+    #   We can cover U using inside covers from intervals in {1..M} \ O.
+    # Minimize |O| + (number of inside covers used).
+
+    # This is still complex.
+
+    # Let's think differently: Since cost is number of operations with cost 1 (operation 1 or 2), we want to minimize total count of non‑zero operations.
+    # So we want to use as few intervals as possible, each either inside or outside.
+
+    # Consider the complement: If we use no operation (all zero), then all positions remain 0 → fail.
+    # If we use exactly one interval i with inside cover, then only [L_i,R_i] become 1, rest remain 0 → fail unless [L_i,R_i] = [1,N].
+    # If we use exactly one interval i with outside cover, then all except [L_i,R_i] become 1, so [L_i,R_i] remain 0 → fail unless [L_i,R_i] empty, impossible.
+
+    # So we need at least two intervals.
+
+    # Let's try to see if we can always do with 2 intervals? Not always.
+
+    # Actually, known result: The minimal cost is either 0, 1, 2, or impossible.
+    # Cost 0: impossible because initial all zeros.
+    # Cost 1: possible only if there exists an interval with L=1 and R=N (inside cover) → then all become 1.
+    # Or if there exists an interval with L=1,R=N? Wait outside cover of [1,N] would cover nothing? Actually outside cover of [1,N] covers positions outside [1,N] which is empty, so covers nothing. So cost 1 only possible with inside cover of full range.
+
+    # Otherwise, cost 2 might be possible: pick two intervals such that their inside/outside combinations cover all.
+
+    # Let's check: Suppose we pick interval i with inside cover, interval j with outside cover.
+    # Then positions covered: inside i covers [L_i,R_i], outside j covers complement of [L_j,R_j].
+    # We need union = [1,N].
+    # That means [L_i,R_i] ∪ ( [1,L_j-1] ∪ [R_j+1,N] ) = [1,N].
+    # So [L_j,R_j] must be a subset of [L_i,R_i].
+    # And also [L_i,R_i] must cover the middle possibly.
+
+    # Similarly, two inside covers: union of two intervals must be [1,N].
+    # Two outside covers: union of complements must be [1,N] → intersection of the two intervals must be empty? Actually union of complements = complement of intersection. So we need complement of intersection = [1

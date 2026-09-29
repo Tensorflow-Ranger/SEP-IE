@@ -1,0 +1,35 @@
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+def task_func(mu, sigma, seed=0):
+    """
+    Draw a normal distribution using a 1000 samples, indicating the mean and standard deviation with a color bar showing their distribution.
+    
+    Parameters:
+    mu (float): Mean of the normal distribution.
+    sigma (float): Standard deviation of the normal distribution.
+    seed (int, optional): Random seed for reproducibility. Default is 0.
+    
+    Returns:
+    matplotlib.axes._axes.Axes: The Axes object of the plotted distribution.
+    """
+    np.random.seed(seed)
+    samples = np.random.normal(mu, sigma, 1000)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.kdeplot(x=samples, ax=ax, fill=True, cmap='viridis', alpha=0.7)
+    ax.axvline(mu, color='red', linestyle='--', label=f'Mean (μ) = {mu}')
+    ax.axvline(mu + sigma, color='orange', linestyle=':', label=f'μ + σ = {mu + sigma:.2f}')
+    ax.axvline(mu - sigma, color='orange', linestyle=':', label=f'μ - σ = {mu - sigma:.2f}')
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Density')
+    ax.set_title(f'Normal Distribution (μ={mu}, σ={sigma})')
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    norm = plt.Normalize(samples.min(), samples.max())
+    sm = plt.cm.ScalarMappable(cmap='viridis', norm=norm)
+    sm.set_array([])
+    cbar = fig.colorbar(sm, ax=ax)
+    cbar.set_label('Probability Density')
+    return ax
+```

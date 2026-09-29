@@ -1,0 +1,97 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [int(next(it)) for _ in range(N)]
+
+    # We need to find for each number x the largest i such that P_i > x and i < pos[x]
+    # Actually, we can think of it as: when moving x leftwards, each swap with a larger number costs i.
+    # Equivalent to: for each x, count how many numbers larger than x are to its left, and sum their positions.
+    # But summing positions directly is tricky. Let's think differently.
+
+    # Observation: The operation swaps adjacent elements with cost = index i.
+    # This is like bubble sort where each swap costs the left index.
+    # We want the minimum total cost to sort. This is equivalent to summing, for each inversion (i, j) with i<j and P[i]>P[j],
+    # the value i (because to fix this inversion we must swap the larger element leftwards across the smaller one,
+    # and each such swap will at some point happen at position i when the larger is at i and smaller at i+1).
+
+    # Actually, consider the process: we can simulate bubble sort by repeatedly moving the largest misplaced element left.
+    # The cost contributed by moving a particular value x leftwards from position p to position x-1 is sum of indices where swaps happen.
+    # Each time we swap x with a larger element? Wait, x is smaller than the elements it passes? No, when moving x leftwards,
+    # we swap with elements that are larger than x (because we want to place x in its correct spot, so elements to the left
+    # that are larger than x need to move right). So x will swap with each larger element to its left exactly once.
+    # The cost of such a swap is the position of the larger element at the moment of swap, which is exactly the original index
+    # of that larger element? Not exactly, because indices shift during the process.
+
+    # Let's think in terms of inversions: For each inversion (i, j) with i<j and P[i] > P[j], we need to swap P[i] and P[j] at some point.
+    # In bubble sort, they become adjacent exactly when the larger is at position j-1 and the smaller at j, and then they swap.
+    # The cost of that swap is j-1. So each inversion contributes j-1? But j is the original index of the smaller element?
+    # Not necessarily, because indices change.
+
+    # Better approach: Consider the final sorted array. For each number x, it starts at position pos[x] (1‑based) and ends at position x.
+    # To move it leftwards from pos[x] to x, it must cross over all numbers y that are larger than x and originally to the left of x.
+    # Each such crossing corresponds to a swap whose cost is the position of y at the moment of swap. But the positions of those y
+    # are decreasing as we move x left (because y moves right). However, the sum of the positions where swaps occur for a given pair (x, y)
+    # is actually the original position of y. Why? Because when x passes y, the swap happens exactly when y is at the position
+    # that was originally occupied by some element between them? Let's test with small examples.
+
+    # Let’s brute force for small N and see pattern. But we need an O(N log N) solution.
+
+    # Known trick: The total cost equals sum over all inversions (i, j) of i (the left index). Let's verify with N=3.
+    # Example: P = [2,1,3]. Inversions: (1,2) because 2>1. Cost according to formula = 1. Indeed, we swap positions 1 and 2 (cost 1) → sorted.
+    # Example: P = [3,2,1]. Inversions: (1,2),(1,3),(2,3). Sum i = 1+1+2 = 4. Let's simulate: 
+    # swap i=1 (cost 1) → [2,3,1]
+    # swap i=2 (cost 2) → [2,1,3]
+    # swap i=1 (cost 1) → [1,2,3] total cost 4. Works.
+
+    # So the answer is sum over inversions of the left index i (1‑based). We can compute this with a Fenwick tree that stores indices.
+    # For each element P[j] at position j (1‑based), we want to count how many numbers > P[j] are to its left, and sum their positions.
+    # Equivalent: iterate j from 1 to N, for current P[j], we want among already seen numbers those with value > P[j], sum their indices.
+    # Fenwick tree can maintain frequency of values, but here we need sum of indices for values > P[j].
+    # We can maintain a BIT over values where bit[v] = sum of indices of elements with value v that have been seen.
+    # Then for current P[j], we need sum over v from P[j]+1 to N of bit[v]. That gives total index sum of larger elements to the left.
+    # Add that to answer. Then update bit[P[j]] += j.
+
+    # Complexity O(N log N).
+
+    class Fenwick:
+        def __init__(self, n):
+            self.n = n
+            self.bit = [0] * (n + 2)
+        def add(self, idx, delta):
+            i = idx
+            while i <= self.n:
+                self.bit[i] += delta
+                i += i & -i
+        def sum(self, idx):
+            # sum up to idx inclusive
+            res = 0
+            i = idx
+            while i > 0:
+                res += self.bit[i]
+                i -= i & -i
+            return res
+        def range_sum(self, l, r):
+            # sum from l to r inclusive
+            if l > r:
+                return 0
+            return self.sum(r) - self.sum(l - 1)
+
+    bit = Fenwick(N)
+    ans = 0
+    for j in range(1, N + 1):
+        val = P[j - 1]
+        # sum of indices of already seen elements with value > val
+        larger_sum = bit.range_sum(val + 1, N)
+        ans += larger_sum
+        bit.add(val, j)
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

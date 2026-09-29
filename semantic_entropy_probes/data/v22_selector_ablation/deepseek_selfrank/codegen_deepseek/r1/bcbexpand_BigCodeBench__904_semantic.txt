@@ -1,0 +1,21 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+def task_func(d, keys=['x', 'y', 'z']):
+    if not d:
+        fig, ax = plt.subplots()
+        return ax
+    combined = {key: [] for key in keys}
+    for dictionary in d:
+        for key in keys:
+            if key in dictionary:
+                combined[key].append(dictionary[key])
+    fig, ax = plt.subplots()
+    for key in keys:
+        if combined[key]:
+            ax.plot(combined[key], label=key)
+    ax.legend()
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Value')
+    return ax
+```

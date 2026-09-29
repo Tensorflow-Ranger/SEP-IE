@@ -1,0 +1,95 @@
+```python
+import socket
+import select
+import queue
+from datetime import datetime, timedelta
+def task_func(
+    server_address="localhost", server_port=12345, buffer_size=1024, run_duration=5
+):
+    # Create a TCP/IP socket
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setblocking(0)
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    
+    # Bind the socket to the address and port
+    server.bind((server_address, server_port))
+    server.listen(5)
+    
+    # Sockets from which we expect to read
+    inputs = [server]
+    # Sockets to which we expect to write
+    outputs = []
+    # Outgoing message queues (socket:Queue)
+    message_queues = {}
+    # Track client connections for cleanup
+    clients = {}
+    
+    # Time when server should stop
+    end_time = datetime.now() + timedelta(seconds=run_duration)
+    
+    while inputs and datetime.now() < end_time:
+        # Wait for at least one socket to be ready for processing
+        readable, writable, exceptional = select.select(
+            inputs, outputs, inputs, 0.1
+        )
+        
+        # Handle readable sockets
+        for s in readable:
+            if s is server:
+                # A "readable" server socket is ready to accept a connection
+                connection, client_address = s.accept()
+                connection.setblocking(0)
+                inputs.append(connection)
+                # Give the connection a queue for data we want to send
+                message_queues[connection] = queue.Queue()
+                clients[connection] = client_address
+            else:
+                # Existing client socket has data to read
+                data = s.recv(buffer_size)
+                if data:
+                    # Append current time to received data
+                    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    response = data.decode('utf-8', errors='ignore').strip() + f" [{current_time}]"
+                    # Put the response in the socket's queue
+                    message_queues[s].put(response.encode('utf-8'))
+                    # Add to output list for writing
+                    if s not in outputs:
+                        outputs.append(s)
+                else:
+                    # Interpret empty result as closed connection
+                    if s in outputs:
+                        outputs.remove(s)
+                    inputs.remove(s)
+                    s.close()
+                    # Remove message queue
+                    del message_queues[s]
+                    del clients[s]
+        
+        # Handle writable sockets
+        for s in writable:
+            try:
+                next_msg = message_queues[s].get_nowait()
+            except queue.Empty:
+                # No messages waiting so stop checking for writability
+                outputs.remove(s)
+            else:
+                s.send(next_msg)
+        
+        # Handle exceptional conditions
+        for s in exceptional:
+            # Remove from all lists
+            inputs.remove(s)
+            if s in outputs:
+                outputs.remove(s)
+            s.close()
+            # Remove message queue
+            del message_queues[s]
+            if s in clients:
+                del clients[s]
+    
+    # Clean up all remaining sockets
+    for s in inputs:
+        s.close()
+    
+    return f"Server ran for {run_duration} seconds, handled {len(clients)} clients"
+```

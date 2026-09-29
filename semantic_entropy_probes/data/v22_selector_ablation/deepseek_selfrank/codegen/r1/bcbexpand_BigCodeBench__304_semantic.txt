@@ -1,0 +1,26 @@
+```python
+import pandas as pd
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+def task_func(df):
+    if df.empty:
+        return (0, 0)
+    # Convert lists into separate columns
+    df = df.apply(pd.Series.explode).reset_index(drop=True)
+    # Drop rows with missing values
+    df = df.dropna()
+    # Prepare features
+    X = df.select_dtypes(include=['number']).values
+    if X.shape[0] == 0 or X.shape[1] == 0:
+        return (0, 0)
+    # Apply PCA
+    pca = PCA()
+    explained_variance_ratio = pca.fit_transform(X).explained_variance_ratio_
+    # Create bar chart
+    fig, ax = plt.subplots()
+    ax.bar(range(len(explained_variance_ratio)), explained_variance_ratio)
+    ax.set_title('Explained Variance Ratio of Principal Components')
+    ax.set_xlabel('Principal Component')
+    ax.set_ylabel('Explained Variance Ratio')
+    return (explained_variance_ratio, ax)
+```

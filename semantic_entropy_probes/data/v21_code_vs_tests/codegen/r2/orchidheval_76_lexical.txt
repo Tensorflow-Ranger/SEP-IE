@@ -1,0 +1,18 @@
+```python
+def is_simple_power(x, n):
+    import math
+    if n == 1:
+        return x == 1
+    low = 0
+    high = x
+    while low <= high:
+        mid = (low + high) // 2
+        power = n ** mid
+        if power == x:
+            return True
+        elif power < x:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return False
+```

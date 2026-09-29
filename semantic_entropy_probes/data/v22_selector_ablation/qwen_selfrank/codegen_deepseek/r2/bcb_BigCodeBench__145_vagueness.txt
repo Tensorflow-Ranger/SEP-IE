@@ -1,0 +1,22 @@
+```python
+import csv
+from ipaddress import IPv4Network
+def task_func(ip_range, csv_path):
+    """
+    Generates a CSV file listing all addresses in the specified IP range.
+    Each IP address is written as a row in the CSV file.
+    
+    Parameters:
+    ip_range (str): The IP range in CIDR notation (e.g., '192.168.0.0/24').
+    csv_path (str): The path where the CSV file should be saved.
+    
+    Returns:
+    str: The path to the generated CSV file.
+    """
+    network = IPv4Network(ip_range)
+    with open(csv_path, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        for ip in network:
+            writer.writerow([str(ip)])
+    return csv_path
+```

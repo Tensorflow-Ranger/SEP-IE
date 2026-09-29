@@ -1,0 +1,36 @@
+```python
+import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+TARGET_VALUES = np.array([1, 3, 4])
+def task_func(df):
+    df = df.copy()
+    for col in df.columns:
+        df[col] = df[col].apply(lambda x: x if x in TARGET_VALUES else 0)
+    transformed_df = df.copy()
+    for col in df.columns:
+        col_data = df[col].values
+        if np.all(col_data == col_data[0]) and col_data.shape[0] > 0:
+            continue
+        positive_data = col_data[col_data > 0]
+        if len(positive_data) == 0:
+            continue
+        min_val = np.min(positive_data)
+        shift = 1 - min_val if min_val <= 0 else 0
+        try:
+            transformed_data, _ = stats.boxcox(col_data + shift)
+            transformed_df[col] = transformed_data
+        except:
+            continue
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for col in transformed_df.columns:
+        data = transformed_df[col].dropna()
+        if len(data) > 0:
+            data.plot.kde(ax=ax, label=col)
+    ax.legend()
+    ax.set_title('KDE Plots of Transformed Columns')
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Density')
+    plt.tight_layout()
+    return transformed_df, fig
+```

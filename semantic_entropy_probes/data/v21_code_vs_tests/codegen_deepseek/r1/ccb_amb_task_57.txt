@@ -1,0 +1,33 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:]))
+    arr.sort()
+    
+    max_val = arr[-1]
+    present = [False] * (max_val + 1)
+    for x in arr:
+        present[x] = True
+    
+    count = 0
+    # Iterate over possible A and C, compute B, check if B is present and between A and C
+    # Since B must be integer, (A + C) must be even
+    for i in range(n):
+        A = arr[i]
+        for j in range(i + 2, n):
+            C = arr[j]
+            total = A + C
+            if total % 2 == 0:
+                B = total // 2
+                if B > A and B < C and present[B]:
+                    count += 1
+    print(count)
+
+if __name__ == "__main__":
+    main()
+```

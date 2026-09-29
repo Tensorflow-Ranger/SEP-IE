@@ -1,0 +1,12 @@
+```python
+from collections import Counter
+import heapq
+# Constants
+LETTERS = list('abcdefghijklmnopqrstuvwxyz')
+def task_func(my_dict):
+    # Create a list of tuples (value, letter) and use heapq to find the 3 most common
+    most_common = heapq.nlargest(3, [(my_dict[letter], letter) for letter in LETTERS])
+    # Extract the letters from the tuples
+    most_common_letters = [letter for (value, letter) in most_common]
+    return most_common_letters
+```

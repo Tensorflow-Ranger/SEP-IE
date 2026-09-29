@@ -1,0 +1,43 @@
+```python
+def compare_one(a, b):
+    """
+    Create a function that takes different representing
+    real numbers, and returns the larger variable in its given variable type.
+    Return None if the values are equal.
+    """
+    def to_float(val):
+        if isinstance(val, (int, float)):
+            return float(val)
+        elif isinstance(val, str):
+            # Remove any thousand separators and replace decimal comma with dot
+            cleaned = val.replace(',', '').replace('.', '')
+            if ',' in val and '.' in val:
+                # If both comma and dot exist, assume comma is decimal if it appears last
+                if val.rfind(',') > val.rfind('.'):
+                    cleaned = val.replace('.', '').replace(',', '.')
+                else:
+                    cleaned = val.replace(',', '')
+            elif ',' in val:
+                # Comma as decimal separator
+                cleaned = val.replace(',', '.')
+            try:
+                return float(cleaned)
+            except ValueError:
+                # If cleaning fails, try direct conversion (will fail for invalid strings)
+                return float(val)
+        else:
+            raise TypeError(f"Unsupported type: {type(val)}")
+
+    try:
+        a_float = to_float(a)
+        b_float = to_float(b)
+    except (ValueError, TypeError):
+        return None
+
+    if a_float > b_float:
+        return a
+    elif b_float > a_float:
+        return b
+    else:
+        return None
+```

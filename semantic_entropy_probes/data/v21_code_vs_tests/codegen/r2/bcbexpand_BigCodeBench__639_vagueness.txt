@@ -1,0 +1,18 @@
+```python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+def task_func(num_samples=100, num_features=5):
+    # Generate random data
+    np.random.seed(42)
+    data = np.random.rand(num_samples, num_features)
+    # Create DataFrame with specified column names
+    df = pd.DataFrame(data, columns=[f'Feature{i+1}' for i in range(num_features)])
+    # Calculate pairwise correlation matrix
+    corr = df.corr()
+    # Visualize the correlation matrix using a heatmap
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(corr, annot=True, fmt=".2f", cmap='coolwarm', square=True)
+    # Return the DataFrame and the Axes object
+    return df, plt.gca()
+```

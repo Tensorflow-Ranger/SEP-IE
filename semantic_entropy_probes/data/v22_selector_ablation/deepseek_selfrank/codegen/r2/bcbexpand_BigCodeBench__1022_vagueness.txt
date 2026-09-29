@@ -1,0 +1,23 @@
+```python
+import pandas as pd
+import os
+from datetime import datetime
+from pandas.errors import EmptyDataError
+def task_func(csv_file_path, column_name, date_format="%Y-%m-%d"):
+    if not os.path.exists(csv_file_path):
+        raise FileNotFoundError(f"The file {csv_file_path} was not found.")
+    try:
+        df = pd.read_csv(csv_file_path)
+    except EmptyDataError:
+        return pd.DataFrame()
+    if column_name not in df.columns:
+        raise ValueError(f"The column {column_name} is not present in the CSV file.")
+    try:
+        df[column_name] = pd.to_datetime(df[column_name], format=date_format)
+    except ValueError as e:
+        raise ValueError(f"Error converting dates in column {column_name}: {e}")
+    today = datetime.today().date()
+    df[column_name] = df[column_name].dt.date
+    filtered_df = df[df[column_name] == today]
+    return filtered_df.sort_values(by=column_name)
+```

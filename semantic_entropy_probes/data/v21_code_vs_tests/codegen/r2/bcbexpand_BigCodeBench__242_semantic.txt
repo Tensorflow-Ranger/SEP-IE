@@ -1,0 +1,35 @@
+```python
+import cv2
+import matplotlib.pyplot as plt
+def task_func(image_path, kernel_size):
+    try:
+        # Check if kernel_size is a positive integer
+        if not isinstance(kernel_size, int) or kernel_size <= 0:
+            raise ValueError("kernel_size must be a positive integer")
+        
+        # Read the image
+        image = cv2.imread(image_path)
+        if image is None:
+            raise FileNotFoundError("The specified image file does not exist.")
+        
+        # Convert image to RGB for matplotlib
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        
+        # Apply blur using a square kernel
+        blurred_image = cv2.GaussianBlur(image, (kernel_size, kernel_size), 0)
+        
+        # Create subplots for original and blurred images
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5))
+        ax1.imshow(image)
+        ax1.set_title('Original Image')
+        ax2.imshow(blurred_image)
+        ax2.set_title('Blurred Image')
+        plt.tight_layout()
+        
+        return (blurred_image, ax1, ax2)
+    
+    except FileNotFoundError as e:
+        raise e
+    except ValueError as e:
+        raise e
+```

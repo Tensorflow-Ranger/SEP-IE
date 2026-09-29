@@ -1,0 +1,71 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(product_dict, product_keys):
+    """
+    Create a profit report for a list of products based on a specific product dictionary that includes the quantity, price, and profit of each product. Additionally, calculate the average price and profit for all considered products, and plot a bar chart of the profit for each product, combining duplicates before calculating averages.
+    
+    Parameters:
+    - product_dict (dict): Dictionary with product names as keys and dictionaries of 'quantity', 'price', 'profit' as values.
+    - product_keys (list): List of product names to include in the report.
+    
+    Returns:
+    - tuple: A tuple containing:
+        - DataFrame: A pandas DataFrame with columns ['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit'].
+        - Axes: A matplotlib Axes object representing the plotted bar chart of profit for each product (None if no products).
+    """
+    if not product_keys:
+        return pd.DataFrame(columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit']), None
+    
+    filtered_data = {}
+    for key in product_keys:
+        if key in product_dict:
+            if key not in filtered_data:
+                filtered_data[key] = {
+                    'quantity': product_dict[key]['quantity'],
+                    'price': product_dict[key]['price'],
+                    'profit': product_dict[key]['profit']
+                }
+            else:
+                filtered_data[key]['quantity'] += product_dict[key]['quantity']
+                filtered_data[key]['profit'] += product_dict[key]['profit']
+    
+    if not filtered_data:
+        return pd.DataFrame(columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit']), None
+    
+    total_price = 0
+    total_profit = 0
+    count = 0
+    for data in filtered_data.values():
+        total_price += data['price']
+        total_profit += data['profit']
+        count += 1
+    
+    avg_price = total_price / count
+    avg_profit = total_profit / count
+    
+    report_data = []
+    for product, data in filtered_data.items():
+        report_data.append({
+            'Product': product,
+            'Quantity': data['quantity'],
+            'Price': data['price'],
+            'Profit': data['profit'],
+            'Average Price': avg_price,
+            'Average Profit': avg_profit
+        })
+    
+    df = pd.DataFrame(report_data)
+    
+    fig, ax = plt.subplots()
+    ax.bar(df['Product'], df['Profit'])
+    ax.set_xlabel('Product')
+    ax.set_ylabel('Profit')
+    ax.set_title('Profit per Product')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    
+    return df, ax
+```

@@ -1,0 +1,68 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+    B = [int(next(it)) for _ in range(N)]
+    C = [int(next(it)) for _ in range(N)]
+
+    # We need to flip bits where A[i] != B[i]
+    # Each operation flips exactly one bit, then pays sum of all current A[k] * C[k]
+    # Let total = sum_{k=1..N} A[k] * C[k] initially.
+    # Flipping A[i] changes total by: new_total = total + delta_i, where
+    # delta_i = (1 - 2*A[i]) * C[i]   (since 0->1 adds C[i], 1->0 subtracts C[i])
+    # After flipping, we pay new_total as cost.
+    # So if we flip bits in order i1, i2, ..., im, the total cost is:
+    # total_0 + (total_0 + delta_i1) + (total_0 + delta_i1 + delta_i2) + ... + (total_0 + sum_{j=1..m} delta_ij)
+    # = m * total_0 + sum_{k=1..m} (m - k + 1) * delta_{ik}
+    # = m * total_0 + sum_{k=1..m} k * delta_{i_{m-k+1}}  (re-indexing)
+    # To minimize, we should flip bits with larger delta_i first if delta_i > 0,
+    # and with smaller delta_i first if delta_i < 0? Wait, delta_i can be positive or negative.
+    # Let's rewrite: total cost = m * total_0 + sum_{j=1..m} (m - j + 1) * delta_{i_j}
+    # = m * total_0 + sum_{j=1..m} j * delta_{i_{m-j+1}}.
+    # If we sort the deltas in descending order, and assign coefficients m, m-1, ..., 1 to them,
+    # we maximize the sum (since larger coefficients multiply larger deltas).
+    # But we want to minimize total cost, so we should assign larger coefficients to smaller deltas.
+    # Actually, we want to minimize: sum_{j=1..m} (m - j + 1) * delta_{i_j}.
+    # Let x_j = m - j + 1, decreasing from m to 1.
+    # So we want to pair larger x with smaller delta to minimize product sum.
+    # Thus sort deltas ascending, then pair x descending (i.e., x1=m with smallest delta, x2=m-1 with next smallest, ...).
+    # That's equivalent to sorting deltas ascending and computing sum_{j=1..m} (m - j + 1) * delta_j.
+    # But careful: the order of flipping matters only for the coefficients, not for the final A.
+    # So we can choose any permutation of the m flips; the above pairing gives the minimum.
+    # Therefore:
+    # 1. Compute initial total = sum A[k] * C[k]
+    # 2. For each i where A[i] != B[i], compute delta_i = (1 - 2*A[i]) * C[i]
+    # 3. Let m = number of such i.
+    # 4. Sort list of delta_i ascending.
+    # 5. Compute extra = sum_{j=1..m} (m - j + 1) * delta_sorted[j-1]
+    # 6. Answer = m * total + extra
+
+    total = sum(A[k] * C[k] for k in range(N))
+    deltas = []
+    for i in range(N):
+        if A[i] != B[i]:
+            # flip needed
+            delta = (1 - 2 * A[i]) * C[i]
+            deltas.append(delta)
+
+    m = len(deltas)
+    if m == 0:
+        print(0)
+        return
+
+    deltas.sort()
+    extra = 0
+    for j in range(m):
+        extra += (m - j) * deltas[j]  # j from 0 to m-1, coefficient = m - j
+    ans = m * total + extra
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

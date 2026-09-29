@@ -1,0 +1,42 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1 + n]))
+    
+    max_val = 10 ** 6
+    present = [False] * (max_val + 1)
+    for x in arr:
+        present[x] = True
+    
+    count = 0
+    # Iterate over possible A and B such that A < B
+    # We'll iterate over all pairs (A, B) from the set and check if C = A * B is in the set
+    # Since S_i <= 10^6, A * B can be up to 10^12, but we only care if it's <= 10^6 to be in S.
+    # So we can break early when A * B > max_val.
+    
+    # Sort to make iteration easier (not strictly needed but helps with early break)
+    arr.sort()
+    m = len(arr)
+    
+    for i in range(m):
+        A = arr[i]
+        if A * A > max_val:
+            break
+        for j in range(i + 1, m):
+            B = arr[j]
+            C = A * B
+            if C > max_val:
+                break
+            if present[C]:
+                count += 1
+    
+    print(count)
+
+if __name__ == "__main__":
+    solve()
+```

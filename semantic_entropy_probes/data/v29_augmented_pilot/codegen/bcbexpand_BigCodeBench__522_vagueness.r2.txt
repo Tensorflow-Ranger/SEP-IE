@@ -1,0 +1,27 @@
+```python
+import collections
+import matplotlib.pyplot as plt
+def task_func(data):
+    if not data:
+        return None
+    score_dict = collections.defaultdict(list)
+    for d in data:
+        for student, score in d.items():
+            if score is None:
+                continue
+            if score < 0:
+                raise ValueError("Invalid score found")
+            score_dict[student].append(score)
+    avg_scores = {}
+    for student, scores in score_dict.items():
+        avg_scores[student] = sum(scores) / len(scores)
+    sorted_students = sorted(avg_scores.keys())
+    sorted_avgs = [avg_scores[student] for student in sorted_students]
+    colors = ['red', 'yellow', 'green', 'blue', 'purple']
+    fig, ax = plt.subplots()
+    bars = ax.bar(sorted_students, sorted_avgs, color=colors[:len(sorted_students)])
+    ax.set_xlabel('Student')
+    ax.set_ylabel('Average Score')
+    ax.set_title('Average Student Scores')
+    return ax
+```

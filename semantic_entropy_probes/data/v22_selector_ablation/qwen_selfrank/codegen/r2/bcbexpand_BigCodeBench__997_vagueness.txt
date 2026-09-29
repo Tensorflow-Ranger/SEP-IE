@@ -1,0 +1,24 @@
+```python
+import urllib.request
+import os
+import zipfile
+# Constants
+TARGET_DIR = "downloaded_files"
+TARGET_ZIP_FILE = "downloaded_files.zip"
+def task_func(url):
+    # Ensure the target directory exists
+    os.makedirs(TARGET_DIR, exist_ok=True)
+    
+    # Download the zip file
+    urllib.request.urlretrieve(url, TARGET_ZIP_FILE)
+    
+    # Extract the zip file to the target directory
+    with zipfile.ZipFile(TARGET_ZIP_FILE, 'r') as zip_ref:
+        zip_ref.extractall(TARGET_DIR)
+    
+    # Delete the zip file after extraction
+    os.remove(TARGET_ZIP_FILE)
+    
+    # Return the path of the extracted directory
+    return os.path.abspath(TARGET_DIR)
+```

@@ -1,0 +1,21 @@
+```python
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+def task_func(df1, df2, column1="feature1", column2="feature2"):
+    # Merge the datasets on the 'id' column using an inner join
+    merged_df = pd.merge(df1, df2, on='id', how='inner')
+    
+    # Extract the feature columns for clustering
+    X = merged_df[[column1, column2]]
+    
+    # Apply KMeans clustering with n_init=10
+    kmeans = KMeans(n_init=10).fit(X)
+    labels = kmeans.labels_
+    
+    # Create a scatter plot
+    fig, ax = plt.subplots()
+    scatter = ax.scatter(merged_df[column1], merged_df[column2], c=labels, cmap='viridis')
+    
+    # Return the labels and the Axes object
+    return labels, ax
+```

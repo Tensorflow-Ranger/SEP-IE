@@ -1,0 +1,20 @@
+```python
+import inspect
+import types
+import math
+def task_func(f):
+    arg_info = inspect.signature(f)
+    num_args = len(arg_info.parameters)
+    name = f.__name__
+    root_args = math.sqrt(num_args)
+    lambda_count = 0
+    for param in arg_info.parameters.values():
+        if param.default is not inspect.Parameter.empty:
+            if isinstance(param.default, types.LambdaType) and param.default.__name__ == '<lambda>':
+                lambda_count += 1
+    return {
+        'name': name,
+        'root_args': root_args,
+        'lambda_count': lambda_count
+    }
+```

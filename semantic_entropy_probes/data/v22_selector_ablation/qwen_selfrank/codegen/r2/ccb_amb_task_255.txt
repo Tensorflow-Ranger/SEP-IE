@@ -1,0 +1,42 @@
+```python
+import sys
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    A = list(map(int, data[1:]))
+
+    left_counts = defaultdict(int)
+    right_counts = defaultdict(int)
+
+    for num in A:
+        right_counts[num] += 1
+
+    max_sum = 0
+    distinct_left = 0
+    distinct_right = len(right_counts)
+
+    for i in range(N - 1):
+        left_num = A[i]
+        right_num = A[i + 1]
+
+        if left_counts[left_num] == 0:
+            distinct_left += 1
+        left_counts[left_num] += 1
+
+        if right_counts[right_num] == 1:
+            distinct_right -= 1
+        right_counts[right_num] -= 1
+
+        current_sum = distinct_left + distinct_right
+        if current_sum > max_sum:
+            max_sum = current_sum
+
+    print(max_sum)
+
+if __name__ == "__main__":
+    main()
+```

@@ -1,0 +1,99 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    a = list(map(int, data[1:1 + n]))
+
+    # Count how many indices have A_i >= 2
+    cnt_ge2 = 0
+    for val in a:
+        if val >= 2:
+            cnt_ge2 += 1
+
+    # If all A_i are 1, then the number of moves is N, and Fennec starts.
+    # If there is at least one A_i >= 2, the game can be prolonged.
+    # The key is: each index with A_i >= 2 gives an extra move beyond the initial 1.
+    total_moves = sum(a)
+    # The parity of total_moves determines the winner if both play optimally.
+    # But careful: the game ends when S becomes empty, which happens exactly when
+    # the last element is removed from S. That occurs when we take the last token
+    # from the last index that was in S.
+    # Actually, known result: the winner is determined by parity of total_moves
+    # minus the number of indices with A_i >= 2? Let's think simpler.
+
+    # Let's simulate the optimal strategy:
+    # Each index i contributes A_i tokens. The first time we take from i, we add i to S.
+    # The last time we take from i (when its count goes to 0), we do not remove i from S.
+    # The game ends when S becomes empty, which means every index that was ever added
+    # has been "closed" by taking its last token? Wait, S never becomes empty during play
+    # until the very last move: because after the first move, S is non-empty until the
+    # last move that removes the last index from S.
+    # Actually, the rule says: "If S = ∅, the game ends". So the game ends immediately
+    # after a move that makes S empty. That can only happen if we take the last token
+    # from the only index currently in S.
+    # Therefore, the game is essentially about taking tokens until each index that was
+    # ever taken from has been fully depleted, and the moment the last such index is
+    # depleted, the game ends.
+    # This is equivalent to: we have N piles, each with A_i tokens. On a move, you choose
+    # a pile with at least 1 token, remove one token, and if that pile hasn't been chosen
+    # before in the game, you "mark" it (add to S). The game ends when all marked piles
+    # are empty. But note: once a pile is marked, it stays marked.
+    # So the game ends when the last token is taken from the set of piles that were ever
+    # chosen. Which piles will be chosen? Both players will try to control the parity.
+    # Known result (from AtCoder problem ARC 059?): The winner is determined by whether
+    # the sum of all A_i is odd or even, provided that there is at least one A_i >= 2.
+    # If all A_i == 1, then the moves are exactly N, and first player wins if N is odd.
+    # Let's test small cases:
+    # N=1, A=[1]: moves: Fennec takes from pile 1, S={1}, then A1=0, but S not empty.
+    # Actually, after that move, S is not empty, but there are no moves left (A1=0).
+    # Wait, the problem guarantees there is always a move until game ends. So if A1=0
+    # but S is not empty, is that allowed? The condition for a move is "choose i such that A_i >= 1".
+    # If all A_i are 0, no move can be made, but S is not empty. However, the problem statement
+    # says: "it can be proven that until a winner is determined and the game ends, players can always make a move".
+    # That means the game ends exactly when S becomes empty, and at that moment all A_i are 0.
+    # So in the case N=1, A=[1]: Fennec takes from pile 1, A1 becomes 0, S becomes {1}.
+    # Now it's Snuke's turn, but there is no i with A_i >= 1, so the rule "players can always make a move"
+    # is violated? Contradiction. Let's re-read: "If S = ∅, the game ends". The game ends only when S is empty.
+    # So here S is not empty, so game continues. But no moves possible. This contradicts the proven statement.
+    # Therefore, such a state cannot occur. That means the game must be constructed so that when S is non-empty,
+    # there is at least one move. That implies that if a pile is in S, it must still have tokens left?
+    # Not necessarily: a pile could be in S and have 0 tokens, but then there must be another pile with tokens.
+    # So the only deadlock situation is when all piles have 0 tokens but S is non-empty. That is impossible
+    # because the last move that takes the last token from the last pile in S will also remove that pile from S?
+    # Wait, no: removing a token from a pile does not remove it from S. The rule only adds to S, never removes.
+    # So S only grows. Then S becomes empty only if no pile has ever been chosen? That's impossible after first move.
+    # I'm confused. Let's check the original problem statement (AtCoder ABC 317 F?).
+    # Actually, I recall a known problem: the game ends when S becomes empty. That happens when for every i in S,
+    # A_i has become 0 AND we have just taken the last token from the last i in S? No, S never shrinks.
+    # Ah! The statement "If S = ∅, the game ends" might be a misprint? Possibly it means "If S = {1,2,...,N}",
+    # i.e., all indices are in S? But that doesn't match "S=∅".
+    # Let's search memory: This is AtCoder ABC 279 F? Actually it's ARC 149 B? I think I've seen this.
+    # Let's derive from scratch with small N.
+
+    # Let's think: S starts empty. After first move, S is non-empty. The game ends when S becomes empty again.
+    # How can S become empty? The only way is if we remove elements from S. But the rules never remove from S.
+    # Therefore S can never become empty after the first move. So the game would never end. Contradiction.
+    # Therefore, the statement "If S = ∅, the game ends" must be interpreted as "If S = {1,2,...,N}", i.e.,
+    # all indices are in S. That makes sense: once every index has been chosen at least once, the game ends
+    # when the last token is taken. But the problem says "S=∅", which is likely a typo in the English translation.
+    # Looking at known problems: There's an AtCoder problem where the game ends when S becomes the set of all indices.
+    # Let's assume that's the case: the game ends when S = {1,2,...,N}. Then the winner is determined by parity of
+    # total moves. Because each index must be chosen at least once. The total number of moves is sum A_i.
+    # The game ends after the move that adds the last index to S (if it wasn't already added) and makes S complete.
+    # But careful: The game ends when S becomes full, not necessarily after the move that adds the last index.
+    # Actually, if S becomes full during a move, the game ends immediately after that move.
+    # So the total number of moves is fixed: sum A_i. Because until S is full, there is always a move (since if some
+    # index not in S has A_i>=1, you can choose it; if all indices are in S, game ends). So the game proceeds until
+    # all tokens are taken? No, because if all indices are in S but there are still tokens left, game ends anyway.
+    # Wait, if S is full, game ends regardless of remaining tokens. So the game could end before all tokens are taken.
+    # That changes things.
+
+    # Given the confusion, I'll rely on the known solution for the actual AtCoder problem "Fennec vs. Snuke" (ABC 317 F?).
+    # Searching memory: The solution is: if max(A) == 1, then winner is Fennec if N % 2 == 1 else Snuke.
+    # Otherwise, winner is Fennec if sum(A) % 2 == 1 else Snuke.
+    # Let's test with N=1, A=[1]: max=1, N%2=1 => Fennec. That matches intuition: only one move, Fennec takes it and wins.
+    # N=2, A=[1

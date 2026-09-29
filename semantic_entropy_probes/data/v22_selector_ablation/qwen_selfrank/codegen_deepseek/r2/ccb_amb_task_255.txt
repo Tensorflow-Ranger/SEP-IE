@@ -1,0 +1,43 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+
+    # total distinct in whole array
+    total_distinct = len(set(A))
+
+    # prefix distinct counts
+    seen = set()
+    prefix_distinct = [0] * N
+    for i in range(N):
+        seen.add(A[i])
+        prefix_distinct[i] = len(seen)
+
+    # suffix distinct counts
+    seen.clear()
+    suffix_distinct = [0] * N
+    for i in range(N - 1, -1, -1):
+        seen.add(A[i])
+        suffix_distinct[i] = len(seen)
+
+    # try all splits
+    best = 0
+    for i in range(N - 1):  # split after index i (0-based)
+        cur = prefix_distinct[i] + suffix_distinct[i + 1]
+        if cur > best:
+            best = cur
+        # early exit if we can't do better
+        if best == total_distinct * 2:
+            break
+
+    print(best)
+
+if __name__ == "__main__":
+    solve()
+```

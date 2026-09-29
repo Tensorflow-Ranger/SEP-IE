@@ -1,0 +1,150 @@
+```python
+import sys
+import bisect
+
+def solve() -> None:
+    it = iter(sys.stdin.read().split())
+    N = int(next(it))
+    W = int(next(it))
+
+    blocks = []
+    for _ in range(N):
+        x = int(next(it))
+        y = int(next(it))
+        blocks.append((x, y))
+
+    # Preprocess: sort blocks by (x, y)
+    blocks_by_x = [[] for _ in range(W + 1)]
+    for idx, (x, y) in enumerate(blocks):
+        blocks_by_x[x].append((y, idx))
+
+    for lst in blocks_by_x:
+        lst.sort()
+
+    # For each column, compute for each block the time it disappears
+    disappear_time = [0] * N
+    for x in range(1, W + 1):
+        col = blocks_by_x[x]
+        m = len(col)
+        if m == 0:
+            continue
+        # stack of (y, index)
+        stack = []
+        for pos in range(m - 1, -1, -1):
+            y, idx = col[pos]
+            # while stack not empty and top block is exactly one above current
+            while stack and stack[-1][0] == y + 1:
+                _, top_idx = stack.pop()
+                disappear_time[top_idx] = y + 1  # disappears at time y+1
+            stack.append((y, idx))
+        # remaining in stack never disappear (they reach bottom and stay until row full)
+        # Actually they disappear when bottom row is full, but we handle that separately.
+        # For now mark them as never disappearing (large sentinel).
+        for y, idx in stack:
+            disappear_time[idx] = 10**18  # never disappear by column rule
+
+    # Now handle bottom-row full removal.
+    # For each column, find the lowest block (smallest y) that never disappears by column rule.
+    # These are the candidates to be in bottom row at some time.
+    # Actually, we need to know for each block when it reaches y=1 and then possibly removed by row-full.
+
+    # Let's compute for each block the time it reaches y=1 (if ever).
+    reach_bottom_time = [0] * N
+    for x in range(1, W + 1):
+        col = blocks_by_x[x]
+        m = len(col)
+        if m == 0:
+            continue
+        # Process from bottom to top
+        # The lowest block reaches y=1 at time y-1 (since it must fall y-1 steps).
+        # The next block above it can only start falling after the block below disappears.
+        # But careful: a block disappears when the cell below is empty, which happens
+        # when the block below has disappeared (by column rule) or has fallen further.
+        # Actually the falling is sequential per time step: all blocks that can fall do so simultaneously.
+        # However, the described process is equivalent to: each block falls until it either
+        # reaches y=1 or sits on top of another block that never disappears.
+        # The time a block reaches y=1 is: its original y minus 1, minus the number of blocks
+        # below it that disappear before it would reach y=1? Not exactly.
+
+        # Let's think differently: simulate column independently.
+        # Sort column by y ascending.
+        # For block i (from bottom), let prev_y be y of block i-1 (or 0 if i=0).
+        # The block i can fall until it either hits y=prev_y+1 or reaches y=1.
+        # So the lowest y it can reach is max(1, prev_y+1).
+        # The time to reach that y is original_y - target_y.
+        # If target_y == 1, then it reaches bottom at that time.
+        # If target_y > 1, it never reaches bottom (sits on another block).
+        prev_y = 0
+        for y, idx in col:
+            target_y = max(1, prev_y + 1)
+            reach_bottom_time[idx] = y - target_y
+            if target_y == 1:
+                # reaches bottom
+                pass
+            else:
+                # sits on another block, never reaches bottom
+                reach_bottom_time[idx] = 10**18  # never reaches bottom
+            prev_y = y
+
+    # But we need disappear_time considering row-full removal.
+    # A block that reaches bottom at time t (so at time t it first appears at y=1)
+    # will stay there until the whole bottom row is full, then be removed.
+    # When does bottom row become full? When for every column x, there is some block at y=1.
+    # That happens at time T_full = max over x of (time when column x first has a block at y=1).
+    # Actually, we need the earliest time when all columns have a block at y=1 simultaneously.
+    # Since blocks reach bottom at different times, they wait until all columns are ready.
+    # So T_full = max_{x} min_{block in column x} (time it reaches y=1).
+    # If a column has no block that ever reaches y=1, then bottom row never fills.
+
+    # Compute for each column the earliest time a block reaches y=1.
+    col_first_bottom_time = [10**18] * (W + 1)
+    for x in range(1, W + 1):
+        col = blocks_by_x[x]
+        for y, idx in col:
+            if reach_bottom_time[idx] < 10**18:  # reaches bottom
+                t_reach = reach_bottom_time[idx]
+                if t_reach < col_first_bottom_time[x]:
+                    col_first_bottom_time[x] = t_reach
+
+    # If any column has no block reaching bottom, T_full = infinity.
+    T_full = max(col_first_bottom_time[1:])
+    if T_full == 10**18:
+        T_full = 10**18  # never full
+
+    # Now for each block that reaches bottom at time t_reach, it disappears at time max(t_reach, T_full).
+    # Because it appears at y=1 at time t_reach, stays until row full (at T_full if T_full >= t_reach),
+    # then removed immediately at that time.
+    # Actually removal happens at integer times when condition satisfied, but query is at T+0.5.
+    # So block exists at T+0.5 if T < disappearance_time.
+
+    # Compute final disappearance time for each block.
+    final_disappear = [0] * N
+    for idx in range(N):
+        if disappear_time[idx] < 10**18:
+            # disappears earlier by column rule
+            final_disappear[idx] = disappear_time[idx]
+        else:
+            # may disappear by row full
+            t_reach = reach_bottom_time[idx]
+            if t_reach < 10**18:
+                # reaches bottom
+                final_disappear[idx] = max(t_reach, T_full)
+            else:
+                # never reaches bottom, never disappears
+                final_disappear[idx] = 10**18
+
+    # Answer queries
+    Q = int(next(it))
+    out_lines = []
+    for _ in range(Q):
+        T = int(next(it))
+        A = int(next(it)) - 1
+        if T < final_disappear[A]:
+            out_lines.append("Yes")
+        else:
+            out_lines.append("No")
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,31 @@
+```python
+from random import randint
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+# Constants
+TEAMS = ['Team A', 'Team B', 'Team C', 'Team D', 'Team E']
+PENALTY_COST = 1000  # in dollars
+def task_func(goals, penalties):
+    # Generate random goals and penalties for each team
+    data = {
+        'Team': TEAMS,
+        'Goals': [randint(0, goals) for _ in TEAMS],
+        'Penalties': [randint(0, penalties) for _ in TEAMS]
+    }
+    df = pd.DataFrame(data)
+    
+    # Calculate total cost for penalties
+    df['Penalty Cost'] = df['Penalties'] * PENALTY_COST
+    
+    # Create seaborn plots
+    plt.figure(figsize=(12, 5))
+    ax1 = sns.barplot(x='Team', y='Goals', data=df, palette="viridis")
+    ax1.set_title('Goals Scored by Team')
+    
+    plt.figure(figsize=(12, 5))
+    ax2 = sns.barplot(x='Team', y='Penalty Cost', data=df, palette="magma")
+    ax2.set_title('Penalty Cost Incurred by Team')
+    
+    return df, [ax1, ax2]
+```

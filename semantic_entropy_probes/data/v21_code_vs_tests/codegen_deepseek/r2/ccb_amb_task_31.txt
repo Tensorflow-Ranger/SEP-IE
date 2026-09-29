@@ -1,0 +1,103 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    A = data[1].strip()
+    length = 3 ** N
+
+    # Helper: majority of three bits
+    def majority(a: str, b: str, c: str) -> str:
+        # Since only 0 and 1, we can count
+        cnt0 = (a == '0') + (b == '0') + (c == '0')
+        return '0' if cnt0 >= 2 else '1'
+
+    # Recursive function to compute min changes to make the root become target
+    def dfs(start: int, depth: int, target: str) -> int:
+        if depth == 0:
+            # single character
+            return 0 if A[start] == target else 1
+
+        block_size = 3 ** depth
+        step = block_size // 3
+        # Three children
+        cost0 = dfs(start, depth - 1, '0')
+        cost1 = dfs(start + step, depth - 1, '0')
+        cost2 = dfs(start + 2 * step, depth - 1, '0')
+        cost_for_zero = cost0 + cost1 + cost2
+
+        cost0 = dfs(start, depth - 1, '1')
+        cost1 = dfs(start + step, depth - 1, '1')
+        cost2 = dfs(start + 2 * step, depth - 1, '1')
+        cost_for_one = cost0 + cost1 + cost2
+
+        # To get majority '0', at least two children must be '0'
+        # We can change children to '0' with minimal cost
+        # Sort costs for making a child '0' vs '1'
+        zero_costs = []
+        one_costs = []
+        # For each child, compute cost to make it '0' and cost to make it '1'
+        for offset in (0, step, 2 * step):
+            zero_cost = dfs(start + offset, depth - 1, '0')
+            one_cost = dfs(start + offset, depth - 1, '1')
+            zero_costs.append(zero_cost)
+            one_costs.append(one_cost)
+
+        # To get majority '0', we need at least two zeros.
+        # For each child we can either pay zero_cost (leave/change to 0) or one_cost (leave/change to 1).
+        # We want min total cost such that number of zeros >= 2.
+        best_zero = float('inf')
+        # brute force over 3 children (only 8 possibilities)
+        for mask in range(8):
+            zeros = 0
+            total = 0
+            for i in range(3):
+                if mask >> i & 1:
+                    total += zero_costs[i]
+                    zeros += 1
+                else:
+                    total += one_costs[i]
+            if zeros >= 2:
+                best_zero = min(best_zero, total)
+
+        # Similarly for majority '1'
+        best_one = float('inf')
+        for mask in range(8):
+            ones = 0
+            total = 0
+            for i in range(3):
+                if mask >> i & 1:
+                    total += one_costs[i]
+                    ones += 1
+                else:
+                    total += zero_costs[i]
+            if ones >= 2:
+                best_one = min(best_one, total)
+
+        if target == '0':
+            return best_zero
+        else:
+            return best_one
+
+    # First compute current root value without changes
+    def get_root(start: int, depth: int) -> str:
+        if depth == 0:
+            return A[start]
+        block_size = 3 ** depth
+        step = block_size // 3
+        a = get_root(start, depth - 1)
+        b = get_root(start + step, depth - 1)
+        c = get_root(start + 2 * step, depth - 1)
+        return majority(a, b, c)
+
+    current_root = get_root(0, N)
+    target_root = '1' if current_root == '0' else '0'
+    answer = dfs(0, N, target_root)
+    print(answer)
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,22 @@
+```python
+from collections import Counter
+import heapq
+# Constants
+LETTERS = list('abcdefghijklmnopqrstuvwxyz')
+def task_func(my_dict):
+    """
+    Create a dictionary in which the keys are letters and the values are random integers. 
+    Find the 3 most common letters in the dictionary based on their values.
+    
+    Parameters:
+    my_dict (dict): The input dictionary with letters as keys and integers as values.
+    
+    Returns:
+    list: The 3 most common letters.
+    """
+    if not my_dict:
+        return []
+    counter = Counter(my_dict)
+    most_common = counter.most_common(3)
+    return [letter for letter, _ in most_common]
+```

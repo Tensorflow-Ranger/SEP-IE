@@ -1,0 +1,18 @@
+```python
+import collections
+import random
+import json
+# Constants
+PREFICES = ['EMP$$', 'MAN$$', 'DEV$$', 'HR$$']
+LEVELS = ['Junior', 'Mid', 'Senior']
+def task_func(department_data):
+    result = {}
+    for prefix in PREFICES:
+        if prefix in department_data:
+            count = department_data[prefix]
+            levels = [random.choice(LEVELS) for _ in range(count)]
+            result[prefix] = levels
+        else:
+            result[prefix] = []
+    return json.dumps(result)
+```

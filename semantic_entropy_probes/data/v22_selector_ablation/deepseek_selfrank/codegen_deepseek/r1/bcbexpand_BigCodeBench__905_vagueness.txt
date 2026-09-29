@@ -1,0 +1,16 @@
+```python
+import os
+import glob
+import csv
+def task_func(directory_path, file_extension='.csv'):
+    result = {}
+    pattern = os.path.join(directory_path, '*' + file_extension)
+    for file_path in glob.glob(pattern):
+        file_name = os.path.basename(file_path)
+        key = os.path.splitext(file_name)[0]
+        with open(file_path, 'r', newline='', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            rows = [row for row in reader]
+        result[key] = rows
+    return result
+```

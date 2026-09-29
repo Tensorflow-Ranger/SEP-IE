@@ -1,0 +1,29 @@
+```python
+import pandas as pd
+import random
+
+def task_func(data, columns=['Name', 'Age', 'Occupation'], fill_missing=False, num_range=(0, 100), seed=None):
+    if seed is not None:
+        random.seed(seed)
+    
+    rows = []
+    for row_tuple in data:
+        row = list(row_tuple)
+        if len(row) < len(columns):
+            row.extend([None] * (len(columns) - len(row)))
+        elif len(row) > len(columns):
+            row = row[:len(columns)]
+        rows.append(row)
+    
+    df = pd.DataFrame(rows, columns=columns)
+    
+    if fill_missing:
+        for col in df.columns:
+            if pd.api.types.is_numeric_dtype(df[col]):
+                mask = df[col].isna()
+                if mask.any():
+                    random_values = [random.randint(num_range[0], num_range[1]) for _ in range(mask.sum())]
+                    df.loc[mask, col] = random_values
+    
+    return df
+```

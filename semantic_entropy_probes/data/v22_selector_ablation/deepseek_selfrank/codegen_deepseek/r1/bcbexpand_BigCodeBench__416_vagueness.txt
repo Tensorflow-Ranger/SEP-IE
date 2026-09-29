@@ -1,0 +1,18 @@
+```python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+def task_func(data, column="c"):
+    if not data:
+        return None
+    df = pd.DataFrame(data)
+    if column in df.columns:
+        df = df.drop(column, axis=1)
+    numeric_df = df.select_dtypes(include=['number'])
+    if numeric_df.empty:
+        return None
+    corr_matrix = numeric_df.corr()
+    fig, ax = plt.subplots()
+    sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap='coolwarm', ax=ax)
+    return ax
+```

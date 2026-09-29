@@ -1,0 +1,16 @@
+```python
+from collections import Counter
+import re
+def task_func(result):
+    url_pattern = re.compile(r'^https?://')
+    url_values = []
+    for d in result:
+        for key, value in d.items():
+            if isinstance(key, str) and url_pattern.match(key):
+                url_values.append(value)
+    if not url_values:
+        return {}
+    counter = Counter(url_values)
+    most_common = counter.most_common(1)
+    return {most_common[0][0]: most_common[0][1]}
+```

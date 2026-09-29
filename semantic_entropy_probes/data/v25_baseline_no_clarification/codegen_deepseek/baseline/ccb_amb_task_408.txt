@@ -1,0 +1,104 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.buffer.read().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    M = int(next(it))
+    L = [0] * M
+    R = [0] * M
+    for i in range(M):
+        L[i] = int(next(it))
+        R[i] = int(next(it))
+
+    # We need to cover every position with at least one "set to 1" operation.
+    # Operation 1 sets positions inside [L,R] to 1.
+    # Operation 2 sets positions outside [L,R] to 1.
+    # Operation 0 does nothing.
+    # We can think of each operation as offering two possible covering choices:
+    #   - cover the interval [L,R] (op1)
+    #   - cover the complement (1..L-1) and (R+1..N) (op2)
+    # We must choose for each i either op0 (cost 0, cover nothing), op1 (cost 1, cover interval),
+    # or op2 (cost 1, cover complement) so that every position 1..N is covered by at least one chosen op1 or op2.
+    # Minimize total cost = number of chosen op1/op2.
+
+    # Transform to a hitting set / covering problem on N elements by M*2 possible covering sets.
+    # This is NP-hard in general, but here the sets have special structure:
+    #   op1: a single interval [L,R]
+    #   op2: two intervals [1, L-1] and [R+1, N] (could be empty)
+    # We can think of each operation as offering two intervals (one for op1, two for op2).
+    # We need to pick a collection of intervals (from either choice of some operations) that cover [1,N].
+    # Minimize number of operations used (each operation contributes at most one chosen interval set).
+
+    # Observation: If we fix which operations we use (say k of them), we can choose for each used operation
+    # either its interval or its complement intervals. This is still hard.
+
+    # Alternative viewpoint: Let’s define for each position j the set of operations that can cover it with op1,
+    # and the set of operations that can cover it with op2. We need to assign each operation a choice (0,1,2)
+    # such that for each j, there exists an operation i with either (choice=1 and j in [Li,Ri]) or (choice=2 and j not in [Li,Ri]).
+    # This is a 2-SAT-like condition but with covering.
+
+    # Known solution approach (from similar problems): The minimal cost equals the minimum number of intervals
+    # (from the given M intervals) needed to cover [1,N] when we are allowed to also use the complements.
+    # But using a complement is equivalent to covering the whole line except that interval, which is two intervals.
+    # Actually, using op2 on [L,R] covers everything except [L,R]. So if we pick op2 for interval [L,R],
+    # we cover all positions outside [L,R]. So the only positions not covered are those inside [L,R].
+    # Thus, picking op2 for [L,R] forces us to cover [L,R] by other operations (op1 of other intervals).
+
+    # This becomes: choose a subset S of operations where we use op1 (cover their intervals),
+    # and a subset T of operations where we use op2 (cover the complements of their intervals),
+    # such that union of all chosen intervals (from op1) and all chosen complement intervals (from op2) = [1,N].
+    # Minimize |S|+|T|.
+
+    # Let’s denote for each operation i, its interval I_i = [L_i,R_i].
+    # If we pick op2 for i, we cover J_i = [1, L_i-1] ∪ [R_i+1, N].
+    # The union of J_i over i in T is the complement of the intersection of I_i over i in T.
+    # Because J_i = complement of I_i. So union of J_i = complement of intersection of I_i.
+    # So positions covered by T are those not in ∩_{i in T} I_i.
+    # Therefore, positions not covered by T are exactly ∩_{i in T} I_i.
+    # Those must be covered by S (op1 intervals).
+    # So we need ∩_{i in T} I_i ⊆ union_{i in S} I_i.
+    # Minimize |S|+|T|.
+
+    # If T is empty, then we just need S to cover [1,N] with intervals I_i.
+    # That’s a classic interval covering problem: min number of given intervals to cover [1,N].
+    # If T is nonempty, let X = ∩_{i in T} I_i. Since each I_i is an interval, intersection of intervals is also an interval
+    # (possibly empty). Let that intersection be [a,b]. Then we need S to cover [a,b].
+    # So total cost = |T| + (min intervals from {I_i} to cover [a,b]).
+    # We can try all possible intersections of a subset T? Too many.
+
+    # But note: intersection of intervals is determined by the maximum left endpoint and minimum right endpoint among T.
+    # So T corresponds to choosing some operations, taking max L and min R, giving intersection [maxL, minR] if maxL <= minR,
+    # else empty. If empty, then J_i already cover everything (since complement of empty set is whole [1,N]), so S can be empty.
+    # So minimal cost could be |T| if we can find T such that intersection of their I_i is empty.
+    # That means there exists a set of intervals whose intersection is empty. That is equivalent to there exist two intervals
+    # that do not intersect? Actually, intersection empty means maxL > minR. So we need to find smallest |T| such that
+    # maxL > minR. That’s like picking a set of intervals with no common point.
+    # Minimal |T| for that is 2 if there exist two disjoint intervals. But we can also take more.
+    # So minimal cost could be 2 if we find two disjoint intervals, then pick op2 for both, their complements cover everything.
+    # Wait: If we pick op2 for two disjoint intervals I1 and I2, then J1 = complement of I1, J2 = complement of I2.
+    # Union of J1 and J2 = complement of (I1 ∩ I2). Since I1 and I2 disjoint, I1 ∩ I2 = empty, so union = whole [1,N].
+    # So cost 2 suffices if there exist two disjoint intervals.
+    # What if no two intervals are disjoint? Then all intervals intersect pairwise, meaning they have a common point
+    # (by Helly's theorem in 1D: if a family of intervals pairwise intersect, then all intersect at a common point).
+    # So intersection of all intervals is non-empty. Then for any T, intersection of I_i for i in T is non-empty (since all intersect).
+    # So we cannot get empty intersection with any T. Then we must rely on S to cover the whole line or cover the intersection.
+    # If all intervals share a point p, then picking op2 for any single interval I_i leaves J_i covering all except I_i.
+    # Since p ∈ I_i, p is not covered by that single op2. So we need S to cover p. So minimal cost at least 1+1=2.
+    # Could we do with cost 1? Cost 1 means we pick either one op1 or one op2.
+    # One op1 covers its interval I_i, but since all intervals intersect, I_i may not be whole [1,N], so fails.
+    # One op2 covers complement of I_i, which misses I_i, so fails unless I_i is empty (impossible). So cost 1 impossible.
+    # So minimal cost is at least 2.
+
+    # Therefore, the problem reduces to:
+    # 1. If we can cover [1,N] with a single op1 interval (i.e., some interval [L,R] with L=1 and R=N), then cost 1 possible.
+    # 2. Else, if there exist two disjoint intervals, then cost 2 possible (pick op2 for both).
+    # 3. Else, all intervals intersect pairwise, then we need to check if we can cover [1,N] with two operations:
+    #    either two op1 intervals that together cover [1,N], or one op1 and one op2, or two op2.
+    #    But since all intersect, two op2: if we pick op2 for two intervals I1 and I2, their intersection is non-empty,
+    #    so union of complements = complement of intersection ≠ whole [1,N]. So two op2 not enough.
+    #    One op1 and one op2: op1 covers I_a, op2 covers complement of I_b. Union = I_a ∪ (complement of I_b).
+   

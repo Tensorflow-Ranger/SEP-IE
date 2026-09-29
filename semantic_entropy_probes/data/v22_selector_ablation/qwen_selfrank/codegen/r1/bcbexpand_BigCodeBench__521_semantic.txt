@@ -1,0 +1,26 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+def task_func(data_list):
+    # Combine the list of dictionaries into a DataFrame
+    df = pd.DataFrame(data_list)
+    
+    # Transpose the DataFrame to have tests as rows and students as columns
+    df = df.T
+    
+    # Rename the index to 'Test' and columns to 'Student'
+    df.index.name = 'Test'
+    df.columns.name = 'Student'
+    
+    # Plot the data
+    ax = df.plot(kind='line', marker='o', linestyle='-', figsize=(10, 6))
+    
+    # Set labels and title
+    ax.set_xlabel('Test Number')
+    ax.set_ylabel('Score')
+    ax.set_title('Student Scores Over Multiple Tests')
+    
+    # Show the plot
+    plt.tight_layout()
+    return ax
+```

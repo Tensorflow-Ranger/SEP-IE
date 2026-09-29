@@ -1,0 +1,22 @@
+```python
+import pandas as pd
+import random
+def task_func(data, columns=['Name', 'Age', 'Occupation'], fill_missing=False, num_range=(0, 100), seed=None):
+    if seed is not None:
+        random.seed(seed)
+    rows = []
+    for tup in data:
+        row = list(tup)
+        while len(row) < len(columns):
+            row.append(None)
+        rows.append(row)
+    df = pd.DataFrame(rows, columns=columns)
+    if fill_missing:
+        for col in df.columns:
+            if pd.api.types.is_numeric_dtype(df[col]):
+                missing_mask = df[col].isna()
+                if missing_mask.any():
+                    random_values = [random.randint(num_range[0], num_range[1]) for _ in range(missing_mask.sum())]
+                    df.loc[missing_mask, col] = random_values
+    return df
+```

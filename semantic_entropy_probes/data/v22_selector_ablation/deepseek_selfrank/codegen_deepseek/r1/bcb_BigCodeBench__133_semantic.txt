@@ -1,0 +1,56 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+
+def task_func(df):
+    """
+    Normalize the last column of the DataFrame using MinMaxScaler from sklearn and plot the normalized data, excluding any non-numeric values in the last column.
+    
+    Parameters:
+    df (pd.DataFrame): The input DataFrame.
+    
+    Returns:
+    pd.DataFrame: A pandas DataFrame where the last column has been normalized.
+    plt.Axes: A Matplotlib Axes object representing the plot of the normalized last column.
+    
+    Raises:
+    ValueError: If the input is not a DataFrame or if the DataFrame is empty.
+    """
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("Input must be a pandas DataFrame")
+    if df.empty:
+        raise ValueError("DataFrame is empty")
+    
+    df_clean = df.copy()
+    last_col = df_clean.columns[-1]
+    
+    # Convert last column to numeric, coercing errors to NaN
+    df_clean[last_col] = pd.to_numeric(df_clean[last_col], errors='coerce')
+    
+    # Drop rows where the last column is NaN (non-numeric or missing)
+    df_clean = df_clean.dropna(subset=[last_col])
+    
+    if df_clean.empty:
+        raise ValueError("No numeric data in the last column after cleaning")
+    
+    # Extract the last column for normalization
+    data_to_normalize = df_clean[[last_col]]
+    
+    # Normalize using MinMaxScaler
+    scaler = MinMaxScaler()
+    normalized_data = scaler.fit_transform(data_to_normalize)
+    
+    # Update the DataFrame with normalized values
+    df_clean[last_col] = normalized_data
+    
+    # Plot the normalized data
+    fig, ax = plt.subplots()
+    ax.plot(df_clean.index, df_clean[last_col], marker='o', linestyle='-')
+    ax.set_title(f'Normalized Data of {last_col}')
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Normalized Value')
+    ax.grid(True)
+    
+    return df_clean, ax
+```

@@ -1,0 +1,23 @@
+```python
+from collections import Counter
+
+def main():
+    import sys
+    input = sys.stdin.read
+    cards = list(map(int, input().split()))
+    count = Counter(cards)
+    
+    # Check for possible full house combinations
+    # We need exactly two distinct numbers: one appearing 3 times, the other 2 times
+    # We can have multiple counts, so we check all possible pairs
+    values = list(count.values())
+    for i in range(len(values)):
+        for j in range(len(values)):
+            if i != j and values[i] >= 3 and values[j] >= 2:
+                print("Yes")
+                return
+    print("No")
+
+if __name__ == "__main__":
+    main()
+```

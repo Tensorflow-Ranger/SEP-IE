@@ -1,0 +1,28 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1+n]))
+
+    last_seen = {}
+    min_len = n + 1
+
+    for i, val in enumerate(arr):
+        if val in last_seen:
+            length = i - last_seen[val] + 1
+            if length < min_len:
+                min_len = length
+        last_seen[val] = i
+
+    if min_len == n + 1:
+        print(-1)
+    else:
+        print(min_len)
+
+if __name__ == "__main__":
+    main()
+```

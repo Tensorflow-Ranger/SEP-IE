@@ -1,0 +1,25 @@
+```python
+import sys
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    A = list(map(int, data[1:]))
+    
+    prefix_sum = [0] * (N + 1)
+    for i in range(N):
+        prefix_sum[i + 1] = prefix_sum[i] + A[i]
+    
+    max_sum = 0
+    for i in range(1, N):
+        left = prefix_sum[i]
+        right = prefix_sum[N] - prefix_sum[i]
+        max_sum = max(max_sum, left + right)
+    
+    print(max_sum)
+
+if __name__ == "__main__":
+    main()
+```

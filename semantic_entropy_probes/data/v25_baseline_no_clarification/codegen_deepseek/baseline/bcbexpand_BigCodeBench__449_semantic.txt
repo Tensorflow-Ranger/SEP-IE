@@ -1,0 +1,46 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+def task_func(data: pd.DataFrame) -> (pd.DataFrame, list):
+    """
+    Standardizes a pandas DataFrame using sklearn's StandardScaler and draws histograms 
+    for each feature (20 bins) showing the standardized values.
+    
+    Parameters:
+    data (pd.DataFrame): Input DataFrame with numerical features.
+    
+    Returns:
+    standardized_data (pd.DataFrame): The standardized data.
+    axes_list (list): A list of matplotlib Axes objects for each feature histogram.
+    """
+    if not isinstance(data, pd.DataFrame):
+        raise ValueError("Input must be a pandas DataFrame")
+    
+    if data.empty:
+        raise ValueError("DataFrame is empty")
+    
+    scaler = StandardScaler()
+    standardized_array = scaler.fit_transform(data)
+    standardized_data = pd.DataFrame(standardized_array, columns=data.columns, index=data.index)
+    
+    axes_list = []
+    num_features = standardized_data.shape[1]
+    
+    fig, axes = plt.subplots(1, num_features, figsize=(4*num_features, 4))
+    if num_features == 1:
+        axes = [axes]
+    
+    for idx, column in enumerate(standardized_data.columns):
+        ax = axes[idx]
+        ax.hist(standardized_data[column], bins=20, edgecolor='black')
+        ax.set_title(f'Standardized {column}')
+        ax.set_xlabel('Value')
+        ax.set_ylabel('Frequency')
+        axes_list.append(ax)
+    
+    plt.tight_layout()
+    plt.show()
+    
+    return standardized_data, axes_list
+```

@@ -1,0 +1,138 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+
+    # Step 1: total distinct count
+    total_distinct = len(set(A))
+
+    # Step 2: prefix distinct counts
+    prefix_distinct = [0] * N
+    seen = set()
+    for i in range(N):
+        seen.add(A[i])
+        prefix_distinct[i] = len(seen)
+
+    # Step 3: suffix distinct counts
+    suffix_distinct = [0] * N
+    seen.clear()
+    for i in range(N - 1, -1, -1):
+        seen.add(A[i])
+        suffix_distinct[i] = len(seen)
+
+    # Step 4: compute best middle segment distinct count for each j
+    # middle segment is A[i+1..j], we need its distinct count for all i<j
+    # We'll process j from 1 to N-2, maintaining best prefix distinct for i < j
+    # Actually we need: for fixed j, maximize (prefix_distinct[i] + middle_distinct(i+1,j) + suffix_distinct[j+1])
+    # Let’s precompute for each j the best value of prefix_distinct[i] + middle_distinct(i+1,j)
+    # middle_distinct(i+1,j) = total distinct in A[i+1..j]
+    # We can compute it as: distinct in A[0..j] minus distinct in A[0..i] plus correction for overlap?
+    # Not straightforward. Better: process j and maintain a data structure of candidates i.
+
+    # Alternative approach: fix middle segment start s = i+1, end e = j.
+    # Then answer = prefix_distinct[s-1] + middle_distinct(s,e) + suffix_distinct[e+1]
+    # We need to maximize over 1 <= s <= e <= N-2, with s-1 >=0, e+1 <= N-1.
+
+    # Let’s rewrite: for each middle segment [l, r] (1-indexed, l>=2, r<=N-1, length>=1),
+    # value = prefix_distinct[l-2] + distinct(A[l-1..r-1]) + suffix_distinct[r]
+    # We'll iterate r from 1 to N-2 (0-indexed r), and maintain best for each l.
+
+    # We can use a sweep: for each r, we want best over l <= r of (prefix_distinct[l-2] + distinct(A[l-1..r-1]))
+    # Let’s define f[l] = prefix_distinct[l-2] (for l>=2), and we update as r increases.
+
+    # When we increase r by 1, we add A[r] to all segments ending at r.
+    # For each l, distinct(A[l-1..r]) = distinct(A[l-1..r-1]) + (1 if A[r] is new in that segment else 0).
+    # So we need to know for each l, whether A[r] appeared in A[l-1..r-1].
+    # The last occurrence of A[r] before r determines which l's already have A[r].
+    # Let prev[r] = last index < r where A[r] appears, or -1 if none.
+    # Then for l <= prev[r]+1, A[r] is already in segment, else it's new.
+
+    # So we can maintain a segment tree over l (2..N-1) storing candidate value = f[l] + distinct(A[l-1..r-1]).
+    # Initially r = 1 (0-indexed), segments are [l-1,0] length? Actually we start r=1 means middle segment ends at index 1.
+    # Let's shift indices to 0‑based for implementation.
+
+    # Let’s define:
+    # L = left index of middle segment (0‑based), 1 <= L <= N-3? Wait, middle must be non-empty and leave room for prefix and suffix.
+    # Actually constraints: prefix non-empty => i >= 1 (1‑based) => L >= 1 (0‑based, since i = L-1).
+    # suffix non-empty => j <= N-2 (1‑based) => r <= N-3 (0‑based, since j = r).
+    # Let’s keep 0‑based: prefix A[0..i], middle A[i+1..j], suffix A[j+1..N-1].
+    # i from 0 to N-3, j from i+1 to N-2.
+    # So middle segment indices [i+1, j] inclusive.
+    # Let l = i+1 (start of middle), r = j (end of middle).
+    # Then l from 1 to N-2, r from l to N-2.
+    # Value = prefix_distinct[i] + middle_distinct(l,r) + suffix_distinct[r+1].
+    # Since i = l-1, value = prefix_distinct[l-1] + middle_distinct(l,r) + suffix_distinct[r+1].
+
+    # We'll iterate r from 1 to N-2, and for each r maintain best over l <= r of (prefix_distinct[l-1] + middle_distinct(l,r)).
+    # Then candidate = that best + suffix_distinct[r+1].
+
+    # Build prev array.
+    last_pos = [-1] * (N + 1)  # 1‑based values
+    prev = [-1] * N
+    for idx, val in enumerate(A):
+        prev[idx] = last_pos[val]
+        last_pos[val] = idx
+
+    # Segment tree for range max and range add.
+    size = N  # we'll index l from 0 to N-1, but l>=1 actually
+    seg = [0] * (4 * size)
+    lazy = [0] * (4 * size)
+
+    def propagate(node, left, right):
+        if lazy[node] != 0:
+            seg[node] += lazy[node]
+            if left != right:
+                lazy[node * 2] += lazy[node]
+                lazy[node * 2 + 1] += lazy[node]
+            lazy[node] = 0
+
+    def update_range(node, left, right, ql, qr, delta):
+        propagate(node, left, right)
+        if qr < left or right < ql:
+            return
+        if ql <= left and right <= qr:
+            lazy[node] += delta
+            propagate(node, left, right)
+            return
+        mid = (left + right) // 2
+        update_range(node * 2, left, mid, ql, qr, delta)
+        update_range(node * 2 + 1, mid + 1, right, ql, qr, delta)
+        seg[node] = max(seg[node * 2], seg[node * 2 + 1])
+
+    def query_max(node, left, right, ql, qr):
+        propagate(node, left, right)
+        if qr < left or right < ql:
+            return -10**18
+        if ql <= left and right <= qr:
+            return seg[node]
+        mid = (left + right) // 2
+        return max(
+            query_max(node * 2, left, mid, ql, qr),
+            query_max(node * 2 + 1, mid + 1, right, ql, qr)
+        )
+
+    # Initialize: for each l (1..N-2), base = prefix_distinct[l-1]
+    # because middle_distinct(l, r) for r = l-1 is 0 (empty? Actually r starts at l, so we'll start r = l).
+    # We'll start r = 1, and for l > r, segment invalid. So we only consider l <= r.
+    # We'll build seg tree where position l stores prefix_distinct[l-1] for l>=1.
+    # But we also need to handle l=0? l=0 means middle starts at 0, but then prefix empty, not allowed.
+    # So we only care l from 1 to N-2.
+    # Let's build initial values for l=1..N-2.
+    for l in range(1, N - 1):
+        update_range(1, 0, size - 1, l, l, prefix_distinct[l - 1])
+
+    best = 0
+    # Iterate r from 1 to N-2
+    for r in range(1, N - 1):
+        # Now middle segment ends at r.
+        # For all l <= r, we need to add 1 to those l where A[r] is new in segment [l, r].
+        # That is l > prev[r] (0‑based). Because if prev[r] >= l, then A[r] already appeared.
+        # So add 1 to l in [prev[r]+1, r].
+        p = prev[r]
+        update_range(1, 0, size -

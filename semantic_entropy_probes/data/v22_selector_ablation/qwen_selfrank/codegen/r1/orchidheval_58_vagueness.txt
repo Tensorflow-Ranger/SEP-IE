@@ -1,0 +1,19 @@
+```python
+def common(l1: list, l2: list):
+    """Return sorted common elements for two lists."""
+    import bisect
+    l1.sort()
+    l2.sort()
+    common_elements = []
+    i = j = 0
+    while i < len(l1) and j < len(l2):
+        if l1[i] == l2[j]:
+            common_elements.append(l1[i])
+            i += 1
+            j += 1
+        elif l1[i] < l2[j]:
+            i += 1
+        else:
+            j += 1
+    return common_elements
+```

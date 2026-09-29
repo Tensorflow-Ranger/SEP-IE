@@ -1,0 +1,25 @@
+```python
+from datetime import datetime
+import random
+import matplotlib.pyplot as plt
+def task_func(date_str):
+    """
+    Generates a list of random integers, where the count of integers equals the day of the month in the provided date,
+    then generates a line plot of these integers and returns the Axes object of the plot.
+    
+    Parameters:
+    date_str (str): A date string in the format 'YYYY-MM-DD'.
+    
+    Returns:
+    matplotlib.axes.Axes: The Axes object containing the plot.
+    """
+    date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+    day_of_month = date_obj.day
+    random_ints = [random.randint(0, 100) for _ in range(day_of_month)]
+    fig, ax = plt.subplots()
+    ax.plot(random_ints)
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Random Value')
+    ax.set_title(f'Random Integers for Day {day_of_month}')
+    return ax
+```

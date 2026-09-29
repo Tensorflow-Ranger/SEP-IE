@@ -1,0 +1,9 @@
+```python
+import re
+import pandas as pd
+def task_func(input_df):
+    # Remove all special characters, punctuation, and spaces, preserving digits
+    input_df['clean_text'] = input_df['text'].apply(lambda x: re.sub(r'[^a-zA-Z0-9]', '', x))
+    input_df['text_length'] = input_df['clean_text'].str.len()
+    return input_df
+```

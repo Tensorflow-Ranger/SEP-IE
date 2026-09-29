@@ -1,0 +1,28 @@
+```python
+import random
+import string
+import collections
+# Constants
+VALID_CHARACTERS = string.ascii_letters + string.digits
+def task_func(n_strings, string_length):
+    """
+    Generate n random strings of a specified length, count the frequency of each character across all strings, and return the result as a dictionary.
+    
+    Parameters:
+    n_strings (int): Number of random strings to generate.
+    string_length (int): Length of each random string.
+    
+    Returns:
+    dict: A dictionary containing character counts with characters as keys and their frequencies as values.
+    """
+    if n_strings <= 0 or string_length <= 0:
+        return {}
+    
+    all_chars = []
+    for _ in range(n_strings):
+        random_string = ''.join(random.choice(VALID_CHARACTERS) for _ in range(string_length))
+        all_chars.extend(list(random_string))
+    
+    char_count = collections.Counter(all_chars)
+    return dict(char_count)
+```

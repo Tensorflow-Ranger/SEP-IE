@@ -1,0 +1,14 @@
+```python
+import pandas as pd
+import random
+def task_func(data, columns=['Name', 'Age', 'Occupation'], fill_missing=False, num_range=(0, 100), seed=None):
+    if seed is not None:
+        random.seed(seed)
+    df = pd.DataFrame(data, columns=columns)
+    for col in df.columns:
+        if fill_missing and pd.api.types.is_numeric_dtype(df[col]):
+            df[col] = df[col].fillna(random.uniform(num_range[0], num_range[1]))
+        else:
+            df[col] = df[col].fillna(None)
+    return df
+```

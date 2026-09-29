@@ -1,0 +1,25 @@
+```python
+from collections import Counter
+import numpy as np
+import matplotlib.pyplot as plt
+import itertools
+def task_func(list_of_menuitems, title="Menu Distribution", color="blue", width=1.0):
+    # Flatten the nested list using itertools.chain
+    flat_list = list(itertools.chain.from_iterable(list_of_menuitems))
+    # Count occurrences of each menu item
+    counts = Counter(flat_list)
+    # Get sorted list of unique menu items
+    sorted_items = sorted(counts.keys())
+    # Get corresponding frequencies
+    frequencies = [counts[item] for item in sorted_items]
+    # Create a figure and axes
+    fig, ax = plt.subplots()
+    # Plot the histogram
+    ax.bar(sorted_items, frequencies, color=color, width=width)
+    # Set labels and title
+    ax.set_xlabel("Menu Items")
+    ax.set_ylabel("Frequency")
+    ax.set_title(title)
+    # Return the Axes object
+    return ax
+```

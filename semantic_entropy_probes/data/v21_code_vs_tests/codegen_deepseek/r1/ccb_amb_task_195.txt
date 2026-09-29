@@ -1,0 +1,41 @@
+```python
+import sys
+
+def solve() -> None:
+    it = iter(sys.stdin.read().split())
+    H = int(next(it))
+    W = int(next(it))
+    rows = [int(next(it), 2) for _ in range(H)]
+
+    # Count how many rows have each column pattern
+    from collections import Counter
+    freq = Counter(rows)
+
+    # Precompute popcounts for all possible masks (0..2^W-1)
+    popcount = [0] * (1 << W)
+    for i in range(1, 1 << W):
+        popcount[i] = popcount[i >> 1] + (i & 1)
+
+    # For each column subset (mask), compute the total sum if we flip those columns
+    # and then optionally flip rows to minimize ones.
+    # Let original row value = r.
+    # After flipping columns in mask, row becomes r ^ mask.
+    # Then we can choose to flip the row (i.e., invert all bits) or not.
+    # The contribution of this row is min(popcount[r ^ mask], W - popcount[r ^ mask]).
+    # We can precompute for each mask the total contribution over all distinct row patterns.
+
+    best = H * W  # upper bound
+    for mask in range(1 << W):
+        total = 0
+        for pattern, cnt in freq.items():
+            after = pattern ^ mask
+            ones = popcount[after]
+            total += cnt * min(ones, W - ones)
+        if total < best:
+            best = total
+
+    print(best)
+
+if __name__ == "__main__":
+    solve()
+```

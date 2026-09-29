@@ -1,0 +1,20 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.fft import fft
+def task_func(signal, precision=2, seed=777):
+    # Flatten the signal if it's multidimensional
+    signal_flat = signal.flatten()
+    # Compute the FFT
+    fft_result = fft(signal_flat)
+    # Round the transformed signal to the specified precision
+    fft_rounded = np.round(fft_result, precision)
+    # Create subplots for original and transformed signals
+    fig, (ax1, ax2) = plt.subplots(2, 1)
+    ax1.plot(signal_flat)
+    ax1.set_title('Original Signal')
+    ax2.plot(fft_rounded)
+    ax2.set_title('Transformed Signal')
+    # Return the transformed signal as a numpy array and the tuple of Axes objects
+    return fft_rounded, (ax1, ax2)
+```

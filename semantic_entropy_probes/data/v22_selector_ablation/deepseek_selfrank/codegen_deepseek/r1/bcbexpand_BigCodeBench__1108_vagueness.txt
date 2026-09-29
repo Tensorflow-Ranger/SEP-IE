@@ -1,0 +1,22 @@
+```python
+from collections import Counter
+import re
+
+def task_func(result):
+    pattern = re.compile(
+        r'^(https?:\/\/)?'  # http:// or https://
+        r'([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}'  # domain
+        r'(\/[^\s]*)?$'  # optional path
+    )
+    url_counts = Counter()
+    for item in result:
+        if isinstance(item, dict):
+            for key, value in item.items():
+                if isinstance(key, str) and pattern.fullmatch(key):
+                    url_counts[value] += 1
+    if not url_counts:
+        return {}
+    max_count = url_counts.most_common(1)[0][1]
+    most_common = {value: count for value, count in url_counts.items() if count == max_count}
+    return most_common
+```

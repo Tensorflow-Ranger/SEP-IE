@@ -1,0 +1,22 @@
+```python
+def starts_one_ends(n):
+    """
+    Given a positive integer n, return the count of the numbers of n-digit
+    positive integers that either start or end with the digit 1.
+    """
+    if n == 1:
+        return 1  # Only the number 1 itself
+    
+    # Total n-digit numbers: from 10^(n-1) to 10^n - 1
+    # Numbers starting with 1: first digit fixed as 1, remaining n-1 digits any (0-9)
+    count_start_with_1 = 10 ** (n - 1)
+    
+    # Numbers ending with 1: last digit fixed as 1, first digit cannot be 0 (1-9), middle n-2 digits any (0-9)
+    count_end_with_1 = 9 * 10 ** (n - 2)
+    
+    # Numbers both starting and ending with 1: first digit 1, last digit 1, middle n-2 digits any (0-9)
+    count_both = 10 ** (n - 2)
+    
+    # Inclusion-exclusion
+    return count_start_with_1 + count_end_with_1 - count_both
+```

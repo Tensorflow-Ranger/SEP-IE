@@ -1,0 +1,34 @@
+```python
+import numpy as np
+import random
+import itertools
+import pandas as pd
+# Constants
+PLANETS = [
+    "Mercury",
+    "Venus",
+    "Earth",
+    "Mars",
+    "Jupiter",
+    "Saturn",
+    "Uranus",
+    "Neptune",
+]
+ELEMENTS = [
+    "Hydrogen",
+    "Helium",
+    "Oxygen",
+    "Carbon",
+    "Nitrogen",
+    "Magnesium",
+    "Silicon",
+    "Iron",
+    "Nickel",
+]
+def task_func():
+    pairs = [f"{planet}:{element}" for planet in PLANETS for element in ELEMENTS]
+    random.shuffle(pairs)
+    reshaped_pairs = np.array(pairs).reshape(len(PLANETS), len(ELEMENTS))
+    df = pd.DataFrame(reshaped_pairs, columns=ELEMENTS, index=PLANETS)
+    return df
+```

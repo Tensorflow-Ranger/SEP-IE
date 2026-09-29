@@ -1,0 +1,22 @@
+```python
+import os
+import shutil
+def task_func(path, delimiter="/"):
+    if not isinstance(path, str) or not path:
+        raise ValueError("Invalid path: must be a non-empty string.")
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"The path '{path}' does not exist.")
+    
+    components = path.split(delimiter)
+    result = []
+    
+    for i in range(len(components)):
+        current_dir = delimiter.join(components[:i+1])
+        if not os.path.exists(current_dir):
+            raise FileNotFoundError(f"The directory '{current_dir}' does not exist.")
+        
+        total, used, free = shutil.disk_usage(current_dir)
+        result.append((current_dir, {'total': total, 'used': used, 'free': free}))
+    
+    return result
+```

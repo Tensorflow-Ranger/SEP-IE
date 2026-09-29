@@ -1,0 +1,26 @@
+```python
+from collections import Counter
+import heapq
+# Constants
+LETTERS = list('abcdefghijklmnopqrstuvwxyz')
+def task_func(my_dict):
+    """
+    Find the 3 most common letters in the dictionary based on their integer values.
+    
+    Parameters:
+    my_dict (dict): A dictionary with letters as keys and integers as values.
+    
+    Returns:
+    list: The 3 letters with the largest values, in descending order of values.
+    """
+    if not my_dict:
+        return []
+    
+    # Get the top 3 items by value using heapq.nlargest
+    top_three = heapq.nlargest(3, my_dict.items(), key=lambda x: x[1])
+    
+    # Extract just the letters in order
+    most_common_letters = [letter for letter, value in top_three]
+    
+    return most_common_letters
+```

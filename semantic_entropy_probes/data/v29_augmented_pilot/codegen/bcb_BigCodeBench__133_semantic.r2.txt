@@ -1,0 +1,26 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+def task_func(df):
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("Input must be a DataFrame")
+    if df.empty:
+        raise ValueError("DataFrame is empty")
+    if df.shape[1] == 0:
+        raise ValueError("DataFrame has no columns")
+    last_col = df.columns[-1]
+    numeric_df = df[pd.to_numeric(df[last_col], errors='coerce').notna()]
+    if numeric_df.empty:
+        raise ValueError(f"No numeric values in column '{last_col}'")
+    scaler = MinMaxScaler()
+    normalized_values = scaler.fit_transform(numeric_df[[last_col]])
+    normalized_df = numeric_df.copy()
+    normalized_df[last_col] = normalized_values
+    fig, ax = plt.subplots()
+    ax.plot(normalized_df.index, normalized_df[last_col])
+    ax.set_title(f'Normalized Data of {last_col}')
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Normalized Value')
+    return normalized_df, ax
+```

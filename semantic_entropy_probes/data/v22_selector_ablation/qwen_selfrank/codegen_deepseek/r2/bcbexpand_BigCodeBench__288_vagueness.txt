@@ -1,0 +1,21 @@
+```python
+import collections
+import json
+import os
+def task_func(directory_path: str) -> dict:
+    key_counter = collections.Counter()
+    if not os.path.isdir(directory_path):
+        return dict(key_counter)
+    for filename in os.listdir(directory_path):
+        if filename.endswith('.json'):
+            file_path = os.path.join(directory_path, filename)
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                if isinstance(data, dict):
+                    for key in data.keys():
+                        key_counter[key] += 1
+            except (json.JSONDecodeError, IOError):
+                continue
+    return dict(key_counter)
+```

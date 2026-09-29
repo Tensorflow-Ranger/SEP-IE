@@ -1,0 +1,11 @@
+```python
+import codecs
+import random
+import struct
+KEYS = ['470FC614', '4A0FC614', '4B9FC614', '4C8FC614', '4D7FC614']
+def task_func(hex_keys=KEYS):
+    random.shuffle(hex_keys)
+    hex_str = hex_keys[0]
+    float_value = struct.unpack('!f', bytes.fromhex(hex_str))[0]
+    return float_value.encode('utf-8')
+```

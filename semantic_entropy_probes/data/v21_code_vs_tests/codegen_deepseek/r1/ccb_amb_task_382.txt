@@ -1,0 +1,90 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    a = list(map(int, data[1:1 + n]))
+
+    total_moves = sum(a)
+    # The game ends when S contains all indices 1..N.
+    # Adding an index to S happens the first time we subtract from that index.
+    # So exactly N moves are "first subtractions" (each index enters S once).
+    # After those N moves, we still have total_moves - N remaining subtractions
+    # that can be made (since each index must have been subtracted at least once
+    # to be in S, and those first subtractions are part of the total_moves).
+    # Actually simpler: The game ends when every index has been chosen at least once.
+    # The sequence of moves is: total_moves subtractions, but the game stops
+    # immediately after the move that adds the last index to S.
+    # That move is the N-th distinct-index move.
+    # So the number of moves actually played is:
+    #   N (first subtractions) + extra subtractions on already-visited indices
+    # But careful: The extra subtractions can be interleaved arbitrarily.
+    # However, the game ends exactly when the last first-subtraction happens.
+    # So the total number of moves played = (sum of all A_i) - (sum of extra subtractions after the last first-subtraction?).
+    # Actually, think of it this way: Let’s sort A. The smallest first-subtraction time for each index is 1.
+    # We can model the process as: we need to allocate N "first" moves, one to each index.
+    # For each index i, the first move on it must happen before we exhaust its A_i.
+    # So we can think of having A_i - 1 "extra" moves available for that index after its first move.
+    # The game ends immediately after the last first move.
+    # Therefore, the total number of moves played = N + (sum of extra moves that happen before the last first move).
+    # But those extra moves can be scheduled arbitrarily among the indices whose first move already occurred.
+    # The maximum number of extra moves before the last first move is limited by the sum of (A_i - 1) over all i except the one that gets the last first move? Not exactly.
+    # Actually, we can reorder moves arbitrarily as long as each index gets its first move before its count reaches zero.
+    # Since A_i >= 1, we can always take a first move on any index at any time before its count becomes zero.
+    # So we can delay the first move on an index as long as we want, provided we don't run out of its A_i (but A_i >= 1, so we always have at least one).
+    # Thus, the players can control the order of first moves.
+    # The game ends exactly when the N-th distinct index is played for the first time.
+    # So the total number of moves = N + X, where X is the number of extra moves played before that moment.
+    # How large can X be? The players can choose to play extra moves on already-visited indices to postpone the last first move.
+    # The maximum X is sum of (A_i - 1) over all i, because each index can contribute at most A_i - 1 extra moves after its first move.
+    # But if we want to maximize X before the last first move, we must ensure that for the index that will be last, we never touch it until the end.
+    # So we can use all extra moves from the other N-1 indices before taking the last first move.
+    # Therefore, maximum X = sum_{i != last} (A_i - 1).
+    # To maximize total moves, we choose as last the index with smallest A_i? Let's check.
+    # Total moves = N + sum_{i != last} (A_i - 1) = N + (sum (A_i - 1)) - (A_last - 1) = sum A_i - (A_last - 1).
+    # So total moves = total_moves - (A_last - 1).
+    # To maximize total moves, we minimize A_last, i.e., choose the smallest A_i as last.
+    # Similarly, to minimize total moves, we choose the largest A_i as last.
+    # But players can choose the order; they want to control parity of total moves because the winner is determined by who makes the last move.
+    # Since players play optimally, they will try to force the parity favorable to them.
+    # Let’s denote M = total number of moves actually played.
+    # If M is odd, Fennec (first player) wins; if even, Snuke wins.
+    # The first player can try to make M odd, the second player try to make M even.
+    # They can influence which index is last by choosing when to take first moves.
+    # The key observation: The game is equivalent to having N piles, each with A_i stones, but the first move on each pile is special (adds index to S).
+    # The game ends immediately after the last special move.
+    # This is a known problem: The total number of moves is total_moves - max(0, max(A_i) - 1 - (total_moves - max(A_i)))? Not exactly.
+    # Let's think differently: Let’s sort A in non-decreasing order: a1 <= a2 <= ... <= aN.
+    # Suppose we want to maximize total moves. We keep index N (largest A) as last. Then before taking its first move, we can use all extra moves from indices 1..N-1.
+    # Extra moves from index i (i < N) = a_i - 1.
+    # So total moves before last first move = (N-1) first moves + sum_{i=1}^{N-1} (a_i - 1) = sum_{i=1}^{N-1} a_i.
+    # Then we take the last first move on index N, which is move number (sum_{i=1}^{N-1} a_i + 1).
+    # But wait, that's only if we never touch index N before. However, we could also play extra moves on index N after its first move? No, because game ends immediately after the last first move, so no extra moves after that.
+    # So total moves = sum_{i=1}^{N-1} a_i + 1.
+    # That's not matching earlier formula. Let's test with small example: N=2, A=[2,2]. total_moves=4.
+    # If we take index1 first, then index2 last: sequence: (1) subtract from 1 (S={1}), (2) subtract from 1 again (extra), (3) subtract from 2 (S={1,2}) game ends. Total moves=3 = sum_{i=1}^{1} a_i +1 = 2+1=3. Good.
+    # If we take index2 first, then index1 last: similar, total moves=3.
+    # So maximum total moves = sum of all except largest + 1.
+    # Minimum total moves? We want to end quickly: take all first moves as early as possible, without extra moves in between.
+    # That would be exactly N moves (each index once). But can we force that? Only if for each index, we take its first move before any extra moves. But players can choose to play extra moves even if first moves remain. So to minimize, we want to avoid extra moves.
+    # The minimal total moves is N if players cooperate, but they are adversarial.
+    # Actually, the second player can try to force extra moves to change parity.
+    # Let's think in terms of "critical move": The game ends when the last first move occurs.
+    # Let’s define B_i = A_i - 1 (extra moves possible after first move).
+    # The total extra moves available is sum B_i.
+    # The number of extra moves actually played before the last first move can be any number from 0 to sum B_i - min(B_i)?? Wait.
+    # Suppose we want to minimize extra moves played. The first player can always choose to take a first move on an index that hasn't been visited, whenever possible. But the second player can choose to play extra moves on visited indices to increase count.
+    # However, the first player can also play extra moves.
+    # Both players can influence.
+    # This resembles a classic game: The player who makes the move that completes the set wins if and only if (total_moves - (max(A_i)-1)) is odd? Not sure.
+    # Let's derive a formula.
+    # Let total = sum A_i.
+    # Let extra_total = sum (A_i - 1) = total - N.
+    # The game ends when we have taken N first moves.
+    # Let’s denote x = number of extra moves played before the last first move.
+    # Then total moves M = N + x.
+    # The last first move is taken on some index k.
+    # Before that move, index k has not

@@ -1,0 +1,33 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    P = list(map(int, data[1:1+N]))
+    Q = list(map(int, data[1+N:1+2*N]))
+
+    # person_to_bib[person] = bib number that person wears
+    person_to_bib = [0] * (N + 1)
+    for person, bib in enumerate(Q, start=1):
+        person_to_bib[person] = bib
+
+    # bib_to_person[bib] = person wearing that bib
+    bib_to_person = [0] * (N + 1)
+    for person, bib in enumerate(Q, start=1):
+        bib_to_person[bib] = person
+
+    result = []
+    for bib in range(1, N + 1):
+        person_wearing_bib = bib_to_person[bib]
+        person_stared_at = P[person_wearing_bib - 1]
+        bib_of_stared_at = person_to_bib[person_stared_at]
+        result.append(str(bib_of_stared_at))
+
+    sys.stdout.write(" ".join(result))
+
+if __name__ == "__main__":
+    main()
+```

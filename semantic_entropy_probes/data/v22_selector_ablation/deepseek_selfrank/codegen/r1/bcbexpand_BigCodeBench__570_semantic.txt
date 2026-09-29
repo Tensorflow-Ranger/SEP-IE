@@ -1,0 +1,21 @@
+```python
+import inspect
+import types
+import json
+def task_func(f):
+    spec = {
+        "name": f.__name__,
+        "args": [],
+        "defaults": {},
+        "annotations": str(inspect.getfullargspec(f).annotations),
+        "is_lambda": isinstance(f, types.LambdaType)
+    }
+    argspec = inspect.getfullargspec(f)
+    args = argspec.args
+    if argspec.defaults:
+        defaults = argspec.defaults
+        for i in range(len(args)-len(defaults), len(args)):
+            spec["defaults"][args[i]] = defaults[i - (len(args)-len(defaults))]
+    spec["args"] = args
+    return json.dumps(spec)
+```

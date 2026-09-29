@@ -1,0 +1,68 @@
+```python
+import sys
+sys.setrecursionlimit(300000)
+
+def solve():
+    data = sys.stdin.buffer.read().split()
+    t = int(data[0])
+    idx = 1
+    out_lines = []
+    for _ in range(t):
+        n = int(data[idx]); idx += 1
+        arr = list(map(int, data[idx:idx+2*n])); idx += 2*n
+        pos = [[] for _ in range(n+1)]
+        for i, val in enumerate(arr):
+            pos[val].append(i)
+        
+        # adjacency list for couples whose occurrences are adjacent
+        adj = [[] for _ in range(n+1)]
+        for val in range(1, n+1):
+            p1, p2 = pos[val]
+            if abs(p1 - p2) == 1:
+                mn, mx = min(p1, p2), max(p1, p2)
+                left_val = arr[mx+1] if mx+1 < 2*n else None
+                right_val = arr[mn-1] if mn-1 >= 0 else None
+                if left_val is not None:
+                    adj[val].append(left_val)
+                if right_val is not None:
+                    adj[val].append(right_val)
+        
+        # BFS/DFS to find connected components among adjacent couples
+        visited = [False] * (n+1)
+        comp_sizes = []
+        for v in range(1, n+1):
+            if not visited[v] and adj[v]:
+                stack = [v]
+                visited[v] = True
+                sz = 0
+                while stack:
+                    u = stack.pop()
+                    sz += 1
+                    for w in adj[u]:
+                        if not visited[w]:
+                            visited[w] = True
+                            stack.append(w)
+                comp_sizes.append(sz)
+        
+        total_non_adj = 0
+        for val in range(1, n+1):
+            p1, p2 = pos[val]
+            if abs(p1 - p2) != 1:
+                total_non_adj += 1
+        
+        # Count pairs where both are non‑adjacent and in same component
+        ans = 0
+        for sz in comp_sizes:
+            ans += sz * (sz - 1) // 2
+        
+        # Add pairs where both are non‑adjacent and not in any component
+        non_adj_in_comp = sum(sz for sz in comp_sizes)
+        non_adj_outside = total_non_adj - non_adj_in_comp
+        ans += non_adj_outside * (non_adj_outside - 1) // 2
+        
+        out_lines.append(str(ans))
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    solve()
+```

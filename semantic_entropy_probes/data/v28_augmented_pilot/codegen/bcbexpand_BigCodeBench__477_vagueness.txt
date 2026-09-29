@@ -1,0 +1,24 @@
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+def task_func(N=100, CATEGORIES=["A", "B", "C", "D", "E"], seed=42):
+    np.random.seed(seed)
+    if N >= len(CATEGORIES):
+        category_counts = np.random.multinomial(N - len(CATEGORIES), [1/len(CATEGORIES)]*len(CATEGORIES))
+        categories = CATEGORIES + [CATEGORIES[i] for i in range(len(CATEGORIES)) for _ in range(category_counts[i])]
+        np.random.shuffle(categories)
+    else:
+        categories = np.random.choice(CATEGORIES, N, replace=False).tolist()
+    x = np.random.rand(N)
+    y = np.random.rand(N)
+    df = pd.DataFrame({'x': x, 'y': y, 'category': categories})
+    fig, ax = plt.subplots()
+    for category in df['category'].unique():
+        subset = df[df['category'] == category]
+        ax.scatter(subset['x'], subset['y'], label=category, alpha=0.7)
+    ax.legend(title='Category')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    return df, ax
+```

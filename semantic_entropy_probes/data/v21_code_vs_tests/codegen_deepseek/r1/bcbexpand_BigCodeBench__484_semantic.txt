@@ -1,0 +1,51 @@
+```python
+import math
+import numpy as np
+from datetime import datetime
+import pandas as pd
+
+def task_func(
+    start_time,
+    end_time,
+    step,
+    columns=["Timestamp", "Sensor1", "Sensor2", "Sensor3", "SensorStatus"],
+    sensor_statuses=["OK", "MAINTENANCE_REQUIRED", "ERROR"],
+    random_seed=42,
+):
+    """
+    Generate a DataFrame with detailed artificial sensor readings for specified timestamps and sensor statuses.
+
+    Parameters:
+    - start_time (datetime): Start time for the data generation.
+    - end_time (datetime): End time for the data generation.
+    - step (int): Step size in seconds between timestamps.
+    - columns (list): List of column names for the DataFrame. Default is ["Timestamp", "Sensor1", "Sensor2", "Sensor3", "SensorStatus"].
+    - sensor_statuses (list): List of possible sensor statuses. Default is ["OK", "MAINTENANCE_REQUIRED", "ERROR"].
+    - random_seed (int): Seed for random number generation. Default is 42.
+
+    Returns:
+    - pd.DataFrame: Generated sensor readings for the given timestamps.
+    """
+    np.random.seed(random_seed)
+    
+    timestamps = []
+    current_time = start_time
+    while current_time <= end_time:
+        timestamps.append(current_time)
+        current_time += pd.Timedelta(seconds=step)
+    
+    data = []
+    for ts in timestamps:
+        seconds = (ts - start_time).total_seconds()
+        
+        sensor1 = math.sin(seconds) + np.random.normal(0, 0.05)
+        sensor2 = math.cos(seconds) + np.random.normal(0, 0.05)
+        sensor3 = math.tan(seconds) + np.random.normal(0, 0.05)
+        
+        status = np.random.choice(sensor_statuses)
+        
+        data.append([ts, sensor1, sensor2, sensor3, status])
+    
+    df = pd.DataFrame(data, columns=columns)
+    return df
+```

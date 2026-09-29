@@ -1,0 +1,42 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [0] * (N + 1)
+    for i in range(1, N + 1):
+        P[i] = int(next(it))
+    Q = [0] * (N + 1)
+    for i in range(1, N + 1):
+        q = int(next(it))
+        Q[q] = i  # person wearing bib number q is person i
+    result = []
+    for i in range(1, N + 1):
+        # person wearing bib i is Q[i], they stare at P[Q[i]]
+        stared_person = P[Q[i]]
+        # bib number of that stared person is Q^{-1}[stared_person] = Q.index(stared_person)
+        # but we stored Q_inv: Q_inv[x] = bib number of person x
+        # Actually we have Q[bib] = person, so we need inverse mapping.
+        # We can precompute inverse of Q.
+        # Let invQ[person] = bib
+        # We already have Q[bib] = person, so invQ[person] = bib.
+    # Better: precompute invQ
+    invQ = [0] * (N + 1)
+    for bib in range(1, N + 1):
+        person = Q[bib]
+        invQ[person] = bib
+    result = []
+    for bib in range(1, N + 1):
+        person_wearing_bib = Q[bib]
+        stared_person = P[person_wearing_bib]
+        stared_bib = invQ[stared_person]
+        result.append(str(stared_bib))
+    print(" ".join(result))
+
+if __name__ == "__main__":
+    main()
+```

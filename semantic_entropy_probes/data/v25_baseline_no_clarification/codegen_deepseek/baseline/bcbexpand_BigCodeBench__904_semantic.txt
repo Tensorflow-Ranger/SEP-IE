@@ -1,0 +1,34 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+def task_func(d, keys=['x', 'y', 'z']):
+    """
+    Plot values from a list of dictionaries based on specified keys, combining values with the same key into a single series, and return the plot as a Matplotlib Axes object.
+    
+    Parameters:
+    d (list of dict): List of dictionaries containing numerical data.
+    keys (list): List of keys to extract and plot from the dictionaries.
+    
+    Returns:
+    matplotlib.axes._axes.Axes: The plot showing the values of specified keys.
+    """
+    if not d:
+        fig, ax = plt.subplots()
+        return ax
+    
+    df = pd.DataFrame(d)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    
+    for key in keys:
+        if key in df.columns:
+            ax.plot(df[key].dropna().values, label=key, marker='o')
+    
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Value')
+    ax.set_title('Values from Dictionaries by Key')
+    ax.legend()
+    ax.grid(True, linestyle='--', alpha=0.7)
+    
+    plt.tight_layout()
+    return ax
+```

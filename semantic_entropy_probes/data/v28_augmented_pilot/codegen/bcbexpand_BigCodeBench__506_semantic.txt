@@ -1,0 +1,53 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(column, data):
+    if not data:
+        return {
+            'sum': 0,
+            'mean': np.nan,
+            'min': np.inf,
+            'max': -np.inf,
+            'plot': None
+        }
+    
+    columns = ['Date', 'Temperature', 'Humidity', 'Wind Speed', 'Precipitation']
+    df = pd.DataFrame(data, columns=columns)
+    
+    if column not in df.columns:
+        raise ValueError(f"Column '{column}' not found in data")
+    
+    numeric_data = pd.to_numeric(df[column], errors='coerce')
+    numeric_data = numeric_data.dropna()
+    
+    if numeric_data.empty:
+        return {
+            'sum': 0,
+            'mean': np.nan,
+            'min': np.inf,
+            'max': -np.inf,
+            'plot': None
+        }
+    
+    sum_val = numeric_data.sum()
+    mean_val = numeric_data.mean()
+    min_val = numeric_data.min()
+    max_val = numeric_data.max()
+    
+    fig, ax = plt.subplots()
+    plot_obj = ax.hist(numeric_data, bins='auto', edgecolor='black')
+    ax.set_xlabel(column)
+    ax.set_ylabel('Frequency')
+    ax.set_title(f'Histogram of {column}')
+    plt.close(fig)
+    
+    return {
+        'sum': sum_val,
+        'mean': mean_val,
+        'min': min_val,
+        'max': max_val,
+        'plot': plot_obj[2]
+    }
+```

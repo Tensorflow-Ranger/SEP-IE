@@ -1,0 +1,32 @@
+```python
+import pandas as pd
+import time
+import matplotlib.pyplot as plt
+
+def task_func(df, target_value):
+    # Convert input dict of lists to DataFrame
+    df = pd.DataFrame(df)
+    
+    # Convert all cells to string type for uniform comparison
+    df = df.astype(str)
+    
+    # Check if DataFrame is empty
+    if df.empty:
+        return pd.Series(), None
+    
+    # Search for rows where any cell matches the target_value (exact or partial match)
+    mask = df.apply(lambda row: row.str.contains(target_value, case=False, na=False)).any(axis=1)
+    matching_rows = df[mask]
+    
+    # Count occurrences of target_value per column
+    counts = matching_rows.apply(lambda col: col.str.contains(target_value, case=False, na=False).sum())
+    
+    # Plot the counts
+    fig, ax = plt.subplots()
+    counts.plot(kind='bar', ax=ax)
+    ax.set_title('Count of Target Value per Column')
+    ax.set_xlabel('Columns')
+    ax.set_ylabel('Count')
+    
+    return counts, ax
+```

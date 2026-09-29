@@ -1,0 +1,26 @@
+```python
+import cv2
+import matplotlib.pyplot as plt
+def task_func(image_path, kernel_size):
+    if not isinstance(kernel_size, int) or kernel_size <= 0:
+        raise ValueError("kernel_size must be a positive integer")
+    try:
+        original_img = cv2.imread(image_path)
+        if original_img is None:
+            raise FileNotFoundError(f"Image file not found: {image_path}")
+    except Exception as e:
+        if isinstance(e, FileNotFoundError):
+            raise e
+        else:
+            raise FileNotFoundError(f"Error reading image: {image_path}")
+    blurred_img = cv2.blur(original_img, (kernel_size, kernel_size))
+    fig, (ax_original, ax_blurred) = plt.subplots(1, 2, figsize=(10, 5))
+    ax_original.imshow(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB))
+    ax_original.set_title('Original')
+    ax_original.axis('off')
+    ax_blurred.imshow(cv2.cvtColor(blurred_img, cv2.COLOR_BGR2RGB))
+    ax_blurred.set_title('Blurred')
+    ax_blurred.axis('off')
+    plt.tight_layout()
+    return blurred_img, ax_original, ax_blurred
+```

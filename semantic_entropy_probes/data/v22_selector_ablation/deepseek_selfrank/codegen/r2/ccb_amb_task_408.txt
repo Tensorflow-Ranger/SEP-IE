@@ -1,0 +1,94 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    M = int(data[1])
+    ops = []
+    for i in range(M):
+        L = int(data[2 + 2*i])
+        R = int(data[3 + 2*i])
+        ops.append((L, R))
+    
+    # For each position, track which operations can set it to 1
+    # We'll use a list of sets to track which operations affect each position
+    # But since N is up to 1e6, we need an efficient way to process this
+    
+    # We can use a union-find (disjoint set) approach to find the minimal set of operations
+    # that can cover all positions, using the fact that operation 1 and 2 can be combined
+    # to cover the entire range or its complement
+    
+    # Let's track for each position whether it's covered by any operation
+    # We'll use a union-find structure to group positions that can be covered together
+    
+    parent = list(range(N + 2))  # 1-based indexing
+
+    def find(u):
+        while parent[u] != u:
+            parent[u] = parent[parent[u]]
+            u = parent[u]
+        return u
+
+    def union(u, v):
+        pu = find(u)
+        pv = find(v)
+        if pu != pv:
+            parent[pu] = pv
+
+    # For each operation, we can represent it as a range [L, R]
+    # We'll process the operations in a way that allows us to find minimal coverage
+
+    # We'll use a greedy approach to select the minimal set of operations
+    # that can cover all positions
+
+    # First, sort the operations by their right endpoint
+    ops.sort(key=lambda x: x[1])
+
+    # We'll use a set to track which positions are already covered
+    covered = set()
+    selected_ops = []
+
+    for L, R in ops:
+        # Check if any position in [L, R] is not covered
+        # We can use binary search to find the first uncovered position in [L, R]
+        # If there's any uncovered position, we need to select this operation
+        # Otherwise, skip it
+
+        # Find the first uncovered position in [L, R]
+        left = L
+        right = R
+        while left <= right:
+            mid = (left + right) // 2
+            if mid in covered:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        if left <= R:
+            # There is an uncovered position in [L, R]
+            # Select this operation
+            selected_ops.append(1)
+            # Mark all positions in [L, R] as covered
+            for j in range(L, R + 1):
+                covered.add(j)
+        else:
+            # No uncovered positions in [L, R]
+            selected_ops.append(0)
+
+    # Now check if all positions are covered
+    if len(covered) != N:
+        print(-1)
+        return
+
+    # Output the result
+    print(len(selected_ops))
+    print(' '.join(map(str, selected_ops)))
+
+if __name__ == "__main__":
+    main()
+```

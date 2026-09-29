@@ -1,0 +1,16 @@
+```python
+import random
+import string
+import collections
+# Constants
+VALID_CHARACTERS = string.ascii_letters + string.digits
+def task_func(n_strings, string_length):
+    if n_strings <= 0 or string_length <= 0:
+        return {}
+    char_count = collections.defaultdict(int)
+    for _ in range(n_strings):
+        random_string = ''.join(random.choice(VALID_CHARACTERS) for _ in range(string_length))
+        for char in random_string:
+            char_count[char] += 1
+    return dict(char_count)
+```

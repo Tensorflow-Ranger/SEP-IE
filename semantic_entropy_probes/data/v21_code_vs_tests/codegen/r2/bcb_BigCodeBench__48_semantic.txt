@@ -1,0 +1,28 @@
+```python
+import time
+from datetime import datetime
+import random
+import matplotlib.pyplot as plt
+# Constants
+DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+def task_func(n, output_path=None):
+    current_timestamp = int(time.time())
+    timestamps = [random.randint(0, current_timestamp) for _ in range(n)]
+    formatted_timestamps = [datetime.utcfromtimestamp(ts).strftime(DATE_FORMAT) for ts in timestamps]
+    
+    # Convert formatted strings back to datetime objects for histogram
+    datetime_objects = [datetime.strptime(ts, DATE_FORMAT) for ts in formatted_timestamps]
+    
+    # Plot histogram
+    plt.hist(datetime_objects, bins=30, edgecolor='black')
+    plt.title('Distribution of Random Unix Timestamps')
+    plt.xlabel('Timestamp')
+    plt.ylabel('Frequency')
+    
+    if output_path:
+        plt.savefig(output_path)
+    else:
+        plt.show()
+    
+    return formatted_timestamps
+```

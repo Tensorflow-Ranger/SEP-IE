@@ -1,0 +1,27 @@
+```python
+import pandas as pd
+import re
+import random
+def task_func(data_list, seed=None):
+    if seed is not None:
+        random.seed(seed)
+    original_strings = []
+    modified_strings = []
+    for s in data_list:
+        original_strings.append(s)
+        items = [item.strip() for item in s.split(',')]
+        if not items:
+            modified_strings.append(s)
+            continue
+        to_remove = random.choice(items)
+        pattern = r'(^|,\s*)' + re.escape(to_remove) + r'(\s*,|$)'
+        modified = re.sub(pattern, lambda m: '' if m.group(1) and m.group(2) else m.group(2) if m.group(1) else m.group(1), s, count=1)
+        modified = re.sub(r',\s*,', ',', modified)
+        modified = modified.strip().strip(',')
+        modified_strings.append(modified)
+    df = pd.DataFrame({
+        'Original String': original_strings,
+        'Modified String': modified_strings
+    })
+    return df
+```

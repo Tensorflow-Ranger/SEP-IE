@@ -1,0 +1,70 @@
+```python
+import sys
+
+def solve():
+    input = sys.stdin.readline
+    N, M = map(int, input().split())
+    intervals = [tuple(map(int, input().split())) for _ in range(M)]
+
+    # Step 1: Check feasibility using the condition that the union of all intervals must be [1, N]
+    # and for every prefix of intervals, the union of their complements must be covered by later intervals.
+    # This is equivalent to checking if after processing all intervals, every position can be set to 1.
+    # We'll use a sweep line to determine if every position is covered by at least one "set to 1" operation
+    # either inside an interval (op1) or outside an interval (op2).
+    # However, a simpler necessary and sufficient condition is that the union of all intervals equals [1, N]
+    # and the intersection of all intervals is empty? Not exactly.
+    # Actually, the problem is known: we need that for every position j, there exists an operation i
+    # such that either (L_i <= j <= R_i and we choose op1) or (j < L_i or j > R_i and we choose op2).
+    # This is equivalent to: for each j, there is an i such that j is in the "chosen set" of operation i.
+    # We can think of each operation offering two possible sets: the interval [L_i, R_i] and its complement.
+    # We need to pick one set per operation (or none) such that the union of chosen sets is [1, N].
+    # This is a set cover problem, but we can solve it greedily because of the structure.
+
+    # We'll transform the problem: For each operation i, define two events:
+    # If we choose op1, we cover [L_i, R_i].
+    # If we choose op2, we cover [1, L_i-1] ∪ [R_i+1, N].
+    # We need to cover all positions 1..N with at most one set per operation.
+
+    # This can be solved with a greedy algorithm similar to covering with intervals.
+    # We'll process positions from 1 to N, and for each position not yet covered,
+    # we choose an operation that covers it and has the farthest reach.
+    # However, we have two types of sets per operation.
+
+    # Instead, we can think of each operation as offering two intervals: the inside interval and the outside interval.
+    # The outside interval is actually two intervals unless L_i=1 or R_i=N.
+    # This makes it messy.
+
+    # Known solution: This is equivalent to checking if the union of all intervals is [1, N] and
+    # the intersection of all intervals is empty? Let's test with examples.
+
+    # Example 1: N=3, M=2, intervals: (1,2), (2,3). Union = [1,3], intersection of all intervals = empty? Intersection of (1,2) and (2,3) is {2}? Actually intersection is {2}? Wait, intersection of (1,2) and (2,3) is {2}? No, because 2 is in both, so intersection is {2}. Not empty. But we can achieve: op1 on (1,2) covers 1,2; op1 on (2,3) covers 2,3; total covered 1,2,3. So intersection non-empty is okay.
+
+    # Let's think differently: We can always choose op1 for all operations. Then the covered set is the union of all intervals.
+    # So if union of all intervals is [1, N], then we can achieve with all op1. So union = [1, N] is sufficient.
+    # Is it necessary? Suppose union is not [1, N]. Then there is a position j not in any interval. To cover j, we must choose op2 for some operation i where j is outside [L_i, R_i]. That means j must be in the complement of that interval. But if j is not in any interval, then for every operation i, j is outside [L_i, R_i]? Actually if j is not in the union, then for every i, j is outside [L_i, R_i]. So we can choose op2 for any operation, and that will set j to 1. But careful: op2 sets all positions outside [L_i, R_i] to 1. So if we choose op2 for some operation, it will set j to 1. So we can cover j by choosing op2 for any operation. However, if we choose op2 for an operation, it also sets all other positions outside that interval to 1, which might cover others. So actually we can cover all positions if there exists at least one operation? Let's test: N=3, M=1, interval (2,2). Union = {2}. Position 1 and 3 not covered by union. But we can choose op2 for the only operation: then it sets positions 1 and 3 to 1 (since they are outside [2,2]), and also sets 2? No, op2 sets x_j=1 for j not in [L,R]. So 2 remains 0. So we have 1 and 3 set to 1, but 2 is 0. So we need another operation to set 2 to 1. But there is only one operation. So not achievable. So union must be [1,N]? Not necessarily: we could choose op1 for one operation and op2 for another. Example: N=3, M=2, intervals: (1,1), (3,3). Union = {1,3}. Position 2 not in union. But we can choose op1 for (1,1) sets 1 to 1, op2 for (3,3) sets positions 1 and 2 to 1 (since outside [3,3] are 1,2). Then we have 1,2 set to 1, but 3 is 0. So not covered. Choose op1 for both: sets 1 and 3, but 2 is 0. Choose op2 for both: op2 on (1,1) sets 2,3 to 1; op2 on (3,3) sets 1,2 to 1; then all 1,2,3 are 1? Let's simulate: start all 0.
+    # Operation1: op2 on (1,1): set j not in [1,1] to 1 -> positions 2,3 become 1. Now x=[0,1,1].
+    # Operation2: op2 on (3,3): set j not in [3,3] to 1 -> positions 1,2 become 1. Now x=[1,1,1]. Achieved! So union not [1,N] but achievable.
+    # So union condition is not necessary.
+
+    # This is a known problem: we need to check if the intersection of all intervals is empty? Let's test: above example intervals (1,1) and (3,3) intersection is empty. Yes.
+    # Another example: N=3, M=2, intervals: (1,2), (2,3). Intersection = {2} not empty. But achievable as we saw. So intersection empty is not necessary.
+
+    # Let's think of a necessary and sufficient condition: We need that for every position j, there exists an operation i such that j is in the chosen set of i.
+    # We can choose for each operation either the interval or its complement.
+    # This is equivalent to: For each j, there exists i such that either (L_i <= j <= R_i) and we pick op1, or (j < L_i or j > R_i) and we pick op2.
+    # So for each j, there must be an operation i where the chosen set contains j.
+    # We can think of each operation as offering two sets: A_i = [L_i, R_i] and B_i = [1, L_i-1] ∪ [R_i+1, N].
+    # We need to pick at most one set per operation (or none) such that the union of picked sets is [1,N].
+
+    # This is a set cover problem with M sets, each of size O(N). But we can solve it greedily because the sets have a special structure: each A_i is an interval, each B_i is up to two intervals.
+
+    # We can transform the problem into covering a line with intervals if we consider only op1. But we can also use op2.
+    # Actually, we can think of each operation as allowing us to "cover" either the interval or its complement.
+    # We can model this as a graph problem? Not trivial.
+
+    # Let's try a different approach: Since M <= 200000, we can try to compute the minimal cost using dynamic programming?
+    # But N up to 1e6, too large.
+
+    # Let's search for known solution: This problem is from AtCoder "F - 01 Sequence" or similar? Actually it's from "Operation on a Sequence" maybe.
+
+    # I recall a solution: The goal is achievable if and only if for every j,

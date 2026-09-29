@@ -1,0 +1,29 @@
+```python
+import sys
+from math import pow
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    A = data[1]
+
+    length = 3 ** N
+    target = '0' if A.count('1') < length // 2 else '1'
+
+    def compute_min_changes(s, target):
+        n = len(s)
+        changes = 0
+        for i in range(0, n, 3):
+            group = s[i:i+3]
+            count = group.count(target)
+            if count < 2:
+                changes += 3 - count
+        return changes
+
+    print(compute_min_changes(A, target))
+
+if __name__ == "__main__":
+    main()
+```

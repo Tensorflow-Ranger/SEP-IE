@@ -1,0 +1,58 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    M = int(data[1])
+    A = list(map(int, data[2:2+N]))
+    
+    inv_count = [0] * M
+    inv_count[0] = 0
+    
+    # Precompute the initial inversion count
+    inv = 0
+    for i in range(N):
+        for j in range(i+1, N):
+            if A[i] > A[j]:
+                inv += 1
+    inv_count[0] = inv
+    
+    # For each k from 1 to M-1, compute the change in inversion count
+    for k in range(1, M):
+        # The change is based on how many elements increase or decrease
+        # When k increases by 1, each element A[i] becomes (A[i] + k) % M
+        # So we need to track how many elements A[i] + k - 1 and A[i] + k change their relative order
+        # We can use a Fenwick Tree to count inversions efficiently
+        # However, for efficiency, we can use a difference array approach
+        
+        # The difference in inversion count when k increases by 1
+        delta = 0
+        for i in range(N):
+            prev = (A[i] + k - 1) % M
+            curr = (A[i] + k) % M
+            if prev != curr:
+                # prev is (A[i] + k - 1) % M, curr is (A[i] + k) % M
+                # If prev > curr, then the element A[i] + k - 1 is greater than A[i] + k
+                # So when k increases, this pair may contribute to an inversion
+                # We need to count how many elements are between prev and curr
+                # Since we are dealing with mod M, we can handle wrap-around
+                if prev > curr:
+                    # The number of elements between curr and prev (mod M)
+                    # is (M - curr + prev) % M
+                    delta -= (M - curr + prev) % M
+                else:
+                    # The number of elements between prev and curr is (curr - prev)
+                    delta += (curr - prev)
+        inv_count[k] = inv_count[k-1] + delta
+    
+    for i in range(M):
+        print(inv_count[i])
+
+if __name__ == "__main__":
+    main()
+```

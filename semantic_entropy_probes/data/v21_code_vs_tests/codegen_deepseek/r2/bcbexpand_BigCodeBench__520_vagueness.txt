@@ -1,0 +1,39 @@
+```python
+import collections
+import matplotlib.pyplot as plt
+def task_func(data):
+    """
+    Combine a list of dictionaries with the same keys (fruit names) into a single dictionary,
+    calculate the total for each fruit, and return a bar chart's axes with colors representing
+    different fruits. The colors are selected from: 'red', 'yellow', 'green', 'blue', 'purple'.
+    The function ensures that sales quantity must not be negative, throwing a ValueError if encountered.
+
+    Parameters:
+    data (list): A list of dictionaries where each dictionary has fruit names as keys and sales quantities as values.
+
+    Returns:
+    tuple: A tuple containing:
+        - total_sales (dict): A dictionary containing the total sales for each fruit.
+        - ax (matplotlib.container.BarContainer): A bar chart of total fruit sales, or None if data is empty.
+
+    Raises:
+    ValueError: If any sales quantity is negative.
+    """
+    if not data:
+        return {}, None
+    total_sales = collections.defaultdict(int)
+    for d in data:
+        for fruit, quantity in d.items():
+            if quantity < 0:
+                raise ValueError("Sales quantity must not be negative")
+            total_sales[fruit] += quantity
+    total_sales = dict(total_sales)
+    colors = ['red', 'yellow', 'green', 'blue', 'purple']
+    color_cycle = (colors * ((len(total_sales) // len(colors)) + 1))[:len(total_sales)]
+    fig, ax = plt.subplots()
+    bars = ax.bar(total_sales.keys(), total_sales.values(), color=color_cycle)
+    ax.set_xlabel('Fruit')
+    ax.set_ylabel('Total Sales')
+    ax.set_title('Total Fruit Sales')
+    return total_sales, bars
+```

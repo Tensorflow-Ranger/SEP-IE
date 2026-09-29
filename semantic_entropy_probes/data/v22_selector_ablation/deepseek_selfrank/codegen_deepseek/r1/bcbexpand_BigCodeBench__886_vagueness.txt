@@ -1,0 +1,16 @@
+```python
+import pandas as pd
+from collections import Counter
+def task_func(data):
+    required_keys = {'Name', 'Age', 'Score'}
+    if not all(key in data for key in required_keys):
+        raise ValueError("Input dictionary must contain 'Name', 'Age', and 'Score' keys")
+    if not data['Name']:
+        return pd.DataFrame(), pd.Series(dtype=float), None
+    df = pd.DataFrame(data)
+    df_sorted = df.sort_values(by=['Name', 'Age']).reset_index(drop=True)
+    avg_score = df.groupby('Name')['Score'].mean()
+    age_counts = Counter(df['Age'])
+    most_common_age = age_counts.most_common(1)[0][0] if age_counts else None
+    return df_sorted, avg_score, most_common_age
+```

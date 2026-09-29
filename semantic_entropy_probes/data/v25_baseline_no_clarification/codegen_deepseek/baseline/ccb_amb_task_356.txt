@@ -1,0 +1,134 @@
+```python
+import sys
+sys.setrecursionlimit(1 << 25)
+
+def solve():
+    import sys
+    input = sys.stdin.readline
+
+    N = int(input())
+    W = list(map(int, input().split()))
+    intervals = []
+    for _ in range(N):
+        l, r = map(int, input().split())
+        intervals.append((l, r))
+
+    # compress coordinates
+    points = []
+    for l, r in intervals:
+        points.append(l)
+        points.append(r)
+    points = sorted(set(points))
+    comp = {v: i for i, v in enumerate(points)}
+    m = len(points)
+
+    # sort intervals by left endpoint
+    order = sorted(range(N), key=lambda i: intervals[i][0])
+    # build graph of intervals and connected components
+    parent = list(range(N))
+    rank = [0] * N
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(a, b):
+        ra, rb = find(a), find(b)
+        if ra == rb:
+            return
+        if rank[ra] < rank[rb]:
+            parent[ra] = rb
+        elif rank[ra] > rank[rb]:
+            parent[rb] = ra
+        else:
+            parent[rb] = ra
+            rank[ra] += 1
+
+    # sweep line: maintain set of active intervals sorted by right endpoint
+    import heapq
+    active = []  # min-heap of (right, index)
+    max_r_so_far = -1
+    last_idx = -1
+
+    for idx in order:
+        l, r = intervals[idx]
+        lc, rc = comp[l], comp[r]
+        # connect with all active intervals whose right >= l
+        # but we only need to connect to the one with maximum right among processed
+        if active and max_r_so_far >= lc:
+            # connect idx with last_idx (representative of current component)
+            union(idx, last_idx)
+        # update active set
+        heapq.heappush(active, (rc, idx))
+        if rc > max_r_so_far:
+            max_r_so_far = rc
+            last_idx = idx
+        # remove finished intervals
+        while active and active[0][0] < lc:
+            heapq.heappop(active)
+
+    # after sweep, we have components
+    comp_id = [find(i) for i in range(N)]
+    # compress component ids
+    comp_map = {}
+    comp_cnt = 0
+    for c in comp_id:
+        if c not in comp_map:
+            comp_map[c] = comp_cnt
+            comp_cnt += 1
+    comp_id = [comp_map[c] for c in comp_id]
+
+    # for each component, compute minimum vertex weight
+    comp_min = [10**18] * comp_cnt
+    for i in range(N):
+        cid = comp_id[i]
+        if W[i] < comp_min[cid]:
+            comp_min[cid] = W[i]
+
+    # build component graph: intervals are nodes, edges between overlapping intervals
+    # but we already have connectivity via union-find, so each component is a clique?
+    # Actually, within a component, any two vertices are connected directly? Not necessarily.
+    # The graph defined by interval intersection is not necessarily transitive.
+    # However, we need shortest path weight in the original graph, not component graph.
+    # Observation: In each connected component of the interval graph, the minimum possible
+    # path weight between two vertices is either:
+    # 1. direct edge if intervals intersect -> weight = W[s] + W[t]
+    # 2. via a third vertex that intersects both -> weight = W[s] + W[t] + min_weight_of_vertex_in_component
+    # Actually, because the graph is not necessarily complete inside a component,
+    # the shortest path might need to go through several vertices.
+    # But interval graphs are chordal and have nice properties.
+    # Key fact: In a connected interval graph, the shortest path between two vertices
+    # in terms of number of edges is at most 2? Let's think.
+    # If two intervals do not intersect, they can be connected via a chain.
+    # However, for weight minimization, we can always route through the vertex with smallest weight in the component.
+    # Because we can go from s to min_vertex (since in same component there is a path),
+    # and from min_vertex to t. So weight = dist(s, min) + dist(min, t) - W[min] (since counted twice).
+    # But dist(s, min) is at least W[s] + W[min] if direct edge, possibly more.
+    # Actually, the minimal path weight from s to t in a connected component is:
+    # min over all paths of sum of weights. Since weights are positive, the minimal path
+    # will be a simple path. The minimal possible sum is W[s] + W[t] + (sum of weights of internal vertices).
+    # The best internal vertex set is the minimum weight vertex in the whole component (if we can route through it).
+    # So answer = W[s] + W[t] + min_weight_component if s and t are in same component and not directly connected?
+    # Wait, if they are directly connected, then answer = W[s] + W[t].
+    # But if they are not directly connected, we can go s -> x -> t where x is min weight vertex.
+    # Then weight = W[s] + W[x] + W[t].
+    # So overall, minimal path weight = W[s] + W[t] + (0 if intervals intersect else min_weight_component).
+    # Is that always true? Let's test: Suppose component has vertices A, B, C with weights 100, 1, 100.
+    # A intersects B, B intersects C, but A does not intersect C. Then shortest A-C is A-B-C weight 201.
+    # Formula gives 100+100+1 = 201, correct.
+    # Suppose A intersects C directly, then weight 200, formula gives 200 (since min_weight_component not added).
+    # So we need to know for each pair (s,t) whether their intervals intersect.
+    # If they intersect, answer = W[s] + W[t], else answer = W[s] + W[t] + min_weight_component.
+    # But careful: what if min_weight_component is one of s or t? Then adding it extra is wrong.
+    # Actually, if min_weight_component is s or t, then the path s -> min -> t would count min twice.
+    # But we can do s -> t directly if they intersect, else s -> other -> t.
+    # Let's formalize: Let m = min_weight_component.
+    # If intervals s and t intersect: ans = W[s] + W[t].
+    # Else: we need a path of length at least 2. The minimal extra weight we must add is m, because we must include at least one internal vertex, and the cheapest is m. However, if m is s or t, then we cannot use it as internal vertex? Actually we can, but then it's counted twice? Wait, path s -> m -> t where m = s is just s -> t, which is direct edge, but we already know they don't intersect, contradiction. So m cannot be s or t if they don't intersect? It could be that s is the min weight but s doesn't intersect t, then we need another vertex. So the minimal extra weight is the minimum weight among vertices that intersect both s and t? Not exactly.
+    # Let's think differently: In a connected interval graph, the shortest path between two non‑adjacent vertices can always be chosen to have length 2. Because interval graphs are chordal and have a simplicial vertex ordering, but more concretely: take the interval with leftmost right endpoint among those intersecting s, call it x. Then x intersects t? Not guaranteed.
+    # Actually, there is a known property: In an interval graph, if two intervals are in the same connected component but do not intersect, then there exists a vertex adjacent to both (a common neighbor). Because intervals are on a line: if s and t are disjoint, say s before t, then any interval that starts after s ends cannot intersect s, but to connect s and t there must be a chain s - a - b - ... - t. The union of intervals in the component covers a contiguous segment of the line (since connected). So there exists some interval that overlaps the gap between s and t. That interval will intersect both s and t. Therefore, there is always a common neighbor if s and t are in same component but not intersecting. Thus the shortest path length is 2.
+    # So minimal weight = W[s] + W[t] + min_weight_of_common_neighbor. To minimize, we pick the common neighbor with smallest weight. That could be any vertex in the component that intersects both s and t.
+    # So we need, for each pair (s,t) in same component, the minimum weight of a vertex that intersects both intervals.
+    # That is the minimum weight among vertices whose interval intersects the gap between s and t? Actually, if s and t are disjoint

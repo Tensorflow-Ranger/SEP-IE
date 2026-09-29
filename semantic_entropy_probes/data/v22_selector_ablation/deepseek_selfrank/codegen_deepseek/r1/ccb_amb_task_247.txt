@@ -1,0 +1,85 @@
+```python
+import sys
+from collections import defaultdict
+
+def solve() -> None:
+    it = iter(sys.stdin.read().strip().split())
+    n = int(next(it))
+    arr = [int(next(it)) for _ in range(n)]
+
+    # total frequency of each value in the whole array
+    total_freq = defaultdict(int)
+    for x in arr:
+        total_freq[x] += 1
+
+    # frequency in left part
+    left_freq = defaultdict(int)
+    # frequency in middle part (initially empty)
+    mid_freq = defaultdict(int)
+    # frequency in right part starts as total_freq
+    right_freq = total_freq.copy()
+
+    left_distinct = 0
+    mid_distinct = 0
+    right_distinct = len(right_freq)
+
+    ans = 0
+    i = 0  # end of left part (0-based, left length = i+1)
+    j = 0  # end of middle part (0-based, middle length = j-i)
+
+    # We will slide j from 0 to n-2 (so that right part is non-empty)
+    for j in range(n - 1):
+        # move arr[j] from right to middle
+        val = arr[j]
+        right_freq[val] -= 1
+        if right_freq[val] == 0:
+            right_distinct -= 1
+        mid_freq[val] += 1
+        if mid_freq[val] == 1:
+            mid_distinct += 1
+
+        # If middle part is empty after moving j, skip (should not happen here)
+        if j < i:
+            continue
+
+        # Now adjust i to keep left part non-empty and maximize sum
+        # We want to move i forward while it improves total distinct sum
+        while i < j:
+            # try moving arr[i] from middle to left
+            cand = arr[i]
+            # if moving cand to left doesn't decrease middle distinct count
+            # (i.e., cand still appears in middle after moving), then moving i is beneficial
+            # because left distinct may increase while middle distinct stays same
+            if mid_freq[cand] > 1:
+                # safe to move
+                mid_freq[cand] -= 1
+                left_freq[cand] += 1
+                if left_freq[cand] == 1:
+                    left_distinct += 1
+                i += 1
+            else:
+                # moving i would reduce middle distinct by 1
+                # check if left distinct increases (if cand not already in left)
+                if left_freq[cand] == 0:
+                    # moving i increases left distinct by 1, decreases middle distinct by 1
+                    # net change 0, but we can still move because later moves might help
+                    # Actually, moving i here doesn't change sum, but allows future moves.
+                    # We'll move if it doesn't decrease sum.
+                    mid_freq[cand] -= 1
+                    left_freq[cand] += 1
+                    left_distinct += 1
+                    i += 1
+                else:
+                    # moving i decreases middle distinct by 1, left distinct unchanged
+                    # sum decreases, so stop
+                    break
+
+        # Ensure left part is non-empty (i >= 0) and middle part non-empty (j > i)
+        if i > 0 and j > i:
+            ans = max(ans, left_distinct + mid_distinct + right_distinct)
+
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

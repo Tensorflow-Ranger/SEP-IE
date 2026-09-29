@@ -1,0 +1,21 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+def task_func(dictionary, key, value, n=100, bins=30, seed=0):
+    try:
+        float(value)
+    except (TypeError, ValueError):
+        raise ValueError("If the provided value is not a number.")
+    np.random.seed(seed)
+    mean = float(value)
+    std_dev = float(value)
+    data = np.random.normal(loc=mean, scale=std_dev, size=n)
+    dictionary[key] = value
+    series = pd.Series(data)
+    plt.hist(data, bins=bins, edgecolor='black')
+    plt.title('Histogram of Generated Data')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    return (dictionary, series, plt.gcf())
+```

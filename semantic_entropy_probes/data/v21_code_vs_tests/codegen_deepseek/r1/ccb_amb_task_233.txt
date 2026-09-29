@@ -1,0 +1,130 @@
+```python
+import sys
+
+def solve():
+    input = sys.stdin.read
+    data = input().split()
+    idx = 0
+    N = int(data[idx]); idx += 1
+    M = int(data[idx]); idx += 1
+    A = [int(data[idx + i]) for i in range(N)]
+    idx += N
+
+    # Count frequency of each value in A
+    freq = [0] * M
+    for v in A:
+        freq[v] += 1
+
+    # Prefix sums of frequencies
+    pref = [0] * (M + 1)
+    for i in range(M):
+        pref[i + 1] = pref[i] + freq[i]
+
+    # Helper: number of elements in [l, r)
+    def count_in_range(l, r):
+        if l >= r:
+            return 0
+        if l < 0:
+            l = 0
+        if r > M:
+            r = M
+        return pref[r] - pref[l]
+
+    # Step 1: Compute base inversion count for k = 0
+    # Use Fenwick tree over values 0..M-1
+    class Fenwick:
+        def __init__(self, n):
+            self.n = n
+            self.bit = [0] * (n + 1)
+        def add(self, idx, delta):
+            i = idx + 1
+            while i <= self.n:
+                self.bit[i] += delta
+                i += i & -i
+        def sum(self, idx):
+            # sum of [0, idx]
+            i = idx + 1
+            s = 0
+            while i > 0:
+                s += self.bit[i]
+                i -= i & -i
+            return s
+        def range_sum(self, l, r):
+            # [l, r]
+            if l > r:
+                return 0
+            return self.sum(r) - (self.sum(l - 1) if l > 0 else 0)
+
+    bit = Fenwick(M)
+    inv0 = 0
+    for v in A:
+        # count numbers > v
+        inv0 += bit.range_sum(v + 1, M - 1)
+        bit.add(v, 1)
+
+    # Step 2: Prepare contribution of each value shift
+    # For each original value x, when k increases, its new value is (x + k) mod M.
+    # When it wraps from M-1 to 0, it loses inversions with all larger original values
+    # and gains inversions with all smaller original values.
+    # We can compute total change per k increment.
+
+    # Let’s compute for each x:
+    #   loss[x] = number of y > x  (original values)
+    #   gain[x] = number of y < x
+    # When x wraps, we lose loss[x] inversions and gain gain[x] inversions.
+    # But careful: inversions are counted as pairs (i,j) with i<j and A_i > A_j.
+    # When x wraps, all occurrences of x change from being larger than some numbers to smaller.
+    # Actually, for each occurrence of value x:
+    #   it was part of inversions as larger element with all y < x (counted in loss? no, opposite)
+    # Let's think systematically:
+
+    # For a fixed pair (i,j) with i<j, original values a = A_i, b = A_j.
+    # Inversion condition for k: (a + k) mod M > (b + k) mod M.
+    # This depends on whether a and b cross the mod boundary relative to k.
+    # Let’s define f(k) = ((a + k) mod M) - ((b + k) mod M).
+    # Actually easier: Inversion exists iff (a + k) mod M > (b + k) mod M.
+    # Let d = (a - b) mod M, taking values in [0, M-1].
+    # Then (a + k) mod M > (b + k) mod M iff (d mod M) != 0 and (b + k) mod M < (a + k) mod M.
+    # Equivalent to: (b + k) mod M is in [0, (a + k) mod M - 1] if no wrap? Messy.
+
+    # Better approach known from problem "Inversion of Shifts":
+    # For each pair (a,b) with a != b, define interval of k where inversion exists.
+    # Let’s fix a > b in normal sense (without mod). Then initially (k=0) we have inversion.
+    # As k increases, both increase until b + k reaches M and wraps to 0 while a + k is still < M.
+    # At that moment, b becomes smaller than a again? Wait, after wrap, b becomes 0, a is still a+k < M, so a > b still.
+    # Actually, the condition (a+k) mod M > (b+k) mod M changes only when either a+k or b+k crosses M.
+    # Let’s compute threshold k where (a+k) mod M becomes less than (b+k) mod M.
+    # Suppose a > b. Then initially (a+0) mod M = a, (b+0) mod M = b, so a > b -> inversion.
+    # When k increases, both increase until b+k reaches M-1 then wraps to 0.
+    # At k = M - b, b+k becomes 0, while a+k = a + M - b.
+    # If a + M - b < M, i.e., a < b, but we assumed a > b, so a + M - b >= M.
+    # So a + M - b >= M, meaning (a + M - b) mod M = a - b.
+    # At k = M - b, we have new values: a' = a - b, b' = 0.
+    # Since a > b, a - b > 0, so a' > b' still inversion.
+    # Next change when a+k reaches M-1 and wraps? Let's find when inversion flips:
+    # Inversion exists iff (a+k) mod M > (b+k) mod M.
+    # Let’s define x = (a - b) mod M. If x = 0, never inversion.
+    # If 0 < x < M, then (a+k) mod M - (b+k) mod M = x if no wrap, or x - M if wrap occurs.
+    # Actually, (a+k) mod M - (b+k) mod M = (a - b) mod M if (b+k) mod M <= (a+k) mod M,
+    # otherwise = (a - b) mod M - M.
+    # So sign depends on whether (a - b) mod M > M/2? Not exactly.
+
+    # Known trick: For each pair (a,b) with a != b, the inversion condition for k is:
+    # (a + k) mod M > (b + k) mod M  <=>  (a - b) mod M > 0 and k mod M not in [M - a, M - b) if a < b? Let's derive.
+
+    # Let’s compute k where (a+k) mod M = 0, i.e., k = (M - a) mod M.
+    # Similarly for b. The order of wraps matters.
+    # Case 1: a > b. Then a wraps after b? Actually wrap times: t_a = (M - a) mod M, t_b = (M - b) mod M.
+    # Since a > b, t_a > t_b (because M - a < M - b).
+    # For k in [0, t_b): both in [0, M-1], a+k > b+k -> inversion.
+    # For k in [t_b, t_a): b wrapped, a not wrapped. Then (b+k) mod M = b+k - M, (a+k) mod M = a+k.
+    # Compare: a+k > b+k - M  <=> a - b > -M, always true. So inversion still.
+    # For k in [t_a, M): both wrapped. Then (a+k) mod M = a+k - M, (b+k) mod M = b+k - M.
+    # Then a+k - M > b+k - M <=> a > b, still inversion.
+    # So if a > b, inversion for all k.
+
+    # Case 2: a < b. Then t_a > t_b? Actually a < b => M - a > M - b, so t_a > t_b.
+    # For k in [0, t_b): both not wrapped, a+k < b+k -> no inversion.
+    # For k in [t_b, t_a): b wrapped, a not wrapped. Then (b+k) mod M = b+k - M, (a+k) mod M = a+k.
+    # Compare a+k > b+k - M <=> a - b > -M, always true because a-b >= -M+1. So inversion exists.
+    # For k in [t_a, M

@@ -1,0 +1,54 @@
+```python
+import sys
+import math
+
+def solve():
+    input = sys.stdin.read
+    data = input().split()
+    idx = 0
+    N = int(data[idx]); idx += 1
+    K = int(data[idx]); idx += 1
+    A = [int(data[idx + i]) for i in range(N)]
+    maxA = max(A)
+    
+    # frequency array
+    freq = [0] * (maxA + 1)
+    for x in A:
+        freq[x] += 1
+    
+    # prefix sums of frequencies for multiples
+    prefix = [0] * (maxA + 1)
+    for d in range(1, maxA + 1):
+        cnt = 0
+        for m in range(d, maxA + 1, d):
+            cnt += freq[m]
+        prefix[d] = cnt
+    
+    # For each i, we need the largest d such that
+    # count of multiples of d in A >= K
+    # and A[i] is a multiple of d.
+    # We can precompute for each d whether count >= K,
+    # then for each A[i] find the max d dividing A[i] with that property.
+    
+    good = [False] * (maxA + 1)
+    for d in range(1, maxA + 1):
+        if prefix[d] >= K:
+            good[d] = True
+    
+    # For each possible value v, find the maximum good divisor
+    # Precompute for all numbers up to maxA the largest good divisor
+    best_div = [0] * (maxA + 1)
+    for d in range(1, maxA + 1):
+        if not good[d]:
+            continue
+        for m in range(d, maxA + 1, d):
+            best_div[m] = max(best_div[m], d)
+    
+    out = []
+    for x in A:
+        out.append(str(best_div[x]))
+    sys.stdout.write("\n".join(out))
+
+if __name__ == "__main__":
+    solve()
+```

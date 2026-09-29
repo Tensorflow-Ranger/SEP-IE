@@ -1,0 +1,114 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    A = data[1].strip()
+    length = 3 ** N
+
+    # We need to compute the minimum changes so that the final majority after N levels is flipped.
+    # This is essentially: min(changes to make final 0, changes to make final 1) but we want to flip,
+    # so if current final is 0, we compute changes to make it 1, and vice versa.
+
+    # We can think recursively: at each node we need the min changes to make its subtree yield 0 or 1.
+    # Let dp[node][target] = min changes in subtree rooted at node to make its majority = target.
+    # The tree is a complete ternary tree of height N (root level 0, leaves level N).
+    # Number of nodes total = (3^(N+1)-1)/2, but we can index leaves by their position.
+
+    # Instead of building the whole tree, we can compute recursively on the string directly.
+    # Define a recursive function that takes a segment (start, length = 3^k) and returns (cost0, cost1)
+    # where costt = min changes in this segment to make its majority after k operations = t.
+
+    # Base case: k = 0, segment length 1, just one character.
+    # If char == '0': cost0 = 0, cost1 = 1; else cost0 = 1, cost1 = 0.
+
+    # For k > 0: split into 3 subsegments each of length 3^(k-1).
+    # Let (a0, a1), (b0, b1), (c0, c1) be the pairs from the three children.
+    # To get majority 0 for this node: we need at least two children to yield 0.
+    # So cost0 = min over choices of two children giving 0, third arbitrary.
+    # That is: min(a0 + b0 + min(c0, c1), a0 + c0 + min(b0, b1), b0 + c0 + min(a0, a1)).
+    # Similarly for majority 1: cost1 = min(a1 + b1 + min(c0, c1), a1 + c1 + min(b0, b1), b1 + c1 + min(a0, a1)).
+
+    # We can compute recursively from leaves up to root.
+
+    # Since N <= 13, total length <= 3^13 ≈ 1.6 million, recursion depth 13 is fine.
+    # But we must avoid O(3^N) recursion overhead? Actually recursion visits each node once,
+    # total nodes = (3^(N+1)-1)/2 ≈ 2.4 million for N=13, which is acceptable in Python with memoization?
+    # However, recursion on string slices would copy strings and be slow.
+    # Better: work with indices into the original string A.
+
+    # We'll implement a recursive function that takes (l, k) where l is start index in A,
+    # and k is the level (length = 3^k).
+    # Returns tuple (cost0, cost1).
+
+    # Use memoization with (l, k) as key. But k is determined by length, and l varies.
+    # Number of distinct calls: each node corresponds to a unique (l, k). Total nodes ~ (3^(N+1)-1)/2.
+    # For N=13, that's ~2.4 million calls, each doing constant work. Might be borderline but okay in PyPy.
+    # We can avoid memoization by computing bottom-up, but recursion is simpler.
+
+    # However, recursion depth is N <= 13, fine.
+
+    # We'll implement without memoization first, but that would be exponential.
+    # So we need memoization.
+
+    from functools import lru_cache
+
+    @lru_cache(maxsize=None)
+    def dp(l: int, k: int):
+        # segment A[l : l + 3^k]
+        if k == 0:
+            c = A[l]
+            if c == '0':
+                return (0, 1)
+            else:
+                return (1, 0)
+        sublen = 3 ** (k - 1)
+        a0, a1 = dp(l, k - 1)
+        b0, b1 = dp(l + sublen, k - 1)
+        c0, c1 = dp(l + 2 * sublen, k - 1)
+
+        # cost for majority 0
+        cost0 = min(
+            a0 + b0 + min(c0, c1),
+            a0 + c0 + min(b0, b1),
+            b0 + c0 + min(a0, a1)
+        )
+        # cost for majority 1
+        cost1 = min(
+            a1 + b1 + min(c0, c1),
+            a1 + c1 + min(b0, b1),
+            b1 + c1 + min(a0, a1)
+        )
+        return (cost0, cost1)
+
+    root_cost0, root_cost1 = dp(0, N)
+    # Determine current final value without changes: we could compute by applying operations,
+    # but it's easier: we know it's the majority after N levels on original string.
+    # We can compute by recursion as well, but we can just see which of root_cost0, root_cost1 is smaller?
+    # Actually root_cost0 is min changes to make final 0, root_cost1 to make final 1.
+    # If original final is 0, then root_cost0 = 0 (since no changes needed to keep it 0).
+    # Wait, not exactly: root_cost0 is min changes to make final 0, but original final might be 0,
+    # so root_cost0 could be 0. Similarly root_cost1 >= 1.
+    # So original final = 0 if root_cost0 < root_cost1? Not necessarily, because maybe both >0 if original
+    # requires changes to be consistent? Actually original string yields some final value, call it orig_val.
+    # Then min changes to get final orig_val is 0 (by doing nothing). So one of root_cost0, root_cost1 is 0.
+    # Therefore, if orig_val = 0, then root_cost0 = 0 and root_cost1 > 0.
+    # If orig_val = 1, then root_cost1 = 0 and root_cost0 > 0.
+    # So we can decide: if root_cost0 == 0 then orig_val = 0 else orig_val = 1.
+    # But careful: Could both be 0? No, because that would mean we can get both 0 and 1 with 0 changes,
+    # impossible unless the string is ambiguous? But majority is deterministic, so only one final value.
+    # So exactly one of root_cost0, root_cost1 is 0.
+
+    if root_cost0 == 0:
+        # original final is 0, need to flip to 1
+        print(root_cost1)
+    else:
+        # original final is 1, need to flip to 0
+        print(root_cost0)
+
+if __name__ == "__main__":
+    solve()
+```

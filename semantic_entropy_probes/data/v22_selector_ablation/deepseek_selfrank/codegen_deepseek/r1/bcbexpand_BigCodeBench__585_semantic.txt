@@ -1,0 +1,58 @@
+```python
+import rsa
+import os
+import zipfile
+from base64 import b64encode
+
+def task_func(directory):
+    """
+    Generates RSA public and private keys, encrypts all files in the specified directory 
+    using the public key, and saves the encrypted files into a zip file. 
+    Returns the public key and the name of the zip file.
+
+    Parameters:
+    directory (str): The path to the directory containing files to encrypt.
+
+    Returns:
+    tuple: (rsa.PublicKey, str) The RSA public key and the filename of the zip file.
+    """
+    if not os.path.exists(directory):
+        raise ValueError(f"Directory '{directory}' does not exist.")
+    
+    files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+    if not files:
+        raise ValueError(f"No files found in directory '{directory}'.")
+    
+    # Generate RSA keys
+    (pub_key, priv_key) = rsa.newkeys(512)  # Small key size for speed; not for production
+    
+    encrypted_files = []
+    for filename in files:
+        filepath = os.path.join(directory, filename)
+        with open(filepath, 'rb') as f:
+            file_data = f.read()
+        
+        # Encrypt the file data with RSA public key
+        encrypted_data = rsa.encrypt(file_data, pub_key)
+        # Encode encrypted data to base64 for safe storage
+        encoded_data = b64encode(encrypted_data)
+        
+        # Save encrypted file temporarily
+        encrypted_filename = f"encrypted_{filename}.bin"
+        encrypted_filepath = os.path.join(directory, encrypted_filename)
+        with open(encrypted_filepath, 'wb') as f:
+            f.write(encoded_data)
+        encrypted_files.append(encrypted_filepath)
+    
+    # Create zip file containing all encrypted files
+    zip_filename = os.path.join(directory, "encrypted_files.zip")
+    with zipfile.ZipFile(zip_filename, 'w') as zipf:
+        for encrypted_file in encrypted_files:
+            zipf.write(encrypted_file, os.path.basename(encrypted_file))
+    
+    # Clean up temporary encrypted files
+    for encrypted_file in encrypted_files:
+        os.remove(encrypted_file)
+    
+    return pub_key, zip_filename
+```

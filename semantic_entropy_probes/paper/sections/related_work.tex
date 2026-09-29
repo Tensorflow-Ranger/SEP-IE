@@ -1,0 +1,65 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Uncertainty Quantification via Sampling}
+
+Semantic entropy~\cite{kuhn2023semantic} estimates an LLM's uncertainty
+about a free-form generation by sampling multiple outputs, clustering them
+by semantic equivalence, and computing the entropy of the resulting cluster
+distribution. This requires $K$ generation calls per uncertainty estimate
+and is the conceptual basis for a family of clarify-then-generate systems
+for code, including ClarifyGPT~\cite{clarifygpt}, which uses repeated
+sampling of the coding model's outputs to decide when an ambiguous
+requirement warrants a clarifying question. These approaches are effective
+but tie the cost of every clarification decision to $K$ additional calls to
+the coding model itself, which is frequently the most expensive component
+of the pipeline.
+
+\subsection{Single-Forward-Pass Probing}
+
+Kossen et al.~\cite{oatml_sep} introduce semantic entropy probes: a linear
+probe trained on a single forward pass' hidden states to predict the
+semantic entropy that would otherwise require $K$ generations to estimate,
+amortizing the sampling cost of training many probes' worth of labels into
+a one-time cost, with cheap inference thereafter. Our probing methodology
+directly reuses this approach -- per-layer linear probing of residual-stream
+activations, best-split binarization for layer selection, bootstrapped
+evaluation -- but applies it to a different prediction target. Where
+Kossen et al.\ probe for a property of the model's own \emph{output}
+distribution (how much its generations would disagree with each other), we
+probe for a property of the \emph{input} prompt (how much unresolved
+specification ambiguity it contains) and, in a second stage, a property of
+a candidate answer relative to that input (how well it resolves the
+ambiguity, for ranking purposes). This is a substantively different
+prediction problem: no sampling, clustering, or generation from the model
+being probed is involved anywhere in our pipeline, at either training or
+inference time, and consequently the model being probed need not be the
+model doing the coding.
+
+\subsection{Ambiguity and Clarification in Software Engineering}
+
+Resolving requirements ambiguity before implementation is a long-standing
+concern in software engineering, predating LLM-based tooling. Recent
+LLM-era work targets this directly for code generation, constructing
+benchmarks with deliberately injected or naturally occurring ambiguity and
+evaluating whether models recognize the need to ask a clarifying question
+before writing code~\cite{clarifycodebench}. Our evaluation builds on
+ClarifyCodeBench and on Orchid-style ambiguity injections over
+HumanEval~\cite{humaneval} and BigCodeBench~\cite{bigcodebench}, which
+construct matched clear/ambiguous prompt pairs by deleting or rewriting a
+targeted specification detail and pairing the injected prompt with tests
+that specifically exercise the resulting ambiguity.
+
+\subsection{Agentic Coding Benchmarks}
+
+Our live evaluation loop -- eliciting candidate clarifying questions,
+ranking them, generating code conditioned on the top-ranked answer, and
+scoring the result against real executable test suites -- follows the
+general pattern of agentic coding benchmarks that emphasize execution-based
+correctness over surface-level similarity to a reference
+solution~\cite{humaneval,bigcodebench}. We report correctness using the
+fractional test-case pass rate rather than an all-or-nothing pass metric,
+and show in Section~\ref{sec:results} that this choice materially affects
+which relationships in the data reach statistical significance -- a point
+we believe is broadly relevant to how agentic coding pipelines should be
+evaluated, independent of our specific method.

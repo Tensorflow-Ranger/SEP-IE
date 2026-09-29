@@ -1,0 +1,22 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame(data)
+    values = df[column].dropna().astype(float)
+    sum_val = np.sum(values)
+    mean_val = np.mean(values) if not values.empty else np.nan
+    min_val = np.min(values) if not values.empty else np.inf
+    max_val = np.max(values) if not values.empty else -np.inf
+    plt.hist(values, bins=10)
+    plot = plt.gca().get_children()[1]
+    result = {
+        'sum': sum_val,
+        'mean': mean_val,
+        'min': min_val,
+        'max': max_val,
+        'plot': plot
+    }
+    return result
+```

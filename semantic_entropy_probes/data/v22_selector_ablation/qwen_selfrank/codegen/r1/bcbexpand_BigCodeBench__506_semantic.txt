@@ -1,0 +1,34 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame(data)
+    filtered_data = df[[column]].apply(pd.to_numeric, errors='coerce')
+    numeric_data = filtered_data.dropna()
+    
+    if numeric_data.empty:
+        sum_val = np.nan
+        mean_val = np.nan
+        min_val = np.inf
+        max_val = -np.inf
+    else:
+        sum_val = numeric_data[column].sum()
+        mean_val = numeric_data[column].mean()
+        min_val = numeric_data[column].min()
+        max_val = numeric_data[column].max()
+    
+    plt.figure()
+    plt.hist(numeric_data[column], bins=10, edgecolor='black')
+    plot = plt.gca().get_children()[1]  # Get the BarContainer object
+    
+    result = {
+        'sum': sum_val,
+        'mean': mean_val,
+        'min': min_val,
+        'max': max_val,
+        'plot': plot
+    }
+    
+    return result
+```

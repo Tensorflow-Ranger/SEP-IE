@@ -1,0 +1,80 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    M = int(data[1])
+    ops = []
+    for i in range(M):
+        L = int(data[2 + 2*i])
+        R = int(data[3 + 2*i])
+        ops.append((L, R))
+    
+    # We need to make all x_i = 1
+    # We can track which positions are already 1
+    # We'll use a set to track the positions that are 1
+    # Initially, no positions are 1
+    covered = set()
+    
+    # We'll track the operations we choose
+    selected_ops = []
+    
+    # For each operation, decide whether to use it or not
+    for i in range(M):
+        L, R = ops[i]
+        # Check if the current interval is already fully covered
+        # If not, we need to perform an operation on it
+        # We can use operation 1 or 2
+        # Operation 1 sets [L, R] to 1
+        # Operation 2 sets [1, L-1] and [R+1, N] to 1
+        # We choose the one that covers the most uncovered positions
+        
+        # Calculate the number of uncovered positions in [L, R]
+        left = bisect.bisect_left(covered, L)
+        right_idx = bisect.bisect_right(covered, R)
+        uncovered_in_range = right_idx - left
+        
+        # Calculate the number of uncovered positions in [1, L-1] and [R+1, N]
+        left1 = bisect.bisect_left(covered, 1)
+        right1 = bisect.bisect_left(covered, L)
+        uncovered_left = right1 - left1
+        
+        left2 = bisect.bisect_right(covered, R)
+        right2 = bisect.bisect_right(covered, N)
+        uncovered_right = right2 - left2
+        
+        total_uncovered = uncovered_in_range + uncovered_left + uncovered_right
+        
+        if uncovered_in_range > uncovered_left + uncovered_right:
+            # Use operation 1
+            selected_ops.append(1)
+            # Add all positions in [L, R] to covered
+            for j in range(L, R+1):
+                if j not in covered:
+                    covered.add(j)
+        else:
+            # Use operation 2
+            selected_ops.append(2)
+            # Add all positions in [1, L-1] and [R+1, N] to covered
+            for j in range(1, L):
+                if j not in covered:
+                    covered.add(j)
+            for j in range(R+1, N+1):
+                if j not in covered:
+                    covered.add(j)
+    
+    # Check if all positions are covered
+    if len(covered) != N:
+        print(-1)
+    else:
+        print(len(selected_ops))
+        print(' '.join(map(str, selected_ops)))
+
+if __name__ == "__main__":
+    main()
+```

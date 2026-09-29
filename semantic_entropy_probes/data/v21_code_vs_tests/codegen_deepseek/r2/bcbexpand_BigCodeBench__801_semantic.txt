@@ -1,0 +1,23 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    try:
+        data = np.genfromtxt(file_name, delimiter=',', dtype=str, names=True, encoding='utf-8')
+    except (IOError, StopIteration):
+        return {}
+    if data.size == 0 or len(data.dtype.names) == 0:
+        return {}
+    result = {}
+    for col in data.dtype.names:
+        column_data = data[col]
+        column_data = [str(item) if not (isinstance(item, float) and np.isnan(item)) else '' for item in column_data]
+        counter = collections.Counter(column_data)
+        if not counter:
+            continue
+        max_count = max(counter.values())
+        most_common_values = [val for val, cnt in counter.items() if cnt == max_count]
+        most_common_values.sort()
+        result[col] = most_common_values[0]
+    return result
+```

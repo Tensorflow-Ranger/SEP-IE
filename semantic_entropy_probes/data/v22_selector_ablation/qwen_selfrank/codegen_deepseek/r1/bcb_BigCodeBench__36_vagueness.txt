@@ -1,0 +1,68 @@
+```python
+import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+TARGET_VALUES = np.array([1, 3, 4])
+def task_func(df):
+    """
+    Replace all elements in DataFrame columns that do not match the TARGET_VALUES array with zeros,
+    then perform a Box-Cox transformation on each column (if data is not constant, add 1 to account for zeros)
+    and display the resulting KDE plots.
+    
+    Parameters:
+    df (pandas.DataFrame): Input DataFrame.
+    
+    Returns:
+    pandas.DataFrame: The transformed DataFrame after Box-Cox transformation.
+    matplotlib.figure.Figure: Figure containing KDE plots of the transformed columns.
+    """
+    import pandas as pd
+    from scipy import stats
+    import matplotlib.pyplot as plt
+    
+    # Create a copy to avoid modifying the original DataFrame
+    df_transformed = df.copy()
+    
+    # Replace values not in TARGET_VALUES with 0
+    mask = ~df_transformed.isin(TARGET_VALUES)
+    df_transformed[mask] = 0
+    
+    # Apply Box-Cox transformation to each column
+    for col in df_transformed.columns:
+        column_data = df_transformed[col]
+        # Check if column is constant (all values equal)
+        if column_data.nunique() <= 1:
+            # Constant column, skip transformation
+            continue
+        # Add 1 to handle zeros (since Box-Cox requires positive data)
+        shifted_data = column_data + 1
+        # Perform Box-Cox transformation
+        try:
+            transformed_data, _ = stats.boxcox(shifted_data)
+            df_transformed[col] = transformed_data
+        except:
+            # If transformation fails, keep the original data
+            pass
+    
+    # Create KDE plots
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for col in df_transformed.columns:
+        data = df_transformed[col].dropna()
+        if len(data) > 1:
+            try:
+                from scipy.stats import gaussian_kde
+                kde = gaussian_kde(data)
+                x_vals = np.linspace(data.min(), data.max(), 1000)
+                ax.plot(x_vals, kde(x_vals), label=col)
+            except:
+                # Fallback to histogram if KDE fails
+                ax.hist(data, alpha=0.5, label=col, density=True)
+    
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Density')
+    ax.set_title('KDE Plots of Transformed Columns')
+    ax.legend()
+    plt.tight_layout()
+    
+    return df_transformed, fig
+```

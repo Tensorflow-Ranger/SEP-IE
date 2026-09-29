@@ -1,0 +1,40 @@
+```python
+import codecs
+import random
+import struct
+KEYS = ['470FC614', '4A0FC614', '4B9FC614', '4C8FC614', '4D7FC614']
+def task_func(hex_keys=KEYS):
+    """
+    Generate a random float number from a list of hex strings by selecting each string in sequence and then encode the float number in utf-8.
+    
+    Parameters:
+    - hex_keys (list): List of hex strings. Default is KEYS.
+    
+    Returns:
+    - bytes: The utf-8 encoded float number.
+    """
+    if not hex_keys:
+        raise ValueError("hex_keys list must not be empty")
+    
+    # Select each hex string in sequence
+    for hex_str in hex_keys:
+        # Convert hex string to bytes
+        try:
+            key_bytes = codecs.decode(hex_str, 'hex')
+        except:
+            continue  # Skip invalid hex strings
+        
+        # Convert bytes to float (assuming little-endian format)
+        try:
+            float_num = struct.unpack('<f', key_bytes)[0]
+        except:
+            continue  # Skip if conversion fails
+        
+        # Encode the float number in utf-8
+        encoded = str(float_num).encode('utf-8')
+        return encoded
+    
+    # If all conversions failed, return default encoded float
+    default_float = 0.0
+    return str(default_float).encode('utf-8')
+```

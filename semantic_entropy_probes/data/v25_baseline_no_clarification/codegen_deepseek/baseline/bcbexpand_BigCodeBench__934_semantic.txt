@@ -1,0 +1,14 @@
+```python
+from collections import Counter
+import hashlib
+def task_func(word: str) -> dict:
+    if not word:
+        return {}
+    word_lower = word.lower()
+    pairs = [word_lower[i:i+2] for i in range(len(word_lower)-1)]
+    pair_counts = Counter(pairs)
+    result_dict = dict(pair_counts)
+    result_str = str(sorted(result_dict.items()))
+    hash_obj = hashlib.md5(result_str.encode())
+    return {"hash": hash_obj.hexdigest()}
+```

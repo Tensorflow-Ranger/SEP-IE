@@ -1,0 +1,50 @@
+```python
+import sys
+import sys
+input = sys.stdin.read
+
+def main():
+    data = input().split()
+    idx = 0
+    T = int(data[idx])
+    idx += 1
+    results = []
+    
+    for _ in range(T):
+        N = int(data[idx])
+        idx += 1
+        A = list(map(int, data[idx:idx+2*N]))
+        idx += 2*N
+        
+        pos = [0] * (N + 1)
+        for i in range(2*N):
+            pos[A[i]] = i
+        
+        # Check if two occurrences of a are adjacent
+        def is_adjacent(x):
+            return abs(pos[x][0] - pos[x][1]) == 1
+        
+        # Check if a and b can be made adjacent by swapping
+        def can_swap(a, b):
+            # Positions of a and b
+            a1, a2 = pos[a]
+            b1, b2 = pos[b]
+            # Check if they form a cross or a line
+            # If they form a cross, they can be made adjacent
+            # If they form a line, they can be made adjacent
+            # But if they are already adjacent, they can be made adjacent
+            # But the problem says that a and b must not be adjacent originally
+            if abs(a1 - b1) == 1 or abs(a1 - b2) == 1 or abs(a2 - b1) == 1 or abs(a2 - b2) == 1:
+                return True
+            return False
+        
+        # Precompute for all pairs (a, b)
+        count = 0
+        for a in range(1, N+1):
+            for b in range(a+1, N+1):
+                if not is_adjacent(a) and not is_adjacent(b) and can_swap(a, b):
+                    count += 1
+        results.append(str(count))
+    
+    print('\n'.join(results))
+```

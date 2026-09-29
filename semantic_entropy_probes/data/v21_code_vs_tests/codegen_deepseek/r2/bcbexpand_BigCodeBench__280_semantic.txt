@@ -1,0 +1,29 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.fft import fft
+def task_func(signal, precision=2, seed=777):
+    np.random.seed(seed)
+    signal_array = np.array(signal)
+    transformed = fft(signal_array)
+    transformed_rounded = np.round(transformed, precision)
+    
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+    
+    ax1.plot(signal_array.real, label='Real')
+    if np.iscomplexobj(signal_array):
+        ax1.plot(signal_array.imag, label='Imag', linestyle='--')
+    ax1.set_title('Original Signal')
+    ax1.legend()
+    ax1.grid(True)
+    
+    ax2.plot(transformed_rounded.real, label='Real')
+    if np.iscomplexobj(transformed_rounded):
+        ax2.plot(transformed_rounded.imag, label='Imag', linestyle='--')
+    ax2.set_title('Transformed Signal')
+    ax2.legend()
+    ax2.grid(True)
+    
+    plt.tight_layout()
+    return transformed_rounded, (ax1, ax2)
+```

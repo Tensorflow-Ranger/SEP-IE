@@ -1,0 +1,82 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    W = int(data[idx])
+    idx += 1
+    
+    blocks = []
+    for _ in range(N):
+        x = int(data[idx])
+        idx += 1
+        y = int(data[idx])
+        idx += 1
+        blocks.append((x, y))
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        t = int(data[idx])
+        idx += 1
+        a = int(data[idx]) - 1  # 0-based index
+        idx += 1
+        queries.append((t, a))
+    
+    # Sort blocks by Y coordinate
+    blocks.sort(key=lambda x: x[1])
+    
+    # For each column, keep track of the Y positions of blocks
+    col_y = [[] for _ in range(W)]
+    for x, y in blocks:
+        col_y[x - 1].append(y)
+    
+    # Sort each column's Y positions
+    for i in range(W):
+        col_y[i].sort()
+    
+    # Precompute for each block how many times it would be moved
+    # For each block (x, y), determine how many blocks are below it in the same column
+    # The number of blocks below it is the number of blocks in the same column with Y > y
+    # So for each block, we can find how many blocks are below it using binary search
+    # The number of blocks that would be removed before this block is moved down is the number of blocks below it
+    # The number of times this block is moved down is equal to the number of blocks that are removed before it
+    # So for each block, we can precompute the number of times it would be moved down
+    # Then, for a query (T, A), we check if the block A would have been removed by time T
+    
+    # Precompute for each block the number of blocks below it in its column
+    move_counts = []
+    for x, y in blocks:
+        col = x - 1
+        # Number of blocks below it is the number of blocks in the column with Y > y
+        # Since col_y[col] is sorted, we can use bisect to find the first Y > y
+        pos = bisect.bisect_right(col_y[col], y)
+        move_counts.append(pos)
+    
+    # For each block, the number of times it would be moved down is equal to the number of blocks below it
+    # So the final Y position of the block after T moves is original Y + number of moves
+    # But if T exceeds the number of moves, then the block would have been removed
+    # So for a query (T, A), we check if T <= move_counts[A]
+    
+    # Answer queries
+    results = []
+    for t, a in queries:
+        if t <= move_counts[a]:
+            results.append("Yes")
+        else:
+            results.append("No")
+    
+    print('\n'.join(results))
+
+if __name__ == "__main__":
+    main()
+```

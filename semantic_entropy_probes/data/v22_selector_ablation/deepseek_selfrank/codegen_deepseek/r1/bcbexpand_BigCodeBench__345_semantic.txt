@@ -1,0 +1,15 @@
+```python
+import pandas as pd
+import seaborn as sns
+def task_func(df, col1, col2):
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("Input must be a pandas DataFrame")
+    if df.empty:
+        raise ValueError("DataFrame is empty")
+    if col1 not in df.columns or col2 not in df.columns:
+        raise ValueError("Specified columns not found in DataFrame")
+    if not pd.api.types.is_numeric_dtype(df[col1]) or not pd.api.types.is_numeric_dtype(df[col2]):
+        raise TypeError("Columns contain non-numeric data")
+    ax = sns.regplot(x=col1, y=col2, data=df, scatter_kws={'alpha': 0.6})
+    return ax
+```

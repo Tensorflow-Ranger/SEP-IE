@@ -1,0 +1,159 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+
+    # Step 1: compute prefix distinct counts
+    pref = [0] * N
+    seen = set()
+    cnt = 0
+    for i in range(N):
+        if A[i] not in seen:
+            seen.add(A[i])
+            cnt += 1
+        pref[i] = cnt
+
+    # Step 2: compute suffix distinct counts
+    suff = [0] * N
+    seen.clear()
+    cnt = 0
+    for i in range(N - 1, -1, -1):
+        if A[i] not in seen:
+            seen.add(A[i])
+            cnt += 1
+        suff[i] = cnt
+
+    # Step 3: compute middle distinct counts using a sliding window
+    # We need for each possible j (end of middle subarray) the best i (start of middle subarray)
+    # such that middle distinct count + pref[i] is maximized.
+    # We iterate j from 1 to N-2 (since middle must be non-empty and leave room for suffix).
+    # For each j, we consider i from 0 to j-1, but we can maintain a sliding window of distinct counts.
+
+    # Let’s define mid_distinct(i, j) = number of distinct elements in A[i+1 .. j]
+    # We want to maximize pref[i] + mid_distinct(i, j) + suff[j+1] for fixed j.
+    # Let’s rewrite as (pref[i] + mid_distinct(i, j)) + suff[j+1].
+    # We can compute for each j the best value of pref[i] + mid_distinct(i, j) using a sliding window.
+
+    best_mid_prefix = [0] * N  # best_mid_prefix[j] = max over i<j of (pref[i] + mid_distinct(i, j))
+    # We'll compute it incrementally.
+
+    freq = {}
+    distinct = 0
+    left = 0
+    current_best = -10**9
+
+    for right in range(N):
+        # Add A[right] to window
+        freq[A[right]] = freq.get(A[right], 0) + 1
+        if freq[A[right]] == 1:
+            distinct += 1
+
+        # Now window is A[left .. right]
+        # For each possible i = left-1? Wait, we need i such that middle is A[i+1 .. j].
+        # If middle is A[i+1 .. j], then i < j and i >= 0.
+        # Let's maintain left = i+1, so middle is A[left .. right].
+        # Then i = left-1.
+        # We want to maximize pref[left-1] + distinct.
+        # We can adjust left to shrink window when we want to consider different i.
+
+        # But we need for each j the best over all i < j.
+        # We can slide left from 0 to right, but that’s O(N^2).
+        # Instead, note that when we increase right, we can keep left fixed,
+        # because adding a new element to the window only increases distinct count
+        # or keeps it same, but pref[left-1] stays same for fixed left.
+        # However, we might get a better value by moving left forward,
+        # because pref[left-1] could increase while distinct might decrease.
+        # We need to track the maximum of pref[left-1] + distinct over left.
+
+        # We can maintain a deque of candidates (left, value) where value = pref[left-1] + distinct(left, right).
+        # When we add A[right], distinct for all windows ending at right changes.
+        # Actually distinct(left, right) depends on the whole window, so all values change.
+        # This is tricky.
+
+        # Alternative approach: process from right to left.
+        # Let’s define for each i the best j > i of mid_distinct(i, j) + suff[j+1].
+        # But symmetry doesn’t help much.
+
+        # Let's think differently: we can precompute for each possible middle start index l
+        # the distinct count of the middle subarray as we extend it to the right.
+        # For each l, as we increase r, distinct count is non-decreasing until it saturates.
+        # We need max over l<r of (pref[l-1] + distinct(l, r) + suff[r+1]).
+        # This is like for each r, we want max over l of (pref[l-1] + distinct(l, r)).
+        # We can maintain for each distinct value the last occurrence index.
+        # When we move r to r+1, we update the last occurrence of A[r+1].
+        # The distinct(l, r) for a given l is the number of distinct elements in A[l..r]
+        # whose last occurrence index >= l. When we process r, for each element,
+        # its last occurrence is updated to r. This may affect which l have that element counted.
+
+        # Actually, we can use a segment tree where each position l stores pref[l-1] + distinct(l, current_r).
+        # Initially for r = 0, distinct(l,0) is 0 for l=0? Wait l <= r.
+        # We iterate r from 0 to N-2 (since middle must end before last element for suffix).
+        # For each r, we want max over l in [0, r-1] of tree[l].
+        # Then answer candidate = tree.max + suff[r+1].
+        # How to update tree when moving r to r+1?
+        # When we add A[r+1] to the sequence, for all l <= last_occurrence[A[r+1]] (old last occurrence),
+        # the element A[r+1] was already counted in distinct(l, r). So no change.
+        # For l in (last_occurrence[A[r+1]], r+1], the element A[r+1] is new, so distinct(l, r+1) = distinct(l, r) + 1.
+        # Thus we add 1 to tree positions (last_occurrence[A[r+1]]+1, r+1].
+        # Then update last_occurrence[A[r+1]] = r+1.
+
+    # Let's implement the segment tree approach.
+
+    # Segment tree for range add and range max.
+    class SegTree:
+        def __init__(self, n):
+            self.n = n
+            self.size = 1
+            while self.size < n:
+                self.size <<= 1
+            self.data = [0] * (2 * self.size)
+            self.lazy = [0] * (2 * self.size)
+
+        def _push(self, idx):
+            if self.lazy[idx] != 0:
+                self.data[2*idx] += self.lazy[idx]
+                self.data[2*idx+1] += self.lazy[idx]
+                self.lazy[2*idx] += self.lazy[idx]
+                self.lazy[2*idx+1] += self.lazy[idx]
+                self.lazy[idx] = 0
+
+        def _range_add(self, l, r, v, idx, seg_l, seg_r):
+            if r <= seg_l or seg_r <= l:
+                return
+            if l <= seg_l and seg_r <= r:
+                self.data[idx] += v
+                self.lazy[idx] += v
+                return
+            self._push(idx)
+            mid = (seg_l + seg_r) // 2
+            self._range_add(l, r, v, 2*idx, seg_l, mid)
+            self._range_add(l, r, v, 2*idx+1, mid, seg_r)
+            self.data[idx] = max(self.data[2*idx], self.data[2*idx+1])
+
+        def range_add(self, l, r, v):
+            # add v to [l, r) (0-indexed)
+            self._range_add(l, r, v, 1, 0, self.size)
+
+        def query_max(self, l, r):
+            return self._query_max(l, r, 1, 0, self.size)
+
+        def _query_max(self, l, r, idx, seg_l, seg_r):
+            if r <= seg_l or seg_r <= l:
+                return -10**18
+            if l <= seg_l and seg_r <= r:
+                return self.data[idx]
+            self._push(idx)
+            mid = (seg_l + seg_r) // 2
+            left_max = self._query_max(l, r, 2*idx, seg_l, mid)
+            right_max = self._query_max(l, r, 2*idx+1, mid, seg_r)
+            return max(left_max, right_max)
+
+    # We need to consider middle subarray from l to r (inclusive), where l = i+1, r = j.
+    # So i = l-1, j = r.
+    # Condition: 1 <= i < j <= N-1

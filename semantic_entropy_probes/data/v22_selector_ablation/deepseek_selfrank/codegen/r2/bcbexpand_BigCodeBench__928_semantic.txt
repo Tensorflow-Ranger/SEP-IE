@@ -1,0 +1,20 @@
+```python
+from collections import Counter
+import itertools
+import string
+def task_func(word: str) -> dict:
+    # Generate all possible two-letter combinations (including double letters)
+    all_combinations = [a + b for a in string.ascii_lowercase for b in string.ascii_lowercase]
+    
+    # Count overlapping two-letter combinations in the word
+    two_letter_counts = Counter()
+    for i in range(len(word) - 1):
+        two_letter_counts[word[i:i+2]] += 1
+    
+    # Create the result dictionary with all combinations, including those with 0 count
+    result = {}
+    for combo in all_combinations:
+        result[combo] = two_letter_counts.get(combo, 0)
+    
+    return result
+```

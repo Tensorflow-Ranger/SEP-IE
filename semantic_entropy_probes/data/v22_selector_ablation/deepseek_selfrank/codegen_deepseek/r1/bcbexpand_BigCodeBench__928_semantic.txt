@@ -1,0 +1,15 @@
+```python
+from collections import Counter
+import itertools
+import string
+def task_func(word: str) -> dict:
+    combinations = [''.join(pair) for pair in itertools.product(string.ascii_lowercase, repeat=2)]
+    result = {combo: 0 for combo in combinations}
+    if len(word) < 2:
+        return result
+    for i in range(len(word) - 1):
+        combo = word[i:i+2].lower()
+        if combo in result:
+            result[combo] += 1
+    return result
+```

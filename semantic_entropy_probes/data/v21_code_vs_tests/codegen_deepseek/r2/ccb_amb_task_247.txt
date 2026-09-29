@@ -1,0 +1,164 @@
+```python
+import sys
+from collections import defaultdict
+
+def solve() -> None:
+    it = iter(sys.stdin.read().strip().split())
+    n = int(next(it))
+    a = [int(next(it)) for _ in range(n)]
+
+    # total frequency of each value in the whole array
+    total_cnt = defaultdict(int)
+    for val in a:
+        total_cnt[val] += 1
+
+    # left distinct set and its size
+    left_set = set()
+    left_size = 0
+
+    # middle frequency map and distinct count
+    mid_cnt = defaultdict(int)
+    mid_distinct = 0
+
+    # right frequency map starts as full, we'll move elements from right to middle
+    right_cnt = total_cnt.copy()
+    right_distinct = len(right_cnt)
+
+    best = 0
+    i = 0  # left subarray ends at i (0‑based), so left = a[0..i]
+    # j is the end of middle subarray (0‑based), middle = a[i+1 .. j]
+    # right = a[j+1 .. n-1]
+    # we iterate i from 0 to n-3, and for each i we try to find best j
+
+    # initial state: left empty, middle empty, right full
+    # we will first move a[0] from right to left before starting loops
+    # but it's easier to handle inside loops
+
+    # We'll use two pointers: for fixed i, increase j until right would become empty
+    j = i  # middle starts empty, right starts at a[i+1..]
+    # Actually, we must have i < j < n-1, so minimal i=0, j at least 1, right at least 1 element.
+    # Let's initialize properly.
+
+    # We'll build left gradually.
+    # Start with i = 0, left has a[0], middle empty, right has a[1..n-1]
+    left_set.add(a[0])
+    left_size = 1
+    # remove a[0] from right
+    right_cnt[a[0]] -= 1
+    if right_cnt[a[0]] == 0:
+        right_distinct -= 1
+
+    # Now middle is empty, right has a[1..n-1]
+    # We'll start j at i (which is 0) but middle must be non‑empty, so we need j >= i+1.
+    # So we'll first move a[1] from right to middle.
+    # We'll handle j pointer inside loop.
+
+    for i in range(n - 2):  # i can go up to n-3 because we need two elements after
+        # Ensure middle is not empty when i advances? Actually when i increases,
+        # the previous a[i] moves from middle (or left?) Wait:
+        # At start of iteration for i:
+        # left = a[0..i]
+        # middle = a[i+1 .. j]
+        # right = a[j+1 .. n-1]
+        # We must have i < j < n-1.
+
+        # If i has increased, the element a[i] was in middle at previous step,
+        # now it must move to left.
+        # So before starting j loop for new i, we move a[i] from middle to left.
+        if i > 0:
+            val = a[i]
+            # remove from middle
+            mid_cnt[val] -= 1
+            if mid_cnt[val] == 0:
+                mid_distinct -= 1
+            # add to left
+            if val not in left_set:
+                left_set.add(val)
+                left_size += 1
+
+        # Now we need to adjust j: because middle may have become empty,
+        # we must ensure middle is non‑empty, so j must be at least i+1.
+        # Also right must be non‑empty, so j <= n-2.
+        # We'll maintain j as the end index of middle.
+        # If after moving a[i] to left, middle is empty (i.e., j == i),
+        # we need to move one element from right to middle.
+        if j == i:
+            j += 1
+            val = a[j]
+            # move from right to middle
+            right_cnt[val] -= 1
+            if right_cnt[val] == 0:
+                right_distinct -= 1
+            mid_cnt[val] += 1
+            if mid_cnt[val] == 1:
+                mid_distinct += 1
+
+        # Now we can try to increase j to improve answer
+        # For fixed i, the sum is left_size + mid_distinct + right_distinct.
+        # As j increases, mid_distinct may increase or stay same,
+        # right_distinct may decrease or stay same.
+        # We want to maximize the sum.
+        # Since right_distinct is monotonic non‑increasing as j increases,
+        # and mid_distinct is monotonic non‑decreasing,
+        # the total sum is not monotonic, but we can use two‑pointer sliding:
+        # we increase j while the sum improves, but because of possible fluctuations,
+        # we might need to check all j. However, N up to 3e5, O(N^2) is impossible.
+        # We need a faster way.
+
+        # Observation: The sum = left_size + mid_distinct + right_distinct.
+        # left_size is fixed for given i.
+        # Let f(j) = mid_distinct(j) + right_distinct(j).
+        # We want max over j in [i+1, n-2] of f(j).
+        # Notice that when j increases by 1, we move a[j+1] from right to middle.
+        # So right_distinct changes depending on whether right_cnt[val] becomes 0,
+        # and mid_distinct changes depending on whether mid_cnt[val] becomes 1.
+        # We can maintain f(j) as we slide j.
+
+        # We'll try to increase j while it improves f(j), but because f(j) can go up and down,
+        # we need to track the maximum f(j) for current i.
+        # Since we move i from 0 to n-3, and j only increases overall (because when i increases,
+        # j will not decrease), we can use a moving j pointer that only goes forward.
+        # This is like a two‑pointer sweep where j is monotonic.
+        # We'll maintain j such that for current i, f(j) is maximized.
+        # Actually we can just keep increasing j while f(j+1) >= f(j) (greedy),
+        # but that might get stuck in local maximum.
+        # Better: we can compute f(j) for all j in O(N) total using prefix/suffix distinct counts.
+
+        # Alternative approach: precompute suffix distinct counts.
+        suffix_distinct = [0] * (n + 1)
+        seen = set()
+        for idx in range(n - 1, -1, -1):
+            seen.add(a[idx])
+            suffix_distinct[idx] = len(seen)
+        # suffix_distinct[k] = number of distinct in a[k..n-1]
+
+        # Now for each i, left distinct is just number of distinct in a[0..i].
+        # We can compute on the fly.
+        left_seen = set()
+        left_distinct_arr = [0] * n
+        for idx in range(n):
+            left_seen.add(a[idx])
+            left_distinct_arr[idx] = len(left_seen)
+
+        # For middle distinct: we need distinct in a[i+1 .. j].
+        # If we fix i, and vary j, we need distinct count in subarray.
+        # We can use a sliding window over j: maintain frequency map for current middle.
+        # Since i increases, we remove a[i] from middle (already done).
+        # And we can increase j as needed.
+        # But we still need to evaluate sum for each j quickly.
+        # sum = left_distinct_arr[i] + mid_distinct + suffix_distinct[j+1]
+        # because right subarray is a[j+1..n-1].
+        # Wait: suffix_distinct[j+1] is distinct in a[j+1..n-1], exactly right subarray.
+
+        # So we can write:
+        # total(i,j) = left_distinct_arr[i] + distinct(a[i+1..j]) + suffix_distinct[j+1]
+        # We want max over i<j<n-1.
+
+        # We can iterate i from 0 to n-3, and for each i we need max over j of
+        # distinct(a[i+1..j]) + suffix_distinct[j+1].
+        # Let g(i,j) = distinct(a[i+1..j]) + suffix_distinct[j+1].
+        # As j increases, distinct(a[i+1..j]) is non‑decreasing,
+        # suffix_distinct[j+1] is non‑increasing,
+        # so g(i,j) is not monotonic, but we can precompute best suffix of g for each i?
+        # Actually, for fixed i, we can compute g(i,j) for all j in O(N) if we recompute middle distinct each time -> O(N^2) too slow.
+

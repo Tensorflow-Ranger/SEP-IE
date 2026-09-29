@@ -1,0 +1,124 @@
+```python
+import sys
+import bisect
+
+def solve():
+    input = sys.stdin.read
+    data = input().split()
+    N, M = int(data[0]), int(data[1])
+    A = list(map(int, data[2:]))
+
+    # Count frequencies of each value in A
+    freq = [0] * M
+    for x in A:
+        freq[x] += 1
+
+    # Prefix sums of frequencies
+    pref = [0] * (M + 1)
+    for i in range(M):
+        pref[i + 1] = pref[i] + freq[i]
+
+    # Fenwick tree for counting inversions
+    class Fenwick:
+        def __init__(self, n):
+            self.n = n
+            self.bit = [0] * (n + 1)
+        def add(self, idx, delta):
+            i = idx + 1
+            while i <= self.n:
+                self.bit[i] += delta
+                i += i & -i
+        def sum(self, idx):
+            # sum of [0, idx]
+            i = idx + 1
+            s = 0
+            while i > 0:
+                s += self.bit[i]
+                i -= i & -i
+            return s
+        def range_sum(self, l, r):
+            # sum of [l, r]
+            if l > r:
+                return 0
+            return self.sum(r) - (self.sum(l - 1) if l > 0 else 0)
+
+    bit = Fenwick(M)
+
+    # Precompute inversion count for k = 0
+    inv0 = 0
+    for x in A:
+        inv0 += bit.range_sum(x + 1, M - 1)
+        bit.add(x, 1)
+
+    # Reset BIT
+    bit = Fenwick(M)
+
+    # We'll process numbers in order of (A_i + k) % M for each k
+    # For each possible value v in A, we consider its contribution when k increases.
+    # Let’s store positions of each value.
+    positions = [[] for _ in range(M)]
+    for i, x in enumerate(A):
+        positions[x].append(i)
+
+    # We'll compute answer for each k using the formula:
+    # inv(k) = inv0 - sum_{x=0}^{M-1} freq[x] * (number of elements > x) + sum_{x=0}^{M-1} freq[x] * (number of elements < (x+k)%M)
+    # Actually, better to think in terms of shifting thresholds.
+
+    # Precompute for each value x: count of elements > x in original A.
+    greater_than = [0] * M
+    for x in range(M):
+        greater_than[x] = pref[M] - pref[x + 1]
+
+    # We'll maintain current inversion count as we rotate k.
+    # When k increases by 1, each element with value v becomes (v+1)%M.
+    # Inversions involving this element change:
+    #   - It no longer contributes inversions with elements that were > v (now they are > (v+1)%M? careful)
+    #   - It now may gain inversions with elements that become < (v+1)%M after shift.
+    # Instead, think of the sequence B_k[i] = (A[i] + k) % M.
+    # Inversion count in B_k = number of pairs (i,j) with i<j and (A[i]+k)%M > (A[j]+k)%M.
+    # This is equivalent to:
+    #   (A[i] + k) % M > (A[j] + k) % M
+    #   iff (A[i] - A[j]) % M > 0 and (A[i] - A[j]) % M < M/2? Not exactly.
+    # Better: compare without modulo: Let a = A[i], b = A[j].
+    # Condition: (a + k) mod M > (b + k) mod M.
+    # This happens if:
+    #   Case 1: a + k < M and b + k < M: then condition is a > b.
+    #   Case 2: a + k >= M and b + k < M: then (a+k)%M = a+k-M, (b+k)%M = b+k, so condition is a+k-M > b+k -> a-M > b -> a > b+M (impossible since a<M, b>=0). So actually (a+k)%M < (b+k)%M always in this case.
+    #   Case 3: a + k < M and b + k >= M: then (a+k)%M = a+k, (b+k)%M = b+k-M, condition a+k > b+k-M -> a > b - M, which is always true since a>=0, b<M. So always inversion.
+    #   Case 4: both >= M: then both subtract M, condition a > b.
+    # So inversion exists iff:
+    #   (a + k) mod M > (b + k) mod M
+    #   iff (a + k) // M == (b + k) // M and a > b   [same quotient]
+    #      or (a + k) // M < (b + k) // M? Let's check cases:
+    #   Actually from above: inversion if:
+    #     1. both quotients equal (0 or 1) and a > b.
+    #     2. quotient of a is 0 and quotient of b is 1 (then always inversion)
+    #     3. quotient of a is 1 and quotient of b is 0 (then never inversion)
+    # So inversion count = #pairs with (floor((a+k)/M) < floor((b+k)/M)) + #pairs with same floor and a > b.
+    # Let q(x,k) = floor((x+k)/M). Then inversion = sum_{i<j} [q(A[i],k) > q(A[j],k)] + sum_{i<j} [q(A[i],k) == q(A[j],k) and A[i] > A[j]].
+    # But note q(x,k) can be 0 or 1 because 0 <= x,k < M, so x+k in [0, 2M-2], so floor is 0 or 1.
+    # So q(x,k) = 1 iff x+k >= M, i.e., x >= M - k.
+    # So for each k, elements with value >= M-k get quotient 1, others 0.
+    # Then inversion count = (#pairs where A[i] in group 1 and A[j] in group 0) + (inversions within group 0) + (inversions within group 1).
+    # Let group0 = {i | A[i] < M-k}, group1 = {i | A[i] >= M-k}.
+    # Then:
+    #   cross inversions: every pair (i,j) with i in group1, j in group0 contributes 1 (since q_i=1 > q_j=0).
+    #   within group0: inversions among elements with original values < M-k.
+    #   within group1: inversions among elements with original values >= M-k.
+    # So if we precompute:
+    #   - total_inv = inversion count for whole array (k=0).
+    #   - For each prefix of sorted values, inversion count within that prefix.
+    #   - For each suffix, inversion count within that suffix.
+    # Then for each k, group0 is values [0, M-k-1], group1 is [M-k, M-1].
+    # Let cnt0 = pref[M-k], cnt1 = N - cnt0.
+    # cross = cnt1 * cnt0? Wait, cross inversions require i in group1 and j in group0 with i<j.
+    # But our grouping is by value, not index. So we need to count pairs where value_i in group1 and value_j in group0 and i<j.
+    # This is not simply cnt1 * cnt0. We need to compute for each k the number of such index pairs.
+    # However, we can compute it using the positions: for each element in group1, how many elements in group0 appear after it? That's tricky.
+    # Alternative approach: Process k from 0 to M-1 and update inversion count incrementally.
+    # When k increases by 1, one value moves from group1 to group0: value v = M-k-1 (since now v < M-k becomes true).
+    # Let's see how inversion count changes when v moves from group1 to group0.
+    # Let cnt0 be current size of group0, cnt1 of group1.
+    # Before move, v was in group1. After move, v is in group0.
+    # Consider pairs involving v:
+    #   - With elements u in group0: before move, v (group1) and u (group0) contributed inversion if v appears before u? Actually cross inversion from group1 to group0 is counted regardless of order? Wait, cross inversion is defined as i in group1, j in group0, i<j. So

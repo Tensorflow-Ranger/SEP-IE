@@ -1,0 +1,15 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+def task_func(data: pd.DataFrame) -> (pd.DataFrame, list):
+    scaler = StandardScaler()
+    standardized_data = pd.DataFrame(scaler.fit_transform(data), columns=data.columns)
+    num_features = len(data.columns)
+    figs = []
+    for i in range(num_features):
+        fig, ax = plt.subplots()
+        ax.hist(standardized_data.iloc[:, i], bins=20)
+        figs.append(ax)
+    return standardized_data, figs
+```

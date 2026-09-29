@@ -1,0 +1,29 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    data = np.genfromtxt(file_name, delimiter=',', filling_values=np.nan, names=True, dtype=None)
+    column_names = data.dtype.names
+    result = {}
+    for col in column_names:
+        values = data[col]
+        counts = collections.Counter()
+        nan_count = 0
+        for val in values:
+            if np.isnan(val):
+                nan_count += 1
+            else:
+                counts[val] += 1
+        if nan_count > 0:
+            counts[np.nan] = nan_count
+        most_common = counts.most_common(1)
+        if not most_common:
+            result[col] = ''
+        else:
+            value, _ = most_common[0]
+            if np.isnan(value):
+                result[col] = ''
+            else:
+                result[col] = str(value)
+    return result
+```

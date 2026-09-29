@@ -1,0 +1,19 @@
+```python
+import heapq
+import random
+def task_func(k, list_length = 5, min_value = 0, max_value = 100):
+    """
+    Find the k smallest distinct numbers in a randomly generated list using heapq.
+    The function should output with:
+        tuple: A tuple containing two lists:
+        list[int]: The randomly generated list of integers with the specified length.
+        list[int]: The k smallest numbers found using heapq.
+    """
+    if list_length <= 0 or k <= 0:
+        return ([], [])
+    random_list = [random.randint(min_value, max_value) for _ in range(list_length)]
+    if k > list_length:
+        k = list_length
+    smallest = heapq.nsmallest(k, random_list)
+    return (random_list, smallest)
+```

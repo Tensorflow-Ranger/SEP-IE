@@ -1,0 +1,13 @@
+```python
+from collections import Counter
+import re
+def task_func(result):
+    url_pattern = re.compile(r'https?://[^\s]+')
+    url_counts = Counter()
+    for item in result:
+        if 'url' in item:
+            url = item['url']
+            if url_pattern.match(url):
+                url_counts[url] += 1
+    return dict(url_counts.most_common(1))
+```

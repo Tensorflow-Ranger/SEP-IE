@@ -1,0 +1,17 @@
+```python
+import pandas as pd
+import time
+def task_func(df, target_value):
+    if not isinstance(df, dict):
+        raise ValueError("Input must be a dictionary")
+    if not df:
+        return pd.Series(dtype=int), None
+    df = pd.DataFrame(df)
+    df = df.astype(str)
+    target_str = str(target_value)
+    matches = df.applymap(lambda x: x == target_str)
+    counts = matches.sum()
+    ax = counts.plot(kind='bar', title=f"Count of '{target_str}' per column")
+    ax.set_ylabel("Count")
+    return counts, ax
+```

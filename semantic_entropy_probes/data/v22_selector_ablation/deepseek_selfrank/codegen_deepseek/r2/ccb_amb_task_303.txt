@@ -1,0 +1,123 @@
+```python
+import sys
+sys.setrecursionlimit(1 << 25)
+
+def solve():
+    data = sys.stdin.read().strip().split()
+    it = iter(data)
+    t = int(next(it))
+    out_lines = []
+    for _ in range(t):
+        n = int(next(it))
+        arr = [int(next(it)) for _ in range(2 * n)]
+        pos = [[] for _ in range(n + 1)]
+        for idx, val in enumerate(arr):
+            pos[val].append(idx)
+        
+        # Build adjacency list for the graph where edges connect numbers whose intervals intersect
+        adj = [[] for _ in range(n + 1)]
+        for i in range(1, n + 1):
+            l1, r1 = pos[i]
+            if l1 > r1:
+                l1, r1 = r1, l1
+            # interval is [l1, r1]
+            # We will find j such that intervals intersect but are not nested
+            # Instead of O(n^2), we use a stack sweep line
+            pass
+        
+        # Sweep line to build intersection graph in O(n log n)
+        events = []
+        for i in range(1, n + 1):
+            l, r = pos[i]
+            if l > r:
+                l, r = r, l
+            events.append((l, 1, i))  # start
+            events.append((r, -1, i)) # end
+        events.sort()
+        
+        active = []
+        from bisect import bisect_left
+        for x, typ, idx in events:
+            if typ == 1:
+                # start event: intersect with all currently active intervals
+                for aidx in active:
+                    adj[idx].append(aidx)
+                    adj[aidx].append(idx)
+                active.append(idx)
+            else:
+                # end event: remove from active
+                pos_in_active = bisect_left(active, idx)
+                # idx must be in active exactly once
+                active.pop(pos_in_active)
+        
+        # Now we have intersection graph.
+        # Condition: both a and b are not adjacent originally.
+        # Count pairs (a,b) with a<b such that:
+        # 1. a's positions not adjacent, b's positions not adjacent.
+        # 2. a and b are in same connected component of intersection graph.
+        # Because if they are in same component, we can swap to make both adjacent.
+        # Actually stronger: if they are in same component, we can rearrange those four people.
+        # But also need that originally they are not adjacent themselves.
+        
+        # Find connected components
+        visited = [False] * (n + 1)
+        comp_id = [0] * (n + 1)
+        comp_cnt = 0
+        from collections import deque
+        for i in range(1, n + 1):
+            if not visited[i]:
+                comp_cnt += 1
+                q = deque([i])
+                visited[i] = True
+                while q:
+                    u = q.popleft()
+                    comp_id[u] = comp_cnt
+                    for v in adj[u]:
+                        if not visited[v]:
+                            visited[v] = True
+                            q.append(v)
+        
+        # Count size of each component
+        comp_size = [0] * (comp_cnt + 1)
+        for i in range(1, n + 1):
+            comp_size[comp_id[i]] += 1
+        
+        # For each component, total pairs = C(size,2)
+        total_pairs = 0
+        for sz in comp_size:
+            total_pairs += sz * (sz - 1) // 2
+        
+        # Subtract pairs where at least one couple originally adjacent
+        # Precompute adjacency: two occurrences of x are adjacent if abs(pos[x][0]-pos[x][1]) == 1
+        adjacent_couple = [False] * (n + 1)
+        for i in range(1, n + 1):
+            l, r = pos[i]
+            if abs(l - r) == 1:
+                adjacent_couple[i] = True
+        
+        # Count bad pairs where at least one is adjacent
+        # Count per component: number of adjacent couples in component
+        adj_count = [0] * (comp_cnt + 1)
+        for i in range(1, n + 1):
+            if adjacent_couple[i]:
+                adj_count[comp_id[i]] += 1
+        
+        bad_pairs = 0
+        for cid in range(1, comp_cnt + 1):
+            sz = comp_size[cid]
+            adjc = adj_count[cid]
+            # pairs where both are non-adjacent = total_pairs_in_comp - pairs with at least one adjacent
+            # total_pairs_in_comp = C(sz,2)
+            # pairs with at least one adjacent = total_pairs_in_comp - C(sz - adjc, 2)
+            if sz - adjc >= 2:
+                bad_pairs += sz * (sz - 1) // 2 - (sz - adjc) * (sz - adjc - 1) // 2
+            else:
+                bad_pairs += sz * (sz - 1) // 2
+        
+        answer = total_pairs - bad_pairs
+        out_lines.append(str(answer))
+    sys.stdout.write("\n".join(out_lines))
+
+if __name__ == "__main__":
+    solve()
+```

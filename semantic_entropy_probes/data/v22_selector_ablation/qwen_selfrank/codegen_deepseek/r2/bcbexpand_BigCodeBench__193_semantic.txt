@@ -1,0 +1,44 @@
+```python
+import pandas as pd
+import numpy as np
+from random import choice, randint, sample
+import string
+# Constants
+DATA_TYPES = [str, int, float, list, tuple, dict, set]
+def task_func(rows, columns):
+    data = {}
+    for col_idx in range(columns):
+        col_name = f'col{col_idx}'
+        dtype = choice(DATA_TYPES)
+        col_data = []
+        if dtype == str:
+            for _ in range(rows):
+                col_data.append(''.join(choice(string.ascii_lowercase) for _ in range(5)))
+        elif dtype == int:
+            col_data = [randint(0, 9) for _ in range(rows)]
+        elif dtype == float:
+            col_data = [float(randint(0, 9)) for _ in range(rows)]
+        elif dtype == list:
+            for _ in range(rows):
+                length = randint(1, 5)
+                col_data.append([randint(0, 9) for _ in range(length)])
+        elif dtype == tuple:
+            for _ in range(rows):
+                length = randint(1, 5)
+                col_data.append(tuple(randint(0, 9) for _ in range(length)))
+        elif dtype == dict:
+            for _ in range(rows):
+                num_pairs = randint(1, 5)
+                d = {}
+                for _ in range(num_pairs):
+                    key = randint(0, 9)
+                    value = randint(0, 9)
+                    d[key] = value
+                col_data.append(d)
+        elif dtype == set:
+            for _ in range(rows):
+                size = randint(1, 5)
+                col_data.append(set(sample(range(10), size)))
+        data[col_name] = col_data
+    return pd.DataFrame(data)
+```

@@ -1,0 +1,48 @@
+```python
+import csv
+import random
+import os
+import datetime
+# Constants
+DATA = ['Temperature', 'Humidity', 'Pressure']
+RANGE = {
+    'Temperature': (-50, 50),
+    'Humidity': (0, 100),
+    'Pressure': (980, 1040)
+}
+def task_func(file_name="data.csv"):
+    """
+    Generate a CSV file with weather data for each hour of the current day.
+    The CSV has rows for 'Temperature', 'Humidity', and 'Pressure' with hourly values.
+    Returns the path to the created file.
+    """
+    # Get current date and determine number of hours in the day
+    now = datetime.datetime.now()
+    start_of_day = datetime.datetime(now.year, now.month, now.day, 0, 0, 0)
+    hours_in_day = 24
+    
+    # Prepare data structure
+    data_dict = {key: [] for key in DATA}
+    
+    # Generate random values for each hour
+    for hour in range(hours_in_day):
+        for param in DATA:
+            min_val, max_val = RANGE[param]
+            # Generate random integer within range
+            value = random.randint(min_val, max_val)
+            data_dict[param].append(value)
+    
+    # Write to CSV
+    with open(file_name, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        # Write header
+        header = ['Parameter'] + [f'Hour_{i+1}' for i in range(hours_in_day)]
+        writer.writerow(header)
+        # Write data rows
+        for param in DATA:
+            row = [param] + data_dict[param]
+            writer.writerow(row)
+    
+    # Return absolute path to the file
+    return os.path.abspath(file_name)
+```

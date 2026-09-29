@@ -1,0 +1,17 @@
+```python
+import textwrap
+import re
+def task_func(input_string, width):
+    lines = input_string.split('\n')
+    wrapped_lines = []
+    for line in lines:
+        if len(line) <= width:
+            # Replace 'is' with 'was' in the line
+            line = re.sub(r'\bis\b', 'was', line)
+            wrapped_lines.append(line)
+        else:
+            # Wrap the line to the specified width
+            wrapped_line = textwrap.fill(line, width=width)
+            wrapped_lines.append(wrapped_line)
+    return '\n'.join(wrapped_lines)
+```

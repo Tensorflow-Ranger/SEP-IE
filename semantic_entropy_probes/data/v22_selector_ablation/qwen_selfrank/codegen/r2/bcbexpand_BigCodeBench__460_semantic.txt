@@ -1,0 +1,22 @@
+```python
+import subprocess
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def task_func(script_path, output_file_path):
+    try:
+        subprocess.run(['python', script_path], check=True)
+    except subprocess.CalledProcessError:
+        raise ValueError("The script failed to execute.")
+    
+    try:
+        df = pd.read_csv(output_file_path)
+    except pd.errors.ParserError:
+        raise ValueError("The produced CSV is invalid.")
+    
+    if df.shape[1] != 2:
+        raise ValueError("The CSV does not contain exactly two columns.")
+    
+    ax = df.plot(kind='bar', x=df.columns[0], y=df.columns[1], legend=False)
+    return df, ax
+```

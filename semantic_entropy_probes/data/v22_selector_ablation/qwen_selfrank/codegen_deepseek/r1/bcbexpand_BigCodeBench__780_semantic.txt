@@ -1,0 +1,43 @@
+```python
+import pandas as pd
+import pytz
+
+def task_func(articles, timezone):
+    if not isinstance(articles, list):
+        raise TypeError("articles must be a list")
+    if not articles:
+        raise ValueError("articles list cannot be empty")
+    if not all(isinstance(article, dict) for article in articles):
+        raise TypeError("articles must be a list of dictionaries")
+    required_keys = {'published_time', 'category'}
+    for article in articles:
+        if not required_keys.issubset(article.keys()):
+            raise ValueError("Each dictionary must contain 'published_time' and 'category' keys")
+    
+    try:
+        tz = pytz.timezone(timezone)
+    except pytz.exceptions.UnknownTimeZoneError:
+        raise ValueError(f"Invalid timezone: {timezone}")
+    
+    data = []
+    for article in articles:
+        dt = pd.to_datetime(article['published_time'])
+        dt_tz = dt.tz_convert(tz) if dt.tz is not None else dt.tz_localize('UTC').tz_convert(tz)
+        hour = dt_tz.hour
+        data.append({
+            'category': article['category'],
+            'hour': hour
+        })
+    
+    df = pd.DataFrame(data)
+    grouped = df.groupby('category')['hour']
+    
+    result = pd.DataFrame({
+        'count': grouped.count(),
+        'mean': grouped.mean(),
+        'min': grouped.min(),
+        'max': grouped.max()
+    })
+    
+    return result
+```

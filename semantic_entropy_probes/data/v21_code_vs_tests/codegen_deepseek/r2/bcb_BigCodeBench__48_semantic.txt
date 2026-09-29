@@ -1,0 +1,40 @@
+```python
+import time
+from datetime import datetime
+import random
+import matplotlib.pyplot as plt
+# Constants
+DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+def task_func(n, output_path=None):
+    """
+    Generate n random Unix timestamps covering the range from 0 to the current Unix timestamp,
+    convert them to formatted UTC strings, and plot a histogram of their distribution.
+    
+    Parameters:
+    n (int): Number of timestamps to generate.
+    output_path (str, optional): Path to save the histogram. If None, display the plot.
+    
+    Returns:
+    list: The list of n formatted timestamps.
+    """
+    current_timestamp = int(time.time())
+    timestamps = [random.randint(0, current_timestamp) for _ in range(n)]
+    formatted_timestamps = []
+    for ts in timestamps:
+        dt = datetime.utcfromtimestamp(ts)
+        formatted_timestamps.append(dt.strftime(DATE_FORMAT))
+    datetime_objects = [datetime.utcfromtimestamp(ts) for ts in timestamps]
+    plt.figure(figsize=(10, 6))
+    plt.hist(datetime_objects, bins=30, edgecolor='black')
+    plt.title('Distribution of Generated Timestamps')
+    plt.xlabel('Datetime')
+    plt.ylabel('Frequency')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    if output_path:
+        plt.savefig(output_path)
+    else:
+        plt.show()
+    plt.close()
+    return formatted_timestamps
+```

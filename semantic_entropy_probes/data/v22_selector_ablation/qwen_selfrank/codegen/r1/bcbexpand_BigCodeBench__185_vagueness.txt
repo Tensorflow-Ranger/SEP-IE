@@ -1,0 +1,40 @@
+```python
+import pandas as pd
+import numpy as np
+import folium
+def task_func(dic={'Lon': (-180, 180), 'Lat': (-90, 90)}, cities=['New York', 'London', 'Beijing', 'Tokyo', 'Sydney']):
+    # Validate the dictionary keys and values
+    required_keys = ['Lon', 'Lat']
+    for key in required_keys:
+        if key not in dic:
+            raise ValueError("Keys are missing in the dictionary")
+        if not isinstance(dic[key], tuple) or len(dic[key]) < 2:
+            raise ValueError("Values must be tuples with at least two elements")
+    
+    # Generate random coordinates for each city
+    lon_min, lon_max = dic['Lon']
+    lat_min, lat_max = dic['Lat']
+    np.random.seed(42)  # For reproducibility
+    coordinates = np.random.uniform(low=[lon_min, lat_min], high=[lon_max, lat_max], size=(len(cities), 2))
+    
+    # Create DataFrame
+    df = pd.DataFrame({
+        'City': cities,
+        'Longitude': coordinates[:, 0],
+        'Latitude': coordinates[:, 1]
+    })
+    
+    # Create map centered around the mean of the generated coordinates
+    map_center = [np.mean(df['Latitude']), np.mean(df['Longitude'])]
+    m = folium.Map(location=map_center, zoom_start=2)
+    
+    # Add markers for each city
+    for index, row in df.iterrows():
+        folium.Marker(
+            location=[row['Latitude'], row['Longitude']],
+            popup=row['City'],
+            icon=folium.Icon(color='blue')
+        ).add_to(m)
+    
+    return (m, df)
+```

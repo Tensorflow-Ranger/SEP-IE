@@ -1,0 +1,24 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+def task_func(data_list):
+    if not data_list:
+        fig, ax = plt.subplots()
+        return ax
+    
+    df = pd.DataFrame(data_list)
+    fig, ax = plt.subplots()
+    
+    for student in df.columns:
+        scores = df[student].dropna()
+        if not scores.empty:
+            ax.plot(scores.index, scores.values, marker='o', label=student)
+    
+    ax.set_xlabel('Test Number')
+    ax.set_ylabel('Score')
+    ax.set_title('Student Scores Over Tests')
+    ax.legend()
+    ax.grid(True)
+    
+    return ax
+```

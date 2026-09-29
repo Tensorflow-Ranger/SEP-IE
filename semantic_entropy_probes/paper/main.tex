@@ -1,0 +1,83 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Ambiguity Localization at the Cost of a Forward Pass:\\
+Lightweight Hidden-State Probing for Clarification-Question Ranking\\
+in Agentic Code Generation}
+
+\author{
+\IEEEauthorblockN{Author Name}
+\IEEEauthorblockA{\textit{Affiliation} \\
+\textit{Institution}\\
+City, Country \\
+email@example.com}
+}
+
+\maketitle
+
+\begin{abstract}
+Agentic coding assistants that ask a clarifying question before writing code
+can resolve specification ambiguity that a one-shot generation cannot. The
+standard way to decide \emph{whether} and \emph{what} to clarify is to
+estimate the coding model's uncertainty by repeated sampling of its own
+outputs -- an approach that scales the cost of every clarification decision
+with the cost of the (often large) coding model itself. We show that a
+lightweight linear probe over the hidden states of a small, decoupled model
+(Qwen3-8B), extracted in a single forward pass, can (i) detect the degree of
+specification ambiguity in a coding prompt and (ii) rank candidate
+clarifying questions for a two-round elicit-rank-clarify-code agentic
+pipeline, at a fraction of the inference cost of prompting a model to reason
+about its own uncertainty. We evaluate the ranking probe against a zero-shot
+self-rank baseline across four benchmark sources (ClarifyCodeBench and three
+Orchid-derived variants of HumanEval and BigCodeBench) under grouped,
+leave-one-source-out splits, and against real, executable test suites in a
+live two-round clarify-then-code loop with two different coding models. We
+find the probe reaches ranking quality close to -- and on its
+closest-to-training-distribution source, above -- the zero-shot baseline, at
+substantially lower measured inference cost. Using the fractional
+test-case pass rate rather than an all-or-nothing correctness metric, we
+show that correctly ranking the labeled ambiguity to rank one is associated
+with a statistically significant round-1 correctness gain
+($+9.9$ percentage points, $p=0.035$, bootstrap 95\% CI $[1.2, 19.1]$pp on
+Orchid-sourced problems), a result the coarser binary metric alone does not
+surface significantly. We further show that asking any clarifying question
+at all, independent of which one, is itself a significant and robust
+correctness gain, and that a cheap, targeted prompt augmentation recovers
+missing type information that the ambiguity-injection process otherwise
+strips, further improving pass rates. We report all findings, including
+places where our own earlier conclusions were revised under closer
+methodological scrutiny, as a case study in evaluating agentic clarification
+pipelines rigorously.
+\end{abstract}
+
+\begin{IEEEkeywords}
+agentic software engineering, code generation, ambiguity detection, hidden-state probing, clarifying questions, large language models
+\end{IEEEkeywords}
+
+\input{sections/intro}
+\input{sections/related_work}
+\input{sections/approach}
+\input{sections/experimental_setup}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

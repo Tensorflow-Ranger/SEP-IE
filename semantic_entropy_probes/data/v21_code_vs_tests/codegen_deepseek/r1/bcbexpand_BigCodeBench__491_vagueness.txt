@@ -1,0 +1,41 @@
+```python
+import random
+from datetime import datetime
+import matplotlib.pyplot as plt
+def task_func(epoch_milliseconds, seed=None):
+    """
+    Generate and draw a sales trend for different categories from a particular epoch milliseconds to the current UTC time.
+    The function selects category from the list. Each day's sales are randomly determined between 10 and 50 units for each category.
+    The plot's x-axis represents 'Days since (the start date)', and the y-axis represents 'Sales' units.
+    The function should raise the exception for: ValueError: If the start time is negative or after the current time.
+    The function should output with:
+        sales_data (dict): Sales data for different categories over days.
+        ax (plt.Axes): The plot depicting the sales trend.
+    Clarification: The categories are ['Electronics', 'Clothing', 'Home', 'Books', 'Sports'].
+    """
+    if seed is not None:
+        random.seed(seed)
+    categories = ['Electronics', 'Clothing', 'Home', 'Books', 'Sports']
+    start_time = datetime.utcfromtimestamp(epoch_milliseconds / 1000.0)
+    current_time = datetime.utcnow()
+    if epoch_milliseconds < 0 or start_time > current_time:
+        raise ValueError("Start time is negative or after the current time.")
+    days_diff = (current_time - start_time).days
+    if days_diff < 0:
+        days_diff = 0
+    sales_data = {category: [] for category in categories}
+    for day in range(days_diff + 1):
+        for category in categories:
+            sales = random.randint(10, 50)
+            sales_data[category].append(sales)
+    fig, ax = plt.subplots()
+    for category in categories:
+        ax.plot(range(days_diff + 1), sales_data[category], label=category, marker='o')
+    ax.set_xlabel(f'Days since {start_time.date()}')
+    ax.set_ylabel('Sales')
+    ax.set_title('Sales Trend by Category')
+    ax.legend()
+    ax.grid(True)
+    plt.tight_layout()
+    return sales_data, ax
+```

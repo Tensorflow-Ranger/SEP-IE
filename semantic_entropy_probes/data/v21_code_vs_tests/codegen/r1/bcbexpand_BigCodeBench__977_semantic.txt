@@ -1,0 +1,22 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+def task_func(array, features=None, seed=None):
+    if not isinstance(array, np.ndarray) or array.ndim != 2 or array.size == 0:
+        raise ValueError("array is empty or not 2-dimensional")
+    if features is not None and len(features) != array.shape[1]:
+        raise ValueError("features is provided and does not match the number of columns in array")
+    if seed is not None:
+        np.random.seed(seed)
+    shuffled_array = array[:, np.random.permutation(array.shape[1])]
+    plt.figure(figsize=(10, 6))
+    ax = sns.heatmap(shuffled_array, cmap='viridis', cbar=True)
+    if features is not None:
+        ax.set_xticks(np.arange(len(features)))
+        ax.set_xticklabels(features)
+    else:
+        ax.set_xticks(np.arange(array.shape[1]))
+        ax.set_xticklabels([str(i+1) for i in range(array.shape[1])])
+    return ax
+```

@@ -1,0 +1,35 @@
+```python
+import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+TARGET_VALUES = np.array([1, 3, 4])
+def task_func(df):
+    # Replace values not in TARGET_VALUES with zeros
+    for col in df.columns:
+        df[col] = np.where(df[col].isin(TARGET_VALUES), df[col], 0)
+    
+    # Perform Box-Cox transformation on each column
+    transformed_df = pd.DataFrame()
+    fig, axes = plt.subplots(nrows=len(df.columns), ncols=1, figsize=(10, 6 * len(df.columns)))
+    for i, col in enumerate(df.columns):
+        data = df[col].values
+        if np.unique(data).size == 1:
+            # Constant data, no transformation
+            transformed_df[col] = data
+            axes[i].set_title(f'Original (Constant): {col}')
+            axes[i].hist(data, bins=20, alpha=0.7)
+        else:
+            # Check if data contains zeros and add 1 to avoid log(0)
+            if 0 in data:
+                data += 1
+            # Perform Box-Cox transformation
+            transformed_data, _ = stats.boxcox(data)
+            transformed_df[col] = transformed_data
+            axes[i].set_title(f'Box-Cox Transformed: {col}')
+            axes[i].hist(transformed_data, bins=20, alpha=0.7)
+    
+    plt.tight_layout()
+    plt.show()
+    
+    return transformed_df, fig
+```

@@ -1,0 +1,39 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    a = list(map(int, data[1:1+n]))
+
+    # Count total distinct numbers in the whole array
+    total_distinct = len(set(a))
+
+    # Prefix distinct counts
+    prefix_seen = set()
+    prefix_distinct = [0] * n
+    for i in range(n):
+        prefix_seen.add(a[i])
+        prefix_distinct[i] = len(prefix_seen)
+
+    # Suffix distinct counts
+    suffix_seen = set()
+    suffix_distinct = [0] * n
+    for i in range(n-1, -1, -1):
+        suffix_seen.add(a[i])
+        suffix_distinct[i] = len(suffix_seen)
+
+    # Compute max sum for split between i and i+1 (0 <= i < n-1)
+    ans = 0
+    for i in range(n-1):
+        cur = prefix_distinct[i] + suffix_distinct[i+1]
+        if cur > ans:
+            ans = cur
+
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

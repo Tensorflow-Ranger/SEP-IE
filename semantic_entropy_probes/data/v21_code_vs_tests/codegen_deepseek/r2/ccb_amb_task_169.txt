@@ -1,0 +1,32 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    n = int(next(it))
+    arr = [int(next(it)) for _ in range(n)]
+
+    # We need the shortest subarray with a repeated value.
+    # That means two equal numbers with minimal distance between them.
+    # Distance = index2 - index1 + 1 (length of subarray from index1 to index2 inclusive).
+    last_seen = {}
+    min_len = n + 1  # larger than any possible answer
+
+    for i, val in enumerate(arr):
+        if val in last_seen:
+            length = i - last_seen[val] + 1
+            if length < min_len:
+                min_len = length
+        last_seen[val] = i
+
+    if min_len == n + 1:
+        print(-1)
+    else:
+        print(min_len)
+
+if __name__ == "__main__":
+    solve()
+```

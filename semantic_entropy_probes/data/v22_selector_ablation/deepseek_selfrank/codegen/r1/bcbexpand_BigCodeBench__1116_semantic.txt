@@ -1,0 +1,24 @@
+```python
+import random
+import statistics
+# Constants
+AGE_RANGE = (22, 60)
+def task_func(dict1):
+    # Extract the list of ages for the "EMP$$" department
+    emp_ages = dict1.get("EMP$$", [])
+    # Generate ages if the list is empty
+    if not emp_ages:
+        emp_ages = [random.randint(AGE_RANGE[0], AGE_RANGE[1]) for _ in range(100)]
+    # Calculate mean, median, and mode(s)
+    mean_age = statistics.mean(emp_ages)
+    median_age = statistics.median(emp_ages)
+    # Handle mode calculation
+    try:
+        mode_age = statistics.mode(emp_ages)
+    except statistics.StatisticsError:
+        mode_age = []
+    # If there are multiple modes, use multimode
+    if not mode_age:
+        mode_age = statistics.multimode(emp_ages)
+    return (mean_age, median_age, mode_age)
+```

@@ -1,0 +1,16 @@
+```python
+import xlwt
+import os
+import io
+import csv
+def task_func(csv_content, filename):
+    workbook = xlwt.Workbook()
+    worksheet = workbook.add_sheet('Sheet1')
+    csv_file = io.StringIO(csv_content)
+    reader = csv.reader(csv_file)
+    for row_idx, row in enumerate(reader):
+        for col_idx, cell_value in enumerate(row):
+            worksheet.write(row_idx, col_idx, cell_value)
+    workbook.save(filename)
+    return os.path.abspath(filename)
+```

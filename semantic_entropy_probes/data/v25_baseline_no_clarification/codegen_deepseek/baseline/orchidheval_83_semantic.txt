@@ -1,0 +1,26 @@
+```python
+def starts_one_ends(n):
+    """
+    Given a positive integer n, return the count of the numbers of n-digit
+    positive integers that either start or end with the digit 1.
+    """
+    if n == 1:
+        return 1
+    
+    # Total n-digit numbers: from 10^(n-1) to 10^n - 1
+    # Numbers starting with 1: 1 * 10^(n-1) to 1 * 10^(n-1) + (10^(n-1) - 1)
+    # That's exactly 10^(n-1) numbers
+    start_with_one = 10 ** (n - 1)
+    
+    # Numbers ending with 1: any of 9 choices for first digit (1-9, but we'll handle overlap later)
+    # and 10^(n-2) choices for middle digits, and last digit fixed as 1
+    # For n-digit numbers, first digit cannot be 0, so 9 choices
+    end_with_one = 9 * 10 ** (n - 2)
+    
+    # Numbers both starting and ending with 1:
+    # First digit 1, last digit 1, middle n-2 digits any of 10^(n-2) possibilities
+    both = 10 ** (n - 2)
+    
+    # Inclusion-exclusion principle
+    return start_with_one + end_with_one - both
+```

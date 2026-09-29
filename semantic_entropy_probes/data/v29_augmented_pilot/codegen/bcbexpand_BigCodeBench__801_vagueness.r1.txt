@@ -1,0 +1,25 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    import csv
+    result = {}
+    try:
+        with open(file_name, 'r') as f:
+            reader = csv.DictReader(f)
+            rows = list(reader)
+    except FileNotFoundError:
+        return result
+    if not rows:
+        return result
+    for col in rows[0].keys():
+        values = [row[col] for row in rows if col in row]
+        if not values:
+            continue
+        counter = collections.Counter(values)
+        max_count = max(counter.values())
+        most_common_values = [val for val, cnt in counter.items() if cnt == max_count]
+        most_common_values.sort()
+        result[col] = most_common_values[0]
+    return result
+```

@@ -1,0 +1,89 @@
+\section{Introduction}
+\label{sec:intro}
+
+Large language model (LLM) coding assistants increasingly operate as
+\emph{agents}: given a natural-language task description, they plan, write,
+run, and revise code with little further human input. A persistent failure
+mode in this setting is specification ambiguity -- the prompt genuinely
+under-determines the intended behavior, and a one-shot generation commits to
+an arbitrary resolution that may not match the user's intent. A natural
+mitigation is to have the agent ask a clarifying question before writing
+code, turning a single generation step into a short elicit-then-generate
+loop~\cite{clarifygpt}. This raises two sub-problems: \emph{detecting} that
+a prompt is ambiguous enough to be worth interrupting for, and, given a set
+of candidate clarifying questions, \emph{ranking} which one to ask.
+
+Existing approaches to both sub-problems typically estimate the coding
+model's own uncertainty by sampling its outputs repeatedly and measuring
+disagreement among the samples -- an approach with a long lineage in
+uncertainty quantification for LLMs, exemplified by semantic
+entropy~\cite{kuhn2023semantic} and its application to code-generation
+ambiguity in systems such as ClarifyGPT~\cite{clarifygpt}. This is
+effective, but its cost scales linearly with the number of samples drawn
+\emph{from the coding model itself}, which is often the largest, most
+capable, and most expensive model in the pipeline. Every clarification
+decision therefore costs as much as several full code-generation calls,
+before any code has actually been written.
+
+We investigate a different design point, motivated by a simple observation:
+if a prompt's hidden-state representation already encodes how ambiguous it
+is, that signal can be read off in a single forward pass, without sampling
+any generations at all -- and that forward pass can be run on a small model
+\emph{decoupled} from whichever model eventually writes the code. This
+motivates the semantic-entropy-probe approach of Kossen et
+al.~\cite{oatml_sep}, who train a linear probe on a model's hidden states to
+predict semantic entropy (a property of the model's \emph{output}
+distribution) from a single forward pass, avoiding repeated sampling at
+inference time for that specific prediction task. We adapt this probing
+methodology to a different target relevant to agentic software engineering:
+not the entropy of a model's own generations, but the ambiguity of an
+\emph{input} coding prompt, and, in a second stage, the relative quality of
+candidate clarifying questions for resolving that ambiguity.
+
+Concretely, we make the following contributions:
+
+\begin{itemize}
+\item We show that a per-layer linear probe over Qwen3-8B's residual-stream
+activations, extracted from a single forward pass over an unmodified coding
+prompt, predicts the degree of injected specification ambiguity
+significantly above chance (Section~\ref{sec:results}), and that this
+signal is present, though imperfectly transferable, across four
+differently-constructed ambiguity benchmarks.
+\item We build a ranking probe that scores candidate clarifying questions
+from batched forward passes over the prompt concatenated with each
+candidate, and deploy it in a live, two-round elicit-rank-clarify-code
+agentic loop with real executable test suites, comparing it against a
+zero-shot self-rank baseline (the coding model is simply asked to pick the
+best candidate) under grouped, leave-one-source-out evaluation.
+\item We report, honestly, that the probe's ranking quality is
+close to but does not uniformly exceed the zero-shot baseline -- it
+wins on the benchmark closest to its training distribution and trails on
+others -- and we frame our contribution accordingly as a
+\emph{cost-quality tradeoff}: comparable ranking quality at substantially
+lower measured inference cost, since the probe requires no autoregressive
+generation from the coding model, rather than as an unconditional accuracy
+win.
+\item We investigate whether ranking quality (does the pipeline pick the
+labeled ambiguity as the top clarifying question) actually predicts
+downstream code correctness, and show that the answer depends on the
+correctness metric used: an all-or-nothing ``did every test pass'' metric
+shows no significant relationship, but the more informative fractional
+test-case pass rate reveals a real, statistically significant effect in
+round one of the clarification loop. We report both metrics and both
+outcomes, since this discrepancy is itself a methodological finding about
+how to evaluate agentic clarification systems.
+\item We identify and quantify a second, largely orthogonal lever for
+correctness: whether \emph{any} clarifying question is asked at all is a
+robust, significant improvement over asking none, and a cheap,
+targeted prompt augmentation that restores type and requirement information
+the ambiguity-injection process incidentally strips further reduces
+trivial crash-class failures.
+\end{itemize}
+
+We deliberately report several points in this investigation where our own
+earlier conclusions did not survive closer scrutiny -- most notably, an
+early result that the probe outperformed zero-shot ranking was later
+reversed under a larger, more carefully filtered evaluation. We treat this
+not as a weakness to hide but as an illustration of the methodological
+rigor agentic-system evaluations in software engineering research need: a
+result computed once, on one split, with one metric, is not yet a finding.

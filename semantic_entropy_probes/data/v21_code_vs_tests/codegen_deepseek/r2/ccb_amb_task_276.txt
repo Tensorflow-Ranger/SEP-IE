@@ -1,0 +1,27 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    cards = list(map(int, data))
+    from collections import Counter
+    count = Counter(cards)
+    
+    # Check for any value with at least 3 occurrences
+    for x in count:
+        if count[x] >= 3:
+            # Remove three copies of x temporarily
+            remaining = count.copy()
+            remaining[x] -= 3
+            # Check if any other value has at least 2 occurrences
+            for y in remaining:
+                if remaining[y] >= 2:
+                    print("Yes")
+                    return
+    print("No")
+
+if __name__ == "__main__":
+    main()
+```

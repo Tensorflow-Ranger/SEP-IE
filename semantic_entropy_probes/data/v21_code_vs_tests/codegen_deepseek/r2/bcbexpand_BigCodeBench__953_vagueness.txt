@@ -1,0 +1,58 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+def task_func(mystrings, folder_path, seed=None):
+    """
+    Generates random data points to plot bar charts for each unique plot name in `mystrings`,
+    then saves them in a specified directory.
+
+    Parameters:
+    - mystrings (list): List of plot names (strings).
+    - folder_path (str): Directory path where plots will be saved.
+    - seed (int, optional): Random seed for reproducibility.
+
+    Returns:
+    - list: Names of the saved plot files (with .png extension).
+
+    Raises:
+    - FileNotFoundError: If the directory path does not exist and cannot be created.
+    """
+    if seed is not None:
+        np.random.seed(seed)
+
+    # Deduplicate while preserving order
+    seen = set()
+    unique_strings = []
+    for s in mystrings:
+        if s not in seen:
+            seen.add(s)
+            unique_strings.append(s)
+
+    # Create directory if it doesn't exist
+    try:
+        os.makedirs(folder_path, exist_ok=True)
+    except Exception as e:
+        raise FileNotFoundError(f"Directory '{folder_path}' cannot be created: {e}")
+
+    saved_files = []
+    for title in unique_strings:
+        # Generate 10 random data points in [0, 1)
+        data = np.random.rand(10)
+        x = np.arange(10)  # x-axis indices 0 to 9
+
+        plt.figure()
+        plt.bar(x, data)
+        plt.title(title)
+
+        # Create filename: replace spaces with underscores and add .png
+        filename = title.replace(' ', '_') + '.png'
+        filepath = os.path.join(folder_path, filename)
+        plt.savefig(filepath)
+        plt.close()
+
+        saved_files.append(filename)
+
+    return saved_files
+```

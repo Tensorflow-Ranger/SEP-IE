@@ -1,0 +1,26 @@
+```python
+import re
+import pandas as pd
+def task_func(input_df):
+    """
+    Cleans the text in a pandas DataFrame column named 'text' by removing all special characters, punctuation marks, and spaces, then calculates the length of the resulting cleaned text.
+    
+    Parameters:
+    input_df (pd.DataFrame): DataFrame containing a column named 'text'.
+    
+    Returns:
+    pd.DataFrame: A DataFrame with two new columns 'clean_text' and 'text_length'.
+    """
+    if 'text' not in input_df.columns:
+        raise ValueError("Input DataFrame must contain a column named 'text'")
+    
+    def clean_text(text):
+        if pd.isna(text):
+            return ''
+        return re.sub(r'[^A-Za-z0-9]', '', str(text))
+    
+    input_df['clean_text'] = input_df['text'].apply(clean_text)
+    input_df['text_length'] = input_df['clean_text'].str.len()
+    
+    return input_df
+```

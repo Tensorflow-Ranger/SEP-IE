@@ -1,0 +1,19 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.fft import fft
+ANGLES = np.arange(0, 2*np.pi, 0.01)
+def task_func(n_waves, seed=0):
+    np.random.seed(seed)
+    sine_waves = []
+    for i in range(n_waves):
+        y = np.sin(i * ANGLES)
+        sine_waves.append(y)
+    if n_waves < 1:
+        return [], np.array([]), None
+    signal = np.sum(sine_waves, axis=0)
+    fft_data = fft(signal)
+    fig, ax = plt.subplots()
+    ax.hist(np.abs(fft_data), bins=100, alpha=0.7)
+    return sine_waves, fft_data, ax
+```

@@ -1,0 +1,14 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+def task_func(df, column, bins=30, density=True, alpha=0.6, color="g", seed=None):
+    np.random.seed(seed)
+    data = df[column].dropna().values
+    fig, ax = plt.subplots()
+    ax.hist(data, bins=bins, density=density, alpha=alpha, color=color, edgecolor='black')
+    mu, std = np.mean(data), np.std(data)
+    x = np.linspace(mu - 3*std, mu + 3*std, 100)
+    ax.plot(x, norm.pdf(x, mu, std), color='r', lw=2)
+    return ax
+```

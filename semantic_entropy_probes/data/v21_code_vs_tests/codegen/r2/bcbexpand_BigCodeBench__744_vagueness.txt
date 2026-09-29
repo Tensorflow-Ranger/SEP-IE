@@ -1,0 +1,19 @@
+```python
+import nltk
+from string import punctuation
+import pandas as pd
+def task_func(text):
+    if not isinstance(text, str):
+        raise ValueError("text is not a string")
+    words = text.split()
+    filtered_words = []
+    for word in words:
+        if word.startswith('$'):
+            # Check if the word has at least one character not in punctuation
+            non_punct_chars = [c for c in word if c not in punctuation]
+            if non_punct_chars:
+                filtered_words.append(word)
+    word_counts = pd.Series(filtered_words).value_counts().reset_index()
+    word_counts.columns = ["Word", "Frequency"]
+    return word_counts
+```

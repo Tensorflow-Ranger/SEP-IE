@@ -1,0 +1,40 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame(data)
+    if df.empty:
+        result = {
+            'sum': 0,
+            'mean': np.nan,
+            'min': np.inf,
+            'max': -np.inf,
+            'plot': None
+        }
+        return result
+    numeric_series = pd.to_numeric(df[column], errors='coerce')
+    numeric_series = numeric_series.dropna()
+    if numeric_series.empty:
+        result = {
+            'sum': 0,
+            'mean': np.nan,
+            'min': np.inf,
+            'max': -np.inf,
+            'plot': None
+        }
+        return result
+    sum_val = numeric_series.sum()
+    mean_val = numeric_series.mean()
+    min_val = numeric_series.min()
+    max_val = numeric_series.max()
+    plot_obj = plt.hist(numeric_series)[0]
+    result = {
+        'sum': sum_val,
+        'mean': mean_val,
+        'min': min_val,
+        'max': max_val,
+        'plot': plot_obj
+    }
+    return result
+```

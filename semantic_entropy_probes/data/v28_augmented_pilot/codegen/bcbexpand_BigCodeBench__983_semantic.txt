@@ -1,0 +1,41 @@
+```python
+import seaborn as sns
+import numpy as np
+def task_func(df):
+    """
+    Generates a pair plot from a numeric DataFrame and calculates its covariance matrix, 
+    handling duplicate columns by keeping the first occurrence.
+    
+    Parameters:
+    df (pandas.DataFrame): Input DataFrame.
+    
+    Returns:
+    tuple:
+        covariance_df (pandas.DataFrame): The covariance matrix of the input DataFrame.
+        pair_plot (sns.axisgrid.PairGrid): Pair plot of the input DataFrame.
+    
+    Raises:
+    ValueError: If the DataFrame is empty.
+    TypeError: If the DataFrame contains non-numeric data types.
+    """
+    import pandas as pd
+    
+    if df.empty:
+        raise ValueError("DataFrame is empty")
+    
+    # Remove duplicate columns by keeping first occurrence
+    df = df.loc[:, ~df.columns.duplicated()]
+    
+    # Check for non-numeric columns
+    non_numeric_cols = df.select_dtypes(exclude=[np.number]).columns
+    if len(non_numeric_cols) > 0:
+        raise TypeError(f"DataFrame contains non-numeric data types in columns: {list(non_numeric_cols)}")
+    
+    # Calculate covariance matrix
+    covariance_df = df.cov()
+    
+    # Generate pair plot
+    pair_plot = sns.pairplot(df)
+    
+    return covariance_df, pair_plot
+```

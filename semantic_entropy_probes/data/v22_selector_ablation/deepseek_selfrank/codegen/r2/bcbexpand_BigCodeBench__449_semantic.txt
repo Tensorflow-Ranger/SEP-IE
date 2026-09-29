@@ -1,0 +1,30 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+def task_func(data: pd.DataFrame) -> (pd.DataFrame, list):
+    # Select specified features
+    features = ['Feature1', 'Feature2', 'Feature3', 'Feature4', 'Feature5']
+    selected_data = data[features]
+    
+    # Standardize the selected features
+    scaler = StandardScaler()
+    standardized_data = pd.DataFrame(scaler.fit_transform(selected_data), columns=features)
+    
+    # Create a figure with subplots for histograms
+    num_features = len(features)
+    fig, axes = plt.subplots(nrows=num_features, ncols=1, figsize=(8, 4 * num_features))
+    axes = axes.flatten()  # Flatten the array for easy iteration
+    
+    # Plot histograms for standardized values
+    for ax, feature in zip(axes, features):
+        ax.hist(standardized_data[feature], bins=20, edgecolor='black')
+        ax.set_title(f'Histogram of {feature} (Standardized)')
+        ax.set_xlabel('Value')
+        ax.set_ylabel('Frequency')
+    
+    plt.tight_layout()
+    plt.close(fig)  # Close the figure to prevent it from being displayed
+    
+    return standardized_data, axes.tolist()
+```

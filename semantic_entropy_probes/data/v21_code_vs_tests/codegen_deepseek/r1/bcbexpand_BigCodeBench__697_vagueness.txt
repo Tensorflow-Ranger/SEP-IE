@@ -1,0 +1,16 @@
+```python
+import numpy as np
+from sklearn.linear_model import LinearRegression
+def task_func(df):
+    X = df[['feature']].values
+    y = df['value'].values
+    model = LinearRegression()
+    model.fit(X, y)
+    coefficients = model.coef_.tolist()
+    intercept = float(model.intercept_)
+    result = {
+        'coefficients': coefficients,
+        'intercept': intercept
+    }
+    return result
+```

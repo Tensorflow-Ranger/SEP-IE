@@ -1,0 +1,44 @@
+```python
+import seaborn as sns
+from random import sample
+# Constants
+COLUMNS = ['A', 'B', 'C', 'D', 'E']
+def task_func(df, tuples, n_plots):
+    """
+    Remove rows from a dataframe based on values of multiple columns, and then create n random pairs of two columns against each other or with each other to generate pairplots.
+    The function should output with:
+        tuple: A tuple containing:
+        DataFrame: The modified DataFrame after removing specified rows.
+        list of Axes: A list containing the generated pairplots.
+    Clarification: Generate fewer plots, specifically min(n_plots, len(available_columns) // 2) plots, without repeating pairs.
+    """
+    if df.empty:
+        return df, []
+    for tup in tuples:
+        if len(tup) == 3:
+            col, val1, val2 = tup
+            df = df[~df[col].isin([val1, val2])]
+        elif len(tup) == 2:
+            col, val = tup
+            df = df[df[col] != val]
+    available_columns = [col for col in COLUMNS if col in df.columns]
+    if len(available_columns) < 2:
+        return df, []
+    possible_pairs = []
+    for i in range(len(available_columns)):
+        for j in range(i + 1, len(available_columns)):
+            possible_pairs.append((available_columns[i], available_columns[j]))
+    n_plots = min(n_plots, len(possible_pairs))
+    if n_plots <= 0:
+        return df, []
+    selected_pairs = sample(possible_pairs, n_plots)
+    axes_list = []
+    for pair in selected_pairs:
+        pair_df = df[list(pair)].dropna()
+        if pair_df.empty:
+            axes_list.append(None)
+            continue
+        g = sns.pairplot(pair_df, vars=pair)
+        axes_list.append(g)
+    return df, axes_list
+```

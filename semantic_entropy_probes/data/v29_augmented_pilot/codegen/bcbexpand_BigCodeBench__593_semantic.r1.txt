@@ -1,0 +1,61 @@
+```python
+import csv
+import os
+from datetime import datetime
+from random import randint
+import matplotlib.pyplot as plt
+import pandas as pd
+# Constants
+VEHICLE_TYPES = ['Car', 'Bus', 'Truck', 'Bike']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    """
+    Generates traffic data for different vehicle types over a specified number of hours,
+    saves the data to a CSV file, and plots the combined vehicle count data in a line chart.
+    
+    Parameters:
+    - hours (int): Number of hours to generate data for.
+    - output_dir (str): Directory to save the CSV file. Default is './output'.
+    
+    Returns:
+    - tuple: Path to the CSV file and the matplotlib axes object of the line plot.
+    """
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    # Generate time points
+    times = []
+    data = {vtype: [] for vtype in VEHICLE_TYPES}
+    
+    for hour in range(hours):
+        for minute in range(0, 60, 5):  # Data every 5 minutes
+            time_str = f"{hour:02d}:{minute:02d}"
+            times.append(time_str)
+            for vtype in VEHICLE_TYPES:
+                count = randint(0, 50)  # Random count between 0 and 50
+                data[vtype].append(count)
+    
+    # Create DataFrame
+    df_data = {'Time': times}
+    for vtype in VEHICLE_TYPES:
+        df_data[vtype] = data[vtype]
+    df = pd.DataFrame(df_data)
+    
+    # Save to CSV
+    csv_path = os.path.join(output_dir, 'traffic_data.csv')
+    df.to_csv(csv_path, index=False)
+    
+    # Plot
+    fig, ax = plt.subplots()
+    for vtype in VEHICLE_TYPES:
+        ax.plot(times, data[vtype], label=vtype)
+    
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Vehicle Count')
+    ax.set_title('Traffic Data Over Time')
+    ax.legend()
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    
+    return csv_path, ax
+```

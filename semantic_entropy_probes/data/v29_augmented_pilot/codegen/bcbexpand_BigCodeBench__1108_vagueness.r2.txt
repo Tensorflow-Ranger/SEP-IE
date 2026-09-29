@@ -1,0 +1,15 @@
+```python
+from collections import Counter
+import re
+def task_func(result):
+    values = []
+    pattern = re.compile(r'^https?://')
+    for d in result:
+        for key in d:
+            if pattern.match(key):
+                values.append(d[key])
+    if not values:
+        return {}
+    most_common = Counter(values).most_common(1)
+    return {most_common[0][0]: most_common[0][1]}
+```

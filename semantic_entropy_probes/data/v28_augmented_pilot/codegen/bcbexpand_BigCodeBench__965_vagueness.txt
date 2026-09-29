@@ -1,0 +1,22 @@
+```python
+import os
+import re
+import shutil
+def task_func(source_directory: str, target_directory: str, pattern: str = r"\d{4}") -> int:
+    if not os.path.exists(source_directory) or not os.path.isdir(source_directory):
+        return 0
+    if not os.path.exists(target_directory):
+        os.makedirs(target_directory)
+    moved_count = 0
+    compiled_pattern = re.compile(pattern)
+    for filename in os.listdir(source_directory):
+        if compiled_pattern.search(filename):
+            source_path = os.path.join(source_directory, filename)
+            target_path = os.path.join(target_directory, filename)
+            try:
+                shutil.move(source_path, target_path)
+                moved_count += 1
+            except Exception:
+                continue
+    return moved_count
+```

@@ -1,0 +1,16 @@
+```python
+import csv
+import json
+import os
+def task_func(file_name):
+    if not os.path.exists(file_name):
+        raise FileNotFoundError(f"The file {file_name} does not exist.")
+    csv_file = file_name
+    json_file = os.path.splitext(file_name)[0] + '.json'
+    with open(csv_file, 'r') as csvf:
+        csv_reader = csv.DictReader(csvf)
+        json_data = [row for row in csv_reader]
+    with open(json_file, 'w') as jsonf:
+        json.dump(json_data, jsonf, indent=4)
+    return json_file
+```

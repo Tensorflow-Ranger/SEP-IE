@@ -1,0 +1,33 @@
+```python
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+def task_func(data):
+    """
+    Normalizes a given dataset using MinMaxScaler and calculates the average of each row.
+    This average is then added as a new column 'Average' to the resulting DataFrame.
+    The function also visualizes these averages in a line plot.
+
+    Parameters:
+    - data (DataFrame): The input pandas DataFrame.
+
+    Returns:
+    - DataFrame: A pandas DataFrame where data is normalized, with an additional column 'Average'.
+    - Axes: A matplotlib Axes object showing a line plot of the average values.
+    """
+    if not isinstance(data, pd.DataFrame):
+        raise ValueError("Input must be a pandas DataFrame")
+    if data.empty:
+        return pd.DataFrame(columns=['Average']), plt.subplots()[1]
+    scaler = MinMaxScaler()
+    normalized_data = scaler.fit_transform(data)
+    normalized_df = pd.DataFrame(normalized_data, columns=data.columns)
+    normalized_df['Average'] = normalized_df.mean(axis=1)
+    fig, ax = plt.subplots()
+    ax.plot(normalized_df['Average'], marker='o')
+    ax.set_xlabel('Row Index')
+    ax.set_ylabel('Average Value')
+    ax.set_title('Average Values per Row After Normalization')
+    ax.grid(True)
+    return normalized_df, ax
+```

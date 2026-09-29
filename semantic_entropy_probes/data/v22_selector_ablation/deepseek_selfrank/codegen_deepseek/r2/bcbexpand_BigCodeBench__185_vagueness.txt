@@ -1,0 +1,35 @@
+```python
+import pandas as pd
+import numpy as np
+import folium
+def task_func(dic={'Lon': (-180, 180), 'Lat': (-90, 90)}, cities=['New York', 'London', 'Beijing', 'Tokyo', 'Sydney']):
+    required_keys = ['Lon', 'Lat']
+    for key in required_keys:
+        if key not in dic:
+            raise ValueError(f"Missing required key: {key}")
+        if not isinstance(dic[key], tuple) or len(dic[key]) != 2:
+            raise ValueError(f"Value for {key} must be a tuple of length 2")
+    
+    lon_range = dic['Lon']
+    lat_range = dic['Lat']
+    
+    data = []
+    for city in cities:
+        lon = np.random.uniform(lon_range[0], lon_range[1])
+        lat = np.random.uniform(lat_range[0], lat_range[1])
+        data.append([city, lon, lat])
+    
+    df = pd.DataFrame(data, columns=['City', 'Longitude', 'Latitude'])
+    
+    center_lat = (lat_range[0] + lat_range[1]) / 2
+    center_lon = (lon_range[0] + lon_range[1]) / 2
+    m = folium.Map(location=[center_lat, center_lon], zoom_start=2)
+    
+    for _, row in df.iterrows():
+        folium.Marker(
+            location=[row['Latitude'], row['Longitude']],
+            popup=row['City']
+        ).add_to(m)
+    
+    return (m, df)
+```

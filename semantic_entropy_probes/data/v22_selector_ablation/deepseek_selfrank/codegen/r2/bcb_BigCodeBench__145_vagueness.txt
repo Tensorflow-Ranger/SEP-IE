@@ -1,0 +1,15 @@
+```python
+import csv
+from ipaddress import IPv4Network
+def task_func(ip_range, csv_path):
+    try:
+        network = IPv4Network(ip_range)
+    except Exception as e:
+        raise e
+    with open(csv_path, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['IP Address'])
+        for ip in network:
+            writer.writerow([str(ip)])
+    return csv_path
+```

@@ -1,0 +1,20 @@
+```python
+import re
+import os
+import subprocess
+def task_func(dir_path, exe_pattern, execute_files=True):
+    results = []
+    pattern = re.compile(exe_pattern)
+    for filename in os.listdir(dir_path):
+        file_path = os.path.join(dir_path, filename)
+        if os.path.isfile(file_path) and pattern.match(filename):
+            if execute_files:
+                try:
+                    output = subprocess.check_output([file_path], stderr=subprocess.STDOUT, text=True)
+                    results.append(output.strip())
+                except subprocess.CalledProcessError as e:
+                    results.append(e.output.strip())
+            else:
+                results.append(file_path)
+    return results
+```

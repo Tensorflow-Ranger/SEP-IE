@@ -1,0 +1,19 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+def task_func(df):
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("df is not a DataFrame")
+    if 'Date' not in df.columns or 'Sales' not in df.columns:
+        raise ValueError("df lacks 'Date' or 'Sales' columns")
+    if df.empty:
+        raise ValueError("df has no data to plot")
+    df_sorted = df.sort_values('Date')
+    plt.figure(figsize=(10, 6))
+    plt.plot(df_sorted['Date'], df_sorted['Sales'], marker='o', linestyle='-')
+    plt.title('Daily Turnover Line Chart')
+    plt.xlabel('Date')
+    plt.ylabel('Sales')
+    plt.grid(True)
+    return plt.gca()
+```

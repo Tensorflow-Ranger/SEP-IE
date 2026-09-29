@@ -1,0 +1,31 @@
+```python
+import pandas as pd
+import numpy as np
+DEFAULT_COLUMNS = ['Element', 'Count']
+def task_func(elements, include_index=False):
+    """
+    Constructs a DataFrame that enumerates the character counts of each string in a provided list of elements, counting either unique or all characters as specified. This function can optionally include an index column for each row in the DataFrame.
+    Note that: The order of columns in the returned DataFrame will be ['Index', 'Element', 'Count'] if the index is included.
+    The function should output with:
+        DataFrame: Returns a pandas DataFrame with columns for elements and their respective character counts.
+        Includes an 'Index' column if requested.
+    """
+    if not elements:
+        return pd.DataFrame(columns=DEFAULT_COLUMNS)
+    
+    counts = [len(str(element)) for element in elements]
+    
+    if include_index:
+        df = pd.DataFrame({
+            'Index': range(len(elements)),
+            'Element': elements,
+            'Count': counts
+        })
+        return df[['Index', 'Element', 'Count']]
+    else:
+        df = pd.DataFrame({
+            'Element': elements,
+            'Count': counts
+        })
+        return df
+```

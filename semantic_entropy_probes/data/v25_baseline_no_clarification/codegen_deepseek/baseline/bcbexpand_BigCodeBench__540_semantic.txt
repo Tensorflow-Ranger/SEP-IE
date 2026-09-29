@@ -1,0 +1,19 @@
+```python
+from collections import Counter
+import numpy as np
+import matplotlib.pyplot as plt
+import itertools
+def task_func(list_of_menuitems, title="Menu Distribution", color="blue", width=1.0):
+    flattened = list(itertools.chain.from_iterable(list_of_menuitems))
+    counts = Counter(flattened)
+    sorted_items = sorted(counts.keys())
+    sorted_counts = [counts[item] for item in sorted_items]
+    fig, ax = plt.subplots()
+    ax.bar(sorted_items, sorted_counts, color=color, width=width)
+    ax.set_xlabel("Menu Items")
+    ax.set_ylabel("Frequency")
+    ax.set_title(title)
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    return ax
+```

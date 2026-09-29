@@ -1,0 +1,54 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    idx = 0
+    T = int(data[idx])
+    idx += 1
+    results = []
+    
+    for _ in range(T):
+        N = int(data[idx])
+        idx += 1
+        A = list(map(int, data[idx:idx+2*N]))
+        idx += 2*N
+        
+        positions = [[] for _ in range(N+1)]
+        for i, val in enumerate(A):
+            positions[val].append(i)
+        
+        # Check if two occurrences of a are adjacent
+        def is_adjacent(a):
+            return abs(positions[a][0] - positions[a][1]) == 1
+        
+        # Check if a and b can be made adjacent by swaps
+        def can_be_adjacent(a, b):
+            pos_a = positions[a]
+            pos_b = positions[b]
+            # Find positions of a and b
+            a1, a2 = pos_a
+            b1, b2 = pos_b
+            # Check if a and b are already adjacent
+            if abs(a1 - b1) == 1 or abs(a1 - b2) == 1 or abs(a2 - b1) == 1 or abs(a2 - b2) == 1:
+                return True
+            # Check if there's a way to swap to make them adjacent
+            # We can move a and b to adjacent positions through swaps
+            # This is always possible if they are not in the same pair
+            return a != b
+        
+        count = 0
+        for a in range(1, N+1):
+            for b in range(a+1, N+1):
+                if not is_adjacent(a) and not is_adjacent(b) and can_be_adjacent(a, b):
+                    count += 1
+        results.append(str(count))
+    
+    print('\n'.join(results))
+
+if __name__ == "__main__":
+    main()
+```

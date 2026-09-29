@@ -1,0 +1,39 @@
+```python
+import pandas as pd
+from datetime import datetime
+import random
+def task_func(
+    epoch_milliseconds,
+    random_seed=0,
+    products=["Product1", "Product2", "Product3", "Product4", "Product5"],
+):
+    # Validate input
+    if not isinstance(epoch_milliseconds, int):
+        raise ValueError("epoch_milliseconds must be an integer.")
+    if not isinstance(random_seed, int):
+        raise ValueError("random_seed must be an integer.")
+    unique_products = list(set(products))
+    if len(unique_products) != 5:
+        raise ValueError("Products must contain exactly 5 unique entries.")
+    
+    # Set random seed
+    random.seed(random_seed)
+    
+    # Convert epoch milliseconds to datetime
+    start_date = datetime.fromtimestamp(epoch_milliseconds / 1000)
+    end_date = datetime.now()
+    
+    # Generate date range
+    date_range = pd.date_range(start=start_date, end=end_date, freq='D')
+    
+    # Generate sales data
+    data = []
+    for date in date_range:
+        for product in unique_products:
+            sales = random.randint(10, 50)
+            data.append({'Product': product, 'Date': date, 'Sales': sales})
+    
+    # Create DataFrame
+    df = pd.DataFrame(data)
+    return df
+```

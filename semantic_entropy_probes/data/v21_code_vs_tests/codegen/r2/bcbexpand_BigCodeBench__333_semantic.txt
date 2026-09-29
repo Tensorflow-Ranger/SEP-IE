@@ -1,0 +1,10 @@
+```python
+import heapq
+import random
+def task_func(k, list_length = 5, min_value = 0, max_value = 100):
+    if k <= 0:
+        return (random.sample(range(min_value, max_value), list_length), [])
+    generated_list = random.sample(range(min_value, max_value), list_length)
+    k_smallest = heapq.nsmallest(k, generated_list)
+    return (generated_list, k_smallest)
+```

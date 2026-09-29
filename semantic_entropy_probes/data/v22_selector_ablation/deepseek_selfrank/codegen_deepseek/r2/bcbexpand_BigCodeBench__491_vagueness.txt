@@ -1,0 +1,27 @@
+```python
+import random
+from datetime import datetime
+import matplotlib.pyplot as plt
+def task_func(epoch_milliseconds, seed=None):
+    if seed is not None:
+        random.seed(seed)
+    categories = ['Electronics', 'Clothing', 'Home', 'Books', 'Sports']
+    start_time = datetime.utcfromtimestamp(epoch_milliseconds / 1000.0)
+    current_time = datetime.utcnow()
+    days_diff = (current_time - start_time).days
+    if days_diff <= 0:
+        raise ValueError("Start time must be before current time.")
+    sales_data = {}
+    for category in categories:
+        sales_data[category] = [random.randint(10, 50) for _ in range(days_diff)]
+    fig, ax = plt.subplots()
+    for category in categories:
+        ax.plot(range(days_diff), sales_data[category], label=category, marker='o')
+    ax.set_xlabel('Days since ' + start_time.strftime('%Y-%m-%d'))
+    ax.set_ylabel('Sales')
+    ax.set_title('Sales Trend from ' + start_time.strftime('%Y-%m-%d') + ' to ' + current_time.strftime('%Y-%m-%d'))
+    ax.legend()
+    ax.grid(True)
+    plt.tight_layout()
+    return sales_data, ax
+```

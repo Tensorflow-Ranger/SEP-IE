@@ -1,0 +1,11 @@
+```python
+import heapq
+import collections
+def task_func(x, n):
+    if not x or n <= 0:
+        return []
+    letter_counts = [(freq, letter) for letter, freq in x.items()]
+    heapq.heapify(letter_counts)
+    most_common = heapq.nlargest(n, letter_counts)
+    return [letter for freq, letter in most_common]
+```

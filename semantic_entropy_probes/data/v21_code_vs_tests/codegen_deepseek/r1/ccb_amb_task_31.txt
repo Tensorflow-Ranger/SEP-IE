@@ -1,0 +1,96 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    A = data[1].strip()
+    length = 3 ** N
+
+    # We need to know the final majority after repeatedly applying the operation.
+    # The operation is essentially a ternary tree where each node is the majority of its three children.
+    # We can compute the final value by recursively checking the majority at each level.
+    # To flip the final value, we need to change the minimum number of leaves so that the root flips.
+    # This is a DP on trees: for each subtree, compute the minimal changes to make its value 0 or 1.
+
+    # We'll represent the tree as a linear array for simplicity, but we need to know the structure.
+    # Let's build the tree recursively.
+    # Each node corresponds to a substring of length 3^k.
+    # We'll store for each node: min changes to force value 0, min changes to force value 1.
+
+    # Number of nodes in the tree: total nodes = (3^(N+1) - 1) / 2, but we can compute recursively.
+    # Since N <= 13, 3^N <= 1594323, total nodes ~ (3^(N+1)-1)/2 ~ 2.3 million, which is fine.
+
+    # We'll do a DFS that returns (cost0, cost1) for the subtree rooted at a given segment.
+    def dfs(l: int, r: int) -> tuple:
+        # segment [l, r) of A, length = 3^k for some k.
+        if r - l == 1:
+            # leaf node
+            val = int(A[l])
+            return (0 if val == 0 else 1, 0 if val == 1 else 1)
+        # internal node: divide into three equal parts
+        third = (r - l) // 3
+        m1 = l + third
+        m2 = m1 + third
+        left = dfs(l, m1)
+        mid = dfs(m1, m2)
+        right = dfs(m2, r)
+
+        # For each possible target value (0 or 1) of this node,
+        # we need to choose values for the three children (each 0 or 1)
+        # such that majority of the three equals target,
+        # and minimize total cost.
+
+        # Enumerate all 8 combinations of child values.
+        # For each combination, compute majority and total cost.
+        # Then take min over combinations that yield target.
+
+        INF = 10 ** 9
+        cost0 = INF
+        cost1 = INF
+
+        # child choices: 0 or 1 for each of three children
+        for a in (0, 1):
+            cost_a = left[a]
+            for b in (0, 1):
+                cost_b = mid[b] + cost_a
+                for c in (0, 1):
+                    cost_c = right[c] + cost_b
+                    # majority of a,b,c
+                    if a + b + c >= 2:
+                        majority = 1
+                    else:
+                        majority = 0
+                    if majority == 0:
+                        cost0 = min(cost0, cost_c)
+                    else:
+                        cost1 = min(cost1, cost_c)
+        return cost0, cost1
+
+    root_cost0, root_cost1 = dfs(0, length)
+    # Current final value is whatever the root naturally is without changes.
+    # We can compute it by applying the operation directly, but we already have costs.
+    # Actually we need to know the current A'_1 value.
+    # We can compute it by recursively taking majority without changes.
+    def current_value(l: int, r: int) -> int:
+        if r - l == 1:
+            return int(A[l])
+        third = (r - l) // 3
+        m1 = l + third
+        m2 = m1 + third
+        a = current_value(l, m1)
+        b = current_value(m1, m2)
+        c = current_value(m2, r)
+        return 1 if a + b + c >= 2 else 0
+
+    cur = current_value(0, length)
+    # If cur == 0, we need to flip to 1, so answer = root_cost1.
+    # If cur == 1, we need to flip to 0, so answer = root_cost0.
+    answer = root_cost1 if cur == 0 else root_cost0
+    print(answer)
+
+if __name__ == "__main__":
+    solve()
+```

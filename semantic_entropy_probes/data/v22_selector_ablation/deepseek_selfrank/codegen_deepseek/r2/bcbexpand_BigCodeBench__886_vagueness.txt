@@ -1,0 +1,25 @@
+```python
+import pandas as pd
+from collections import Counter
+
+def task_func(data):
+    required_keys = {"Name", "Age", "Score"}
+    if not all(key in data for key in required_keys):
+        raise ValueError("If the dictionary does not have the required keys.")
+    
+    if not data["Name"]:
+        return pd.DataFrame(), pd.Series(dtype=float), None
+    
+    df = pd.DataFrame(data)
+    df = df.sort_values(by=["Name", "Age"], ascending=[True, True]).reset_index(drop=True)
+    
+    avg_series = df.groupby("Name")["Score"].mean()
+    
+    age_counts = Counter(df["Age"])
+    if age_counts:
+        most_common_age = age_counts.most_common(1)[0][0]
+    else:
+        most_common_age = None
+    
+    return df, avg_series, most_common_age
+```

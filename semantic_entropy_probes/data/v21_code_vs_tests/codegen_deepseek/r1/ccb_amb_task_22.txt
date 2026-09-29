@@ -1,0 +1,123 @@
+```python
+import sys
+import bisect
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    W = int(next(it))
+    
+    blocks = []
+    for _ in range(N):
+        x = int(next(it))
+        y = int(next(it))
+        blocks.append((x, y))
+    
+    # Preprocess: sort blocks by (x, y)
+    blocks_by_x = [[] for _ in range(W + 1)]
+    for idx, (x, y) in enumerate(blocks):
+        blocks_by_x[x].append((y, idx))
+    
+    for lst in blocks_by_x:
+        lst.sort()
+    
+    # For each block, compute its "final" y after falling until it either
+    # hits something below or reaches the bottom row.
+    # We process columns independently.
+    # For a column, we go from bottom to top, stacking.
+    final_y = [0] * N
+    for x in range(1, W + 1):
+        col = blocks_by_x[x]
+        if not col:
+            continue
+        # We'll simulate stacking: the lowest block stays at its y,
+        # the next one above will sit at y-1 if it was originally above,
+        # but we must consider that blocks can't overlap.
+        # Actually easier: sort by y ascending, then assign new_y = max(original_y, prev_y+1)
+        # but careful: they can fall arbitrarily, so the final y is original_y - (how many gaps above?)
+        # Better: think of each block falling until it hits the block below or bottom row.
+        # So for a column, after falling, blocks will be contiguous from bottom upward.
+        # Let's sort by y ascending.
+        # The lowest block will end at y1 (its original y, because nothing below).
+        # The next block: if its original y > final_y[prev]+1, it will fall to final_y[prev]+1.
+        # Otherwise, it stays at its original y (because it's already touching the one below).
+        # So final_y[i] = max(original_y[i], final_y[i-1] + 1)
+        # But we must process in order of original y.
+        col.sort(key=lambda p: p[0])  # sort by y ascending
+        prev_final = -10**18
+        for (orig_y, idx) in col:
+            cand = max(orig_y, prev_final + 1)
+            final_y[idx] = cand
+            prev_final = cand
+    
+    # Now each block has a final_y where it rests after infinite time (until bottom row removal).
+    # However, bottom row removal happens when the whole bottom row is filled.
+    # That means: if for every x in 1..W there is a block with final_y = 1, then at time t=1,
+    # the bottom row is full and those blocks are removed, causing a chain reaction.
+    # Actually, the process is: at each integer time step:
+    #   1. If bottom row full -> remove all blocks in bottom row.
+    #   2. Then each block falls one step if possible.
+    # This is equivalent to: blocks fall until they hit something, then if a complete bottom row
+    # forms, those blocks are removed and everything above falls one more step, possibly causing
+    # new bottom row completions.
+    # This is exactly like Tetris clearing lines.
+    # We can think in terms of "height" of each column: the lowest block's final_y after falling
+    # without line clears. Let h[x] = smallest final_y in column x (or infinity if no block).
+    # The bottom row is full if min(h) >= 1 (actually exactly 1, because blocks can't be at y=0).
+    # Wait, y starts at 1. So bottom row is y=1.
+    # If for all x, there is a block with final_y = 1, then at time 1 those are removed.
+    # After removal, the blocks that were at y=2 become new bottom, and they fall one step,
+    # so their y becomes 1. Then we check again if bottom row full, etc.
+    # This is equivalent to: let m = min over x of (lowest block's final_y).
+    # If m = 1, then we clear the bottom row, and all blocks' final_y decrease by 1.
+    # Then we check new m, etc. So we can clear multiple rows at once.
+    # Actually, the process repeats until no bottom row is full.
+    # So the stable state after infinite time is: let d = max(0, m - 1) ? Not exactly.
+    # Let's define the "base" of each column: the final_y of the lowest block in that column
+    # after falling without line clears.
+    # Let base[x] = that value, or infinity if column empty.
+    # Let B = min(base). If B > 1, then bottom row is not full, so no clears happen.
+    # If B = 1, then we clear bottom row, and all blocks shift down by 1, so base[x] becomes base[x]-1
+    # (if column non-empty). Then new B' = min(base[x]-1) = B - 1 = 0, but y cannot be 0.
+    # Actually after shifting down, the new lowest y might be 0, but y starts at 1, so maybe we
+    # should think in terms of "height above bottom".
+    # Better: think of the whole grid shifting downward when a line is cleared.
+    # Equivalent to: let offset = number of times the bottom row has been cleared.
+    # At time t, offset = number of integer k such that at some time <= t, the bottom row was full.
+    # But this is tricky.
+    # However, note that constraints allow T_j up to 1e9, and Y_i up to 1e9.
+    # We can simulate the clearing process in O(W log N) by considering the multiset of base[x].
+    # The clearing process stops when min(base) > 1. So we can compute how many clears happen:
+    # Let min_base = min(base). If min_base > 1, zero clears.
+    # If min_base = 1, then after clearing once, all base decrease by 1, so new min = 0? Wait,
+    # base cannot be 0 because y>=1. Actually after clearing, the block that was at y=1 is removed,
+    # so the next block (if any) was at y=2, now becomes y=1. So base[x] becomes next block's final_y -1.
+    # So we need the sorted list of final_y per column.
+    # Let's compute for each column the sorted list of final_y (after falling without clears).
+    # Then clearing a bottom row corresponds to removing the smallest element from each non-empty column.
+    # This can happen repeatedly.
+    # Let cnt = number of columns that have at least one block.
+    # If cnt < W, then bottom row can never be full, so no clears ever.
+    # If cnt == W, then bottom row may become full.
+    # Actually, bottom row is full if every column has a block with final_y = 1 (after considering previous clears).
+    # So we need to know, after k clears, what is the lowest final_y in each column?
+    # That's just the (k+1)-th smallest final_y in that column (1-indexed), minus k.
+    # Because each clear removes the current bottom block and shifts everything down.
+    # So after k clears, the i-th block from bottom (original final_y) now has y = final_y - k,
+    # provided i > k.
+    # Therefore, a block exists at time t if its final_y - clears(t) > 0, where clears(t) is number of
+    # clears that have happened by time t.
+    # And clears(t) = max number k such that for every column x, there are at least k blocks with
+    # final_y <= k? Wait, careful.
+    # Let's define f[x][i] = i-th smallest final_y in column x (1-indexed).
+    # After k clears, the bottom block in column x is f[x][k+1] - k (if exists).
+    # The bottom row is full at time k+1 if for all x, f[x][k+1] - k == 1.
+    # Actually, the condition for the k-th clear to happen is: for all x, f[x][k] - (k-1) == 1.
+    # Because before the k-th clear, we have had k-1 clears, so the current bottom block in column x
+    # is f[x][k] - (k-1). For bottom row to be full, that must equal 1 for all x.
+    # So clears happen at steps where the multiset {f[x][k] - (k-1)} all equal 1.
+    # This is equivalent to f[x][k] = k for all x.
+    # Therefore, the number of clears that will happen is the largest k such that for

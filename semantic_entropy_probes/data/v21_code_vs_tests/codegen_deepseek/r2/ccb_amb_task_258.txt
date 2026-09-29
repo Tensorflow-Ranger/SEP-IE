@@ -1,0 +1,43 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    n = int(next(it))
+    arr = [int(next(it)) for _ in range(n)]
+
+    # total distinct elements in whole array
+    total_distinct = len(set(arr))
+
+    # prefix distinct counts
+    seen_prefix = set()
+    prefix_distinct = [0] * n
+    for i in range(n):
+        seen_prefix.add(arr[i])
+        prefix_distinct[i] = len(seen_prefix)
+
+    # suffix distinct counts
+    seen_suffix = set()
+    suffix_distinct = [0] * n
+    for i in range(n - 1, -1, -1):
+        seen_suffix.add(arr[i])
+        suffix_distinct[i] = len(seen_suffix)
+
+    # try all splits between i and i+1 for i from 0 to n-2
+    ans = 0
+    for i in range(n - 1):
+        cur = prefix_distinct[i] + suffix_distinct[i + 1]
+        if cur > ans:
+            ans = cur
+        # early exit if we already have the theoretical maximum
+        if ans == total_distinct * 2:
+            break
+
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

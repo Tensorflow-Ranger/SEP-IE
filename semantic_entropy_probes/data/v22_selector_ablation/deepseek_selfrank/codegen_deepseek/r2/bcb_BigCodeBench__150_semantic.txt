@@ -1,0 +1,36 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(product_dict, product_keys):
+    if not product_keys:
+        return pd.DataFrame(columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit']), None
+    
+    data = []
+    for key in product_keys:
+        if key not in product_dict:
+            raise KeyError(f"Product key '{key}' not found in dictionary")
+        entry = product_dict[key]
+        data.append({
+            'Product': key,
+            'Quantity': entry['quantity'],
+            'Price': entry['price'],
+            'Profit': entry['profit']
+        })
+    
+    df = pd.DataFrame(data)
+    
+    avg_price = df['Price'].mean()
+    avg_profit = df['Profit'].mean()
+    
+    df['Average Price'] = avg_price
+    df['Average Profit'] = avg_profit
+    
+    fig, ax = plt.subplots()
+    df.plot(x='Product', y='Profit', kind='bar', ax=ax, legend=False)
+    ax.set_title('Profit per Product')
+    ax.set_ylabel('Profit')
+    
+    return df, ax
+```

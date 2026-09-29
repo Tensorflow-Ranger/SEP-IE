@@ -1,0 +1,18 @@
+```python
+import collections
+import pandas as pd
+def task_func(my_tuple, path_csv_files):
+    result = {}
+    for col in my_tuple:
+        counter = collections.defaultdict(int)
+        for file_path in path_csv_files:
+            try:
+                df = pd.read_csv(file_path)
+                if col in df.columns:
+                    for value in df[col]:
+                        counter[value] += 1
+            except Exception:
+                continue
+        result[col] = dict(counter)
+    return result
+```

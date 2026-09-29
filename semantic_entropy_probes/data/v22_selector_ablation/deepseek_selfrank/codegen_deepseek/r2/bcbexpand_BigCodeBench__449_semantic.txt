@@ -1,0 +1,30 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+
+def task_func(data: pd.DataFrame) -> (pd.DataFrame, list):
+    feature_columns = ['Feature1', 'Feature2', 'Feature3', 'Feature4', 'Feature5']
+    data = data[feature_columns].copy()
+    
+    scaler = StandardScaler()
+    standardized_array = scaler.fit_transform(data)
+    standardized_data = pd.DataFrame(standardized_array, columns=feature_columns)
+    
+    axes_list = []
+    fig, axes = plt.subplots(1, len(feature_columns), figsize=(20, 4))
+    if len(feature_columns) == 1:
+        axes = [axes]
+    
+    for i, col in enumerate(feature_columns):
+        axes[i].hist(standardized_data[col], bins=20, edgecolor='black')
+        axes[i].set_title(f'Standardized {col}')
+        axes[i].set_xlabel('Value')
+        axes[i].set_ylabel('Frequency')
+        axes_list.append(axes[i])
+    
+    plt.tight_layout()
+    plt.show()
+    
+    return standardized_data, axes_list
+```

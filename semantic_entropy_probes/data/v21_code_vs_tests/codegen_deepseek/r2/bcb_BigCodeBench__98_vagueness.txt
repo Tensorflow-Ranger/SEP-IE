@@ -1,0 +1,20 @@
+```python
+import random
+import string
+from collections import Counter
+
+def task_func(num_strings, string_length):
+    """
+    Creates a list of random strings (ASCII lowercase only) of specified length,
+    counts character frequencies across all strings, and returns frequencies sorted
+    in descending order.
+    """
+    strings = []
+    for _ in range(num_strings):
+        random_string = ''.join(random.choice(string.ascii_lowercase) for _ in range(string_length))
+        strings.append(random_string)
+    all_chars = ''.join(strings)
+    char_counter = Counter(all_chars)
+    sorted_freq = char_counter.most_common()
+    return sorted_freq
+```

@@ -1,0 +1,17 @@
+```python
+import xlwt
+import os
+# Constants
+FIELDS = ['ID', 'Name', 'Age']
+def task_func(values, filename):
+    workbook = xlwt.Workbook()
+    sheet = workbook.add_sheet('Sheet1')
+    for col_idx, field in enumerate(FIELDS):
+        sheet.write(0, col_idx, field)
+    for row_idx, row_data in enumerate(values, start=1):
+        for col_idx, field in enumerate(FIELDS):
+            value = row_data.get(field, '')
+            sheet.write(row_idx, col_idx, value)
+    workbook.save(filename)
+    return os.path.abspath(filename)
+```

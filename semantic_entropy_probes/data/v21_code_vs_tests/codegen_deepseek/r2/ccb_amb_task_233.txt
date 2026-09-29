@@ -1,0 +1,126 @@
+```python
+import sys
+
+class Fenwick:
+    def __init__(self, n):
+        self.n = n
+        self.bit = [0] * (n + 1)
+
+    def update(self, idx, delta):
+        i = idx + 1
+        while i <= self.n:
+            self.bit[i] += delta
+            i += i & -i
+
+    def query(self, idx):
+        # sum of [0, idx]
+        s = 0
+        i = idx + 1
+        while i > 0:
+            s += self.bit[i]
+            i -= i & -i
+        return s
+
+    def range_sum(self, l, r):
+        # sum of [l, r]
+        if l > r:
+            return 0
+        res = self.query(r)
+        if l > 0:
+            res -= self.query(l - 1)
+        return res
+
+def solve():
+    input_data = sys.stdin.read().strip().split()
+    if not input_data:
+        return
+    it = iter(input_data)
+    N = int(next(it))
+    M = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+
+    # Step 1: Count inversions in original A (k = 0)
+    # We'll use a Fenwick tree over values 0..M-1
+    bit = Fenwick(M)
+    inv0 = 0
+    for i in range(N - 1, -1, -1):
+        val = A[i]
+        inv0 += bit.query(val - 1)  # count values < val already seen
+        bit.update(val, 1)
+
+    # Step 2: Precompute for each value x how many values y satisfy:
+    #   (x + k) % M > (y + k) % M  for a given k
+    # This is equivalent to:
+    #   if x < y: then (x+k) % M > (y+k) % M only when x+k >= M and y+k < M
+    #   if x > y: then (x+k) % M > (y+k) % M always unless both wrap around and x+k < y+k after wrap (impossible because x>y)
+    # Actually, let's think in terms of pairs (i,j) with i<j.
+    # For each pair (i,j) with A_i = x, A_j = y, we want to know for which k we have (x+k)%M > (y+k)%M.
+    # Let’s define d = (y - x) mod M.
+    # Then (x+k)%M > (y+k)%M iff (x+k) % M > (x+d+k) % M.
+    # This happens exactly when adding k causes a wrap between x and x+d.
+    # More precisely, let’s consider the interval [x, x+d) modulo M.
+    # If k is such that x+k mod M is in the last part of the interval and x+d+k mod M is in the beginning part (because of wrap),
+    # i.e., when x+k >= M (so it wraps to x+k-M) and x+d+k < M (no wrap).
+    # Actually, let's compute condition directly:
+    # We want (x+k) % M > (y+k) % M.
+    # Let x' = x+k, y' = y+k.
+    # The remainders are x'%M and y'%M.
+    # If x' < M and y' < M: then remainder order same as x',y' order -> x'%M > y'%M iff x > y (since x'=x+k, y'=y+k).
+    # If x' >= M and y' >= M: then both wrap, remainders are x'-M, y'-M, order same as x,y -> x'%M > y'%M iff x > y.
+    # If x' >= M and y' < M: then remainder of x is x'-M, remainder of y is y'. We have x'-M < y' always? Not necessarily.
+    #   Actually x'-M = x+k-M, y' = y+k. We want x+k-M > y+k -> x-M > y -> x-y > M, impossible since 0<=x,y<M.
+    #   So in this case remainder of x is less than remainder of y. So inversion false.
+    # If x' < M and y' >= M: then remainder of x is x+k, remainder of y is y+k-M. We want x+k > y+k-M -> x > y-M, which is always true since x>=0, y<M.
+    #   So in this case inversion true.
+    # Therefore, for a pair (x,y) with i<j (so we consider original order), inversion happens for k when:
+    #   x+k < M and y+k >= M.
+    # That is: k < M-x and k >= M-y.
+    # So k in [M-y, M-x) (if M-y < M-x).
+    # Also note that if x <= y, then M-x >= M-y, so interval length = (M-x) - (M-y) = y-x >=0.
+    # If x > y, then M-x < M-y, so interval is empty? Let's check: x>y -> M-x < M-y, so [M-y, M-x) is empty.
+    # But wait, for x>y, in original sequence (k=0) we already have an inversion. But according to our condition, for k where both don't wrap or both wrap, inversion stays.
+    # Our derived condition only catches the extra inversion when y wraps but x doesn't.
+    # Actually we need to consider all cases systematically.
+
+    # Better approach: Count inversions for each k using difference array.
+    # For each pair (i,j) with i<j, let x=A[i], y=A[j].
+    # We want to know for which k we have (x+k)%M > (y+k)%M.
+    # Consider the values modulo M. Let’s define f(k) = ((x+k) mod M, (y+k) mod M).
+    # As k increases from 0 to M-1, the relative order of the two remainders changes only when one of them wraps around.
+    # Let’s find the k where the order flips.
+    # Initially at k=0, we compare x and y.
+    # When k increases, both increase linearly until they reach M and wrap.
+    # The order changes exactly when the larger one wraps before the smaller one.
+    # More precisely, if x < y:
+    #   - For k in [0, M-y): both x+k < M, y+k < M, so order x<y remains -> no inversion.
+    #   - For k in [M-y, M-x): x+k < M, y+k >= M, so remainder of y is y+k-M which is < x+k, so order flips -> inversion.
+    #   - For k in [M-x, M): both >= M, remainders are x+k-M, y+k-M, order x<y again -> no inversion.
+    # So for x<y, inversion occurs for k in [M-y, M-x).
+    # If x > y:
+    #   - For k in [0, M-x): both < M, order x>y remains -> inversion.
+    #   - For k in [M-x, M-y): x+k >= M, y+k < M, so remainder of x is x+k-M which is < y+k, so order flips -> no inversion.
+    #   - For k in [M-y, M): both >= M, remainders are x+k-M, y+k-M, order x>y again -> inversion.
+    # So for x>y, inversion occurs for k in [0, M-x) ∪ [M-y, M).
+
+    # Therefore, we can process each pair (i,j) with i<j and update an array diff[k] that stores change in inversion count when moving from k to k+1.
+    # Then total inversions for k = inv0 + prefix sum of diff[0..k-1].
+    # But iterating over all pairs O(N^2) is too slow.
+    # We need to aggregate contributions by value.
+
+    # Let cnt[v] = frequency of value v.
+    # For each pair of distinct values x and y, we need to know how many pairs (i,j) with i<j have A[i]=x, A[j]=y.
+    # That's exactly: for each x, count how many y appear after x.
+    # We can process from left to right, maintain suffix counts.
+
+    suffix = [0] * M
+    for v in A:
+        suffix[v] += 1
+
+    diff = [0] * (M + 1)  # diff[k] = change when moving from k-1 to k (using 0-index)
+
+    # Process from left to right, updating suffix counts.
+    prefix = [0] * M
+    for idx in range(N):
+        x = A[idx]
+        suffix[x] -= 1
+        # For each y != x, we have pairs (current x, future y

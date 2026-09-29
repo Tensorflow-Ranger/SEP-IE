@@ -1,0 +1,11 @@
+```python
+import numpy as np
+import pandas as pd
+def task_func(rows, columns=["A", "B", "C", "D", "E"], seed=0) -> pd.DataFrame:
+    if rows < 0:
+        raise ValueError("Number of rows cannot be negative")
+    np.random.seed(seed)
+    data = np.random.random(size=(rows, len(columns)))
+    shuffled_columns = np.random.permutation(columns)
+    return pd.DataFrame(data, columns=shuffled_columns)
+```

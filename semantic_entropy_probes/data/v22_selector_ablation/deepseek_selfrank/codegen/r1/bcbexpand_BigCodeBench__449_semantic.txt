@@ -1,0 +1,15 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+def task_func(data: pd.DataFrame) -> (pd.DataFrame, list):
+    scaler = StandardScaler()
+    standardized_data = pd.DataFrame(scaler.fit_transform(data), columns=data.columns)
+    fig, axes = plt.subplots(nrows=len(data.columns), ncols=1, figsize=(10, 5 * len(data.columns)))
+    for i, col in enumerate(data.columns):
+        axes[i].hist(standardized_data[col], bins=20)
+        axes[i].set_title(f'Histogram of {col} (Standardized)')
+    plt.tight_layout()
+    axes_list = axes.tolist()
+    return standardized_data, axes_list
+```

@@ -1,0 +1,30 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(file_path="data.csv", columns=["A", "B", "C"]):
+    # Read CSV file
+    df = pd.read_csv(file_path)
+    
+    # Convert numeric values to float
+    for col in df.columns:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+    
+    # Ensure only specified columns are used
+    plot_df = df[columns].copy()
+    
+    # Plot line chart
+    fig, ax = plt.subplots()
+    for col in columns:
+        ax.plot(plot_df.index, plot_df[col], label=col)
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Value')
+    ax.set_title('Line Chart of Specified Columns')
+    ax.legend()
+    
+    # Compute cube-root of the data for specified columns
+    cube_root_df = np.cbrt(plot_df)
+    
+    return df, ax, cube_root_df
+```

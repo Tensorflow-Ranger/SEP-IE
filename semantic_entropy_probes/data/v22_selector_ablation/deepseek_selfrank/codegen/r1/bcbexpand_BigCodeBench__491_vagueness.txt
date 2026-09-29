@@ -1,0 +1,30 @@
+```python
+import random
+from datetime import datetime
+import matplotlib.pyplot as plt
+def task_func(epoch_milliseconds, seed=None):
+    categories = ['Electronics', 'Clothing', 'Home', 'Books', 'Sports']
+    if seed is not None:
+        random.seed(seed)
+    start_time = datetime.utcfromtimestamp(epoch_milliseconds / 1000)
+    current_time = datetime.utcnow()
+    if start_time > current_time:
+        raise ValueError("The start time is after the current time.")
+    if epoch_milliseconds < 0:
+        raise ValueError("The start time is negative.")
+    delta = current_time - start_time
+    days = delta.days
+    sales_data = {category: [0] * days for category in categories}
+    current_date = start_time
+    for i in range(days):
+        for category in categories:
+            sales_data[category][i] = random.randint(10, 50)
+        current_date += datetime.timedelta(days=1)
+    fig, ax = plt.subplots()
+    for category in categories:
+        ax.plot(range(days), sales_data[category], label=category)
+    ax.set_xlabel('Days since (the start date)')
+    ax.set_ylabel('Sales units')
+    ax.legend()
+    return sales_data, ax
+```

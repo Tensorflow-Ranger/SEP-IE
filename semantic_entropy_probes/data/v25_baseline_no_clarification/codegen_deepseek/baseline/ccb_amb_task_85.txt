@@ -1,0 +1,48 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [0] * (N + 1)
+    for i in range(1, N + 1):
+        P[i] = int(next(it))
+    Q = [0] * (N + 1)
+    for i in range(1, N + 1):
+        bib = int(next(it))
+        Q[bib] = i  # Q[bib] = person wearing bib 'bib'
+    result = []
+    for i in range(1, N + 1):
+        # person wearing bib i is Q[i]
+        person = Q[i]
+        # that person stares at P[person]
+        stared_at_person = P[person]
+        # bib number of stared_at_person is Q^{-1}[stared_at_person]
+        # but we have Q mapping bib -> person, so we need inverse
+        # we can precompute inverse: person_to_bib[person] = bib
+        # but we already have Q, so we need its inverse:
+        # person_to_bib[person] = bib such that Q[bib] == person
+        # Since Q is a permutation, we can compute inverse array
+        pass  # We'll compute inverse first
+
+    # Compute inverse of Q: person -> bib
+    person_to_bib = [0] * (N + 1)
+    for bib in range(1, N + 1):
+        person = Q[bib]
+        person_to_bib[person] = bib
+
+    result = []
+    for i in range(1, N + 1):
+        person = Q[i]          # person wearing bib i
+        target_person = P[person]  # person they stare at
+        target_bib = person_to_bib[target_person]  # bib of target person
+        result.append(str(target_bib))
+
+    print(" ".join(result))
+
+if __name__ == "__main__":
+    main()
+```

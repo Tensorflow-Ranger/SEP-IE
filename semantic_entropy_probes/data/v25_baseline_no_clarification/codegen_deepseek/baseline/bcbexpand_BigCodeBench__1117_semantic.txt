@@ -1,0 +1,21 @@
+```python
+import collections
+import random
+import json
+# Constants
+PREFICES = ['EMP$$', 'MAN$$', 'DEV$$', 'HR$$']
+LEVELS = ['Junior', 'Mid', 'Senior']
+def task_func(department_data):
+    result = {}
+    for dept, count in department_data.items():
+        if dept not in PREFICES:
+            continue
+        if count <= 0:
+            result[dept] = []
+            continue
+        levels = []
+        for _ in range(count):
+            levels.append(random.choice(LEVELS))
+        result[dept] = levels
+    return json.dumps(result)
+```

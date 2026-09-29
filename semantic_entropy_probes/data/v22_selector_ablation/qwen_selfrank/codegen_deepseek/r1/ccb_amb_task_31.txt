@@ -1,0 +1,125 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    A = data[1].strip()
+    length = 3 ** N
+
+    # Precompute the number of changes needed to make a group of 3 become all 0 or all 1
+    # For a group of 3 bits, to make majority 0 we need at most 1 change (if all 1 -> change two of them)
+    # Actually: majority 0 means at least two 0's.
+    #   - If already two or three 0's: 0 changes.
+    #   - If one 0: change one 1 to 0 -> 1 change.
+    #   - If zero 0: change two 1's to 0 -> 2 changes.
+    # Similarly for majority 1.
+    # But we can compute directly: changes_to_majority_0 = number of 1's in group if <=2, else? Let's compute:
+    # Let cnt1 = number of '1' in group.
+    # To have majority 0 we need at least two 0's, so at most one 1.
+    # If cnt1 <= 1: changes = 0 (already majority 0).
+    # If cnt1 == 2: changes = 1 (change one 1 to 0).
+    # If cnt1 == 3: changes = 2 (change two 1's to 0).
+    # So changes_to_majority_0 = max(0, cnt1 - 1).
+    # Similarly changes_to_majority_1 = max(0, (3 - cnt1) - 1) = max(0, 2 - cnt1).
+    # Wait: number of 0's = 3 - cnt1. Need at least two 1's -> at most one 0.
+    # If zeros <= 1: changes = 0.
+    # If zeros == 2: changes = 1.
+    # If zeros == 3: changes = 2.
+    # So changes_to_majority_1 = max(0, zeros - 1) = max(0, (3 - cnt1) - 1) = max(0, 2 - cnt1).
+
+    # We'll process recursively: at each level we have a string of length 3^k.
+    # We want to compute min changes to make final result 0 or 1, and then answer is min changes to flip.
+    # Let dp[k][target] = min changes for substring of length 3^k to yield target after full reduction.
+    # Base k=0: length 1, dp[0][bit] = 0 if bit matches, else 1.
+    # For k>0: we split into 3 blocks of size 3^(k-1). Each block reduces to a single bit (0 or 1).
+    # Then we take majority of those three bits. So:
+    # dp[k][target] = min over triples (b1,b2,b3) in {0,1}^3 such that majority(b1,b2,b3) = target of
+    #   dp[k-1][b1] + dp[k-1][b2] + dp[k-1][b3].
+    # We can precompute dp for each k from 0 to N.
+
+    # But N <= 13, 3^13 ~ 1.6 million, too large to store all dp for each position.
+    # However, we can think recursively: we only need dp for whole string.
+    # We can define a recursive function f(s, target) that returns min changes for string s (length 3^k) to reduce to target.
+    # Then answer = min(f(A, 0), f(A, 1)) but we need to flip, so if original final bit is X, we need min changes to get 1-X.
+    # But we don't know original final bit without simulating? We can compute original final bit by applying operation directly.
+    # However, we can compute both f(A,0) and f(A,1) and see which one corresponds to original.
+    # Actually we need: let orig = reduce(A). Then answer = min changes to get (1-orig). So we need f(A, 1-orig).
+    # So we can compute orig by simulation (fast) and then compute f(A, 1-orig) recursively.
+
+    # Recursion depth N <= 13, branching factor 3, total nodes ~ (3^N - 1)/2 ~ 800k, which is okay if memoized.
+    # But we can do bottom-up DP on the tree implicitly.
+
+    # Better approach: process the string in a DFS manner.
+    # Let's define a function solve_range(l, r) that returns (cost0, cost1) for substring A[l:r] (length 3^k).
+    # If length == 1: cost0 = 0 if A[l]=='0' else 1; cost1 = 0 if A[l]=='1' else 1.
+    # Else: split into three equal parts, get (c00,c01), (c10,c11), (c20,c21) for each part.
+    # Then to get final 0, we need to choose bits b1,b2,b3 in {0,1} with majority 0.
+    # cost = min over such triples of c0b1 + c1b2 + c2b3.
+    # Similarly for final 1.
+    # There are only 8 triples, easy.
+
+    # We'll implement recursion with memoization on (l, k) where k = log3(length). But we can just pass l and length.
+    # Since length = 3^k, we can compute k from length, but easier: we know N total, and current depth d = log3(len).
+    # We'll use l and d where d is remaining depth (0 means length 1).
+    # Total subproblems: for each depth d, there are 3^(N-d) starting positions. Sum_{d=0..N} 3^(N-d) = (3^(N+1)-1)/2 ~ 2.4M for N=13.
+    # That's okay with memoization (store in dict). But we can also compute recursively without memo for each node (since each node visited once).
+    # Actually recursion without memo visits each node exactly once, because we compute for each node its cost0/cost1.
+    # Number of nodes = (3^(N+1)-1)/2 ~ 2.4M, each node does constant work (8 combinations). That's about 20M operations, fine.
+
+    # Let's implement recursion without memo, just DFS.
+
+    A_list = list(A)
+
+    def dfs(l, depth):
+        # depth = remaining levels to reduce (0 means single character)
+        if depth == 0:
+            ch = A_list[l]
+            return (0 if ch == '0' else 1, 0 if ch == '1' else 1)
+        part_len = 3 ** (depth - 1)
+        # three children
+        c0 = dfs(l, depth - 1)
+        c1 = dfs(l + part_len, depth - 1)
+        c2 = dfs(l + 2 * part_len, depth - 1)
+        # compute cost for target 0
+        best0 = 10 ** 9
+        best1 = 10 ** 9
+        for b1 in (0, 1):
+            for b2 in (0, 1):
+                for b3 in (0, 1):
+                    majority = (b1 + b2 + b3) >= 2  # 1 if at least two 1's
+                    cost = c0[b1] + c1[b2] + c2[b3]
+                    if majority == 0:
+                        if cost < best0:
+                            best0 = cost
+                    else:
+                        if cost < best1:
+                            best1 = cost
+        return (best0, best1)
+
+    total_cost0, total_cost1 = dfs(0, N)
+    # Now compute original final bit
+    def original_final(s):
+        # iterative reduction
+        while len(s) > 1:
+            new_s = []
+            for i in range(0, len(s), 3):
+                group = s[i:i+3]
+                cnt1 = group.count('1')
+                if cnt1 >= 2:
+                    new_s.append('1')
+                else:
+                    new_s.append('0')
+            s = ''.join(new_s)
+        return int(s)
+    orig = original_final(A)
+    if orig == 0:
+        print(total_cost1)
+    else:
+        print(total_cost0)
+
+if __name__ == "__main__":
+    solve()
+```

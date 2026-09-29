@@ -1,0 +1,85 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+    B = [int(next(it)) for _ in range(N)]
+    C = [int(next(it)) for _ in range(N)]
+
+    # We need to decide for each position whether to flip it or not.
+    # The cost of flipping position i is the sum of C_j over all j where A_j = 1 after the flip.
+    # But note: flipping changes A_i, so the cost depends on the current state of A.
+    # However, we can think of the process as building B step by step.
+    # Let's define x_i = 1 if we flip A_i, 0 otherwise.
+    # After all flips, A_i becomes A_i ^ x_i, and we want A_i ^ x_i = B_i.
+    # So x_i = A_i ^ B_i. Thus the set of positions to flip is fixed.
+    # Now we need to order the flips to minimize total cost.
+    # The cost of flipping i at some moment is sum_{k: current A_k == 1} C_k.
+    # This is like: each time we flip a bit, we pay the sum of C over all bits currently 1.
+    # We can choose the order of flips. Let S be the set of positions to flip.
+    # Intuition: flipping a 1 to 0 reduces future costs, flipping a 0 to 1 increases future costs.
+    # So we should flip all 1→0 flips first, then all 0→1 flips.
+    # Within each group, order by C_i? Let's analyze.
+    # Suppose we have two 1→0 flips at positions i and j with costs C_i, C_j.
+    # If we flip i first, cost for i = sum_{k: A_k=1} C_k.
+    # After flipping i, that sum decreases by C_i, so cost for j = sum - C_i.
+    # Total for i and j = sum + (sum - C_i) = 2*sum - C_i.
+    # If we flip j first, total = 2*sum - C_j.
+    # To minimize, we should flip larger C_i first (since subtracting larger value reduces total).
+    # So for 1→0 flips, sort descending by C.
+    # For 0→1 flips: flipping a 0→1 increases the sum for subsequent flips.
+    # If we flip i first, cost for i = current_sum, then sum increases by C_i.
+    # If we flip j first, cost for j = current_sum, then sum increases by C_j.
+    # Total for i then j: sum + (sum + C_i) = 2*sum + C_i.
+    # For j then i: 2*sum + C_j.
+    # To minimize, we should flip smaller C first (so the increase is smaller for later flips).
+    # So for 0→1 flips, sort ascending by C.
+    # Implementation: compute initial sum of C over positions where A_k == 1.
+    # Collect positions to flip: those where A_i != B_i.
+    # Split into two lists: type0: A_i=1, B_i=0 (1→0), type1: A_i=0, B_i=1 (0→1).
+    # Sort type0 by C descending, type1 by C ascending.
+    # Process all type0 first, then type1.
+    # Keep current_sum = initial sum.
+    # total_cost = 0.
+    # For each flip in type0: total_cost += current_sum; current_sum -= C_i.
+    # For each flip in type1: total_cost += current_sum; current_sum += C_i.
+    # Output total_cost.
+
+    initial_sum = 0
+    for i in range(N):
+        if A[i] == 1:
+            initial_sum += C[i]
+
+    type0 = []  # 1→0
+    type1 = []  # 0→1
+    for i in range(N):
+        if A[i] != B[i]:
+            if A[i] == 1:
+                type0.append((C[i], i))
+            else:
+                type1.append((C[i], i))
+
+    type0.sort(reverse=True)  # descending by C
+    type1.sort()              # ascending by C
+
+    current_sum = initial_sum
+    total_cost = 0
+
+    for c, _ in type0:
+        total_cost += current_sum
+        current_sum -= c
+
+    for c, _ in type1:
+        total_cost += current_sum
+        current_sum += c
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

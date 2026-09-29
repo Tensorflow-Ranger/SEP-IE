@@ -1,0 +1,37 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(product_dict, product_keys):
+    if not product_keys:
+        return (pd.DataFrame(columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit']), None)
+    
+    product_data = []
+    for product in product_keys:
+        if product in product_dict:
+            quantity = product_dict[product]['quantity']
+            price = product_dict[product]['price']
+            profit = quantity * price
+            product_data.append({
+                'Product': product,
+                'Quantity': quantity,
+                'Price': price,
+                'Profit': profit
+            })
+    
+    df = pd.DataFrame(product_data)
+    avg_price = df['Price'].mean()
+    avg_profit = df['Profit'].mean()
+    
+    df['Average Price'] = avg_price
+    df['Average Profit'] = avg_profit
+    
+    fig, ax = plt.subplots()
+    df.groupby('Product')['Profit'].sum().plot(kind='bar', ax=ax)
+    ax.set_title('Profit by Product')
+    ax.set_xlabel('Product')
+    ax.set_ylabel('Profit')
+    
+    return (df, ax)
+```

@@ -1,0 +1,46 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(column, data):
+    """
+    Analyze a list of employee data and calculate statistics for a given column.
+    If the data list is empty, the sum will be 0 and mean, min, and max values will be NaN.
+    The function also visualizes the data with a pie chart, using the Age column as labels.
+
+    Parameters:
+    column (str): The column name to analyze (e.g., 'Age', 'Salary', 'Experience').
+    data (list of dict): List of dictionaries containing employee data.
+
+    Returns:
+    tuple: A tuple containing:
+        dict: A dictionary with the 'sum', 'mean', 'min', and 'max' of the column.
+        Axes object: The pie chart visualizing the column data.
+    """
+    if not data:
+        stats = {'sum': 0, 'mean': np.nan, 'min': np.nan, 'max': np.nan}
+        fig, ax = plt.subplots()
+        ax.text(0.5, 0.5, 'No data', ha='center', va='center')
+        ax.set_title(f'Pie Chart of {column}')
+        return stats, ax
+
+    df = pd.DataFrame(data)
+    values = df[column].copy()
+
+    numeric_values = pd.to_numeric(values, errors='coerce')
+    numeric_values_filled = numeric_values.fillna(0)
+
+    stats = {
+        'sum': float(numeric_values_filled.sum()),
+        'mean': float(numeric_values_filled.mean()),
+        'min': float(numeric_values_filled.min()),
+        'max': float(numeric_values_filled.max())
+    }
+
+    fig, ax = plt.subplots()
+    ax.pie(numeric_values_filled, labels=df['Age'].astype(str), autopct='%1.1f%%')
+    ax.set_title(f'Pie Chart of {column}')
+
+    return stats, ax
+```

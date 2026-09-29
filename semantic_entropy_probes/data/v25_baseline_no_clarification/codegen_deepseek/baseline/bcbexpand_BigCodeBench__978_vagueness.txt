@@ -1,0 +1,36 @@
+```python
+import numpy as np
+import pandas as pd
+from sklearn.decomposition import PCA
+def task_func(array, seed=None):
+    """
+    Shuffles the columns of a numpy array randomly, performs Principal Component Analysis (PCA) 
+    to reduce the data to 2 principal components, and returns these components as a pandas DataFrame.
+    
+    Parameters:
+    - array (np.ndarray): Input 2D numpy array.
+    - seed (int, optional): Random seed for reproducibility of column shuffling.
+    
+    Returns:
+    - pandas.DataFrame: DataFrame with columns 'PC1' and 'PC2' representing the two principal components.
+    
+    Raises:
+    - ValueError: If the input array is not 2D.
+    """
+    if not isinstance(array, np.ndarray):
+        array = np.array(array)
+    if array.ndim != 2:
+        raise ValueError("If the input array is not 2D.")
+    if array.size == 0 or array.shape[1] == 0:
+        return pd.DataFrame(columns=['PC1', 'PC2'])
+    if seed is not None:
+        np.random.seed(seed)
+    shuffled_indices = np.random.permutation(array.shape[1])
+    shuffled_array = array[:, shuffled_indices]
+    n_components = min(2, shuffled_array.shape[1])
+    pca = PCA(n_components=n_components)
+    principal_components = pca.fit_transform(shuffled_array)
+    if n_components == 1:
+        principal_components = np.hstack([principal_components, np.zeros((principal_components.shape[0], 1))])
+    return pd.DataFrame(principal_components, columns=['PC1', 'PC2'])
+```

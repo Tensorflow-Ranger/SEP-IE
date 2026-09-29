@@ -1,0 +1,13 @@
+```python
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+def task_func(n_rows, scale_cols, columns=['A', 'B', 'C', 'D', 'E'], random_seed=None):
+    np.random.seed(random_seed)
+    df = pd.DataFrame(np.random.rand(n_rows, len(columns)), columns=columns)
+    if scale_cols:
+        scaler = StandardScaler()
+        df_cols = df.columns[scale_cols]
+        df[df_cols] = scaler.fit_transform(df[df_cols])
+    return df
+```

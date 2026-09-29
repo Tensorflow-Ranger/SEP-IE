@@ -1,0 +1,12 @@
+```python
+import seaborn as sns
+import numpy as np
+def task_func(df):
+    if df.empty:
+        raise ValueError("DataFrame is empty")
+    if not np.issubdtype(df.dtypes.values, np.number).all():
+        raise TypeError("DataFrame contains non-numeric data types")
+    covariance_df = df.cov()
+    pair_plot = sns.pairplot(df)
+    return covariance_df, pair_plot
+```

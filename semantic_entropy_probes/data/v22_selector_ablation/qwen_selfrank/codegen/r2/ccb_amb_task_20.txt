@@ -1,0 +1,77 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    W = int(data[idx])
+    idx += 1
+    
+    blocks = []
+    for _ in range(N):
+        x = int(data[idx])
+        idx += 1
+        y = int(data[idx])
+        idx += 1
+        blocks.append((x, y))
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        T = int(data[idx])
+        idx += 1
+        A = int(data[idx]) - 1  # convert to 0-based index
+        idx += 1
+        queries.append((T, A))
+    
+    # Sort blocks by Y coordinate
+    blocks.sort(key=lambda x: x[1])
+    
+    # For each column, track the Y positions of blocks
+    from collections import defaultdict
+    col_y = defaultdict(list)
+    for x, y in blocks:
+        bisect.insort(col_y[x], y)
+    
+    # For each query, determine if block A exists at time T+0.5
+    results = []
+    for T, A in queries:
+        x, y = blocks[A]
+        # Determine the number of blocks that would have fallen before time T
+        # This is equivalent to the number of full rows that have been cleared
+        # Each full row is cleared once all columns in that row are filled
+        # So we need to count how many full rows have been cleared by time T
+        
+        # For each column, find the number of blocks that would have fallen by time T
+        # Each block in column x will fall down (T) times if possible
+        # So the new Y position is y + T, but we need to consider the number of full rows
+        # that have been cleared by that time
+        
+        # For each column, the number of full rows that have been cleared is the number of full rows
+        # that can be formed by the number of blocks in that column
+        # So for column x, the number of full rows is the number of blocks in that column
+        # Each full row is cleared once, so the number of full rows cleared is floor((y + T) / W)
+        # Wait, no, that's not correct. Let's think differently.
+        
+        # The number of full rows that have been cleared by time T is equal to the number of full rows
+        # that have been filled and then removed. Each block in column x can fall down (T) times
+        # but only if there's space below. So the effective Y after T steps is y + T, but we have to
+        # consider how many full rows have been cleared. Each full row is cleared once all columns in that row are filled.
+        
+        # To find how many full rows have been cleared, we can simulate for each column
+        # the number of blocks that would have fallen by time T, and count how many full rows are formed
+        # This is complicated, but we can use the following approach:
+        
+        # For each column x, the number of blocks in that column is len(col_y[x])
+        # Each block can fall down (T) times, so the new Y is y + T
+        # But the number of full rows that have been cleared is the number of times a full row has been filled
+        # A full row is filled when all W columns have at least one block in that row
+        # So we can use

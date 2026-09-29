@@ -1,0 +1,32 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    H = int(next(it))
+    W = int(next(it))
+    rows = []
+    for _ in range(H):
+        rows.append(int(next(it), 2))
+    
+    # Precompute column masks
+    col_masks = [1 << j for j in range(W)]
+    
+    # For each column subset, compute the best total
+    best = H * W  # upper bound
+    for col_mask in range(1 << W):
+        total = 0
+        for row in rows:
+            flipped = row ^ col_mask
+            ones = bin(flipped).count("1")
+            total += min(ones, W - ones)
+        if total < best:
+            best = total
+    print(best)
+
+if __name__ == "__main__":
+    solve()
+```

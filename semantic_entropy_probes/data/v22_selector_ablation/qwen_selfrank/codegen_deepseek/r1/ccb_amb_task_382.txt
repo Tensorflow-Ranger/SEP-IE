@@ -1,0 +1,75 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    a = list(map(int, data[1:1 + n]))
+
+    # The game ends when all indices are in S.
+    # Each index i must be added to S exactly once, which requires A_i initial opportunities.
+    # However, we can also subtract from A_i after i is already in S.
+    # The total number of moves is sum(A) - (number of extra subtractions after S is full).
+    # But S becomes full exactly when each index has been chosen at least once.
+    # The minimal number of moves to get all indices into S is sum(max(0, A_i - 1)) + n?
+    # Let's think differently:
+    # For each i, the first time we choose i, we add i to S. After that, choosing i again just subtracts 1 from A_i.
+    # So the game ends when S = {1..N}, i.e., after each i has been chosen at least once.
+    # The number of moves until that moment is: for each i, we need at least 1 move to add it.
+    # But we can interleave moves that subtract from already-added indices.
+    # Actually, the total number of moves before S becomes full is not fixed; players can choose order.
+    # However, the parity of the total number of moves determines the winner (since the game ends right when S becomes full).
+    # Let total = sum(A_i). Each move subtracts 1 from some A_i.
+    # The game ends when all indices have been added to S, which requires at least N moves (one per index).
+    # After those N "adding" moves, the remaining moves are only on indices already in S.
+    # So total moves = N + (sum(A_i) - N) = sum(A_i) ? Wait, careful:
+    # For each i, the first time we pick it, we add it to S and subtract 1 from A_i.
+    # After that, we can pick it A_i - 1 more times (since A_i becomes 0 after A_i total picks).
+    # So total moves = sum over i (A_i) because each unit of A_i is consumed in one move.
+    # But the game ends when S becomes full, which happens exactly after we have made N "adding" moves.
+    # Those N adding moves are part of the total sum(A_i) moves.
+    # So the game ends exactly after the move that adds the last missing index to S.
+    # That move is one of the total sum(A_i) moves.
+    # Therefore, the total number of moves made in the entire game is exactly sum(A_i) (since after S is full, no further moves are allowed; the game ends immediately).
+    # But wait: the problem says: "If S = {1,2,...,N}, the game ends and the player who performed the last operation wins."
+    # So the game ends right after the operation that completes S. That operation is the N-th distinct index addition.
+    # However, there could have been many moves before that addition that subtracted from already-added indices.
+    # So the total number of moves until the end is: let k be the number of moves before the last addition.
+    # Then the last addition is move k+1, and the game ends.
+    # The total number of moves is not necessarily sum(A_i), because after S becomes full, we stop, even if some A_i > 0? No, the rule says: "If S = {1,2,...,N}, the game ends". So we stop as soon as S becomes full, even if some A_i > 0.
+    # But the problem also says: "Note that it can be proven that until a winner is determined and the game ends, players can always make a move (there exists some i such that 1 ≤ A_i)." That means until S is full, there is always some i with A_i ≥ 1, so we can always continue.
+    # However, once S is full, we stop immediately, even if some A_i > 0.
+    # Therefore, the total number of moves is not fixed; it depends on the order of moves.
+    # Players can choose which indices to subtract from, and they will choose optimally to win.
+    # This becomes a parity game: the player who makes the move that completes S wins.
+    # So we need to determine who that will be under optimal play.
+    # Let's model: We have N piles, each with A_i stones. A move: choose a pile with at least 1 stone, remove one stone from it, and if that pile has never been chosen before, mark it as chosen.
+    # The game ends when all piles are marked. The player who makes the move that marks the last pile wins.
+    # This is similar to a game where each pile has two types of moves: "first move" on that pile (which marks it) and subsequent moves.
+    # The key is that marking a pile is mandatory to end the game, and each pile must be marked exactly once.
+    # So there are exactly N marking moves. The rest are non-marking moves.
+    # The total number of moves = N + X, where X is the number of non-marking moves played before the last marking move.
+    # Players can choose to play non-marking moves to adjust parity.
+    # However, non-marking moves are limited: for each pile i, you can play at most A_i - 1 non-marking moves (since you need one stone for the marking move).
+    # Actually, you could play more than A_i - 1 non-marking moves if you play the marking move later? No, because marking move requires a stone, and you cannot mark a pile twice. So for pile i, you can play at most A_i - 1 non-marking moves before marking it, and then after marking it, you can still play non-marking moves on it as long as A_i > 1? Wait, after marking, you can still subtract from A_i if A_i > 1, because the operation only requires A_i ≥ 1. So after marking, you can continue to subtract from that pile until A_i becomes 0. Those are also non-marking moves.
+    # So for each pile i, total moves on that pile = A_i. Among them, exactly one is a marking move (the first time you choose it). The other A_i - 1 are non-marking.
+    # Therefore, total non-marking moves across all piles = sum(A_i) - N.
+    # The game ends when the last marking move is played. Let’s denote the order of marking moves as a permutation of 1..N.
+    # Between marking moves, players can play any number of non-marking moves on any pile that still has stones and is already marked or not yet marked? Actually, non-marking moves can be played on any pile with A_i ≥ 1, regardless of whether it's marked or not, as long as it hasn't been marked yet? Wait, if a pile is not yet marked, playing a move on it will mark it (if it's the first time). So a non-marking move can only be played on a pile that has already been marked. Because if you play on an unmarked pile, it will become marked (that's a marking move). So non-marking moves are only on already-marked piles.
+    # Therefore, the sequence of moves: players alternate. They can either:
+    # - Choose an unmarked pile i with A_i ≥ 1: this marks it and subtracts 1 from A_i. (marking move)
+    # - Choose a marked pile i with A_i ≥ 1: this subtracts 1 from A_i. (non-marking move)
+    # The game ends immediately after the move that marks the last unmarked pile.
+    # So the total number of moves is: N marking moves + some number of non-marking moves interspersed.
+    # Let’s denote M = sum(A_i) - N = total non-marking moves available.
+    # Players can choose to play non-marking moves at any time, as long as there is a marked pile with A_i ≥ 1.
+    # However, at the beginning, no pile is marked, so the first move must be a marking move.
+    # After each marking move, the set of marked piles grows.
+    # The key observation: The player who makes the N-th marking move wins. The parity of the total number of moves up to that point determines the winner.
+    # Let’s think about optimal strategy. This is a classic "annihilation" game: the player who forces the last marking move to be on their turn wins.
+    # Since non-marking moves don't change the set of unmarked piles, they only change the parity of the move count.
+    # So players can use non-marking moves to adjust the parity of the number of moves until the last marking move.
+    # Essentially, the game reduces to: there are N marking moves that must be played in some order. Between them, players can insert any number of non-marking moves (up to available ones) to shift the turn.
+    # This is similar to a game where each player can, on their turn, either make a marking move (

@@ -1,0 +1,87 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    W = int(data[idx])
+    idx += 1
+    
+    blocks = []
+    for _ in range(N):
+        X = int(data[idx])
+        idx += 1
+        Y = int(data[idx])
+        idx += 1
+        blocks.append((X, Y))
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        T = int(data[idx])
+        idx += 1
+        A = int(data[idx]) - 1  # 0-based index
+        idx += 1
+        queries.append((T, A))
+    
+    # Sort blocks by Y coordinate
+    blocks.sort(key=lambda x: x[1])
+    
+    # For each block, compute the effective Y after time t
+    # For a block at (X, Y), after t steps, it will fall down to Y + t
+    # But if there are blocks in the same column, they will block the fall
+    # So we need to find the number of blocks in the same column that are below or at the same level as this block
+    
+    # We will process queries offline
+    # For each query (T, A), we need to check if the block A exists at time T+0.5
+    # Which means, after T steps, the block is still present
+    
+    # We will use a list to track the current Y positions of blocks
+    # But since the number of blocks is large, we need an efficient way to query the number of blocks in the same column below a certain Y
+    
+    # For each column, we will keep a sorted list of Y positions of blocks
+    # Then, for a block at (X, Y), after T steps, its Y would be Y + T
+    # But if there are blocks in the same column with Y <= Y + T, then it will be blocked
+    # So the number of such blocks is the number of blocks in column X with Y <= Y + T
+    
+    # We will use a dictionary to map column X to a sorted list of Y positions
+    from collections import defaultdict
+    col_y = defaultdict(list)
+    for x, y in blocks:
+        col_y[x].append(y)
+    
+    # Sort each column's Y list
+    for x in col_y:
+        col_y[x].sort()
+    
+    # For each query (T, A), get the original X and Y of block A
+    # Then compute the target Y after T steps: target_y = Y + T
+    # Then find how many blocks are in the same column with Y <= target_y
+    # If the count is less than the number of blocks in the column, then the block is still present
+    # Else, it's removed
+    
+    results = []
+    for T, A in queries:
+        x, y = blocks[A]
+        target_y = y + T
+        # Find the number of blocks in column x with Y <= target_y
+        ys = col_y[x]
+        cnt = bisect.bisect_right(ys, target_y)
+        if cnt < len(ys):
+            results.append("Yes")
+        else:
+            results.append("No")
+    
+    print('\n'.join(results))
+
+if __name__ == "__main__":
+    main()
+```

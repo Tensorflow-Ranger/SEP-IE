@@ -1,0 +1,27 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    A = list(map(int, data[1:1+N]))
+
+    # The game is equivalent to each index i contributing A_i moves
+    # plus one extra move the first time it is chosen (when it enters S).
+    # So total moves = sum(A) + (number of distinct indices ever chosen).
+    # But since every index will eventually be chosen at least once
+    # (because otherwise there would be an index with A_i > 0 forever),
+    # all N indices will enter S. So total moves = sum(A) + N.
+    total_moves = sum(A) + N
+
+    # Fennec moves first, so if total_moves is odd, Fennec wins.
+    if total_moves % 2 == 1:
+        print("Fennec")
+    else:
+        print("Snuke")
+
+if __name__ == "__main__":
+    solve()
+```

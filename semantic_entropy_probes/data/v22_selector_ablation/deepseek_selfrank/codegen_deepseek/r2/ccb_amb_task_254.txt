@@ -1,0 +1,38 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    n = int(next(it))
+    arr = [int(next(it)) for _ in range(n)]
+
+    # total distinct count in whole array
+    total_distinct = len(set(arr))
+
+    # prefix distinct counts
+    seen = set()
+    prefix_distinct = [0] * (n - 1)
+    for i in range(n - 1):
+        seen.add(arr[i])
+        prefix_distinct[i] = len(seen)
+
+    # suffix distinct counts
+    seen.clear()
+    suffix_distinct = [0] * (n - 1)
+    for i in range(n - 1, 0, -1):
+        seen.add(arr[i])
+        suffix_distinct[i - 1] = len(seen)
+
+    # compute maximum sum
+    ans = 0
+    for i in range(n - 1):
+        ans = max(ans, prefix_distinct[i] + suffix_distinct[i])
+
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

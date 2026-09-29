@@ -1,0 +1,50 @@
+```python
+import sys
+from math import log, ceil
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    A = data[1]
+
+    length = 3 ** N
+
+    def process(s):
+        n = len(s)
+        while n > 1:
+            new_s = []
+            for i in range(0, n, 3):
+                group = s[i:i+3]
+                count0 = group.count('0')
+                count1 = group.count('1')
+                if count0 > count1:
+                    new_s.append('0')
+                else:
+                    new_s.append('1')
+            s = ''.join(new_s)
+            n = len(s)
+        return s
+
+    # Try flipping each bit and find the minimum changes needed
+    min_changes = float('inf')
+    for i in range(length):
+        # Create a copy of A
+        A_list = list(A)
+        # Flip the i-th bit
+        A_list[i] = '1' if A_list[i] == '0' else '0'
+        # Convert back to string
+        modified_A = ''.join(A_list)
+        # Process the modified string
+        result = process(modified_A)
+        if result[0] != A[0]:
+            # Count the number of changes
+            changes = sum(1 for a, b in zip(A, modified_A) if a != b)
+            min_changes = min(min_changes, changes)
+
+    print(min_changes)
+
+if __name__ == "__main__":
+    main()
+```

@@ -1,0 +1,84 @@
+```python
+import sys
+import heapq
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    
+    W = list(map(int, data[idx:idx+N]))
+    idx += N
+    
+    intervals = []
+    for _ in range(N):
+        L = int(data[idx])
+        R = int(data[idx+1])
+        intervals.append((L, R))
+        idx += 2
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        s = int(data[idx])
+        t = int(data[idx+1])
+        queries.append((s-1, t-1))
+        idx += 2
+    
+    # Build adjacency list
+    adj = [[] for _ in range(N)]
+    
+    # For each interval, find all other intervals that overlap
+    # and add an edge between them
+    # To optimize, we can use a line sweep approach
+    # but for now, we'll do a naive approach for clarity
+    
+    for i in range(N):
+        L1, R1 = intervals[i]
+        for j in range(N):
+            if i == j:
+                continue
+            L2, R2 = intervals[j]
+            if not (R1 < L2 or R2 < L1):
+                adj[i].append(j)
+                adj[j].append(i)
+    
+    # Dijkstra's algorithm for each query
+    # Since Q is large, we need to optimize
+    # We can precompute the minimum distances from all nodes to all others
+    # But with N up to 2e5, that's not feasible
+    # So we process each query individually using Dijkstra's algorithm
+    
+    for s, t in queries:
+        if s == t:
+            print(-1)
+            continue
+        
+        dist = [float('inf')] * N
+        dist[s] = W[s]
+        heap = [(W[s], s)]
+        
+        while heap:
+            current_dist, u = heapq.heappop(heap)
+            if current_dist > dist[u]:
+                continue
+            for v in adj[u]:
+                if dist[v] > dist[u] + W[v]:
+                    dist[v] = dist[u] + W[v]
+                    heapq.heappush(heap, (dist[v], v))
+        
+        if dist[t] == float('inf'):
+            print(-1)
+        else:
+            print(dist[t])
+
+if __name__ == "__main__":
+    main()
+```

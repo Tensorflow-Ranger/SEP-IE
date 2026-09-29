@@ -1,0 +1,26 @@
+```python
+import os
+import glob
+import csv
+def task_func(directory_path, file_extension='.csv'):
+    result = {}
+    pattern = os.path.join(directory_path, f'*{file_extension}')
+    for file_path in glob.glob(pattern):
+        if os.path.isfile(file_path):
+            filename = os.path.basename(file_path)
+            key = filename[:-len(file_extension)] if filename.endswith(file_extension) else filename
+            data = []
+            try:
+                with open(file_path, 'r', newline='', encoding='utf-8') as f:
+                    if file_extension == '.csv':
+                        reader = csv.reader(f)
+                        for row in reader:
+                            data.append(row)
+                    else:
+                        for line in f:
+                            data.append([line.strip()])
+            except Exception:
+                continue
+            result[key] = data
+    return result
+```

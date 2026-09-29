@@ -1,0 +1,23 @@
+```python
+import inspect
+import json
+import types
+
+def task_func(f):
+    spec = inspect.getfullargspec(f)
+    args = spec.args
+    defaults = spec.defaults if spec.defaults is not None else ()
+    annotations = {k: str(v) for k, v in spec.annotations.items()}
+    is_lambda = isinstance(f, types.LambdaType) and f.__name__ == '<lambda>'
+    has_nested = any(isinstance(obj, types.FunctionType) and obj.__name__ != f.__name__ 
+                     for obj in f.__dict__.values()) if hasattr(f, '__dict__') else False
+    result = {
+        'name': f.__name__,
+        'args': args,
+        'defaults': defaults,
+        'annotations': annotations,
+        'is_lambda': is_lambda,
+        'has_nested': has_nested
+    }
+    return json.dumps(result)
+```

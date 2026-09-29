@@ -1,0 +1,71 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    W = int(data[idx])
+    idx += 1
+    
+    blocks = []
+    for _ in range(N):
+        x = int(data[idx])
+        idx += 1
+        y = int(data[idx])
+        idx += 1
+        blocks.append((x, y))
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        T = int(data[idx])
+        idx += 1
+        A = int(data[idx]) - 1  # 0-based index
+        idx += 1
+        queries.append((T, A))
+    
+    # Sort blocks by Y descending
+    blocks.sort(key=lambda x: -x[1])
+    
+    # For each column, track the positions of blocks
+    col_blocks = [[] for _ in range(W)]
+    for x, y in blocks:
+        col_blocks[x - 1].append(y)
+    
+    # Precompute for each column the sorted list of Ys
+    for i in range(W):
+        col_blocks[i].sort()
+    
+    # For each query, simulate the time evolution
+    results = []
+    for T, A in queries:
+        x, y = blocks[A]
+        col = x - 1
+        ys = col_blocks[col]
+        # Find the original position in the column
+        pos = bisect.bisect_left(ys, y)
+        # The number of blocks below the original position
+        below = pos
+        # The number of blocks that would be removed in T steps
+        removed = min(below, T)
+        # The new position is original position - removed
+        new_y = y - removed
+        # If new_y <= 0, the block is gone
+        if new_y <= 0:
+            results.append("No")
+        else:
+            results.append("Yes")
+    
+    print('\n'.join(results))
+
+if __name__ == "__main__":
+    main()
+```

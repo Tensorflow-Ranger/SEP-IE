@@ -1,0 +1,26 @@
+```python
+import sys
+
+def main():
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    P = list(map(int, data[1:N+1]))
+    Q = list(map(int, data[N+1:2*N+1]))
+    
+    # Create a dictionary to map bib numbers to person indices
+    bib_to_index = {q: i for i, q in enumerate(Q)}
+    
+    # For each bib number i, find the person k with Q_k = i
+    # Then get the bib number of the person that k is staring at, which is Q[P[k]-1]
+    result = [0] * N
+    for i in range(N):
+        k = bib_to_index[i+1]
+        result[i] = Q[P[k] - 1]
+    
+    print(' '.join(map(str, result)))
+
+if __name__ == "__main__":
+    main()
+```

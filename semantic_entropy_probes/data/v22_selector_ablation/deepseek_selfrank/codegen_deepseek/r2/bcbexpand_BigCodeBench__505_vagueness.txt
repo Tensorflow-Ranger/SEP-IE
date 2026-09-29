@@ -1,0 +1,9 @@
+```python
+import hashlib
+import hmac
+def task_func(secret, message):
+    secret_bytes = secret.encode('utf-8')
+    message_bytes = message.encode('utf-8')
+    hmac_signature = hmac.new(secret_bytes, message_bytes, hashlib.sha256)
+    return hmac_signature.hexdigest()
+```

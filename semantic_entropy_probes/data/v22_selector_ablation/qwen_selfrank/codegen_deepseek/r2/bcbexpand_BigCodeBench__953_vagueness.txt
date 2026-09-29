@@ -1,0 +1,31 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+def task_func(mystrings, folder_path, seed=None):
+    if seed is not None:
+        np.random.seed(seed)
+    if not os.path.exists(folder_path):
+        try:
+            os.makedirs(folder_path)
+        except Exception as e:
+            raise FileNotFoundError(f"Directory '{folder_path}' does not exist and cannot be created.") from e
+    seen = set()
+    unique_names = []
+    for name in mystrings:
+        if name not in seen:
+            seen.add(name)
+            unique_names.append(name)
+    saved_files = []
+    for name in unique_names:
+        data = np.random.rand(10)
+        plt.figure()
+        plt.bar(range(10), data)
+        plt.title(name)
+        file_name = name.replace(' ', '_') + '.png'
+        file_path = os.path.join(folder_path, file_name)
+        plt.savefig(file_path)
+        plt.close()
+        saved_files.append(file_name)
+    return saved_files
+```

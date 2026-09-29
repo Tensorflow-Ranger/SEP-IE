@@ -1,0 +1,29 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+def task_func(d, keys=['x', 'y', 'z']):
+    """
+    Plot values from a list of dictionaries based on specified keys, combining values
+    with the same key into a single series, and return the plot as a Matplotlib Axes object.
+    """
+    if not d or not keys:
+        fig, ax = plt.subplots()
+        return ax
+    
+    combined = {key: [] for key in keys}
+    for dictionary in d:
+        for key in keys:
+            if key in dictionary:
+                combined[key].append(dictionary[key])
+            else:
+                combined[key].append(None)
+    
+    df = pd.DataFrame(combined)
+    ax = df.plot(marker='o')
+    ax.set_xlabel('Index')
+    ax.set_ylabel('Value')
+    ax.set_title('Values from Dictionaries by Key')
+    ax.legend(title='Keys')
+    plt.tight_layout()
+    return ax
+```

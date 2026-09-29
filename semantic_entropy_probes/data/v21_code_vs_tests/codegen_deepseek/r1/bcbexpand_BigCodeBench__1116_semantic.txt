@@ -1,0 +1,28 @@
+```python
+import random
+import statistics
+# Constants
+AGE_RANGE = (22, 60)
+def task_func(dict1):
+    if "EMP$$" not in dict1:
+        return (0, 0, [])
+    ages = []
+    for employee in dict1["EMP$$"]:
+        age = random.randint(AGE_RANGE[0], AGE_RANGE[1])
+        ages.append(age)
+    if not ages:
+        return (0, 0, [])
+    mean = statistics.mean(ages)
+    median = statistics.median(ages)
+    try:
+        mode_val = statistics.mode(ages)
+        modes = [mode_val]
+    except statistics.StatisticsError:
+        freq_dict = {}
+        for age in ages:
+            freq_dict[age] = freq_dict.get(age, 0) + 1
+        max_freq = max(freq_dict.values())
+        modes = [age for age, freq in freq_dict.items() if freq == max_freq]
+        modes.sort()
+    return (mean, median, modes)
+```

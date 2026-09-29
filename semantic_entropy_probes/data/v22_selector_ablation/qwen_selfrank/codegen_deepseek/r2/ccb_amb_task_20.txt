@@ -1,0 +1,102 @@
+```python
+import sys
+import bisect
+
+def solve() -> None:
+    it = iter(sys.stdin.read().split())
+    N = int(next(it))
+    W = int(next(it))
+    blocks = []
+    for _ in range(N):
+        x = int(next(it))
+        y = int(next(it))
+        blocks.append((x, y))
+    # Preprocess: sort blocks by (x, y)
+    blocks.sort(key=lambda p: (p[0], p[1]))
+    # For each column, collect sorted y's
+    col_ys = [[] for _ in range(W + 1)]
+    for x, y in blocks:
+        col_ys[x].append(y)
+
+    # Precompute for each column the "critical" y values where a block
+    # would be at height y at time t = y - k (k = number of blocks below it that have disappeared)
+    # Actually, we can think: a block at (x, y) will disappear at time t if
+    # there are at least t blocks strictly below it that have disappeared.
+    # But disappearance only happens when a full row is cleared.
+    # Equivalently: a block survives at time t if y > t + (number of full-row clears that happened before time t).
+    # The number of full-row clears before time t is the number of times the bottom row became full.
+    # The bottom row becomes full when, for each column, there is a block at height <= current_time.
+    # This is essentially a "water level" problem: we maintain the minimum height among the topmost
+    # block in each column that is <= current_time.
+    # However, we can answer queries offline per block.
+    # Observation: The process is equivalent to each block moving down until it hits the bottom,
+    # and the bottom row being cleared whenever all columns have a block in the bottom row.
+    # This is exactly the same as the classic "falling blocks with row clears" problem.
+    # We can simulate per column independently if we know the times when the bottom row is full.
+    # Let’s define for each column x a sequence of y-values sorted ascending.
+    # For a block at (x, y), its "arrival time" at the bottom row is y - (index in its column).
+    # Because before it reaches bottom, all blocks below it must be cleared (by full-row clears).
+    # Actually, more precisely: let rank = number of blocks in column x with y <= y0.
+    # Then the block will reach the bottom at time y0 - rank + 1? Let's derive.
+    # Consider column x: blocks at heights y1 < y2 < ... < yk.
+    # The lowest block (y1) reaches bottom at time y1 - 1 (since it starts at y1, moves down each step).
+    # But if there is a full-row clear before that, it might disappear earlier.
+    # However, full-row clears affect all columns simultaneously.
+    # This is known as the "Tower" problem from some contest.
+    # We can think of the global timeline: let H(t) be the number of full-row clears up to time t.
+    # Then a block at (x, y) exists at time t if y - t > H(t) (because it moved down t steps,
+    # but also was pushed up by H(t) clears? Actually each clear removes the bottom row, so all blocks shift down one?
+    # Wait, the rule: when bottom row is full, those blocks are removed, then remaining blocks move down if possible.
+    # This is equivalent to: after a full-row clear, all blocks above effectively shift down by one.
+    # So the net effect after time t: a block originally at y will be at height y - t + H(t) (since each clear
+    # reduces its height by one extra). It exists if its current height > 0.
+    # But also, if multiple blocks in same column, they cannot pass each other.
+    # The condition for existence at time t is: y - t + H(t) > 0.
+    # And also it hasn't been removed by a full-row clear while being in bottom row.
+    # Actually, a block is removed exactly when it is in the bottom row at a moment the bottom row is full.
+    # That happens when its current height = 1 and all columns have a block at height 1 at that time.
+    # But that's equivalent to the global condition: H(t) increases exactly when all columns have a block
+    # whose original y satisfies y - t + H(t) = 1.
+    # So H(t) is determined by the blocks themselves.
+    # This is a known solution: sort all blocks by y - idx (where idx is its order in its column).
+    # Then the times when full-row clears happen are the times when the (W)-th smallest of these values
+    # reaches a new integer.
+    # Actually, let’s define for each block i in column x with rank r (1-based from bottom in its column),
+    # let val = y - r. Then the block will reach the bottom at time val.
+    # Because the r-th block from bottom needs to wait for r-1 blocks below it to be cleared.
+    # The bottom row becomes full when for each column, the smallest val among remaining blocks <= current_time.
+    # So the times of full-row clears are the times when the W-th smallest val among all blocks <= current_time.
+    # Therefore, we can sort all vals, and then H(t) = number of vals <= t that are among the smallest W at that time.
+    # But that's tricky to compute directly.
+    # However, we can answer a query for block a at time T: we need to know if it still exists.
+    # Let rank = number of blocks in same column with y <= Ya.
+    # Let base = Ya - rank.
+    # Then the block reaches bottom at time base (if no clears happen earlier).
+    # But clears happen earlier, which delay its arrival? Actually clears make it arrive earlier because
+    # each clear removes the bottom row, effectively moving it down one extra step.
+    # So the actual arrival time is base + H(arrival_time)? This is circular.
+    # Let's think differently: Let f(t) = t - H(t). Then the block exists at time t if Ya > f(t) + (rank - 1).
+    # Because the block's height decreases by 1 each step, but each clear also decreases height by 1.
+    # Actually, after t steps, the block has moved down t times, but also been affected by H(t) clears,
+    # so its height = Ya - t + H(t). It exists if height >= 1.
+    # And it hasn't been removed: it is removed if at some time s <= t, it was in bottom row (height = 1)
+    # and a full-row clear happened at time s. That means at time s, Ya - s + H(s) = 1 and a clear happened.
+    # But if a clear happened at time s, then H(s) = H(s-1) + 1, and condition for clear is that for all columns,
+    # there is some block with Ya' - s + H(s-1) = 1? This is messy.
+    # Let's use known solution: For each block, compute key = y - (number of blocks in same column with y <= y).
+    # Sort these keys. Then the process is equivalent to: at time t, remove all blocks with key <= t that are
+    # among the smallest W remaining keys. This is like a greedy scheduling.
+    # Then for a query (T, A), we need to know if block A has been removed by time T.
+    # We can simulate removal times offline: sort keys, and process times in increasing order.
+    # Maintain a priority queue of smallest W keys, and when the smallest key reaches current time, remove them.
+    # But we have up to 2e5 blocks, and times up to 1e9, but we only care about times when removals happen.
+    # Actually, removal happens at integer times when there are at least W blocks with key <= current_time.
+    # Let’s compute for each block its removal time (or infinity if never removed).
+    # Sort blocks by key. Let’s denote keys sorted: k1 <= k2 <= ... <= kN.
+    # The first removal happens at time k_W (since at that time, the first W blocks have key <= k_W).
+    # Remove those W blocks. Then next removal happens at time k_{2W} (since after removing first W, the next W
+    # smallest keys are k_{W+1}..k_{2W}), but wait, after first removal, the remaining blocks shift? No, because
+    # keys are fixed. Actually, after removing first W blocks, the smallest key among remaining is k_{W+1}.
+    # But removal happens when there are W blocks with key <= current_time. So at time k_{2W}, there are
+    # W blocks among remaining with key <= k_{2W} (namely k_{W+1}..k_{2W}). So second removal at k_{2W}.
+    # So removal times are k_{i*W} for i=1,2,... until we run

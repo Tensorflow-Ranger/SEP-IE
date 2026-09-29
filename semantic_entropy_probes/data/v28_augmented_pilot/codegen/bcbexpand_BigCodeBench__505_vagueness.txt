@@ -1,0 +1,11 @@
+```python
+import hashlib
+import hmac
+def task_func(secret, message):
+    # Create HMAC using SHA-256
+    hmac_obj = hmac.new(secret.encode('utf-8'), 
+                        message.encode('utf-8'), 
+                        hashlib.sha256)
+    # Return hexadecimal digest
+    return hmac_obj.hexdigest()
+```

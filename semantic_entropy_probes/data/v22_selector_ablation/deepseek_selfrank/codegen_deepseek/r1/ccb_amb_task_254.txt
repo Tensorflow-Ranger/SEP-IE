@@ -1,0 +1,37 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+
+    # Count distinct integers in the whole array
+    total_set = set(A)
+    total_distinct = len(total_set)
+
+    # We'll sweep from left to right, maintaining distinct counts
+    left_seen = set()
+    right_count = {}
+    for x in A:
+        right_count[x] = right_count.get(x, 0) + 1
+
+    ans = 0
+    for i in range(N - 1):
+        x = A[i]
+        left_seen.add(x)
+        right_count[x] -= 1
+        if right_count[x] == 0:
+            del right_count[x]
+        # distinct in left = len(left_seen)
+        # distinct in right = len(right_count)
+        ans = max(ans, len(left_seen) + len(right_count))
+
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

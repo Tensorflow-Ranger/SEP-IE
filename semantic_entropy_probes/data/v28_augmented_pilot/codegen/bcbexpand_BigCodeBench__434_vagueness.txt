@@ -1,0 +1,26 @@
+```python
+import pandas as pd
+import re
+import random
+def task_func(s: str, seed: int = 0) -> pd.DataFrame:
+    random.seed(seed)
+    product_names = ['Apple', 'Banana', 'Orange', 'Pear', 'Grape']
+    code_to_product = {}
+    data = []
+    lines = s.strip().split('\n')
+    for line in lines:
+        parts = line.strip().split()
+        if len(parts) < 5:
+            continue
+        id_val = parts[0].strip()
+        quantity = int(parts[1].strip())
+        code = parts[2].strip()
+        price = float(parts[3].strip())
+        description = ' '.join(parts[4:]).strip()
+        if code not in code_to_product:
+            code_to_product[code] = random.choice(product_names)
+        product = code_to_product[code]
+        data.append([id_val, quantity, code, price, product, description])
+    df = pd.DataFrame(data, columns=['ID', 'Quantity', 'Code', 'Price', 'Product', 'Description'])
+    return df
+```

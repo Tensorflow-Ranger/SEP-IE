@@ -1,0 +1,91 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    A = [int(next(it)) for _ in range(N)]
+    B = [int(next(it)) for _ in range(N)]
+    C = [int(next(it)) for _ in range(N)]
+
+    # We need to transform A into B.
+    # Operation: pick i, flip A_i, then pay sum_{k=1..N} A_k * C_k.
+    # Let’s think in terms of differences.
+    # Let D_i = A_i xor B_i (1 if they differ, 0 if same).
+    # We must flip exactly those positions where D_i = 1.
+    # But the order matters because after each flip the cost depends on current A.
+
+    # Let’s model the process: we start with A, we will flip some bits one by one.
+    # Suppose we flip a set S of positions (each exactly once, because flipping twice is useless).
+    # The total cost = sum over steps of (sum_{k} A_k^{(step)} * C_k).
+    # Let’s compute total cost in terms of initial A and the flips.
+
+    # Let initial total = sum_{k} A_k * C_k.
+    # If we flip position i, then A_i changes from x to 1-x.
+    # The effect on the sum is: if x=0 -> 1, adds C_i; if x=1 -> 0, subtracts C_i.
+    # So flipping i changes the current sum by delta_i = (1 - 2*A_i) * C_i.
+    # Actually: new_A_i = 1 - old_A_i, so change = (1 - old_A_i)*C_i - old_A_i*C_i = (1 - 2*old_A_i)*C_i.
+
+    # Now, the cost of an operation when flipping i is the sum BEFORE the flip.
+    # So if we flip i at some step, we pay the sum at that moment.
+    # The sum evolves with each flip.
+
+    # Let’s denote we have a sequence of flips i1, i2, ..., i_m.
+    # Cost = S0 + (S0 + delta_i1) + (S0 + delta_i1 + delta_i2) + ... 
+    # where S0 = initial sum.
+    # So total cost = m * S0 + (m-1)*delta_i1 + (m-2)*delta_i2 + ... + 0*delta_im.
+
+    # We must flip exactly those positions where D_i=1, so m = number of differences.
+    # We can choose the order of flips. We want to minimize total cost? Wait, problem says:
+    # "Print the total cost required to make A identical to B."
+    # It doesn't say minimize. But we can perform operations any number of times, possibly zero.
+    # Since each operation has a positive cost (C_i >=1, A_k in {0,1}, sum >=0), we would want to minimize.
+    # So we need to find minimal total cost.
+
+    # So we have m fixed flips, each with a delta_i = (1 - 2*A_i)*C_i.
+    # We can order them arbitrarily. The total cost formula:
+    # total = m * S0 + sum_{t=1..m} (m-t) * delta_{i_t}.
+    # Let’s denote the deltas sorted in some order.
+    # To minimize total, we want the larger (more positive) deltas to be multiplied by larger coefficients (m-t) (since t smaller => m-t larger).
+    # Actually coefficients decrease: m-1, m-2, ..., 0.
+    # So we should put larger deltas earlier (larger coefficient) if delta positive, but if delta negative, we might want them later (smaller coefficient).
+    # Wait: if delta is negative, multiplying by a larger coefficient makes total more negative (good), so we want negative deltas early as well? Let's check.
+
+    # total = m*S0 + sum_{j=1..m} (m-j) * delta_{order[j]}.
+    # We can reorder delta's. Let’s sort deltas descending: larger first.
+    # Then earlier positions get larger coefficients, so larger delta (positive) gets larger multiplier -> increases total.
+    # But we want to minimize total, so we actually want to assign larger deltas to smaller coefficients.
+    # Because if delta positive, we want its contribution small; if delta negative, we want its contribution large (more negative).
+    # So we should sort deltas ascending: smallest (most negative) first, so they get larger coefficients.
+    # Yes: to minimize sum (m-j)*delta_j, since (m-j) decreases as j increases, we pair larger (m-j) with smaller delta.
+
+    # So optimal order: sort deltas of the positions we must flip in increasing order.
+    # Then total = m * S0 + sum_{j=0..m-1} (m-1 - j) * sorted_deltas[j] (if zero-indexed).
+
+    # Compute m, S0, deltas for positions where A_i != B_i.
+    diffs = []
+    S0 = 0
+    for i in range(N):
+        S0 += A[i] * C[i]
+        if A[i] != B[i]:
+            delta = (1 - 2 * A[i]) * C[i]  # if A[i]=0, delta=+C_i; if A[i]=1, delta=-C_i
+            diffs.append(delta)
+
+    m = len(diffs)
+    if m == 0:
+        print(0)
+        return
+
+    diffs.sort()  # ascending
+    total = m * S0
+    for j in range(m):
+        total += (m - 1 - j) * diffs[j]
+
+    print(total)
+
+if __name__ == "__main__":
+    solve()
+```

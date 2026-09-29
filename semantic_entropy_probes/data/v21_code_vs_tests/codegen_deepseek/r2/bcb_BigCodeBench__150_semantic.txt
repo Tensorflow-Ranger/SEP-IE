@@ -1,0 +1,62 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(product_dict, product_keys):
+    """
+    Create a profit report for a list of products based on a specific product dictionary
+    that includes the quantity, price, and profit of each product. Additionally, calculate
+    the average price and profit for all considered products, and plot a bar chart of the
+    profit for each product.
+
+    Parameters:
+    product_dict (dict): A dictionary where keys are product names and values are dictionaries
+                         with keys 'quantity', 'price', and 'profit'.
+    product_keys (list): A list of product names to include in the report.
+
+    Returns:
+    tuple: A tuple containing:
+        DataFrame: A pandas DataFrame with columns
+                   ['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit'].
+        Axes: A matplotlib Axes object representing the plotted bar chart of profit for each product
+              (None if no products).
+    """
+    if not product_keys:
+        return pd.DataFrame(columns=['Product', 'Quantity', 'Price', 'Profit', 'Average Price', 'Average Profit']), None
+
+    data = []
+    total_price = 0
+    total_profit = 0
+    count = 0
+
+    for key in product_keys:
+        if key in product_dict:
+            product_info = product_dict[key]
+            quantity = product_info.get('quantity', 0)
+            price = product_info.get('price', 0)
+            profit = product_info.get('profit', 0)
+            data.append([key, quantity, price, profit])
+            total_price += price
+            total_profit += profit
+            count += 1
+
+    if count == 0:
+        avg_price = 0
+        avg_profit = 0
+    else:
+        avg_price = total_price / count
+        avg_profit = total_profit / count
+
+    df = pd.DataFrame(data, columns=['Product', 'Quantity', 'Price', 'Profit'])
+    df['Average Price'] = avg_price
+    df['Average Profit'] = avg_profit
+
+    fig, ax = plt.subplots()
+    ax.bar(df['Product'], df['Profit'])
+    ax.set_xlabel('Product')
+    ax.set_ylabel('Profit')
+    ax.set_title('Profit per Product')
+
+    return df, ax
+```

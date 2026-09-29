@@ -1,0 +1,57 @@
+```python
+import csv
+import os
+import shutil
+from datetime import datetime
+from random import randint
+# Constants
+WEATHER_CONDITIONS = ['Sunny', 'Cloudy', 'Rainy', 'Snowy', 'Stormy']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    """
+    Generate weather data for the specified number of hours, save it in a CSV file with columns and back up the file to a backup directory.
+    
+    Parameters:
+    - hours (int): Number of hours of data to generate.
+    - output_dir (str): Directory to save the CSV file. Default is OUTPUT_DIR.
+    
+    Returns:
+    - str: The path of the generated CSV file.
+    """
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Generate filename with timestamp
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    filename = f'weather_data_{timestamp}.csv'
+    filepath = os.path.join(output_dir, filename)
+    
+    # Generate data
+    with open(filepath, 'w', newline='') as csvfile:
+        fieldnames = ['Time', 'Temperature', 'Humidity', 'Condition']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        
+        writer.writeheader()
+        
+        for hour in range(hours):
+            for minute in range(60):
+                time_str = f"{hour:02d}:{minute:02d}:00.{randint(0, 999999):06d}"
+                temperature = randint(-10, 35)
+                humidity = randint(30, 100)
+                condition = WEATHER_CONDITIONS[randint(0, len(WEATHER_CONDITIONS)-1)]
+                
+                writer.writerow({
+                    'Time': time_str,
+                    'Temperature': temperature,
+                    'Humidity': humidity,
+                    'Condition': condition
+                })
+    
+    # Create backup directory and copy file
+    backup_dir = os.path.join(output_dir, 'backup')
+    os.makedirs(backup_dir, exist_ok=True)
+    backup_path = os.path.join(backup_dir, filename)
+    shutil.copy2(filepath, backup_path)
+    
+    return filepath
+```

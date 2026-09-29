@@ -1,0 +1,36 @@
+```python
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+# Constants
+COLUMNS = ['Date', 'Value']
+def task_func(df, plot=False):
+    if not all(col in df.columns for col in COLUMNS):
+        raise KeyError("This function will raise KeyError if the DataFrame does not have the 'Date' and 'Value' columns.")
+    
+    df['Date'] = pd.to_datetime(df['Date'])
+    df.set_index('Date', inplace=True)
+    
+    # Split 'Value' list into separate columns
+    df_expanded = df['Value'].apply(pd.Series).join(df.drop(columns=['Value']))
+    
+    # Scale the numeric columns (excluding 'Date')
+    scaler = StandardScaler()
+    df_scaled = pd.DataFrame(scaler.fit_transform(df_expanded.select_dtypes(include='number')), 
+                             index=df_expanded.index, 
+                             columns=df_expanded.select_dtypes(include='number').columns)
+    
+    # Rename columns to 'Scaled Value' for clarity
+    df_scaled.columns = [f'Scaled Value {i+1}' if col == df_expanded.columns[0] else col for i, col in enumerate(df_scaled.columns)]
+    
+    # Optional plot
+    axes = None
+    if plot:
+        fig, axes = plt.subplots()
+        df_scaled.plot(kind='bar', ax=axes)
+        axes.set_title('Scaled Values Over Time')
+        axes.set_xlabel('Date')
+        axes.set_ylabel('Scaled Value')
+    
+    return df_scaled, axes
+```

@@ -1,0 +1,55 @@
+```python
+import pandas as pd
+import re
+# Constants
+STOPWORDS = set([
+    "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself",
+    "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself",
+    "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that",
+    "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
+    "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because",
+    "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into",
+    "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out",
+    "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where",
+    "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no",
+    "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just",
+    "don", "should", "now"
+])
+def task_func(data, column):
+    """
+    Removes English stopwords from a text column in a DataFrame and returns the modified DataFrame,
+    treating words as sequences between whitespace or punctuation.
+    
+    Parameters:
+    - data (pd.DataFrame): The input DataFrame.
+    - column (str): The name of the text column to process.
+    
+    Returns:
+    - pd.DataFrame: A DataFrame with the stopwords removed from the specified column.
+    """
+    if not isinstance(data, pd.DataFrame):
+        raise TypeError("Input 'data' must be a pandas DataFrame")
+    if column not in data.columns:
+        raise ValueError(f"Column '{column}' not found in DataFrame")
+    
+    def remove_stopwords(text):
+        if not isinstance(text, str):
+            return text
+        # Split by whitespace and punctuation, keeping the delimiters for reconstruction
+        tokens = re.findall(r'\b\w+\b|[^\w\s]', text)
+        filtered_tokens = [token for token in tokens if token.lower() not in STOPWORDS]
+        # Reconstruct the text, handling spaces appropriately
+        result = []
+        for token in filtered_tokens:
+            if re.match(r'^\w+$', token):
+                if result and re.match(r'^\w+$', result[-1]):
+                    result.append(' ')
+                result.append(token)
+            else:
+                result.append(token)
+        return ''.join(result).strip()
+    
+    data_copy = data.copy()
+    data_copy[column] = data_copy[column].apply(remove_stopwords)
+    return data_copy
+```

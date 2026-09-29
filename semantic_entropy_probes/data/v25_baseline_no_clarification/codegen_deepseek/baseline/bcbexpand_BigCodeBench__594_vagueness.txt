@@ -1,0 +1,63 @@
+```python
+import csv
+import os
+import shutil
+from datetime import datetime
+from random import randint
+# Constants
+WEATHER_CONDITIONS = ['Sunny', 'Cloudy', 'Rainy', 'Snowy', 'Stormy']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    """
+    Generate weather data for the specified number of hours, save it in a CSV file with columns and back up the file to a backup directory.
+    
+    Parameters:
+    - hours (int): Number of hours of weather data to generate.
+    - output_dir (str): Directory where the CSV file will be saved. Default is OUTPUT_DIR.
+    
+    Returns:
+    - str: The path of the generated CSV file.
+    """
+    if hours <= 0:
+        raise ValueError("hours must be a positive integer")
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Generate filename with timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"weather_data_{timestamp}.csv"
+    filepath = os.path.join(output_dir, filename)
+    
+    # Generate data
+    data = []
+    base_time = datetime.now()
+    for i in range(hours):
+        record_time = base_time.replace(hour=base_time.hour + i)
+        temperature = randint(-10, 35)  # Celsius
+        humidity = randint(30, 100)     # Percentage
+        condition = WEATHER_CONDITIONS[randint(0, len(WEATHER_CONDITIONS)-1)]
+        data.append({
+            'timestamp': record_time.strftime("%Y-%m-%d %H:%M:%S"),
+            'temperature': temperature,
+            'humidity': humidity,
+            'condition': condition
+        })
+    
+    # Write to CSV
+    with open(filepath, 'w', newline='') as csvfile:
+        fieldnames = ['timestamp', 'temperature', 'humidity', 'condition']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(data)
+    
+    # Create backup directory
+    backup_dir = os.path.join(output_dir, 'backup')
+    os.makedirs(backup_dir, exist_ok=True)
+    
+    # Copy file to backup directory
+    backup_path = os.path.join(backup_dir, filename)
+    shutil.copy2(filepath, backup_path)
+    
+    return filepath
+```

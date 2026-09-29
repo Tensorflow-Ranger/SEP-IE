@@ -1,0 +1,31 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    arr = list(map(int, data[1:1 + n]))
+
+    # Count distinct from the right for each position
+    right_distinct = [0] * (n + 1)
+    seen_right = set()
+    for i in range(n - 1, -1, -1):
+        seen_right.add(arr[i])
+        right_distinct[i] = len(seen_right)
+
+    # Traverse from left, compute answer
+    seen_left = set()
+    ans = 0
+    for i in range(n - 1):  # split after index i (0-based)
+        seen_left.add(arr[i])
+        left_count = len(seen_left)
+        right_count = right_distinct[i + 1]
+        ans = max(ans, left_count + right_count)
+
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,37 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    a = list(map(int, data[1:1 + n]))
+
+    # Count total distinct elements in the whole array
+    total_set = set(a)
+    total_distinct = len(total_set)
+
+    # Prefix distinct counts
+    prefix_seen = set()
+    prefix_distinct = [0] * (n - 1)
+    for i in range(n - 1):
+        prefix_seen.add(a[i])
+        prefix_distinct[i] = len(prefix_seen)
+
+    # Suffix distinct counts
+    suffix_seen = set()
+    suffix_distinct = [0] * (n - 1)
+    for i in range(n - 1, 0, -1):
+        suffix_seen.add(a[i])
+        suffix_distinct[i - 1] = len(suffix_seen)
+
+    # Compute maximum sum
+    ans = 0
+    for i in range(n - 1):
+        ans = max(ans, prefix_distinct[i] + suffix_distinct[i])
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

@@ -1,0 +1,17 @@
+```python
+import pandas as pd
+import regex as re
+from sklearn.feature_extraction.text import CountVectorizer
+def task_func(text):
+    # Split text into sentences based on periods
+    sentences = re.split(r'\.', text)
+    # Filter out empty sentences
+    sentences = [s.strip() for s in sentences if s.strip()]
+    # Create CountVectorizer with default parameters
+    vectorizer = CountVectorizer()
+    # Fit and transform the sentences
+    matrix = vectorizer.fit_transform(sentences)
+    # Convert to DataFrame
+    df = pd.DataFrame(matrix.toarray(), columns=vectorizer.get_feature_names_out())
+    return df
+```

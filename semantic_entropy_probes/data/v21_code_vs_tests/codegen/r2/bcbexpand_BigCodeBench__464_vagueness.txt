@@ -1,0 +1,13 @@
+```python
+import json
+from datetime import datetime
+from decimal import Decimal
+def task_func(my_obj):
+    def default_serializer(obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        if isinstance(obj, Decimal):
+            return str(obj)
+        raise TypeError(f"Object of type {obj.__class__.__name__} is not JSON serializable")
+    return json.dumps(my_obj, default=default_serializer)
+```

@@ -1,0 +1,26 @@
+```python
+import pandas as pd
+import re
+import random
+def task_func(data_list, seed=None):
+    if seed is not None:
+        random.seed(seed)
+    original_strings = []
+    modified_strings = []
+    for s in data_list:
+        original_strings.append(s)
+        s_stripped = s.strip()
+        parts = [part.strip() for part in s_stripped.split(',') if part.strip() != '']
+        if len(parts) > 0:
+            remove_idx = random.randint(0, len(parts)-1)
+            removed = parts.pop(remove_idx)
+            modified = ', '.join(parts)
+        else:
+            modified = ''
+        modified_strings.append(modified)
+    df = pd.DataFrame({
+        'Original String': original_strings,
+        'Modified String': modified_strings
+    })
+    return df
+```

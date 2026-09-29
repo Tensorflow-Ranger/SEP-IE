@@ -1,0 +1,25 @@
+```python
+import sys
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    cards = list(map(int, data))
+    freq = {}
+    for c in cards:
+        freq[c] = freq.get(c, 0) + 1
+
+    # Check all possible triples and pairs
+    for triple in freq:
+        if freq[triple] >= 3:
+            # Try to find a different card for the pair
+            for pair in freq:
+                if pair != triple and freq[pair] >= 2:
+                    print("Yes")
+                    return
+    print("No")
+
+if __name__ == "__main__":
+    main()
+```

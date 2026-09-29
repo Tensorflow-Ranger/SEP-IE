@@ -1,0 +1,46 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    if not data:
+        stats = {'sum': 0, 'mean': np.nan, 'min': np.nan, 'max': np.nan}
+        fig, ax = plt.subplots()
+        ax.text(0.5, 0.5, 'No data', ha='center', va='center')
+        return stats, ax
+    
+    df = pd.DataFrame(data)
+    if column not in df.columns:
+        raise ValueError(f"Column '{column}' not found in data")
+    
+    numeric_vals = []
+    for val in df[column]:
+        if pd.isna(val):
+            numeric_vals.append(0)
+        elif isinstance(val, (int, float, np.number)):
+            numeric_vals.append(val)
+        else:
+            try:
+                numeric_vals.append(float(val))
+            except (ValueError, TypeError):
+                numeric_vals.append(len(str(val)))
+    
+    numeric_series = pd.Series(numeric_vals)
+    stats = {
+        'sum': numeric_series.sum(),
+        'mean': numeric_series.mean(),
+        'min': numeric_series.min(),
+        'max': numeric_series.max()
+    }
+    
+    fig, ax = plt.subplots()
+    if 'Age' in df.columns:
+        labels = df['Age'].astype(str).tolist()
+    else:
+        labels = [str(i) for i in range(len(numeric_vals))]
+    
+    ax.pie(numeric_vals, labels=labels, autopct='%1.1f%%')
+    ax.set_title(f'Distribution of {column}')
+    
+    return stats, ax
+```

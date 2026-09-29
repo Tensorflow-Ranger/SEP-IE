@@ -1,0 +1,36 @@
+```python
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+# Constants
+COLUMNS = ['Date', 'Value']
+def task_func(df, plot=False):
+    if not all(col in df.columns for col in COLUMNS):
+        raise KeyError("DataFrame must contain 'Date' and 'Value' columns")
+    df = df.copy()
+    df['Date'] = pd.to_datetime(df['Date'])
+    value_lists = df['Value'].tolist()
+    list_lengths = [len(lst) for lst in value_lists]
+    if len(set(list_lengths)) != 1:
+        raise ValueError("All lists in 'Value' column must have the same length")
+    scaler = StandardScaler()
+    flat_values = [val for sublist in value_lists for val in sublist]
+    scaled_flat = scaler.fit_transform([[v] for v in flat_values]).flatten()
+    n_rows = len(df)
+    n_cols = list_lengths[0]
+    scaled_array = scaled_flat.reshape(n_rows, n_cols)
+    new_cols = [f'Value_{i+1}' for i in range(n_cols)]
+    for i, col in enumerate(new_cols):
+        df[col] = scaled_array[:, i]
+    df = df.drop(columns=['Value'])
+    if plot:
+        df_plot = df.set_index('Date')
+        ax = df_plot.plot(kind='bar', figsize=(10, 6))
+        ax.set_title('Scaled Values Over Time')
+        ax.set_xlabel('Date')
+        ax.set_ylabel('Scaled Value')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        return df, ax
+    return df
+```

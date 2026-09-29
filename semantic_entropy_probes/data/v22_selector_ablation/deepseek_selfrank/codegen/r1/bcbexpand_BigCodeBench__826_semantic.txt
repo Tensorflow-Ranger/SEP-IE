@@ -1,0 +1,19 @@
+```python
+import re
+import os
+import shutil
+def task_func(source_dir, target_dir, file_pattern=r'\b[A-Za-z0-9]+\.(txt|doc|docx)\b'):
+    moved_files_count = 0
+    # Ensure target directory exists
+    os.makedirs(target_dir, exist_ok=True)
+    # Walk through all files in the source directory
+    for root, dirs, files in os.walk(source_dir):
+        for file in files:
+            file_path = os.path.join(root, file)
+            # Check if the file matches the pattern
+            if re.fullmatch(file_pattern, file):
+                # Move the file to the target directory
+                shutil.move(file_path, target_dir)
+                moved_files_count += 1
+    return moved_files_count
+```

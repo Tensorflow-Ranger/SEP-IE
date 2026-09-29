@@ -1,0 +1,21 @@
+```python
+import collections
+import matplotlib.pyplot as plt
+def task_func(data):
+    if not data:
+        return {}, None
+    total_sales = collections.defaultdict(int)
+    color_map = ['red', 'yellow', 'green', 'blue', 'purple']
+    for entry in data:
+        for fruit, quantity in entry.items():
+            if quantity < 0:
+                raise ValueError("Sales quantity must not be negative")
+            total_sales[fruit] += quantity
+    total_sales = dict(total_sales)
+    fruits = list(total_sales.keys())
+    quantities = list(total_sales.values())
+    fig, ax = plt.subplots()
+    colors = [color_map[i % len(color_map)] for i in range(len(fruits))]
+    bars = ax.bar(fruits, quantities, color=colors)
+    return total_sales, bars
+```

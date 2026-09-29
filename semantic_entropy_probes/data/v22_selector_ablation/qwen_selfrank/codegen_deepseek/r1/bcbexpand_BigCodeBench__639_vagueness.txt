@@ -1,0 +1,29 @@
+```python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+def task_func(num_samples=100, num_features=5):
+    """
+    Generate a Pandas DataFrame with random values (uniform distribution between 0 and 1),
+    representing a dataset with multiple features. Calculate the correlation for the features
+    and visualize this information using a heatmap.
+    
+    Parameters:
+    - num_samples (int): Number of samples (rows) in the DataFrame. Default is 100.
+    - num_features (int): Number of features (columns) in the DataFrame. Default is 5.
+    
+    Returns:
+    - DataFrame: The generated DataFrame with random values.
+    - Axes: The heatmap visualization of the correlation matrix.
+    """
+    np.random.seed(42)
+    data = np.random.uniform(0, 1, size=(num_samples, num_features))
+    columns = [f'Feature_{i+1}' for i in range(num_features)]
+    df = pd.DataFrame(data, columns=columns)
+    corr_matrix = df.corr()
+    fig, ax = plt.subplots(figsize=(10, 8))
+    sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap='coolwarm', square=True, ax=ax)
+    ax.set_title('Correlation Heatmap')
+    return df, ax
+```

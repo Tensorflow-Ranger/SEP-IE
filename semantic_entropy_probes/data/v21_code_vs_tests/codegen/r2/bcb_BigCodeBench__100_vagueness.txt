@@ -1,0 +1,28 @@
+```python
+import matplotlib.pyplot as plt
+import pandas as pd
+import random
+from datetime import datetime
+def task_func(seed=42):
+    try:
+        random.seed(seed)
+        # Generate past 30 days of dates
+        end_date = pd.Timestamp.today()
+        start_date = end_date - pd.Timedelta(days=30)
+        dates = pd.date_range(start=start_date, end=end_date, freq='D')
+        # Generate random values
+        values = [random.uniform(0, 100) for _ in range(len(dates))]
+        # Create DataFrame
+        df = pd.DataFrame({'Date': dates, 'Value': values})
+        # Plot the data
+        fig, ax = plt.subplots()
+        ax.plot(df['Date'], df['Value'], marker='o', linestyle='-')
+        ax.set_xlabel('Date', fontfamily='Arial')
+        ax.set_ylabel('Value', fontfamily='Arial')
+        ax.set_title('Random Time Series Data', fontfamily='Arial')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        return ax
+    except Exception as e:
+        raise ValueError(f"Error generating data or plot: {str(e)}")
+```

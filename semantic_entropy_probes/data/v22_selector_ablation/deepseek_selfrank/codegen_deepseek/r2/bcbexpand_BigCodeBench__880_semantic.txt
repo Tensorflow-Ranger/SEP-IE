@@ -1,0 +1,10 @@
+```python
+import pandas as pd
+from sklearn.cluster import KMeans
+def task_func(data, n_clusters=3, seed=None):
+    if not data.select_dtypes(include=['number']).shape[1] == data.shape[1]:
+        raise ValueError("If the DataFrame contains non numeric entries.")
+    model = KMeans(n_clusters=n_clusters, n_init=10, random_state=seed)
+    labels = model.fit_predict(data)
+    return labels, model
+```

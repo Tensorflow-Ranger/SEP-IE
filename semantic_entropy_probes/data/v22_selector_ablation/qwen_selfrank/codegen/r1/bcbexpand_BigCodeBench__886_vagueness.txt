@@ -1,0 +1,19 @@
+```python
+import pandas as pd
+from collections import Counter
+def task_func(data):
+    required_keys = {'Name', 'Age', 'Score'}
+    if not required_keys.issubset(data.keys()):
+        raise ValueError("The dictionary does not have the required keys.")
+    
+    df = pd.DataFrame(data)
+    df.sort_values(by=['Name', 'Age'], ascending=True, inplace=True)
+    
+    average_scores = df.groupby('Name')['Score'].mean()
+    
+    age_counts = Counter(df['Age'])
+    most_common_age = age_counts.most_common(1)
+    most_common_age = most_common_age[0][0] if most_common_age else None
+    
+    return df, average_scores, most_common_age
+```

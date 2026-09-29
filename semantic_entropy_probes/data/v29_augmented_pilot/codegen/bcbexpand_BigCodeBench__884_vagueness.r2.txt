@@ -1,0 +1,18 @@
+```python
+import pandas as pd
+from scipy.stats import chi2_contingency
+def task_func(df, columns=['A', 'B', 'C'], larger=50, equal=900):
+    if len(columns) != 3:
+        raise ValueError("If the number of specified columns is not 3.")
+    if not all(col in df.columns for col in columns):
+        raise ValueError("If the specified columns are not contained in df.")
+    col1, col2, col3 = columns
+    filtered = df[(df[col2] > larger) & (df[col3] == equal)]
+    if filtered.empty:
+        raise ValueError("If there's insufficient data for the test (no rows meeting the criteria).")
+    contingency = pd.crosstab(filtered[col1], filtered[col2])
+    if contingency.size == 0:
+        raise ValueError("If there's insufficient data for the test (no rows meeting the criteria).")
+    _, p_value, _, _ = chi2_contingency(contingency)
+    return p_value
+```

@@ -1,0 +1,19 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+def task_func(df, column, bins=30, density=True, alpha=0.6, color="g", seed=None):
+    # Extract the data from the specified column
+    data = df[column].dropna().values
+    # Create the histogram
+    fig, ax = plt.subplots()
+    counts, bins, patches = ax.hist(data, bins=bins, density=density, alpha=alpha, color=color, edgecolor='black')
+    # Fit a normal distribution to the data
+    mu, std = norm.fit(data)
+    # Generate x values for the fitted curve based on the current x-axis limits
+    x = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 100)
+    # Plot the fitted distribution curve
+    ax.plot(x, norm.pdf(x, mu, std), 'r-', lw=2, alpha=0.6)
+    # Return the Axes object
+    return ax
+```

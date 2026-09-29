@@ -1,0 +1,30 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def task_func(df):
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("If 'df' is not a DataFrame or lacks 'Date' or 'Sales' columns, or has no data to plot.")
+    if not {'Date', 'Sales'}.issubset(df.columns):
+        raise ValueError("If 'df' is not a DataFrame or lacks 'Date' or 'Sales' columns, or has no data to plot.")
+    if df.empty:
+        raise ValueError("If 'df' is not a DataFrame or lacks 'Date' or 'Sales' columns, or has no data to plot.")
+    
+    df['Date'] = pd.to_datetime(df['Date'])
+    df.set_index('Date', inplace=True)
+    daily_sales = df.resample('D').sum()
+    
+    if daily_sales['Sales'].sum() == 0:
+        raise ValueError("If 'df' is not a DataFrame or lacks 'Date' or 'Sales' columns, or has no data to plot.")
+    
+    fig, ax = plt.subplots()
+    ax.plot(daily_sales.index, daily_sales['Sales'], marker='o')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Daily Sales')
+    ax.set_title('Daily Turnover')
+    ax.grid(True)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    
+    return ax
+```

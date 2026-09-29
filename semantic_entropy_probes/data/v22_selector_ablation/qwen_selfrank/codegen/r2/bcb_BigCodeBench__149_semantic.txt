@@ -1,0 +1,19 @@
+```python
+import pandas as pd
+import numpy as np
+DEFAULT_COLUMNS = ['Element', 'Count']
+def task_func(elements, include_index=False):
+    # Calculate the character count for each element
+    counts = [len(element) for element in elements]
+    # Create the DataFrame
+    df = pd.DataFrame({
+        'Element': elements,
+        'Count': counts
+    })
+    # Include index column if requested
+    if include_index:
+        df = df.reset_index()
+        df = df.rename(columns={'index': 'Index'})
+        df = df[['Index', 'Element', 'Count']]
+    return df
+```

@@ -1,0 +1,19 @@
+```python
+import rsa
+import os
+import zipfile
+from base64 import b64encode
+def task_func(directory):
+    (pub_key, priv_key) = rsa.newkeys(512)
+    zip_filename = "encrypted_files.zip"
+    with zipfile.ZipFile(zip_filename, 'w') as zipf:
+        for filename in os.listdir(directory):
+            filepath = os.path.join(directory, filename)
+            if os.path.isfile(filepath):
+                with open(filepath, 'rb') as f:
+                    file_data = f.read()
+                encrypted_data = rsa.encrypt(file_data, pub_key)
+                encoded_data = b64encode(encrypted_data)
+                zipf.writestr(filename + ".enc", encoded_data)
+    return pub_key, zip_filename
+```

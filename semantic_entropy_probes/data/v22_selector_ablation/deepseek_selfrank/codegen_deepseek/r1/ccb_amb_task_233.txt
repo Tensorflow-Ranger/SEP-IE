@@ -1,0 +1,112 @@
+```python
+import sys
+
+def solve():
+    input = sys.stdin.read
+    data = input().split()
+    idx = 0
+    N = int(data[idx]); idx += 1
+    M = int(data[idx]); idx += 1
+    A = [int(data[idx + i]) for i in range(N)]
+    idx += N
+
+    # Step 1: Coordinate compression of original A
+    sorted_vals = sorted(set(A))
+    val_to_idx = {v: i for i, v in enumerate(sorted_vals)}
+    comp_A = [val_to_idx[a] for a in A]
+
+    # Fenwick tree (1-indexed)
+    size = len(sorted_vals)
+    bit = [0] * (size + 2)
+
+    def bit_add(pos, delta):
+        pos += 1
+        while pos <= size + 1:
+            bit[pos] += delta
+            pos += pos & -pos
+
+    def bit_sum(pos):
+        pos += 1
+        res = 0
+        while pos > 0:
+            res += bit[pos]
+            pos -= pos & -pos
+        return res
+
+    # Step 2: Compute initial inversion count for k = 0
+    inv = 0
+    for i in range(N - 1, -1, -1):
+        inv += bit_sum(comp_A[i] - 1)
+        bit_add(comp_A[i], 1)
+
+    # Step 3: Prepare for sweep over k
+    # We'll maintain current inversion count and update as k increases.
+    # For each value a, when k passes M - 1 - a, it wraps around.
+    # We need events: at k = M - a, value a changes from being considered M-1 to 0.
+    # Actually, B_i = (A_i + k) % M.
+    # As k increases by 1, each A_i increases by 1 modulo M.
+    # When A_i + k reaches M, it wraps from M-1 to 0.
+    # So for each a = A_i, the wrap point is when k = M - a.
+    # At that moment, that element changes from value M-1 to 0.
+    # How does this affect inversions?
+    # Let’s consider the effect of one element x wrapping:
+    # Before wrap, its value is M-1 (largest possible).
+    # After wrap, its value becomes 0 (smallest possible).
+    # So it loses inversions with all elements that were smaller than M-1 (i.e., all others),
+    # and gains inversions with all elements that are larger than 0 (i.e., all others).
+    # But careful: at the moment of wrap, all other elements have also been increased by k,
+    # but we can think in terms of relative order.
+    # Better to think in terms of the transformed array B.
+    # When k increases by 1, every B_i increases by 1, except those that wrap.
+    # Actually, we can model the change in inversion count when k -> k+1 directly.
+    # Let’s define f(k) = inversion count of B = (A_i + k) % M.
+    # Consider moving from k to k+1:
+    # For each i, B_i increases by 1, unless B_i = M-1, then it becomes 0.
+    # So let S_k = set of indices i where A_i + k ≡ M-1 (mod M), i.e., A_i = (M-1 - k) mod M.
+    # For those indices, value changes from M-1 to 0.
+    # For others, value increases by 1.
+    # Now, what is Δ = f(k+1) - f(k)?
+    # For each wrapping element (value M-1 -> 0):
+    #   Before wrap, it was larger than every other element (since M-1 is max).
+    #   So it contributed N - 1 - (number of other M-1's) inversions? Actually, if there are multiple M-1's,
+    #   they are equal, so no inversion among themselves. But definition uses strict >, so equal doesn't count.
+    #   So for a given wrapping element, before wrap it had inversions with all elements that are not M-1.
+    #   Let cnt = number of indices with value M-1 at step k.
+    #   Then each of these cnt elements has (N - cnt) inversions with others.
+    #   After wrap, its value becomes 0, so it is smaller than every other element (since 0 is min).
+    #   So it gains inversions from all elements that are larger than 0 (i.e., all others except those that are also 0).
+    #   But after wrap, there may be multiple zeros. Let cnt0 be number of zeros after wrap.
+    #   Actually, after wrap, all wrapping elements become 0, so cnt0 = cnt.
+    #   Then each of these cnt elements now has 0 inversions (since 0 is smallest, no element is smaller than 0).
+    #   Wait, inversion is i<j and B_i > B_j. For an element now 0 at position i, any j>i with B_j > 0 gives an inversion.
+    #   But careful: inversion counts pairs i<j, so if element becomes 0 at position i, then for j>i with B_j > 0, we have B_i=0 < B_j, so not an inversion.
+    #   Actually, if B_i=0, then for any j>i, B_i is not > B_j, so it contributes 0 inversions.
+    #   For j<i, we look at pairs where first index is j, second is i. Since B_j could be >0, and B_i=0, then B_j > B_i, so that's an inversion.
+    #   So the element as second element can be part of inversions.
+    #   This is messy. Let's think differently.
+    #   Instead of tracking each wrap individually, we can compute total inversions as sum over pairs.
+    #   For a pair (i,j) with i<j, how does its contribution change as k increases?
+    #   Let a = A_i, b = A_j.
+    #   We compare (a+k)%M and (b+k)%M.
+    #   Define d = (b - a) mod M. Then (a+k)%M > (b+k)%M iff (a+k) mod M > (b+k) mod M.
+    #   Since (x+k) mod M = (x mod M + k) mod M, we can think of adding k modulo M.
+    #   The relative order of two numbers x,y after adding k modulo M depends on whether there is a wrap between them.
+    #   Specifically, (a+k) mod M > (b+k) mod M if and only if (b - a) mod M is positive and less than M, and also not crossing the mod boundary? Let's derive:
+    #   Let a' = a+k, b' = b+k.
+    #   We want a' mod M > b' mod M.
+    #   This happens if floor(a'/M) = floor(b'/M) and a' > b', or if floor(a'/M) > floor(b'/M) but then a' mod M < b' mod M? Actually, because mod M yields values 0..M-1.
+    #   Better: Consider the difference d = (b - a) mod M, where we take d in [0, M-1].
+    #   If d = 0, they are always equal.
+    #   If 0 < d < M, then (a+k) mod M > (b+k) mod M exactly when (a+k) mod M is in [M-d, M-1]? Let's test:
+    #   Let’s fix a,b. Let r = (a+k) mod M. Then (b+k) mod M = (r + d) mod M.
+    #   We want r > (r+d) mod M.
+    #   This happens when r+d >= M, because then (r+d) mod M = r+d-M, which is < r.
+    #   So condition: r + d >= M, i.e., r >= M - d.
+    #   And r is in [0, M-1].
+    #   So for a given pair (a,b) with fixed d = (b-a) mod M (0<d<M), the pair contributes an inversion exactly when (a+k) mod M is in [M-d, M-1].
+    #   That is a contiguous interval of length d.
+    #   As k increases, (a+k) mod M cycles through 0..M-1.
+    #   So for each pair, the contribution is periodic with period M: for d out of M values of k it is 1, else 0.
+    #   Specifically, for k such that (a+k) mod M ∈ [M-d, M-1].
+    #   That is equivalent to k mod M ∈ [M-d - a, M-1 - a] modulo M.
+    #   Let's define interval for k modulo M: L = (M -

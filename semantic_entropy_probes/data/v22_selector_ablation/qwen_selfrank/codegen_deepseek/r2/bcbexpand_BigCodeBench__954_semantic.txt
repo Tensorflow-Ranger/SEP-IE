@@ -1,0 +1,26 @@
+```python
+import random
+import re
+def task_func(target_words, n_sentences, vocabulary):
+    if n_sentences < 0:
+        raise ValueError("n_sentences must be non-negative")
+    if not vocabulary:
+        raise ValueError("vocabulary must not be empty")
+    
+    sentences = []
+    for _ in range(n_sentences):
+        words = [random.choice(vocabulary).lower() for _ in range(10)]
+        sentence = ' '.join(words)
+        sentences.append(sentence)
+    
+    processed_sentences = []
+    for sentence in sentences:
+        processed = sentence
+        for target in target_words:
+            target_lower = target.lower()
+            pattern = re.compile(re.escape(target_lower), re.IGNORECASE)
+            processed = pattern.sub(lambda m: m.group().replace(' ', '_'), processed)
+        processed_sentences.append(processed.lower())
+    
+    return processed_sentences
+```

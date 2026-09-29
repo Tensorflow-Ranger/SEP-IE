@@ -1,0 +1,33 @@
+```python
+import os
+import shutil
+def task_func(path, delimiter="/"):
+    if not isinstance(path, str):
+        raise ValueError("Path must be a string")
+    if not path:
+        raise ValueError("Path cannot be empty")
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Path '{path}' does not exist")
+    
+    components = path.strip(delimiter).split(delimiter)
+    if any(not comp for comp in components):
+        raise ValueError("Path contains invalid components")
+    
+    result = []
+    current_path = ""
+    for comp in components:
+        if current_path:
+            current_path = delimiter.join([current_path, comp])
+        else:
+            current_path = comp
+        if not current_path.startswith(delimiter):
+            current_path = delimiter + current_path
+        
+        if not os.path.exists(current_path):
+            continue
+            
+        usage = shutil.disk_usage(current_path)
+        result.append((comp, {'total': usage.total, 'used': usage.used, 'free': usage.free}))
+    
+    return result
+```

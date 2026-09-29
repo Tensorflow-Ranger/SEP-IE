@@ -1,0 +1,73 @@
+```python
+import sys
+from math import pow
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    N = int(data[0])
+    A = data[1]
+
+    length = 3 ** N
+    current = A
+
+    for _ in range(N):
+        new_length = 3 ** (N - 1)
+        new_str = []
+        for i in range(new_length):
+            group = current[3*i:3*i+3]
+            counts = [0, 0]
+            for c in group:
+                counts[int(c)] += 1
+            most_common = 1 if counts[1] > counts[0] else 0
+            new_str.append(str(most_common))
+        current = ''.join(new_str)
+        N -= 1
+
+    # To change A'_1, we need to make sure the majority in the final group is different
+    # So we need to find the minimum number of changes to make the final bit different
+    # Since the final bit is determined by the majority of the last 3 bits of the previous step
+    # We need to consider the last 3 bits of the second to last step
+    # So we need to go back one step and find the minimal changes to make the majority of the last 3 bits different
+    # So we need to go back one more step
+
+    # Let's reconstruct the previous step
+    prev_step = current
+    prev_prev_step = []
+    for i in range(len(prev_step)):
+        group = prev_step[3*i:3*i+3]
+        counts = [0, 0]
+        for c in group:
+            counts[int(c)] += 1
+        most_common = 1 if counts[1] > counts[0] else 0
+        prev_prev_step.append(str(most_common))
+    prev_prev_step = ''.join(prev_prev_step)
+
+    # Now we need to find the minimal changes to make the majority of the last 3 bits of prev_prev_step different
+    # So we look at the last 3 bits of prev_prev_step
+    last_three = prev_prev_step[-3:]
+    # Count 0s and 1s
+    count0 = last_three.count('0')
+    count1 = 3 - count0
+    # The current majority is 1 if count1 > count0 else 0
+    current_majority = 1 if count1 > count0 else 0
+    # We want to change the majority to the opposite
+    # So we need to find the minimal number of changes to make the majority the opposite
+    # That is, make sure that the opposite has at least 2 votes
+    # So if current_majority is 1, we need to have at least 2 0s
+    # If current_majority is 0, we need to have at least 2 1s
+    target = 1 - current_majority
+    required = 2
+    # Count how many of the target are already present
+    target_count = last_three.count(str(target))
+    # If target_count >= 2, no changes needed
+    if target_count >= 2:
+        print(0)
+    else:
+        # Need to change (2 - target_count) bits
+        print(2 - target_count)
+
+if __name__ == "__main__":
+    main()
+```

@@ -1,0 +1,32 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame(data)
+    filtered_data = df[column].dropna()
+    if filtered_data.empty:
+        result = {
+            'sum': np.nan,
+            'mean': np.nan,
+            'min': np.inf,
+            'max': -np.inf
+        }
+    else:
+        result = {
+            'sum': filtered_data.sum(),
+            'mean': filtered_data.mean(),
+            'min': filtered_data.min(),
+            'max': filtered_data.max()
+        }
+    plt.figure()
+    filtered_data.hist()
+    plot = plt.gca().get_children()[1]
+    return {
+        'sum': result['sum'],
+        'mean': result['mean'],
+        'min': result['min'],
+        'max': result['max'],
+        'plot': plot
+    }
+```

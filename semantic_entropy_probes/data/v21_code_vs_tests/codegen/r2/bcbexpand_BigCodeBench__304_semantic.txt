@@ -1,0 +1,22 @@
+```python
+import pandas as pd
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+def task_func(df):
+    if df.empty:
+        return (0, 0), plt.gca()
+    # Convert lists in 'Value' column to separate columns
+    values = df['Value'].apply(pd.Series)
+    df_expanded = pd.concat([df.drop('Value', axis=1), values], axis=1)
+    # Perform PCA on the raw data
+    pca = PCA()
+    pca.fit(df_expanded)
+    explained_variance_ratio = pca.explained_variance_ratio_
+    # Create bar chart
+    fig, ax = plt.subplots()
+    ax.bar(range(len(explained_variance_ratio)), explained_variance_ratio)
+    ax.set_title('Explained Variance Ratio of Principal Components')
+    ax.set_xlabel('Principal Component')
+    ax.set_ylabel('Explained Variance Ratio')
+    return (explained_variance_ratio, ax)
+```

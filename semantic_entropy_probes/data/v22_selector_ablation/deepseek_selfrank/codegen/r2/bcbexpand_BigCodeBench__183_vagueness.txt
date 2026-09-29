@@ -1,0 +1,8 @@
+```python
+from django.http import HttpResponse
+import uuid
+def task_func(data):
+    response = HttpResponse(data, content_type='application/json')
+    response['X-Request-ID'] = str(uuid.uuid4())
+    return response
+```

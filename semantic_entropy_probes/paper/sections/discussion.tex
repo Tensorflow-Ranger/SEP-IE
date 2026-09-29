@@ -1,0 +1,98 @@
+\section{Discussion and Threats to Validity}
+\label{sec:discussion}
+
+\subsection{A Reversed Finding, Disclosed}
+
+An earlier stage of this investigation, evaluated on a smaller
+(121-group), more loosely filtered split, found the trained ranking probe
+outperforming zero-shot self-rank by 13 points. That result did not
+survive evaluation on the larger, more stringently filtered 1,229-group
+pool reported in Section~\ref{sec:results:ranking}, where zero-shot wins
+on 6 of 7 rows. We report both results and the reversal explicitly rather
+than reporting only the final number, since a reversal under closer
+scrutiny is itself informative: it indicates the earlier comparison was
+underpowered or measuring an artifact of the looser filter, and a reader
+relying on the earlier number alone would draw the wrong practical
+conclusion about whether to deploy the probe in place of a zero-shot
+baseline.
+
+\subsection{Sample Size and Statistical Power}
+
+Several of the correctness results in Section~\ref{sec:results:correctness}
+are drawn from modest sample sizes -- most notably Orchid-BCB at
+$n{=}21$ for the hit1-vs-pass-rate comparison. Its $+21.5$pp round-1 gap is
+suggestive (Mann-Whitney $p = 0.057$) but not conclusive, and a swing of
+one or two cases would move it substantially; we report the wide bootstrap
+confidence interval alongside the point estimate for this reason rather
+than treating a directionally-interesting result as a settled one. The
+headline all-Orchid-combined result ($n{=}213$) is comparatively better
+powered and reaches significance by two of three tests applied, but we
+regard replication at larger $n$ as necessary before treating the specific
+magnitude of the effect as established.
+
+\subsection{Cross-Source Generalization}
+
+The ranking probe's leave-one-source-out performance varies substantially
+by held-out source (Table~\ref{tab:ranking}), transferring worst to
+Orchid-BCB-Expand. We traced this to the injected ambiguous edit
+constituting a small fraction of a long, free-form prompt for
+BigCodeBench-derived sources (median edit fraction $2.1$--$2.3\%$ of
+prompt words) compared to Orchid-HEval's shorter, more directly-edited
+prompts (median $7.1\%$) -- a single pooled or last-token hidden-state
+vector has proportionally less of its representational capacity available
+to encode a small, diluted edit within a long prompt. This is consistent
+with zero-shot self-rank, which re-reads the full prompt text at inference
+time rather than compressing it into one fixed-size vector, not suffering
+the same degradation on exactly this source. We consider this an
+important limitation of single-vector hidden-state probing for long,
+free-form specifications, rather than a limitation specific to our probe
+architecture, and a natural target for future work (e.g., multi-token or
+attention-weighted pooling that preserves more positional information about
+where in a long prompt the disambiguating content lives).
+
+\subsection{Choice of Probe-Host Model}
+
+We use Qwen3-8B as the probe-host model throughout due to compute
+constraints available to this study, not because it is necessarily the
+best choice. A larger probe-host model might encode ambiguity and
+candidate-quality information more richly, at the cost of increasing the
+per-forward-pass cost that is central to this approach's efficiency
+argument; conversely, a smaller model might preserve most of the cost
+advantage while sacrificing some signal quality. We do not have data
+characterizing this tradeoff and flag it as a direct avenue for future
+work rather than assume our specific model choice generalizes.
+
+\subsection{Metric Sensitivity}
+
+Section~\ref{sec:results:correctness}'s central methodological finding --
+that the fractional test-case pass rate recovers a significant
+ranking-quality effect that the all-or-nothing pass metric does not --
+depends on test suites that assign partial credit meaningfully, i.e.,
+problems with multiple, at least partially independent test assertions.
+For problems with very few test cases, the two metrics converge and this
+distinction has little practical effect; we would expect the gap between
+metrics to shrink correspondingly on benchmarks with coarser test suites.
+
+\subsection{Absence of a Direct Repeated-Sampling Baseline}
+
+We compare against zero-shot self-rank, which requires a single generation
+call per problem, but we do not implement or benchmark a repeated-sampling,
+self-consistency-based baseline in the style of ClarifyGPT's underlying
+uncertainty-estimation mechanism~\cite{clarifygpt} directly against our
+pipeline on the same problems. Any comparison to that class of method in
+this paper is therefore a related-work comparison grounded in its published
+methodology, not an empirical head-to-head measurement, and should be read
+accordingly; we regard implementing and directly benchmarking such a
+baseline as important future work to substantiate the cost-efficiency
+argument beyond the zero-shot-vs-probe comparison reported here.
+
+\subsection{Construct Validity of the Ambiguity Injections}
+
+Both ClarifyCodeBench and the Orchid-derived sources construct ambiguity by
+programmatically editing an originally unambiguous prompt, rather than
+sourcing naturally occurring ambiguous specifications. This is a common and
+practical approach to constructing matched clear/ambiguous pairs with known
+ground truth, but it means our results characterize how well this pipeline
+detects and resolves a specific, constructed style of ambiguity, and may
+not transfer identically to naturally occurring specification gaps in
+real development workflows.

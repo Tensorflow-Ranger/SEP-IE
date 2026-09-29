@@ -1,0 +1,19 @@
+```python
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+import pandas as pd
+def task_func(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        raise ValueError("DataFrame is empty")
+    if not all(df.dtypes.apply(lambda x: np.issubdtype(x, np.number))):
+        raise TypeError("DataFrame contains non-numeric data types")
+    if df.isna().any().any():
+        raise ValueError("DataFrame contains NaN values")
+    result = pd.DataFrame()
+    for col in df.columns:
+        cumsum = df[col].cumsum().values.reshape(-1, 1)
+        scaler = MinMaxScaler()
+        normalized = scaler.fit_transform(cumsum)
+        result[col] = normalized.flatten()
+    return result
+```

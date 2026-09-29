@@ -1,0 +1,23 @@
+```python
+import collections
+import numpy as np
+def task_func(file_name):
+    try:
+        data = np.genfromtxt(file_name, delimiter=',', names=True, dtype=None, encoding='utf-8')
+        column_names = data.dtype.names
+        result = {}
+        for col in column_names:
+            column_data = data[col]
+            counts = collections.Counter(column_data)
+            most_common = counts.most_common(1)
+            if not most_common:
+                result[col] = ''
+            else:
+                value, _ = most_common[0]
+                # Sort values lexicographically if there's a tie
+                sorted_values = sorted(counts.keys())
+                result[col] = sorted_values[0]
+        return result
+    except (IOError, ValueError):
+        return {}
+```

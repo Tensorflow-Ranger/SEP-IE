@@ -1,0 +1,21 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame(data)
+    values = df[column].apply(lambda x: x if pd.to_numeric(x, errors='coerce') is not pd.NA else 0)
+    sum_val = values.sum()
+    mean_val = values.mean()
+    min_val = values.min()
+    max_val = values.max()
+    stats = {'sum': sum_val, 'mean': mean_val, 'min': min_val, 'max': max_val}
+    if df.empty:
+        stats['mean'] = np.nan
+        stats['min'] = np.nan
+        stats['max'] = np.nan
+    fig, ax = plt.subplots()
+    ax.pie(values, labels=df['Age'], autopct='%1.1f%%')
+    ax.axis('equal')
+    return stats, ax
+```

@@ -1,0 +1,33 @@
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.stats as stats
+# Constants
+TARGET_VALUE = '332'
+ARRAY = np.array([['0', '1', '2'], ['a', 'bb', 'ccc'], ['332', '33', '2'], ['33', '22', '332']])
+def task_func(target_value=TARGET_VALUE, array=ARRAY):
+    indices = []
+    for i in range(array.shape[0]):
+        if array[i, 0] == target_value:
+            indices.append(i)
+    if not indices:
+        return ('N/A', 'N/A', 'N/A', 'N/A')
+    indices_array = np.array(indices)
+    mean = np.mean(indices_array)
+    variance = np.var(indices_array)
+    if len(indices_array) < 2:
+        skewness = 'N/A'
+        kurtosis = 'N/A'
+    else:
+        skewness = stats.skew(indices_array)
+        kurtosis = stats.kurtosis(indices_array)
+    plt.figure(figsize=(8, 4))
+    plt.hist(indices_array, bins=range(0, array.shape[0]+2), align='left', rwidth=0.8, edgecolor='black')
+    plt.xlabel('Row Index')
+    plt.ylabel('Frequency')
+    plt.title('Distribution of Row Indices with First Cell Matching Target')
+    plt.xticks(range(0, array.shape[0]))
+    plt.grid(axis='y', alpha=0.75)
+    plt.show()
+    return (mean, variance, skewness, kurtosis)
+```

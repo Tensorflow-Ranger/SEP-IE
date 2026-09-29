@@ -1,0 +1,17 @@
+```python
+import inspect
+import types
+import json
+def task_func(f):
+    spec = {}
+    spec['name'] = f.__name__
+    args = inspect.getfullargspec(f)
+    spec['args'] = args.args
+    spec['defaults'] = args.defaults if args.defaults else None
+    annotations = {}
+    for param, annot in args.annotations.items():
+        annotations[param] = str(annot)
+    spec['annotations'] = annotations
+    spec['is_lambda'] = isinstance(f, types.LambdaType) and f.__name__ == '<lambda>'
+    return json.dumps(spec)
+```

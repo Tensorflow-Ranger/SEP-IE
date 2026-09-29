@@ -1,0 +1,35 @@
+```python
+import csv
+import os
+import shutil
+from datetime import datetime
+from random import randint
+# Constants
+WEATHER_CONDITIONS = ['Sunny', 'Cloudy', 'Rainy', 'Snowy', 'Stormy']
+OUTPUT_DIR = './output'
+def task_func(hours, output_dir=OUTPUT_DIR):
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    # Generate CSV file path
+    csv_file_path = os.path.join(output_dir, f'weather_data_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv')
+    # Generate weather data
+    data = [['Time', 'Condition']]
+    for hour in range(hours):
+        # Generate random time within the current hour
+        time_str = datetime.now().strftime('%H:%M:%S.%f')
+        # Generate random weather condition
+        condition = WEATHER_CONDITIONS[randint(0, len(WEATHER_CONDITIONS) - 1)]
+        data.append([time_str, condition])
+    # Write data to CSV file
+    with open(csv_file_path, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(data)
+    # Create backup directory if it doesn't exist
+    backup_dir = os.path.join(output_dir, 'backup')
+    os.makedirs(backup_dir, exist_ok=True)
+    # Backup CSV file
+    backup_file_path = os.path.join(backup_dir, f'weather_data_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv')
+    shutil.copy2(csv_file_path, backup_file_path)
+    # Return the path of the generated CSV file
+    return csv_file_path
+```

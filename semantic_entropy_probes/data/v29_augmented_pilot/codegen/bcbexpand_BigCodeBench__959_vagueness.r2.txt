@@ -1,0 +1,16 @@
+```python
+import string
+import random
+def task_func(text, seed=None):
+    if seed is not None:
+        random.seed(seed)
+    result = []
+    for char in text:
+        if char.isupper():
+            result.append(random.choice(string.ascii_uppercase))
+        elif char.islower():
+            result.append(random.choice(string.ascii_lowercase))
+        else:
+            result.append(char)
+    return ''.join(result)
+```

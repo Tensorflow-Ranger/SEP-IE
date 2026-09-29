@@ -1,0 +1,21 @@
+```python
+import pandas as pd
+import random
+def task_func(data, columns=['Name', 'Age', 'Occupation'], fill_missing=False, num_range=(0, 100), seed=None):
+    if seed is not None:
+        random.seed(seed)
+    rows = []
+    for row in data:
+        padded_row = list(row) + [None] * (len(columns) - len(row))
+        rows.append(padded_row[:len(columns)])
+    df = pd.DataFrame(rows, columns=columns)
+    if fill_missing:
+        for col in df.columns:
+            mask = df[col].isna()
+            if mask.any():
+                if df[col].dtype in ['int64', 'float64'] or all(isinstance(val, (int, float)) for val in df[col].dropna()):
+                    df.loc[mask, col] = [random.randint(num_range[0], num_range[1]) for _ in range(mask.sum())]
+                else:
+                    df.loc[mask, col] = None
+    return df
+```

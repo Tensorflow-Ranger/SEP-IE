@@ -1,0 +1,42 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    if not data:
+        df = pd.DataFrame(columns=['Age', 'Salary', 'Experience'])
+    else:
+        df = pd.DataFrame(data, columns=['Age', 'Salary', 'Experience'])
+    if column not in df.columns:
+        raise ValueError(f"Column '{column}' not found in data")
+    def convert_value(x):
+        if isinstance(x, (int, float, np.number)):
+            return float(x)
+        elif isinstance(x, str):
+            try:
+                return float(x)
+            except ValueError:
+                return float(len(x))
+        else:
+            return 0.0
+    converted_series = df[column].apply(convert_value)
+    stats = {
+        'sum': converted_series.sum(),
+        'mean': converted_series.mean(),
+        'min': converted_series.min(),
+        'max': converted_series.max()
+    }
+    if np.isnan(stats['mean']):
+        stats['mean'] = np.nan
+        stats['min'] = np.nan
+        stats['max'] = np.nan
+    fig, ax = plt.subplots()
+    if not df.empty and 'Age' in df.columns:
+        labels = df['Age'].astype(str).tolist()
+        ax.pie(converted_series, labels=labels, autopct='%1.1f%%')
+        ax.set_title(f'Distribution of {column}')
+    else:
+        ax.text(0.5, 0.5, 'No data to display', ha='center', va='center')
+        ax.set_title(f'Distribution of {column}')
+    return stats, ax
+```

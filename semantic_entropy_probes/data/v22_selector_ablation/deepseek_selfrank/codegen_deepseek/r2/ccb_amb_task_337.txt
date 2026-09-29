@@ -1,0 +1,35 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    n = int(data[0])
+    p = list(map(int, data[1:1 + n]))
+
+    pos = [0] * (n + 1)
+    for idx, val in enumerate(p):
+        pos[val] = idx + 1  # 1-based index
+
+    total_cost = 0
+    for val in range(1, n + 1):
+        current = pos[val]
+        target = val
+        if current > target:
+            total_cost += target * (current - target)
+            # update positions for values between target+1 and current
+            for x in range(1, n + 1):
+                if target <= pos[x] <= current:
+                    pos[x] = target + (current - pos[x])
+        elif current < target:
+            total_cost += current * (target - current)
+            for x in range(1, n + 1):
+                if current <= pos[x] <= target:
+                    pos[x] = target - (pos[x] - current)
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

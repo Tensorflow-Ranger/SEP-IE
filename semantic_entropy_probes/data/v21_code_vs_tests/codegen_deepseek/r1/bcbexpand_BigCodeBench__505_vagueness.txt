@@ -1,0 +1,11 @@
+```python
+import hashlib
+import hmac
+def task_func(secret, message):
+    if isinstance(secret, str):
+        secret = secret.encode('utf-8')
+    if isinstance(message, str):
+        message = message.encode('utf-8')
+    hmac_signature = hmac.new(secret, message, hashlib.sha256)
+    return hmac_signature.hexdigest()
+```

@@ -1,0 +1,18 @@
+```python
+import pandas as pd
+from sklearn.cluster import KMeans
+def task_func(data, n_clusters=3, seed=None):
+    # Check if all columns are numeric
+    if not data.select_dtypes(include=['number']).shape[1] == data.shape[1]:
+        raise ValueError("DataFrame contains non numeric entries")
+    # Set random state if provided
+    if seed is not None:
+        random_state = seed
+    else:
+        random_state = None
+    # Initialize and fit KMeans model
+    model = KMeans(n_clusters=n_clusters, n_init=10, random_state=random_state).fit(data)
+    # Get cluster labels
+    labels = model.labels_
+    return labels, model
+```

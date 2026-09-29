@@ -1,0 +1,28 @@
+```python
+import sys
+
+def main():
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    P = list(map(int, data[1:N+1]))
+    Q = list(map(int, data[N+1:2*N+1]))
+    
+    # Create a mapping from bib number to person index
+    bib_to_person = [0] * (N + 1)
+    for idx in range(N):
+        bib_to_person[Q[idx]] = idx
+    
+    # For each bib number i, find the person staring at them
+    result = [0] * (N + 1)
+    for i in range(1, N + 1):
+        person = bib_to_person[i]
+        result[i] = P[person]
+    
+    # Output the result for bib numbers 1 to N
+    print(' '.join(map(str, result[1:N+1])))
+
+if __name__ == "__main__":
+    main()
+```

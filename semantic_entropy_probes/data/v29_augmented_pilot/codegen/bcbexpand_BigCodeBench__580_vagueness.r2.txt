@@ -1,0 +1,30 @@
+```python
+import pandas as pd
+import random
+import statistics
+import matplotlib.pyplot as plt
+import numpy as np
+# Constants
+RANGE = 10000  # The range within which random numbers are generated
+SIZE = 1000  # The number of random numbers to generate
+BIN_WIDTH = 100  # The width of bins for the histogram
+def task_func():
+    random_numbers = [random.randint(0, RANGE) for _ in range(SIZE)]
+    moving_averages = []
+    for i in range(SIZE):
+        window_start = max(0, i - 5)
+        window = random_numbers[window_start:i+1]
+        avg = statistics.mean(window)
+        moving_averages.append(avg)
+    df = pd.DataFrame({
+        'Random Numbers': random_numbers,
+        'Moving Average': moving_averages
+    })
+    plt.figure()
+    plt.hist(df['Random Numbers'], bins=range(0, RANGE + BIN_WIDTH, BIN_WIDTH))
+    plt.xlabel('Random Numbers')
+    plt.ylabel('Frequency')
+    plt.title('Histogram of Random Numbers')
+    plt.show()
+    return df
+```

@@ -1,0 +1,18 @@
+```python
+def common(l1: list, l2: list):
+    """Return unique sorted elements common to the lists."""
+    import sys
+    import bisect
+
+    # Convert lists to sorted unique lists
+    unique_l1 = sorted(list(set(l1)))
+    unique_l2 = sorted(list(set(l2)))
+
+    # Use bisect to find common elements efficiently
+    common_elements = []
+    for num in unique_l1:
+        idx = bisect.bisect_left(unique_l2, num)
+        if idx < len(unique_l2) and unique_l2[idx] == num:
+            common_elements.append(num)
+    return common_elements
+```

@@ -1,0 +1,34 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def task_func(df):
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("Input must be a pandas DataFrame")
+    if not all(col in df.columns for col in ['Date', 'Sales']):
+        raise ValueError("DataFrame must contain 'Date' and 'Sales' columns")
+    if df.empty:
+        raise ValueError("DataFrame has no data to plot")
+    
+    df_copy = df.copy()
+    df_copy['Date'] = pd.to_datetime(df_copy['Date'])
+    df_copy.set_index('Date', inplace=True)
+    
+    daily_sales = df_copy['Sales'].resample('D').sum()
+    
+    if daily_sales.empty:
+        raise ValueError("Resampled DataFrame is empty")
+    if daily_sales.sum() == 0:
+        raise ValueError("Sum of 'Sales' is zero")
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.plot(daily_sales.index, daily_sales.values, marker='o', linestyle='-')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Daily Sales')
+    ax.set_title('Daily Turnover')
+    ax.grid(True)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    
+    return ax
+```

@@ -1,0 +1,28 @@
+```python
+import seaborn as sns
+from random import sample
+# Constants
+COLUMNS = ['A', 'B', 'C', 'D', 'E']
+def task_func(df, tuples, n_plots):
+    # Remove rows where the tuple of values matches any in the given list
+    df = df[~df.apply(tuple, axis=1).isin(tuples)]
+    
+    # Generate available column pairs for pairplots
+    available_columns = COLUMNS
+    column_pairs = [(col1, col2) for i, col1 in enumerate(available_columns) 
+                    for j, col2 in enumerate(available_columns) if i < j]
+    
+    # Determine the number of plots to generate
+    n_plots = min(n_plots, len(column_pairs))
+    
+    # Randomly select n_plots unique column pairs
+    selected_pairs = sample(column_pairs, n_plots)
+    
+    # Generate pairplots for the selected column pairs
+    pairplots = []
+    for pair in selected_pairs:
+        pairplot = sns.pairplot(data=df, vars=pair, diag_kind="hist")
+        pairplots.append(pairplot.axes)
+    
+    return df, pairplots
+```

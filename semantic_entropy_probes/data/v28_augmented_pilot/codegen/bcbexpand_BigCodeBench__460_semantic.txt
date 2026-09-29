@@ -1,0 +1,41 @@
+```python
+import subprocess
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def task_func(script_path, output_file_path):
+    """
+    Executes a script to produce a CSV, reads the CSV, and plots a bar graph from the data.
+    
+    Parameters:
+    - script_path (str): Path to the script to execute.
+    - output_file_path (str): Path where the CSV file will be created.
+    
+    Returns:
+    - df (pd.DataFrame): DataFrame containing the data from the CSV.
+    - ax (matplotlib.axes._axes.Axes): Axes object of the plotted bar graph.
+    
+    Raises:
+    - ValueError: If the script fails to execute, the CSV is invalid, or the CSV does not contain exactly 2 columns.
+    """
+    try:
+        result = subprocess.run([script_path], check=True, capture_output=True, text=True)
+    except subprocess.CalledProcessError as e:
+        raise ValueError(f"Script execution failed: {e.stderr}") from e
+    except Exception as e:
+        raise ValueError(f"Script execution failed: {e}") from e
+    
+    try:
+        df = pd.read_csv(output_file_path)
+    except Exception as e:
+        raise ValueError(f"Failed to read CSV file: {e}") from e
+    
+    if len(df.columns) != 2:
+        raise ValueError(f"CSV must have exactly 2 columns, but has {len(df.columns)}")
+    
+    ax = df.plot.bar(x=df.columns[0], y=df.columns[1], legend=False)
+    ax.set_xlabel(df.columns[0])
+    ax.set_ylabel(df.columns[1])
+    
+    return df, ax
+```

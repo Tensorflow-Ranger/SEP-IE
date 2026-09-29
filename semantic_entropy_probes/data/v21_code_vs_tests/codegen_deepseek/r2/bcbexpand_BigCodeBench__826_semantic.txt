@@ -1,0 +1,37 @@
+```python
+import re
+import os
+import shutil
+def task_func(source_dir, target_dir, file_pattern=r'\b[A-Za-z0-9]+\.(txt|doc|docx)\b'):
+    """
+    Move files from the source directory to the target directory based on a specified pattern.
+    Only searches the top-level source directory (no recursion into subdirectories).
+    Only moves regular files (directories that match the pattern are ignored).
+
+    Parameters:
+    - source_dir (str): The source directory path.
+    - target_dir (str): The target directory path.
+    - file_pattern (str): Regular expression pattern to match filenames.
+
+    Returns:
+    - moved_files_count (int): The number of files successfully moved.
+    """
+    if not os.path.exists(source_dir):
+        return 0
+    if not os.path.exists(target_dir):
+        os.makedirs(target_dir)
+    
+    moved_files_count = 0
+    pattern = re.compile(file_pattern)
+    
+    for item in os.listdir(source_dir):
+        item_path = os.path.join(source_dir, item)
+        if os.path.isfile(item_path) and pattern.search(item):
+            try:
+                shutil.move(item_path, target_dir)
+                moved_files_count += 1
+            except Exception:
+                continue
+    
+    return moved_files_count
+```

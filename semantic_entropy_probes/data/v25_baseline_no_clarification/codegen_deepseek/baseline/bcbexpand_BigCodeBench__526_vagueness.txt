@@ -1,0 +1,38 @@
+```python
+import json
+import pandas as pd
+import numpy as np
+from collections import defaultdict
+def task_func(input_file="data.json"):
+    with open(input_file, 'r') as f:
+        data = json.load(f)
+    
+    if not isinstance(data, list):
+        raise ValueError("Input JSON must be a list of dictionaries")
+    
+    value_dict = defaultdict(list)
+    
+    for entry in data:
+        if not isinstance(entry, dict):
+            continue
+        for key, value in entry.items():
+            if isinstance(value, (int, float)):
+                value_dict[key].append(value)
+    
+    results = {}
+    for key, values in value_dict.items():
+        if values:
+            results[key] = {
+                'mean': np.mean(values),
+                'median': np.median(values)
+            }
+    
+    if results:
+        df = pd.DataFrame.from_dict(results, orient='index')
+        df.index.name = 'key'
+        df = df.sort_index()
+    else:
+        df = pd.DataFrame(columns=['mean', 'median'])
+    
+    return df
+```

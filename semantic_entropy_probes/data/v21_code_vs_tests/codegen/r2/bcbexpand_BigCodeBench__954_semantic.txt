@@ -1,0 +1,25 @@
+```python
+import random
+import re
+def task_func(target_words, n_sentences, vocabulary):
+    if n_sentences < 0 or not vocabulary:
+        raise ValueError("n_sentences must be non-negative and vocabulary cannot be empty")
+    
+    # Create a regex pattern for matching target words case-insensitively
+    target_pattern = re.compile(r'\b(' + '|'.join(re.escape(word) for word in target_words) + r')\b', re.IGNORECASE)
+    
+    sentences = []
+    for _ in range(n_sentences):
+        # Generate a sentence by sampling 10 words with replacement
+        sentence = ' '.join(random.choices(vocabulary, k=10))
+        sentences.append(sentence.lower())
+    
+    # Process each sentence to replace spaces in target words with underscores
+    processed_sentences = []
+    for sentence in sentences:
+        # Replace spaces in target words with underscores, case-insensitive
+        processed = target_pattern.sub(lambda m: m.group(0).replace(' ', '_'), sentence)
+        processed_sentences.append(processed)
+    
+    return processed_sentences
+```

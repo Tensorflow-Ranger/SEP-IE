@@ -1,0 +1,34 @@
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.stats as stats
+# Constants
+TARGET_VALUE = '332'
+ARRAY = np.array([['0', '1', '2'], ['a', 'bb', 'ccc'], ['332', '33', '2'], ['33', '22', '332']])
+def task_func(target_value=TARGET_VALUE, array=ARRAY):
+    """
+    Finds the row indices in a numpy array where the first cell matches target_value "332" or contains it as a substring.
+    Performs statistical analysis on these indices and plots their distribution.
+    Return 'N/A' for all stats if no target value found.
+    """
+    indices = []
+    for i, row in enumerate(array):
+        if row[0] == target_value:
+            indices.append(i)
+    if not indices:
+        plt.clf()
+        return 'N/A'
+    indices_array = np.array(indices)
+    mean = np.mean(indices_array)
+    variance = np.var(indices_array)
+    skewness = stats.skew(indices_array)
+    kurtosis = stats.kurtosis(indices_array)
+    plt.figure()
+    plt.hist(indices_array, bins='auto', alpha=0.7, edgecolor='black')
+    plt.title('Distribution of Row Indices with Target Value')
+    plt.xlabel('Row Index')
+    plt.ylabel('Frequency')
+    plt.grid(True)
+    plt.show()
+    return (mean, variance, skewness, kurtosis)
+```

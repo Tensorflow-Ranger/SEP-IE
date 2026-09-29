@@ -1,0 +1,24 @@
+```python
+import re
+import os
+import subprocess
+def task_func(dir_path, exe_pattern, execute_files=True):
+    results = []
+    # Compile the regex pattern
+    pattern = re.compile(exe_pattern)
+    # Iterate over files in the directory
+    for filename in os.listdir(dir_path):
+        file_path = os.path.join(dir_path, filename)
+        # Check if it's a file and matches the pattern
+        if os.path.isfile(file_path) and pattern.search(filename):
+            if execute_files:
+                try:
+                    # Execute the file and capture output
+                    result = subprocess.check_output(['./' + filename], cwd=dir_path, stderr=subprocess.STDOUT, text=True)
+                    results.append(result.strip())
+                except subprocess.CalledProcessError as e:
+                    results.append(e.output.strip())
+            else:
+                results.append(file_path)
+    return results
+```

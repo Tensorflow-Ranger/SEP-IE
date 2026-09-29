@@ -1,0 +1,79 @@
+```python
+import sys
+import bisect
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    W = int(data[idx])
+    idx += 1
+    
+    pos = []
+    for _ in range(N):
+        x = int(data[idx])
+        idx += 1
+        y = int(data[idx])
+        idx += 1
+        pos.append((x, y))
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        T = int(data[idx])
+        idx += 1
+        A = int(data[idx]) - 1  # convert to 0-based index
+        idx += 1
+        queries.append((T, A))
+    
+    # Sort positions by Y coordinate
+    pos.sort(key=lambda x: x[1])
+    
+    # For each column, track the Y coordinates of blocks
+    from collections import defaultdict
+    col_y = defaultdict(list)
+    for x, y in pos:
+        bisect.insort(col_y[x], y)
+    
+    # For each query, determine if block A exists at time T+0.5
+    results = []
+    for T, A in queries:
+        x, y = pos[A]
+        # Calculate how many blocks fall into the same column
+        ys = col_y[x]
+        # Find the number of blocks that are below or at the same level as y
+        # Since the blocks are sorted, we can use bisect to find the count
+        cnt = bisect.bisect_right(ys, y)
+        # The number of blocks that would fall in the same column after T steps
+        # is the number of blocks that are not in the same column or are above
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y (since they will fall down)
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the same column after T steps
+        # is the number of blocks that are above y
+        # So the number of blocks that will fall in the

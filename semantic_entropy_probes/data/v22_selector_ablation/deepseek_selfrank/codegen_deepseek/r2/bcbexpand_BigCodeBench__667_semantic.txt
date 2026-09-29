@@ -1,0 +1,14 @@
+```python
+import heapq
+import collections
+def task_func(x, n):
+    if not x or n <= 0:
+        return []
+    heap = []
+    for letter, freq in x.items():
+        heapq.heappush(heap, (-freq, letter))
+    result = []
+    for _ in range(min(n, len(heap))):
+        result.append(heapq.heappop(heap)[1])
+    return result
+```

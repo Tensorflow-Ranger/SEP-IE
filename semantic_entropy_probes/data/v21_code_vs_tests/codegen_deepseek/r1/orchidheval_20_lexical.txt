@@ -1,0 +1,19 @@
+```python
+from typing import List, Tuple
+
+
+def find_closest_elements(numbers: List[float]) -> Tuple[float, float]:
+    """ From a supplied list of numbers (of length at least two) select and return two that are the nearest neighbors and return them in order (smaller number, larger number).
+    """
+    numbers_sorted = sorted(numbers)
+    min_distance = float('inf')
+    result = (0.0, 0.0)
+    
+    for i in range(len(numbers_sorted) - 1):
+        dist = numbers_sorted[i + 1] - numbers_sorted[i]
+        if dist < min_distance:
+            min_distance = dist
+            result = (numbers_sorted[i], numbers_sorted[i + 1])
+    
+    return result
+```

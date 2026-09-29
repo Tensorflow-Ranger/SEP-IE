@@ -1,0 +1,117 @@
+```python
+import sys
+import bisect
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    W = int(next(it))
+    blocks = []
+    for _ in range(N):
+        x = int(next(it))
+        y = int(next(it))
+        blocks.append((x, y))
+    Q = int(next(it))
+    queries = []
+    for _ in range(Q):
+        t = int(next(it))
+        a = int(next(it)) - 1
+        queries.append((t, a))
+
+    # Group blocks by column
+    by_col = [[] for _ in range(W + 1)]
+    for idx, (x, y) in enumerate(blocks):
+        by_col[x].append((y, idx))
+    for col in range(1, W + 1):
+        by_col[col].sort()
+
+    # Precompute for each block its "final" row after infinite time
+    # ignoring bottom-row removal.
+    # For a block at (x, y), it will fall until it meets the block below it.
+    # This is equivalent to: final_y = y - (number of blocks in same column with Y < y)
+    # because each block above another will stack directly on top.
+    # Actually, careful: if blocks are at y=3, y=5 in same column, then at t=0:
+    # block at y=5 will fall until y=4 (just above the other), so final_y = y - (count_below).
+    # But if there is a gap, e.g., y=3 and y=10, then block at y=10 falls to y=4.
+    # In general, after infinite time without bottom removal, blocks in a column
+    # will become a vertical stack from bottom upward, sorted by original y.
+    # So final_y = y - (position in sorted list when sorted ascending).
+    # Let sorted list be [y1, y2, ..., yk] for column x.
+    # For yi (original y), its final position is yi - (i-1) because it will be
+    # exactly above the (i-1)-th block.
+    # But wait: if yi - (i-1) becomes <=0? That can't happen because bottom row is y=1,
+    # and we have no removal yet. Actually it can become <=0, but then it would be below bottom?
+    # No, because bottom row is y=1, so final_y cannot be less than 1.
+    # However, the falling stops when it reaches row 1 (if no block below).
+    # So final_y = max(1, yi - (i-1)).
+    # But since original y >=1 and i-1 >=0, yi - (i-1) >= 1? Not necessarily.
+    # Example: column has blocks at y=1, y=2. For block at y=2, i=2, yi-(i-1)=2-1=1, okay.
+    # For block at y=1, i=1, yi-(i-1)=1-0=1.
+    # Another: blocks at y=1, y=3. For y=3, i=2, 3-1=2, final row 2.
+    # So formula works and final_y >=1.
+    # Let's compute final_y for each block.
+    final_y = [0] * N
+    for col in range(1, W + 1):
+        lst = by_col[col]
+        for idx_in_col, (y, block_idx) in enumerate(lst):
+            final_y[block_idx] = y - idx_in_col
+
+    # Now we need to consider bottom-row removal.
+    # The only way a block disappears is if it is in the bottom row when the bottom row is full.
+    # At any time, after falling, the configuration is a set of blocks where each column
+    # has a vertical stack starting from some height.
+    # The bottom row is full iff for every column x, there is a block at (x,1) after falling.
+    # That means for each column, the lowest block in that column must have final_y = 1.
+    # Actually, after infinite falling without removal, each column's lowest block has final_y = 1
+    # if there is at least one block in that column? Wait, not necessarily.
+    # Example: column with a single block at y=5, final_y = 5 (since i=1, y-0=5). So bottom row empty.
+    # So bottom row is full only if every column has at least one block AND the lowest block in each column
+    # has final_y = 1. But final_y of lowest block = original y of lowest block (since i=1) = that block's original y.
+    # So condition: for each column, the smallest original y among its blocks equals 1.
+    # But careful: after falling, the lowest block's final_y = original y (since it doesn't fall over another).
+    # So for bottom row to be full, we need for every column x, there exists a block with original y = 1.
+    # That's a very strong condition. However, the problem statement says:
+    # "If the entire bottom row is filled with blocks, then all blocks in the bottom row are removed."
+    # That removal happens at each time step after moving blocks downward.
+    # So the process: at time t, first apply gravity (blocks fall as much as possible),
+    # then if bottom row full, remove those blocks.
+    # This removal can cause chains: after removal, blocks above may fall further in next time steps.
+    # But note: times go up to 10^100, essentially infinite.
+    # We need to know for each block whether it eventually disappears.
+    # Observation: The only way a block disappears is if it reaches row 1 at a moment when the bottom row is full.
+    # And a block reaches row 1 only if its final_y (without removal) is 1.
+    # But if its final_y is 1, it will sit at row 1 forever unless removed.
+    # Removal occurs when all columns have a block at row 1 at the same time.
+    # So a block with final_y = 1 disappears iff every column has at least one block with final_y = 1.
+    # However, there is a subtlety: even if a block's final_y > 1, it might eventually reach row 1
+    # after some blocks below it are removed (because those below had final_y=1 and were removed when bottom full).
+    # Example: two columns, column1: block at y=1, column2: block at y=2.
+    # At time 0: (1,1), (2,2).
+    # Time 1: gravity: block (2,2) falls to (2,1) because below empty. Now bottom row full? Yes, both columns have block at row1.
+    # Remove both. So block originally at y=2 disappears as well, even though its final_y without removal would be 2.
+    # So we need to consider dependencies across columns.
+    # This becomes a classic "waterfall" problem. Known solution: treat each column independently,
+    # but with a global offset representing how many times the bottom row has been cleared.
+    # Let’s think: after infinite time, the configuration stabilizes to a certain shape.
+    # Define for each column the sorted list of original y's.
+    # The process is equivalent to: each block falls until it either hits the ground (row1) or a block that never disappears.
+    # Blocks that reach row1 may disappear if all columns have a block at row1 simultaneously.
+    # This is similar to the game "Tetris" clearing a line.
+    # Insight: The eventual state can be described by a "height" for each column: the number of blocks that remain in that column.
+    # Actually, think of the infinite time limit. The only blocks that survive are those that are above the "waterline"
+    # determined by the column with the fewest blocks that reach row1.
+    # More precisely, sort columns by the smallest original y in each column (call it base_y[x]).
+    # If a column has no blocks, base_y[x] = infinity.
+    # The removal of bottom row happens only when every column has base_y = 1 (after falling).
+    # But after removal, base_y for each column becomes the next original y in that column (since the lowest block is gone).
+    # This process repeats.
+    # So effectively, we can think of each column having a sorted list of original y's.
+    # The global process repeatedly: find the minimum among the current lowest y of each column (call it m).
+    # If m > 1, no more removal possible because bottom row not full.
+    # If m = 1, then all columns that have lowest y = 1 will lose that block, and their next lowest y becomes the new base.
+    # This continues until m > 1.
+    # This is analogous to merging k sorted lists and counting how many times we can pop the minimum value 1,2,3,...
+    # Actually, we need to know for each block whether it

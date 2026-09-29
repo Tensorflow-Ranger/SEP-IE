@@ -1,0 +1,19 @@
+```python
+import heapq
+import collections
+def task_func(x, n):
+    # Use a max-heap to get the n most common letters
+    # We use negative counts to simulate a max-heap with heapq
+    heap = []
+    for letter, count in x.items():
+        heapq.heappush(heap, (-count, letter))
+    
+    result = []
+    for _ in range(n):
+        if not heap:
+            break
+        count, letter = heapq.heappop(heap)
+        result.append(letter)
+    
+    return result
+```

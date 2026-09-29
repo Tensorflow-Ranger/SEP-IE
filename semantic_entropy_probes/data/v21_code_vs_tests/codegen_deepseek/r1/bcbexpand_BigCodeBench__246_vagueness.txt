@@ -1,0 +1,24 @@
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.fft import fft
+ANGLES = np.arange(0, 2*np.pi, 0.01)
+def task_func(n_waves, seed=0):
+    np.random.seed(seed)
+    if n_waves < 1:
+        return [], np.array([]), None
+    waves = []
+    mixed_signal = np.zeros_like(ANGLES)
+    for i in range(1, n_waves + 1):
+        wave = np.sin(i * ANGLES)
+        waves.append(wave)
+        mixed_signal += wave
+    fft_data = fft(mixed_signal)
+    magnitude = np.abs(fft_data)
+    fig, ax = plt.subplots()
+    ax.hist(magnitude, bins=50, edgecolor='black')
+    ax.set_xlabel('Magnitude')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Histogram of FFT Magnitude')
+    return waves, fft_data, ax
+```

@@ -1,0 +1,54 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    H = int(next(it))
+    W = int(next(it))
+    rows = [next(it) for _ in range(H)]
+
+    # Convert each row to an integer (bitmask)
+    row_masks = [int(row, 2) for row in rows]
+
+    # Count how many rows have each mask
+    mask_count = {}
+    for mask in row_masks:
+        mask_count[mask] = mask_count.get(mask, 0) + 1
+
+    # For each possible column flip mask (0..2^W-1),
+    # compute the resulting total sum.
+    # Let col_flip be a bitmask where bit j set means column j is flipped.
+    # For a given row mask m, after flipping columns according to col_flip,
+    # the row becomes m ^ col_flip.
+    # Then we can decide to flip the row itself (operation X) or not.
+    # Flipping the row changes m ^ col_flip to ~(m ^ col_flip) & ((1<<W)-1),
+    # which is the same as m ^ col_flip ^ ((1<<W)-1).
+    # So the best for this row is min(popcount(m ^ col_flip), W - popcount(m ^ col_flip)).
+    # We need to sum over all rows.
+
+    # Precompute popcount for all numbers up to (1<<W)-1
+    max_mask = 1 << W
+    popcount = [0] * max_mask
+    for i in range(1, max_mask):
+        popcount[i] = popcount[i >> 1] + (i & 1)
+
+    ans = H * W  # upper bound
+    # Iterate over all column flip masks
+    for col_flip in range(max_mask):
+        total = 0
+        # Iterate over distinct row masks
+        for m, cnt in mask_count.items():
+            after = m ^ col_flip
+            pc = popcount[after]
+            best = min(pc, W - pc)
+            total += best * cnt
+        if total < ans:
+            ans = total
+    print(ans)
+
+if __name__ == "__main__":
+    solve()
+```

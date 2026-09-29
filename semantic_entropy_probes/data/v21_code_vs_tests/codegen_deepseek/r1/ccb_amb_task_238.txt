@@ -1,0 +1,30 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    N = int(data[0])
+    grid = [['.' for _ in range(N)] for _ in range(N)]
+
+    for i in range(1, N + 1):
+        j = N + 1 - i
+        if i > j:
+            continue
+        # top-left (i,i) is 1‑based, convert to 0‑based
+        r1 = i - 1
+        c1 = i - 1
+        r2 = j - 1
+        c2 = j - 1
+        fill_char = '#' if i % 2 == 1 else '.'
+        for r in range(r1, r2 + 1):
+            for c in range(c1, c2 + 1):
+                grid[r][c] = fill_char
+
+    for row in grid:
+        print(''.join(row))
+
+if __name__ == "__main__":
+    solve()
+```

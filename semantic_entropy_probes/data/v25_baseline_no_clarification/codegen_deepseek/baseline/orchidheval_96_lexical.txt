@@ -1,0 +1,28 @@
+```python
+import math
+
+def count_up_to(n):
+    """Implement a function that takes an non-negative integer and returns an array of the top n
+    integers that are prime numbers and less than n.
+    """
+    if n <= 2:
+        return []
+    
+    def is_prime(num):
+        if num < 2:
+            return False
+        if num == 2:
+            return True
+        if num % 2 == 0:
+            return False
+        for i in range(3, int(math.sqrt(num)) + 1, 2):
+            if num % i == 0:
+                return False
+        return True
+    
+    primes = []
+    for i in range(2, n):
+        if is_prime(i):
+            primes.append(i)
+    return primes
+```

@@ -1,0 +1,81 @@
+```python
+import sys
+import math
+input = sys.stdin.read
+
+MOD = 998244353
+
+def main():
+    data = input().split()
+    idx = 0
+    H = int(data[idx]); idx += 1
+    W = int(data[idx]); idx += 1
+
+    grid = []
+    for _ in range(H):
+        row = list(map(int, data[idx:idx+W]))
+        idx += W
+        grid.append(row)
+
+    Q = int(data[idx]); idx += 1
+    sh = int(data[idx]); idx += 1
+    sw = int(data[idx]); idx += 1
+
+    # Initialize the grid
+    # We'll use a 2D list for the grid
+    # But since H and W can be up to 2e5, but H*W <= 2e5, it's manageable
+
+    # We'll use dynamic programming to compute the sum of products over all paths
+    # Let dp[i][j] be the sum of products of all paths from (1,1) to (i,j)
+    # The recurrence is dp[i][j] = dp[i-1][j] * A[i][j] + dp[i][j-1] * A[i][j]
+    # Base case: dp[0][0] = 1 (but we'll use 1-based indexing)
+
+    # Since H and W can be large, we'll use a 1D array to optimize space
+    # We'll use a 1D array dp where dp[j] represents the value for the current row
+
+    # Initialize dp array
+    dp = [0] * (W + 1)
+    dp[0] = 1  # Starting point (1,1) is (0,0) in 0-based
+
+    # We'll keep track of the current position of Takahashi
+    curr_h = sh - 1
+    curr_w = sw - 1
+
+    for _ in range(Q):
+        d = data[idx]; idx += 1
+        a = int(data[idx]); idx += 1
+
+        # Move Takahashi
+        if d == 'L':
+            curr_w -= 1
+        elif d == 'R':
+            curr_w += 1
+        elif d == 'U':
+            curr_h -= 1
+        elif d == 'D':
+            curr_h += 1
+
+        # Update the grid at the new position
+        grid[curr_h][curr_w] = a
+
+        # Re-calculate the dp array
+        new_dp = [0] * (W + 1)
+        new_dp[0] = 1  # (1,1) is (0,0) in 0-based
+
+        for i in range(H):
+            for j in range(W):
+                if i == 0 and j == 0:
+                    continue
+                val = grid[i][j]
+                if i > 0:
+                    new_dp[j] = (new_dp[j] + dp[j] * val) % MOD
+                if j > 0:
+                    new_dp[j] = (new_dp[j] + new_dp[j - 1] * val) % MOD
+            dp = new_dp
+
+        # The answer is dp[W - 1]
+        print(dp[W - 1] % MOD)
+
+if __name__ == "__main__":
+    main()
+```

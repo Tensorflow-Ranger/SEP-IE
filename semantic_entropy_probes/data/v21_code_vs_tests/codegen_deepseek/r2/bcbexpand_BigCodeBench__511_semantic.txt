@@ -1,0 +1,45 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def task_func(column, data):
+    """
+    Analyze a list of employee data and calculate statistics for a given column.
+    The data list contains inner lists with three numeric values: [Age, Salary, Experience].
+    If the data list is empty, the sum will be 0 and mean, min, and max values will be NaN.
+    The function also visualizes the data with a pie chart, using the Age column as labels.
+    
+    Parameters:
+    column (int): Index of the column to analyze (0: Age, 1: Salary, 2: Experience).
+    data (list of list): List of employee data where each inner list contains three numeric values.
+    
+    Returns:
+    tuple: A tuple containing:
+        dict: A dictionary with the 'sum', 'mean', 'min', and 'max' of the column.
+        Axes object: The pie chart visualizing the column data.
+    """
+    if not data:
+        stats = {'sum': 0, 'mean': np.nan, 'min': np.nan, 'max': np.nan}
+        fig, ax = plt.subplots()
+        ax.text(0.5, 0.5, 'No data', ha='center', va='center')
+        ax.set_title('Pie Chart of Column Data')
+        return stats, ax
+    
+    column_data = [row[column] for row in data]
+    column_array = np.array(column_data, dtype=float)
+    
+    stats = {
+        'sum': np.sum(column_array),
+        'mean': np.mean(column_array),
+        'min': np.min(column_array),
+        'max': np.max(column_array)
+    }
+    
+    ages = [row[0] for row in data]
+    fig, ax = plt.subplots()
+    ax.pie(column_array, labels=ages, autopct='%1.1f%%')
+    ax.set_title('Pie Chart of Column Data')
+    
+    return stats, ax
+```

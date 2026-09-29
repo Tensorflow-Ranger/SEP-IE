@@ -1,0 +1,31 @@
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+def task_func(data_list):
+    """
+    Visualizes the scores of students over multiple tests using a line plot.
+    
+    Parameters:
+    - data_list (list of dict): Each dictionary contains student names (keys) and scores (values).
+    
+    Returns:
+    - ax (matplotlib.axes._axes.Axes): The Axes object with the plotted data.
+    """
+    if not data_list:
+        fig, ax = plt.subplots()
+        return ax
+    
+    df = pd.DataFrame(data_list)
+    fig, ax = plt.subplots()
+    
+    for student in df.columns:
+        ax.plot(df.index, df[student], marker='o', label=student)
+    
+    ax.set_xlabel('Test Number')
+    ax.set_ylabel('Score')
+    ax.set_title('Student Scores Over Tests')
+    ax.legend()
+    ax.grid(True)
+    
+    return ax
+```

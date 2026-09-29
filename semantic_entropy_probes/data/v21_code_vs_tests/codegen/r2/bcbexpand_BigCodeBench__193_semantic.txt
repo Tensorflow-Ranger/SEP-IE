@@ -1,0 +1,38 @@
+```python
+import pandas as pd
+import numpy as np
+from random import choice
+# Constants
+DATA_TYPES = [str, int, float, list, tuple, dict, set]
+def task_func(rows, columns):
+    data = []
+    for _ in range(columns):
+        col_data = []
+        for _ in range(rows):
+            data_type = choice(DATA_TYPES)
+            if data_type == str:
+                val = ''.join(choice('abcdefghijklmnopqrstuvwxyz') for _ in range(5))
+            elif data_type == int:
+                val = np.random.choice(range(10))
+            elif data_type == float:
+                val = float(np.random.choice(range(10)))
+            elif data_type == list:
+                length = np.random.randint(1, 5)
+                val = np.random.choice(range(10), size=length).tolist()
+            elif data_type == tuple:
+                length = np.random.randint(1, 5)
+                val = tuple(np.random.choice(range(10), size=length))
+            elif data_type == dict:
+                size = np.random.randint(1, 5)
+                keys = np.random.choice(range(10), size=size).tolist()
+                values = np.random.choice(range(10), size=size).tolist()
+                val = {k: v for k, v in zip(keys, values)}
+            elif data_type == set:
+                size = np.random.randint(1, 5)
+                val = set(np.random.choice(range(10), size=size))
+            col_data.append(val)
+        data.append(col_data)
+    df = pd.DataFrame(data).T
+    df.columns = [f'col{i}' for i in range(columns)]
+    return df
+```

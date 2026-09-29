@@ -1,0 +1,118 @@
+```python
+import sys
+import bisect
+
+def main():
+    input = sys.stdin.readline
+    N, W = map(int, input().split())
+    blocks = []
+    for _ in range(N):
+        x, y = map(int, input().split())
+        blocks.append((x, y))
+    
+    # Preprocess: sort blocks by (x, y) and create mapping from original index
+    blocks_sorted = sorted(blocks, key=lambda p: (p[0], p[1]))
+    # Map original index -> position in sorted list
+    pos_in_sorted = [0] * N
+    for i, (x, y) in enumerate(blocks_sorted):
+        # Find original index of this block
+        # We can store original indices while sorting
+        pass  # We'll handle differently
+    
+    # Instead, create a list of (x, y, idx) and sort
+    blocks_with_idx = [(blocks[i][0], blocks[i][1], i) for i in range(N)]
+    blocks_with_idx.sort(key=lambda t: (t[0], t[1]))
+    # Now blocks_with_idx is sorted by x, then y
+    # For each x, collect y values in sorted order
+    by_x = [[] for _ in range(W + 1)]
+    original_to_sorted_pos = [0] * N
+    for pos, (x, y, idx) in enumerate(blocks_with_idx):
+        by_x[x].append(y)
+        original_to_sorted_pos[idx] = (x, len(by_x[x]) - 1)
+    
+    # Precompute for each column the "height" after which blocks are removable
+    # We need to simulate the falling process conceptually.
+    # Key observation: The process is equivalent to:
+    # For each column, blocks fall until they hit the ground or a block below.
+    # Then, if a full row is formed at the bottom, that row is removed.
+    # This removal can cause further falls.
+    # But we can think in terms of "effective height" of each block after infinite time,
+    # considering that rows are removed only when a full bottom row exists.
+    # Actually, the problem asks for existence at a finite time T, so we need to know
+    # the state at time T.
+    
+    # Let's think differently:
+    # At each time step:
+    # 1. If bottom row is full, remove all blocks in that row.
+    # 2. Then, for each block not in bottom row and with empty below, move down.
+    # This is equivalent to: blocks fall one step per time unit, but removal of a full bottom row
+    # happens before the falling step? The description says:
+    # "At times t=1,2,..., first if entire bottom row filled, remove them, then for each remaining block,
+    # if it's not at bottom and cell below empty, move down."
+    # So removal happens, then falling.
+    
+    # We can simulate per column independently because falling is vertical, but removal is row-wide.
+    # However, removal depends on all columns.
+    
+    # Let’s denote the bottom row as y=1.
+    # A block at (x, y) at time 0 will, after t steps, have fallen as much as possible,
+    # but may be blocked by other blocks below it in its column, and may be removed if it ever becomes part of a full bottom row.
+    
+    # Consider column x. Let the blocks in column x have initial y coordinates y1 < y2 < ... < yk.
+    # After infinite time, they will occupy consecutive rows from the bottom upward, as long as they are not removed.
+    # But removal can happen if at some point a block reaches y=1 and all other columns also have a block at y=1 at that same time.
+    # That removal removes that entire row, and then blocks above can fall further.
+    
+    # This is similar to the classic "falling blocks with row clearing" puzzle.
+    # We can think of each block's final resting row as: its initial y minus the number of blocks initially below it,
+    # but adjusted for row removals.
+    # Row removals happen when every column has a block at the same row at the same time.
+    # This is complex.
+    
+    # However, note constraints: N, Q up to 2e5, T up to 1e9.
+    # We need O(log N) per query.
+    
+    # Let's think about the timeline of a block:
+    # At time 0, at (x, y).
+    # It starts falling. Let d = number of blocks in same column with smaller y.
+    # Then without row removal, it would reach row y - d after d time steps? Actually, each fall takes one time unit.
+    # The block cannot fall past the block directly below it. So after d time steps, it will be at y - d.
+    # But if row removal occurs, it may fall further because the block below may be removed.
+    
+    # Row removal occurs when for some row r, every column has a block at row r at the same moment.
+    # That moment is when the lowest block in each column has reached row r.
+    # Since columns fall independently until they hit the ground or a block, the time when column x's lowest block reaches row r is:
+    # Let lowest block in column x have initial y = low_x. It will reach row 1 after low_x - 1 steps (since it falls one per step, and starts at low_x).
+    # But it may be blocked by other blocks? Actually, the lowest block has no block below, so it falls freely until row 1.
+    # So time for column x's lowest block to reach row r is (low_x - r) if r <= low_x.
+    # For row removal to happen at time t, we need for all columns x, there exists a block that reaches row r at time t.
+    # Actually, we need that at time t, after the falling step, each column has a block exactly at row r.
+    # But because falling is simultaneous, we need that for each column, the block that ends at row r at time t must have started at some y and fallen appropriately.
+    
+    # This is getting too complicated.
+    
+    # Let's search for known solution patterns: This problem is from AtCoder "Falling Blocks" maybe.
+    # I recall a known approach: For each column, sort blocks by y ascending.
+    # Then, for each block, compute the time it reaches the bottom if no row removals: t0 = y - rank_in_column, where rank_in_column is number of blocks below it.
+    # Then, consider row removals: They happen when for some time t, every column has a block with t0 = t.
+    # Actually, row removal at row 1 occurs when all columns have a block with t0 = some common time.
+    # But after a row removal, the "clock" resets for blocks above.
+    
+    # Alternative: Think of the process as: Blocks fall until they hit the ground or a block. Then, if a full row forms, it's removed instantly, and blocks above fall one more step? Wait, the description says removal happens before the falling step at each time unit.
+    # So at time t, first check full row, remove, then all blocks that can fall do fall.
+    # This is equivalent to: At each time, remove any full rows, then apply gravity.
+    
+    # We can model the final configuration after infinite time: It's the same as if we repeatedly remove full rows from the bottom.
+    # That is, take the initial set of blocks, let them fall as far down as possible ignoring row removal, then while there exists a full row at some height h, remove that row and let blocks above fall to fill the gap.
+    # This is analogous to Tetris.
+    
+    # So we can compute the final resting row for each block after infinite time as follows:
+    # Let for each column, sort blocks by y ascending. Let their initial y's be y1 < y2 < ... < yk.
+    # Without row removal, they would occupy rows 1,2,...,k (since they fall as far down as possible).
+    # But with row removal, some rows may be removed. Which rows? Those where every column has a block at that row in the "without removal" configuration.
+    # So we need to find, for each row r from 1 upwards, whether every column has a block at row r in the fallen-but-no-removal state.
+    # If yes, that row is removed, and all blocks above shift down one.
+    # So we can compute the number of removed rows below a given block.
+    
+    # Let’s define for each column x, let f_x[i] be the row that the i-th block (0-indexed from bottom) would occupy without row removal: f_x[i] = i+1.
+    # But actually, because blocks start at different heights, the fallen-but-no-removal row is: the i-th block (from bottom) will be at row i+1? Wait, if blocks fall freely until they hit the ground or a block below, then the lowest block will be at row 1, the next at row 2, etc. Yes, regardless of initial y, as long as they are in the same column, they

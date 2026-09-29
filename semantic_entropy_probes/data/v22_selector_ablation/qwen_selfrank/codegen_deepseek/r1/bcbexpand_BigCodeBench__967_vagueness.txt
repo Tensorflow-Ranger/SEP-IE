@@ -1,0 +1,30 @@
+```python
+import numpy as np
+from scipy import integrate
+import matplotlib.pyplot as plt
+def task_func(func, x_range=(-2, 2), num_points=1000):
+    """
+    Calculates and plots both a given function and its integral over a specified range,
+    using a linearly spaced range of x-values and numerical integration (cumulative trapezoidal rule).
+    
+    Parameters:
+    - func: The function to evaluate and integrate.
+    - x_range: Tuple (x_min, x_max) defining the range of x-values.
+    - num_points: Number of linearly spaced points in the range.
+    
+    Returns:
+    - matplotlib.axes.Axes: The Axes object containing the plots of the function and its integral.
+    """
+    x_min, x_max = x_range
+    x = np.linspace(x_min, x_max, num_points)
+    y = func(x)
+    integral = integrate.cumulative_trapezoid(y, x, initial=0)
+    fig, ax = plt.subplots()
+    ax.plot(x, y, label=f'f(x) = {func.__name__}')
+    ax.plot(x, integral, label=f'Integral of {func.__name__}')
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.legend()
+    ax.grid(True)
+    return ax
+```

@@ -1,0 +1,12 @@
+```python
+from scipy import fftpack
+from matplotlib import pyplot as plt
+def task_func(arr):
+    row_sums = arr.sum(axis=1)
+    fft_result = fftpack.fft(row_sums)
+    fig, ax = plt.subplots()
+    ax.plot(fft_result.real, label='Real')
+    ax.plot(fft_result.imag, label='Imaginary')
+    ax.legend()
+    return ax
+```

@@ -1,0 +1,92 @@
+```python
+import sys
+
+def solve() -> None:
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    it = iter(data)
+    N = int(next(it))
+    P = [int(next(it)) for _ in range(N)]
+
+    # position of each value (1-indexed)
+    pos = [0] * (N + 1)
+    for idx, val in enumerate(P, 1):
+        pos[val] = idx
+
+    total_cost = 0
+    i = 1
+    while i <= N:
+        if pos[i] == i:
+            i += 1
+            continue
+        # find the segment where values are consecutive and misplaced
+        start = i
+        current = i
+        while current <= N and pos[current] != current:
+            # check if the next value is consecutive and also misplaced
+            if current + 1 <= N and pos[current + 1] == pos[current] + 1:
+                current += 1
+            else:
+                break
+        end = current
+        # we need to move the whole block [start..end] leftwards
+        # cost is sum of indices we swap over
+        # each element in the block will pass through positions
+        # from its current position down to its target position
+        # but since swaps are only adjacent, we can compute:
+        # For each j from start to end, we need to swap it from pos[j] down to j.
+        # However, because they are consecutive in both value and current position,
+        # we can treat the block as one unit moving left.
+        # The total cost is sum_{k=start}^{end} (pos[k] - k) * k? Wait, careful.
+        # Actually, each adjacent swap at position i costs i.
+        # If we move an element from position x to position y (y < x),
+        # it passes through positions x-1, x-2, ..., y.
+        # The costs incurred are (x-1) + (x-2) + ... + y = sum_{t=y}^{x-1} t.
+        # That sum is (x-1 + y) * (x - y) // 2.
+        # But we can compute total cost directly:
+        # For the block, the leftmost element (value start) is at pos[start],
+        # it needs to go to position start.
+        # The rightmost element (value end) is at pos[end] = pos[start] + (end-start),
+        # it needs to go to position end.
+        # Since they are consecutive in both current and target, the swaps
+        # will not interfere across blocks. The minimal way is to bubble the
+        # whole block left together.
+        # Equivalent to: for each value v in [start..end], we need to perform
+        # (pos[v] - v) swaps, each at a certain position. But the positions
+        # decrease as we move left.
+        # Simpler: simulate bubble sort but only on this block.
+        # Actually, we can think of it as: we need to move the block so that
+        # its leftmost element reaches start. That requires moving it left by
+        # (pos[start] - start) steps. Each step i costs the current position.
+        # As we move left, the position decreases.
+        # So total cost for moving the whole block left by d steps is:
+        # sum_{k=pos[start] - d + 1}^{pos[start]} k? Wait, let's derive.
+        # Let L = pos[start], R = pos[end] = L + (end-start).
+        # The block occupies positions L..R.
+        # We want it to occupy start..end.
+        # Shift amount = L - start.
+        # For each shift step, we swap the leftmost element of the block with the element to its left.
+        # The cost of that swap is the position of the leftmost element before the swap.
+        # Initially leftmost element at L, cost L.
+        # After one swap, it's at L-1, cost L-1 next time, etc.
+        # So total cost = L + (L-1) + ... + (L - (shift-1)) = shift * (2L - shift + 1) // 2.
+        # But careful: when we move the leftmost element, the rest of the block also shifts left.
+        # So indeed the whole block moves left together.
+        # So total cost for this block = sum_{k=L - shift + 1}^{L} k.
+        shift = pos[start] - start
+        length = end - start + 1
+        # Actually shift = L - start, and L = pos[start].
+        # The positions we swap at are L, L-1, ..., L-shift+1.
+        left_pos = pos[start]
+        total_cost += shift * (2 * left_pos - shift + 1) // 2
+        # Update positions for values in this block (they all move left by shift)
+        for v in range(start, end + 1):
+            pos[v] -= shift
+        i = end + 1
+
+    print(total_cost)
+
+if __name__ == "__main__":
+    solve()
+```

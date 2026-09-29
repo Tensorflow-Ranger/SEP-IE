@@ -1,0 +1,23 @@
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+def task_func(column, data):
+    df = pd.DataFrame(data)
+    if df.empty:
+        stats = {'sum': 0, 'mean': np.nan, 'min': np.nan, 'max': np.nan}
+    else:
+        if column not in df.columns:
+            raise KeyError(f"Invalid column: {column}")
+        values = df[column].apply(lambda x: x if pd.to_numeric(x, errors='coerce') is not pd.NA else 0)
+        stats = {
+            'sum': values.sum(),
+            'mean': values.mean(),
+            'min': values.min(),
+            'max': values.max()
+        }
+    fig, ax = plt.subplots()
+    if not df.empty:
+        ax.pie(values, labels=df['Age'], autopct='%1.1f%%')
+    return (stats, ax)
+```

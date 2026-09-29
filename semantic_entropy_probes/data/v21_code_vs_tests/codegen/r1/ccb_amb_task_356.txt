@@ -1,0 +1,103 @@
+```python
+import sys
+import heapq
+from collections import defaultdict
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    idx = 0
+    N = int(data[idx])
+    idx += 1
+    
+    W = list(map(int, data[idx:idx+N]))
+    idx += N
+    
+    intervals = []
+    for _ in range(N):
+        L = int(data[idx])
+        R = int(data[idx+1])
+        intervals.append((L, R))
+        idx += 2
+    
+    Q = int(data[idx])
+    idx += 1
+    
+    queries = []
+    for _ in range(Q):
+        s = int(data[idx])
+        t = int(data[idx+1])
+        queries.append((s, t))
+        idx += 2
+    
+    # Build interval graph
+    # For each interval [L, R], create a list of nodes that overlap with it
+    # To avoid O(N^2) time, we can use a line sweep approach
+    # We'll create a graph where two nodes are connected if their intervals overlap
+    
+    # Create a list of events for line sweep
+    events = []
+    for i in range(N):
+        L, R = intervals[i]
+        events.append((L, i, 1))  # start of interval
+        events.append((R + 1, i, -1))  # end of interval
+    
+    # Sort events by position
+    events.sort()
+    
+    # Use a set to keep track of active intervals
+    active = set()
+    # Build adjacency list
+    adj = [[] for _ in range(N)]
+    
+    # Process events
+    for event in events:
+        pos, i, typ = event
+        if typ == 1:
+            active.add(i)
+        else:
+            active.remove(i)
+        
+        # For each node in active, connect to current node
+        for j in active:
+            if j != i:
+                adj[i].append(j)
+                adj[j].append(i)
+    
+    # Dijkstra's algorithm to find minimum weight path
+    import heapq
+    
+    def dijkstra(start, end):
+        dist = [float('inf')] * N
+        dist[start] = W[start - 1]
+        heap = [(W[start - 1], start)]
+        visited = [False] * N
+        
+        while heap:
+            current_dist, u = heapq.heappop(heap)
+            if visited[u]:
+                continue
+            visited[u] = True
+            if u == end:
+                return current_dist
+            for v in adj[u]:
+                if not visited[v]:
+                    new_dist = current_dist + W[v - 1]
+                    if new_dist < dist[v]:
+                        dist[v] = new_dist
+                        heapq.heappush(heap, (new_dist, v))
+        return -1
+    
+    # Process queries
+    results = []
+    for s, t in queries:
+        res = dijkstra(s - 1, t - 1)
+        results.append(str(res))
+    
+    print('\n'.join(results))
+
+if __name__ == "__main__":
+    main()
+```

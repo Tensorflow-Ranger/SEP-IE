@@ -1,0 +1,43 @@
+```python
+import sqlite3
+from random import choice, randint, seed
+import os
+
+def task_func(db_name, table_name, num_entries, random_seed=None):
+    if num_entries < 0:
+        raise ValueError("num_entries cannot be negative")
+    
+    if random_seed is not None:
+        seed(random_seed)
+    
+    NAMES = ['John', 'Jane', 'Steve', 'Emma', 'Liam', 'Olivia']
+    AGES = (18, 65)
+    HEIGHTS = (150, 200)
+    
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
+    
+    cursor.execute(f"DROP TABLE IF EXISTS {table_name}")
+    cursor.execute(f"""
+        CREATE TABLE {table_name} (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            age INTEGER,
+            height INTEGER
+        )
+    """)
+    
+    for _ in range(num_entries):
+        name = choice(NAMES)
+        age = randint(AGES[0], AGES[1])
+        height = randint(HEIGHTS[0], HEIGHTS[1])
+        cursor.execute(f"""
+            INSERT INTO {table_name} (name, age, height)
+            VALUES (?, ?, ?)
+        """, (name, age, height))
+    
+    conn.commit()
+    conn.close()
+    
+    return os.path.abspath(db_name)
+```
