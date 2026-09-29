@@ -1,0 +1,14 @@
+{
+  "branch_idx": 791,
+  "id": "bcbexpand_BigCodeBench/1007_semantic",
+  "questions": [
+    "Should the function raise a ValueError for a JSON that is a single dictionary (not a list of dictionaries) but is still convertible to a DataFrame (e.g., {'A': [1,2], 'B': [3,4]})?",
+    "If the JSON is a list of dictionaries but some dictionaries have missing keys, should the function still succeed (pandas will fill with NaN) or raise ValueError?",
+    "Should the function raise SystemError for any requests.RequestException, including timeout and connection errors, or only for specific subtypes?",
+    "If the JSON is a list of empty dictionaries, should it succeed (empty DataFrame) or raise ValueError?",
+    "Should the function handle JSON that is a list of non-dictionary items (e.g., list of strings) by raising ValueError?",
+    "If the HTTP response status is successful (e.g., 200) but the response body is empty or not valid JSON, should ValueError be raised from response.json()?",
+    "Should the function raise SystemError for a redirect (3xx status) if response.raise_for_status() does not treat it as an error?",
+    "If the JSON is a dictionary with non-list values (e.g., {'A': 1, 'B': 2}), should it raise ValueError or succeed (DataFrame with one row)?"
+  ]
+}

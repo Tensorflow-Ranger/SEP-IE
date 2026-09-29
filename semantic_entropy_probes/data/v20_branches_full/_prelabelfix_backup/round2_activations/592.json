@@ -1,0 +1,14 @@
+{
+  "branch_idx": 592,
+  "id": "ccb_amb_task_85",
+  "questions": [
+    "Are we guaranteed that the bib numbers Q_i are a permutation of 1..N, or could they be any distinct numbers within that range (meaning they might not cover all numbers 1..N)?",
+    "Is the output for each i from 1 to N, or for each bib number i from 1 to N? The prompt says 'for each i = 1,2,...,N, find the number written on the bib of the person that the person wearing the bib with number i is staring at.' This could be interpreted as i being the bib number, not the person index.",
+    "If bib numbers are not a permutation, what should be output for i that does not appear in Q? For example, if N=3 and Q = [2,3,5] (invalid per constraints?), but constraints only say 1 \u2264 Q_i \u2264 N and distinct, so 5 is invalid. So maybe it's always a permutation?",
+    "The phrase 'person i is wearing a bib with the number Q_i' suggests person index i (1..N) has bib Q_i. Then 'staring at person P_i' means person i stares at person P_i. The output asks for the bib number of the person that the person wearing bib i is staring at. So we need to map from bib i to person wearing it, then to P of that person, then to Q of that target person. Is this interpretation correct?",
+    "Should the output be printed as a single line with N space-separated integers, or one per line? The prompt says 'Print the result.' without specifying format.",
+    "Is there any guarantee that P_i values being distinct implies no self-stares (i.e., P_i \u2260 i)? Distinctness of P_i means all P_i are different, but it doesn't forbid P_i = i for some i, as long as all P_i are distinct. For example, N=2, P=[1,2] is distinct but each stares at themselves. Is this allowed?",
+    "Do we need to handle cases where the staring chain leads to a person not wearing a bib? Since Q is a permutation, every person has a bib, so no.",
+    "The clarification says 'Not addressed by the given clarification.' Does this mean the original prompt had a clarification that didn't resolve the core ambiguity? If so, what was that clarification? Without knowing, we must assume the prompt as given is ambiguous."
+  ]
+}

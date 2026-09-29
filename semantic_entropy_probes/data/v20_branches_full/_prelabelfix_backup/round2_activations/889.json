@@ -1,0 +1,14 @@
+{
+  "branch_idx": 889,
+  "id": "bcbexpand_BigCodeBench/236_vagueness",
+  "questions": [
+    "Which columns are used to drop duplicates? The prompt says 'Rows with duplicate entries are dropped' but does not specify which columns define a duplicate entry. The reference solution uses subset='Name', but is that intended?",
+    "What is the target column for prediction? The prompt says 'Predicts categories based on 'Age' and 'Score'' but does not name the target column. The reference solution uses 'Category'. Should the function assume a column named 'Category' exists?",
+    "Should the function handle missing values in 'Age', 'Score', or the target column? The prompt does not mention handling NaN values, but dropping duplicates might not remove rows with missing features.",
+    "Are the columns 'Age' and 'Score' guaranteed to be numeric? The prompt says 'based on 'Age' and 'Score'' but does not specify type; if they are strings, the model may fail or behave differently.",
+    "What should happen if after dropping duplicates, the DataFrame has too few rows for train_test_split (e.g., 0 or 1 row)? The prompt does not specify error handling for insufficient data.",
+    "Is the RandomForestClassifier supposed to use any specific hyperparameters beyond random_state? The prompt says 'uses a RandomForestClassifier' but only mentions random_state in function signature; default parameters may vary.",
+    "Should the function return the accuracy as a Python float (e.g., 0.75) or as a string or rounded value? The prompt says 'float: The accuracy of the prediction as a float value.' but does not specify formatting.",
+    "What if the target column has more than two unique categories? The prompt says 'categories' (plural) and the clarification says RandomForestClassifier handles string labels, but is multi-class classification intended?"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "branch_idx": 361,
+  "id": "bcbexpand_BigCodeBench/752_vagueness",
+  "questions": [
+    "Should the target column be excluded from the input features? The prompt says 'target_column is used as target in training the model' but does not explicitly state whether it should be dropped from the feature set. The reference solution drops it, but is that required?",
+    "What metric should the model's score be? The prompt says 'return the model score of the test set' but does not specify which scoring metric (e.g., R\u00b2, MSE). The reference solution uses model.score, which for LinearRegression is R\u00b2, but is that guaranteed?",
+    "Should the function handle missing values (NaN) in the data? The prompt only says data values should be numeric, but numeric columns can contain NaN.",
+    "Should the function raise an error if test_size is exactly 0 or 1? The prompt says 'test_size is not between 0 and 1' (implying exclusive), but the reference solution checks test_size <= 0 or test_size >= 1 (exclusive).",
+    "Should the function ensure that after splitting, both training and test sets have at least one sample? The prompt doesn't specify, but very small data or extreme test_size could cause empty sets.",
+    "Should the function handle the case where the target column is the only column in the DataFrame? Dropping it would leave empty feature matrices.",
+    "Should the function use any specific solver or parameters for LinearRegression (e.g., fit_intercept, normalize)? The prompt doesn't specify, and the reference solution uses default parameters.",
+    "Should the function ensure that the data has more than one unique value in the target column or features? A constant target might produce a perfect score or cause issues."
+  ]
+}

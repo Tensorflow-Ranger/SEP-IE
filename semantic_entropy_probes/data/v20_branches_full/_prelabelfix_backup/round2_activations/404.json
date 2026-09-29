@@ -1,0 +1,14 @@
+{
+  "branch_idx": 404,
+  "id": "bcbexpand_BigCodeBench/837_semantic",
+  "questions": [
+    "Should scale_cols be interpreted as column indices (0-based) or column names? The prompt says 'indexes or names' but the reference solution treats them as indices, and the example call uses [1,2,3] which are indices. However, the docstring doesn't specify which takes precedence if a list contains mixed types or if a string name is provided.",
+    "If scale_cols contains duplicate entries, should the column be scaled multiple times (which would affect the output) or should duplicates be ignored?",
+    "Should the scaling be applied in-place to the original DataFrame, or should a copy be made before scaling? The reference solution modifies in-place, but the prompt doesn't specify.",
+    "If scale_cols includes an index that is out of bounds for the columns list (e.g., index 10 when there are only 5 columns), should the function raise an error, ignore it, or scale a non-existent column?",
+    "Should the random integer generation include both endpoints 0 and 99? The clarification says 'integers from 0 to 99 inclusive', but numpy's randint excludes the upper bound by default.",
+    "If columns parameter is overridden (e.g., a custom list of column names), should scale_cols still refer to positions in that custom list, or to the default column names?",
+    "Should the StandardScaler be fitted on each column individually (as in the reference) or on all specified columns together (multivariate scaling)?",
+    "Is the random_seed parameter intended to control only the initial random integer generation, or also any randomness within StandardScaler (though StandardScaler is deterministic)?"
+  ]
+}

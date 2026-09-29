@@ -1,0 +1,14 @@
+{
+  "branch_idx": 3279,
+  "id": "bcbexpand_BigCodeBench/737_semantic",
+  "questions": [
+    "Should the function treat non-list items at the top level as part of the data to be flattened, or only consider sublists? The prompt says 'treat each sublist independently' but the reference solution flattens recursively, including top-level non-list items.",
+    "What is the expected behavior if a sublist contains non-numeric elements (e.g., strings, None)? Should the function raise an error, ignore them, or treat them as numbers if possible?",
+    "Does 'treat each sublist independently' mean we compute a median per sublist and then combine them, or simply flatten all elements from all sublists into one collection for a single median?",
+    "How should the function handle nested sublists that are empty? The clarification says empty sublists are ignored, but does that apply recursively to empty lists deep inside?",
+    "What numeric types are allowed? Should the function support integers, floats, and possibly complex numbers? The reference uses numpy.sort which has type-specific behavior.",
+    "Is the median calculation expected to be stable with respect to the original order of elements? The reference sorts, but median definition doesn't require stable sorting.",
+    "Should the function raise a ValueError only for an empty overall list, or also for other invalid cases like all elements being ignored (e.g., only empty sublists)?",
+    "What is the expected behavior if the flattened list contains NaN or infinite values? Should they be handled specially or left to numpy's sorting?"
+  ]
+}

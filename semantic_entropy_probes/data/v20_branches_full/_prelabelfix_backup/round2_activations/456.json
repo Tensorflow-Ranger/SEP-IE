@@ -1,0 +1,14 @@
+{
+  "branch_idx": 456,
+  "id": "bcbexpand_BigCodeBench/954_semantic",
+  "questions": [
+    "If a target word contains spaces, should the underscore replacement apply to the entire multi-word phrase as a single unit, or to each space-separated token individually? The clarification says 'matched as substrings', but does that mean 'apple banana' becomes 'apple_banana' as a whole, or could it also match across word boundaries in the sentence?",
+    "When a target word appears multiple times in a sentence, does the 'applied once per unique word occurrence across all sentences' mean each instance is replaced, or only the first occurrence per sentence? The reference solution loops over target_words and applies re.sub which replaces all occurrences, but the note could be misinterpreted.",
+    "Are target words matched case-insensitively before or after lowercasing the final sentence? The spec says 'case insensitive' and returns 'all lowercase strings', but does matching occur on the original mixed-case sentence or after lowercasing?",
+    "If a target word is a substring of a larger vocabulary word (e.g., target 'apple' and vocabulary contains 'pineapple'), should it be replaced? The clarification says 'matched as substrings', which suggests yes, but is that intended?",
+    "Does 'applied once per unique word occurrence across all sentences' mean that if the same target word appears in multiple sentences, each occurrence is replaced independently, or is there a global deduplication? The reference solution processes each sentence separately, so likely independent.",
+    "Should the underscore replacement preserve the original case of the matched substring in the output, or always output the target word in lowercase with underscores? The spec says returns 'all lowercase strings', but the replacement might keep original case if matched case-insensitively.",
+    "If a target word contains underscores initially, should they be left as is, or should spaces within that target be replaced, potentially creating double underscores? The spec only mentions replacing spaces with underscores.",
+    "Is the vocabulary assumed to be a list of single words, or can vocabulary entries contain spaces? The generation step joins with spaces, but if vocabulary has multi-word entries, that could affect matching."
+  ]
+}

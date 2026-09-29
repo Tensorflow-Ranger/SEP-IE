@@ -1,0 +1,14 @@
+{
+  "branch_idx": 3196,
+  "id": "bcbexpand_BigCodeBench/497_semantic",
+  "questions": [
+    "Does 'days are counted inclusively from the current day' mean that days_in_past=1 yields yesterday, or does it mean that days_in_past=0 yields today and days_in_past=1 yields yesterday (i.e., the typical non-inclusive interpretation)?",
+    "Should the function use the system's local timezone (datetime.now() without pytz) or UTC (as in the reference solution)? The prompt says 'current system time's date in UTC', but the canonical solution uses pytz.UTC, which may not be available in all environments.",
+    "Is the input 'days_in_past' required to be an integer, or should it also accept floats? The prompt says 'days', but timedelta accepts floats.",
+    "What should happen if days_in_past is so large that the computed date is before the epoch or causes an overflow? Should there be a maximum allowed value?",
+    "Should the function raise a ValueError for non-numeric inputs, or let Python's type error propagate?",
+    "Does 'full English name' imply the names should be capitalized exactly as in calendar.day_name (e.g., 'Monday')? The clarification mentions calendar.day_name, but is that a requirement or just an example?",
+    "Should the function account for daylight saving time or leap seconds when subtracting days? The reference uses timedelta which does not.",
+    "If days_in_past is zero, should the function return the weekday of the current moment in UTC, or the weekday of the start of the current day in UTC? The prompt says 'date that is 0 days ago', which implies the current date."
+  ]
+}

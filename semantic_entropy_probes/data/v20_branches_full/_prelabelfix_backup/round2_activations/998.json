@@ -1,0 +1,14 @@
+{
+  "branch_idx": 998,
+  "id": "bcbexpand_BigCodeBench/512_semantic",
+  "questions": [
+    "What does 'using either cumulative or individual values for calculations' mean? The prompt says to calculate sum, mean, min, max of a given column, but the 'cumulative or individual' phrase is ambiguous: should the bar chart plot cumulative values (running total) or individual row values, and should the statistics be computed on cumulative or individual values?",
+    "The clarification says 'the bar chart will plot each row's product separately.' Does this mean the x-axis uses the 'Product' column exactly as given, even if duplicate product names exist? And if duplicates exist, will the bar chart have separate bars for each duplicate (leading to same label repeated) or should duplicates be combined?",
+    "The function raises ValueError if 'quantity sold or total sales is negative' \u2014 but what if the given column is neither 'Quantity Sold' nor 'Total Sales'? Should it still check those columns for negativity, or only check the specified column?",
+    "The data parameter is described as a 'list of sales data' but not its structure. The reference solution expects a list of lists with three elements corresponding to fixed columns. Should the function assume exactly three columns (Product, Quantity Sold, Total Sales) in that order, or infer from data?",
+    "The bar chart title is 'Bar Chart of (column)'. Should (column) be replaced with the actual column name string (e.g., 'Total Sales') or with the data from that column?",
+    "The function returns a tuple (dict, Axes). Should the Axes object be from the current matplotlib figure, or a new figure? Should the function create a new figure or reuse an existing one?",
+    "The prompt says 'calculate the sum, the mean, the minimum, the maximum of a given column'. Should these be calculated using pandas/numpy with default settings (e.g., mean as float, ignoring NaN), or should there be special handling for missing/NaN values?",
+    "The 'Product' column is used for x-axis. What if the data list has rows where 'Product' is not a string (e.g., numeric)? Should the bar chart still work, or should it convert to string?"
+  ]
+}

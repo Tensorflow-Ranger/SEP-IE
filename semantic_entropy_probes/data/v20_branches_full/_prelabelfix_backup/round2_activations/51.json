@@ -1,0 +1,14 @@
+{
+  "branch_idx": 51,
+  "id": "bcb_BigCodeBench/36_vagueness",
+  "questions": [
+    "Should the Box-Cox transformation be applied to columns where all values are already in TARGET_VALUES (so no zeros introduced) but the data is not constant (e.g., column with values [1,3,1,3])?",
+    "When adding 1 for Box-Cox due to zeros, should the addition be applied to the entire column before transformation, or only to the zero values?",
+    "If a column's data is constant after zero replacement (e.g., all zeros or all a single target value), should it be included in the transformed DataFrame unchanged, or should it be excluded from the KDE plot as per clarification?",
+    "What should happen if a column contains only zeros after replacement (i.e., no values match TARGET_VALUES)? Is it considered constant and left unchanged, or should it be transformed (Box-Cox on zeros+1)?",
+    "Should the KDE plot be a single subplot with all transformed columns overlaid, or separate subplots per column?",
+    "Is the Box-Cox lambda parameter (the second return value from stats.boxcox) needed or should it be ignored? The reference solution discards it.",
+    "Should the function raise an error if the DataFrame contains non-positive values before zero replacement, or after replacement?",
+    "What is the expected behavior if TARGET_VALUES contains non-positive numbers? The function currently assumes positive input, but zero replacement could introduce zeros."
+  ]
+}

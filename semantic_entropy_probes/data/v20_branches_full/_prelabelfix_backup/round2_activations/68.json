@@ -1,0 +1,14 @@
+{
+  "branch_idx": 68,
+  "id": "bcbexpand_BigCodeBench/1040_vagueness",
+  "questions": [
+    "Should the server handle multiple simultaneous client connections concurrently, or is it acceptable to process them sequentially within the select loop?",
+    "What encoding should be used for decoding received data and for encoding the echoed message? The reference uses decode() without arguments and encode('utf-8'), but is UTF-8 always correct?",
+    "What should happen if recv() returns data that cannot be decoded as UTF-8? Should the connection be closed, the data ignored, or an error logged?",
+    "Is the server expected to be stopped exactly after run_duration seconds, or is it acceptable to stop after the next select timeout (up to run_duration + timeout)?",
+    "Should the server bind to 'localhost' only (as default) or to all interfaces (e.g., '0.0.0.0')? The default address is 'localhost', but is that a requirement or just a default?",
+    "What should be the behavior if the server socket fails to bind (e.g., address already in use)? Should the function raise an exception, return an error status, or retry?",
+    "Is the server required to handle partial sends (where sendall might block in a non-blocking setup)? The reference uses sendall, but with non-blocking sockets, could it raise BlockingIOError?",
+    "Should the time appended be the time when data is received, or the time when it is about to be sent back? The reference uses datetime.now() at recv time, but the prompt says 'current time' which could be ambiguous."
+  ]
+}
