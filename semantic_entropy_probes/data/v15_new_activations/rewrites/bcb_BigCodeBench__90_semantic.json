@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/90_semantic",
+ "candidates": [
+  {
+   "question": "What is the fixed distance threshold?",
+   "answer": "There is no fixed distance threshold; the original specification was ambiguous, but the intended behavior is to simply return the k nearest neighbors from the entire dataset.",
+   "inline_prompt": "Calculate the 'k' nearest neighbors by geographic coordinates using a dataset and a target data point, where neighbors are considered within a fixed distance threshold. The function returns a list of the 'k' nearest neighbors, sorted in ascending order of their distances from the target. There is no fixed distance threshold; simply return the k nearest neighbors from the entire dataset. Constants: radius of earth is 6371 km\nThe function should raise the exception for: ValueError: If 'k' is a negative integer or not an integer.\nThe function should output with:\n    list: List of the 'k' nearest neighbors as [Latitude, Longitude].\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport math\ndef task_func(data, target, k):\n```"
+  },
+  {
+   "question": "Should we only consider neighbors within the threshold when selecting the top k nearest, or select all within threshold then take top k?",
+   "answer": "There is no threshold; the function should return the k nearest neighbors from the entire dataset.",
+   "inline_prompt": "Calculate the 'k' nearest neighbors by geographic coordinates using a dataset and a target data point, where neighbors are considered within a fixed distance threshold. The function returns a list of the 'k' nearest neighbors, sorted in ascending order of their distances from the target. There is no threshold; return the k nearest neighbors from the entire dataset. Constants: radius of earth is 6371 km\nThe function should raise the exception for: ValueError: If 'k' is a negative integer or not an integer.\nThe function should output with:\n    list: List of the 'k' nearest neighbors as [Latitude, Longitude].\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport math\ndef task_func(data, target, k):\n```"
+  },
+  {
+   "question": "What should happen if there are fewer than k neighbors within the threshold?",
+   "answer": "Since there is no threshold, if there are fewer than k neighbors in the entire dataset, return all of them.",
+   "inline_prompt": "Calculate the 'k' nearest neighbors by geographic coordinates using a dataset and a target data point, where neighbors are considered within a fixed distance threshold. The function returns a list of the 'k' nearest neighbors, sorted in ascending order of their distances from the target. If there are fewer than k neighbors in the dataset, return all of them. Constants: radius of earth is 6371 km\nThe function should raise the exception for: ValueError: If 'k' is a negative integer or not an integer.\nThe function should output with:\n    list: List of the 'k' nearest neighbors as [Latitude, Longitude].\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport math\ndef task_func(data, target, k):\n```"
+  },
+  {
+   "question": "Is the distance calculated as Euclidean or Haversine (great-circle)?",
+   "answer": "The distance should be calculated using the Haversine formula (great-circle distance) with Earth's radius given as 6371 km.",
+   "inline_prompt": "Calculate the 'k' nearest neighbors by geographic coordinates using a dataset and a target data point, where neighbors are considered within a fixed distance threshold. The function returns a list of the 'k' nearest neighbors, sorted in ascending order of their distances from the target. The distance should be calculated using the Haversine formula (great-circle distance). Constants: radius of earth is 6371 km\nThe function should raise the exception for: ValueError: If 'k' is a negative integer or not an integer.\nThe function should output with:\n    list: List of the 'k' nearest neighbors as [Latitude, Longitude].\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport math\ndef task_func(data, target, k):\n```"
+  },
+  {
+   "question": "Should the output include distances or just coordinates?",
+   "answer": "The output includes just the coordinates as [Latitude, Longitude], not the distances.",
+   "inline_prompt": "Calculate the 'k' nearest neighbors by geographic coordinates using a dataset and a target data point, where neighbors are considered within a fixed distance threshold. The function returns a list of the 'k' nearest neighbors, sorted in ascending order of their distances from the target. The output includes just the coordinates as [Latitude, Longitude], not the distances. Constants: radius of earth is 6371 km\nThe function should raise the exception for: ValueError: If 'k' is a negative integer or not an integer.\nThe function should output with:\n    list: List of the 'k' nearest neighbors as [Latitude, Longitude].\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport math\ndef task_func(data, target, k):\n```"
+  },
+  {
+   "question": "What if multiple neighbors have the same distance? How should ties be broken?",
+   "answer": "Not specified beyond what's given; assume standard behavior (e.g., any order among ties is acceptable).",
+   "inline_prompt": "Calculate the 'k' nearest neighbors by geographic coordinates using a dataset and a target data point, where neighbors are considered within a fixed distance threshold. The function returns a list of the 'k' nearest neighbors, sorted in ascending order of their distances from the target. If multiple neighbors have the same distance, any order among ties is acceptable. Constants: radius of earth is 6371 km\nThe function should raise the exception for: ValueError: If 'k' is a negative integer or not an integer.\nThe function should output with:\n    list: List of the 'k' nearest neighbors as [Latitude, Longitude].\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport math\ndef task_func(data, target, k):\n```"
+  },
+  {
+   "question": "Are latitude and longitude in degrees or radians?",
+   "answer": "Latitude and longitude are in degrees, as the Haversine formula internally converts them to radians.",
+   "inline_prompt": "Calculate the 'k' nearest neighbors by geographic coordinates using a dataset and a target data point, where neighbors are considered within a fixed distance threshold. The function returns a list of the 'k' nearest neighbors, sorted in ascending order of their distances from the target. Latitude and longitude are in degrees, as the Haversine formula internally converts them to radians. Constants: radius of earth is 6371 km\nThe function should raise the exception for: ValueError: If 'k' is a negative integer or not an integer.\nThe function should output with:\n    list: List of the 'k' nearest neighbors as [Latitude, Longitude].\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport math\ndef task_func(data, target, k):\n```"
+  },
+  {
+   "question": "What if k exceeds the total number of data points?",
+   "answer": "If k exceeds the number of data points, return all data points sorted by distance.",
+   "inline_prompt": "Calculate the 'k' nearest neighbors by geographic coordinates using a dataset and a target data point, where neighbors are considered within a fixed distance threshold. The function returns a list of the 'k' nearest neighbors, sorted in ascending order of their distances from the target. If k exceeds the total number of data points, return all data points sorted by distance. Constants: radius of earth is 6371 km\nThe function should raise the exception for: ValueError: If 'k' is a negative integer or not an integer.\nThe function should output with:\n    list: List of the 'k' nearest neighbors as [Latitude, Longitude].\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport math\ndef task_func(data, target, k):\n```"
+  }
+ ]
+}

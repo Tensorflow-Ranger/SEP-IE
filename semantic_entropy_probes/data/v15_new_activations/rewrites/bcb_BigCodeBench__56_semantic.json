@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/56_semantic",
+ "candidates": [
+  {
+   "question": "Should we convert only the first number found in each line (e.g., if there were extra numbers before 'Score'), or specifically the number after 'Score:'?",
+   "answer": "Convert specifically the number after 'Score:' in each line, not just the first number found.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the scores in integer, specifically the number after 'Score:' in each line."
+  },
+  {
+   "question": "What if a line contains multiple numbers (e.g., 'Score: 85, Category: Math, Extra: 99')? Should we still only convert the first number or the score number?",
+   "answer": "Convert only the number after 'Score:', ignoring any other numbers in the line.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the scores in integer, specifically the number after 'Score:' in each line, ignoring any other numbers."
+  },
+  {
+   "question": "Is the category always a single word, or can it contain spaces or punctuation?",
+   "answer": "The category can contain any characters (including spaces and punctuation) between 'Category: ' and the next comma or end of line.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the scores in integer, specifically the number after 'Score:' in each line, ignoring any other numbers. The category can contain any characters between 'Category: ' and the next comma or end of line."
+  },
+  {
+   "question": "What if the text has lines with different formatting (e.g., missing 'Score:' or 'Category:')? Should we skip them or raise an error?",
+   "answer": "Only process lines that match the exact format 'Score: <number>, Category: <text>'; skip any lines that do not match.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the scores in integer, specifically the number after 'Score:' in each line, ignoring any other numbers. The category can contain any characters between 'Category: ' and the next comma or end of line. Only process lines that match the exact format 'Score: <number>, Category: <text>'; skip any lines that do not match."
+  },
+  {
+   "question": "Should the DataFrame columns be named exactly 'Score' and 'Category' as in the example, or can they vary?",
+   "answer": "The DataFrame columns should be named exactly 'Score' and 'Category' as shown in the example.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the scores in integer.\nThe function should output with:\n    DataFrame: A pandas DataFrame with extracted data, with columns named exactly 'Score' and 'Category'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Is the input guaranteed to have exactly one line per record, or could there be empty lines between records?",
+   "answer": "The input is not guaranteed beyond what's given; assume standard behavior where each record is on a separate line and there are no empty lines between records.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math', with each record on a separate line and no empty lines between records. Make sure to convert the scores in integer.\nThe function should output with:\n    DataFrame: A pandas DataFrame with extracted data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Should scores be converted to integers even if they are floats (e.g., 'Score: 85.5')?",
+   "answer": "The specification does not address this; assume standard behavior where only integer scores are present in the input.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math', where the scores are integers. Make sure to convert the scores in integer.\nThe function should output with:\n    DataFrame: A pandas DataFrame with extracted data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\ndef task_func(text):\n```"
+  },
+  {
+   "question": "What if the text contains no lines? Should we return an empty DataFrame with specific columns?",
+   "answer": "If the text contains no lines, return an empty DataFrame with columns 'Score' and 'Category'.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the scores in integer.\nThe function should output with:\n    DataFrame: A pandas DataFrame with extracted data, which should be empty with columns 'Score' and 'Category' if the text contains no lines.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\ndef task_func(text):\n```"
+  }
+ ]
+}

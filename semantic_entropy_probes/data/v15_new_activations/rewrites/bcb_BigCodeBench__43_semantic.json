@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/43_semantic",
+ "candidates": [
+  {
+   "question": "Should NaN values be replaced with the column average, left unchanged, or is there a condition to decide?",
+   "answer": "NaN values should be replaced with the column average.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "If replacing NaN with the average, should the average be computed before or after replacement (i.e., include NaN in calculation)?",
+   "answer": "The average should be computed from the non-NaN values in the column before replacement, as is standard for pandas mean.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe average is computed from the non-NaN values in each column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should only numeric columns be processed, or all columns? The prompt mentions 'each numeric column' but the description and plots might include non-numeric if not filtered.",
+   "answer": "Only numeric columns should be processed; non-numeric columns should be ignored.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nOnly numeric columns are processed; non-numeric columns are ignored.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "What should be done if a column has all NaN values? The average would be NaN, so replacement might not be possible.",
+   "answer": "If a column has all NaN values, the average is NaN and replacement leaves it unchanged; the statistics will be all NaN and no plot should be generated for that column.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nIf a column has all NaN values, it remains all NaN after replacement, and no plot is generated for it.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the distribution plots use seaborn's displot with default settings beyond bins=10, like kde or rug?",
+   "answer": "Use seaborn's displot with only the bins=10 parameter, not adding kde or rug.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins, using seaborn's displot with only the bins parameter."
+  },
+  {
+   "question": "Is the returned DataFrame description based on the original df or the df after NaN handling?",
+   "answer": "The returned DataFrame description is based on the dataframe after NaN values have been replaced with the column average.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics, computed after NaN replacement. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins."
+  },
+  {
+   "question": "Should the function raise an error if the input is not a pandas DataFrame, or handle it gracefully?",
+   "answer": "The input is assumed to be a pandas DataFrame; not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins."
+  },
+  {
+   "question": "What if there are no numeric columns in the DataFrame? Should it return empty description and plots or handle differently?",
+   "answer": "If there are no numeric columns, return an empty DataFrame for description and an empty list for plots.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column; if there are no numeric columns, return an empty DataFrame.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column, returning an empty list if there are no numeric columns.\n    Each plot visualizes the distribution of data in the respective column with 10 bins."
+  }
+ ]
+}

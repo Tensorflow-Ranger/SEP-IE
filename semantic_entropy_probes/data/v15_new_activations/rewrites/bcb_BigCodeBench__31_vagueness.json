@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/31_vagueness",
+ "candidates": [
+  {
+   "question": "Should words that start with '$' and contain both letters and punctuation (e.g., '$word!') be included in the count?",
+   "answer": "Words that start with '$' and contain at least one character that is not punctuation (e.g., a letter) should be included in the count.",
+   "inline_prompt": "Draw a bar chart of the frequency of words in a text beginning with the \"$\" character. Words that start with the '$' character but consist only of punctuation (e.g., '$!$' and '$.$') are not included in the frequency count; words containing at least one non-punctuation character are included.\n- If there is no word respecting the above conditions, the plot should be None.\n- The barplot x words on the x-axis and frequencies on the y-axis.\nThe function should output with:\n    matplotlib.axes._axes.Axes: The plot showing the frequency of words beginning with the '$' character.\nYou should write self-contained code starting with:\n```\nimport nltk\nfrom string import punctuation\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nPUNCTUATION = set(punctuation)\ndef task_func(text):"
+  },
+  {
+   "question": "How should words be tokenized? Should we split on whitespace only, or use a more sophisticated tokenizer?",
+   "answer": "Words should be tokenized by splitting the input text on whitespace.",
+   "inline_prompt": "Draw a bar chart of the frequency of words in a text beginning with the \"$\" character. Words that start with the '$' character but consist only of punctuation (e.g., '$!$' and '$.$') are not included in the frequency count.\n- If there is no word respecting the above conditions, the plot should be None.\n- The barplot x words on the x-axis and frequencies on the y-axis.\nThe function should output with:\n    matplotlib.axes._axes.Axes: The plot showing the frequency of words beginning with the '$' character.\nYou should write self-contained code starting with:\n```\nimport nltk\nfrom string import punctuation\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nPUNCTUATION = set(punctuation)\ndef task_func(text):"
+  },
+  {
+   "question": "Is the '$' character considered part of the word for counting purposes, or should it be stripped before frequency counting?",
+   "answer": "The '$' character is considered part of the word for frequency counting; do not strip it.",
+   "inline_prompt": "Draw a bar chart of the frequency of words in a text beginning with the \"$\" character. Words that start with the '$' character but consist only of punctuation (e.g., '$!$' and '$.$') are not included in the frequency count.\n- If there is no word respecting the above conditions, the plot should be None.\n- The barplot x words on the x-axis and frequencies on the y-axis.\nThe function should output with:\n    matplotlib.axes._axes.Axes: The plot showing the frequency of words beginning with the '$' character, with the '$' included as part of each word.\nYou should write self-contained code starting with:\n```\nimport nltk\nfrom string import punctuation\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nPUNCTUATION = set(punctuation)\ndef task_func(text):"
+  },
+  {
+   "question": "Should case sensitivity be considered for words starting with '$'? For example, is '$Word' different from '$word'?",
+   "answer": "Words are case-sensitive; '$Word' and '$word' are considered different.",
+   "inline_prompt": "Draw a bar chart of the frequency of words in a text beginning with the \"$\" character. Words that start with the '$' character but consist only of punctuation (e.g., '$!$' and '$.$') are not included in the frequency count.\n- If there is no word respecting the above conditions, the plot should be None.\n- The barplot x words on the x-axis and frequencies on the y-axis.\nThe function should output with:\n    matplotlib.axes._axes.Axes: The plot showing the frequency of words beginning with the '$' character, with words treated as case-sensitive.\nYou should write self-contained code starting with:\n```\nimport nltk\nfrom string import punctuation\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nPUNCTUATION = set(punctuation)\ndef task_func(text):"
+  },
+  {
+   "question": "What constitutes a 'word'? Are numbers or symbols after '$' allowed, or must it be alphabetic?",
+   "answer": "A word is any token after splitting the text by whitespace; it can contain any characters after the '$' and is included as long as not all its characters are punctuation.",
+   "inline_prompt": "Draw a bar chart of the frequency of words in a text beginning with the \"$\" character. Words that start with the '$' character but consist only of punctuation (e.g., '$!$' and '$.$') are not included in the frequency count. A word is any token after splitting the text by whitespace; it can contain any characters after the '$' and is included as long as not all its characters are punctuation.\n- If there is no word respecting the above conditions, the plot should be None.\n- The barplot x words on the x-axis and frequencies on the y-axis.\nThe function should output with:\n    matplotlib.axes._axes.Axes: The plot showing the frequency of words beginning with the '$' character.\nYou should write self-contained code starting with:\n```\nimport nltk\nfrom string import punctuation\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nPUNCTUATION = set(punctuation)\ndef task_func(text):"
+  },
+  {
+   "question": "How should the bar chart be ordered? Alphabetically, by frequency, or in order of appearance?",
+   "answer": "The ordering is not specified beyond what's given; assume standard behavior (the default ordering of seaborn.barplot, which is by the order of unique words as they appear in the frequency distribution).",
+   "inline_prompt": "Draw a bar chart of the frequency of words in a text beginning with the \"$\" character. Words that start with the '$' character but consist only of punctuation (e.g., '$!$' and '$.$') are not included in the frequency count.\n- If there is no word respecting the above conditions, the plot should be None.\n- The barplot x words on the x-axis and frequencies on the y-axis.\nThe ordering of bars follows the default behavior of seaborn.barplot.\nThe function should output with:\n    matplotlib.axes._axes.Axes: The plot showing the frequency of words beginning with the '$' character.\nYou should write self-contained code starting with:\n```\nimport nltk\nfrom string import punctuation\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nPUNCTUATION = set(punctuation)\ndef task_func(text):"
+  },
+  {
+   "question": "Should words that start with '$' but are only one character long (e.g., '$') be excluded?",
+   "answer": "Yes, a single '$' character is considered to consist only of punctuation and is excluded.",
+   "inline_prompt": "Draw a bar chart of the frequency of words in a text beginning with the \"$\" character. Words that start with the '$' character but consist only of punctuation (e.g., '$!$' and '$.$') are not included in the frequency count; a single '$' character is also excluded.\n- If there is no word respecting the above conditions, the plot should be None.\n- The barplot x words on the x-axis and frequencies on the y-axis.\nThe function should output with:\n    matplotlib.axes._axes.Axes: The plot showing the frequency of words beginning with the '$' character.\nYou should write self-contained code starting with:\n```\nimport nltk\nfrom string import punctuation\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nPUNCTUATION = set(punctuation)\ndef task_func(text):"
+  },
+  {
+   "question": "What should happen if there are no words meeting the criteria? Should the function return None or an empty plot?",
+   "answer": "If there is no word respecting the conditions, the plot should be None, as stated in the original problem.",
+   "inline_prompt": "Draw a bar chart of the frequency of words in a text beginning with the \"$\" character. Words that start with the '$' character but consist only of punctuation (e.g., '$!$' and '$.$') are not included in the frequency count.\n- If there is no word respecting the above conditions, the plot should be None.\n- The barplot x words on the x-axis and frequencies on the y-axis.\nThe function should output with:\n    matplotlib.axes._axes.Axes: The plot showing the frequency of words beginning with the '$' character.\nYou should write self-contained code starting with:\n```\nimport nltk\nfrom string import punctuation\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nPUNCTUATION = set(punctuation)\ndef task_func(text):"
+  }
+ ]
+}

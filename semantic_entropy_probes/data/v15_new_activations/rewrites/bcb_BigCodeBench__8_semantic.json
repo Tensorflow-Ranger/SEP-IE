@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/8_semantic",
+ "candidates": [
+  {
+   "question": "What does 'whichever comes first' mean? Should we use the sum of integers in T1 or the count of elements in T1 as the number of random integers to generate?",
+   "answer": "The number of random integers to generate is the sum of the integers in T1.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers where the number of integers is determined by the sum of the integers in `T1`. Random integers are generated between 0 and `RANGE` (default is 100). Count the occurrences of each number in the generated list using a Counter."
+  },
+  {
+   "question": "Does 'count of elements in T1' refer to the total number of inner tuples, or the total number of string numbers across all inner tuples?",
+   "answer": "The phrase 'count of elements in T1' is not used; the number of random integers is determined by the sum of the integers in T1.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers where the number of integers is determined by the sum of the integers in `T1`. Random integers are generated between 0 and `RANGE` (default is 100). Count the occurrences of each number in the generated list using a Counter."
+  },
+  {
+   "question": "Should the random integers be generated with replacement (i.e., independent draws) or without replacement?",
+   "answer": "The random integers are generated with replacement (independent draws).",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers where the number of integers is determined by the sum of the integers in `T1`. Random integers are generated between 0 and `RANGE` (default is 100) with replacement. Count the occurrences of each number in the generated list using a Counter."
+  },
+  {
+   "question": "Is the RANGE parameter inclusive or exclusive of the upper bound?",
+   "answer": "The upper bound RANGE is inclusive.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers where the number of integers is determined by the sum of the integers in `T1`. Random integers are generated between 0 and `RANGE` (default is 100), inclusive. Count the occurrences of each number in the generated list using a Counter."
+  },
+  {
+   "question": "What should happen if T1 contains non-numeric strings? Should we raise an error or handle it somehow?",
+   "answer": "The function assumes all strings in T1 are valid integer representations; if not, a standard ValueError from int() will be raised.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers where the number of integers is determined by the sum of the integers in `T1`. Random integers are generated between 0 and `RANGE` (default is 100). Count the occurrences of each number in the generated list using a Counter.\nThe function should output with:\n    Counter: A Counter object representing the count of each number appearing in the list of generated random integers.\nYou should write self-contained code starting with:\n```\nfrom collections import Counter\nimport itertools\nfrom random import randint\ndef task_func(T1, RANGE=100):\n```"
+  },
+  {
+   "question": "Should the random integers be unique, or can duplicates be allowed?",
+   "answer": "Duplicates are allowed; each random integer is generated independently with replacement between 0 and RANGE inclusive.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers where the number of integers is determined by the sum of the integers in `T1`. Random integers are generated between 0 and `RANGE` (default is 100), with duplicates allowed. Count the occurrences of each number in the generated list using a Counter.\nThe function should output with:\n    Counter: A Counter object representing the count of each number appearing in the list of generated random integers.\nYou should write self-contained code starting with:\n```\nfrom collections import Counter\nimport itertools\nfrom random import randint\ndef task_func(T1, RANGE=100):\n```"
+  },
+  {
+   "question": "Does 'convert elements in T1 to integers' imply we should flatten the tuple of tuples first, or process each inner tuple separately?",
+   "answer": "Convert each string in each inner tuple to an integer, then flatten all resulting integers into a single list.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers where the number of integers is determined by the sum of the integers in `T1`. Random integers are generated between 0 and `RANGE` (default is 100). Count the occurrences of each number in the generated list using a Counter.\nThe function should output with:\n    Counter: A Counter object representing the count of each number appearing in the list of generated random integers.\nYou should write self-contained code starting with:\n```\nfrom collections import Counter\nimport itertools\nfrom random import randint\ndef task_func(T1, RANGE=100):\n```"
+  },
+  {
+   "question": "What is the expected output if T1 is an empty tuple? Should we return an empty Counter or handle it differently?",
+   "answer": "If T1 is empty, the sum of integers is 0, so an empty list of random integers is generated and an empty Counter is returned.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers where the number of integers is determined by the sum of the integers in `T1`. Random integers are generated between 0 and `RANGE` (default is 100). Count the occurrences of each number in the generated list using a Counter.\nThe function should output with:\n    Counter: A Counter object representing the count of each number appearing in the list of generated random integers.\nYou should write self-contained code starting with:\n```\nfrom collections import Counter\nimport itertools\nfrom random import randint\ndef task_func(T1, RANGE=100):\n```"
+  }
+ ]
+}

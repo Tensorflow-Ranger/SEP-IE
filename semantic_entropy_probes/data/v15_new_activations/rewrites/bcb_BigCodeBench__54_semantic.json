@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/54_semantic",
+ "candidates": [
+  {
+   "question": "Should we split only at periods followed by optional whitespace (standard sentence splitting), or at every period regardless of context (e.g., abbreviations like 'Mr.' or decimal numbers)?",
+   "answer": "Split only at periods followed by optional whitespace (standard sentence splitting), treating abbreviations like 'Mr.' as part of the same sentence.",
+   "inline_prompt": "Analyze a text by creating a document term matrix with CountVectorizer, treating each sequence of non-period characters as a separate sentence. Split only at periods followed by optional whitespace (standard sentence splitting), treating abbreviations like 'Mr.' as part of the same sentence. Ignore empty sentences.\nThe function should output with:\n    DataFrame: A pandas DataFrame with the document-term matrix. Its column names should be adapted from the vectorizer feature names.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\nfrom sklearn.feature_extraction.text import CountVectorizer\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Should sequences of non-period characters include punctuation like commas, exclamation marks, or question marks, or only letters and spaces?",
+   "answer": "Sequences of non-period characters include all characters except periods, so punctuation like commas, exclamation marks, and question marks are included in the sentences.",
+   "inline_prompt": "Analyze a text by creating a document term matrix with CountVectorizer, treating each sequence of non-period characters as a separate sentence. Sequences of non-period characters include all characters except periods, so punctuation like commas, exclamation marks, and question marks are included in the sentences. Ignore empty sentences.\nThe function should output with:\n    DataFrame: A pandas DataFrame with the document-term matrix. Its column names should be adapted from the vectorizer feature names.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\nfrom sklearn.feature_extraction.text import CountVectorizer\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Should empty sentences be defined as those with zero characters after stripping whitespace, or those with only whitespace characters?",
+   "answer": "Empty sentences are defined as those with zero characters after stripping whitespace.",
+   "inline_prompt": "Analyze a text by creating a document term matrix with CountVectorizer, treating each sequence of non-period characters as a separate sentence. Ignore empty sentences, defined as those with zero characters after stripping whitespace.\nThe function should output with:\n    DataFrame: A pandas DataFrame with the document-term matrix. Its column names should be adapted from the vectorizer feature names.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\nfrom sklearn.feature_extraction.text import CountVectorizer\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Should the CountVectorizer use default parameters (e.g., lowercase=True, token_pattern=r'(?u)\\b\\w\\w+\\b'), or should we customize them?",
+   "answer": "Use CountVectorizer with default parameters (including lowercase=True and the default token pattern).",
+   "inline_prompt": "Analyze a text by creating a document term matrix with CountVectorizer, treating each sequence of non-period characters as a separate sentence. Ignore empty sentences.\nThe function should output with:\n    DataFrame: A pandas DataFrame with the document-term matrix. Its column names should be adapted from the vectorizer feature names.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\nfrom sklearn.feature_extraction.text import CountVectorizer\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Should the text be preprocessed (e.g., removing extra spaces, normalizing whitespace) before splitting into sentences?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Analyze a text by creating a document term matrix with CountVectorizer, treating each sequence of non-period characters as a separate sentence. Ignore empty sentences.\nThe function should output with:\n    DataFrame: A pandas DataFrame with the document-term matrix. Its column names should be adapted from the vectorizer feature names.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\nfrom sklearn.feature_extraction.text import CountVectorizer\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Should the DataFrame column names be sorted alphabetically or in the order CountVectorizer provides them?",
+   "answer": "The column names should be adapted from the vectorizer feature names, which are typically in alphabetical order as provided by CountVectorizer's get_feature_names_out.",
+   "inline_prompt": "Analyze a text by creating a document term matrix with CountVectorizer, treating each sequence of non-period characters as a separate sentence. Ignore empty sentences.\nThe function should output with:\n    DataFrame: A pandas DataFrame with the document-term matrix. Its column names should be adapted from the vectorizer feature names, which are typically in alphabetical order as provided by CountVectorizer's get_feature_names_out.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\nfrom sklearn.feature_extraction.text import CountVectorizer\ndef task_func(text):\n```"
+  },
+  {
+   "question": "If the text ends with a period, should we ignore the trailing empty string after splitting?",
+   "answer": "Yes, ignore empty sentences, which includes any trailing empty string after splitting.",
+   "inline_prompt": "Analyze a text by creating a document term matrix with CountVectorizer, treating each sequence of non-period characters as a separate sentence. Ignore empty sentences, which includes any trailing empty string after splitting.\nThe function should output with:\n    DataFrame: A pandas DataFrame with the document-term matrix. Its column names should be adapted from the vectorizer feature names.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\nfrom sklearn.feature_extraction.text import CountVectorizer\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Should we handle multiple consecutive periods (e.g., '...') as a single sentence delimiter or as separate delimiters?",
+   "answer": "Split the text at every period, treating each sequence of non-period characters as a separate sentence; multiple consecutive periods create empty sentences which are ignored.",
+   "inline_prompt": "Analyze a text by creating a document term matrix with CountVectorizer, treating each sequence of non-period characters as a separate sentence by splitting the text at every period. Ignore empty sentences.\nThe function should output with:\n    DataFrame: A pandas DataFrame with the document-term matrix. Its column names should be adapted from the vectorizer feature names.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\nfrom sklearn.feature_extraction.text import CountVectorizer\ndef task_func(text):\n```"
+  }
+ ]
+}

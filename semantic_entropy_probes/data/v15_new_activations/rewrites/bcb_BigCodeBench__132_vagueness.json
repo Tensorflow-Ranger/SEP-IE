@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/132_vagueness",
+ "candidates": [
+  {
+   "question": "Should we count frequencies of each byte (0-255) or each hex digit (0-15)?",
+   "answer": "Count frequencies of each byte value (0-255).",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  },
+  {
+   "question": "If the hex string contains '\\x' prefixes, should we treat them as literal characters or ignore them?",
+   "answer": "Ignore '\\x' prefixes by removing them before processing.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix, ignoring the '\\x' prefixes by removing them before processing.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  },
+  {
+   "question": "Should the byte values in the DataFrame be integers (0-255) or hex strings (e.g., '0xF3')?",
+   "answer": "The byte values should be integers (0-255).",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency'], where 'Byte Value' is an integer from 0 to 255,\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  },
+  {
+   "question": "Should the plot's X-axis be numeric (byte values) or categorical (string labels)?",
+   "answer": "The X-axis should be numeric (byte values).",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the numeric X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  },
+  {
+   "question": "If the hex string is empty, should the DataFrame be empty or have a row for zero?",
+   "answer": "The DataFrame should be empty for an empty hex string.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nIf the hex string is empty, the returned DataFrame will be empty.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  },
+  {
+   "question": "Should we handle uppercase vs lowercase hex characters differently?",
+   "answer": "No, hex characters are case-insensitive, as per standard hex conventions.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nHex characters are case-insensitive.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  },
+  {
+   "question": "Should the frequency count include zero-frequency bytes (all 256 values)?",
+   "answer": "No, only bytes that actually appear in the data should be included in the frequency count.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nOnly bytes that actually appear in the data are included in the frequency count.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  },
+  {
+   "question": "If the hex string has an odd length, should we pad it or raise an error?",
+   "answer": "An odd-length hex string is invalid and should raise a ValueError.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nAn odd-length hex string is invalid and will raise a ValueError.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  }
+ ]
+}

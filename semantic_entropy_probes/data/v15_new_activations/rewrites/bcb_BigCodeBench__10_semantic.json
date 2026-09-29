@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/10_semantic",
+ "candidates": [
+  {
+   "question": "Should the random integers be generated within the range [0, RANGE] inclusive?",
+   "answer": "Yes, each random integer is generated uniformly in the inclusive range [0, RANGE].",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers.\nThe size of the list is the sum of the integers in `T1`, and each random integer is generated uniformly in the inclusive range [0, RANGE].\nCalculate and return the mean, median, and mode of the list."
+  },
+  {
+   "question": "Is the sum of integers in T1 computed after converting all strings to integers across all tuples?",
+   "answer": "Yes, the sum is computed after converting all string representations of integers in all tuples to integers.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers.\nThe size of the list is the sum of the integers in `T1` (computed after converting all string representations in all tuples to integers).\nCalculate and return the mean, median, and mode of the list."
+  },
+  {
+   "question": "What should happen if the sum of integers in T1 is zero? Should an empty list be generated?",
+   "answer": "If the sum is zero, an empty list is generated, which will cause statistics.StatisticsError when calculating the mode.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers.\nThe size of the list is the sum of the integers in `T1` (if the sum is zero, an empty list is generated).\nCalculate and return the mean, median, and mode of the list."
+  },
+  {
+   "question": "Is the mode calculation expected to handle multiple modes? If so, which one should be returned?",
+   "answer": "The mode calculation uses statistics.mode, which raises StatisticsError if there is not exactly one most common value; if multiple modes exist, it is not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers.\nThe size of the list is the sum of the integers in `T1`. Calculate and return the mean, median, and mode of the list.\nThe function should raise the exception for: statistics.StatisticsError if T1 is empty or if the mode calculation fails (e.g., no unique mode)."
+  },
+  {
+   "question": "Should the random integers be generated with a fixed seed for reproducibility?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers from the sum of the integers in `T1`. Calculate and return the mean, median, and mode of the list.\nThe function should raise the exception for: statistics.StatisticsError if T1 is empty\nThe function should output with:\n    tuple: A tuple containing the mean, median, and mode of the generated list of random integers.\n    The mean and median are floats, and the mode is an integer. The calculations use the generated\n    list whose size is determined by the sum of converted integers from `T1`.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport itertools\nimport random\nimport statistics\ndef task_func(T1, RANGE=100):\n```"
+  },
+  {
+   "question": "Are negative integers allowed in T1 after conversion?",
+   "answer": "The strings in T1 are converted to integers; negative integers are allowed if the strings represent them.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers from the sum of the integers in `T1`. The strings in T1 are converted to integers; negative integers are allowed if the strings represent them. Calculate and return the mean, median, and mode of the list.\nThe function should raise the exception for: statistics.StatisticsError if T1 is empty\nThe function should output with:\n    tuple: A tuple containing the mean, median, and mode of the generated list of random integers.\n    The mean and median are floats, and the mode is an integer. The calculations use the generated\n    list whose size is determined by the sum of converted integers from `T1`.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport itertools\nimport random\nimport statistics\ndef task_func(T1, RANGE=100):\n```"
+  },
+  {
+   "question": "Is the list size the absolute value of the sum of integers, or should negative sums be handled differently?",
+   "answer": "The list size is the sum of the integers; if the sum is negative, the range function will raise a ValueError.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers from the sum of the integers in `T1`. The list size is the sum of the integers; if the sum is negative, the range function will raise a ValueError. Calculate and return the mean, median, and mode of the list.\nThe function should raise the exception for: statistics.StatisticsError if T1 is empty\nThe function should output with:\n    tuple: A tuple containing the mean, median, and mode of the generated list of random integers.\n    The mean and median are floats, and the mode is an integer. The calculations use the generated\n    list whose size is determined by the sum of converted integers from `T1`.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport itertools\nimport random\nimport statistics\ndef task_func(T1, RANGE=100):\n```"
+  },
+  {
+   "question": "Should the mean and median be rounded to a specific number of decimal places?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Convert elements in 'T1' to integers and create a list of random integers from the sum of the integers in `T1`. Calculate and return the mean, median, and mode of the list.\nThe function should raise the exception for: statistics.StatisticsError if T1 is empty\nThe function should output with:\n    tuple: A tuple containing the mean, median, and mode of the generated list of random integers.\n    The mean and median are floats, and the mode is an integer. The calculations use the generated\n    list whose size is determined by the sum of converted integers from `T1`.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport itertools\nimport random\nimport statistics\ndef task_func(T1, RANGE=100):\n```"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_0_semantic",
+ "candidates": [
+  {
+   "question": "Should the function consider the distance between a number and itself (i.e., same index) as a candidate pair?",
+   "answer": "No, the function should only consider pairs of distinct elements (different indices).",
+   "inline_prompt": "from typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, any two numbers are closer to each other than\n    given threshold, considering only pairs of distinct elements.\n    \"\"\""
+  },
+  {
+   "question": "Does 'closer' mean strictly less than (<) the threshold, or less than or equal to (<=)?",
+   "answer": "Closer means strictly less than (<) the threshold.",
+   "inline_prompt": "from typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, any two numbers are closer to each other than\n    given threshold (i.e., the absolute difference is strictly less than the threshold).\n    \"\"\""
+  },
+  {
+   "question": "Are we allowed to assume the list has at least two elements? If the list has fewer than two elements, should the function return False?",
+   "answer": "Not specified beyond what's given; assume standard behavior (return False if fewer than two elements, as no pair exists).",
+   "inline_prompt": "from typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, any two numbers are closer to each other than\n    given threshold.\n    \"\"\""
+  },
+  {
+   "question": "Should the function consider pairs (x, y) and (y, x) as distinct, or avoid double-counting?",
+   "answer": "The function should avoid double-counting; it only needs to check each unordered pair once.",
+   "inline_prompt": "from typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, any two numbers are closer to each other than\n    given threshold, checking each unordered pair only once.\n    \"\"\""
+  },
+  {
+   "question": "Is the threshold always non-negative? If negative, should we treat it as always true or raise an error?",
+   "answer": "The threshold is a float; assume standard behavior where a negative threshold is allowed and the comparison distance < threshold is evaluated normally.",
+   "inline_prompt": "from typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, any two numbers are closer to each other than\n    given threshold.\n    The threshold is a float; assume standard behavior where a negative threshold is allowed and the comparison distance < threshold is evaluated normally.\n    \"\"\""
+  },
+  {
+   "question": "Does 'closer' refer to Euclidean distance or absolute difference? (Given numbers are floats, likely absolute difference, but not explicitly stated.)",
+   "answer": "Closer means the absolute difference between two numbers is less than the threshold.",
+   "inline_prompt": "from typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, any two numbers are closer to each other than\n    given threshold, where closer means the absolute difference between two numbers is less than the threshold.\n    \"\"\""
+  },
+  {
+   "question": "Should the function handle NaN or infinity values in the list?",
+   "answer": "Not specified beyond what's given; assume standard behavior for floats (i.e., comparisons with NaN or infinity follow IEEE 754).",
+   "inline_prompt": "from typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, any two numbers are closer to each other than\n    given threshold.\n    Not specified beyond what's given; assume standard behavior for floats (i.e., comparisons with NaN or infinity follow IEEE 754).\n    \"\"\""
+  },
+  {
+   "question": "Is the list guaranteed to contain only floats, or could there be integers? (Type hint says List[float], so likely floats, but might be ambiguous for implementation.)",
+   "answer": "The type hint List[float] indicates the list contains floats; integers are automatically convertible to floats in Python.",
+   "inline_prompt": "from typing import List\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, any two numbers are closer to each other than\n    given threshold.\n    The type hint List[float] indicates the list contains floats; integers are automatically convertible to floats in Python.\n    \"\"\""
+  }
+ ]
+}

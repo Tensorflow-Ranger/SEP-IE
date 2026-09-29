@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/17_vagueness",
+ "candidates": [
+  {
+   "question": "Should we terminate all processes with the given name, or just one instance?",
+   "answer": "Terminate all processes with the given name.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is running, terminate all processes with the given name and restart it using the command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "What if the process name is not directly executable as a command (e.g., needs a full path or arguments)?",
+   "answer": "The process name should be executable as a command; assume it is a valid command string for subprocess.Popen.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command, which must be executable as a command string for subprocess.Popen. If it is running, terminate the process and restart it using the command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "How long should we wait after terminating before restarting?",
+   "answer": "Wait 5 seconds after terminating before restarting.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is running, terminate the process, wait 5 seconds, and restart it using the command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "Should we check for process existence by exact name match or partial match?",
+   "answer": "Check for exact name match.",
+   "inline_prompt": "Check if a particular process is running based on its exact name. If it is not running, start it using the process name as a command. If it is running, terminate the process and restart it using the command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "What if the process fails to start or terminate? Should we handle errors?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is running, terminate the process and restart it using the command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "Is the process name case-sensitive when checking?",
+   "answer": "Yes, the process name comparison is case-sensitive as per the canonical solution.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is running, terminate the process and restart it using the command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "Should we use psutil.process_iter() with attrs=['name'] for efficiency?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is running, terminate the process and restart it using the command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "Are there any specific platforms or operating systems we should support?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is running, terminate the process and restart it using the command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  }
+ ]
+}

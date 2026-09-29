@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/92_semantic",
+ "candidates": [
+  {
+   "question": "Should the function automatically decide whether to use raw or normalized data based on some internal logic, or should it accept a parameter to let the user choose?",
+   "answer": "The function uses the raw data as provided, without any normalization.",
+   "inline_prompt": "Perform K-means clustering on a dataset and generate a scatter plot visualizing the clusters with their centroids, using the raw data as provided.\nThe function should raise the exception for: ValueError: If 'data' is not a pd.DataFrame. ValueError: If 'n_clusters' is not an integer greater than 1. The function should output with: \n    tuple: \n    np.ndarray: An array of cluster labels assigned to each sample. \n    plt.Axes: An Axes object with the scatter plot showing the clusters and centroids. \nYou should write self-contained code starting with: \n```\nimport pandas as pd \nimport matplotlib.pyplot as plt \nfrom sklearn.cluster import KMeans \nfrom matplotlib.collections import PathCollection \ndef task_func(data, n_clusters=3):\n```"
+  },
+  {
+   "question": "If normalization is applied, what method should be used (e.g., min-max scaling, standard scaling)?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Perform K-means clustering on a dataset and generate a scatter plot visualizing the clusters with their centroids, using either the raw data or its normalized version.\nThe function should raise the exception for: ValueError: If 'data' is not a pd.DataFrame. ValueError: If 'n_clusters' is not an integer greater than 1. The function should output with: \n    tuple: \n    np.ndarray: An array of cluster labels assigned to each sample. \n    plt.Axes: An Axes object with the scatter plot showing the clusters and centroids. \nYou should write self-contained code starting with: \n```\nimport pandas as pd \nimport matplotlib.pyplot as plt \nfrom sklearn.cluster import KMeans \nfrom matplotlib.collections import PathCollection \ndef task_func(data, n_clusters=3):\n```"
+  },
+  {
+   "question": "Should the function raise an error if the data has more than 2 columns, since the plot is a scatter plot of the first two columns?",
+   "answer": "No, the function should not raise an error; it uses the first two columns for plotting but clusters using all numeric columns.",
+   "inline_prompt": "Perform K-means clustering on a dataset and generate a scatter plot visualizing the clusters with their centroids, using either the raw data or its normalized version.\nThe function should raise the exception for: ValueError: If 'data' is not a pd.DataFrame. ValueError: If 'n_clusters' is not an integer greater than 1. The function should output with: \n    tuple: \n    np.ndarray: An array of cluster labels assigned to each sample. \n    plt.Axes: An Axes object with the scatter plot showing the clusters and centroids. \nYou should write self-contained code starting with: \n```\nimport pandas as pd \nimport matplotlib.pyplot as plt \nfrom sklearn.cluster import KMeans \nfrom matplotlib.collections import PathCollection \ndef task_func(data, n_clusters=3):\n```"
+  },
+  {
+   "question": "What should happen if the data contains non-numeric columns?",
+   "answer": "The function should raise a ValueError if the data contains non-numeric columns.",
+   "inline_prompt": "Perform K-means clustering on a dataset and generate a scatter plot visualizing the clusters with their centroids, using either the raw data or its normalized version.\nThe function should raise the exception for: ValueError: If 'data' is not a pd.DataFrame. ValueError: If 'n_clusters' is not an integer greater than 1. ValueError: If 'data' contains non-numeric columns.\nThe function should output with: \n    tuple: \n    np.ndarray: An array of cluster labels assigned to each sample. \n    plt.Axes: An Axes object with the scatter plot showing the clusters and centroids. \nYou should write self-contained code starting with: \n```\nimport pandas as pd \nimport matplotlib.pyplot as plt \nfrom sklearn.cluster import KMeans \nfrom matplotlib.collections import PathCollection \ndef task_func(data, n_clusters=3):\n```"
+  },
+  {
+   "question": "Should the plot always use the first two columns for the scatter plot, or should it allow specification of which columns to plot?",
+   "answer": "The plot always uses the first two columns of the DataFrame for the scatter plot.",
+   "inline_prompt": "Perform K-means clustering on a dataset and generate a scatter plot visualizing the clusters with their centroids, using either the raw data or its normalized version. The plot always uses the first two columns of the DataFrame for the scatter plot. The function should raise the exception for: ValueError: If 'data' is not a pd.DataFrame. ValueError: If 'n_clusters' is not an integer greater than 1. The function should output with: \n    tuple: \n    np.ndarray: An array of cluster labels assigned to each sample. \n    plt.Axes: An Axes object with the scatter plot showing the clusters and centroids. \nYou should write self-contained code starting with: \n```\nimport pandas as pd \nimport matplotlib.pyplot as plt \nfrom sklearn.cluster import KMeans \nfrom matplotlib.collections import PathCollection \ndef task_func(data, n_clusters=3):"
+  },
+  {
+   "question": "Is the random seed for KMeans fixed or should it be configurable?",
+   "answer": "The random seed for KMeans is not specified beyond what's given; assume standard behavior (i.e., not fixed within the function).",
+   "inline_prompt": "Perform K-means clustering on a dataset and generate a scatter plot visualizing the clusters with their centroids, using either the raw data or its normalized version. The function should raise the exception for: ValueError: If 'data' is not a pd.DataFrame. ValueError: If 'n_clusters' is not an integer greater than 1. The function should output with: \n    tuple: \n    np.ndarray: An array of cluster labels assigned to each sample. \n    plt.Axes: An Axes object with the scatter plot showing the clusters and centroids. \nYou should write self-contained code starting with: \n```\nimport pandas as pd \nimport matplotlib.pyplot as plt \nfrom sklearn.cluster import KMeans \nfrom matplotlib.collections import PathCollection \ndef task_func(data, n_clusters=3):"
+  },
+  {
+   "question": "Should the function return the figure object in addition to the axes?",
+   "answer": "No, the function returns only the labels and the Axes object as specified.",
+   "inline_prompt": "Perform K-means clustering on a dataset and generate a scatter plot visualizing the clusters with their centroids, using either the raw data or its normalized version. The function should raise the exception for: ValueError: If 'data' is not a pd.DataFrame. ValueError: If 'n_clusters' is not an integer greater than 1. The function should output with: \n    tuple: \n    np.ndarray: An array of cluster labels assigned to each sample. \n    plt.Axes: An Axes object with the scatter plot showing the clusters and centroids. \nYou should write self-contained code starting with: \n```\nimport pandas as pd \nimport matplotlib.pyplot as plt \nfrom sklearn.cluster import KMeans \nfrom matplotlib.collections import PathCollection \ndef task_func(data, n_clusters=3):"
+  },
+  {
+   "question": "What colormap should be used for the scatter plot if not specified?",
+   "answer": "The colormap is not specified beyond what's given; assume standard behavior (i.e., any valid colormap is acceptable).",
+   "inline_prompt": "Perform K-means clustering on a dataset and generate a scatter plot visualizing the clusters with their centroids, using either the raw data or its normalized version. The function should raise the exception for: ValueError: If 'data' is not a pd.DataFrame. ValueError: If 'n_clusters' is not an integer greater than 1. The function should output with: \n    tuple: \n    np.ndarray: An array of cluster labels assigned to each sample. \n    plt.Axes: An Axes object with the scatter plot showing the clusters and centroids. \nYou should write self-contained code starting with: \n```\nimport pandas as pd \nimport matplotlib.pyplot as plt \nfrom sklearn.cluster import KMeans \nfrom matplotlib.collections import PathCollection \ndef task_func(data, n_clusters=3):"
+  }
+ ]
+}

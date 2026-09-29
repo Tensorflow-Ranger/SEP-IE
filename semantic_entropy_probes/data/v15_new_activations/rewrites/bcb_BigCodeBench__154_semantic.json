@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/154_semantic",
+ "candidates": [
+  {
+   "question": "Should we determine MIME type based on file content, file extension, or both? If both, which takes precedence?",
+   "answer": "Determine MIME type based on file extension using mimetypes.guess_type.",
+   "inline_prompt": "Ambiguous: Scans a specified directory for files matching a given pattern and with a certain suffix, then determines their file types based on file extension using mimetypes.guess_type.\nThe function returns a dictionary with file names as keys and their corresponding MIME types as values.\nYou should write self-contained code starting with:\n```\nimport re\nimport os\nimport glob\nimport mimetypes\ndef task_func(directory, file_pattern, suffix):\n```"
+  },
+  {
+   "question": "What should happen if mimetypes.guess_type returns None for a file?",
+   "answer": "If mimetypes.guess_type returns None, the dictionary value for that file should be None.",
+   "inline_prompt": "Ambiguous: Scans a specified directory for files matching a given pattern and with a certain suffix, then determines their file types based on either content or extension.\nIf mimetypes.guess_type returns None, the dictionary value for that file should be None.\nThe function returns a dictionary with file names as keys and their corresponding MIME types as values.\nYou should write self-contained code starting with:\n```\nimport re\nimport os\nimport glob\nimport mimetypes\ndef task_func(directory, file_pattern, suffix):\n```"
+  },
+  {
+   "question": "Should the suffix be a literal string suffix or a regex pattern? The parameter name 'suffix' suggests literal, but re.search is used.",
+   "answer": "The suffix is a regex pattern used with re.search to filter files.",
+   "inline_prompt": "Ambiguous: Scans a specified directory for files matching a given pattern and with a certain suffix, then determines their file types based on either content or extension.\nThe suffix is a regex pattern used with re.search to filter files.\nThe function returns a dictionary with file names as keys and their corresponding MIME types as values.\nYou should write self-contained code starting with:\n```\nimport re\nimport os\nimport glob\nimport mimetypes\ndef task_func(directory, file_pattern, suffix):\n```"
+  },
+  {
+   "question": "Should the file pattern include the suffix, or is the suffix an additional filter?",
+   "answer": "The suffix is an additional filter applied after matching the file pattern.",
+   "inline_prompt": "Ambiguous: Scans a specified directory for files matching a given pattern and with a certain suffix, then determines their file types based on either content or extension.\nThe suffix is an additional filter applied after matching the file pattern.\nThe function returns a dictionary with file names as keys and their corresponding MIME types as values.\nYou should write self-contained code starting with:\n```\nimport re\nimport os\nimport glob\nimport mimetypes\ndef task_func(directory, file_pattern, suffix):\n```"
+  },
+  {
+   "question": "Are we scanning files recursively in subdirectories, or only in the top-level directory?",
+   "answer": "Only files in the top-level directory are scanned; subdirectories are not searched recursively.",
+   "inline_prompt": "Ambiguous: Scans a specified directory for files matching a given pattern and with a certain suffix, then determines their file types based on either content or extension. Only files in the top-level directory are scanned; subdirectories are not searched recursively. The function returns a dictionary with file names as keys and their corresponding MIME types as values.\nThe function should output with:\n    dict: A dictionary mapping file names to their MIME types.\nYou should write self-contained code starting with:\n```\nimport re\nimport os\nimport glob\nimport mimetypes\ndef task_func(directory, file_pattern, suffix):\n```"
+  },
+  {
+   "question": "Should the dictionary keys be full paths or just filenames?",
+   "answer": "The dictionary keys are just the filenames (without directory path).",
+   "inline_prompt": "Ambiguous: Scans a specified directory for files matching a given pattern and with a certain suffix, then determines their file types based on either content or extension. The function returns a dictionary with file names (without directory path) as keys and their corresponding MIME types as values.\nThe function should output with:\n    dict: A dictionary mapping file names to their MIME types.\nYou should write self-contained code starting with:\n```\nimport re\nimport os\nimport glob\nimport mimetypes\ndef task_func(directory, file_pattern, suffix):\n```"
+  },
+  {
+   "question": "What if a file matches the pattern but not the suffix? Should it be skipped or raise an error?",
+   "answer": "Files that match the pattern but not the suffix should be silently skipped.",
+   "inline_prompt": "Ambiguous: Scans a specified directory for files matching a given pattern and with a certain suffix, then determines their file types based on either content or extension. Files that match the pattern but not the suffix should be silently skipped. The function returns a dictionary with file names as keys and their corresponding MIME types as values.\nThe function should output with:\n    dict: A dictionary mapping file names to their MIME types.\nYou should write self-contained code starting with:\n```\nimport re\nimport os\nimport glob\nimport mimetypes\ndef task_func(directory, file_pattern, suffix):\n```"
+  },
+  {
+   "question": "Should we handle hidden files (starting with '.')?",
+   "answer": "Not specified beyond what's given; assume standard behavior where hidden files are included if they match the pattern and suffix.",
+   "inline_prompt": "Ambiguous: Scans a specified directory for files matching a given pattern and with a certain suffix, then determines their file types based on either content or extension. The function returns a dictionary with file names as keys and their corresponding MIME types as values.\nThe function should output with:\n    dict: A dictionary mapping file names to their MIME types.\nYou should write self-contained code starting with:\n```\nimport re\nimport os\nimport glob\nimport mimetypes\ndef task_func(directory, file_pattern, suffix):\n```"
+  }
+ ]
+}

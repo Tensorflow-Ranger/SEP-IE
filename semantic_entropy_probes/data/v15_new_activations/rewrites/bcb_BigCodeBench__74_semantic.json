@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/74_semantic",
+ "candidates": [
+  {
+   "question": "Should the function cache the geolocation data to avoid repeated API calls for the same host?",
+   "answer": "No, the function should not cache; it must fetch geolocation information from the API each time it is called.",
+   "inline_prompt": "This function resolves the IP address of the given host and then uses the IP address to fetch geolocation information from the ipinfo.io API, without caching.\nThe function is robust against various common errors, such as invalid hostnames, network issues, or problems with the geolocation service.\nThe function should raise the exception for: ValueError: If 'host' is None or an empty string. ConnectionError: If there is a problem connecting to the geolocation service.\nThe function should output with:\n    dict: A dictionary containing the IP address and geolocation information if successful.\nYou should write self-contained code starting with:\n```\nimport socket\nimport requests\ndef task_func(host):\n```"
+  },
+  {
+   "question": "What specific geolocation fields (e.g., city, country, coordinates) are expected in the output dictionary?",
+   "answer": "The output dictionary includes the entire JSON response from ipinfo.io as the 'geolocation' value, with no specific fields required.",
+   "inline_prompt": "This function resolves the IP address of the given host and then uses the IP address to fetch geolocation information from the ipinfo.io API.\nThe function is robust against various common errors, such as invalid hostnames, network issues, or problems with the geolocation service.\nThe function should raise the exception for: ValueError: If 'host' is None or an empty string. ConnectionError: If there is a problem connecting to the geolocation service.\nThe function should output with:\n    dict: A dictionary containing the IP address and the full JSON response from ipinfo.io as geolocation information if successful.\nYou should write self-contained code starting with:\n```\nimport socket\nimport requests\ndef task_func(host):\n```"
+  },
+  {
+   "question": "Is there a timeout for the network requests (DNS resolution and API call)?",
+   "answer": "Not specified beyond what's given; assume standard behavior (i.e., no explicit timeout required).",
+   "inline_prompt": "This function resolves the IP address of the given host and then uses the IP address to fetch geolocation information from the ipinfo.io API.\nThe function is robust against various common errors, such as invalid hostnames, network issues, or problems with the geolocation service.\nThe function should raise the exception for: ValueError: If 'host' is None or an empty string. ConnectionError: If there is a problem connecting to the geolocation service.\nThe function should output with:\n    dict: A dictionary containing the IP address and geolocation information if successful.\nYou should write self-contained code starting with:\n```\nimport socket\nimport requests\ndef task_func(host):\n```"
+  },
+  {
+   "question": "Should the function handle IPv6 addresses in addition to IPv4?",
+   "answer": "No, the function only needs to handle IPv4 addresses as returned by socket.gethostbyname.",
+   "inline_prompt": "This function resolves the IP address of the given host and then uses the IP address to fetch geolocation information from the ipinfo.io API.\nThe function is robust against various common errors, such as invalid hostnames, network issues, or problems with the geolocation service.\nThe function should raise the exception for: ValueError: If 'host' is None or an empty string. ConnectionError: If there is a problem connecting to the geolocation service.\nThe function should output with:\n    dict: A dictionary containing the IP address and geolocation information if successful.\nYou should write self-contained code starting with:\n```\nimport socket\nimport requests\ndef task_func(host):\n```"
+  },
+  {
+   "question": "Are we allowed to use any external libraries besides socket and requests?",
+   "answer": "No, you should only use the libraries socket and requests as specified in the self-contained code starting block.",
+   "inline_prompt": "This function resolves the IP address of the given host and then uses the IP address to fetch fresh geolocation information from the ipinfo.io API. The function is robust against various common errors, such as invalid hostnames, network issues, or problems with the geolocation service.\nThe function should raise the exception for: ValueError: If 'host' is None or an empty string. ConnectionError: If there is a problem connecting to the geolocation service.\nYou should write self-contained code starting with:\n```\nimport socket\nimport requests\ndef task_func(host):\n```"
+  },
+  {
+   "question": "What should happen if the geolocation API returns a successful response but with an empty or malformed JSON body?",
+   "answer": "Not specified beyond what's given; assume standard behavior (i.e., requests.Response.json() will raise a JSONDecodeError, which should propagate as a ConnectionError).",
+   "inline_prompt": "This function resolves the IP address of the given host and then uses the IP address to fetch fresh geolocation information from the ipinfo.io API. The function is robust against various common errors, such as invalid hostnames, network issues, or problems with the geolocation service, including malformed API responses.\nThe function should raise the exception for: ValueError: If 'host' is None or an empty string. ConnectionError: If there is a problem connecting to the geolocation service.\nYou should write self-contained code starting with:\n```\nimport socket\nimport requests\ndef task_func(host):\n```"
+  },
+  {
+   "question": "Should the function validate that the host parameter is a string (not just non-empty)?",
+   "answer": "Yes, the function should raise a ValueError if 'host' is not a string, as implied by the example raising ValueError for None.",
+   "inline_prompt": "This function resolves the IP address of the given host and then uses the IP address to fetch fresh geolocation information from the ipinfo.io API. The function is robust against various common errors, such as invalid hostnames, network issues, or problems with the geolocation service.\nThe function should raise the exception for: ValueError: If 'host' is None, an empty string, or not a string. ConnectionError: If there is a problem connecting to the geolocation service.\nYou should write self-contained code starting with:\n```\nimport socket\nimport requests\ndef task_func(host):\n```"
+  },
+  {
+   "question": "Does 'fresh geolocation information' mean we must prevent caching by adding headers like Cache-Control: no-cache to the HTTP request?",
+   "answer": "No, 'fresh' is not a technical requirement; simply fetch from the API without any special caching headers.",
+   "inline_prompt": "This function resolves the IP address of the given host and then uses the IP address to fetch geolocation information from the ipinfo.io API. The function is robust against various common errors, such as invalid hostnames, network issues, or problems with the geolocation service.\nThe function should raise the exception for: ValueError: If 'host' is None or an empty string. ConnectionError: If there is a problem connecting to the geolocation service.\nYou should write self-contained code starting with:\n```\nimport socket\nimport requests\ndef task_func(host):\n```"
+  }
+ ]
+}

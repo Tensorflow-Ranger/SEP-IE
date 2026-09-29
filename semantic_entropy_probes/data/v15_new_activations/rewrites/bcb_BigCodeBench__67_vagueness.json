@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/67_vagueness",
+ "candidates": [
+  {
+   "question": "Should the files be sorted in ascending or descending order?",
+   "answer": "Files should be sorted in ascending order.",
+   "inline_prompt": "Look for all ascendingly sorted files in a directory that start with a given pattern, and return the number of files against their size. You should return a pandas DataFrame with 2 columns 'File' and 'Size' with correspond to the file name and the size respectively."
+  },
+  {
+   "question": "What should happen if the directory does not exist?",
+   "answer": "Not specified beyond what's given; assume standard behavior (e.g., the function may raise an exception).",
+   "inline_prompt": "Look for all sorted files in a directory that start with a given pattern, and return the number of files against their size. You should return a pandas DataFrame with 2 columns 'File' and 'Size' with correspond to the file name and the size respectively."
+  },
+  {
+   "question": "Should the file size be in bytes, kilobytes, or another unit?",
+   "answer": "File size should be in bytes.",
+   "inline_prompt": "Look for all sorted files in a directory that start with a given pattern, and return the number of files against their size. You should return a pandas DataFrame with 2 columns 'File' and 'Size' with correspond to the file name and the size respectively.\nThe size is in bytes."
+  },
+  {
+   "question": "Should the pattern match the start of the filename only, or anywhere in the filename?",
+   "answer": "The pattern matches the start of the filename only (as indicated by the default pattern '^EMP').",
+   "inline_prompt": "Look for all sorted files in a directory that start with a given pattern, and return the number of files against their size. You should return a pandas DataFrame with 2 columns 'File' and 'Size' with correspond to the file name and the size respectively.\nThe pattern matches from the beginning of the filename."
+  },
+  {
+   "question": "Should hidden files (starting with '.') be included?",
+   "answer": "The specification does not mention hidden files; assume standard behavior where files are included if they match the pattern and are listed by os.listdir, which includes hidden files.",
+   "inline_prompt": "Look for all sorted files in a directory that start with a given pattern, and return the number of files against their size. You should return a pandas DataFrame with 2 columns 'File' and 'Size' with correspond to the file name and the size respectively.\nThe function should output with:\n    pandas.DataFrame: A pandas DataFrame with file names and their sizes.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport re\nimport os\ndef task_func(dir_path: str, pattern: str = '^EMP'):"
+  },
+  {
+   "question": "Should we recursively search subdirectories?",
+   "answer": "The specification only mentions searching in the given directory; do not recursively search subdirectories.",
+   "inline_prompt": "Look for all sorted files in a directory that start with a given pattern, and return the number of files against their size. You should return a pandas DataFrame with 2 columns 'File' and 'Size' with correspond to the file name and the size respectively.\nThe function should output with:\n    pandas.DataFrame: A pandas DataFrame with file names and their sizes.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport re\nimport os\ndef task_func(dir_path: str, pattern: str = '^EMP'):"
+  },
+  {
+   "question": "What if multiple files have the same name? (unlikely but possible with symlinks or case-insensitive systems)",
+   "answer": "The specification does not address duplicate names; assume standard behavior where os.listdir returns each file entry, and duplicates are handled as separate entries.",
+   "inline_prompt": "Look for all sorted files in a directory that start with a given pattern, and return the number of files against their size. You should return a pandas DataFrame with 2 columns 'File' and 'Size' with correspond to the file name and the size respectively.\nThe function should output with:\n    pandas.DataFrame: A pandas DataFrame with file names and their sizes.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport re\nimport os\ndef task_func(dir_path: str, pattern: str = '^EMP'):"
+  },
+  {
+   "question": "Should the DataFrame be sorted by file name or size after creation?",
+   "answer": "The specification states 'sorted files' but does not specify the order; assume ascending alphabetical order by file name, as in the canonical solution.",
+   "inline_prompt": "Look for all ascendingly sorted files in a directory that start with a given pattern, and return the number of files against their size. You should return a pandas DataFrame with 2 columns 'File' and 'Size' with correspond to the file name and the size respectively.\nThe function should output with:\n    pandas.DataFrame: A pandas DataFrame with file names and their sizes.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport re\nimport os\ndef task_func(dir_path: str, pattern: str = '^EMP'):"
+  }
+ ]
+}

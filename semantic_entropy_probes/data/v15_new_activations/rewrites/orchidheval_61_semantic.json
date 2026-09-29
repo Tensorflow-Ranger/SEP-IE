@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_61_semantic",
+ "candidates": [
+  {
+   "question": "Does 'potentially has a corresponding closing bracket' mean the brackets must form a properly balanced sequence (every prefix has at least as many opening as closing brackets and total counts match), or just that there are enough closing brackets somewhere in the string to match each opening bracket, regardless of order?",
+   "answer": "It means the brackets must form a properly balanced sequence where every prefix has at least as many opening as closing brackets and the total counts match.",
+   "inline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket, forming a properly balanced sequence (every prefix has at least as many opening as closing brackets and total counts match).\n    \"\"\""
+  },
+  {
+   "question": "Should the function return True for an empty string?",
+   "answer": "Yes, an empty string contains no opening brackets, so it vacuously satisfies the condition and should return True.",
+   "inline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket, forming a properly balanced sequence (every prefix has at least as many opening as closing brackets and total counts match).\n    (An empty string returns True.)\n    \"\"\""
+  },
+  {
+   "question": "Are inputs guaranteed to contain only '(' and ')' characters, or could there be other characters?",
+   "answer": "The input is guaranteed to contain only '(' and ')' characters.",
+   "inline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string containing only \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket, forming a properly balanced sequence (every prefix has at least as many opening as closing brackets and total counts match).\n    (An empty string returns True.)\n    \"\"\""
+  },
+  {
+   "question": "Is the string length limited, or can it be arbitrarily long?",
+   "answer": "The string length is not specified beyond what's given; assume standard behavior (can be arbitrarily long within typical constraints).",
+   "inline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string containing only \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket, forming a properly balanced sequence (every prefix has at least as many opening as closing brackets and total counts match).\n    (An empty string returns True.)\n    \"\"\""
+  },
+  {
+   "question": "Should we consider nested brackets as valid, or only sequential pairs?",
+   "answer": "Nested brackets are valid as long as the sequence is well-formed, meaning every opening bracket has a corresponding closing bracket and the depth never goes negative.",
+   "inline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket, meaning the sequence is well-formed (depth never negative and ends at zero).\n    \"\"\""
+  },
+  {
+   "question": "Does 'corresponding closing bracket' imply a one-to-one pairing where each '(' matches a unique ')', and vice versa?",
+   "answer": "Yes, it implies a one-to-one pairing where each '(' matches a unique ')' in a well-formed sequence, and the total counts are equal.",
+   "inline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket in a one-to-one well-formed pairing.\n    \"\"\""
+  },
+  {
+   "question": "If the string starts with a closing bracket ')', should it immediately return False?",
+   "answer": "Yes, starting with a closing bracket makes the sequence invalid because the depth would become negative immediately.",
+   "inline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket, and the depth never becomes negative (so starting with ')' is invalid).\n    \"\"\""
+  },
+  {
+   "question": "Are we allowed to use additional data structures like stacks, or should we implement with simple counting?",
+   "answer": "Not specified beyond what's given; assume standard behavior and use any approach that correctly solves the problem.",
+   "inline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket.\n    \"\"\""
+  }
+ ]
+}

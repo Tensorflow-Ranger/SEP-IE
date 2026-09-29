@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/80_vagueness",
+ "candidates": [
+  {
+   "question": "Should we log the entire request object (including headers, method, etc.) or just the JSON payload?",
+   "answer": "Log only the JSON payload from the request body, as obtained via request.get_json().",
+   "inline_prompt": "Creates a Flask application with a specified templates folder. It defines a route at the root ('/') which handles POST requests, logs the request data as a JSON (specifically the JSON payload from the request body, as obtained via request.get_json()), and renders an 'index.html' template using the data provided in POST requests.\nThe function should output with:\n    flask.app.Flask: A Flask application instance configured with a root route that handles POST requests.\n    The route logs incoming request data as JSON and serves the 'index.html' template with the provided data.\nYou should write self-contained code starting with:\n```\nfrom flask import Flask, render_template, request\nimport json\nimport logging\nlogging.basicConfig(filename=\"out.log\", level=logging.INFO)\ndef task_func(template_folder):"
+  },
+  {
+   "question": "What should happen if the POST request does not contain JSON data (e.g., form data or empty)?",
+   "answer": "Not specified beyond what's given; assume standard behavior where request.get_json() returns None for non-JSON requests.",
+   "inline_prompt": "Creates a Flask application with a specified templates folder. It defines a route at the root ('/') which handles POST requests, logs the request data as a JSON, and renders an 'index.html' template using the data provided in POST requests.\nThe function should output with:\n    flask.app.Flask: A Flask application instance configured with a root route that handles POST requests.\n    The route logs incoming request data as JSON and serves the 'index.html' template with the provided data.\nYou should write self-contained code starting with:\n```\nfrom flask import Flask, render_template, request\nimport json\nimport logging\nlogging.basicConfig(filename=\"out.log\", level=logging.INFO)\ndef task_func(template_folder):"
+  },
+  {
+   "question": "Should the logging be at INFO level or a different level?",
+   "answer": "The logging should be at INFO level, as indicated by the basicConfig call.",
+   "inline_prompt": "Creates a Flask application with a specified templates folder. It defines a route at the root ('/') which handles POST requests, logs the request data as a JSON, and renders an 'index.html' template using the data provided in POST requests.\nThe function should output with:\n    flask.app.Flask: A Flask application instance configured with a root route that handles POST requests.\n    The route logs incoming request data as JSON and serves the 'index.html' template with the provided data.\nYou should write self-contained code starting with:\n```\nfrom flask import Flask, render_template, request\nimport json\nimport logging\nlogging.basicConfig(filename=\"out.log\", level=logging.INFO)\ndef task_func(template_folder):"
+  },
+  {
+   "question": "Is the template 'index.html' expected to be in the specified template_folder or a subdirectory?",
+   "answer": "The template 'index.html' is expected to be directly in the specified template_folder.",
+   "inline_prompt": "Creates a Flask application with a specified templates folder. It defines a route at the root ('/') which handles POST requests, logs the request data as a JSON, and renders an 'index.html' template (located directly in the specified template_folder) using the data provided in POST requests.\nThe function should output with:\n    flask.app.Flask: A Flask application instance configured with a root route that handles POST requests.\n    The route logs incoming request data as JSON and serves the 'index.html' template with the provided data.\nYou should write self-contained code starting with:\n```\nfrom flask import Flask, render_template, request\nimport json\nimport logging\nlogging.basicConfig(filename=\"out.log\", level=logging.INFO)\ndef task_func(template_folder):"
+  },
+  {
+   "question": "Should the app handle GET requests at the root route in addition to POST?",
+   "answer": "No, the route only handles POST requests as specified.",
+   "inline_prompt": "Creates a Flask application with a specified templates folder. It defines a route at the root ('/') which handles POST requests (and does not handle GET requests), logs the data as a JSON, and renders an 'index.html' template using the data provided in POST requests.\nThe function should output with:\n    flask.app.Flask: A Flask application instance configured with a root route that handles POST requests.\n    The route logs incoming request data as JSON and serves the 'index.html' template with the provided data.\nYou should write self-contained code starting with:\n```\nfrom flask import Flask, render_template, request\nimport json\nimport logging\nlogging.basicConfig(filename=\"out.log\", level=logging.INFO)\ndef task_func(template_folder):"
+  },
+  {
+   "question": "What should be returned if the template 'index.html' does not exist?",
+   "answer": "Not specified beyond what's given; assume standard behavior (Flask will raise a TemplateNotFound exception).",
+   "inline_prompt": "Creates a Flask application with a specified templates folder. It defines a route at the root ('/') which handles POST requests, logs the data as a JSON, and renders an 'index.html' template using the data provided in POST requests.\nThe function should output with:\n    flask.app.Flask: A Flask application instance configured with a root route that handles POST requests.\n    The route logs incoming request data as JSON and serves the 'index.html' template with the provided data.\nYou should write self-contained code starting with:\n```\nfrom flask import Flask, render_template, request\nimport json\nimport logging\nlogging.basicConfig(filename=\"out.log\", level=logging.INFO)\ndef task_func(template_folder):"
+  },
+  {
+   "question": "Should the logged JSON include metadata like timestamp or request IP?",
+   "answer": "No, only the request data (specifically, the JSON payload from the request) should be logged.",
+   "inline_prompt": "Creates a Flask application with a specified templates folder. It defines a route at the root ('/') which handles POST requests, logs the data as a JSON (specifically the JSON payload from the request, without additional metadata), and renders an 'index.html' template using the data provided in POST requests.\nThe function should output with:\n    flask.app.Flask: A Flask application instance configured with a root route that handles POST requests.\n    The route logs incoming request data as JSON and serves the 'index.html' template with the provided data.\nYou should write self-contained code starting with:\n```\nfrom flask import Flask, render_template, request\nimport json\nimport logging\nlogging.basicConfig(filename=\"out.log\", level=logging.INFO)\ndef task_func(template_folder):"
+  },
+  {
+   "question": "Is the Flask app intended to run in debug mode or with specific configuration?",
+   "answer": "Not specified beyond what's given; assume standard behavior (no debug mode or extra configuration is required).",
+   "inline_prompt": "Creates a Flask application with a specified templates folder. It defines a route at the root ('/') which handles POST requests, logs the data as a JSON, and renders an 'index.html' template using the data provided in POST requests.\nThe function should output with:\n    flask.app.Flask: A Flask application instance configured with a root route that handles POST requests.\n    The route logs incoming request data as JSON and serves the 'index.html' template with the provided data.\nYou should write self-contained code starting with:\n```\nfrom flask import Flask, render_template, request\nimport json\nimport logging\nlogging.basicConfig(filename=\"out.log\", level=logging.INFO)\ndef task_func(template_folder):"
+  }
+ ]
+}

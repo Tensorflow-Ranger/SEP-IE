@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/109_vagueness",
+ "candidates": [
+  {
+   "question": "What are the predefined lists for items and locations when not provided?",
+   "answer": "The predefined list for items is ['apple', 'banana', 'grape', 'orange', 'pineapple'], and for locations is ['store1', 'store2', 'store3', 'store4', 'store5'].",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list: items default to ['apple', 'banana', 'grape', 'orange', 'pineapple'] and locations default to ['store1', 'store2', 'store3', 'store4', 'store5'].\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, or if 'Item' or 'Location' columns are missing.\nThe function should output with:\n    matplotlib.axes.Axes: Axes object with the plotted bar chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, items=None, locations=None):"
+  },
+  {
+   "question": "Should the bar chart be stacked or grouped (side-by-side)?",
+   "answer": "The bar chart should be stacked, as indicated by the canonical solution using stacked=True.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location as a stacked bar chart. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, or if 'Item' or 'Location' columns are missing.\nThe function should output with:\n    matplotlib.axes.Axes: Axes object with the plotted bar chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, items=None, locations=None):"
+  },
+  {
+   "question": "What should happen if items or locations lists contain values not present in the DataFrame?",
+   "answer": "Not specified beyond what's given; assume standard behavior where missing categories are included with zero counts.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list. Categories not present in the DataFrame are included with zero counts.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, or if 'Item' or 'Location' columns are missing.\nThe function should output with:\n    matplotlib.axes.Axes: Axes object with the plotted bar chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, items=None, locations=None):"
+  },
+  {
+   "question": "Should the order of items/locations in the chart follow the input lists, alphabetical, or data frequency?",
+   "answer": "The order follows the input lists (or default lists) as used in the canonical solution via unstack and plot.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list. The order of items and locations in the chart follows the order of the provided (or default) lists.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, or if 'Item' or 'Location' columns are missing.\nThe function should output with:\n    matplotlib.axes.Axes: Axes object with the plotted bar chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, items=None, locations=None):"
+  },
+  {
+   "question": "Is the chart title fixed as 'Item Distribution by Location' or should it be customizable?",
+   "answer": "The chart title is fixed as 'Item Distribution by Location'.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, or if 'Item' or 'Location' columns are missing.\nThe function should output with:\n    matplotlib.axes.Axes: Axes object with the plotted bar chart, with title 'Item Distribution by Location'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, items=None, locations=None):\n```"
+  },
+  {
+   "question": "Should missing combinations (item-location) be shown as zero bars or omitted entirely?",
+   "answer": "Missing combinations should be shown as zero bars.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list; missing combinations are shown as zero bars.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, or if 'Item' or 'Location' columns are missing.\nThe function should output with:\n    matplotlib.axes.Axes: Axes object with the plotted bar chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, items=None, locations=None):\n```"
+  },
+  {
+   "question": "What is the expected behavior if df is empty?",
+   "answer": "If df is empty, the bar chart should be plotted with zero counts for all specified item-location combinations.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, or if 'Item' or 'Location' columns are missing.\nThe function should output with:\n    matplotlib.axes.Axes: Axes object with the plotted bar chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, items=None, locations=None):\n```"
+  },
+  {
+   "question": "Are the items and locations case-sensitive when matching against DataFrame columns?",
+   "answer": "Yes, items and locations are case-sensitive when matching against DataFrame columns.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list; matching is case-sensitive.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, or if 'Item' or 'Location' columns are missing.\nThe function should output with:\n    matplotlib.axes.Axes: Axes object with the plotted bar chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, items=None, locations=None):\n```"
+  }
+ ]
+}

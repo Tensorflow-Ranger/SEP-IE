@@ -1,0 +1,99 @@
+{
+  "round": 3,
+  "prompt_before": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.",
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "Does \"ascending order\" mean that items with a lower digit sum should appear earlier in the output list, and if two sums are equal, the original index order is preserved?",
+      "answer": "Yes, ascending order means lower digit sums appear earlier, and equal sums preserve original index order.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits, meaning lower digit sums appear earlier.\nIf several items have similar sum of digits, order them based on their index in the original list, preserving their relative order.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.",
+      "score": 10.091426610946655
+    },
+    {
+      "idx": 0,
+      "question": "What is the exact definition of \"sum of digits\" for a negative integer: is it the sum with the sign applied only to the first digit (as the example suggests) or to each digit individually (e.g., -123 as -1, -2, -3)?",
+      "answer": "The minus sign makes only the first digit negative, as stated in the specification: \"treating the minus sign as making the first digit negative.\"",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.",
+      "score": 8.378174021840096
+    },
+    {
+      "idx": 7,
+      "question": "If two numbers have the same digit sum, does \"order them based on their index in the original list\" mean we should preserve the relative order they had in the input (stable sort by original position)?",
+      "answer": "Yes, preserve the relative order from the original list (stable sort by original index).",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list, preserving their relative order.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.",
+      "score": 7.311581954360008
+    },
+    {
+      "idx": 11,
+      "question": "Does \"index in the original list\" refer to the position before any sorting, and if so, is the index 0\u2011based as usual in Python?",
+      "answer": "Yes, index refers to the original position before sorting, using Python's standard 0\u2011based indexing.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list, using Python's standard 0\u2011based indexing.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.",
+      "score": 7.091632321476936
+    },
+    {
+      "idx": 3,
+      "question": "Are we allowed to modify the input list in-place, or must we return a new sorted list?",
+      "answer": "Return a new sorted list; do not modify the input list.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.\nThe function must return a new sorted list without modifying the input.",
+      "score": 6.388146437704563
+    },
+    {
+      "idx": 10,
+      "question": "Is the minus sign considered a \"digit\" for the purpose of the sum, or is it only an operator that makes the first digit negative?",
+      "answer": "The minus sign is not a digit; it only makes the first digit negative.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.\nThe minus sign is not a digit; it only makes the first digit negative.",
+      "score": 5.3277904987335205
+    },
+    {
+      "idx": 1,
+      "question": "How should the sum of digits be computed for the integer 0, and for negative numbers that are multiples of 10 (e.g., -10)?",
+      "answer": "For 0, the digit sum is 0; for negative multiples of 10, apply the rule: the minus sign makes the first digit negative, so -10 gives -1+0 = -1.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.\nFor 0, the digit sum is 0; for negative multiples of 10, apply the same rule: the minus sign makes the first digit negative.",
+      "score": 5.182005055248737
+    },
+    {
+      "idx": 6,
+      "question": "For numbers with multiple digits, are digits defined in base\u201110, and how should the sum be computed for numbers like -100 (is it -1+0+0 = -1)?",
+      "answer": "Digits are base\u201110, and for -100, the sum is -1+0+0 = -1, applying the minus sign only to the first digit.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.\nDigits are base\u201110; for example, -100 gives -1+0+0 = -1.",
+      "score": 4.9013755694031715
+    },
+    {
+      "idx": 8,
+      "question": "Are there any constraints on the size of the integers that would affect the digit\u2011sum calculation (e.g., extremely large integers)?",
+      "answer": "No constraints; handle integers of any size as Python normally does.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.\nThere are no constraints on integer size; handle them as Python does normally.",
+      "score": 4.716339029371738
+    },
+    {
+      "idx": 5,
+      "question": "Is the input guaranteed to be a list of integers, or could it contain other types that need to be handled or rejected?",
+      "answer": "The input is guaranteed to be a list of integers; no other types need handling.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.\nThe input is guaranteed to be a list of integers.",
+      "score": 4.417830511927605
+    },
+    {
+      "idx": 4,
+      "question": "What should be returned if the input list is empty?",
+      "answer": "Return an empty list.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.\nIf the input list is empty, return an empty list.",
+      "score": 2.465036276727915
+    },
+    {
+      "idx": 9,
+      "question": "Should the function handle `None` values or other non\u2011integer elements in the list?",
+      "answer": "No, the input is guaranteed to be a list of integers; no `None` or non\u2011integer elements.",
+      "prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits.\nIf several items have similar sum of digits, order them based on their index in the original list.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.\nThe input is guaranteed to be a list of integers, with no `None` or non\u2011integer elements.",
+      "score": 0.679434597492218
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "Does \"ascending order\" mean that items with a lower digit sum should appear earlier in the output list, and if two sums are equal, the original index order is preserved?",
+    "answer": "Yes, ascending order means lower digit sums appear earlier, and equal sums preserve original index order.",
+    "score": 10.091426610946655
+  },
+  "next_prompt": "Write a function which sorts the given list of integers\nin ascending order according to the sum of their digits, meaning lower digit sums appear earlier.\nIf several items have similar sum of digits, order them based on their index in the original list, preserving their relative order.\nThe sum of digits for a negative integer is calculated by treating the minus sign as making the first digit negative, so -123 gives -1+2+3 = 4.",
+  "test_n_pass": 0,
+  "test_n_total": 6
+}

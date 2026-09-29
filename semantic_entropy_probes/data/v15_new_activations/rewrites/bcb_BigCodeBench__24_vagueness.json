@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/24_vagueness",
+ "candidates": [
+  {
+   "question": "Should the salt be randomly generated (e.g., using os.urandom) or deterministically derived from the password?",
+   "answer": "The salt should be randomly generated, as implied by the original unambiguous specification.",
+   "inline_prompt": "Hashes a password using the PBKDF2 HMAC algorithm with SHA-256 as the hashing algorithm, combined with a randomly generated salt, and returns both the salt and the hashed password, each base64-encoded.\nThe function should raise the exception for: ValueError if the password is None or empty\nThe function should output with:\n    tuple[bytes, bytes]: A tuple containing the base64-encoded salt and the base64-encoded hashed password as byte strings.\nYou should write self-contained code starting with:\n```\nimport base64\nimport hashlib\nimport os\ndef task_func(password, SALT_LENGTH = 32):\n```"
+  },
+  {
+   "question": "What iteration count should be used for the PBKDF2 algorithm?",
+   "answer": "The iteration count is not specified beyond what's given; assume standard behavior, which in the canonical solution is 100000.",
+   "inline_prompt": "Hashes a password using the PBKDF2 HMAC algorithm with SHA-256 as the hashing algorithm, combined with a generated salt, and returns both the salt and the hashed password, each base64-encoded.\nThe function should raise the exception for: ValueError if the password is None or empty\nThe function should output with:\n    tuple[bytes, bytes]: A tuple containing the base64-encoded salt and the base64-encoded hashed password as byte strings.\nYou should write self-contained code starting with:\n```\nimport base64\nimport hashlib\nimport os\ndef task_func(password, SALT_LENGTH = 32):\n```"
+  },
+  {
+   "question": "What encoding should be used for the password when passing it to pbkdf2_hmac?",
+   "answer": "The password should be encoded to bytes using the default string encoding (typically UTF-8), as per the canonical solution.",
+   "inline_prompt": "Hashes a password using the PBKDF2 HMAC algorithm with SHA-256 as the hashing algorithm, combined with a generated salt, and returns both the salt and the hashed password, each base64-encoded.\nThe function should raise the exception for: ValueError if the password is None or empty\nThe function should output with:\n    tuple[bytes, bytes]: A tuple containing the base64-encoded salt and the base64-encoded hashed password as byte strings.\nYou should write self-contained code starting with:\n```\nimport base64\nimport hashlib\nimport os\ndef task_func(password, SALT_LENGTH = 32):\n```"
+  },
+  {
+   "question": "Should the function handle non-string password inputs (e.g., bytes) or only strings?",
+   "answer": "The function only handles string password inputs, as specified in the unambiguous version.",
+   "inline_prompt": "Hashes a password using the PBKDF2 HMAC algorithm with SHA-256 as the hashing algorithm, combined with a generated salt, and returns both the salt and the hashed password, each base64-encoded.\nThe function should raise the exception for: ValueError if the password is None or empty\nThe function should output with:\n    tuple[bytes, bytes]: A tuple containing the base64-encoded salt and the base64-encoded hashed password as byte strings.\nYou should write self-contained code starting with:\n```\nimport base64\nimport hashlib\nimport os\ndef task_func(password, SALT_LENGTH = 32):\n```"
+  },
+  {
+   "question": "What is the default SALT_LENGTH if not provided? The prompt says 32, but is that guaranteed?",
+   "answer": "The default SALT_LENGTH is 32, as given in the function signature.",
+   "inline_prompt": "Hashes a password using the PBKDF2 HMAC algorithm with SHA-256 as the hashing algorithm, combined with a randomly generated salt, and returns both the salt and the hashed password, each base64-encoded.\nThe function should raise the exception for: ValueError if the password is None or empty\nThe function should output with:\n    tuple[bytes, bytes]: A tuple containing the base64-encoded salt and the base64-encoded hashed password as byte strings.\nYou should write self-contained code starting with:\n```\nimport base64\nimport hashlib\nimport os\ndef task_func(password, SALT_LENGTH = 32):\n```"
+  },
+  {
+   "question": "Should the base64 encoding use standard encoding or a variant like URL-safe?",
+   "answer": "Use standard base64 encoding as implied by the base64.b64encode function in the canonical solution.",
+   "inline_prompt": "Hashes a password using the PBKDF2 HMAC algorithm with SHA-256 as the hashing algorithm, combined with a randomly generated salt, and returns both the salt and the hashed password, each base64-encoded using standard encoding.\nThe function should raise the exception for: ValueError if the password is None or empty\nThe function should output with:\n    tuple[bytes, bytes]: A tuple containing the base64-encoded salt and the base64-encoded hashed password as byte strings.\nYou should write self-contained code starting with:\n```\nimport base64\nimport hashlib\nimport os\ndef task_func(password, SALT_LENGTH = 32):\n```"
+  },
+  {
+   "question": "Are there any constraints on the salt length (e.g., minimum or maximum)?",
+   "answer": "Not specified beyond what's given; assume standard behavior (positive integer length accepted by os.urandom).",
+   "inline_prompt": "Hashes a password using the PBKDF2 HMAC algorithm with SHA-256 as the hashing algorithm, combined with a randomly generated salt, and returns both the salt and the hashed password, each base64-encoded.\nThe function should raise the exception for: ValueError if the password is None or empty\nThe function should output with:\n    tuple[bytes, bytes]: A tuple containing the base64-encoded salt and the base64-encoded hashed password as byte strings.\nYou should write self-contained code starting with:\n```\nimport base64\nimport hashlib\nimport os\ndef task_func(password, SALT_LENGTH = 32):\n```"
+  },
+  {
+   "question": "Should the function validate that SALT_LENGTH is a positive integer?",
+   "answer": "The function does not need to validate SALT_LENGTH; assume it is a positive integer as per the canonical solution.",
+   "inline_prompt": "Hashes a password using the PBKDF2 HMAC algorithm with SHA-256 as the hashing algorithm, combined with a randomly generated salt, and returns both the salt and the hashed password, each base64-encoded.\nThe function should raise the exception for: ValueError if the password is None or empty\nThe function should output with:\n    tuple[bytes, bytes]: A tuple containing the base64-encoded salt and the base64-encoded hashed password as byte strings.\nYou should write self-contained code starting with:\n```\nimport base64\nimport hashlib\nimport os\ndef task_func(password, SALT_LENGTH = 32):\n```"
+  }
+ ]
+}

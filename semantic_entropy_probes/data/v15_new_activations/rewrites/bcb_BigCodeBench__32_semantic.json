@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/32_semantic",
+ "candidates": [
+  {
+   "question": "Should nested tags of the same type have their text combined into one string, or should only the outermost tag's text be extracted?",
+   "answer": "Only the outermost tag's text content should be extracted, ignoring nested tags.",
+   "inline_prompt": "Scrape a web page for the first occurrence of a specified HTML tag and return its text content, handling nested tags of the same type as a single occurrence by extracting only the outermost tag's text.\nThe function should output with:  \n    str: The text content of the specified HTML tag if found, otherwise returns None.  \nYou should write self-contained code starting with:  \n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):"
+  },
+  {
+   "question": "If the tag contains nested tags of different types, should their text be included in the output?",
+   "answer": "The text content of the outermost tag includes all descendant text, regardless of nested tag types.",
+   "inline_prompt": "Scrape a web page for the first occurrence of a specified HTML tag and return its text content, handling nested tags of the same type as a single occurrence.\nThe text content includes all descendant text of the outermost tag.\nThe function should output with:  \n    str: The text content of the specified HTML tag if found, otherwise returns None.  \nYou should write self-contained code starting with:  \n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):"
+  },
+  {
+   "question": "What should happen if the tag is self-closing (e.g., <img>)?",
+   "answer": "If the tag is self-closing and has no text content, the function should return None.",
+   "inline_prompt": "Scrape a web page for the first occurrence of a specified HTML tag and return its text content, handling nested tags of the same type as a single occurrence.\nIf the tag is self-closing (e.g., <img>) and has no text content, the function returns None.\nThe function should output with:  \n    str: The text content of the specified HTML tag if found, otherwise returns None.  \nYou should write self-contained code starting with:  \n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):"
+  },
+  {
+   "question": "Should the function handle cases where the tag has attributes (e.g., <div class='main'>)?",
+   "answer": "The function should find the first occurrence of the tag regardless of attributes.",
+   "inline_prompt": "Scrape a web page for the first occurrence of a specified HTML tag and return its text content, handling nested tags of the same type as a single occurrence.\nThe function finds the first occurrence of the tag regardless of any attributes.\nThe function should output with:  \n    str: The text content of the specified HTML tag if found, otherwise returns None.  \nYou should write self-contained code starting with:  \n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):"
+  },
+  {
+   "question": "If the tag contains both text and nested tags, should the text from the nested tags be concatenated with the direct text?",
+   "answer": "No, only the direct text content of the outermost tag should be returned, ignoring any nested tags.",
+   "inline_prompt": "Scrape a web page for the first occurrence of a specified HTML tag and return its text content, handling nested tags of the same type as a single occurrence by ignoring them.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "Should the function return an empty string or None if the tag is found but has no text content?",
+   "answer": "It should return None if the tag is not found, and an empty string if the tag is found but has no text content.",
+   "inline_prompt": "Scrape a web page for the first occurrence of a specified HTML tag and return its text content, handling nested tags of the same type as a single occurrence.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None; if the tag is found but has no text content, return an empty string.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "Does 'first occurrence' mean the first in document order, or the first at the top level of the DOM?",
+   "answer": "It means the first occurrence in document order as parsed by BeautifulSoup.",
+   "inline_prompt": "Scrape a web page for the first occurrence in document order of a specified HTML tag and return its text content, handling nested tags of the same type as a single occurrence.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "Should the function follow redirects or handle HTTP errors (e.g., 404)?",
+   "answer": "Not specified beyond what's given; assume standard behavior of the requests library, which follows redirects by default and raises exceptions on HTTP errors.",
+   "inline_prompt": "Scrape a web page for the first occurrence of a specified HTML tag and return its text content, handling nested tags of the same type as a single occurrence.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/107_semantic",
+ "candidates": [
+  {
+   "question": "Should the 'date' and 'value' columns be normalized (e.g., using StandardScaler) before applying KMeans clustering?",
+   "answer": "No, use the original values after converting 'date' to ordinal.",
+   "inline_prompt": "Convert the 'date' column of a DataFrame to ordinal, perform KMeans clustering on 'date' and 'value' columns using their original values (no normalization), and plot the clusters."
+  },
+  {
+   "question": "What should be done if the 'date' column is not in datetime format? Should we convert it or raise an error?",
+   "answer": "Raise a ValueError if the 'date' column is not in datetime format.",
+   "inline_prompt": "Convert the 'date' column of a DataFrame to ordinal, perform KMeans clustering on 'date' and 'value' columns using their current or normalized values, and plot the clusters.\nThe function should raise the exception for: ValueError: If the DataFrame is empty, lacks required columns, or if the 'date' column is not in datetime format."
+  },
+  {
+   "question": "Is the 'group' column required for clustering, or is it only for reference?",
+   "answer": "The 'group' column is required to be present in the DataFrame but is not used for clustering.",
+   "inline_prompt": "Convert the 'date' column of a DataFrame to ordinal, perform KMeans clustering on 'date' and 'value' columns using their current or normalized values, and plot the clusters.\nThe function should raise the exception for: ValueError: If the DataFrame is empty or lacks required columns (including 'group', 'date', and 'value')."
+  },
+  {
+   "question": "Should the KMeans algorithm use a specific initialization method (e.g., 'k-means++') or number of initializations?",
+   "answer": "Not specified beyond what's given; assume standard behavior (default sklearn KMeans parameters).",
+   "inline_prompt": "Convert the 'date' column of a DataFrame to ordinal, perform KMeans clustering on 'date' and 'value' columns using their current or normalized values, and plot the clusters.\nThe function should raise the exception for: ValueError: If the DataFrame is empty or lacks required columns.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\ndef task_func(df, n_clusters=3, random_state=0):\n```"
+  },
+  {
+   "question": "What colormap should be used for the scatter plot? Is 'viridis' required or can it be any?",
+   "answer": "The colormap is not specified beyond what's given; assume standard behavior, so any valid colormap is acceptable.",
+   "inline_prompt": "Convert the 'date' column of a DataFrame to ordinal, perform KMeans clustering on 'date' and 'value' columns, and plot the clusters. Required names: x: 'Date (ordinal)' ylabel: 'Value' title: 'KMeans Clustering of Value vs Date'\nThe function should raise the exception for: ValueError: If the DataFrame is empty or lacks required columns.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object containing the scatter plot of the clusters.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\ndef task_func(df, n_clusters=3, random_state=0):"
+  },
+  {
+   "question": "Should the plot include a legend or colorbar for the clusters?",
+   "answer": "The plot should not include a legend or colorbar, as not specified in the required names or canonical solution.",
+   "inline_prompt": "Convert the 'date' column of a DataFrame to ordinal, perform KMeans clustering on 'date' and 'value' columns, and plot the clusters. Required names: x: 'Date (ordinal)' ylabel: 'Value' title: 'KMeans Clustering of Value vs Date'\nThe plot should not include a legend or colorbar.\nThe function should raise the exception for: ValueError: If the DataFrame is empty or lacks required columns.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object containing the scatter plot of the clusters.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\ndef task_func(df, n_clusters=3, random_state=0):"
+  },
+  {
+   "question": "What should happen if there are missing values (NaN) in the 'date' or 'value' columns?",
+   "answer": "The function should raise a ValueError if there are missing values, as the canonical solution expects valid data for clustering.",
+   "inline_prompt": "Convert the 'date' column of a DataFrame to ordinal, perform KMeans clustering on 'date' and 'value' columns, and plot the clusters. Required names: x: 'Date (ordinal)' ylabel: 'Value' title: 'KMeans Clustering of Value vs Date'\nThe function should raise the exception for: ValueError: If the DataFrame is empty or lacks required columns or contains missing values in 'date' or 'value'.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object containing the scatter plot of the clusters.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\ndef task_func(df, n_clusters=3, random_state=0):"
+  },
+  {
+   "question": "Is the 'date' column conversion to ordinal required even if it's already numeric?",
+   "answer": "The 'date' column must be converted to ordinal regardless of its initial type, as per the canonical solution.",
+   "inline_prompt": "Convert the 'date' column of a DataFrame to ordinal, perform KMeans clustering on 'date' and 'value' columns, and plot the clusters. Required names: x: 'Date (ordinal)' ylabel: 'Value' title: 'KMeans Clustering of Value vs Date'\nThe function should raise the exception for: ValueError: If the DataFrame is empty or lacks required columns.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object containing the scatter plot of the clusters.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\ndef task_func(df, n_clusters=3, random_state=0):"
+  }
+ ]
+}

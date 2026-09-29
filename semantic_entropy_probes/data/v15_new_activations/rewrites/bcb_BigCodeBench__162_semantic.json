@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/162_semantic",
+ "candidates": [
+  {
+   "question": "Should we count each word length only once regardless of how many words have that length, or count each unique word's length without considering duplicates?",
+   "answer": "Count each word's length, including duplicates, so the histogram shows the frequency of each length across all words.",
+   "inline_prompt": "Analyzes and visualizes the distribution of word lengths in a text, considering only unique word lengths. The function generates a histogram subplot, which facilitates the understanding of how word lengths vary within the provided text. The histogram counts each word's length, including duplicates, so it shows the frequency of each length across all words.\nNote that: If there are no words in the input text, or all words are filtered out, the histogram will be empty as no bins will be created.\nThe function should output with:\n    matplotlib.axes.Axes: An Axes object containing the histogram of word lengths.\nYou should write self-contained code starting with:\n```\nimport re\nimport matplotlib.pyplot as plt\nimport numpy as np\ndef task_func(text, rwidth=0.8):\n```"
+  },
+  {
+   "question": "How should we define a 'word'? Should punctuation be removed, and are contractions or hyphenated words treated as one word?",
+   "answer": "Words are defined as sequences of alphanumeric characters separated by non-alphanumeric characters, with punctuation removed, and contractions or hyphenated words are treated as separate words.",
+   "inline_prompt": "Analyzes and visualizes the distribution of word lengths in a text, considering only unique word lengths. Words are defined as sequences of alphanumeric characters separated by non-alphanumeric characters, with punctuation removed, and contractions or hyphenated words are treated as separate words. The function generates a histogram subplot, which facilitates the understanding of how word lengths vary within the provided text.\nNote that: If there are no words in the input text, or all words are filtered out, the histogram will be empty as no bins will be created.\nThe function should output with:\n    matplotlib.axes.Axes: An Axes object containing the histogram of word lengths.\nYou should write self-contained code starting with:\n```\nimport re\nimport matplotlib.pyplot as plt\nimport numpy as np\ndef task_func(text, rwidth=0.8):\n```"
+  },
+  {
+   "question": "What should the histogram bins be? Should they be integer-aligned (e.g., centered on integers) and what range should they cover?",
+   "answer": "The bins should be centered on integers, covering from the minimum word length minus 0.5 to the maximum word length plus 0.5, with one bin per integer length.",
+   "inline_prompt": "Analyzes and visualizes the distribution of word lengths in a text, considering only unique word lengths. The function generates a histogram subplot, which facilitates the understanding of how word lengths vary within the provided text. The bins should be centered on integers, covering from the minimum word length minus 0.5 to the maximum word length plus 0.5, with one bin per integer length.\nNote that: If there are no words in the input text, or all words are filtered out, the histogram will be empty as no bins will be created.\nThe function should output with:\n    matplotlib.axes.Axes: An Axes object containing the histogram of word lengths.\nYou should write self-contained code starting with:\n```\nimport re\nimport matplotlib.pyplot as plt\nimport numpy as np\ndef task_func(text, rwidth=0.8):\n```"
+  },
+  {
+   "question": "Should the histogram include zero-frequency bins for word lengths that are possible but not present in the text?",
+   "answer": "No, the histogram should only include bins for word lengths that are present in the text, with no zero-frequency bins for missing lengths.",
+   "inline_prompt": "Analyzes and visualizes the distribution of word lengths in a text, considering only unique word lengths. The function generates a histogram subplot, which facilitates the understanding of how word lengths vary within the provided text. The histogram should only include bins for word lengths that are present in the text, with no zero-frequency bins for missing lengths.\nNote that: If there are no words in the input text, or all words are filtered out, the histogram will be empty as no bins will be created.\nThe function should output with:\n    matplotlib.axes.Axes: An Axes object containing the histogram of word lengths.\nYou should write self-contained code starting with:\n```\nimport re\nimport matplotlib.pyplot as plt\nimport numpy as np\ndef task_func(text, rwidth=0.8):\n```"
+  },
+  {
+   "question": "How should we handle non-alphabetic characters or digits within words? Are they part of word length?",
+   "answer": "Words are split by non-alphabetic characters using regex \\W+, and the length of each resulting non-empty string is counted, so digits and punctuation are not part of words.",
+   "inline_prompt": "Analyzes and visualizes the distribution of word lengths in a text, considering only unique word lengths. Words are split by non-alphabetic characters using regex \\W+, and the length of each resulting non-empty string is counted. The function generates a histogram subplot, which facilitates the understanding of how word lengths vary within the provided text.\nNote that: If there are no words in the input text, or all words are filtered out, the histogram will be empty as no bins will be created.\nThe function should output with:\n    matplotlib.axes.Axes: An Axes object containing the histogram of word lengths.\nYou should write self-contained code starting with:\n```\nimport re\nimport matplotlib.pyplot as plt\nimport numpy as np\ndef task_func(text, rwidth=0.8):"
+  },
+  {
+   "question": "What should the title, x-label, and y-label of the histogram be exactly?",
+   "answer": "The title should be \"Distribution of Word Lengths\", the x-label \"Word Length\", and the y-label \"Frequency\".",
+   "inline_prompt": "Analyzes and visualizes the distribution of word lengths in a text, considering only unique word lengths. The function generates a histogram subplot, which facilitates the understanding of how word lengths vary within the provided text.\nThe histogram's title is \"Distribution of Word Lengths\", the x-label is \"Word Length\", and the y-label is \"Frequency\".\nNote that: If there are no words in the input text, or all words are filtered out, the histogram will be empty as no bins will be created.\nThe function should output with:\n    matplotlib.axes.Axes: An Axes object containing the histogram of word lengths.\nYou should write self-contained code starting with:\n```\nimport re\nimport matplotlib.pyplot as plt\nimport numpy as np\ndef task_func(text, rwidth=0.8):"
+  },
+  {
+   "question": "Should the function handle multiple languages or Unicode characters, and how does that affect word splitting?",
+   "answer": "The function uses regex \\W+ which splits on non-word characters, treating Unicode letters as part of words, so it handles multiple languages as per standard Python re behavior.",
+   "inline_prompt": "Analyzes and visualizes the distribution of word lengths in a text, considering only unique word lengths. The function generates a histogram subplot, which facilitates the understanding of how word lengths vary within the provided text.\nWord splitting uses regex \\W+ which treats Unicode letters as part of words, handling multiple languages as per standard Python re behavior.\nNote that: If there are no words in the input text, or all words are filtered out, the histogram will be empty as no bins will be created.\nThe function should output with:\n    matplotlib.axes.Axes: An Axes object containing the histogram of word lengths.\nYou should write self-contained code starting with:\n```\nimport re\nimport matplotlib.pyplot as plt\nimport numpy as np\ndef task_func(text, rwidth=0.8):"
+  },
+  {
+   "question": "What should be returned if there are no words? Should it return an empty Axes or raise an error?",
+   "answer": "It should return an Axes object with an empty histogram (no bars) as per the note, not raise an error.",
+   "inline_prompt": "Analyzes and visualizes the distribution of word lengths in a text, considering only unique word lengths. The function generates a histogram subplot, which facilitates the understanding of how word lengths vary within the provided text.\nNote that: If there are no words in the input text, or all words are filtered out, the histogram will be empty as no bins will be created, and the function returns an Axes object with no bars.\nThe function should output with:\n    matplotlib.axes.Axes: An Axes object containing the histogram of word lengths.\nYou should write self-contained code starting with:\n```\nimport re\nimport matplotlib.pyplot as plt\nimport numpy as np\ndef task_func(text, rwidth=0.8):"
+  }
+ ]
+}

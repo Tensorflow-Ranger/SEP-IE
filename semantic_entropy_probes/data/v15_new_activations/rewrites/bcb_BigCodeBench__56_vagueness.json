@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/56_vagueness",
+ "candidates": [
+  {
+   "question": "Should we convert only the Score column to integer, or also any numeric-looking Category values?",
+   "answer": "Only the Score column should be converted to integer.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the Score column to integer.\nThe function should output with:\n    DataFrame: A pandas DataFrame with extracted data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\ndef task_func(text):\n```"
+  },
+  {
+   "question": "What should happen if a line doesn't match the expected format? Should we skip it, raise an error, or include NaN?",
+   "answer": "Lines that do not match the expected format should be skipped; only matching lines are extracted.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the data in integer.\nOnly lines matching the exact format should be processed; others are ignored.\nThe function should output with:\n    DataFrame: A pandas DataFrame with extracted data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Is the Category column expected to be a string, or could it contain numbers that should be converted to integer?",
+   "answer": "The Category column is expected to be a string; it should not be converted to integer.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the data in integer.\nThe Category column remains as strings.\nThe function should output with:\n    DataFrame: A pandas DataFrame with extracted data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\ndef task_func(text):\n```"
+  },
+  {
+   "question": "Should the DataFrame columns be ordered as ['Score', 'Category'] or ['Category', 'Score']?",
+   "answer": "The DataFrame columns should be ordered as ['Score', 'Category'].",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the data in integer.\nThe DataFrame must have columns in the order ['Score', 'Category'].\nThe function should output with:\n    DataFrame: A pandas DataFrame with extracted data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\ndef task_func(text):\n```"
+  },
+  {
+   "question": "What if there are extra spaces or variations in formatting (e.g., 'Score:85,Category:Math')?",
+   "answer": "The specification assumes the exact format 'Score: 85, Category: Math' as given; assume standard behavior and handle only that exact format.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted exactly as 'Score: 85, Category: Math'. Make sure to convert the data in integer."
+  },
+  {
+   "question": "Should the function handle empty text by returning an empty DataFrame with defined columns or no columns?",
+   "answer": "For empty text, return an empty DataFrame with columns 'Score' and 'Category'.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the data in integer. For empty text, return an empty DataFrame with columns 'Score' and 'Category'."
+  },
+  {
+   "question": "Are scores always non-negative integers, or could they be negative or decimal?",
+   "answer": "Scores are integers as per the example; assume they are integers that can be converted via astype(int).",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the data in integer, assuming scores are integers."
+  },
+  {
+   "question": "Should we validate that scores are within a specific range (e.g., 0-100)?",
+   "answer": "No validation is required; just convert the scores to integers as they appear.",
+   "inline_prompt": "Extract data from a text and create a Pandas DataFrame. The text contains several lines, each formatted as 'Score: 85, Category: Math'. Make sure to convert the data in integer without any validation."
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/93_semantic",
+ "candidates": [
+  {
+   "question": "Should the function always fit PCA on the input data, or should it accept an optional pre-fitted PCA transformer as an additional parameter?",
+   "answer": "The function should always fit PCA on the input data; there is no pre-fitted transformer parameter.",
+   "inline_prompt": "Perform Principal Component Analysis (PCA) on a dataset and record the result.\nAlso, generates a scatter plot of the transformed data.\nThe function should raise the exception for: ValueError: If n_components is not a positive integer.\nThe function should output with:\n    DataFrame: The transformed data with principal components.\n    Axes: The matplotlib Axes object containing the scatter plot.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.decomposition import PCA\ndef task_func(data, n_components=2):\n```"
+  },
+  {
+   "question": "If using a pre-fitted transformer, how should it be provided (e.g., as an additional argument)?",
+   "answer": "Not specified beyond what's given; assume standard behavior (no pre-fitted transformer is used).",
+   "inline_prompt": "Perform Principal Component Analysis (PCA) on a dataset and record the result.\nAlso, generates a scatter plot of the transformed data.\nThe function should raise the exception for: ValueError: If n_components is not a positive integer.\nThe function should output with:\n    DataFrame: The transformed data with principal components.\n    Axes: The matplotlib Axes object containing the scatter plot.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.decomposition import PCA\ndef task_func(data, n_components=2):\n```"
+  },
+  {
+   "question": "What should the scatter plot represent? Should it always plot PC1 vs PC2, or should it handle more components (e.g., first two if n_components>2)?",
+   "answer": "The scatter plot should always plot the first two principal components (PC1 vs PC2), even if n_components is greater than 2.",
+   "inline_prompt": "Perform Principal Component Analysis (PCA) on a dataset and record the result.\nAlso, generates a scatter plot of the transformed data, plotting the first two principal components (PC1 vs PC2).\nThe function should raise the exception for: ValueError: If n_components is not a positive integer.\nThe function should output with:\n    DataFrame: The transformed data with principal components.\n    Axes: The matplotlib Axes object containing the scatter plot.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.decomposition import PCA\ndef task_func(data, n_components=2):\n```"
+  },
+  {
+   "question": "Should the function standardize (scale) the data before applying PCA?",
+   "answer": "The function should not standardize the data; it should apply PCA directly to the input data as provided.",
+   "inline_prompt": "Perform Principal Component Analysis (PCA) on a dataset and record the result.\nAlso, generates a scatter plot of the transformed data.\nThe function should raise the exception for: ValueError: If n_components is not a positive integer.\nThe function should output with:\n    DataFrame: The transformed data with principal components.\n    Axes: The matplotlib Axes object containing the scatter plot.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.decomposition import PCA\ndef task_func(data, n_components=2):\n```"
+  },
+  {
+   "question": "What should happen if the data has more rows than columns or vice versa? Should PCA still be applied?",
+   "answer": "PCA should be applied as long as the data is numeric and n_components is valid; the function does not impose constraints on the relative dimensions of rows and columns.",
+   "inline_prompt": "Perform Principal Component Analysis (PCA) on a dataset and record the result.\nAlso, generates a scatter plot of the transformed data.\nPCA should be applied as long as the data is numeric and n_components is valid; the function does not impose constraints on the relative dimensions of rows and columns.\n\nParameters:\ndata (DataFrame): The dataset.\nn_components (int): The number of principal components to calculate. Default is 2.\n\nReturns:\nDataFrame: The transformed data with principal components.\nAxes: The matplotlib Axes object containing the scatter plot.\n\nRaises:\nValueError: If n_components is not a positive integer.\n\nRequirements:\n- numpy\nn- pandas\n- matplotlib.pyplot\n- sklearn.decomposition\n\nExample:\n>>> data = pd.DataFrame([[14, 25], [1, 22], [7, 8]], columns=['Column1', 'Column2'])\n>>> transformed_data, plot = task_func(data)\n"
+  },
+  {
+   "question": "Should the function handle missing values in the data?",
+   "answer": "Not specified beyond what's given; assume standard behavior, meaning PCA will raise an error if missing values are present.",
+   "inline_prompt": "Perform Principal Component Analysis (PCA) on a dataset and record the result.\nAlso, generates a scatter plot of the transformed data.\nNot specified beyond what's given; assume standard behavior, meaning PCA will raise an error if missing values are present.\n\nParameters:\ndata (DataFrame): The dataset.\nn_components (int): The number of principal components to calculate. Default is 2.\n\nReturns:\nDataFrame: The transformed data with principal components.\nAxes: The matplotlib Axes object containing the scatter plot.\n\nRaises:\nValueError: If n_components is not a positive integer.\n\nRequirements:\n- numpy\nn- pandas\n- matplotlib.pyplot\n- sklearn.decomposition\n\nExample:\n>>> data = pd.DataFrame([[14, 25], [1, 22], [7, 8]], columns=['Column1', 'Column2'])\n>>> transformed_data, plot = task_func(data)\n"
+  },
+  {
+   "question": "Should the scatter plot include labels, titles, or other formatting?",
+   "answer": "No, the scatter plot should be generated without additional labels or formatting, as per the standard competitive-programming convention.",
+   "inline_prompt": "Perform Principal Component Analysis (PCA) on a dataset and record the result.\nAlso, generates a scatter plot of the transformed data.\nNo, the scatter plot should be generated without additional labels or formatting, as per the standard competitive-programming convention.\n\nParameters:\ndata (DataFrame): The dataset.\nn_components (int): The number of principal components to calculate. Default is 2.\n\nReturns:\nDataFrame: The transformed data with principal components.\nAxes: The matplotlib Axes object containing the scatter plot.\n\nRaises:\nValueError: If n_components is not a positive integer.\n\nRequirements:\n- numpy\nn- pandas\n- matplotlib.pyplot\n- sklearn.decomposition\n\nExample:\n>>> data = pd.DataFrame([[14, 25], [1, 22], [7, 8]], columns=['Column1', 'Column2'])\n>>> transformed_data, plot = task_func(data)\n"
+  },
+  {
+   "question": "What should the function return if n_components equals the number of features? Should it still plot?",
+   "answer": "Yes, it should still plot the transformed data, which will have the same number of components as features.",
+   "inline_prompt": "Perform Principal Component Analysis (PCA) on a dataset and record the result.\nAlso, generates a scatter plot of the transformed data.\nYes, it should still plot the transformed data, which will have the same number of components as features.\n\nParameters:\ndata (DataFrame): The dataset.\nn_components (int): The number of principal components to calculate. Default is 2.\n\nReturns:\nDataFrame: The transformed data with principal components.\nAxes: The matplotlib Axes object containing the scatter plot.\n\nRaises:\nValueError: If n_components is not a positive integer.\n\nRequirements:\n- numpy\nn- pandas\n- matplotlib.pyplot\n- sklearn.decomposition\n\nExample:\n>>> data = pd.DataFrame([[14, 25], [1, 22], [7, 8]], columns=['Column1', 'Column2'])\n>>> transformed_data, plot = task_func(data)\n"
+  }
+ ]
+}

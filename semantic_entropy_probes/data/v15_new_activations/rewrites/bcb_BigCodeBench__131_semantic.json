@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/131_semantic",
+ "candidates": [
+  {
+   "question": "Should the salt be appended before converting the hex string to bytes (i.e., salt as hex string concatenated with hex_str then convert) or after conversion (i.e., convert hex_str to bytes then append salt bytes)?",
+   "answer": "The salt is appended after converting the hex string to bytes.",
+   "inline_prompt": "Converts a hex string to bytes, salts it with a random value of specified size, and computes its SHA256 hash.\nThe function generates a random salt of the given size, appends it to the byte representation of the hex string, and then computes the SHA256 hash of the salted data. The salt and hash are returned as a tuple.\nYou should write self-contained code starting with:\n```\nimport base64\nimport binascii\nimport os\nimport hashlib\ndef task_func(hex_str, salt_size):\n```"
+  },
+  {
+   "question": "What should happen if the hex string contains invalid characters (e.g., non-hex digits)?",
+   "answer": "Not specified beyond what's given; assume standard behavior (e.g., binascii.unhexlify will raise an exception).",
+   "inline_prompt": "Converts a hex string to bytes, salts it with a random value of specified size, and computes its SHA256 hash.\nThe function generates a random salt of the given size, appends it to the byte representation of the hex string, and then computes the SHA256 hash of the salted data. The salt and hash are returned as a tuple.\nYou should write self-contained code starting with:\n```\nimport base64\nimport binascii\nimport os\nimport hashlib\ndef task_func(hex_str, salt_size):\n```"
+  },
+  {
+   "question": "Should the salt be prepended or appended to the data? The prompt says 'appends it' but is that before or after the hex bytes?",
+   "answer": "The salt is appended after the hex bytes.",
+   "inline_prompt": "Converts a hex string to bytes, salts it with a random value of specified size, and computes its SHA256 hash.\nThe function generates a random salt of the given size, appends it after the byte representation of the hex string, and then computes the SHA256 hash of the salted data. The salt and hash are returned as a tuple.\nYou should write self-contained code starting with:\n```\nimport base64\nimport binascii\nimport os\nimport hashlib\ndef task_func(hex_str, salt_size):\n```"
+  },
+  {
+   "question": "Is the salt size in bits or bytes? The parameter 'salt_size' is ambiguous.",
+   "answer": "The salt size is in bytes.",
+   "inline_prompt": "Converts a hex string to bytes, salts it with a random value of specified size, and computes its SHA256 hash.\nThe function generates a random salt of the given size in bytes, appends it to the byte representation of the hex string, and then computes the SHA256 hash of the salted data. The salt and hash are returned as a tuple.\nYou should write self-contained code starting with:\n```\nimport base64\nimport binascii\nimport os\nimport hashlib\ndef task_func(hex_str, salt_size):\n```"
+  },
+  {
+   "question": "Should the hex string be stripped of whitespace or other delimiters (like '0x' prefix) before conversion?",
+   "answer": "The hex string should be stripped of '\\x' escape sequences as shown in the canonical solution, but other delimiters like whitespace or '0x' prefix are not specified; assume standard behavior for binascii.unhexlify.",
+   "inline_prompt": "Converts a hex string to bytes, salts it with a random value of specified size, and computes its SHA256 hash.\nThe function generates a random salt of the given size, appends it to the byte representation of the hex string (after stripping any '\\x' escape sequences), and then computes the SHA256 hash of the salted data. The salt and hash are returned as a tuple."
+  },
+  {
+   "question": "What encoding should be used for the base64 output (e.g., standard, URL-safe)?",
+   "answer": "Use standard base64 encoding as implemented by base64.b64encode.",
+   "inline_prompt": "Converts a hex string to bytes, salts it with a random value of specified size, and computes its SHA256 hash.\nThe function generates a random salt of the given size, appends it to the byte representation of the hex string, and then computes the SHA256 hash of the salted data. The salt and hash are returned as a tuple, with the salt base64-encoded using standard encoding."
+  },
+  {
+   "question": "If the hex string has an odd length, should it be padded or handled in a specific way?",
+   "answer": "Not specified beyond what's given; assume standard behavior for binascii.unhexlify, which raises an error for odd-length hex strings.",
+   "inline_prompt": "Converts a hex string to bytes, salts it with a random value of specified size, and computes its SHA256 hash.\nThe function generates a random salt of the given size, appends it to the byte representation of the hex string, and then computes the SHA256 hash of the salted data. The salt and hash are returned as a tuple."
+  },
+  {
+   "question": "Should the function raise an exception for negative or zero salt_size?",
+   "answer": "Not specified beyond what's given; assume standard behavior where os.urandom raises an error for non-positive sizes.",
+   "inline_prompt": "Converts a hex string to bytes, salts it with a random value of specified size, and computes its SHA256 hash.\nThe function generates a random salt of the given size, appends it to the byte representation of the hex string, and then computes the SHA256 hash of the salted data. The salt and hash are returned as a tuple."
+  }
+ ]
+}

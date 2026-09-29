@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/138_semantic",
+ "candidates": [
+  {
+   "question": "Should duplicate entries for the same letter be counted only once per unique letter, or should each occurrence be counted separately?",
+   "answer": "Each occurrence should be counted separately, as the canonical solution uses value_counts() which counts each row.",
+   "inline_prompt": "Create and return a bar chart of the frequency of letters in a DataFrame where the column 'Letters' contains English uppercase letters, counting each row occurrence.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame or lacks the 'Letters' column.\nThe function should output with:\n    Axes: A Matplotlib Axes object representing the bar graph of letter frequency, with the x-axis labeled 'Letters', the y-axis labeled 'Frequency', and the title 'Letter Frequency'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, letters=list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):\n```"
+  },
+  {
+   "question": "What should happen if the 'Letters' column contains non-uppercase letters or non-letter characters?",
+   "answer": "The specification does not restrict the content beyond stating it contains English uppercase letters; assume standard behavior (they will be counted as-is).",
+   "inline_prompt": "Create and return a bar chart of the frequency of letters in a DataFrame where the column 'Letters' contains English uppercase letters, counting each row occurrence.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame or lacks the 'Letters' column.\nThe function should output with:\n    Axes: A Matplotlib Axes object representing the bar graph of letter frequency, with the x-axis labeled 'Letters', the y-axis labeled 'Frequency', and the title 'Letter Frequency'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, letters=list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):\n```"
+  },
+  {
+   "question": "Should the bar chart include letters with zero frequency, or only letters that appear in the DataFrame?",
+   "answer": "The bar chart should include all letters in the 'letters' parameter, with zero frequency for those not appearing, as the canonical solution reindexes to that list.",
+   "inline_prompt": "Create and return a bar chart of the frequency of letters in a DataFrame where the column 'Letters' contains English uppercase letters, counting each row occurrence.\nThe bar chart includes all letters in the 'letters' parameter, with zero frequency for those not appearing.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame or lacks the 'Letters' column.\nThe function should output with:\n    Axes: A Matplotlib Axes object representing the bar graph of letter frequency, with the x-axis labeled 'Letters', the y-axis labeled 'Frequency', and the title 'Letter Frequency'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, letters=list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):\n```"
+  },
+  {
+   "question": "Is the 'letters' parameter intended to filter which letters are counted, or just to define the order/scope of the chart?",
+   "answer": "The 'letters' parameter defines the order and scope of the chart, as the canonical solution reindexes to that list, effectively filtering to those letters.",
+   "inline_prompt": "Create and return a bar chart of the frequency of letters in a DataFrame where the column 'Letters' contains English uppercase letters, counting each row occurrence.\nThe bar chart includes all letters in the 'letters' parameter, with zero frequency for those not appearing, defining the order and scope.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame or lacks the 'Letters' column.\nThe function should output with:\n    Axes: A Matplotlib Axes object representing the bar graph of letter frequency, with the x-axis labeled 'Letters', the y-axis labeled 'Frequency', and the title 'Letter Frequency'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, letters=list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):\n```"
+  },
+  {
+   "question": "Should the function handle missing values (NaN) in the 'Letters' column, and if so, how?",
+   "answer": "The specification does not address NaN values; assume standard behavior where NaN entries are ignored in the value_counts.",
+   "inline_prompt": "Create and return a bar chart of the frequency of letters in a DataFrame where the column 'Letters' contains English uppercase letters, handling duplicate entries per letter as one count.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame or lacks the 'Letters' column.\nThe function should output with:\n    Axes: A Matplotlib Axes object representing the bar graph of letter frequency, with the x-axis labeled 'Letters', the y-axis labeled 'Frequency', and the title 'Letter Frequency'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, letters=list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):\n```"
+  },
+  {
+   "question": "What is the expected behavior if the DataFrame is empty but has a 'Letters' column?",
+   "answer": "The function should not raise an error; it should produce a bar chart with zero frequency for all letters in the default or provided list.",
+   "inline_prompt": "Create and return a bar chart of the frequency of letters in a DataFrame where the column 'Letters' contains English uppercase letters, handling duplicate entries per letter as one count.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame or lacks the 'Letters' column.\nThe function should output with:\n    Axes: A Matplotlib Axes object representing the bar graph of letter frequency, with the x-axis labeled 'Letters', the y-axis labeled 'Frequency', and the title 'Letter Frequency'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, letters=list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):\n```"
+  },
+  {
+   "question": "Should the bar chart be displayed (plt.show()) or just returned without displaying?",
+   "answer": "The bar chart should be returned without displaying; plt.show() is not required.",
+   "inline_prompt": "Create and return a bar chart of the frequency of letters in a DataFrame where the column 'Letters' contains English uppercase letters, handling duplicate entries per letter as one count.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame or lacks the 'Letters' column.\nThe function should output with:\n    Axes: A Matplotlib Axes object representing the bar graph of letter frequency, with the x-axis labeled 'Letters', the y-axis labeled 'Frequency', and the title 'Letter Frequency'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, letters=list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):\n```"
+  },
+  {
+   "question": "Are there any specific formatting requirements for the bar chart (e.g., colors, bar width, grid)?",
+   "answer": "No specific formatting beyond the required labels and title; assume standard matplotlib bar chart defaults.",
+   "inline_prompt": "Create and return a bar chart of the frequency of letters in a DataFrame where the column 'Letters' contains English uppercase letters, handling duplicate entries per letter as one count.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame or lacks the 'Letters' column.\nThe function should output with:\n    Axes: A Matplotlib Axes object representing the bar graph of letter frequency, with the x-axis labeled 'Letters', the y-axis labeled 'Frequency', and the title 'Letter Frequency'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df, letters=list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):\n```"
+  }
+ ]
+}

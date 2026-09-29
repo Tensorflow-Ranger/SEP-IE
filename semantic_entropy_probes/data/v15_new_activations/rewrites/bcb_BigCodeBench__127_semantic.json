@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/127_semantic",
+ "candidates": [
+  {
+   "question": "Should we compute the MD5 hash of the entire file content, or only of specific parts (e.g., ignoring headers or metadata)?",
+   "answer": "Compute the MD5 hash of the entire file content.",
+   "inline_prompt": "Moves all files from a specified root directory (ROOT_DIR) to a target directory (DEST_DIR) if they match a specific hash value (SPECIFIC_HASH).\nThe function calculates the MD5 hash of the entire file content of each file in ROOT_DIR and moves it if the hash matches SPECIFIC_HASH.\nNote that: The function assumes the existence of the root directory. The existence of DEST_DIR is ensured by the function.\nThe function should output with:\n    int: The number of files moved to the target directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\nimport glob\nimport hashlib\ndef task_func(ROOT_DIR, DEST_DIR, SPECIFIC_HASH):\n```"
+  },
+  {
+   "question": "What should happen if a file with the same name already exists in DEST_DIR? Should we overwrite, skip, or rename?",
+   "answer": "Not specified beyond what's given; assume standard behavior (shutil.move will overwrite if the destination exists).",
+   "inline_prompt": "Moves all files from a specified root directory (ROOT_DIR) to a target directory (DEST_DIR) if their content matches a specific hash value (SPECIFIC_HASH). The function calculates the MD5 hash of each file in ROOT_DIR and moves it if the hash matches SPECIFIC_HASH.\nNote that: The function assumes the existence of the root directory. The existence of DEST_DIR is ensured by the function.\nThe function should output with:\n    int: The number of files moved to the target directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\nimport glob\nimport hashlib\ndef task_func(ROOT_DIR, DEST_DIR, SPECIFIC_HASH):\n```"
+  },
+  {
+   "question": "Should we follow symbolic links or treat them as regular files?",
+   "answer": "Not specified beyond what's given; assume standard behavior (treat symbolic links as regular files, moving the link itself).",
+   "inline_prompt": "Moves all files from a specified root directory (ROOT_DIR) to a target directory (DEST_DIR) if their content matches a specific hash value (SPECIFIC_HASH). The function calculates the MD5 hash of each file in ROOT_DIR and moves it if the hash matches SPECIFIC_HASH.\nNote that: The function assumes the existence of the root directory. The existence of DEST_DIR is ensured by the function.\nThe function should output with:\n    int: The number of files moved to the target directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\nimport glob\nimport hashlib\ndef task_func(ROOT_DIR, DEST_DIR, SPECIFIC_HASH):\n```"
+  },
+  {
+   "question": "Are we only moving regular files, or should we also move subdirectories or other special files?",
+   "answer": "Only regular files should be moved; subdirectories and other special files should be skipped.",
+   "inline_prompt": "Moves all files from a specified root directory (ROOT_DIR) to a target directory (DEST_DIR) if their content matches a specific hash value (SPECIFIC_HASH). The function calculates the MD5 hash of each file in ROOT_DIR and moves it if the hash matches SPECIFIC_HASH, moving only regular files and skipping subdirectories and other special files.\nNote that: The function assumes the existence of the root directory. The existence of DEST_DIR is ensured by the function.\nThe function should output with:\n    int: The number of files moved to the target directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\nimport glob\nimport hashlib\ndef task_func(ROOT_DIR, DEST_DIR, SPECIFIC_HASH):\n```"
+  },
+  {
+   "question": "Should the hash comparison be case-sensitive? (e.g., 'a1b2' vs 'A1B2')",
+   "answer": "The hash comparison is case-sensitive, as MD5 hexdigest produces a lowercase string.",
+   "inline_prompt": "Moves all files from a specified root directory (ROOT_DIR) to a target directory (DEST_DIR) if their content matches a specific hash value (SPECIFIC_HASH). The function calculates the MD5 hash of each file in ROOT_DIR and moves it if the hash matches SPECIFIC_HASH, using a case-sensitive comparison.\nNote that: The function assumes the existence of the root directory. The existence of DEST_DIR is ensured by the function.\nThe function should output with:\n    int: The number of files moved to the target directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\nimport glob\nimport hashlib\ndef task_func(ROOT_DIR, DEST_DIR, SPECIFIC_HASH):\n```"
+  },
+  {
+   "question": "What encoding should be used when reading files? Binary mode is implied, but should we handle text files differently?",
+   "answer": "Files should be read in binary mode ('rb') to compute the MD5 hash, which works for both text and binary files.",
+   "inline_prompt": "Moves all files from a specified root directory (ROOT_DIR) to a target directory (DEST_DIR) if their content matches a specific hash value (SPECIFIC_HASH). The function calculates the MD5 hash of each file in ROOT_DIR by reading it in binary mode and moves it if the hash matches SPECIFIC_HASH.\nNote that: The function assumes the existence of the root directory. The existence of DEST_DIR is ensured by the function.\nThe function should output with:\n    int: The number of files moved to the target directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\nimport glob\nimport hashlib\ndef task_func(ROOT_DIR, DEST_DIR, SPECIFIC_HASH):\n```"
+  },
+  {
+   "question": "Should we recursively traverse subdirectories under ROOT_DIR, or only process files directly in ROOT_DIR?",
+   "answer": "Only files directly in ROOT_DIR are processed; subdirectories are not traversed.",
+   "inline_prompt": "Moves all files from a specified root directory (ROOT_DIR) to a target directory (DEST_DIR) if their content matches a specific hash value (SPECIFIC_HASH). The function calculates the MD5 hash of each file directly in ROOT_DIR (without traversing subdirectories) and moves it if the hash matches SPECIFIC_HASH.\nNote that: The function assumes the existence of the root directory. The existence of DEST_DIR is ensured by the function.\nThe function should output with:\n    int: The number of files moved to the target directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\nimport glob\nimport hashlib\ndef task_func(ROOT_DIR, DEST_DIR, SPECIFIC_HASH):\n```"
+  },
+  {
+   "question": "What if ROOT_DIR is empty? Should we return 0 and do nothing?",
+   "answer": "If ROOT_DIR is empty, the function returns 0 and does nothing else, as no files match.",
+   "inline_prompt": "Moves all files from a specified root directory (ROOT_DIR) to a target directory (DEST_DIR) if their content matches a specific hash value (SPECIFIC_HASH). The function calculates the MD5 hash of each file in ROOT_DIR and moves it if the hash matches SPECIFIC_HASH.\nNote that: The function assumes the existence of the root directory. The existence of DEST_DIR is ensured by the function.\nThe function should output with:\n    int: The number of files moved to the target directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\nimport glob\nimport hashlib\ndef task_func(ROOT_DIR, DEST_DIR, SPECIFIC_HASH):\n```"
+  }
+ ]
+}

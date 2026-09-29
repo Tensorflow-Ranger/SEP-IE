@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/64_semantic",
+ "candidates": [
+  {
+   "question": "Should the grouping be by 'col1' alone, 'col2' alone, or both 'col1' and 'col2' together?",
+   "answer": "Group by both 'col1' and 'col2' together.",
+   "inline_prompt": "You are given a list of elements. Each element is a list with the same length as COLUMNS, representing one row a dataframe df to create. Visualize the distribution of different values in a column \"col3\" of a pandas DataFrame df, grouped by \"col1\" and \"col2,\" using a heatmap.\nThe function should output with:\n    tuple:\n    pandas.DataFrame: The DataFrame of the analyzed data.\n    plt.Axes: The heatmap visualization.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nCOLUMNS = ['col1', 'col2', 'col3']\ndef task_func(data):"
+  },
+  {
+   "question": "What does 'distribution of different values in a column \"col3\"' mean? Should we count unique values, frequencies, or something else?",
+   "answer": "Count the number of unique values in column \"col3\" for each group.",
+   "inline_prompt": "You are given a list of elements. Each element is a list with the same length as COLUMNS, representing one row a dataframe df to create. Visualize the distribution of different values in a column \"col3\" of a pandas DataFrame df, grouped by \"col1\" and \"col2,\" using a heatmap, counting the number of unique values in column \"col3\" for each group.\nThe function should output with:\n    tuple:\n    pandas.DataFrame: The DataFrame of the analyzed data.\n    plt.Axes: The heatmap visualization.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nCOLUMNS = ['col1', 'col2', 'col3']\ndef task_func(data):"
+  },
+  {
+   "question": "Should the heatmap have annotations (annot=True) as shown in the reference solution, or is that optional?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "You are given a list of elements. Each element is a list with the same length as COLUMNS, representing one row a dataframe df to create. Visualize the distribution of different values in a column \"col3\" of a pandas DataFrame df, grouped by \"col1\" and \"col2,\" using a heatmap.\nThe function should output with:\n    tuple:\n    pandas.DataFrame: The DataFrame of the analyzed data.\n    plt.Axes: The heatmap visualization.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nCOLUMNS = ['col1', 'col2', 'col3']\ndef task_func(data):"
+  },
+  {
+   "question": "What should be done if there are missing combinations of col1 and col2 in the data? Should the heatmap fill with NaN or default values?",
+   "answer": "Missing combinations should result in NaN values in the pivoted DataFrame and heatmap, which is the default pandas pivot behavior.",
+   "inline_prompt": "You are given a list of elements. Each element is a list with the same length as COLUMNS, representing one row a dataframe df to create. Visualize the distribution of different values in a column \"col3\" of a pandas DataFrame df, grouped by \"col1\" and \"col2,\" using a heatmap.\nThe function should output with:\n    tuple:\n    pandas.DataFrame: The DataFrame of the analyzed data.\n    plt.Axes: The heatmap visualization.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nCOLUMNS = ['col1', 'col2', 'col3']\ndef task_func(data):"
+  },
+  {
+   "question": "Is the input 'data' always a list of lists, or could it be a pandas DataFrame? The prompt says list, but the test passes a DataFrame.",
+   "answer": "The input data is always a list of lists, as specified in the function's docstring; the test case passing a DataFrame is an error in the test, and you should follow the specification.",
+   "inline_prompt": "You are given a list of elements. Each element is a list with the same length as COLUMNS, representing one row a dataframe df to create. Visualize the distribution of different values in a column \"col3\" of a pandas DataFrame df, grouped by \"col1\" and \"col2,\" using a heatmap.\nThe function should output with:\n    tuple:\n    pandas.DataFrame: The DataFrame of the analyzed data.\n    plt.Axes: The heatmap visualization.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nCOLUMNS = ['col1', 'col2', 'col3']\ndef task_func(data):"
+  },
+  {
+   "question": "Should the heatmap include a colorbar and axis labels by default, or are minimal settings acceptable?",
+   "answer": "Not specified beyond what's given; assume standard behavior for seaborn.heatmap, which includes a colorbar by default.",
+   "inline_prompt": "You are given a list of elements. Each element is a list with the same length as COLUMNS, representing one row a dataframe df to create. Visualize the distribution of different values in a column \"col3\" of a pandas DataFrame df, grouped by \"col1\" and \"col2,\" using a heatmap.\nThe function should output with:\n    tuple:\n    pandas.DataFrame: The DataFrame of the analyzed data.\n    plt.Axes: The heatmap visualization.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nCOLUMNS = ['col1', 'col2', 'col3']\ndef task_func(data):"
+  },
+  {
+   "question": "What is the expected output DataFrame format? Should it be pivoted with col1 as index and col2 as columns, or vice versa?",
+   "answer": "The DataFrame should be pivoted with col1 as index and col2 as columns, as shown in the example output.",
+   "inline_prompt": "You are given a list of elements. Each element is a list with the same length as COLUMNS, representing one row a dataframe df to create. Visualize the distribution of different values in a column \"col3\" of a pandas DataFrame df, grouped by \"col1\" and \"col2,\" using a heatmap.\nThe function should output with:\n    tuple:\n    pandas.DataFrame: The DataFrame of the analyzed data, pivoted with col1 as index and col2 as columns.\n    plt.Axes: The heatmap visualization.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nCOLUMNS = ['col1', 'col2', 'col3']\ndef task_func(data):"
+  },
+  {
+   "question": "Are there any constraints on the values in col3 (e.g., numeric only)? The reference uses nunique, which works for any hashable type.",
+   "answer": "The values in col3 can be any hashable type, as the function uses nunique to count distinct values.",
+   "inline_prompt": "You are given a list of elements. Each element is a list with the same length as COLUMNS, representing one row a dataframe df to create. Visualize the distribution of different values in a column \"col3\" of a pandas DataFrame df, grouped by \"col1\" and \"col2,\" using a heatmap.\nThe function should output with:\n    tuple:\n    pandas.DataFrame: The DataFrame of the analyzed data.\n    plt.Axes: The heatmap visualization.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n# Constants\nCOLUMNS = ['col1', 'col2', 'col3']\ndef task_func(data):"
+  }
+ ]
+}

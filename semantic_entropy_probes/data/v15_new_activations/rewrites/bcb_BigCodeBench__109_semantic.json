@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/109_semantic",
+ "candidates": [
+  {
+   "question": "Should the bar chart be stacked or grouped (side-by-side)?",
+   "answer": "The bar chart should be stacked, as shown in the canonical solution.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across given locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list. The bar chart is stacked."
+  },
+  {
+   "question": "What should the title of the chart be?",
+   "answer": "The title should be 'Item Distribution by Location'.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across given locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list. The chart title is 'Item Distribution by Location'."
+  },
+  {
+   "question": "What should the y-axis label be?",
+   "answer": "The y-axis label should be 'Count'.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across given locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list. The y-axis label is 'Count'."
+  },
+  {
+   "question": "How should missing combinations (item-location) be handled? Should they be shown as zero bars or omitted?",
+   "answer": "Missing combinations should be shown as zero bars, as the canonical solution uses fillna(0).",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across given locations. The function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list. Missing item-location combinations are shown as zero bars."
+  },
+  {
+   "question": "Should the bars be ordered alphabetically by location/item, by data frequency, or as provided?",
+   "answer": "The bars are ordered as they appear in the unstacked DataFrame from groupby, which follows the order of unique values in the original data.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across given locations.\nThe function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list.\nThe bars are ordered as they appear in the unstacked DataFrame from groupby, which follows the order of unique values in the original data."
+  },
+  {
+   "question": "What is the predefined list for items and locations?",
+   "answer": "The predefined list for items is ['apple', 'banana', 'grape', 'orange', 'pineapple'] and for locations is ['store1', 'store2', 'store3', 'store4', 'store5'].",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across given locations.\nThe function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list.\nThe predefined list for items is ['apple', 'banana', 'grape', 'orange', 'pineapple'] and for locations is ['store1', 'store2', 'store3', 'store4', 'store5']."
+  },
+  {
+   "question": "Should the function show the plot (plt.show()) or just return the Axes without displaying?",
+   "answer": "The function should call plt.show() before returning the Axes object.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across given locations.\nThe function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list.\nThe function should call plt.show() before returning the Axes object."
+  },
+  {
+   "question": "What if items or locations lists contain values not present in the DataFrame? Should they be ignored or raise an error?",
+   "answer": "Values not present in the DataFrame are ignored, resulting in zero counts for those bars.",
+   "inline_prompt": "Generates a bar chart representing the distribution of specified items across given locations.\nThe function takes a DataFrame with 'Item' and 'Location' columns and plots the count of each item per location. If lists of items and locations are provided, the chart will only include those specified, otherwise it defaults to a predefined list.\nValues not present in the DataFrame are ignored, resulting in zero counts for those bars."
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/25_vagueness",
+ "candidates": [
+  {
+   "question": "Which compression method should be used (e.g., zlib, gzip, bz2)?",
+   "answer": "Use zlib compression, as indicated by the imports and the true specification.",
+   "inline_prompt": "Serializes a dictionary to a JSON string, compresses it using zlib, and then encodes the data with base64.\nThe function should output with:\n    str: A base64 encoded string that represents the zlib-compressed JSON string of the dictionary.\nYou should write self-contained code starting with:\n```\nimport base64\nimport json\nimport zlib\ndef task_func(data_dict):\n```"
+  },
+  {
+   "question": "What compression level should be used (e.g., default, fastest, maximum)?",
+   "answer": "Not specified beyond what's given; assume standard behavior (the default compression level of zlib).",
+   "inline_prompt": "Serializes a dictionary to a JSON string, compresses it using zlib, and then encodes the data with base64.\nThe function should output with:\n    str: A base64 encoded string that represents the zlib-compressed JSON string of the dictionary.\nYou should write self-contained code starting with:\n```\nimport base64\nimport json\nimport zlib\ndef task_func(data_dict):\n```"
+  },
+  {
+   "question": "Should the JSON string be encoded to bytes before compression, and if so, what encoding (e.g., UTF-8)?",
+   "answer": "Yes, the JSON string must be encoded to bytes (e.g., using UTF-8) before compression, as zlib.compress expects bytes.",
+   "inline_prompt": "Serializes a dictionary to a JSON string, compresses it using zlib, and then encodes the data with base64.\nThe JSON string must be encoded to bytes (e.g., using UTF-8) before compression.\nThe function should output with:\n    str: A base64 encoded string that represents the zlib-compressed JSON string of the dictionary.\nYou should write self-contained code starting with:\n```\nimport base64\nimport json\nimport zlib\ndef task_func(data_dict):\n```"
+  },
+  {
+   "question": "Should the base64 output be decoded to a string (e.g., using .decode()) or left as bytes?",
+   "answer": "The base64 output should be decoded to a string, as the return type is specified as str.",
+   "inline_prompt": "Serializes a dictionary to a JSON string, compresses it using zlib, and then encodes the data with base64.\nThe function should output with:\n    str: A base64 encoded string that represents the zlib-compressed JSON string of the dictionary.\nThe base64.b64encode result must be decoded to a string.\nYou should write self-contained code starting with:\n```\nimport base64\nimport json\nimport zlib\ndef task_func(data_dict):\n```"
+  },
+  {
+   "question": "What should happen if the input dictionary contains non-JSON-serializable data (e.g., a datetime object)?",
+   "answer": "The dictionary should only contain data that can be serialized to JSON, as per the specification; assume standard behavior where json.dumps will raise a TypeError for non-serializable objects.",
+   "inline_prompt": "Serializes a dictionary to a JSON string, compresses it, and then encodes the data with base64.\nThe function should output with:\n    str: A base64 encoded string that represents the zlib-compressed JSON string of the dictionary.\nThe dictionary should only contain data that can be serialized to JSON.\nYou should write self-contained code starting with:\n```\nimport base64\nimport json\nimport zlib\ndef task_func(data_dict):\n```"
+  },
+  {
+   "question": "Should the compression include headers (e.g., zlib vs. raw deflate)?",
+   "answer": "Use zlib compression as implied by the imports and canonical solution, which includes zlib headers by default.",
+   "inline_prompt": "Serializes a dictionary to a JSON string, compresses it using zlib, and then encodes the data with base64.\nThe function should output with:\n    str: A base64 encoded string that represents the zlib-compressed JSON string of the dictionary.\nYou should write self-contained code starting with:\n```\nimport base64\nimport json\nimport zlib\ndef task_func(data_dict):\n```"
+  },
+  {
+   "question": "Is the output base64 encoded in standard format or URL-safe format?",
+   "answer": "Use standard base64 encoding as per the canonical solution and typical competitive-programming conventions.",
+   "inline_prompt": "Serializes a dictionary to a JSON string, compresses it, and then encodes the data with base64.\nThe function should output with:\n    str: A base64 encoded string in standard format that represents the zlib-compressed JSON string of the dictionary.\nYou should write self-contained code starting with:\n```\nimport base64\nimport json\nimport zlib\ndef task_func(data_dict):\n```"
+  },
+  {
+   "question": "Should the function handle large dictionaries by streaming or is in-memory compression fine?",
+   "answer": "In-memory compression is fine; the problem does not specify any size constraints beyond standard behavior.",
+   "inline_prompt": "Serializes a dictionary to a JSON string, compresses it, and then encodes the data with base64.\nThe function should output with:\n    str: A base64 encoded string that represents the zlib-compressed JSON string of the dictionary.\nIn-memory compression is sufficient; no streaming is required.\nYou should write self-contained code starting with:\n```\nimport base64\nimport json\nimport zlib\ndef task_func(data_dict):\n```"
+  }
+ ]
+}

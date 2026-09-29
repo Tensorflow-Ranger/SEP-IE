@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/17_semantic",
+ "candidates": [
+  {
+   "question": "Should we treat the process_name as a command to be looked up in the system PATH, or as a full path to an executable?",
+   "answer": "The process_name should be executable as a command, meaning it is looked up in the system PATH.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command, which is looked up in the system PATH. If it is found, terminate the process and restart it by executing the process name as a command line or path."
+  },
+  {
+   "question": "If multiple instances of the process are running, should we terminate all of them before restarting?",
+   "answer": "Yes, all running instances with the given process name should be terminated before restarting.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is found, terminate all instances of the process and restart it by executing the process name as a command line or path."
+  },
+  {
+   "question": "Should we wait for the process to fully terminate before restarting, and if so, how long?",
+   "answer": "Yes, the implementation should wait a short time (e.g., 5 seconds) after terminating before restarting to ensure the process has fully terminated.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is found, terminate the process, wait 5 seconds, and restart it by executing the process name as a command line or path."
+  },
+  {
+   "question": "What should happen if the process cannot be terminated (e.g., access denied)?",
+   "answer": "Not specified beyond what's given; assume standard behavior (i.e., the function should proceed as normal, and any exception from termination failure would propagate).",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is found, terminate the process and restart it by executing the process name as a command line or path."
+  },
+  {
+   "question": "Should we validate that the process_name is a valid executable before attempting to start it?",
+   "answer": "No, assume the process_name is executable as a command; if it is not, the subprocess call will fail, which is acceptable behavior for this problem.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is found, terminate the process and restart it by executing the process name as a command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "If the process is not found, should we check if the command exists in PATH before trying to start it?",
+   "answer": "No, assume the process_name is executable as a command; no additional PATH validation is required.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is found, terminate the process and restart it by executing the process name as a command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "Should the function handle process names with spaces or special characters in them?",
+   "answer": "Not specified beyond what's given; assume standard behavior where the process_name string is passed directly to subprocess.Popen.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is found, terminate the process and restart it by executing the process name as a command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  },
+  {
+   "question": "Is there a specific user or privilege context (e.g., sudo) required to start or terminate the process?",
+   "answer": "No, assume the function runs with the same privileges as the calling user; no special context is required.",
+   "inline_prompt": "Check if a particular process is running based on its name. If it is not running, start it using the process name as a command. If it is found, terminate the process and restart it by executing the process name as a command.\nThe function should output with:\n    str: A message indicating the action taken:\n    \"Process not found. Starting <process_name>.\"\n    \"Process found. Restarting <process_name>.\"\nYou should write self-contained code starting with:\n```\nimport subprocess\nimport psutil\nimport time\ndef task_func(process_name: str) -> str:\n```"
+  }
+ ]
+}

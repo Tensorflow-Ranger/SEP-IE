@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/16_semantic",
+ "candidates": [
+  {
+   "question": "Should we consider only the most recent log file per unique base name (ignoring version suffixes) or simply all .log files regardless of name?",
+   "answer": "The function should consider all .log files in the specified directory regardless of name.",
+   "inline_prompt": "Backup all '.log' files in a specified directory to a tar.gz file and delete the original files after backup.\nThe backup file is named 'logs_backup.tar.gz' and placed in the specified backup directory.\nThe function should raise the exception for: FileNotFoundError: If the specified directory does not exist.\nThe function should output with:\n    str: The path to the backup file if logs are found, otherwise returns a message 'No logs found to backup'.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport subprocess\ndef task_func(directory, backup_dir='/path/to/backup'):"
+  },
+  {
+   "question": "Does 'most recent version' refer to the file with the latest modification time (mtime) or the latest creation time (ctime/birth time)?",
+   "answer": "The phrase 'most recent version' is not part of the intended specification; the function should process all .log files.",
+   "inline_prompt": "Backup all '.log' files in a specified directory to a tar.gz file and delete the original files after backup.\nThe backup file is named 'logs_backup.tar.gz' and placed in the specified backup directory.\nThe function should raise the exception for: FileNotFoundError: If the specified directory does not exist.\nThe function should output with:\n    str: The path to the backup file if logs are found, otherwise returns a message 'No logs found to backup'.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport subprocess\ndef task_func(directory, backup_dir='/path/to/backup'):"
+  },
+  {
+   "question": "Should we include subdirectories recursively when searching for .log files, or only the top-level directory?",
+   "answer": "The function should search only the top-level directory, not subdirectories.",
+   "inline_prompt": "Backup all '.log' files in a specified directory to a tar.gz file and delete the original files after backup.\nThe backup file is named 'logs_backup.tar.gz' and placed in the specified backup directory.\nThe function should raise the exception for: FileNotFoundError: If the specified directory does not exist.\nThe function should output with:\n    str: The path to the backup file if logs are found, otherwise returns a message 'No logs found to backup'.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport subprocess\ndef task_func(directory, backup_dir='/path/to/backup'):"
+  },
+  {
+   "question": "If a log file is currently open or locked by another process, should we skip it, wait, or raise an error?",
+   "answer": "Not specified beyond what's given; assume standard behavior (the function will attempt to delete it, which may raise an OSError).",
+   "inline_prompt": "Backup all '.log' files in a specified directory to a tar.gz file and delete the original files after backup.\nThe backup file is named 'logs_backup.tar.gz' and placed in the specified backup directory.\nThe function should raise the exception for: FileNotFoundError: If the specified directory does not exist.\nThe function should output with:\n    str: The path to the backup file if logs are found, otherwise returns a message 'No logs found to backup'.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport subprocess\ndef task_func(directory, backup_dir='/path/to/backup'):"
+  },
+  {
+   "question": "Should we preserve the directory structure inside the tar.gz archive, or flatten all log files into the root of the archive?",
+   "answer": "The specification does not specify; assume standard behavior, which for the given tar command is to preserve relative paths.",
+   "inline_prompt": "Backup all '.log' files in a specified directory to a tar.gz file and delete the original files after backup.\nThe backup file is named 'logs_backup.tar.gz' and placed in the specified backup directory.\nThe function should raise the exception for: FileNotFoundError: If the specified directory does not exist.\nThe function should output with:\n    str: The path to the backup file if logs are found, otherwise returns a message 'No logs found to backup'.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport subprocess\ndef task_func(directory, backup_dir='/path/to/backup'):"
+  },
+  {
+   "question": "If the backup directory does not exist, should we create it automatically, or raise an error?",
+   "answer": "The backup directory should be created automatically if it does not exist, as shown in the canonical solution.",
+   "inline_prompt": "Backup all '.log' files in a specified directory to a tar.gz file and delete the original files after backup.\nThe backup file is named 'logs_backup.tar.gz' and placed in the specified backup directory.\nIf the backup directory does not exist, it should be created automatically.\nThe function should raise the exception for: FileNotFoundError: If the specified directory does not exist.\nThe function should output with:\n    str: The path to the backup file if logs are found, otherwise returns a message 'No logs found to backup'.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport subprocess\ndef task_func(directory, backup_dir='/path/to/backup'):"
+  },
+  {
+   "question": "Should we delete only the .log files that were successfully added to the backup, or all .log files regardless of tar success?",
+   "answer": "All .log files found in the directory should be deleted after the tar command is called, assuming the tar command succeeds (the canonical solution does not check for tar success).",
+   "inline_prompt": "Backup all '.log' files in a specified directory to a tar.gz file and delete the original files after backup.\nThe backup file is named 'logs_backup.tar.gz' and placed in the specified backup directory.\nAll .log files found in the directory are deleted after the backup is created.\nThe function should raise the exception for: FileNotFoundError: If the specified directory does not exist.\nThe function should output with:\n    str: The path to the backup file if logs are found, otherwise returns a message 'No logs found to backup'.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport subprocess\ndef task_func(directory, backup_dir='/path/to/backup'):"
+  },
+  {
+   "question": "Are symbolic links to .log files included, and if so, do we backup the link or the target, and delete the link or the target?",
+   "answer": "The specification does not mention symbolic links; assume standard glob behavior, which includes symbolic links matching the pattern, and the tar command will archive the link itself by default.",
+   "inline_prompt": "Backup all '.log' files in a specified directory to a tar.gz file and delete the original files after backup.\nThe backup file is named 'logs_backup.tar.gz' and placed in the specified backup directory.\nThe function should raise the exception for: FileNotFoundError: If the specified directory does not exist.\nThe function should output with:\n    str: The path to the backup file if logs are found, otherwise returns a message 'No logs found to backup'.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport subprocess\ndef task_func(directory, backup_dir='/path/to/backup'):"
+  }
+ ]
+}

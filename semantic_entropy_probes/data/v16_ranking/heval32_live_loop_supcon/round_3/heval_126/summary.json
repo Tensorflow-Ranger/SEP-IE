@@ -1,0 +1,99 @@
+{
+  "round": 3,
+  "prompt_before": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number.\n    '''",
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "If a number appears exactly twice, does that satisfy the condition \"more than 1 duplicate\" or not?",
+      "answer": "A number appearing exactly twice does not satisfy \"more than 1 duplicate,\" so it is allowed.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number (exactly two is not \"more than 1 duplicate\").\n    '''",
+      "score": 10.424008309841156
+    },
+    {
+      "idx": 11,
+      "question": "Is the duplicate check performed before, after, or concurrently with the sortedness check, and does the order of these checks affect the return value?",
+      "answer": "The order does not affect the return value, but the duplicate check should be performed first as per the reference solution.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number.\n    The duplicate check is performed first.\n    '''",
+      "score": 8.21256448328495
+    },
+    {
+      "idx": 5,
+      "question": "Does the duplicate check apply independently per number, meaning the function returns False only if any single number appears more than twice?",
+      "answer": "Yes, the duplicate check applies independently per number, returning False if any single number appears more than twice.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False (i.e., if any single number appears more than twice).\n    Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number.\n    '''",
+      "score": 7.388305842876434
+    },
+    {
+      "idx": 3,
+      "question": "Does the duplicate rule apply only when there are more than two total occurrences of a number, or does it also apply when there are exactly two occurrences?",
+      "answer": "The duplicate rule applies only when there are more than two total occurrences of a number; exactly two occurrences is allowed.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number (exactly two is allowed).\n    '''",
+      "score": 7.241889327764511
+    },
+    {
+      "idx": 9,
+      "question": "What constitutes a \"number\" \u2014 does it include, for example, the integer 0?",
+      "answer": "Yes, the integer 0 is included as a valid number.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers (including 0), return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number.\n    '''",
+      "score": 6.331957198679447
+    },
+    {
+      "idx": 6,
+      "question": "Are we to assume the input is always a list, or could it be another iterable?",
+      "answer": "Assume the input is always a list, as specified in the docstring.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers (assumed to be a list), return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number.\n    '''",
+      "score": 5.402332901954651
+    },
+    {
+      "idx": 8,
+      "question": "The docstring says \"Assume no negative numbers and only integers.\" Does this mean the function should still work correctly if negative numbers or non-integers are present, or can we ignore those cases?",
+      "answer": "The assumption means negative numbers and non-integers are guaranteed not to be present, so the function can ignore those cases.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers (these are guaranteed, so such cases can be ignored).\n    It means more than two occurrences total for any number.\n    '''",
+      "score": 5.334807142615318
+    },
+    {
+      "idx": 0,
+      "question": "Does \"sorted in ascending order\" mean strictly increasing (each element must be greater than the previous) or non-decreasing (each element must be greater than or equal to the previous)?",
+      "answer": "Sorted in ascending order means non-decreasing, where each element is greater than or equal to the previous.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order (non-decreasing, where each element is greater than or equal to the previous).\n    If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number.\n    '''",
+      "score": 5.102303478866816
+    },
+    {
+      "idx": 7,
+      "question": "Does \"only integers\" imply the function should handle non-integer numbers (like floats) if they appear, or is that guaranteed not to happen?",
+      "answer": "\"Only integers\" means non-integer numbers like floats are guaranteed not to appear, so the function does not need to handle them.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers (non-integers are guaranteed not to appear).\n    It means more than two occurrences total for any number.\n    '''",
+      "score": 4.399279955774546
+    },
+    {
+      "idx": 10,
+      "question": "If the list is sorted in ascending order but contains a number appearing more than twice, should False be returned even though the order is correct?",
+      "answer": "Yes, if any number appears more than twice, return False regardless of the sortedness.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False (even if the list is sorted).\n    Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number.\n    '''",
+      "score": 4.280861958861351
+    },
+    {
+      "idx": 2,
+      "question": "What should the function return for a list containing a single element?",
+      "answer": "For a list containing a single element, return True as it is trivially sorted.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number.\n    A single-element list returns True.\n    '''",
+      "score": 1.6278530834242702
+    },
+    {
+      "idx": 1,
+      "question": "What should the function return for an empty list?",
+      "answer": "For an empty list, return True as it is trivially sorted.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number.\n    An empty list returns True.\n    '''",
+      "score": 1.3324164422228932
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "If a number appears exactly twice, does that satisfy the condition \"more than 1 duplicate\" or not?",
+    "answer": "A number appearing exactly twice does not satisfy \"more than 1 duplicate,\" so it is allowed.",
+    "score": 10.424008309841156
+  },
+  "next_prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    It means more than two occurrences total for any number (exactly two is not \"more than 1 duplicate\").\n    '''",
+  "test_n_pass": 11,
+  "test_n_total": 13
+}

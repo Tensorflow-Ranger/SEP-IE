@@ -1,0 +1,99 @@
+{
+  "round": 3,
+  "prompt_before": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "For the odd\u2011order lower\u2011case letters count, does \"odd order\" mean ord(letter) - ord('a') is odd, or that the 1\u2011based position in the alphabet is odd given ord('a')=0?",
+      "answer": "\"Odd order\" means ord(letter) - ord('a') is odd, given ord('a') = 0.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet (where odd order means ord(letter) - ord('a') is odd), ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 9.781665086746216
+    },
+    {
+      "idx": 0,
+      "question": "What constitutes \"whitespace\" \u2014 only space characters, or also tabs, newlines, and other Unicode whitespace?",
+      "answer": "Whitespace means any character for which str.split() without arguments would split, including spaces, tabs, and newlines.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace (any character for which str.split() without arguments would split, including spaces, tabs, and newlines), if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 8.947954267263412
+    },
+    {
+      "idx": 6,
+      "question": "Should the function count lower\u2011case letters with odd order in the entire original string, or only after determining no whitespace or commas exist?",
+      "answer": "The function should count lower\u2011case letters with odd order in the entire original string only when no whitespace or commas exist.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet (counted in the entire original string only in this case), ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 8.6979059278965
+    },
+    {
+      "idx": 2,
+      "question": "When splitting on commas, should leading/trailing spaces around commas be trimmed or kept as part of the words?",
+      "answer": "When splitting on commas, spaces around commas are kept as part of the words.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' (with spaces around commas kept as part of the words) if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 8.0716233253479
+    },
+    {
+      "idx": 8,
+      "question": "Is an empty input string considered to have no whitespace and no commas, and thus trigger the odd\u2011order lower\u2011case count (which would be 0)?",
+      "answer": "Yes, an empty input string triggers the odd\u2011order lower\u2011case count, returning 0.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists (including for an empty string, which returns 0) you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 6.385708414018154
+    },
+    {
+      "idx": 3,
+      "question": "When splitting on commas, what should happen if there are consecutive commas \u2014 should empty strings be included?",
+      "answer": "Consecutive commas should not produce empty strings; they are treated as a single delimiter.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' (consecutive commas do not produce empty strings) if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 6.034806616604328
+    },
+    {
+      "idx": 11,
+      "question": "Does \"no whitespaces exists\" mean absolutely zero whitespace characters, or does it mean no whitespace that could serve as a delimiter between words?",
+      "answer": "\"No whitespaces exists\" means absolutely zero whitespace characters in the string.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists (absolutely zero whitespace characters) in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 5.747070074081421
+    },
+    {
+      "idx": 7,
+      "question": "If the string contains both whitespace and commas, is splitting on whitespace mandatory even if the comma rule might apply later?",
+      "answer": "Yes, splitting on whitespace is mandatory if any whitespace exists, regardless of commas.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace (mandatory if any whitespace exists), if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 3.6568473540246487
+    },
+    {
+      "idx": 10,
+      "question": "If the string contains only whitespace or only commas, should the result be an empty list or proceed to the next rule?",
+      "answer": "If the string contains only whitespace, splitting on whitespace returns an empty list; if only commas, splitting on commas returns an empty list.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace (if only whitespace, returns an empty list), if no whitespaces exists in the text you\n    should split on commas ',' (if only commas, returns an empty list) if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 3.3354856222867966
+    },
+    {
+      "idx": 1,
+      "question": "Should consecutive whitespace characters be treated as a single delimiter or produce empty strings in the resulting list?",
+      "answer": "Consecutive whitespace characters should be treated as a single delimiter, producing no empty strings.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    Consecutive whitespace characters are treated as a single delimiter.\n    '''",
+      "score": 2.428139541298151
+    },
+    {
+      "idx": 5,
+      "question": "Are only English alphabet letters ('a' to 'z') considered for the lower\u2011case count, or are other Unicode lower\u2011case letters included?",
+      "answer": "Only English alphabet letters 'a' to 'z' are considered for the lower\u2011case count.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters (only English 'a' to 'z') with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 2.208266379311681
+    },
+    {
+      "idx": 9,
+      "question": "When returning a list of words, should the words retain their original characters exactly, including punctuation other than the delimiter?",
+      "answer": "Yes, words should retain their original characters exactly, including punctuation other than the delimiter.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace (words retain original characters exactly, including other punctuation), if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 1.6191194336861372
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "For the odd\u2011order lower\u2011case letters count, does \"odd order\" mean ord(letter) - ord('a') is odd, or that the 1\u2011based position in the alphabet is odd given ord('a')=0?",
+    "answer": "\"Odd order\" means ord(letter) - ord('a') is odd, given ord('a') = 0.",
+    "score": 9.781665086746216
+  },
+  "next_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet (where odd order means ord(letter) - ord('a') is odd), ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+  "test_n_pass": 8,
+  "test_n_total": 8
+}

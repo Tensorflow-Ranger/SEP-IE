@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/132_semantic",
+ "candidates": [
+  {
+   "question": "Should we count each byte value individually regardless of sequence length, or count multi-byte sequences as distinct values?",
+   "answer": "Count each byte value individually, ignoring any notion of multi-byte sequences.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix."
+  },
+  {
+   "question": "If the hex string contains '\\x' prefixes, should we strip them before processing, or treat them as part of the hex data?",
+   "answer": "Strip the '\\x' prefixes before processing the hex data.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix; any '\\x' prefixes are stripped before conversion."
+  },
+  {
+   "question": "Should the byte values in the DataFrame be integers (0-255) or strings (e.g., 'F3')?",
+   "answer": "The byte values in the DataFrame should be integers from 0 to 255.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nThe 'Byte Value' column contains integers from 0 to 255."
+  },
+  {
+   "question": "If the hex string is empty, should the function return an empty DataFrame and an empty plot, or raise an error?",
+   "answer": "Return an empty DataFrame and a plot (which will be empty) without raising an error.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nAn empty string is considered a valid hex string, resulting in an empty DataFrame and plot."
+  },
+  {
+   "question": "Should the plot title be fixed as 'Frequency of Bytes in Hex String' or customizable?",
+   "answer": "The plot title is fixed as 'Frequency of Bytes in Hex String'.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis, and the plot title is 'Frequency of Bytes in Hex String'.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  },
+  {
+   "question": "Should the DataFrame be sorted by byte value, frequency, or order of appearance?",
+   "answer": "The DataFrame is sorted by byte value in ascending order.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency'], sorted by byte value in ascending order,\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  },
+  {
+   "question": "Are we allowed to use libraries other than binascii, numpy, matplotlib, and pandas?",
+   "answer": "No, you must use only the specified libraries: binascii, numpy, matplotlib.pyplot, and pandas.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```\nOnly the libraries binascii, numpy, matplotlib.pyplot, and pandas are allowed."
+  },
+  {
+   "question": "Should the function handle uppercase and lowercase hex characters interchangeably?",
+   "answer": "Yes, the function handles both uppercase and lowercase hex characters interchangeably.",
+   "inline_prompt": "Converts a hex string representation into actual bytes and records the frequency of each byte value.\nThe function supports hex strings with or without '\\x' prefix, and handles both uppercase and lowercase hex characters interchangeably.\nThe function should raise the exception for: ValueError: If 'hex_str' is not a valid hex string.\nThe function should output with:\n    tuple: A tuple containing a pandas DataFrame of byte frequencies with columns ['Byte Value', 'Frequency']\n    and a matplotlib Axes object for the plot with 'Byte Value' as the X-axis and 'Frequency' as the Y-axis.\nYou should write self-contained code starting with:\n```\nimport binascii\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\ndef task_func(hex_str):\n```"
+  }
+ ]
+}

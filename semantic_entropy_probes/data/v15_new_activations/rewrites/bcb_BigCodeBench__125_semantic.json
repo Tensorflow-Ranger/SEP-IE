@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/125_semantic",
+ "candidates": [
+  {
+   "question": "What should the prefix be in the filename? The prompt says 'prefix_<random-number-here>.json' but doesn't specify the prefix.",
+   "answer": "The prefix is 'letter_combinations_'.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'. Counts the occurrences of each letter in these combinations and saves the results in a JSON file. The name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100 and changes only when the output file already exists.\nThe function should output with:\n    str: The name of the generated JSON file containing letter counts.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):\n```"
+  },
+  {
+   "question": "Should the random number be generated once per function call and reused if the file doesn't exist, or regenerated each time a file exists?",
+   "answer": "The random number is generated once per function call and is only regenerated if a file with that number already exists.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'. Counts the occurrences of each letter in these combinations and saves the results in a JSON file. The name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100 and changes only when the output file already exists: the random number is generated once per function call and is only regenerated if a file with that number already exists.\nThe function should output with:\n    str: The name of the generated JSON file containing letter counts.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):\n```"
+  },
+  {
+   "question": "Is the random number inclusive of 0 and 100? The prompt says 'between 0 and 100' but doesn't specify inclusivity.",
+   "answer": "The random number is inclusive of both 0 and 100.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'. Counts the occurrences of each letter in these combinations and saves the results in a JSON file. The name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100 and changes only when the output file already exists.\nThe function should output with:\n    str: The name of the generated JSON file containing letter counts.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):\n```"
+  },
+  {
+   "question": "Should the function handle duplicate letters in the LETTERS list, or are all letters assumed unique?",
+   "answer": "The LETTERS list is assumed to contain unique letters.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'. Counts the occurrences of each letter in these combinations and saves the results in a JSON file. The name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100 and changes only when the output file already exists.\nThe function should output with:\n    str: The name of the generated JSON file containing letter counts.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):\n```"
+  },
+  {
+   "question": "What should happen if the generated filename already exists? Should it overwrite, skip, or retry with a new random number?",
+   "answer": "The function should generate a new random number only if a file with the initially generated name already exists, and then use that new number for the filename, effectively retrying until a unique name is found.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of each letter in these combinations and saves the results in a JSON file. The name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100 and changes only when the output file already exists; if the file exists, a new random number is generated until a unique filename is found.\nThe function should output with:\n    str: The name of the generated JSON file containing letter counts.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):"
+  },
+  {
+   "question": "Are the combinations order-sensitive (permutations) or order-insensitive (combinations)? The prompt says 'combinations' but doesn't specify if order matters.",
+   "answer": "The combinations are order-insensitive, as in the mathematical sense of combinations (itertools.combinations).",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of each letter in these combinations and saves the results in a JSON file. The name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100 and changes only when the output file already exists.\nThe combinations are order-insensitive.\nThe function should output with:\n    str: The name of the generated JSON file containing letter counts.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):"
+  },
+  {
+   "question": "Should the output JSON file be saved in the current directory or a specific path?",
+   "answer": "The output JSON file is saved in the current directory.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of each letter in these combinations and saves the results in a JSON file. The name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100 and changes only when the output file already exists.\nThe file is saved in the current directory.\nThe function should output with:\n    str: The name of the generated JSON file containing letter counts.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):"
+  },
+  {
+   "question": "Is the function expected to handle empty LETTERS list or n=0? If so, what should be the output?",
+   "answer": "The function is expected to handle these cases; for an empty LETTERS list or n=0, it should generate an empty combination set and thus an empty count dictionary, saving it to a JSON file.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of each letter in these combinations and saves the results in a JSON file. The name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100 and changes only when the output file already exists.\nThe function handles empty LETTERS list or n=0, resulting in an empty combination set and an empty count dictionary.\nThe function should output with:\n    str: The name of the generated JSON file containing letter counts.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):"
+  }
+ ]
+}

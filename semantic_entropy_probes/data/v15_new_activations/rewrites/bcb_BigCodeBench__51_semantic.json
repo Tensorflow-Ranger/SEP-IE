@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/51_semantic",
+ "candidates": [
+  {
+   "question": "Does 'less than 3' refer to the number of rows or the number of columns in the filtered dataframe?",
+   "answer": "It refers to the number of rows in the filtered dataframe.",
+   "inline_prompt": "Filters the input DataFrame based on specified 'Age' and 'Height' conditions and applies KMeans clustering.\n- If the filtered dataframe has less than 3 rows, add to it a column 'Cluster' with 0 for each row.\n- Otherwise, do a KMeans clustering (by Age and Height) with 3 clusters and add a column 'Cluster' to the dataframe which corresponds to the cluster index of the cluster to which each row belongs to.\n- Plot a scatter plot of the 'Age' and 'height' and colored by the cluster indices.\n- the xlabel should be 'Age', the ylabel 'Height' and the title 'KMeans Clustering based on Age and Height'.\nThe function should output with:\n    DataFrame: The filtered dataframe with the new column.\n    matplotlib.axes.Axes: The Axes object of the plotted data. If no KMeans was done, returns None.\nYou should write self-contained code starting with:\n```\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\ndef task_func(df, age: int, height: int):"
+  },
+  {
+   "question": "Should the KMeans clustering use the default parameters from sklearn, or should we specify any specific parameters like random_state?",
+   "answer": "Use the default parameters from sklearn (no random_state specified).",
+   "inline_prompt": "Filters the input DataFrame based on specified 'Age' and 'Height' conditions and applies KMeans clustering.\n- If the filtered dataframe has less than 3, add to it a column 'Cluster' with 0 for each row.\n- Otherwise, do a KMeans clustering using default sklearn parameters (by Age and Height) with 3 clusters and add a column 'Cluster' to the dataframe which corresponds to the cluster index of the cluster to which each row belongs to.\n- Plot a scatter plot of the 'Age' and 'height' and colored by the cluster indices.\n- the xlabel should be 'Age', the ylabel 'Height' and the title 'KMeans Clustering based on Age and Height'.\nThe function should output with:\n    DataFrame: The filtered dataframe with the new column.\n    matplotlib.axes.Axes: The Axes object of the plotted data. If no KMeans was done, returns None.\nYou should write self-contained code starting with:\n```\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\ndef task_func(df, age: int, height: int):"
+  },
+  {
+   "question": "If the filtered dataframe has exactly 3 rows, should KMeans be applied?",
+   "answer": "Yes, KMeans should be applied when there are exactly 3 rows.",
+   "inline_prompt": "Filters the input DataFrame based on specified 'Age' and 'Height' conditions and applies KMeans clustering.\n- If the filtered dataframe has less than 3, add to it a column 'Cluster' with 0 for each row.\n- Otherwise (i.e., when there are 3 or more rows), do a KMeans clustering (by Age and Height) with 3 clusters and add a column 'Cluster' to the dataframe which corresponds to the cluster index of the cluster to which each row belongs to.\n- Plot a scatter plot of the 'Age' and 'height' and colored by the cluster indices.\n- the xlabel should be 'Age', the ylabel 'Height' and the title 'KMeans Clustering based on Age and Height'.\nThe function should output with:\n    DataFrame: The filtered dataframe with the new column.\n    matplotlib.axes.Axes: The Axes object of the plotted data. If no KMeans was done, returns None.\nYou should write self-contained code starting with:\n```\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\ndef task_func(df, age: int, height: int):"
+  },
+  {
+   "question": "Should the scatter plot be created even when no KMeans is done (i.e., when filtered dataframe has less than 3 rows)?",
+   "answer": "No, the scatter plot should only be created when KMeans clustering is performed.",
+   "inline_prompt": "Filters the input DataFrame based on specified 'Age' and 'Height' conditions and applies KMeans clustering.\n- If the filtered dataframe has less than 3, add to it a column 'Cluster' with 0 for each row.\n- Otherwise, do a KMeans clustering (by Age and Height) with 3 clusters and add a column 'Cluster' to the dataframe which corresponds to the cluster index of the cluster to which each row belongs to.\n- Plot a scatter plot of the 'Age' and 'height' and colored by the cluster indices (only when KMeans is performed).\n- the xlabel should be 'Age', the ylabel 'Height' and the title 'KMeans Clustering based on Age and Height'.\nThe function should output with:\n    DataFrame: The filtered dataframe with the new column.\n    matplotlib.axes.Axes: The Axes object of the plotted data. If no KMeans was done, returns None.\nYou should write self-contained code starting with:\n```\nfrom sklearn.cluster import KMeans\nimport matplotlib.pyplot as plt\ndef task_func(df, age: int, height: int):"
+  },
+  {
+   "question": "Are the Age and Height columns guaranteed to be numeric, or should we handle non-numeric values?",
+   "answer": "Assume the Age and Height columns are numeric as per the problem's typical data.",
+   "inline_prompt": "Filters the input DataFrame based on specified 'Age' and 'Height' conditions and applies KMeans clustering. - If the filtered dataframe has less than 3 rows, add to it a column 'Cluster' with 0 for each row. - Otherwise, do a KMeans clustering (by Age and Height) with 3 clusters and add a column 'Cluster' to the dataframe which corresponds to the cluster index of the cluster to which each row belongs to. - Plot a scatter plot of the 'Age' and 'height' and colored by the cluster indices. - the xlabel should be 'Age', the ylabel 'Height' and the title 'KMeans Clustering based on Age and Height'."
+  },
+  {
+   "question": "Should the filtering conditions be strict inequalities (Age > age, Height < height) as implied, or inclusive?",
+   "answer": "The filtering conditions are strict inequalities: Age > age and Height < height.",
+   "inline_prompt": "Filters the input DataFrame based on specified 'Age' and 'Height' conditions and applies KMeans clustering. - If the filtered dataframe has less than 3 rows, add to it a column 'Cluster' with 0 for each row. - Otherwise, do a KMeans clustering (by Age and Height) with 3 clusters and add a column 'Cluster' to the dataframe which corresponds to the cluster index of the cluster to which each row belongs to. - Plot a scatter plot of the 'Age' and 'height' and colored by the cluster indices. - the xlabel should be 'Age', the ylabel 'Height' and the title 'KMeans Clustering based on Age and Height'."
+  },
+  {
+   "question": "If the filtered dataframe is empty, should we still add a 'Cluster' column with 0?",
+   "answer": "Yes, if the filtered dataframe is empty, still add a 'Cluster' column with 0 (though it will have no rows).",
+   "inline_prompt": "Filters the input DataFrame based on specified 'Age' and 'Height' conditions and applies KMeans clustering. - If the filtered dataframe has less than 3 rows, add to it a column 'Cluster' with 0 for each row. - Otherwise, do a KMeans clustering (by Age and Height) with 3 clusters and add a column 'Cluster' to the dataframe which corresponds to the cluster index of the cluster to which each row belongs to. - Plot a scatter plot of the 'Age' and 'height' and colored by the cluster indices. - the xlabel should be 'Age', the ylabel 'Height' and the title 'KMeans Clustering based on Age and Height'."
+  },
+  {
+   "question": "Should the KMeans clustering use only the 'Age' and 'Height' columns, or all numeric columns?",
+   "answer": "The KMeans clustering uses only the 'Age' and 'Height' columns.",
+   "inline_prompt": "Filters the input DataFrame based on specified 'Age' and 'Height' conditions and applies KMeans clustering. - If the filtered dataframe has less than 3 rows, add to it a column 'Cluster' with 0 for each row. - Otherwise, do a KMeans clustering (by Age and Height) with 3 clusters and add a column 'Cluster' to the dataframe which corresponds to the cluster index of the cluster to which each row belongs to. - Plot a scatter plot of the 'Age' and 'height' and colored by the cluster indices. - the xlabel should be 'Age', the ylabel 'Height' and the title 'KMeans Clustering based on Age and Height'."
+  }
+ ]
+}

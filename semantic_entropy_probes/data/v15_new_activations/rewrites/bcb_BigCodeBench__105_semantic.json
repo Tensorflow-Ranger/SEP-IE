@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/105_semantic",
+ "candidates": [
+  {
+   "question": "Should the correlation matrix include the ordinal date column, or only the numeric columns (like 'value')?",
+   "answer": "The correlation matrix should be computed from all numeric columns after processing the date column to ordinal and dropping the categorical 'group' column.",
+   "inline_prompt": "Perform exploratory data analysis on a dataframe. This function converts the 'date' column to an ordinal format, creates a correlation matrix from the numeric columns (including the ordinal date), and generates a pair plot of the dataframe. The title of the plot is 'Correlation Matrix'.\nThe function should raise the exception for: ValueError: If the dataframe is empty, if required columns are missing, or if 'date' column is not in datetime format.\nThe function should output with:\n    matplotlib.figure.Figure: The figure object for the correlation matrix heatmap.\n    seaborn.axisgrid.PairGrid: The PairGrid object for the pair plot.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the pair plot include the 'group' column (categorical) or only numeric columns?",
+   "answer": "The pair plot should include all columns of the dataframe, including the categorical 'group' column.",
+   "inline_prompt": "Perform exploratory data analysis on a dataframe. This function converts the 'date' column to an ordinal format, creates a correlation matrix with the processed data, and generates a pair plot of the dataframe including all columns. The title of the plot is 'Correlation Matrix'.\nThe function should raise the exception for: ValueError: If the dataframe is empty, if required columns are missing, or if 'date' column is not in datetime format.\nThe function should output with:\n    matplotlib.figure.Figure: The figure object for the correlation matrix heatmap.\n    seaborn.axisgrid.PairGrid: The PairGrid object for the pair plot.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "What should be the color map for the heatmap? The prompt only mentions 'coolwarm' in the solution, but it's not specified.",
+   "answer": "Not specified beyond what's given; assume standard behavior (use any valid colormap, such as 'coolwarm' from the reference solution).",
+   "inline_prompt": "Perform exploratory data analysis on a dataframe. This function converts the 'date' column to an ordinal format, creates a correlation matrix with the processed data, and generates a pair plot of the dataframe. The title of the plot is 'Correlation Matrix'.\nThe function should raise the exception for: ValueError: If the dataframe is empty, if required columns are missing, or if 'date' column is not in datetime format.\nThe function should output with:\n    matplotlib.figure.Figure: The figure object for the correlation matrix heatmap.\n    seaborn.axisgrid.PairGrid: The PairGrid object for the pair plot.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the function handle missing values in the dataframe, and if so, how?",
+   "answer": "The function should raise a ValueError if the dataframe is empty or if required columns are missing, but handling of NaN values within non-empty data is not specified beyond what's given; assume standard behavior (pandas correlation and seaborn pairplot handle NaN by dropping or ignoring as per their defaults).",
+   "inline_prompt": "Perform exploratory data analysis on a dataframe. This function converts the 'date' column to an ordinal format, creates a correlation matrix with the processed data, and generates a pair plot of the dataframe. The function should raise the exception for: ValueError: If the dataframe is empty, if required columns are missing, or if 'date' column is not in datetime format. Missing values within the data are handled by the default behavior of pandas and seaborn.\nThe function should output with:\n    matplotlib.figure.Figure: The figure object for the correlation matrix heatmap.\n    seaborn.axisgrid.PairGrid: The PairGrid object for the pair plot.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "What is the expected figure size for the heatmap?",
+   "answer": "The figure size for the heatmap is 8 inches by 6 inches, as shown in the canonical solution.",
+   "inline_prompt": "Perform exploratory data analysis on a dataframe. This function converts the 'date' column to an ordinal format, creates a correlation matrix with the processed data, and generates a pair plot of the dataframe. The title of the plot is 'Correlation Matrix'.\nThe function should raise the exception for: ValueError: If the dataframe is empty, if required columns are missing, or if 'date' column is not in datetime format.\nThe function should output with:\n    matplotlib.figure.Figure: The figure object for the correlation matrix heatmap, created with a figure size of 8 by 6 inches.\n    seaborn.axisgrid.PairGrid: The PairGrid object for the pair plot.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the pair plot use any specific hue or styling based on the 'group' column?",
+   "answer": "The pair plot should not use any specific hue or styling based on the 'group' column; it is a standard pair plot of the dataframe.",
+   "inline_prompt": "Perform exploratory data analysis on a dataframe. This function converts the 'date' column to an ordinal format, creates a correlation matrix with the processed data, and generates a pair plot of the dataframe without using hue or styling based on the 'group' column. The title of the plot is 'Correlation Matrix'.\nThe function should raise the exception for: ValueError: If the dataframe is empty, if required columns are missing, or if 'date' column is not in datetime format.\nThe function should output with:\n    matplotlib.figure.Figure: The figure object for the correlation matrix heatmap.\n    seaborn.axisgrid.PairGrid: The PairGrid object for the pair plot.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Is the 'date' column expected to be in a specific datetime format (e.g., YYYY-MM-DD)?",
+   "answer": "The 'date' column should be in any datetime format recognized by pandas, not a specific string format.",
+   "inline_prompt": "Perform exploratory data analysis on a dataframe. This function converts the 'date' column to an ordinal format, creates a correlation matrix with the processed data, and generates a pair plot of the dataframe. The title of the plot is 'Correlation Matrix'.\nThe function should raise the exception for: ValueError: If the dataframe is empty, if required columns are missing, or if 'date' column is not in datetime format (any pandas-recognized datetime format).\nThe function should output with:\n    matplotlib.figure.Figure: The figure object for the correlation matrix heatmap.\n    seaborn.axisgrid.PairGrid: The PairGrid object for the pair plot.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the correlation matrix be displayed with annotations (numbers) as shown in the solution?",
+   "answer": "Yes, the correlation matrix heatmap should have annotations (numbers) displayed, as shown in the canonical solution.",
+   "inline_prompt": "Perform exploratory data analysis on a dataframe. This function converts the 'date' column to an ordinal format, creates a correlation matrix with the processed data, and generates a pair plot of the dataframe. The title of the plot is 'Correlation Matrix'.\nThe function should raise the exception for: ValueError: If the dataframe is empty, if required columns are missing, or if 'date' column is not in datetime format.\nThe function should output with:\n    matplotlib.figure.Figure: The figure object for the correlation matrix heatmap, which should display annotations (numbers).\n    seaborn.axisgrid.PairGrid: The PairGrid object for the pair plot.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\ndef task_func(df):\n```"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_154_semantic",
+ "candidates": [
+  {
+   "question": "Should we treat the first word as circular when checking for substring matches?",
+   "answer": "No, the first word is not treated as circular; substring matches must be contiguous in the original linear string.",
+   "inline_prompt": "def cycpattern_check(a , b):\n    \"\"\"You are given 2 words. You need to return True if the second word or any of its rotations appears as a substring in the first word (the first word is not treated as circular; substring matches must be contiguous in the original linear string).\n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n    \"\"\""
+  },
+  {
+   "question": "Are the inputs always strings of lowercase letters?",
+   "answer": "Not specified beyond what's given; assume standard behavior (any characters allowed).",
+   "inline_prompt": "def cycpattern_check(a , b):\n    \"\"\"You are given 2 words. You need to return True if the second word or any of its rotations appears as a substring in the first word\n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n    \"\"\""
+  },
+  {
+   "question": "What should we return if either input string is empty?",
+   "answer": "Not specified beyond what's given; assume standard behavior (an empty string is a substring of any string, and rotations of an empty string are empty).",
+   "inline_prompt": "def cycpattern_check(a , b):\n    \"\"\"You are given 2 words. You need to return True if the second word or any of its rotations appears as a substring in the first word\n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n    \"\"\""
+  },
+  {
+   "question": "Is the substring match case-sensitive?",
+   "answer": "Yes, the substring match is case-sensitive as shown in the examples.",
+   "inline_prompt": "def cycpattern_check(a , b):\n    \"\"\"You are given 2 words. You need to return True if the second word or any of its rotations appears as a substring in the first word (case-sensitive).\n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n    \"\"\""
+  },
+  {
+   "question": "Can the second word be longer than the first word?",
+   "answer": "The second word can be longer than the first word, but then no rotation of it can be a substring of the first word, so the function should return False.",
+   "inline_prompt": "def cycpattern_check(a , b):\n    \"\"\"You are given 2 words. You need to return True if the second word or any of its rotations appears as a substring in the first word; if the second word is longer than the first, no rotation can be a substring, so return False.\n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n    \"\"\""
+  },
+  {
+   "question": "Should we consider overlapping rotations of the second word?",
+   "answer": "All distinct rotations of the second word (including the original) should be considered, but overlapping in the sense of cyclic shifts is inherent; each rotation is a contiguous string of length len(b).",
+   "inline_prompt": "def cycpattern_check(a , b):\n    \"\"\"You are given 2 words. You need to return True if the second word or any of its rotations appears as a substring in the first word; consider all distinct rotations (contiguous cyclic shifts) of the second word.\n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n    \"\"\""
+  },
+  {
+   "question": "Are we allowed to use built-in string search functions?",
+   "answer": "Not specified beyond what's given; assume standard behavior (any implementation is acceptable as long as it meets the specification).",
+   "inline_prompt": "def cycpattern_check(a , b):\n    \"\"\"You are given 2 words. You need to return True if the second word or any of its rotations appears as a substring in the first word\n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n    \"\"\""
+  },
+  {
+   "question": "What if the second word has duplicate characters? Does that affect rotation handling?",
+   "answer": "Duplicate characters do not affect rotation handling; all rotations (including duplicates) should be considered as usual.",
+   "inline_prompt": "def cycpattern_check(a , b):\n    \"\"\"You are given 2 words. You need to return True if the second word or any of its rotations appears as a substring in the first word; duplicate characters in the second word do not change the rotation handling.\n    cycpattern_check(\"abcd\",\"abd\") => False\n    cycpattern_check(\"hello\",\"ell\") => True\n    cycpattern_check(\"whassup\",\"psus\") => False\n    cycpattern_check(\"abab\",\"baa\") => True\n    cycpattern_check(\"efef\",\"eeff\") => False\n    cycpattern_check(\"himenss\",\"simen\") => True\n    \"\"\""
+  }
+ ]
+}

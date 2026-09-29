@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/26_semantic",
+ "candidates": [
+  {
+   "question": "Should the encryption key be provided as a raw string that needs to be encoded to bytes and then URL-safe base64 encoded to meet Fernet's 32-byte requirement, or is it already in the correct format?",
+   "answer": "The encryption key is a raw string that must be encoded to bytes and then URL-safe base64 encoded to meet Fernet's 32-byte requirement.",
+   "inline_prompt": "Encrypts a message with a symmetric encryption key using Fernet encryption, and then encode the encrypted message using base64.\nThe function should output with:\n    str: The base64 encoded encrypted message. The message is first encrypted using Fernet encryption,\n    then the result is base64 encoded.\nYou should write self-contained code starting with:\n```\nimport base64\nfrom cryptography.fernet import Fernet\ndef task_func(message, encryption_key):\n```"
+  },
+  {
+   "question": "Does the message need to be encoded to bytes before encryption, or will Fernet handle string encoding internally?",
+   "answer": "The message must be encoded to bytes before encryption, as Fernet encrypts bytes.",
+   "inline_prompt": "Encrypts a message with a symmetric encryption key using Fernet encryption, and then encode the encrypted message using base64.\nThe function should output with:\n    str: The base64 encoded encrypted message. The message is first encrypted using Fernet encryption,\n    then the result is base64 encoded.\nYou should write self-contained code starting with:\n```\nimport base64\nfrom cryptography.fernet import Fernet\ndef task_func(message, encryption_key):\n```"
+  },
+  {
+   "question": "Should the base64 encoding after encryption use standard base64 (b64encode) or URL-safe base64 (urlsafe_b64encode)?",
+   "answer": "Use standard base64 encoding (b64encode) for the encrypted message.",
+   "inline_prompt": "Encrypts a message with a symmetric encryption key using Fernet encryption, and then encode the encrypted message using base64.\nThe function should output with:\n    str: The base64 encoded encrypted message. The message is first encrypted using Fernet encryption,\n    then the result is base64 encoded.\nYou should write self-contained code starting with:\n```\nimport base64\nfrom cryptography.fernet import Fernet\ndef task_func(message, encryption_key):\n```"
+  },
+  {
+   "question": "Is the output expected to be a base64-encoded string of the encrypted bytes, or a string representation (e.g., hex) of those bytes?",
+   "answer": "The output is a base64-encoded string of the encrypted bytes.",
+   "inline_prompt": "Encrypts a message with a symmetric encryption key using Fernet encryption, and then encode the encrypted message using base64.\nThe function should output with:\n    str: The base64 encoded encrypted message. The message is first encrypted using Fernet encryption,\n    then the result is base64 encoded.\nYou should write self-contained code starting with:\n```\nimport base64\nfrom cryptography.fernet import Fernet\ndef task_func(message, encryption_key):\n```"
+  },
+  {
+   "question": "Should the function handle non-string messages (e.g., bytes) or only strings as input?",
+   "answer": "The message should be a string, as specified in the parameters.",
+   "inline_prompt": "Encrypts a message with a symmetric encryption key using Fernet encryption, and then encode the resulting bytes or string using base64.\nThe function should output with:\n    str: The base64 encoded encrypted message. The message is first encrypted using Fernet encryption,\n    then the result is base64 encoded.\nYou should write self-contained code starting with:\n```\nimport base64\nfrom cryptography.fernet import Fernet\ndef task_func(message, encryption_key):\n```"
+  },
+  {
+   "question": "If the encryption key is invalid (e.g., wrong length or format), should the function raise a specific error like ValueError or a general exception?",
+   "answer": "The function should raise a ValueError for an incorrectly formatted encryption key, as indicated in the test cases.",
+   "inline_prompt": "Encrypts a message with a symmetric encryption key using Fernet encryption, and then encode the resulting bytes or string using base64.\nThe function should output with:\n    str: The base64 encoded encrypted message. The message is first encrypted using Fernet encryption,\n    then the result is base64 encoded.\nYou should write self-contained code starting with:\n```\nimport base64\nfrom cryptography.fernet import Fernet\ndef task_func(message, encryption_key):\n```"
+  },
+  {
+   "question": "Should the base64-encoded output be returned as a string (decoded) or as bytes?",
+   "answer": "The output should be a string, as specified in the returns section.",
+   "inline_prompt": "Encrypts a message with a symmetric encryption key using Fernet encryption, and then encode the resulting bytes or string using base64.\nThe function should output with:\n    str: The base64 encoded encrypted message. The message is first encrypted using Fernet encryption,\n    then the result is base64 encoded.\nYou should write self-contained code starting with:\n```\nimport base64\nfrom cryptography.fernet import Fernet\ndef task_func(message, encryption_key):\n```"
+  },
+  {
+   "question": "Is the encryption key expected to be exactly 32 bytes after encoding, or does Fernet handle padding/validation internally?",
+   "answer": "The encryption key should be a string that, when encoded to bytes and then URL-safe base64 encoded, yields 32 bytes, as Fernet requires a 32-byte key.",
+   "inline_prompt": "Encrypts a message with a symmetric encryption key using Fernet encryption, and then encode the resulting bytes or string using base64.\nThe function should output with:\n    str: The base64 encoded encrypted message. The message is first encrypted using Fernet encryption,\n    then the result is base64 encoded.\nYou should write self-contained code starting with:\n```\nimport base64\nfrom cryptography.fernet import Fernet\ndef task_func(message, encryption_key):\n```"
+  }
+ ]
+}

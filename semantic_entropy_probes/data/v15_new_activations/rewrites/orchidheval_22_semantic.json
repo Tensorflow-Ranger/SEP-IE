@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_22_semantic",
+ "candidates": [
+  {
+   "question": "Should we filter only for values that are exactly of type int, or also include subclasses of int?",
+   "answer": "Filter for values that are instances of the int type, which includes subclasses of int.",
+   "inline_prompt": "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers\n    Filter for values that are instances of the int type, which includes subclasses of int.\n    \"\"\""
+  },
+  {
+   "question": "Should we filter for integer values that are numeric but not necessarily int type, like float 2.0?",
+   "answer": "Filter only for values of type int; numeric values of other types like float 2.0 are not included.",
+   "inline_prompt": "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers\n    Filter only for values of type int; numeric values of other types like float 2.0 are not included.\n    \"\"\""
+  },
+  {
+   "question": "Should we handle None values? Are they considered integers?",
+   "answer": "None is not an integer and should not be included in the filtered list.",
+   "inline_prompt": "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers\n    None is not an integer and should not be included in the filtered list.\n    \"\"\""
+  },
+  {
+   "question": "Should we filter for integer values based on their value (e.g., include floats with integer value) or strictly on type?",
+   "answer": "Filter strictly based on type, not value; only values of type int are included.",
+   "inline_prompt": "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers\n    Filter strictly based on type, not value; only values of type int are included.\n    \"\"\""
+  },
+  {
+   "question": "What about complex numbers like 3+0j? Should they be considered integers?",
+   "answer": "Only elements of type int (isinstance(x, int)) are included; complex numbers are not integers.",
+   "inline_prompt": "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers (elements of type int).\n    \"\"\""
+  },
+  {
+   "question": "Should we preserve the order of the integers in the output?",
+   "answer": "Yes, the order of the integers in the output should be the same as their order in the input list.",
+   "inline_prompt": "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers, preserving their original order.\n    \"\"\""
+  },
+  {
+   "question": "If a string like '5' is present, should we convert it to int 5 and include it?",
+   "answer": "No, only elements that are already of type int are included; no conversion is performed.",
+   "inline_prompt": "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers, without any type conversion.\n    \"\"\""
+  },
+  {
+   "question": "Should we include negative integers?",
+   "answer": "Yes, negative integers are of type int and should be included.",
+   "inline_prompt": "from typing import List, Any\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers (including negative integers).\n    \"\"\""
+  }
+ ]
+}

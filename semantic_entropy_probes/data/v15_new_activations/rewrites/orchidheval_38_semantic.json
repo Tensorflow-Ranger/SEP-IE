@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_38_semantic",
+ "candidates": [
+  {
+   "question": "Does 'cycling groups of three characters' mean rotating characters within each group (e.g., 'abc' -> 'bca') or rotating the groups themselves (e.g., groups 'abc','def' -> 'def','abc')?",
+   "answer": "It means rotating characters within each group of three by shifting them one position to the left (e.g., 'abc' becomes 'bca').",
+   "inline_prompt": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters in the string, rotating characters within each group by shifting them one position to the left (e.g., 'abc' becomes 'bca').\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\""
+  },
+  {
+   "question": "For groups with fewer than 3 characters, should they be left unchanged, or should they be padded to 3 characters before cycling?",
+   "answer": "Groups with fewer than 3 characters are left unchanged, as specified in the code comment.",
+   "inline_prompt": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters in the string.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3, in which case it is left unchanged.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\""
+  },
+  {
+   "question": "Is the grouping done from left to right, or could it be right to left?",
+   "answer": "The grouping is done from left to right, as indicated by the list comprehension that splits the string sequentially.",
+   "inline_prompt": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters in the string.\n    \"\"\"\n    # split string to groups from left to right. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\""
+  },
+  {
+   "question": "Should the encoding be applied recursively (e.g., multiple cycles per group)?",
+   "answer": "The encoding is applied exactly once per group, as shown in the provided code.",
+   "inline_prompt": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters in the string, applying the transformation exactly once per group.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\""
+  },
+  {
+   "question": "Does 'cycling' imply a shift to the left or to the right?",
+   "answer": "Cycling means shifting each group of three characters one position to the left, as shown in the provided code.",
+   "inline_prompt": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters in the string.\n    The encoding shifts each group of three characters one position to the left.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\""
+  },
+  {
+   "question": "If the string length is not a multiple of 3, should the leftover characters be at the beginning or end of the encoded string?",
+   "answer": "Leftover characters (fewer than 3) remain unchanged and in their original relative position at the end of the string.",
+   "inline_prompt": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters in the string.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\""
+  },
+  {
+   "question": "Is the decoding function supposed to invert the encoding exactly, or could it use a different algorithm?",
+   "answer": "The decoding function must invert the encoding exactly, as defined by the provided encode_cyclic function.",
+   "inline_prompt": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters in the string.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    The decoding must invert the encoding exactly.\n    \"\"\""
+  },
+  {
+   "question": "Should the encoding handle non-ASCII characters or only ASCII?",
+   "answer": "Not specified beyond what's given; assume standard behavior for Python strings, which handle any Unicode characters.",
+   "inline_prompt": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters in the string.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\""
+  }
+ ]
+}

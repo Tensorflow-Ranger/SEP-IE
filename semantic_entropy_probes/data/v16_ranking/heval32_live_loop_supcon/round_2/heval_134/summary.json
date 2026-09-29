@@ -1,0 +1,99 @@
+{
+  "round": 2,
+  "prompt_before": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n    '''",
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "Does \"a part of a word\" mean the character is immediately preceded by a non-space character within the same contiguous group?",
+      "answer": "A character is part of a word if it is in a group of characters separated by spaces that has length greater than 1.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word (i.e., the group of characters separated by spaces containing it has length 1), and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n    '''",
+      "score": 10.485646426677704
+    },
+    {
+      "idx": 4,
+      "question": "If the last character is a letter but preceded by a space, is it considered \"not a part of a word\" even if there are no other characters after that space?",
+      "answer": "Yes, if the last character is a letter and the group it belongs to after splitting by spaces has exactly one character, it is considered not part of a word.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word (i.e., the group it belongs to after splitting by spaces has exactly one character), and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n    '''",
+      "score": 9.20173054933548
+    },
+    {
+      "idx": 2,
+      "question": "Should the function consider punctuation or digits between spaces as part of a word, or are words defined solely by spaces?",
+      "answer": "Words are defined solely by spaces; any characters between spaces form a word.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space (any characters between spaces form a word).\n    '''",
+      "score": 6.872514493763447
+    },
+    {
+      "idx": 7,
+      "question": "Are tab characters or other whitespace considered equivalent to spaces for word separation?",
+      "answer": "Only space characters are considered for word separation; other whitespace is not treated as separators.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space (only space characters, not other whitespace).\n    '''",
+      "score": 6.785639505833387
+    },
+    {
+      "idx": 8,
+      "question": "If the string contains only a single letter with no spaces, is that letter considered part of a word?",
+      "answer": "Yes, a single letter with no spaces is considered part of a word because it forms a word of length 1.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space (a single letter with no spaces forms a word).\n    '''",
+      "score": 6.288925565779209
+    },
+    {
+      "idx": 6,
+      "question": "Does a trailing space after the last character affect whether that character is part of a word?",
+      "answer": "Yes, a trailing space means the last character is not the last element when splitting by spaces, so it would be part of a word.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space; a trailing space means the last character is part of a word.\n    '''",
+      "score": 6.149263817816973
+    },
+    {
+      "idx": 5,
+      "question": "Are multiple consecutive spaces treated as a single separator, or does each space create separate word boundaries?",
+      "answer": "Each space creates separate word boundaries; multiple consecutive spaces create empty word groups.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space (each space creates a boundary, so multiple consecutive spaces create empty groups).\n    '''",
+      "score": 4.945408586412668
+    },
+    {
+      "idx": 10,
+      "question": "What about letters with diacritics (e.g., \u00e9, \u00f1) \u2014 are they considered alphabetical characters?",
+      "answer": "Letters with diacritics are not considered alphabetical characters; only English letters a-z and A-Z are valid.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character (only English letters a-z and A-Z, without diacritics) and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n    '''",
+      "score": 4.762321785092354
+    },
+    {
+      "idx": 11,
+      "question": "If the last character is a letter that is part of a hyphenated compound (e.g., \"well-known\"), is it considered part of a word?",
+      "answer": "Yes, hyphenated compounds are considered single words as long as there are no spaces within them.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space (hyphenated compounds without internal spaces are single words).\n    '''",
+      "score": 3.807944718748331
+    },
+    {
+      "idx": 9,
+      "question": "Should the function be case-sensitive, or does case not matter for determining if a character is alphabetical?",
+      "answer": "Case does not matter for determining if a character is alphabetical; both uppercase and lowercase English letters are valid.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character (case-insensitive, a-z or A-Z) and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n    '''",
+      "score": 3.242061099037528
+    },
+    {
+      "idx": 0,
+      "question": "What constitutes an \"alphabetical character\" \u2014 only English letters a-z and A-Z, or any Unicode letter?",
+      "answer": "An alphabetical character is only English letters a-z and A-Z.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character (only English letters a-z and A-Z) and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n    '''",
+      "score": 3.1548855267465115
+    },
+    {
+      "idx": 3,
+      "question": "How should an empty string be handled \u2014 is it considered a word, or does it return False?",
+      "answer": "An empty string should return False.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n    For an empty string, return False.\n    '''",
+      "score": 1.3209290578961372
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "Does \"a part of a word\" mean the character is immediately preceded by a non-space character within the same contiguous group?",
+    "answer": "A character is part of a word if it is in a group of characters separated by spaces that has length greater than 1.",
+    "score": 10.485646426677704
+  },
+  "next_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word (i.e., the group of characters separated by spaces containing it has length 1), and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n    '''",
+  "test_n_pass": 8,
+  "test_n_total": 10
+}

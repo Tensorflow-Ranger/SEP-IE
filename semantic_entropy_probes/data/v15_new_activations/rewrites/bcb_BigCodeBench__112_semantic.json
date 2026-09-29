@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/112_semantic",
+ "candidates": [
+  {
+   "question": "Should the status values be normalized to a specific case (e.g., lower or upper) before grouping, or should grouping be case-insensitive while preserving the original case in the chart labels?",
+   "answer": "Grouping is case-insensitive, but the original case of the first occurrence of each distinct status (when ignoring case) should be preserved in the chart labels.",
+   "inline_prompt": "Draws a pie chart of the status distribution from a pandas DataFrame with a 'Status' column, grouping identical status values case-insensitively (preserving the original case of the first occurrence for each distinct status in the labels), and returns the plot object. The 'Status' column in the DataFrame is expected to contain categorical data with possible values like 'Pending', 'In Progress', 'Completed', 'Cancelled'.\nThe function should raise the exception for: ValueError: If 'df' is not a pandas DataFrame or does not contain the 'Status' column.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object with the pie chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df):\n```"
+  },
+  {
+   "question": "What should happen if the 'Status' column contains NaN or missing values? Should they be ignored, raised as an error, or treated as a separate category?",
+   "answer": "Not specified beyond what's given; assume standard behavior (NaN values are ignored in the grouping and not included in the pie chart).",
+   "inline_prompt": "Draws a pie chart of the status distribution from a pandas DataFrame with a 'Status' column, grouping identical status values case-insensitively, and returns the plot object. The 'Status' column in the DataFrame is expected to contain categorical data with possible values like 'Pending', 'In Progress', 'Completed', 'Cancelled'.\nThe function should raise the exception for: ValueError: If 'df' is not a pandas DataFrame or does not contain the 'Status' column.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object with the pie chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the pie chart include a legend, or should labels be placed directly on the chart (e.g., via autopct or text)?",
+   "answer": "Labels should be placed directly on the chart via the pie function's labels parameter, not as a separate legend.",
+   "inline_prompt": "Draws a pie chart of the status distribution from a pandas DataFrame with a 'Status' column, grouping identical status values case-insensitively, and returns the plot object. The 'Status' column in the DataFrame is expected to contain categorical data with possible values like 'Pending', 'In Progress', 'Completed', 'Cancelled'.\nThe function should raise the exception for: ValueError: If 'df' is not a pandas DataFrame or does not contain the 'Status' column.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object with the pie chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df):\n```"
+  },
+  {
+   "question": "What is the expected title of the pie chart? Should it be 'Status Distribution' or something else?",
+   "answer": "The pie chart title should be 'Status Distribution'.",
+   "inline_prompt": "Draws a pie chart of the status distribution from a pandas DataFrame with a 'Status' column, grouping identical status values case-insensitively, and returns the plot object. The 'Status' column in the DataFrame is expected to contain categorical data with possible values like 'Pending', 'In Progress', 'Completed', 'Cancelled'.\nThe function should raise the exception for: ValueError: If 'df' is not a pandas DataFrame or does not contain the 'Status' column.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object with the pie chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the function handle duplicate rows or only unique status entries? The prompt mentions grouping identical values, but it's unclear if duplicates in the DataFrame affect processing.",
+   "answer": "The function should count all rows, grouping identical status values (case-insensitively) and summing their frequencies; duplicates are aggregated into counts.",
+   "inline_prompt": "Draws a pie chart of the status distribution from a pandas DataFrame with a 'Status' column, grouping identical status values case-insensitively (by counting all rows and aggregating frequencies), and returns the plot object. The 'Status' column in the DataFrame is expected to contain categorical data with possible values like 'Pending', 'In Progress', 'Completed', 'Cancelled'.\nThe function should raise the exception for: ValueError: If 'df' is not a pandas DataFrame or does not contain the 'Status' column.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object with the pie chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df):\n```"
+  },
+  {
+   "question": "What colors or styling should be used for the pie chart segments? Are there specific color requirements or defaults?",
+   "answer": "Not specified beyond what's given; assume standard matplotlib default colors and styling.",
+   "inline_prompt": "Draws a pie chart of the status distribution from a pandas DataFrame with a 'Status' column, grouping identical status values case-insensitively, and returns the plot object. The 'Status' column in the DataFrame is expected to contain categorical data with possible values like 'Pending', 'In Progress', 'Completed', 'Cancelled'.\nThe function should raise the exception for: ValueError: If 'df' is not a pandas DataFrame or does not contain the 'Status' column.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object with the pie chart (using matplotlib's default colors and styling).\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the pie chart display percentages (autopct) or raw counts, or both?",
+   "answer": "The pie chart should display percentages (autopct) as shown in the canonical solution, using the format '%1.1f%%'.",
+   "inline_prompt": "Draws a pie chart of the status distribution from a pandas DataFrame with a 'Status' column, grouping identical status values case-insensitively, and returns the plot object. The 'Status' column in the DataFrame is expected to contain categorical data with possible values like 'Pending', 'In Progress', 'Completed', 'Cancelled'.\nThe function should raise the exception for: ValueError: If 'df' is not a pandas DataFrame or does not contain the 'Status' column.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object with the pie chart, displaying percentages with autopct='%1.1f%%'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df):\n```"
+  },
+  {
+   "question": "If there are status values not listed in the prompt (e.g., 'On Hold'), should they be included in the chart or filtered out?",
+   "answer": "All status values present in the 'Status' column should be included in the chart, not limited to the listed examples.",
+   "inline_prompt": "Draws a pie chart of the status distribution from a pandas DataFrame with a 'Status' column, grouping identical status values case-insensitively, and returns the plot object. The 'Status' column in the DataFrame is expected to contain categorical data with possible values like 'Pending', 'In Progress', 'Completed', 'Cancelled', but all values present in the column are included.\nThe function should raise the exception for: ValueError: If 'df' is not a pandas DataFrame or does not contain the 'Status' column.\nThe function should output with:\n    matplotlib.axes.Axes: The Axes object with the pie chart.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport matplotlib.pyplot as plt\ndef task_func(df):\n```"
+  }
+ ]
+}

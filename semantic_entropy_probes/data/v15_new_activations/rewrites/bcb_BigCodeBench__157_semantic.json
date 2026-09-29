@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/157_semantic",
+ "candidates": [
+  {
+   "question": "Should rows with missing values be completely removed from the DataFrame before calculating both the averages and the correlation matrix, or only excluded from the correlation calculation?",
+   "answer": "Rows with missing values should be completely removed from the DataFrame before calculating both the averages and the correlation matrix.",
+   "inline_prompt": "Analyze a dataset by calculating the average of values across each row and visualizing the correlation matrix as a heatmap, excluding any rows with missing values from the correlation calculation. Rows with missing values are completely removed from the DataFrame before calculating both the averages and the correlation matrix.\nThe function should raise the exception for: ValueError: If the input data is not a 2D array or if it contains non-numeric data.  \nThe function should output with:  \n    tuple: A tuple containing:  \n    DataFrame: A pandas DataFrame enhanced with an 'Average' column that represents the mean across each row.  \n    Axes: The matplotlib Axes object showing the heatmap of the correlations.  \nYou should write self-contained code starting with:  \n```\nimport pandas as pd\nimport seaborn as sns\ndef task_func(data):\n```"
+  },
+  {
+   "question": "What should be done with rows that have missing values? Should they be dropped entirely or just ignored for correlation?",
+   "answer": "Rows with missing values should be dropped entirely from the DataFrame before any calculations.",
+   "inline_prompt": "Analyze a dataset by calculating the average of values across each row and visualizing the correlation matrix as a heatmap, excluding any rows with missing values from the correlation calculation. Rows with missing values should be dropped entirely from the DataFrame before any calculations.\nThe function should raise the exception for: ValueError: If the input data is not a 2D array or if it contains non-numeric data.  \nThe function should output with:  \n    tuple: A tuple containing:  \n    DataFrame: A pandas DataFrame enhanced with an 'Average' column that represents the mean across each row.  \n    Axes: The matplotlib Axes object showing the heatmap of the correlations.  \nYou should write self-contained code starting with:  \n```\nimport pandas as pd\nimport seaborn as sns\ndef task_func(data):\n```"
+  },
+  {
+   "question": "If there are missing values, should the average calculation use only non-missing values per row (skipna=True) or treat missing as invalid?",
+   "answer": "Since rows with missing values are dropped entirely, the average calculation will only operate on rows without missing values.",
+   "inline_prompt": "Analyze a dataset by calculating the average of values across each row and visualizing the correlation matrix as a heatmap, excluding any rows with missing values from the correlation calculation. Since rows with missing values are dropped entirely, the average calculation will only operate on rows without missing values.\nThe function should raise the exception for: ValueError: If the input data is not a 2D array or if it contains non-numeric data.  \nThe function should output with:  \n    tuple: A tuple containing:  \n    DataFrame: A pandas DataFrame enhanced with an 'Average' column that represents the mean across each row.  \n    Axes: The matplotlib Axes object showing the heatmap of the correlations.  \nYou should write self-contained code starting with:  \n```\nimport pandas as pd\nimport seaborn as sns\ndef task_func(data):\n```"
+  },
+  {
+   "question": "What type of correlation coefficient should be used (e.g., Pearson, Spearman)?",
+   "answer": "The correlation coefficient is not specified beyond what's given; assume standard behavior (Pearson correlation).",
+   "inline_prompt": "Analyze a dataset by calculating the average of values across each row and visualizing the correlation matrix as a heatmap, excluding any rows with missing values from the correlation calculation.  \nThe function should raise the exception for: ValueError: If the input data is not a 2D array or if it contains non-numeric data.  \nThe function should output with:  \n    tuple: A tuple containing:  \n    DataFrame: A pandas DataFrame enhanced with an 'Average' column that represents the mean across each row.  \n    Axes: The matplotlib Axes object showing the heatmap of the correlations.  \nYou should write self-contained code starting with:  \n```\nimport pandas as pd\nimport seaborn as sns\ndef task_func(data):\n```"
+  },
+  {
+   "question": "Should the heatmap include annotations (numbers) on the cells?",
+   "answer": "The heatmap should include annotations (numbers) on the cells, as shown in the canonical solution's call to sns.heatmap with annot=True.",
+   "inline_prompt": "Analyze a dataset by calculating the average of values across each row and visualizing the correlation matrix as a heatmap, excluding any rows with missing values from the correlation calculation.\nThe function should raise the exception for: ValueError: If the input data is not a 2D array or if it contains non-numeric data.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame enhanced with an 'Average' column that represents the mean across each row.\n    Axes: The matplotlib Axes object showing the heatmap of the correlations with annotations.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\ndef task_func(data):\n```"
+  },
+  {
+   "question": "What colormap should be used for the heatmap?",
+   "answer": "The colormap should be 'coolwarm', as shown in the canonical solution's call to sns.heatmap with cmap='coolwarm'.",
+   "inline_prompt": "Analyze a dataset by calculating the average of values across each row and visualizing the correlation matrix as a heatmap, excluding any rows with missing values from the correlation calculation.\nThe function should raise the exception for: ValueError: If the input data is not a 2D array or if it contains non-numeric data.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame enhanced with an 'Average' column that represents the mean across each row.\n    Axes: The matplotlib Axes object showing the heatmap of the correlations using the 'coolwarm' colormap.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\ndef task_func(data):\n```"
+  },
+  {
+   "question": "Should the input data be converted to a DataFrame exactly as given, or should columns be named?",
+   "answer": "The input data should be converted to a DataFrame exactly as given, without renaming columns, as shown in the canonical solution's call to pd.DataFrame(data).",
+   "inline_prompt": "Analyze a dataset by calculating the average of values across each row and visualizing the correlation matrix as a heatmap, excluding any rows with missing values from the correlation calculation.\nThe function should raise the exception for: ValueError: If the input data is not a 2D array or if it contains non-numeric data.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame enhanced with an 'Average' column that represents the mean across each row.\n    Axes: The matplotlib Axes object showing the heatmap of the correlations.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\ndef task_func(data):\n```"
+  },
+  {
+   "question": "If the input contains non-numeric data, should it raise ValueError before or after any processing?",
+   "answer": "The ValueError should be raised before any processing, as the canonical solution first validates the input is a 2D numpy array.",
+   "inline_prompt": "Analyze a dataset by calculating the average of values across each row and visualizing the correlation matrix as a heatmap, excluding any rows with missing values from the correlation calculation.\nThe function should raise the exception for: ValueError: If the input data is not a 2D array or if it contains non-numeric data, which should be checked before any processing.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame enhanced with an 'Average' column that represents the mean across each row.\n    Axes: The matplotlib Axes object showing the heatmap of the correlations.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\ndef task_func(data):\n```"
+  }
+ ]
+}

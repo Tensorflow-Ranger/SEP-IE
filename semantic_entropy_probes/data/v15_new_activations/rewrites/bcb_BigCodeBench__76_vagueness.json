@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/76_vagueness",
+ "candidates": [
+  {
+   "question": "What is the specific length required for the session key?",
+   "answer": "The session key must have a length of 20.",
+   "inline_prompt": "This function creates a random session key comprising letters and digits with a specific length of 20, then sets this key in a cookie on an HttpResponse object with the specified expiration time.\nNote that: The function set the response content to \"Session key generated successfully.\" if the session key is valid.\nThe function should raise the exception for: ValueError: If the session key does not contain both letters and digits or the session key length is not equal to 20.\nThe function should output with:\n    django.http.HttpResponse: A Django HttpResponse with the session key set in a cookie.\nYou should write self-contained code starting with:\n```\nimport random\nimport string\nfrom django.http import HttpResponse\ndef task_func(request, session_expire_time):\n```"
+  },
+  {
+   "question": "Should the session key contain at least one letter and one digit, or must it contain both letters and digits in any proportion?",
+   "answer": "The session key must contain at least one letter and at least one digit.",
+   "inline_prompt": "This function creates a random session key comprising letters and digits with a specific length of 20, then sets this key in a cookie on an HttpResponse object with the specified expiration time.\nNote that: The function set the response content to \"Session key generated successfully.\" if the session key is valid.\nThe function should raise the exception for: ValueError: If the session key does not contain both letters and digits (i.e., at least one letter and at least one digit) or the session key length is not equal to 20.\nThe function should output with:\n    django.http.HttpResponse: A Django HttpResponse with the session key set in a cookie.\nYou should write self-contained code starting with:\n```\nimport random\nimport string\nfrom django.http import HttpResponse\ndef task_func(request, session_expire_time):\n```"
+  },
+  {
+   "question": "What should happen if the session key is invalid (e.g., missing letters or digits) - should it raise ValueError before setting cookie?",
+   "answer": "Yes, a ValueError should be raised before setting the cookie if the session key is invalid.",
+   "inline_prompt": "This function creates a random session key comprising letters and digits with a specific length of 20, then sets this key in a cookie on an HttpResponse object with the specified expiration time.\nNote that: The function set the response content to \"Session key generated successfully.\" if the session key is valid.\nThe function should raise the exception for: ValueError: If the session key does not contain both letters and digits or the session key length is not equal to 20; this exception is raised before any cookie is set.\nThe function should output with:\n    django.http.HttpResponse: A Django HttpResponse with the session key set in a cookie.\nYou should write self-contained code starting with:\n```\nimport random\nimport string\nfrom django.http import HttpResponse\ndef task_func(request, session_expire_time):\n```"
+  },
+  {
+   "question": "Is the session key case-sensitive, and should it include both uppercase and lowercase letters?",
+   "answer": "Not specified beyond what's given; assume standard behavior, meaning the key is case-sensitive and can include any letters from string.ascii_letters.",
+   "inline_prompt": "This function creates a random session key comprising letters and digits with a specific length of 20, then sets this key in a cookie on an HttpResponse object with the specified expiration time.\nNote that: The function set the response content to \"Session key generated successfully.\" if the session key is valid.\nThe function should raise the exception for: ValueError: If the session key does not contain both letters and digits or the session key length is not equal to 20.\nThe function should output with:\n    django.http.HttpResponse: A Django HttpResponse with the session key set in a cookie.\nYou should write self-contained code starting with:\n```\nimport random\nimport string\nfrom django.http import HttpResponse\ndef task_func(request, session_expire_time):\n```"
+  },
+  {
+   "question": "Should the cookie path or other attributes (like secure, httponly) be set?",
+   "answer": "Not specified beyond what's given; assume standard behavior (only max_age is set).",
+   "inline_prompt": "This function creates a random session key comprising letters and digits with a specific length of 20, then sets this key in a cookie on an HttpResponse object with the specified expiration time, using only the max_age parameter.\nNote that: The function set the response content to \"Session key generated successfully.\" if the session key is valid.\nThe function should raise the exception for: ValueError: If the session key does not contain both letters and digits or the session key length is not equal to 20.\nThe function should output with:\n    django.http.HttpResponse: A Django HttpResponse with the session key set in a cookie.\nYou should write self-contained code starting with:\n```\nimport random\nimport string\nfrom django.http import HttpResponse\ndef task_func(request, session_expire_time):"
+  },
+  {
+   "question": "What character set should be used for letters and digits - ASCII only or Unicode?",
+   "answer": "The session key comprises ASCII letters and digits (as from string.ascii_letters and string.digits).",
+   "inline_prompt": "This function creates a random session key comprising ASCII letters and digits with a specific length of 20, then sets this key in a cookie on an HttpResponse object with the specified expiration time.\nNote that: The function set the response content to \"Session key generated successfully.\" if the session key is valid.\nThe function should raise the exception for: ValueError: If the session key does not contain both letters and digits or the session key length is not equal to 20.\nThe function should output with:\n    django.http.HttpResponse: A Django HttpResponse with the session key set in a cookie.\nYou should write self-contained code starting with:\n```\nimport random\nimport string\nfrom django.http import HttpResponse\ndef task_func(request, session_expire_time):"
+  },
+  {
+   "question": "If the session_expire_time is zero or negative, what should happen?",
+   "answer": "Not specified beyond what's given; assume standard Django cookie behavior (zero or negative max_age results in immediate expiration).",
+   "inline_prompt": "This function creates a random session key comprising letters and digits with a specific length of 20, then sets this key in a cookie on an HttpResponse object with the specified expiration time (standard Django cookie behavior applies for zero or negative values).\nNote that: The function set the response content to \"Session key generated successfully.\" if the session key is valid.\nThe function should raise the exception for: ValueError: If the session key does not contain both letters and digits or the session key length is not equal to 20.\nThe function should output with:\n    django.http.HttpResponse: A Django HttpResponse with the session key set in a cookie.\nYou should write self-contained code starting with:\n```\nimport random\nimport string\nfrom django.http import HttpResponse\ndef task_func(request, session_expire_time):"
+  },
+  {
+   "question": "Should the response content be exactly that string, or could it include additional text?",
+   "answer": "The response content should be exactly \"Session key generated successfully.\".",
+   "inline_prompt": "This function creates a random session key comprising letters and digits with a specific length of 20, then sets this key in a cookie on an HttpResponse object with the specified expiration time.\nNote that: The function set the response content to exactly \"Session key generated successfully.\" if the session key is valid.\nThe function should raise the exception for: ValueError: If the session key does not contain both letters and digits or the session key length is not equal to 20.\nThe function should output with:\n    django.http.HttpResponse: A Django HttpResponse with the session key set in a cookie.\nYou should write self-contained code starting with:\n```\nimport random\nimport string\nfrom django.http import HttpResponse\ndef task_func(request, session_expire_time):"
+  }
+ ]
+}

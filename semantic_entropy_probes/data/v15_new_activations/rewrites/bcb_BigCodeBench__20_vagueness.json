@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/20_vagueness",
+ "candidates": [
+  {
+   "question": "Which column contains the string representations of dictionaries?",
+   "answer": "The column named 'dict_column' contains the string representations of dictionaries.",
+   "inline_prompt": "Read a CSV file, convert the string representations of dictionaries in the column named 'dict_column' to Python dictionaries, and visualize the data with Seaborn's pairplot."
+  },
+  {
+   "question": "Should the conversion handle nested dictionaries or only flat ones?",
+   "answer": "The conversion should handle any valid Python literal that ast.literal_eval can parse, including nested dictionaries.",
+   "inline_prompt": "Read a CSV file, convert the string representations of dictionaries in a column to Python dictionaries using ast.literal_eval (which handles nested structures), and visualize the data with Seaborn's pairplot."
+  },
+  {
+   "question": "What should happen if the column contains strings that are not valid dictionary representations?",
+   "answer": "ast.literal_eval will raise a ValueError for invalid strings; the function should propagate this exception as per standard behavior.",
+   "inline_prompt": "Read a CSV file, convert the string representations of dictionaries in a column to Python dictionaries, and visualize the data with Seaborn's pairplot.\nIf any string in the column is not a valid Python literal, ast.literal_eval will raise a ValueError."
+  },
+  {
+   "question": "Are there any specific columns to include or exclude in the pairplot visualization?",
+   "answer": "Not specified beyond what's given; assume standard behavior where pairplot uses all numeric columns in the DataFrame.",
+   "inline_prompt": "Read a CSV file, convert the string representations of dictionaries in a column to Python dictionaries, and visualize the data with Seaborn's pairplot."
+  },
+  {
+   "question": "Should the hue column be derived from the dictionary column as a string, or is there another intended hue variable?",
+   "answer": "The hue column should be derived from the dictionary column by converting each dictionary to its string representation.",
+   "inline_prompt": "Read a CSV file, convert the string representations of dictionaries in a specific column ('dict_column') to Python dictionaries, and visualize the data with Seaborn's pairplot.\nThe function should output with:\n    tuple: A tuple containing:\n    df (DataFrame): The DataFrame after reading and processing the CSV file.\n    ax (PairGrid): Seaborn's PairGrid object after plotting.\nYou should write self-contained code starting with:\n```\nimport ast\nimport pandas as pd\nimport seaborn as sns\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "What is the expected data type for the CSV file path input?",
+   "answer": "The CSV file path input is a string.",
+   "inline_prompt": "Read a CSV file, convert the string representations of dictionaries in a specific column ('dict_column') to Python dictionaries, and visualize the data with Seaborn's pairplot.\nThe function should output with:\n    tuple: A tuple containing:\n    df (DataFrame): The DataFrame after reading and processing the CSV file.\n    ax (PairGrid): Seaborn's PairGrid object after plotting.\nYou should write self-contained code starting with:\n```\nimport ast\nimport pandas as pd\nimport seaborn as sns\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "Is the CSV file guaranteed to have a header row?",
+   "answer": "The CSV file is assumed to have a header row, as the column name 'dict_column' is used.",
+   "inline_prompt": "Read a CSV file, convert the string representations of dictionaries in a specific column ('dict_column') to Python dictionaries, and visualize the data with Seaborn's pairplot.\nThe function should output with:\n    tuple: A tuple containing:\n    df (DataFrame): The DataFrame after reading and processing the CSV file.\n    ax (PairGrid): Seaborn's PairGrid object after plotting.\nYou should write self-contained code starting with:\n```\nimport ast\nimport pandas as pd\nimport seaborn as sns\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "Should the function handle missing values in the dictionary column?",
+   "answer": "Not specified beyond what's given; assume standard behavior (e.g., missing values may cause errors).",
+   "inline_prompt": "Read a CSV file, convert the string representations of dictionaries in a specific column ('dict_column') to Python dictionaries, and visualize the data with Seaborn's pairplot.\nThe function should output with:\n    tuple: A tuple containing:\n    df (DataFrame): The DataFrame after reading and processing the CSV file.\n    ax (PairGrid): Seaborn's PairGrid object after plotting.\nYou should write self-contained code starting with:\n```\nimport ast\nimport pandas as pd\nimport seaborn as sns\ndef task_func(csv_file):\n```"
+  }
+ ]
+}

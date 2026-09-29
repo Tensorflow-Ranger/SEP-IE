@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_141_semantic",
+ "candidates": [
+  {
+   "question": "Should the digit count condition apply to the entire file name (including extension) or only to the substring before the dot?",
+   "answer": "The digit count condition applies to the entire file name, including the extension.",
+   "inline_prompt": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should not be more than three digits ('0'-'9') in the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    \"\"\""
+  },
+  {
+   "question": "Are digits allowed in the extension substring (e.g., 'file.t2t')?",
+   "answer": "Digits are allowed in the extension substring, but the extension must exactly match one of the allowed strings ['txt', 'exe', 'dll'].",
+   "inline_prompt": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should not be more than three digits ('0'-'9') in the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be exactly one of these: ['txt', 'exe', 'dll'] (digits are not allowed in the extension).\n    \"\"\""
+  },
+  {
+   "question": "Is the file name case-sensitive? For example, does 'FILE.TXT' satisfy the extension condition?",
+   "answer": "The extension check is case-sensitive; only lowercase 'txt', 'exe', 'dll' are allowed.",
+   "inline_prompt": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should not be more than three digits ('0'-'9') in the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be exactly one of these (case-sensitive): ['txt', 'exe', 'dll']\n    \"\"\""
+  },
+  {
+   "question": "Can the substring before the dot contain characters other than letters and digits (e.g., underscores, hyphens)?",
+   "answer": "The substring before the dot can contain any characters, as long as it starts with a Latin alphabet letter and the digit count condition for the entire name is satisfied.",
+   "inline_prompt": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should not be more than three digits ('0'-'9') in the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z') (other characters are allowed after the first character).\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    \"\"\""
+  },
+  {
+   "question": "Does 'no more than three digits' mean total digit count or unique digit characters?",
+   "answer": "It means the total count of digit characters in the file's name should not exceed three.",
+   "inline_prompt": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should be no more than three characters classified as digits ('0'-'9') in \n    the file's name (i.e., the total count of digit characters should not exceed three).\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    \"\"\""
+  },
+  {
+   "question": "If the file name contains multiple dots, is it automatically invalid?",
+   "answer": "Yes, because the condition requires exactly one dot.",
+   "inline_prompt": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should be no more than three characters classified as digits ('0'-'9') in \n    the file's name.\n    - The file's name contains exactly one dot '.' (so multiple dots make it invalid).\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    \"\"\""
+  },
+  {
+   "question": "Is an empty file name (empty string) considered invalid?",
+   "answer": "Yes, an empty string is invalid because it does not contain exactly one dot and the substring before the dot would be empty.",
+   "inline_prompt": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should be no more than three characters classified as digits ('0'-'9') in \n    the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty (so an empty file name is invalid), and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    \"\"\""
+  },
+  {
+   "question": "Should the Latin alphabet check for the first character include non-English letters (e.g., '\u00e9', '\u00f1')?",
+   "answer": "No, only the characters 'a'-'z' and 'A'-'Z' are allowed, as explicitly stated.",
+   "inline_prompt": "def file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should be no more than three characters classified as digits ('0'-'9') in \n    the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z', and does not include accented or non-English letters).\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    \"\"\""
+  }
+ ]
+}

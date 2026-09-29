@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/19_semantic",
+ "candidates": [
+  {
+   "question": "If a file named 'files.zip' already exists in the directory, should the function overwrite it, raise an exception, or do something else?",
+   "answer": "The function should overwrite any existing 'files.zip' file silently.",
+   "inline_prompt": "Zips all files (not including subdirectories) located in the specified directory, overwriting any existing 'files.zip' file silently, and returns the path to the created zip file.\nNote that: Notes: The zip name is always 'files.zip'\nThe function should raise the exception for: FileNotFoundError: if the specified directory does not exist\nThe function should output with:\n    str: The path to the generated zip file. Returns None if the directory does not contain any files.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport zipfile\ndef task_func(directory):\n```"
+  },
+  {
+   "question": "Should the function include hidden files (starting with '.') in the zip?",
+   "answer": "The specification does not mention hidden files; assume standard glob behavior where '*' does not match hidden files.",
+   "inline_prompt": "Zips all files (not including subdirectories) located in the specified directory, processing any existing zip file with the same name, and returns the path to the created zip file.\nNote that: Notes: The zip name is always 'files.zip'\nThe function should raise the exception for: FileNotFoundError: if the specified directory does not exist\nThe function should output with:\n    str: The path to the generated zip file. Returns None if the directory does not contain any files.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport zipfile\ndef task_func(directory):\n```"
+  },
+  {
+   "question": "Should the function preserve the directory structure inside the zip, or flatten files to root?",
+   "answer": "The function should flatten files to the root of the zip archive, storing only the basename of each file.",
+   "inline_prompt": "Zips all files (not including subdirectories) located in the specified directory, processing any existing zip file with the same name, and returns the path to the created zip file.\nNote that: Notes: The zip name is always 'files.zip'\nThe function should raise the exception for: FileNotFoundError: if the specified directory does not exist\nThe function should output with:\n    str: The path to the generated zip file. Returns None if the directory does not contain any files.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport zipfile\ndef task_func(directory):\n```"
+  },
+  {
+   "question": "If a file is not readable (e.g., permission denied), should the function skip it, raise an error, or stop?",
+   "answer": "The specification does not address permission errors; assume standard behavior where the function will raise an OS error if it cannot read a file.",
+   "inline_prompt": "Zips all files (not including subdirectories) located in the specified directory, processing any existing zip file with the same name, and returns the path to the created zip file.\nNote that: Notes: The zip name is always 'files.zip'\nThe function should raise the exception for: FileNotFoundError: if the specified directory does not exist\nThe function should output with:\n    str: The path to the generated zip file. Returns None if the directory does not contain any files.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport zipfile\ndef task_func(directory):\n```"
+  },
+  {
+   "question": "Should the function follow symbolic links to files outside the directory?",
+   "answer": "Not specified beyond what's given; assume standard behavior where symbolic links are followed and the linked file's content is included, but the link itself is not preserved as a symlink in the zip.",
+   "inline_prompt": "Zips all files (not including subdirectories) located in the specified directory, processing any existing zip file with the same name, and returns the path to the created zip file.\nNote that: Notes: The zip name is always 'files.zip'\nThe function should raise the exception for: FileNotFoundError: if the specified directory does not exist\nThe function should output with:\n    str: The path to the generated zip file. Returns None if the directory does not contain any files.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport zipfile\ndef task_func(directory):\n```"
+  },
+  {
+   "question": "Does 'files' include only regular files, or also special files like device files?",
+   "answer": "It includes any file (i.e., non-directory) that os.path.isfile returns True for, which typically includes regular files and may include special files depending on the OS, but the specification does not exclude them.",
+   "inline_prompt": "Zips all files (not including subdirectories) located in the specified directory, processing any existing zip file with the same name, and returns the path to the created zip file.\nNote that: Notes: The zip name is always 'files.zip'\nThe function should raise the exception for: FileNotFoundError: if the specified directory does not exist\nThe function should output with:\n    str: The path to the generated zip file. Returns None if the directory does not contain any files.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport zipfile\ndef task_func(directory):\n```"
+  },
+  {
+   "question": "Should the zip file be created with a specific compression method (e.g., ZIP_STORED vs ZIP_DEFLATED)?",
+   "answer": "Not specified beyond what's given; assume standard behavior where the default compression method (typically ZIP_DEFLATED) is used.",
+   "inline_prompt": "Zips all files (not including subdirectories) located in the specified directory, processing any existing zip file with the same name, and returns the path to the created zip file.\nNote that: Notes: The zip name is always 'files.zip'\nThe function should raise the exception for: FileNotFoundError: if the specified directory does not exist\nThe function should output with:\n    str: The path to the generated zip file. Returns None if the directory does not contain any files.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport zipfile\ndef task_func(directory):\n```"
+  },
+  {
+   "question": "If the directory path contains trailing slashes, should they be normalized?",
+   "answer": "Not specified beyond what's given; assume standard behavior where the function works correctly regardless of trailing slashes, as os.path.join and glob handle them appropriately.",
+   "inline_prompt": "Zips all files (not including subdirectories) located in the specified directory, processing any existing zip file with the same name, and returns the path to the created zip file.\nNote that: Notes: The zip name is always 'files.zip'\nThe function should raise the exception for: FileNotFoundError: if the specified directory does not exist\nThe function should output with:\n    str: The path to the generated zip file. Returns None if the directory does not contain any files.\nYou should write self-contained code starting with:\n```\nimport os\nimport glob\nimport zipfile\ndef task_func(directory):\n```"
+  }
+ ]
+}

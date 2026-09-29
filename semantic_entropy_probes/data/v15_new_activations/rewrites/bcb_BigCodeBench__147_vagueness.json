@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/147_vagueness",
+ "candidates": [
+  {
+   "question": "Should the function check a single port (the 'port' parameter) for each IP, or multiple ports?",
+   "answer": "The function checks a single specified port (the 'port' parameter) for each IP.",
+   "inline_prompt": "Ambiguous: Scans a specified IP address range and checks if a specified port is open on each IP. The function returns a dictionary with IP addresses as keys and a boolean indicating the port's status (True if open, False otherwise).\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their port status (True if open).\nYou should write self-contained code starting with:\n```\nimport socket\nfrom ipaddress import IPv4Network\nfrom threading import Thread\ndef task_func(ip_range, port):\n```"
+  },
+  {
+   "question": "What timeout should be used for socket connection attempts?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Ambiguous: Scans a specified IP address range and checks if ports are open on each IP. The function returns a dictionary with IP addresses as keys and a boolean indicating the port's status (True if open, False otherwise).\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their port status (True if open).\nYou should write self-contained code starting with:\n```\nimport socket\nfrom ipaddress import IPv4Network\nfrom threading import Thread\ndef task_func(ip_range, port):\n```"
+  },
+  {
+   "question": "Should the function handle IPv6 addresses in addition to IPv4?",
+   "answer": "The function only handles IPv4 addresses as indicated by the use of IPv4Network.",
+   "inline_prompt": "Ambiguous: Scans a specified IP address range and checks if ports are open on each IP. The function returns a dictionary with IP addresses as keys and a boolean indicating the port's status (True if open, False otherwise).\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their port status (True if open).\nYou should write self-contained code starting with:\n```\nimport socket\nfrom ipaddress import IPv4Network\nfrom threading import Thread\ndef task_func(ip_range, port):\n```"
+  },
+  {
+   "question": "What should happen if the IP range is invalid (e.g., malformed CIDR)?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Ambiguous: Scans a specified IP address range and checks if ports are open on each IP. The function returns a dictionary with IP addresses as keys and a boolean indicating the port's status (True if open, False otherwise).\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their port status (True if open).\nYou should write self-contained code starting with:\n```\nimport socket\nfrom ipaddress import IPv4Network\nfrom threading import Thread\ndef task_func(ip_range, port):\n```"
+  },
+  {
+   "question": "Should the function scan ports sequentially or in parallel (as implied by threading)?",
+   "answer": "The function should scan in parallel using threading as shown in the canonical solution.",
+   "inline_prompt": "Ambiguous: Scans a specified IP address range and checks if a specified port is open on each IP, using parallel threads for scanning.\nThe function returns a dictionary with IP addresses as keys and a boolean indicating the port's status (True if open, False otherwise).\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their port status (True if open).\nYou should write self-contained code starting with:\n```\nimport socket\nfrom ipaddress import IPv4Network\nfrom threading import Thread\ndef task_func(ip_range, port):\n```"
+  },
+  {
+   "question": "What is the expected behavior if a socket connection fails due to non-port reasons (e.g., host unreachable)?",
+   "answer": "Treat any socket error (including host unreachable) as a closed port, returning False for that IP.",
+   "inline_prompt": "Ambiguous: Scans a specified IP address range and checks if a specified port is open on each IP.\nThe function returns a dictionary with IP addresses as keys and a boolean indicating the port's status (True if open, False otherwise).\nAny socket connection error (including host unreachable) should be treated as a closed port, returning False for that IP.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their port status (True if open).\nYou should write self-contained code starting with:\n```\nimport socket\nfrom ipaddress import IPv4Network\nfrom threading import Thread\ndef task_func(ip_range, port):\n```"
+  },
+  {
+   "question": "Should the function return only IPs with open ports, or all IPs in the range?",
+   "answer": "Return all IPs in the range, each with a boolean status.",
+   "inline_prompt": "Ambiguous: Scans a specified IP address range and checks if a specified port is open on each IP.\nThe function returns a dictionary with IP addresses as keys and a boolean indicating the port's status (True if open, False otherwise), containing all IPs in the given range.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their port status (True if open).\nYou should write self-contained code starting with:\n```\nimport socket\nfrom ipaddress import IPv4Network\nfrom threading import Thread\ndef task_func(ip_range, port):\n```"
+  },
+  {
+   "question": "Is the port parameter guaranteed to be an integer within valid port range (1-65535)?",
+   "answer": "Not specified beyond what's given; assume standard behavior (valid integer port).",
+   "inline_prompt": "Ambiguous: Scans a specified IP address range and checks if a specified port is open on each IP.\nThe function returns a dictionary with IP addresses as keys and a boolean indicating the port's status (True if open, False otherwise).\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their port status (True if open).\nYou should write self-contained code starting with:\n```\nimport socket\nfrom ipaddress import IPv4Network\nfrom threading import Thread\ndef task_func(ip_range, port):\n```"
+  }
+ ]
+}

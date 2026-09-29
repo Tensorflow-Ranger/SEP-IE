@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_17_semantic",
+ "candidates": [
+  {
+   "question": "Are the notes always separated by a single space, or could there be multiple spaces or other whitespace?",
+   "answer": "The notes are separated by spaces; the reference solution splits on single spaces, but you can assume standard behavior where splitting on whitespace yields the correct tokens.",
+   "inline_prompt": "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n\n\nInput to this function is a string representing musical notes in a special ASCII format.\nYour task is to parse this string and return list of integers corresponding to how many beats each note lasts.\nHere is a legend:\n'o' - whole note, lasts four beats\n'o|' - half note, lasts two beats\n'.|' - quarter note, lasts one beat\nThe notes are separated by spaces; you can split the string on whitespace to obtain each token.\n\n>>> parse_music('o o| .| o| o| .| .| .| .| o o')\n[4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]"
+  },
+  {
+   "question": "Can the input string contain invalid characters not in the legend, and if so, how should they be handled?",
+   "answer": "The input is guaranteed to contain only valid note characters as per the legend; no invalid characters will appear.",
+   "inline_prompt": "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n\n\nInput to this function is a string representing musical notes in a special ASCII format.\nYour task is to parse this string and return list of integers corresponding to how many beats each note lasts.\nHere is a legend:\n'o' - whole note, lasts four beats\n'o|' - half note, lasts two beats\n'.|' - quarter note, lasts one beat\nThe input string contains only valid note characters from this legend.\n\n>>> parse_music('o o| .| o| o| .| .| .| .| o o')\n[4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]"
+  },
+  {
+   "question": "Is the input guaranteed to be non-empty, or should empty string return an empty list?",
+   "answer": "The input can be empty; an empty string should return an empty list.",
+   "inline_prompt": "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n\n\nInput to this function is a string representing musical notes in a special ASCII format.\nYour task is to parse this string and return list of integers corresponding to how many beats each note lasts.\nHere is a legend:\n'o' - whole note, lasts four beats\n'o|' - half note, lasts two beats\n'.|' - quarter note, lasts one beat\nIf the input string is empty, return an empty list.\n\n>>> parse_music('o o| .| o| o| .| .| .| .| o o')\n[4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]"
+  },
+  {
+   "question": "Should the function be case-sensitive (e.g., 'O' vs 'o')?",
+   "answer": "The function is case-sensitive; only lowercase 'o' and the specified symbols are used.",
+   "inline_prompt": "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n\n\nInput to this function is a string representing musical notes in a special ASCII format.\nYour task is to parse this string and return list of integers corresponding to how many beats each note lasts.\nHere is a legend:\n'o' - whole note, lasts four beats\n'o|' - half note, lasts two beats\n'.|' - quarter note, lasts one beat\nThe note characters are case-sensitive and use only lowercase 'o'.\n\n>>> parse_music('o o| .| o| o| .| .| .| .| o o')\n[4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]"
+  },
+  {
+   "question": "Are there any ties or rests represented in the music string?",
+   "answer": "No, the music string contains only the three note types specified in the legend.",
+   "inline_prompt": "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n    The music string contains only these three note types.\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\""
+  },
+  {
+   "question": "Does the order of notes in the output list correspond strictly to left-to-right order in the input string?",
+   "answer": "Yes, the output list corresponds to the left-to-right order of notes in the input string.",
+   "inline_prompt": "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\""
+  },
+  {
+   "question": "Can notes be combined or overlapped (e.g., 'o.o|')?",
+   "answer": "No, notes are separated by spaces and do not overlap or combine.",
+   "inline_prompt": "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n    Notes are separated by spaces and do not overlap or combine.\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\""
+  },
+  {
+   "question": "Should the function handle fractional beats or only integer beats?",
+   "answer": "Only integer beats are used, as specified in the legend.",
+   "inline_prompt": "from typing import List\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n    Only integer beats are used.\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\""
+  }
+ ]
+}

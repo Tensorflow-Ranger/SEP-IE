@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/71_vagueness",
+ "candidates": [
+  {
+   "question": "Which column contains the data to calculate sum, mean, and standard deviation for each email?",
+   "answer": "Calculate the sum, mean, and standard deviation of the list associated with each e-mail, which is stored in the 'list' column.",
+   "inline_prompt": "Load e-mail data from a CSV file, convert it into a Pandas DataFrame, and calculate the sum, mean, and standard deviation of the list associated with each e-mail, which is stored in the 'list' column. Additionally, this function will draw a histogram of the mean values and return both the DataFrame and the histogram plot.\nThe function should output with:\n    tuple: A tuple containing two elements:\n    DataFrame: A pandas DataFrame with columns 'email', 'list', 'sum', 'mean', and 'std'.\n    Axes: A histogram plot of the mean values.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport ast\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "Should we assume the CSV has columns 'email' and 'list' as shown in the example, or should we infer column names from the file?",
+   "answer": "The CSV file contains columns named 'email' and 'list' as shown in the example; assume these column names are present.",
+   "inline_prompt": "Load e-mail data from a CSV file, convert it into a Pandas DataFrame, and calculate the sum, mean, and standard deviation of the data associated with each e-mail. The CSV file contains columns named 'email' and 'list' as shown in the example; assume these column names are present. Additionally, this function will draw a histogram of the mean values and return both the DataFrame and the histogram plot.\nThe function should output with:\n    tuple: A tuple containing two elements:\n    DataFrame: A pandas DataFrame with columns 'email', 'list', 'sum', 'mean', and 'std'.\n    Axes: A histogram plot of the mean values.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport ast\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "Is the 'list' column expected to contain string representations of lists (e.g., '[1,2,3]') that need parsing, or are they already numeric lists?",
+   "answer": "The 'list' column contains string representations of lists that need to be parsed using ast.literal_eval.",
+   "inline_prompt": "Load e-mail data from a CSV file, convert it into a Pandas DataFrame, and calculate the sum, mean, and standard deviation of the data associated with each e-mail. The 'list' column contains string representations of lists that need to be parsed using ast.literal_eval. Additionally, this function will draw a histogram of the mean values and return both the DataFrame and the histogram plot.\nThe function should output with:\n    tuple: A tuple containing two elements:\n    DataFrame: A pandas DataFrame with columns 'email', 'list', 'sum', 'mean', and 'std'.\n    Axes: A histogram plot of the mean values.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport ast\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "What should be done if the CSV contains additional columns beyond 'email' and 'list'?",
+   "answer": "Not specified beyond what's given; assume standard behavior (ignore additional columns).",
+   "inline_prompt": "Load e-mail data from a CSV file, convert it into a Pandas DataFrame, and calculate the sum, mean, and standard deviation of the data associated with each e-mail. Additionally, this function will draw a histogram of the mean values and return both the DataFrame and the histogram plot.\nThe function should output with:\n    tuple: A tuple containing two elements:\n    DataFrame: A pandas DataFrame with columns 'email', 'list', 'sum', 'mean', and 'std'.\n    Axes: A histogram plot of the mean values.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport ast\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "How should missing or NaN values in the data be handled?",
+   "answer": "The data contains no missing values; the 'list' column holds string representations of Python lists that can be safely parsed.",
+   "inline_prompt": "Load e-mail data from a CSV file, convert it into a Pandas DataFrame, and calculate the sum, mean, and standard deviation of the list associated with each e-mail. Additionally, this function will draw a histogram of the mean values and return both the DataFrame and the histogram plot.\nThe function should output with:\n    tuple: A tuple containing two elements:\n    DataFrame: A pandas DataFrame with columns 'email', 'list', 'sum', 'mean', and 'std'.\n    Axes: A histogram plot of the mean values.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport ast\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "Should the histogram include a KDE (kernel density estimate) curve?",
+   "answer": "Yes, the histogram should include a KDE curve, as shown in the canonical solution.",
+   "inline_prompt": "Load e-mail data from a CSV file, convert it into a Pandas DataFrame, and calculate the sum, mean, and standard deviation of the list associated with each e-mail. Additionally, this function will draw a histogram of the mean values (including a KDE curve) and return both the DataFrame and the histogram plot.\nThe function should output with:\n    tuple: A tuple containing two elements:\n    DataFrame: A pandas DataFrame with columns 'email', 'list', 'sum', 'mean', and 'std'.\n    Axes: A histogram plot of the mean values.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport ast\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "What are the bins or range settings for the histogram?",
+   "answer": "Not specified beyond what's given; assume standard behavior (seaborn's default bin selection).",
+   "inline_prompt": "Load e-mail data from a CSV file, convert it into a Pandas DataFrame, and calculate the sum, mean, and standard deviation of the list associated with each e-mail. Additionally, this function will draw a histogram of the mean values and return both the DataFrame and the histogram plot.\nThe function should output with:\n    tuple: A tuple containing two elements:\n    DataFrame: A pandas DataFrame with columns 'email', 'list', 'sum', 'mean', and 'std'.\n    Axes: A histogram plot of the mean values.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport ast\ndef task_func(csv_file):\n```"
+  },
+  {
+   "question": "Should the function return the plot object (Axes) or the figure?",
+   "answer": "The function returns the Axes object of the histogram plot.",
+   "inline_prompt": "Load e-mail data from a CSV file, convert it into a Pandas DataFrame, and calculate the sum, mean, and standard deviation of the list associated with each e-mail. Additionally, this function will draw a histogram of the mean values and return both the DataFrame and the histogram plot.\nThe function should output with:\n    tuple: A tuple containing two elements:\n    DataFrame: A pandas DataFrame with columns 'email', 'list', 'sum', 'mean', and 'std'.\n    Axes: A histogram plot of the mean values.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport seaborn as sns\nimport numpy as np\nimport ast\ndef task_func(csv_file):\n```"
+  }
+ ]
+}

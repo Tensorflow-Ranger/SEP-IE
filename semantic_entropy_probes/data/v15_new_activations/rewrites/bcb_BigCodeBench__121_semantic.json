@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/121_semantic",
+ "candidates": [
+  {
+   "question": "Does the seed affect the list of categories, or only the sales figures within those categories?",
+   "answer": "The seed affects only the random sales figures, not the list of categories, which is fixed as ['Electronics', 'Fashion', 'Home & Kitchen', 'Automotive', 'Sports'].",
+   "inline_prompt": "Adds an item \"12\" to a list 'my_list', simulates sales data for different categories with an optional seed for reproducibility, and returns the data along with a bar plot.\nThe sales data is a DataFrame with random sales figures for predefined categories.\nThe categories are 'Electronics', 'Fashion', 'Home & Kitchen', 'Automotive', 'Sports'.\nParameters:\nmy_list (list): The input list.\nseed (int, optional): Seed for the random number generator (default is None, which means no seed).\nReturns:\ntuple: A tuple containing a pandas DataFrame of simulated sales data and the corresponding matplotlib Axes object.\nRaises:\nTypeError: If 'my_list' is not a list."
+  },
+  {
+   "question": "What should happen if my_list is empty after appending '12'? (e.g., for random index selection)",
+   "answer": "The function assumes my_list is non-empty after appending 12; if it becomes empty, the random index selection would raise an error, but this is not a specified constraint.",
+   "inline_prompt": "Adds an item \"12\" to a list 'my_list', simulates sales data for different categories with an optional seed for reproducibility, and returns the data along with a bar plot.\nThe sales data is a DataFrame with random sales figures for predefined categories.\nThe categories are 'Electronics', 'Fashion', 'Home & Kitchen', 'Automotive', 'Sports'.\nParameters:\nmy_list (list): The input list.\nseed (int, optional): Seed for the random number generator (default is None, which means no seed).\nReturns:\ntuple: A tuple containing a pandas DataFrame of simulated sales data and the corresponding matplotlib Axes object.\nRaises:\nTypeError: If 'my_list' is not a list."
+  },
+  {
+   "question": "Should the seed default to 42 as shown in the signature, or to None as described in the docstring?",
+   "answer": "The seed defaults to 42 in the function signature, but the docstring incorrectly states None; follow the signature (default 42) as it is the implemented behavior.",
+   "inline_prompt": "Adds an item \"12\" to a list 'my_list', simulates sales data for different categories with an optional seed for reproducibility, and returns the data along with a bar plot.\nThe sales data is a DataFrame with random sales figures for predefined categories.\nThe categories are 'Electronics', 'Fashion', 'Home & Kitchen', 'Automotive', 'Sports'.\nParameters:\nmy_list (list): The input list.\nseed (int, optional): Seed for the random number generator (default is 42).\nReturns:\ntuple: A tuple containing a pandas DataFrame of simulated sales data and the corresponding matplotlib Axes object.\nRaises:\nTypeError: If 'my_list' is not a list."
+  },
+  {
+   "question": "Is the sales figure calculation exactly as in the reference solution (my_list[np.random.randint(0, len(my_list))] * np.random.randint(100, 1000))?",
+   "answer": "Yes, the sales figure calculation is exactly as specified: a random element from my_list (after appending 12) multiplied by a random integer between 100 and 999.",
+   "inline_prompt": "Adds an item \"12\" to a list 'my_list', simulates sales data for different categories with an optional seed for reproducibility, and returns the data along with a bar plot.\nThe sales data is a DataFrame with random sales figures for predefined categories, where each sales figure is computed as a random element from my_list (after appending 12) multiplied by a random integer between 100 and 999.\nThe categories are 'Electronics', 'Fashion', 'Home & Kitchen', 'Automotive', 'Sports'.\nParameters:\nmy_list (list): The input list.\nseed (int, optional): Seed for the random number generator (default is 42).\nReturns:\ntuple: A tuple containing a pandas DataFrame of simulated sales data and the corresponding matplotlib Axes object.\nRaises:\nTypeError: If 'my_list' is not a list."
+  },
+  {
+   "question": "Should the bar plot have a legend? The reference solution sets legend=False, but is that required?",
+   "answer": "The bar plot should have no legend, as the reference solution sets legend=False.",
+   "inline_prompt": "Adds an item \"12\" to a list 'my_list', simulates sales data for different categories with an optional seed for reproducibility, and returns the data along with a bar plot.\nThe sales data is a DataFrame with random sales figures for predefined categories.\nThe categories are 'Electronics', 'Fashion', 'Home & Kitchen', 'Automotive', 'Sports'.\nThe bar plot has no legend.\nThe function should raise the exception for: TypeError: If 'my_list' is not a list.\nThe function should output with: tuple: A tuple containing a pandas DataFrame of simulated sales data and the corresponding matplotlib Axes object.\nYou should write self-contained code starting with: ```\nimport pandas as pd\nimport numpy as np\ndef task_func(my_list, seed=42):"
+  },
+  {
+   "question": "What is the exact title for the plot? Is 'Category-wise Sales Data' mandatory?",
+   "answer": "The plot title must be exactly 'Category-wise Sales Data'.",
+   "inline_prompt": "Adds an item \"12\" to a list 'my_list', simulates sales data for different categories with an optional seed for reproducibility, and returns the data along with a bar plot.\nThe sales data is a DataFrame with random sales figures for predefined categories.\nThe categories are 'Electronics', 'Fashion', 'Home & Kitchen', 'Automotive', 'Sports'.\nThe bar plot has no legend and has title 'Category-wise Sales Data'.\nThe function should raise the exception for: TypeError: If 'my_list' is not a list.\nThe function should output with: tuple: A tuple containing a pandas DataFrame of simulated sales data and the corresponding matplotlib Axes object.\nYou should write self-contained code starting with: ```\nimport pandas as pd\nimport numpy as np\ndef task_func(my_list, seed=42):"
+  },
+  {
+   "question": "Are the categories always in the order: Electronics, Fashion, Home & Kitchen, Automotive, Sports?",
+   "answer": "Yes, the categories are always exactly those five in that order.",
+   "inline_prompt": "Adds an item \"12\" to a list 'my_list', simulates sales data for different categories with an optional seed for reproducibility, and returns the data along with a bar plot.\nThe sales data is a DataFrame with random sales figures for predefined categories.\nThe categories are always exactly 'Electronics', 'Fashion', 'Home & Kitchen', 'Automotive', 'Sports' in that order.\nThe bar plot has no legend and has title 'Category-wise Sales Data'.\nThe function should raise the exception for: TypeError: If 'my_list' is not a list.\nThe function should output with: tuple: A tuple containing a pandas DataFrame of simulated sales data and the corresponding matplotlib Axes object.\nYou should write self-contained code starting with: ```\nimport pandas as pd\nimport numpy as np\ndef task_func(my_list, seed=42):"
+  },
+  {
+   "question": "Should the function modify the input list my_list in place by appending '12', or work on a copy?",
+   "answer": "The function must modify the input list my_list in place by appending the integer 12.",
+   "inline_prompt": "Adds an item \"12\" to a list 'my_list', simulates sales data for different categories with an optional seed for reproducibility, and returns the data along with a bar plot.\nThe function modifies the input list my_list in place by appending the integer 12.\nThe sales data is a DataFrame with random sales figures for predefined categories.\nThe categories are always exactly 'Electronics', 'Fashion', 'Home & Kitchen', 'Automotive', 'Sports' in that order.\nThe bar plot has no legend and has title 'Category-wise Sales Data'.\nThe function should raise the exception for: TypeError: If 'my_list' is not a list.\nThe function should output with: tuple: A tuple containing a pandas DataFrame of simulated sales data and the corresponding matplotlib Axes object.\nYou should write self-contained code starting with: ```\nimport pandas as pd\nimport numpy as np\ndef task_func(my_list, seed=42):"
+  }
+ ]
+}

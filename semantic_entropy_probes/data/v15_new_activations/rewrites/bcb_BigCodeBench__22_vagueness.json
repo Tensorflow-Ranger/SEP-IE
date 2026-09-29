@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/22_vagueness",
+ "candidates": [
+  {
+   "question": "Should the sample be random, or should it be taken sequentially (e.g., first K elements) from the combined list?",
+   "answer": "The sample should be random, as indicated by the use of random.choices in the canonical solution.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a random sample of size K from the combined list, and calculate the frequency of each element in the sample."
+  },
+  {
+   "question": "If K is larger than the combined list length, should we sample with replacement, or should we cap K at the list length?",
+   "answer": "Sample with replacement, as random.choices does by default.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a random sample of size K from the combined list, with replacement if K exceeds the list length, and calculate the frequency of each element in the sample."
+  },
+  {
+   "question": "Should the sample be weighted (e.g., by element frequency in combined list) or uniform?",
+   "answer": "The sample should be uniform (equal probability for each element in the combined list), as random.choices uses uniform weights by default.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a uniform random sample of size K from the combined list, and calculate the frequency of each element in the sample."
+  },
+  {
+   "question": "If an element appears multiple times in the combined list, should sampling treat each occurrence separately?",
+   "answer": "Yes, each occurrence is a separate item in the list, so sampling treats them independently.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a random sample of size K from the combined list, and calculate the frequency of each element in the sample."
+  },
+  {
+   "question": "Should the sample be taken before or after removing None values from zip_longest?",
+   "answer": "The sample is taken after removing None values from zip_longest, i.e., from the combined list of alternating elements where missing counterparts are omitted.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own, and None values from zip_longest are omitted. Then, create a sample of size K from the combined list, and calculate the frequency of each element in the sample."
+  },
+  {
+   "question": "If K is zero or negative, what should be returned? An empty Counter or raise an error?",
+   "answer": "Not specified beyond what's given; assume standard behavior, i.e., K is expected to be a positive integer as per the default K=10, but for K=0 an empty Counter is returned, and for negative K the behavior is undefined.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a sample of size K from the combined list, and calculate the frequency of each element in the sample. K is expected to be a non-negative integer; for K=0 an empty Counter is returned."
+  },
+  {
+   "question": "Should the alternating combine preserve order strictly (l1[0], l2[0], l1[1], l2[1], ...) as described?",
+   "answer": "Yes, the alternating combine preserves order strictly as described, using zip_longest to pair elements sequentially.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths, preserving order strictly as l1[0], l2[0], l1[1], l2[1], etc. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a sample of size K from the combined list, and calculate the frequency of each element in the sample."
+  },
+  {
+   "question": "Are the input lists guaranteed to contain only hashable types, or should we handle unhashable types?",
+   "answer": "The input lists are assumed to contain only hashable types, as required for Counter to work; handling unhashable types is not specified.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a sample of size K from the combined list, and calculate the frequency of each element in the sample. The lists are assumed to contain only hashable types."
+  }
+ ]
+}

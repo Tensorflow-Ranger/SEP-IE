@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/36_vagueness",
+ "candidates": [
+  {
+   "question": "Does 'do not match' mean elements not equal to any value in TARGET_VALUES, or elements not present in TARGET_VALUES?",
+   "answer": "Replace elements that are not present in the TARGET_VALUES array with zeros.",
+   "inline_prompt": "Replace all elements in DataFrame columns that do not exist in the TARGET_VALUES array with zeros, then perform a Box-Cox transformation on each column (if data is not constant, add 1 to account for zeros) and display the resulting KDE plots."
+  },
+  {
+   "question": "Should the Box-Cox transformation be applied to each column individually, even if a column becomes all zeros after replacement?",
+   "answer": "If a column's data is constant (e.g., all zeros after replacement), it is not transformed and remains unchanged.",
+   "inline_prompt": "Replace all elements in DataFrame columns that do not match the TARGET_VALUES array with zeros, then perform a Box-Cox transformation on each column (if data is not constant, add 1 to account for zeros) and display the resulting KDE plots."
+  },
+  {
+   "question": "What should happen if a column contains negative values?",
+   "answer": "The input DataFrame should contain only positive values; negative or zero values will raise a ValueError.",
+   "inline_prompt": "Replace all elements in DataFrame columns that do not match the TARGET_VALUES array with zeros, then perform a Box-Cox transformation on each column (if data is not constant, add 1 to account for zeros) and display the resulting KDE plots.\nThe input pandas DataFrame must contain only positive values."
+  },
+  {
+   "question": "Is the KDE plot supposed to include all columns, or only those that were transformed?",
+   "answer": "The KDE plot includes only columns that were transformed (i.e., those whose data was not constant).",
+   "inline_prompt": "Replace all elements in DataFrame columns that do not match the TARGET_VALUES array with zeros, then perform a Box-Cox transformation on each column (if data is not constant, add 1 to account for zeros) and display the resulting KDE plots.\nKDE plots are displayed only for columns that underwent transformation."
+  },
+  {
+   "question": "Should the transformation add 1 to all data before Box-Cox, or only to non-constant columns?",
+   "answer": "Add 1 to each column's data before Box-Cox only if the column's data is not constant.",
+   "inline_prompt": "Replace all elements in DataFrame columns that do not exist in the TARGET_VALUES array with zeros, then perform a Box-Cox transformation on each column (if data is not constant, add 1 to account for zeros) and display the resulting KDE plots.\nThe function should output with:\n    pandas.DataFrame: The transformed DataFrame after Box-Cox transformation.\n    matplotlib.figure.Figure: Figure containing KDE plots of the transformed columns.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nfrom scipy import stats\nimport matplotlib.pyplot as plt\nTARGET_VALUES = np.array([1, 3, 4])\ndef task_func(df):\n```"
+  },
+  {
+   "question": "What if TARGET_VALUES contains non-integer values?",
+   "answer": "The TARGET_VALUES array is given as np.array([1, 3, 4]), containing only integers; assume the input DataFrame values are positive numbers and the matching is based on exact equality.",
+   "inline_prompt": "Replace all elements in DataFrame columns that do not exist in the TARGET_VALUES array with zeros, then perform a Box-Cox transformation on each column (if data is not constant, add 1 to account for zeros) and display the resulting KDE plots.\nThe function should output with:\n    pandas.DataFrame: The transformed DataFrame after Box-Cox transformation.\n    matplotlib.figure.Figure: Figure containing KDE plots of the transformed columns.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nfrom scipy import stats\nimport matplotlib.pyplot as plt\nTARGET_VALUES = np.array([1, 3, 4])\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the function handle missing values (NaN) in the DataFrame?",
+   "answer": "The specification does not mention NaN handling; assume the input DataFrame contains only positive values and no missing values.",
+   "inline_prompt": "Replace all elements in DataFrame columns that do not exist in the TARGET_VALUES array with zeros, then perform a Box-Cox transformation on each column (if data is not constant, add 1 to account for zeros) and display the resulting KDE plots.\nThe function should output with:\n    pandas.DataFrame: The transformed DataFrame after Box-Cox transformation.\n    matplotlib.figure.Figure: Figure containing KDE plots of the transformed columns.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nfrom scipy import stats\nimport matplotlib.pyplot as plt\nTARGET_VALUES = np.array([1, 3, 4])\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Is the output DataFrame required to have the same column order as input?",
+   "answer": "Yes, the output DataFrame should have the same column order as the input.",
+   "inline_prompt": "Replace all elements in DataFrame columns that do not exist in the TARGET_VALUES array with zeros, then perform a Box-Cox transformation on each column (if data is not constant, add 1 to account for zeros) and display the resulting KDE plots.\nThe function should output with:\n    pandas.DataFrame: The transformed DataFrame after Box-Cox transformation, with columns in the same order as the input.\n    matplotlib.figure.Figure: Figure containing KDE plots of the transformed columns.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nfrom scipy import stats\nimport matplotlib.pyplot as plt\nTARGET_VALUES = np.array([1, 3, 4])\ndef task_func(df):\n```"
+  }
+ ]
+}

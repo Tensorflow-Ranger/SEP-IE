@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/50_semantic",
+ "candidates": [
+  {
+   "question": "Should the Unix timestamp be interpreted as seconds since the epoch (1970-01-01 UTC), or could it be in milliseconds?",
+   "answer": "The Unix timestamp is in seconds since the epoch (1970-01-01 UTC).",
+   "inline_prompt": "Convert a Unix timestamp (seconds since 1970-01-01 UTC) to date objects in different time zones using their local or UTC time, create a Pandas DataFrame, and draw a bar chart."
+  },
+  {
+   "question": "Should the bar chart use the formatted datetime strings for the bar heights, or the raw datetime objects?",
+   "answer": "The bar chart should use the raw datetime objects (converted to datetime64) for the bar heights, not the formatted strings.",
+   "inline_prompt": "Convert a Unix timestamp to date objects in different time zones using their local or UTC time, create a Pandas DataFrame, and draw a bar chart. - You should use the time zones mentionned in the constant TIMEZONES. - The date format should be as DATE_FORMAT. - The DataFrame should have 'Timezone' and 'Datetime' as column names, where 'Datetime' contains datetime64 objects. - The x-label of the bar plot should be set to 'Timezone' while the y-label should be set to 'Datetime'. - The plot title should be \"Datetime = f(Timezone)\""
+  },
+  {
+   "question": "Is the timestamp guaranteed to be an integer, or could it be a float?",
+   "answer": "The timestamp is guaranteed to be an integer.",
+   "inline_prompt": "Convert a Unix timestamp (integer) to date objects in different time zones using their local or UTC time, create a Pandas DataFrame, and draw a bar chart."
+  },
+  {
+   "question": "Should the 'Datetime' column in the DataFrame contain timezone-aware datetime objects, or naive ones?",
+   "answer": "The 'Datetime' column should contain naive datetime objects (without timezone information).",
+   "inline_prompt": "Convert a Unix timestamp to date objects in different time zones using their local or UTC time, create a Pandas DataFrame, and draw a bar chart. - You should use the time zones mentionned in the constant TIMEZONES. - The date format should be as DATE_FORMAT. - The DataFrame should have 'Timezone' and 'Datetime' as column names, where 'Datetime' contains naive datetime objects. - The x-label of the bar plot should be set to 'Timezone' while the y-label should be set to 'Datetime'. - The plot title should be \"Datetime = f(Timezone)\""
+  },
+  {
+   "question": "Are we allowed to use pandas' built-in timezone conversion, or must we use pytz?",
+   "answer": "You must use pytz as per the canonical solution and the provided imports.",
+   "inline_prompt": "Convert a Unix timestamp to date objects in different time zones using their local or UTC time, create a Pandas DataFrame, and draw a bar chart. - You should use the time zones mentionned in the constant TIMEZONES. - The date format should be as DATE_FORMAT. - The DataFrame should have 'Timezone' and 'Datetime' as column names. - The x-label of the bar plot should be set to 'Timezone' while the y-label should be set to 'Datetime'. - The plot title should be \"Datetime = f(Timezone)\"\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame containing the datetime in different timezones.\n    Axes: A matplotlib Axes object for the generated bar chart.\nYou should write self-contained code starting with:\n```\nfrom datetime import datetime\nimport pandas as pd\nimport pytz\nimport matplotlib.pyplot as plt\n# Constants\nDATE_FORMAT = \"%Y-%m-%d %H:%M:%S\"\nTIMEZONES = [\n    \"America/New_York\",\n    \"Europe/London\",\n    \"Asia/Shanghai\",\n    \"Asia/Tokyo\",\n    \"Australia/Sydney\",\n]\ndef task_func(timestamp):"
+  },
+  {
+   "question": "Should the bar chart have a legend?",
+   "answer": "The bar chart should not have a legend, as per the canonical solution which sets legend=False.",
+   "inline_prompt": "Convert a Unix timestamp to date objects in different time zones using their local or UTC time, create a Pandas DataFrame, and draw a bar chart. - You should use the time zones mentionned in the constant TIMEZONES. - The date format should be as DATE_FORMAT. - The DataFrame should have 'Timezone' and 'Datetime' as column names. - The x-label of the bar plot should be set to 'Timezone' while the y-label should be set to 'Datetime'. - The plot title should be \"Datetime = f(Timezone)\". The bar chart should not have a legend.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame containing the datetime in different timezones.\n    Axes: A matplotlib Axes object for the generated bar chart.\nYou should write self-contained code starting with:\n```\nfrom datetime import datetime\nimport pandas as pd\nimport pytz\nimport matplotlib.pyplot as plt\n# Constants\nDATE_FORMAT = \"%Y-%m-%d %H:%M:%S\"\nTIMEZONES = [\n    \"America/New_York\",\n    \"Europe/London\",\n    \"Asia/Shanghai\",\n    \"Asia/Tokyo\",\n    \"Australia/Sydney\",\n]\ndef task_func(timestamp):"
+  },
+  {
+   "question": "What should happen if the timestamp is negative (pre-1970)?",
+   "answer": "The timestamp is a standard Unix timestamp; the function should handle negative values as per Python's datetime.fromtimestamp behavior, which supports negative timestamps for dates before 1970.",
+   "inline_prompt": "Convert a Unix timestamp to date objects in different time zones using their local or UTC time, create a Pandas DataFrame, and draw a bar chart. - You should use the time zones mentionned in the constant TIMEZONES. - The date format should be as DATE_FORMAT. - The DataFrame should have 'Timezone' and 'Datetime' as column names. - The x-label of the bar plot should be set to 'Timezone' while the y-label should be set to 'Datetime'. - The plot title should be \"Datetime = f(Timezone)\"\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame containing the datetime in different timezones.\n    Axes: A matplotlib Axes object for the generated bar chart.\nYou should write self-contained code starting with:\n```\nfrom datetime import datetime\nimport pandas as pd\nimport pytz\nimport matplotlib.pyplot as plt\n# Constants\nDATE_FORMAT = \"%Y-%m-%d %H:%M:%S\"\nTIMEZONES = [\n    \"America/New_York\",\n    \"Europe/London\",\n    \"Asia/Shanghai\",\n    \"Asia/Tokyo\",\n    \"Australia/Sydney\",\n]\ndef task_func(timestamp):"
+  },
+  {
+   "question": "Should the x-axis labels (timezone names) be rotated or formatted in a specific way?",
+   "answer": "Not specified beyond what's given; assume standard behavior (no rotation or special formatting).",
+   "inline_prompt": "Convert a Unix timestamp to date objects in different time zones using their local or UTC time, create a Pandas DataFrame, and draw a bar chart. - You should use the time zones mentionned in the constant TIMEZONES. - The date format should be as DATE_FORMAT. - The DataFrame should have 'Timezone' and 'Datetime' as column names. - The x-label of the bar plot should be set to 'Timezone' while the y-label should be set to 'Datetime'. - The plot title should be \"Datetime = f(Timezone)\"\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame containing the datetime in different timezones.\n    Axes: A matplotlib Axes object for the generated bar chart.\nYou should write self-contained code starting with:\n```\nfrom datetime import datetime\nimport pandas as pd\nimport pytz\nimport matplotlib.pyplot as plt\n# Constants\nDATE_FORMAT = \"%Y-%m-%d %H:%M:%S\"\nTIMEZONES = [\n    \"America/New_York\",\n    \"Europe/London\",\n    \"Asia/Shanghai\",\n    \"Asia/Tokyo\",\n    \"Australia/Sydney\",\n]\ndef task_func(timestamp):"
+  }
+ ]
+}

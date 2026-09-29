@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/151_semantic",
+ "candidates": [
+  {
+   "question": "Should MinMax scaling be applied independently per key (each column scaled to its own min/max) or collectively across all specified keys (all columns scaled together using a single min/max)?",
+   "answer": "MinMax scaling is applied collectively across all specified keys using a single min/max, as shown in the canonical solution where scaler.fit_transform(df) scales the entire DataFrame.",
+   "inline_prompt": "Normalize data specified by keys in a dictionary using MinMax scaling and plot the results, treating each key's data combined across all specified keys (scaled collectively). This function is useful for preprocessing data for machine learning models where data scaling can impact performance.\nThe function should raise the exception for: ValueError: If no keys in `data_keys` are found in `data_dict`.\nThe function should output with:\n    tuple: A tuple containing a DataFrame of normalized values and a matplotlib Axes object representing a plot of the\n    normalized data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import MinMaxScaler\ndef task_func(data_dict, data_keys):\n```"
+  },
+  {
+   "question": "What should happen if data_keys contains duplicates?",
+   "answer": "Not specified beyond what's given; assume standard behavior where duplicates are handled as per pandas DataFrame construction, which would create duplicate column names.",
+   "inline_prompt": "Normalize data specified by keys in a dictionary using MinMax scaling and plot the results, treating each key's data separately or combined depending on the scaling method. This function is useful for preprocessing data for machine learning models where data scaling can impact performance.\nThe function should raise the exception for: ValueError: If no keys in `data_keys` are found in `data_dict`.\nThe function should output with:\n    tuple: A tuple containing a DataFrame of normalized values and a matplotlib Axes object representing a plot of the\n    normalized data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import MinMaxScaler\ndef task_func(data_dict, data_keys):\n```"
+  },
+  {
+   "question": "Should the plot be a line plot (as shown in example) or another type (e.g., bar, scatter)?",
+   "answer": "The plot should be a line plot, as shown in the canonical solution with normalized_df.plot(kind='line').",
+   "inline_prompt": "Normalize data specified by keys in a dictionary using MinMax scaling and plot the results, treating each key's data separately or combined depending on the scaling method. This function is useful for preprocessing data for machine learning models where data scaling can impact performance.\nThe function should raise the exception for: ValueError: If no keys in `data_keys` are found in `data_dict`.\nThe function should output with:\n    tuple: A tuple containing a DataFrame of normalized values and a matplotlib Axes object representing a plot of the\n    normalized data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import MinMaxScaler\ndef task_func(data_dict, data_keys):\n```"
+  },
+  {
+   "question": "If a key's data list has varying lengths across keys, should the function pad/truncate or raise an error?",
+   "answer": "Not specified beyond what's given; assume standard behavior where pandas DataFrame construction will raise an error if lists have different lengths.",
+   "inline_prompt": "Normalize data specified by keys in a dictionary using MinMax scaling and plot the results, treating each key's data separately or combined depending on the scaling method. This function is useful for preprocessing data for machine learning models where data scaling can impact performance.\nThe function should raise the exception for: ValueError: If no keys in `data_keys` are found in `data_dict`.\nThe function should output with:\n    tuple: A tuple containing a DataFrame of normalized values and a matplotlib Axes object representing a plot of the\n    normalized data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import MinMaxScaler\ndef task_func(data_dict, data_keys):\n```"
+  },
+  {
+   "question": "Should the function handle non-numeric values in the lists, and if so, how?",
+   "answer": "The specification does not address non-numeric values; assume standard behavior where non-numeric values would cause an error during MinMax scaling.",
+   "inline_prompt": "Normalize data specified by keys in a dictionary using MinMax scaling and plot the results. This function is useful for preprocessing data for machine learning models where data scaling can impact performance.\nThe function should raise the exception for: ValueError: If no keys in `data_keys` are found in `data_dict`.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import MinMaxScaler\ndef task_func(data_dict, data_keys):\n```"
+  },
+  {
+   "question": "Is the plot required to have specific title, labels, or styling beyond the example?",
+   "answer": "The plot should have a title 'Normalized Data', y-label 'Normalized Value', and x-label 'Index' as shown in the canonical solution.",
+   "inline_prompt": "Normalize data specified by keys in a dictionary using MinMax scaling and plot the results. This function is useful for preprocessing data for machine learning models where data scaling can impact performance.\nThe function should raise the exception for: ValueError: If no keys in `data_keys` are found in `data_dict`.\nThe function should output with:\n    tuple: A tuple containing a DataFrame of normalized values and a matplotlib Axes object representing a plot of the\n    normalized data, with title 'Normalized Data', y-label 'Normalized Value', and x-label 'Index'.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import MinMaxScaler\ndef task_func(data_dict, data_keys):\n```"
+  },
+  {
+   "question": "Should the function return the Axes object with specific modifications (grid, legend)?",
+   "answer": "The specification does not require grid or legend modifications; assume standard behavior without additional styling.",
+   "inline_prompt": "Normalize data specified by keys in a dictionary using MinMax scaling and plot the results. This function is useful for preprocessing data for machine learning models where data scaling can impact performance.\nThe function should raise the exception for: ValueError: If no keys in `data_keys` are found in `data_dict`.\nThe function should output with:\n    tuple: A tuple containing a DataFrame of normalized values and a matplotlib Axes object representing a plot of the\n    normalized data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import MinMaxScaler\ndef task_func(data_dict, data_keys):\n```"
+  },
+  {
+   "question": "What if data_dict contains keys not in data_keys? Should they be ignored or included in scaling?",
+   "answer": "Only the keys specified in data_keys should be included in the scaling; other keys in data_dict should be ignored.",
+   "inline_prompt": "Normalize data specified by keys in a dictionary using MinMax scaling and plot the results, treating each key's data separately or combined depending on the scaling method. This function is useful for preprocessing data for machine learning models where data scaling can impact performance.\nOnly the keys specified in data_keys should be included in the scaling; other keys in data_dict should be ignored.\nThe function should raise the exception for: ValueError: If no keys in `data_keys` are found in `data_dict`.\nThe function should output with:\n    tuple: A tuple containing a DataFrame of normalized values and a matplotlib Axes object representing a plot of the\n    normalized data.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import MinMaxScaler\ndef task_func(data_dict, data_keys):\n```"
+  }
+ ]
+}

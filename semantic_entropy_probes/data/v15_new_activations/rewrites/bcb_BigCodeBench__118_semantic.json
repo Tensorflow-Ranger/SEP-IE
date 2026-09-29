@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/118_semantic",
+ "candidates": [
+  {
+   "question": "What defines the 'most recent version' of a file? Is it based on modification time (mtime), creation time (ctime), or something else?",
+   "answer": "The phrase about preserving the most recent version is ambiguous; the intended specification simply copies all JSON files from the source directory to the backup directory without any duplicate-resolution logic.",
+   "inline_prompt": "Scans a specified directory for JSON files and copies them to a backup directory, preserving only the most recent version of each file if duplicates exist. If the backup directory does not exist, it is created. The function returns a list of paths to the copied files in the backup directory.\nNote that: The function assumes that the source directory exists and contains JSON files.\nThe function should output with:\n    list: Paths to the copied JSON files in the backup directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\ndef task_func(directory, backup_directory):\n```"
+  },
+  {
+   "question": "If a file with the same name already exists in the backup directory, should it be overwritten, skipped, or renamed?",
+   "answer": "The intended behavior is to overwrite any existing file in the backup directory with the same name.",
+   "inline_prompt": "Scans a specified directory for JSON files and copies them to a backup directory, preserving only the most recent version of each file if duplicates exist. If the backup directory does not exist, it is created. The function returns a list of paths to the copied files in the backup directory.\nNote that: The function assumes that the source directory exists and contains JSON files.\nThe function should output with:\n    list: Paths to the copied JSON files in the backup directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\ndef task_func(directory, backup_directory):\n```"
+  },
+  {
+   "question": "Should the function preserve the directory structure (subfolders) of JSON files from the source, or flatten all files into the backup directory?",
+   "answer": "The function should flatten all JSON files directly into the backup directory without preserving subdirectory structure.",
+   "inline_prompt": "Scans a specified directory for JSON files and copies them to a backup directory, preserving only the most recent version of each file if duplicates exist. If the backup directory does not exist, it is created. The function returns a list of paths to the copied files in the backup directory.\nNote that: The function assumes that the source directory exists and contains JSON files.\nThe function should output with:\n    list: Paths to the copied JSON files in the backup directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\ndef task_func(directory, backup_directory):\n```"
+  },
+  {
+   "question": "Are symlinks to JSON files in the source directory followed and copied as regular files, or should they be skipped or copied as links?",
+   "answer": "Symlinks should be followed and the target JSON files copied as regular files.",
+   "inline_prompt": "Scans a specified directory for JSON files and copies them to a backup directory, preserving only the most recent version of each file if duplicates exist. If the backup directory does not exist, it is created. The function returns a list of paths to the copied files in the backup directory.\nNote that: The function assumes that the source directory exists and contains JSON files.\nThe function should output with:\n    list: Paths to the copied JSON files in the backup directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\ndef task_func(directory, backup_directory):\n```"
+  },
+  {
+   "question": "Should the function recursively scan subdirectories for JSON files, or only look at the top-level directory?",
+   "answer": "The function only scans the top-level directory for JSON files, not subdirectories.",
+   "inline_prompt": "Scans a specified directory for JSON files (only at the top level, not recursively) and copies them to a backup directory, preserving only the most recent version of each file if duplicates exist. If the backup directory does not exist, it is created. The function returns a list of paths to the copied files in the backup directory.\nNote that: The function assumes that the source directory exists and contains JSON files.\nThe function should output with:\n    list: Paths to the copied JSON files in the backup directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\ndef task_func(directory, backup_directory):\n```"
+  },
+  {
+   "question": "If duplicate filenames exist in the source directory (e.g., same name in different subfolders), how should they be handled?",
+   "answer": "Duplicate filenames are not relevant as only the top-level directory is scanned, so each filename is unique in that context.",
+   "inline_prompt": "Scans a specified directory for JSON files and copies them to a backup directory, preserving only the most recent version of each file if duplicates exist. If the backup directory does not exist, it is created. The function returns a list of paths to the copied files in the backup directory.\nNote that: The function assumes that the source directory exists and contains JSON files.\nThe function should output with:\n    list: Paths to the copied JSON files in the backup directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\ndef task_func(directory, backup_directory):\n```"
+  },
+  {
+   "question": "What should happen if the source directory is empty or contains no JSON files? Should it return an empty list or raise an error?",
+   "answer": "If the source directory contains no JSON files, the function returns an empty list.",
+   "inline_prompt": "Scans a specified directory for JSON files and copies them to a backup directory, preserving only the most recent version of each file if duplicates exist. If the backup directory does not exist, it is created. The function returns a list of paths to the copied files in the backup directory.\nNote that: The function assumes that the source directory exists and contains JSON files. If no JSON files are found, an empty list is returned.\nThe function should output with:\n    list: Paths to the copied JSON files in the backup directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\ndef task_func(directory, backup_directory):\n```"
+  },
+  {
+   "question": "Should the file copying preserve metadata (e.g., timestamps, permissions) or just the content?",
+   "answer": "Not specified beyond what's given; assume standard behavior (shutil.copy preserves metadata).",
+   "inline_prompt": "Scans a specified directory for JSON files and copies them to a backup directory, preserving only the most recent version of each file if duplicates exist. If the backup directory does not exist, it is created. The function returns a list of paths to the copied files in the backup directory.\nNote that: The function assumes that the source directory exists and contains JSON files.\nThe function should output with:\n    list: Paths to the copied JSON files in the backup directory.\nYou should write self-contained code starting with:\n```\nimport os\nimport shutil\ndef task_func(directory, backup_directory):\n```"
+  }
+ ]
+}

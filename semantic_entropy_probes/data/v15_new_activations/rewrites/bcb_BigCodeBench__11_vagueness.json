@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/11_vagueness",
+ "candidates": [
+  {
+   "question": "Should the size of the list be the sum of all integer values across all tuples, or should we create a separate list for each integer value?",
+   "answer": "The size of the list equals the sum of all integer values across all tuples.",
+   "inline_prompt": "Converts elements in 'T1', a tuple of tuples containing string representations of integers, to integers and creates a list of random integers. The size of the list equals the sum of these integers. Returns the 25th, 50th, and 75th percentiles of this list.\nThe function should output with:\n    tuple: A tuple (p25, p50, p75) representing the 25th, 50th, and 75th percentiles of the list.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport itertools\nimport random\ndef task_func(T1, max_value=100):\n```"
+  },
+  {
+   "question": "What percentile method should be used (e.g., linear, nearest, midpoint)?",
+   "answer": "Not specified beyond what's given; assume standard behavior (numpy's default linear interpolation).",
+   "inline_prompt": "Converts elements in 'T1', a tuple of tuples containing string representations of integers, to integers and creates a list of random integers. The size of the list equals the values of these integers. Returns the 25th, 50th, and 75th percentiles of this list.\nThe function should output with:\n    tuple: A tuple (p25, p50, p75) representing the 25th, 50th, and 75th percentiles of the list.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport itertools\nimport random\ndef task_func(T1, max_value=100):\n```"
+  },
+  {
+   "question": "Should the random integers be generated with a uniform distribution over [0, max_value) or [0, max_value]?",
+   "answer": "The random integers are generated in the range [0, max_value] (inclusive).",
+   "inline_prompt": "Converts elements in 'T1', a tuple of tuples containing string representations of integers, to integers and creates a list of random integers. The size of the list equals the values of these integers. Returns the 25th, 50th, and 75th percentiles of this list.\nThe function should output with:\n    tuple: A tuple (p25, p50, p75) representing the 25th, 50th, and 75th percentiles of the list.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport itertools\nimport random\ndef task_func(T1, max_value=100):\n```"
+  },
+  {
+   "question": "Is the random number generation seeded or should it be deterministic?",
+   "answer": "Not specified beyond what's given; assume standard behavior (no explicit seeding).",
+   "inline_prompt": "Converts elements in 'T1', a tuple of tuples containing string representations of integers, to integers and creates a list of random integers. The size of the list equals the values of these integers. Returns the 25th, 50th, and 75th percentiles of this list.\nThe function should output with:\n    tuple: A tuple (p25, p50, p75) representing the 25th, 50th, and 75th percentiles of the list.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport itertools\nimport random\ndef task_func(T1, max_value=100):\n```"
+  },
+  {
+   "question": "How should we handle empty tuples or empty strings in T1?",
+   "answer": "Empty strings are not valid integer representations and would cause a conversion error; empty inner tuples contribute zero to the sum.",
+   "inline_prompt": "Converts elements in 'T1', a tuple of tuples containing string representations of integers, to integers and creates a list of random integers. The size of the list equals the sum of these integers. Empty inner tuples contribute zero to the sum, and empty strings are invalid. Returns the 25th, 50th, and 75th percentiles of this list."
+  },
+  {
+   "question": "Should the percentiles be returned as floats or integers?",
+   "answer": "The percentiles are returned as floats, as per numpy.percentile's default behavior.",
+   "inline_prompt": "Converts elements in 'T1', a tuple of tuples containing string representations of integers, to integers and creates a list of random integers. The size of the list equals the sum of these integers. Returns the 25th, 50th, and 75th percentiles of this list as floats."
+  },
+  {
+   "question": "What should happen if the sum of integers is zero?",
+   "answer": "If the sum is zero, the list of random integers is empty, and numpy.percentile on an empty array raises an error, which is the expected behavior.",
+   "inline_prompt": "Converts elements in 'T1', a tuple of tuples containing string representations of integers, to integers and creates a list of random integers. The size of the list equals the sum of these integers. Returns the 25th, 50th, and 75th percentiles of this list.\nIf the sum is zero, the list is empty and numpy.percentile will raise an error."
+  },
+  {
+   "question": "Are negative integers allowed in the string representations?",
+   "answer": "The specification does not restrict the integers to non-negative; standard integer conversion applies, but the sum must be non-negative for the range call.",
+   "inline_prompt": "Converts elements in 'T1', a tuple of tuples containing string representations of integers, to integers and creates a list of random integers. The size of the list equals the sum of these integers, which must be non-negative. Returns the 25th, 50th, and 75th percentiles of this list."
+  }
+ ]
+}

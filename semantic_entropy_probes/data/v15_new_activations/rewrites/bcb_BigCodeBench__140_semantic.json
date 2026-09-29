@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/140_semantic",
+ "candidates": [
+  {
+   "question": "Should missing values in the specified columns be filled with zero before standardization, or should columns with any missing values be excluded entirely?",
+   "answer": "Missing values are not filled with zero; the function standardizes columns as-is using StandardScaler, which handles missing values according to its default behavior (raising an error if any NaN values are present).",
+   "inline_prompt": "Standardize specified numeric columns in a dataframe, treating empty columns as zero or excluding them.\nMissing values are not filled with zero; the function standardizes columns as-is using StandardScaler, which handles missing values according to its default behavior (raising an error if any NaN values are present).\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, 'cols' is not a list, or columns in 'cols' don't exist in 'df'.\nThe function should output with:\n    DataFrame: The dataframe with standardized columns.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import StandardScaler\ndef task_func(df, cols):"
+  },
+  {
+   "question": "If a column has all missing values, should it be standardized (resulting in NaN/zero) or excluded?",
+   "answer": "The function standardizes columns as-is using StandardScaler, which will raise an error if a column has all missing values (or any missing values) because StandardScaler cannot compute mean and standard deviation.",
+   "inline_prompt": "Standardize specified numeric columns in a dataframe, treating empty columns as zero or excluding them.\nThe function standardizes columns as-is using StandardScaler, which will raise an error if a column has all missing values (or any missing values) because StandardScaler cannot compute mean and standard deviation.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, 'cols' is not a list, or columns in 'cols' don't exist in 'df'.\nThe function should output with:\n    DataFrame: The dataframe with standardized columns.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import StandardScaler\ndef task_func(df, cols):"
+  },
+  {
+   "question": "Should non-numeric columns in 'cols' be ignored, raise an error, or be converted?",
+   "answer": "The function standardizes columns as-is using StandardScaler, which will raise an error if non-numeric columns are present because StandardScaler requires numeric input.",
+   "inline_prompt": "Standardize specified numeric columns in a dataframe, treating empty columns as zero or excluding them.\nThe function standardizes columns as-is using StandardScaler, which will raise an error if non-numeric columns are present because StandardScaler requires numeric input.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, 'cols' is not a list, or columns in 'cols' don't exist in 'df'.\nThe function should output with:\n    DataFrame: The dataframe with standardized columns.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import StandardScaler\ndef task_func(df, cols):"
+  },
+  {
+   "question": "Does 'empty columns' refer to columns with all NaN values, or columns with any NaN values?",
+   "answer": "The phrase 'empty columns' is ambiguous; the function simply standardizes the specified columns using StandardScaler, which treats any NaN values as missing data and will raise an error.",
+   "inline_prompt": "Standardize specified numeric columns in a dataframe, treating empty columns as zero or excluding them.\nThe phrase 'empty columns' is ambiguous; the function simply standardizes the specified columns using StandardScaler, which treats any NaN values as missing data and will raise an error.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, 'cols' is not a list, or columns in 'cols' don't exist in 'df'.\nThe function should output with:\n    DataFrame: The dataframe with standardized columns.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import StandardScaler\ndef task_func(df, cols):"
+  },
+  {
+   "question": "Should standardization be performed in-place or on a copy of the dataframe?",
+   "answer": "The standardization modifies the specified columns in the original dataframe; it is performed in-place on those columns.",
+   "inline_prompt": "Standardize specified numeric columns in a dataframe, treating empty columns as zero or excluding them.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, 'cols' is not a list, or columns in 'cols' don't exist in 'df'.\nThe function should output with:\n    DataFrame: The dataframe with standardized columns.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import StandardScaler\ndef task_func(df, cols):\n```"
+  },
+  {
+   "question": "If a column has zero variance (all identical values), should it be standardized to zero or handled specially?",
+   "answer": "StandardScaler standardizes by subtracting the mean and dividing by the standard deviation; if standard deviation is zero, division results in NaN, which is not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Standardize specified numeric columns in a dataframe, treating empty columns as zero or excluding them.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, 'cols' is not a list, or columns in 'cols' don't exist in 'df'.\nThe function should output with:\n    DataFrame: The dataframe with standardized columns.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import StandardScaler\ndef task_func(df, cols):\n```"
+  },
+  {
+   "question": "Are we allowed to use other libraries besides pandas and sklearn, or must the solution be strictly as imported?",
+   "answer": "The solution must use only pandas and sklearn as imported; no other libraries are allowed.",
+   "inline_prompt": "Standardize specified numeric columns in a dataframe, treating empty columns as zero or excluding them.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, 'cols' is not a list, or columns in 'cols' don't exist in 'df'.\nThe function should output with:\n    DataFrame: The dataframe with standardized columns.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import StandardScaler\ndef task_func(df, cols):\n```"
+  },
+  {
+   "question": "Should the function also standardize columns not in 'cols' if they are numeric?",
+   "answer": "Only the columns specified in 'cols' should be standardized; other columns remain unchanged.",
+   "inline_prompt": "Standardize specified numeric columns in a dataframe, treating empty columns as zero or excluding them.\nThe function should raise the exception for: ValueError: If 'df' is not a DataFrame, 'cols' is not a list, or columns in 'cols' don't exist in 'df'.\nThe function should output with:\n    DataFrame: The dataframe with standardized columns.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom sklearn.preprocessing import StandardScaler\ndef task_func(df, cols):\n```"
+  }
+ ]
+}

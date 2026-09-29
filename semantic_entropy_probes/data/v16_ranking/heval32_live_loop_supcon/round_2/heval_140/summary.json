@@ -1,0 +1,99 @@
+{
+  "round": 2,
+  "prompt_before": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "Should the replacement of a long space group with a single hyphen happen before or after processing other underscores for single spaces?",
+      "answer": "The processing is done in a single left-to-right pass, applying the appropriate replacement to each contiguous group of spaces.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    The processing is done in a single left-to-right pass, applying the appropriate replacement to each contiguous group of spaces.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 8.154046297073364
+    },
+    {
+      "idx": 6,
+      "question": "For groups of exactly 2 consecutive spaces, are they replaced with two underscores or a single double underscore?",
+      "answer": "Groups of exactly 2 consecutive spaces are replaced with two underscores.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    Groups of exactly 2 consecutive spaces are replaced with two underscores.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 7.013507813215256
+    },
+    {
+      "idx": 5,
+      "question": "Does the rule for \"more than 2 consecutive spaces\" apply globally to the entire string or per each contiguous group?",
+      "answer": "The rule applies per each contiguous group of spaces.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    The rule applies per each contiguous group of spaces.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 6.9347692131996155
+    },
+    {
+      "idx": 1,
+      "question": "Does \"more than 2 consecutive spaces\" mean 3 or more spaces, or does it start at 4 spaces?",
+      "answer": "\"More than 2 consecutive spaces\" means 3 or more spaces.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces (meaning 3 or more spaces),\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 6.932122975587845
+    },
+    {
+      "idx": 9,
+      "question": "Should overlapping space groups be considered, or is processing strictly left-to-right?",
+      "answer": "Processing is strictly left-to-right, considering non-overlapping contiguous groups.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    Processing is strictly left-to-right, considering non-overlapping contiguous groups.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 6.324639111757278
+    },
+    {
+      "idx": 10,
+      "question": "Are Unicode space characters (non-breaking space, etc.) considered \"spaces\"?",
+      "answer": "Only the ASCII space character ' ' is considered; Unicode space characters are not replaced.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    Only the ASCII space character ' ' is considered; Unicode space characters are not replaced.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 5.669275492429733
+    },
+    {
+      "idx": 8,
+      "question": "What should be the output if the input contains leading/trailing spaces that are part of a consecutive group exceeding 2?",
+      "answer": "Leading or trailing spaces are processed like any other spaces, following the same replacement rules.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    Leading or trailing spaces are processed like any other spaces, following the same replacement rules.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 5.430308133363724
+    },
+    {
+      "idx": 3,
+      "question": "Are other whitespace characters (like tabs, newlines) considered \"spaces\" for this replacement?",
+      "answer": "Only the ASCII space character ' ' is considered; other whitespace characters are not replaced.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    Only the ASCII space character ' ' is considered; other whitespace characters are not replaced.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 5.261628419160843
+    },
+    {
+      "idx": 0,
+      "question": "What should happen if the input string is empty?",
+      "answer": "An empty input string should return an empty string.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    An empty input string should return an empty string.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 5.091676831245422
+    },
+    {
+      "idx": 7,
+      "question": "Is the function case-sensitive or does it only deal with space characters?",
+      "answer": "The function only deals with space characters; case sensitivity is irrelevant.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    The function only deals with space characters; case sensitivity is irrelevant.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 5.0173725336790085
+    },
+    {
+      "idx": 4,
+      "question": "If a hyphen is already present in the input, should it be treated specially or left unchanged?",
+      "answer": "Existing hyphens in the input remain unchanged.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    Existing hyphens in the input remain unchanged.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 4.340068086981773
+    },
+    {
+      "idx": 11,
+      "question": "If the input is not a string (e.g., integer, None), what behavior is expected?",
+      "answer": "The function expects a string input; non-string inputs should raise a TypeError.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    The function expects a string input; non-string inputs should raise a TypeError.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+      "score": 1.5279109179973602
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "Should the replacement of a long space group with a single hyphen happen before or after processing other underscores for single spaces?",
+    "answer": "The processing is done in a single left-to-right pass, applying the appropriate replacement to each contiguous group of spaces.",
+    "score": 8.154046297073364
+  },
+  "next_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores,\n    and if a string has more than 2 consecutive spaces,\n    then replace all consecutive spaces with -\n    For 1 or 2 consecutive spaces, replace each with an underscore; for more than 2 consecutive spaces, replace the entire group with a single hyphen.\n    The processing is done in a single left-to-right pass, applying the appropriate replacement to each contiguous group of spaces.\n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

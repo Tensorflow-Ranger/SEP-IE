@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_95_semantic",
+ "candidates": [
+  {
+   "question": "Should the function consider non-string keys (like integers) as breaking consistency, or ignore them?",
+   "answer": "Non-string keys break consistency; the function returns False if any key is not a string.",
+   "inline_prompt": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    \"\"\""
+  },
+  {
+   "question": "What should be returned if all keys are strings but some are mixed case (e.g., 'Aa')?",
+   "answer": "Mixed-case strings (neither all lower nor all upper) break consistency; the function returns False.",
+   "inline_prompt": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    \"\"\""
+  },
+  {
+   "question": "Does an empty dictionary return False as stated, or should it be considered consistent (e.g., vacuously true)?",
+   "answer": "The function returns False for an empty dictionary, as stated.",
+   "inline_prompt": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    \"\"\""
+  },
+  {
+   "question": "Should keys that are empty strings be treated as lower case, upper case, or neither?",
+   "answer": "Empty strings are neither lower nor upper case, so they break consistency; the function returns False.",
+   "inline_prompt": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    \"\"\""
+  },
+  {
+   "question": "If all keys are numeric strings (e.g., '123'), are they considered lower case, upper case, or inconsistent?",
+   "answer": "Numeric strings are neither lower case nor upper case, so they are inconsistent and the function should return False.",
+   "inline_prompt": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Numeric strings are neither lower case nor upper case, so they are inconsistent and the function should return False.\n    \"\"\""
+  },
+  {
+   "question": "Are keys with special characters (e.g., 'a-b' or 'A_B') considered lower/upper case based on letters only?",
+   "answer": "A string is considered lower case only if all its cased characters are lower case, and similarly for upper case; strings with special characters are evaluated based on their letters.",
+   "inline_prompt": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    A string is considered lower case only if all its cased characters are lower case, and similarly for upper case; strings with special characters are evaluated based on their letters.\n    The function should return False is the given dictionary is empty.\n    \"\"\""
+  },
+  {
+   "question": "Should the function be case-sensitive for consistency across all keys, or treat 'A' and 'a' as the same case?",
+   "answer": "The function is case-sensitive: 'A' is upper case, 'a' is lower case, and they are not the same case.",
+   "inline_prompt": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function is case-sensitive: 'A' is upper case, 'a' is lower case, and they are not the same case.\n    The function should return False is the given dictionary is empty.\n    \"\"\""
+  },
+  {
+   "question": "If a key is a string with only whitespace, how should it be classified?",
+   "answer": "A string with only whitespace has no cased characters, so it is neither lower case nor upper case, making it inconsistent.",
+   "inline_prompt": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    A string with only whitespace has no cased characters, so it is neither lower case nor upper case, making it inconsistent.\n    The function should return False is the given dictionary is empty.\n    \"\"\""
+  }
+ ]
+}

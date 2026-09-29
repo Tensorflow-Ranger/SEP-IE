@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_153_semantic",
+ "candidates": [
+  {
+   "question": "Is strength calculated as CAP - SM (difference) or CAP / SM (division)?",
+   "answer": "Strength is calculated as CAP - SM (the difference between uppercase and lowercase counts).",
+   "inline_prompt": "def Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the fraction CAP - SM, meaning the difference between uppercase and lowercase counts.\n    You should identify the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    \"\"\""
+  },
+  {
+   "question": "Should we count only alphabetic characters for CAP and SM, or include digits/punctuation?",
+   "answer": "Only alphabetic characters are counted for CAP and SM; digits and punctuation are ignored.",
+   "inline_prompt": "def Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name (counting only alphabetic characters, ignoring digits and punctuation), the strength is given by the fraction CAP - SM.\n    You should identify the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    \"\"\""
+  },
+  {
+   "question": "If an extension has no lowercase letters (SM=0), how should strength be calculated for division interpretation?",
+   "answer": "Strength is calculated as CAP - SM (difference), not division, so this scenario does not arise.",
+   "inline_prompt": "def Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the fraction CAP - SM (the difference, not division).\n    You should identify the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    \"\"\""
+  },
+  {
+   "question": "Should uppercase and lowercase counts include non-English letters (e.g., accented characters)?",
+   "answer": "Not specified beyond what's given; assume standard behavior where only ASCII letters A-Z and a-z are considered alphabetic.",
+   "inline_prompt": "def Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the fraction CAP - SM.\n    You should identify the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    \"\"\""
+  },
+  {
+   "question": "If two extensions have equal strength, do we choose the first in the list or any arbitrary one?",
+   "answer": "You should choose the one that comes first in the list.",
+   "inline_prompt": "def Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the fraction CAP - SM. \n    You should identify the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    \"\"\""
+  },
+  {
+   "question": "Is the class name case-sensitive in the output format?",
+   "answer": "The class name should be output exactly as given, preserving its original case.",
+   "inline_prompt": "def Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the fraction CAP - SM. \n    You should identify the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName, where ClassName is the given class name exactly as provided.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    \"\"\""
+  },
+  {
+   "question": "Should we consider extensions with no alphabetic characters (CAP=0, SM=0)?",
+   "answer": "Yes, such extensions are considered, and their strength is 0 (since CAP - SM = 0).",
+   "inline_prompt": "def Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the fraction CAP - SM. \n    Extensions with no alphabetic characters have CAP=0 and SM=0, giving strength 0.\n    You should identify the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    \"\"\""
+  },
+  {
+   "question": "Does strength calculation treat CAP and SM as integers for division, resulting in float or integer division?",
+   "answer": "Strength is the integer difference CAP - SM, not a division; the phrase 'fraction' is misleading but means the subtraction result.",
+   "inline_prompt": "def Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the integer difference CAP - SM. \n    You should identify the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    \"\"\""
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/43_vagueness",
+ "candidates": [
+  {
+   "question": "Should non-numeric columns be included when replacing NaN values with the column average?",
+   "answer": "No, only numeric columns should have NaN values replaced with the column average.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "What should be done if a column has no numeric data (e.g., all strings)?",
+   "answer": "Non-numeric columns should be ignored entirely, with no NaN replacement or plots generated for them.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "Should the distribution plots be created for all columns or only numeric ones?",
+   "answer": "Distribution plots should be created only for numeric columns.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "How should we handle columns where all values are NaN before replacement?",
+   "answer": "If a numeric column has all NaN values, its average will be NaN, so replacement leaves it unchanged, and no distribution plot can be drawn; the behavior is not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):\n```"
+  },
+  {
+   "question": "What if the DataFrame has zero rows or columns?",
+   "answer": "The DataFrame may have zero rows or columns; handle it according to standard pandas behavior (e.g., fillna with empty means, describe returns empty DataFrame, no plots).",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe DataFrame may have zero rows or columns; handle it according to standard pandas behavior.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):"
+  },
+  {
+   "question": "Should the average be computed before or after removing NaN values for replacement?",
+   "answer": "Compute the average of each numeric column using only the non-NaN values, then replace NaN values with that average.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nCompute the average of each numeric column using only the non-NaN values, then replace NaN values with that average.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):"
+  },
+  {
+   "question": "What type of distribution chart (e.g., histogram, KDE) should be drawn?",
+   "answer": "Draw a histogram distribution chart with 10 bins for each numeric column.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nDraw a histogram distribution chart with 10 bins for each numeric column.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):"
+  },
+  {
+   "question": "Should the plots be saved to disk or displayed interactively?",
+   "answer": "The plots should not be saved to disk or displayed interactively; just return the list of Axes objects.",
+   "inline_prompt": "Describe a dataframe and draw a distribution chart for each numeric column after replacing the NaN values with the average of the column.\nThe plots should not be saved to disk or displayed interactively; just return the list of Axes objects.\nThe function should output with:\n    tuple: A tuple containing:\n    DataFrame: A pandas DataFrame with statistics. This includes count, mean, standard deviation (std), min, 25%, 50%, 75%, and max values for each numeric column.\n    List[Axes]: A list of matplotlib Axes objects representing the distribution plots for each numeric column.\n    Each plot visualizes the distribution of data in the respective column with 10 bins.\nYou should write self-contained code starting with:\n```\nimport numpy as np\nimport seaborn as sns\ndef task_func(df):"
+  }
+ ]
+}

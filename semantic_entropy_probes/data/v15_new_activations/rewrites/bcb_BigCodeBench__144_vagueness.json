@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/144_vagueness",
+ "candidates": [
+  {
+   "question": "Should the HTTP request use GET, POST, HEAD, or another method?",
+   "answer": "The HTTP request should use the GET method.",
+   "inline_prompt": "Scans a specified IP address range and sends an HTTP GET request to each IP to verify if it is an active web server.\nThe function requires an IP range in CIDR format (e.g., '192.168.0.0/16') and a timeout value in seconds.\nIt returns a list of IPs where the request returned a status code of 200. If the request is not success, then ignore and continue to the next IP address.\nThe function should raise the exception for: ValueError: If an invalid IP range is provided.\nThe function should output with:\n    list: A list of IP addresses that responded with a status code of 200.\nYou should write self-contained code starting with:\n```\nimport ipaddress\nimport requests\ndef task_func(ip_range, timeout):"
+  },
+  {
+   "question": "Should the request be sent to HTTP or HTTPS URLs?",
+   "answer": "The request should be sent to HTTP URLs (using the http:// scheme).",
+   "inline_prompt": "Scans a specified IP address range and sends an HTTP request to each IP to verify if it is an active web server.\nThe function requires an IP range in CIDR format (e.g., '192.168.0.0/16') and a timeout value in seconds.\nIt returns a list of IPs where the request returned a status code of 200. If the request is not success, then ignore and continue to the next IP address.\nThe request is sent to the HTTP URL http://{ip}.\nThe function should raise the exception for: ValueError: If an invalid IP range is provided.\nThe function should output with:\n    list: A list of IP addresses that responded with a status code of 200.\nYou should write self-contained code starting with:\n```\nimport ipaddress\nimport requests\ndef task_func(ip_range, timeout):"
+  },
+  {
+   "question": "Should we follow redirects automatically or treat them as non-200?",
+   "answer": "Not specified beyond what's given; assume standard behavior (the requests library follows redirects by default, and the final status code is considered).",
+   "inline_prompt": "Scans a specified IP address range and sends an HTTP request to each IP to verify if it is an active web server.\nThe function requires an IP range in CIDR format (e.g., '192.168.0.0/16') and a timeout value in seconds.\nIt returns a list of IPs where the request returned a status code of 200. If the request is not success, then ignore and continue to the next IP address.\nThe function should raise the exception for: ValueError: If an invalid IP range is provided.\nThe function should output with:\n    list: A list of IP addresses that responded with a status code of 200.\nYou should write self-contained code starting with:\n```\nimport ipaddress\nimport requests\ndef task_func(ip_range, timeout):"
+  },
+  {
+   "question": "Should we include IPs that return 200 only for a specific path (like '/') or any path?",
+   "answer": "The request is sent to the root path '/' (i.e., http://{ip}/).",
+   "inline_prompt": "Scans a specified IP address range and sends an HTTP request to each IP to verify if it is an active web server.\nThe function requires an IP range in CIDR format (e.g., '192.168.0.0/16') and a timeout value in seconds.\nIt returns a list of IPs where the request returned a status code of 200. If the request is not success, then ignore and continue to the next IP address.\nThe request is sent to the root path '/' of each IP.\nThe function should raise the exception for: ValueError: If an invalid IP range is provided.\nThe function should output with:\n    list: A list of IP addresses that responded with a status code of 200.\nYou should write self-contained code starting with:\n```\nimport ipaddress\nimport requests\ndef task_func(ip_range, timeout):"
+  },
+  {
+   "question": "Should we validate that the timeout is a positive integer?",
+   "answer": "Not specified beyond what's given; assume standard behavior where a non-positive timeout would cause the underlying requests library to raise its own exception.",
+   "inline_prompt": "Scans a specified IP address range and sends an HTTP request to each IP to verify if it is an active web server.\nThe function requires an IP range in CIDR format (e.g., '192.168.0.0/16') and a timeout value in seconds.\nIt returns a list of IPs where the request returned a status code of 200. If the request is not success, then ignore and continue to the next IP address.\nThe function should raise the exception for: ValueError: If an invalid IP range is provided.\nThe function should output with:\n    list: A list of IP addresses that responded with a status code of 200.\nYou should write self-contained code starting with:\n```\nimport ipaddress\nimport requests\ndef task_func(ip_range, timeout):"
+  },
+  {
+   "question": "Should we handle IPv6 addresses in the CIDR range?",
+   "answer": "No, the function is only required to handle IPv4 addresses as per the canonical solution using IPv4Network.",
+   "inline_prompt": "Scans a specified IP address range and sends an HTTP request to each IP to verify if it is an active web server.\nThe function requires an IP range in CIDR format (e.g., '192.168.0.0/16') and a timeout value in seconds.\nIt returns a list of IPs where the request returned a status code of 200. If the request is not success, then ignore and continue to the next IP address.\nThe function should raise the exception for: ValueError: If an invalid IP range is provided.\nThe function should output with:\n    list: A list of IP addresses that responded with a status code of 200.\nYou should write self-contained code starting with:\n```\nimport ipaddress\nimport requests\ndef task_func(ip_range, timeout):"
+  },
+  {
+   "question": "Should we skip private or reserved IP addresses (e.g., 192.168.0.0/16) as they might not be accessible?",
+   "answer": "No, the function should scan all IPs in the given range without skipping any based on address type.",
+   "inline_prompt": "Scans a specified IP address range and sends an HTTP request to each IP to verify if it is an active web server.\nThe function requires an IP range in CIDR format (e.g., '192.168.0.0/16') and a timeout value in seconds.\nIt returns a list of IPs where the request returned a status code of 200. If the request is not success, then ignore and continue to the next IP address.\nThe function should raise the exception for: ValueError: If an invalid IP range is provided.\nThe function should output with:\n    list: A list of IP addresses that responded with a status code of 200.\nYou should write self-contained code starting with:\n```\nimport ipaddress\nimport requests\ndef task_func(ip_range, timeout):"
+  },
+  {
+   "question": "Should we retry failed requests (e.g., due to timeout) before moving on?",
+   "answer": "No, each IP should be attempted exactly once; if a request fails, move to the next IP.",
+   "inline_prompt": "Scans a specified IP address range and sends an HTTP request to each IP to verify if it is an active web server.\nThe function requires an IP range in CIDR format (e.g., '192.168.0.0/16') and a timeout value in seconds.\nIt returns a list of IPs where the request returned a status code of 200. If the request is not success, then ignore and continue to the next IP address.\nThe function should raise the exception for: ValueError: If an invalid IP range is provided.\nThe function should output with:\n    list: A list of IP addresses that responded with a status code of 200.\nYou should write self-contained code starting with:\n```\nimport ipaddress\nimport requests\ndef task_func(ip_range, timeout):"
+  }
+ ]
+}

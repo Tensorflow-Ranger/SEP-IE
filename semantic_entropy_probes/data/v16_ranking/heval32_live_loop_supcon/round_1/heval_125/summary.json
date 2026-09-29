@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "For counting lower-case letters with odd order, does \"odd order\" mean an odd ord('letter') value where ord('a')=0, or an odd 1\u2011based index (i.e., odd positions in the alphabet)?",
+      "answer": "Odd order means an odd ord('letter') value where ord('a')=0, ord('b')=1, etc.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet (odd ord('letter') value where ord('a')=0), ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 10.016967415809631
+    },
+    {
+      "idx": 1,
+      "question": "What are the \"certain characters\" to split on if no whitespace exists, and is there a specific order or list of these characters?",
+      "answer": "The certain characters are specifically commas ','.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',', if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 7.671839818358421
+    },
+    {
+      "idx": 2,
+      "question": "If multiple \"certain characters\" are present, should splitting occur on each occurrence of any of them, or on a specific single character?",
+      "answer": "Splitting occurs only on commas ',' as the single specific character.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',', if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 7.671839818358421
+    },
+    {
+      "idx": 11,
+      "question": "In the case of counting lower\u2011case letters, should letters with diacritics (e.g., '\u00e9') be considered lower\u2011case letters, and how are their orders determined?",
+      "answer": "Letters with diacritics are not considered; only English 'a' to 'z' letters are counted.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters (only English 'a' to 'z', not letters with diacritics) with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 7.556670978665352
+    },
+    {
+      "idx": 3,
+      "question": "When splitting on \"certain characters,\" should empty strings between consecutive split characters be included in the result list?",
+      "answer": "Empty strings between consecutive split characters are not included in the result list.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters (empty strings between consecutive split characters are not included), if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 6.711514979600906
+    },
+    {
+      "idx": 9,
+      "question": "When splitting on whitespace, are words defined as non\u2011whitespace sequences, and can a \"word\" be an empty string?",
+      "answer": "Words are defined as non-whitespace sequences, and empty strings are not considered words.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace (words are non-whitespace sequences, not empty strings), if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 5.765224911272526
+    },
+    {
+      "idx": 0,
+      "question": "What constitutes \"whitespace\" \u2014 does it include only spaces, or also tabs, newlines, and other Unicode whitespace characters?",
+      "answer": "Whitespace means only space characters ' ', not tabs, newlines, or other Unicode whitespace.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace (only space characters ' '), if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 5.441548712551594
+    },
+    {
+      "idx": 6,
+      "question": "Are only English alphabet letters ('a' to 'z') considered for the lower\u2011case count, or are other Unicode lower\u2011case letters included?",
+      "answer": "Only English alphabet letters 'a' to 'z' are considered for the lower-case count.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters (only English 'a' to 'z') with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 5.260745324194431
+    },
+    {
+      "idx": 4,
+      "question": "How should the function handle leading, trailing, or repeated whitespace in the initial whitespace-splitting case?",
+      "answer": "Leading, trailing, and repeated whitespace are handled by Python's standard str.split() method with no arguments.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace (handling leading, trailing, and repeated whitespace via str.split()), if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 3.156929135322571
+    },
+    {
+      "idx": 10,
+      "question": "Is the input guaranteed to be a string, or should the function handle non\u2011string inputs (e.g., numbers, None) by raising an error or converting?",
+      "answer": "The input is guaranteed to be a string.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words (input guaranteed to be a string), return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 2.782380573451519
+    },
+    {
+      "idx": 8,
+      "question": "If the text is an empty string, what should be returned \u2014 an empty list, a list with one empty string, or the integer 0?",
+      "answer": "For an empty string, return an empty list.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace (for an empty string return an empty list), if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 2.7775074169039726
+    },
+    {
+      "idx": 7,
+      "question": "If the text contains no whitespace and none of the \"certain characters,\" should the function always return an integer (the count) rather than a list?",
+      "answer": "Yes, when no whitespace and no certain characters exist, the function returns an integer count.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet (returning an integer count in this case), ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+      "score": 2.4923532716929913
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "For counting lower-case letters with odd order, does \"odd order\" mean an odd ord('letter') value where ord('a')=0, or an odd 1\u2011based index (i.e., odd positions in the alphabet)?",
+    "answer": "Odd order means an odd ord('letter') value where ord('a')=0, ord('b')=1, etc.",
+    "score": 10.016967415809631
+  },
+  "next_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet (odd ord('letter') value where ord('a')=0), ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+  "test_n_pass": 8,
+  "test_n_total": 8
+}

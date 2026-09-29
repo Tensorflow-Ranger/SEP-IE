@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/125_vagueness",
+ "candidates": [
+  {
+   "question": "Should we count occurrences of each letter across all combinations (global total) or per combination (local per combination)?",
+   "answer": "Count occurrences of each letter across all combinations (global total).",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of each letter across all combinations and saves the results\nin a JSON file. The name of the file is prefix_<random-number-here>.json. The value of\n<random-number-here> is between 0 and 100."
+  },
+  {
+   "question": "What prefix should be used in the filename? The prompt says 'prefix_<random-number-here>.json' but doesn't specify the prefix.",
+   "answer": "The prefix is 'letter_combinations_'.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of each letter across all combinations and saves the results\nin a JSON file. The name of the file is letter_combinations_<random-number-here>.json. The value of\n<random-number-here> is between 0 and 100."
+  },
+  {
+   "question": "Is the random number inclusive of 0 and 100? The prompt says 'between 0 and 100' which could be exclusive or inclusive.",
+   "answer": "The random number is inclusive of 0 and 100.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of each letter across all combinations and saves the results\nin a JSON file. The name of the file is letter_combinations_<random-number-here>.json. The value of\n<random-number-here> is between 0 and 100 inclusive."
+  },
+  {
+   "question": "Should combinations be permutations (order matters) or combinations (order doesn't matter)? The prompt says 'combinations' but could be ambiguous.",
+   "answer": "Use combinations where order does not matter, as in itertools.combinations.",
+   "inline_prompt": "Generates all possible combinations (where order does not matter) of a given set of letters of length 'n'.\nCounts the occurrences of each letter across all combinations and saves the results\nin a JSON file. The name of the file is letter_combinations_<random-number-here>.json. The value of\n<random-number-here> is between 0 and 100 inclusive."
+  },
+  {
+   "question": "Are letters case-sensitive? The prompt uses lowercase in examples but doesn't specify for input.",
+   "answer": "The function should work for any list of letters provided, treating them as distinct strings, so case-sensitivity is standard behavior.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of letters in these combinations and saves the results in a JSON file.\nThe name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100.\nThe function should work for any list of letters provided, treating them as distinct strings.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):\n```"
+  },
+  {
+   "question": "Should duplicate letters in the input list be allowed and counted separately? The prompt doesn't specify if LETTERS can have duplicates.",
+   "answer": "The input list LETTERS can contain duplicate letters, which are treated as distinct items for combinations and counting.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of letters in these combinations and saves the results in a JSON file.\nThe name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100.\nThe input list LETTERS can contain duplicate letters, which are treated as distinct items for combinations and counting.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):\n```"
+  },
+  {
+   "question": "What should happen if n is greater than the length of LETTERS? The prompt doesn't define behavior for invalid n.",
+   "answer": "If n is greater than the length of LETTERS, the function should generate no combinations and produce an empty count dictionary.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of letters in these combinations and saves the results in a JSON file.\nThe name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100.\nIf n is greater than the length of LETTERS, the function should generate no combinations and produce an empty count dictionary.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):\n```"
+  },
+  {
+   "question": "Should the JSON file be saved in a specific directory or the current working directory? The prompt doesn't specify file path.",
+   "answer": "The JSON file should be saved in the current working directory.",
+   "inline_prompt": "Generates all possible combinations of a given set of letters of length 'n'.\nCounts the occurrences of letters in these combinations and saves the results in a JSON file.\nThe name of the file is prefix_<random-number-here>.json. The value of <random-number-here> is between 0 and 100.\nThe JSON file should be saved in the current working directory.\nYou should write self-contained code starting with:\n```\nfrom collections import defaultdict\nimport itertools\nimport json\nimport random\ndef task_func(LETTERS, n):\n```"
+  }
+ ]
+}

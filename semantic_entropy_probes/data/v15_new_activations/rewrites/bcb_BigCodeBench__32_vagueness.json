@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/32_vagueness",
+ "candidates": [
+  {
+   "question": "Should we return the text content of the first occurrence of the specified tag, or all occurrences concatenated?",
+   "answer": "Return the text content of the first occurrence of the specified tag.",
+   "inline_prompt": "Scrape a web page for the first occurrence of a specified HTML tag and return its text content.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "If the tag is nested within another tag, should we return only the direct text content or include text from nested tags?",
+   "answer": "Return the text content of the tag as defined by BeautifulSoup's .string property, which returns None if there is more than one child element or if the tag contains nested tags with text.",
+   "inline_prompt": "Scrape a web page for an occurrence of a specified HTML tag and return its text content.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nThe text content is defined as the value of the .string attribute from BeautifulSoup's find method.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "Should we handle tags that have no text content but contain other elements (e.g., <div> with <span> inside)?",
+   "answer": "If the tag contains other elements, the .string attribute will be None, so the function should return None.",
+   "inline_prompt": "Scrape a web page for an occurrence of a specified HTML tag and return its text content.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nIf the tag contains other elements, return None.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "If the tag exists but its text content is empty (e.g., <p></p>), should we return an empty string or None?",
+   "answer": "If the tag exists and its .string attribute is an empty string, return an empty string.",
+   "inline_prompt": "Scrape a web page for an occurrence of a specified HTML tag and return its text content.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nIf the tag exists but has no text content, return an empty string.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "Should we strip whitespace from the extracted text content?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Scrape a web page for an occurrence of a specified HTML tag and return its text content.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "If the tag has attributes (e.g., <div class='foo'>text</div>), should we match any tag with that name or require specific attributes?",
+   "answer": "The function should find the first occurrence of the specified HTML tag name regardless of attributes.",
+   "inline_prompt": "Scrape a web page for the first occurrence of a specified HTML tag and return its text content.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "Should we follow redirects or handle HTTP errors (e.g., 404) gracefully?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Scrape a web page for an occurrence of a specified HTML tag and return its text content.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  },
+  {
+   "question": "Is the URL guaranteed to be accessible and return valid HTML, or should we validate the response content type?",
+   "answer": "Not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Scrape a web page for an occurrence of a specified HTML tag and return its text content.\nThe function should output with:\n    str: The text content of the specified HTML tag if found, otherwise returns None.\nYou should write self-contained code starting with:\n```\nimport requests\nfrom bs4 import BeautifulSoup\ndef task_func(url, tag):\n```"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/87_semantic",
+ "candidates": [
+  {
+   "question": "Are the weights applied globally across all products (one random draw per product using the same weight distribution) or per product individually (different weight distributions for each product)?",
+   "answer": "The weights are applied globally: for each product, a rating is drawn from the ratings list using the same provided weights distribution.",
+   "inline_prompt": "Generates a DataFrame containing ratings for a given list of products. Ratings are generated randomly based on the provided weights, using the same weight distribution for each product.\nThe DataFrame is sorted by ratings in descending order.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom random import choices, seed\ndef task_func(products, ratings, weights, random_seed=42):\n```"
+  },
+  {
+   "question": "Should the ratings be generated with replacement across products (i.e., can two products get the same rating from the same draw)?",
+   "answer": "Yes, ratings are generated independently per product, so multiple products can receive the same rating.",
+   "inline_prompt": "Generates a DataFrame containing ratings for a given list of products. Ratings are generated randomly based on the provided weights, either for each product individually or across all products collectively, and multiple products can receive the same rating.\nThe DataFrame is sorted by ratings in descending order.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom random import choices, seed\ndef task_func(products, ratings, weights, random_seed=42):\n```"
+  },
+  {
+   "question": "If the number of products is zero, should the function return an empty DataFrame or raise an error?",
+   "answer": "Not specified beyond what's given; assume standard behavior: the function should return an empty DataFrame with the appropriate columns.",
+   "inline_prompt": "Generates a DataFrame containing ratings for a given list of products. Ratings are generated randomly based on the provided weights, either for each product individually or across all products collectively. The DataFrame is sorted by ratings in descending order.\nIf the list of products is empty, the function returns an empty DataFrame.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom random import choices, seed\ndef task_func(products, ratings, weights, random_seed=42):\n```"
+  },
+  {
+   "question": "Should the sorting be stable (preserve original order for equal ratings) or can it be arbitrary?",
+   "answer": "Not specified beyond what's given; assume standard behavior: sorting is not required to be stable.",
+   "inline_prompt": "Generates a DataFrame containing ratings for a given list of products. Ratings are generated randomly based on the provided weights, either for each product individually or across all products collectively. The DataFrame is sorted by ratings in descending order; the order among products with equal ratings is not specified.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom random import choices, seed\ndef task_func(products, ratings, weights, random_seed=42):\n```"
+  },
+  {
+   "question": "Are the weights required to sum to 1, or will they be normalized automatically?",
+   "answer": "The weights are used directly by random.choices, which normalizes them automatically if they do not sum to 1.",
+   "inline_prompt": "Generates a DataFrame containing ratings for a given list of products. Ratings are generated randomly based on the provided weights. The DataFrame is sorted by ratings in descending order.\nThe function should output with:\n    pandas.DataFrame: A DataFrame with two columns: 'Product' and 'Rating', sorted by 'Rating' in descending order.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom random import choices, seed\ndef task_func(products, ratings, weights, random_seed=42):\n```"
+  },
+  {
+   "question": "Can the ratings list contain non-integer values (e.g., floats or strings), or only integers as in the example?",
+   "answer": "The ratings list can contain any values (e.g., floats, strings) as long as they are valid for random.choices and DataFrame sorting.",
+   "inline_prompt": "Generates a DataFrame containing ratings for a given list of products. Ratings are generated randomly based on the provided weights. The DataFrame is sorted by ratings in descending order.\nThe function should output with:\n    pandas.DataFrame: A DataFrame with two columns: 'Product' and 'Rating', sorted by 'Rating' in descending order.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom random import choices, seed\ndef task_func(products, ratings, weights, random_seed=42):\n```"
+  },
+  {
+   "question": "If a product name appears multiple times in the input list, should it be treated as separate entries or deduplicated?",
+   "answer": "Each occurrence in the input list is treated as a separate entry, generating a rating for each.",
+   "inline_prompt": "Generates a DataFrame containing ratings for a given list of products. Ratings are generated randomly based on the provided weights. The DataFrame is sorted by ratings in descending order.\nThe function should output with:\n    pandas.DataFrame: A DataFrame with two columns: 'Product' and 'Rating', sorted by 'Rating' in descending order.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom random import choices, seed\ndef task_func(products, ratings, weights, random_seed=42):\n```"
+  },
+  {
+   "question": "Should the random seed be set only once at the start, or reset per product?",
+   "answer": "The random seed should be set only once at the start of the function to ensure reproducibility across all products.",
+   "inline_prompt": "Generates a DataFrame containing ratings for a given list of products. Ratings are generated randomly based on the provided weights. The DataFrame is sorted by ratings in descending order.\nThe function should output with:\n    pandas.DataFrame: A DataFrame with two columns: 'Product' and 'Rating', sorted by 'Rating' in descending order.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nfrom random import choices, seed\ndef task_func(products, ratings, weights, random_seed=42):\n```"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/22_semantic",
+ "candidates": [
+  {
+   "question": "Should the random sample be drawn with replacement (allowing duplicates in the sample if the combined list has duplicates) or without replacement (ensuring no duplicates in the sample even if the combined list has duplicates)?",
+   "answer": "The sample is drawn with replacement, so duplicates can appear in the sample if the combined list contains duplicates.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a random sample of size K from the combined list (drawn with replacement), and calculate the frequency of each element in the sample.\nThe function should output with:\n    collections.Counter: An object that counts the frequency of each element in the sample.\nYou should write self-contained code starting with:\n```\nimport collections\nfrom itertools import zip_longest\nfrom random import choices\ndef task_func(l1, l2, K=10):\n```"
+  },
+  {
+   "question": "If the combined list has duplicate elements, should the sample be allowed to contain the same element more than once (i.e., sampling with replacement) or should each occurrence in the sample be unique (sampling without replacement)?",
+   "answer": "The sample is drawn with replacement, so the same element can appear multiple times in the sample.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a random sample of size K from the combined list (drawn with replacement, so duplicates can occur), and calculate the frequency of each element in the sample.\nThe function should output with:\n    collections.Counter: An object that counts the frequency of each element in the sample.\nYou should write self-contained code starting with:\n```\nimport collections\nfrom itertools import zip_longest\nfrom random import choices\ndef task_func(l1, l2, K=10):\n```"
+  },
+  {
+   "question": "What should happen if K is larger than the length of the combined list? Should we sample with replacement to reach size K, raise an error, or cap K at the combined list length?",
+   "answer": "Not specified beyond what's given; assume standard behavior (i.e., sampling with replacement is allowed regardless of K relative to combined list length).",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a random sample of size K from the combined list without replacement, and calculate the frequency of each element in the sample.\nThe function should output with:\n    collections.Counter: An object that counts the frequency of each element in the sample.\nYou should write self-contained code starting with:\n```\nimport collections\nfrom itertools import zip_longest\nfrom random import choices\ndef task_func(l1, l2, K=10):\n```"
+  },
+  {
+   "question": "Does 'alternating their elements' mean start with l1, then l2, then l1, etc., or can it start with either list? The prompt says 'Combine two lists by alternating their elements' but doesn't specify order.",
+   "answer": "Alternating starts with the first list (l1), then the second (l2), then l1, and so on.",
+   "inline_prompt": "Combine two lists by alternating their elements (starting with l1, then l2, then l1, etc.), even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own. Then, create a random sample of size K from the combined list without replacement, and calculate the frequency of each element in the sample.\nThe function should output with:\n    collections.Counter: An object that counts the frequency of each element in the sample.\nYou should write self-contained code starting with:\n```\nimport collections\nfrom itertools import zip_longest\nfrom random import choices\ndef task_func(l1, l2, K=10):\n```"
+  },
+  {
+   "question": "Should the random sample be uniformly random (each element equally likely) or weighted by something (e.g., position)?",
+   "answer": "The sample is uniformly random, with each element in the combined list equally likely to be chosen.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own.\nThen, create a random sample of size K from the combined list without replacement, and calculate the frequency of each element in the sample.\nThe sample is uniformly random, with each element in the combined list equally likely to be chosen.\nThe function should output with:\n    collections.Counter: An object that counts the frequency of each element in the sample.\nYou should write self-contained code starting with:\n```\nimport collections\nfrom itertools import zip_longest\nfrom random import choices\ndef task_func(l1, l2, K=10):\n```"
+  },
+  {
+   "question": "If an element is None in the original lists, how should it be handled? The zip_longest with default fillvalue=None could introduce Nones if lists are of different lengths.",
+   "answer": "The zip_longest default fillvalue=None is used, but any None values introduced as fill are filtered out from the combined list before sampling.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own.\nThen, create a random sample of size K from the combined list without replacement, and calculate the frequency of each element in the sample.\nThe zip_longest default fillvalue=None is used, but any None values introduced as fill are filtered out from the combined list before sampling.\nThe function should output with:\n    collections.Counter: An object that counts the frequency of each element in the sample.\nYou should write self-contained code starting with:\n```\nimport collections\nfrom itertools import zip_longest\nfrom random import choices\ndef task_func(l1, l2, K=10):\n```"
+  },
+  {
+   "question": "Is K required to be a positive integer, and what should happen if K <= 0?",
+   "answer": "K is required to be a positive integer; if K <= 0, the behavior is not specified beyond what's given; assume standard behavior.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own.\nThen, create a random sample of size K from the combined list without replacement, and calculate the frequency of each element in the sample.\nK is required to be a positive integer; if K <= 0, the behavior is not specified beyond what's given; assume standard behavior.\nThe function should output with:\n    collections.Counter: An object that counts the frequency of each element in the sample.\nYou should write self-contained code starting with:\n```\nimport collections\nfrom itertools import zip_longest\nfrom random import choices\ndef task_func(l1, l2, K=10):\n```"
+  },
+  {
+   "question": "Should the sample be a list or any iterable? The output is a Counter, but the sampling method affects intermediate representation.",
+   "answer": "The sample should be a list, as produced by random.choices.",
+   "inline_prompt": "Combine two lists by alternating their elements, even if they are of different lengths. Elements from the longer list without a counterpart in the shorter one will be included on their own.\nThen, create a random sample of size K from the combined list without replacement, and calculate the frequency of each element in the sample.\nThe sample should be a list, as produced by random.choices.\nThe function should output with:\n    collections.Counter: An object that counts the frequency of each element in the sample.\nYou should write self-contained code starting with:\n```\nimport collections\nfrom itertools import zip_longest\nfrom random import choices\ndef task_func(l1, l2, K=10):\n```"
+  }
+ ]
+}

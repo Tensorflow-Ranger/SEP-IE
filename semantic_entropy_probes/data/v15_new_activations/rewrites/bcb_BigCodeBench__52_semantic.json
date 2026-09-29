@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/52_semantic",
+ "candidates": [
+  {
+   "question": "Should we count only the first occurrence of each word (ignoring duplicates after the first), or count all occurrences after removing stopwords?",
+   "answer": "Count all occurrences of each word after removing stopwords.",
+   "inline_prompt": "Count the frequency of each word in a text after removing specific stopwords.\nCount all occurrences of each word after removing stopwords.\nThe function should output with:\n    Series: A pandas Series with word frequencies excluding the words in STOPWORDS list.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\n# Constants\nSTOPWORDS = [\"a\", \"an\", \"the\", \"in\", \"is\", \"are\"]\ndef task_func(text):"
+  },
+  {
+   "question": "How should we handle punctuation and non-alphabetic characters in the text?",
+   "answer": "Words are defined as sequences of alphabetic characters (A-Z, a-z) separated by non-alphabetic characters, as extracted by regex pattern \\b\\w+\\b after lowercasing.",
+   "inline_prompt": "Count the frequency of each word in a text after removing specific stopwords.\nWords are defined as sequences of alphabetic characters (A-Z, a-z) separated by non-alphabetic characters, as extracted by regex pattern \\b\\w+\\b after lowercasing.\nThe function should output with:\n    Series: A pandas Series with word frequencies excluding the words in STOPWORDS list.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\n# Constants\nSTOPWORDS = [\"a\", \"an\", \"the\", \"in\", \"is\", \"are\"]\ndef task_func(text):"
+  },
+  {
+   "question": "Should the stopwords removal be case-sensitive?",
+   "answer": "Stopwords removal is case-insensitive; the text is lowercased before comparison.",
+   "inline_prompt": "Count the frequency of each word in a text after removing specific stopwords.\nStopwords removal is case-insensitive; the text is lowercased before comparison.\nThe function should output with:\n    Series: A pandas Series with word frequencies excluding the words in STOPWORDS list.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\n# Constants\nSTOPWORDS = [\"a\", \"an\", \"the\", \"in\", \"is\", \"are\"]\ndef task_func(text):"
+  },
+  {
+   "question": "What constitutes a 'word'? Should numbers or underscores be included?",
+   "answer": "A word is defined as a sequence of alphanumeric characters (letters and digits) and underscores, matching the regex pattern \\b\\w+\\b.",
+   "inline_prompt": "Count the frequency of each word in a text after removing specific stopwords.\nA word is defined as a sequence of alphanumeric characters (letters and digits) and underscores, matching the regex pattern \\b\\w+\\b.\nThe function should output with:\n    Series: A pandas Series with word frequencies excluding the words in STOPWORDS list.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\n# Constants\nSTOPWORDS = [\"a\", \"an\", \"the\", \"in\", \"is\", \"are\"]\ndef task_func(text):"
+  },
+  {
+   "question": "Should the output Series be sorted in any particular order (e.g., alphabetical, by frequency)?",
+   "answer": "The output Series is not specified to be sorted in any particular order; it is the result of pandas Series value_counts() which sorts by frequency descending.",
+   "inline_prompt": "Count the frequency of each distinct word in a text after removing specific stopwords, considering only their first occurrence in the text.\nThe function should output with:\n    Series: A pandas Series with word frequencies excluding the words in STOPWORDS list, sorted by frequency descending as per pandas value_counts().\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\n# Constants\nSTOPWORDS = [\"a\", \"an\", \"the\", \"in\", \"is\", \"are\"]\ndef task_func(text):"
+  },
+  {
+   "question": "Are we supposed to remove stopwords before or after considering first occurrences?",
+   "answer": "Remove stopwords first, then count the frequency of the remaining words (all occurrences are considered).",
+   "inline_prompt": "Count the frequency of each distinct word in a text after removing specific stopwords, considering only their first occurrence in the text.\nSpecifically, first remove all stopwords, then count the frequency of each remaining word (considering all its occurrences).\nThe function should output with:\n    Series: A pandas Series with word frequencies excluding the words in STOPWORDS list.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\n# Constants\nSTOPWORDS = [\"a\", \"an\", \"the\", \"in\", \"is\", \"are\"]\ndef task_func(text):"
+  },
+  {
+   "question": "What should happen if the text is empty or contains only stopwords?",
+   "answer": "If the text is empty or contains only stopwords, the output Series should be empty.",
+   "inline_prompt": "Count the frequency of each distinct word in a text after removing specific stopwords, considering only their first occurrence in the text.\nIf the text is empty or contains only stopwords, the output Series should be empty.\nThe function should output with:\n    Series: A pandas Series with word frequencies excluding the words in STOPWORDS list.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\n# Constants\nSTOPWORDS = [\"a\", \"an\", \"the\", \"in\", \"is\", \"are\"]\ndef task_func(text):"
+  },
+  {
+   "question": "Should we treat hyphenated words as single words or split them?",
+   "answer": "Words are defined by the regex pattern \\b\\w+\\b, which treats hyphenated words as separate tokens split at hyphens.",
+   "inline_prompt": "Count the frequency of each distinct word in a text after removing specific stopwords, considering only their first occurrence in the text.\nWords are defined as sequences of word characters (\\w+) separated by word boundaries, meaning hyphenated words are split at hyphens.\nThe function should output with:\n    Series: A pandas Series with word frequencies excluding the words in STOPWORDS list.\nYou should write self-contained code starting with:\n```\nimport pandas as pd\nimport regex as re\n# Constants\nSTOPWORDS = [\"a\", \"an\", \"the\", \"in\", \"is\", \"are\"]\ndef task_func(text):"
+  }
+ ]
+}

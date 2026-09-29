@@ -1,0 +1,45 @@
+{
+ "id": "bcb_BigCodeBench/146_vagueness",
+ "candidates": [
+  {
+   "question": "What format should ip_range be in? (e.g., CIDR string like '192.168.0.0/24', start-end IPs, list of IPs)",
+   "answer": "The ip_range parameter is a string in CIDR notation, e.g., '192.168.0.0/24'.",
+   "inline_prompt": "Scans the IP address range and pings each IP to check if it is active. The function returns a dictionary with IP addresses as keys and a boolean value indicating their active status (True if the ping is successful, False otherwise).\nThe function should raise the exception for: subprocess.CalledProcessError: If a ping command fails due to a subprocess error.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their active status.\nYou should write self-contained code starting with:\n```\nimport subprocess\nfrom ipaddress import IPv4Network\ndef task_func(ip_range):\n```\nThe ip_range parameter is a string in CIDR notation, e.g., '192.168.0.0/24'."
+  },
+  {
+   "question": "How many ping attempts should be made per IP? (e.g., -c 1 as in reference, or more?)",
+   "answer": "Not specified beyond what's given; assume standard behavior (one ping attempt per IP).",
+   "inline_prompt": "Scans the IP address range and pings each IP to check if it is active. The function returns a dictionary with IP addresses as keys and a boolean value indicating their active status (True if the ping is successful, False otherwise).\nThe function should raise the exception for: subprocess.CalledProcessError: If a ping command fails due to a subprocess error.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their active status.\nYou should write self-contained code starting with:\n```\nimport subprocess\nfrom ipaddress import IPv4Network\ndef task_func(ip_range):\n```"
+  },
+  {
+   "question": "What timeout or other ping options should be used? (e.g., -W 1)",
+   "answer": "Not specified beyond what's given; assume standard behavior (no explicit timeout or extra options).",
+   "inline_prompt": "Scans the IP address range and pings each IP to check if it is active. The function returns a dictionary with IP addresses as keys and a boolean value indicating their active status (True if the ping is successful, False otherwise).\nThe function should raise the exception for: subprocess.CalledProcessError: If a ping command fails due to a subprocess error.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their active status.\nYou should write self-contained code starting with:\n```\nimport subprocess\nfrom ipaddress import IPv4Network\ndef task_func(ip_range):\n```"
+  },
+  {
+   "question": "Should we ping only IPv4 addresses, or also IPv6 if present in the range?",
+   "answer": "Only IPv4 addresses are scanned, as indicated by the import of IPv4Network.",
+   "inline_prompt": "Scans the IP address range and pings each IP to check if it is active. The function returns a dictionary with IP addresses as keys and a boolean value indicating their active status (True if the ping is successful, False otherwise).\nThe function should raise the exception for: subprocess.CalledProcessError: If a ping command fails due to a subprocess error.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their active status.\nYou should write self-contained code starting with:\n```\nimport subprocess\nfrom ipaddress import IPv4Network\ndef task_func(ip_range):\n```\nOnly IPv4 addresses are scanned, as indicated by the import of IPv4Network."
+  },
+  {
+   "question": "Should the function handle network or broadcast addresses in the range, or skip them?",
+   "answer": "The function should ping each IP in the range, including network and broadcast addresses, as per the standard behavior of IPv4Network iteration.",
+   "inline_prompt": "Scans the IP address range and pings each IP to check if it is active, including network and broadcast addresses.\nThe function returns a dictionary with IP addresses as keys and a boolean value indicating their active status (True if the ping is successful, False otherwise).\nThe function should raise the exception for: subprocess.CalledProcessError: If a ping command fails due to a subprocess error.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their active status.\nYou should write self-contained code starting with:\n```\nimport subprocess\nfrom ipaddress import IPv4Network\ndef task_func(ip_range):\n```"
+  },
+  {
+   "question": "What should happen if the IP range is invalid (e.g., malformed)? Should we raise an exception?",
+   "answer": "Not specified beyond what's given; assume standard behavior, which would raise a ValueError from IPv4Network for an invalid range.",
+   "inline_prompt": "Scans the IP address range and pings each IP to check if it is active.\nThe function returns a dictionary with IP addresses as keys and a boolean value indicating their active status (True if the ping is successful, False otherwise).\nThe function should raise the exception for: subprocess.CalledProcessError: If a ping command fails due to a subprocess error.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their active status.\nYou should write self-contained code starting with:\n```\nimport subprocess\nfrom ipaddress import IPv4Network\ndef task_func(ip_range):\n```"
+  },
+  {
+   "question": "Is the ping command platform-specific? (e.g., should we use 'ping -n 1' on Windows?)",
+   "answer": "Assume the platform uses a standard Unix-style ping command with '-c 1' as in the canonical solution.",
+   "inline_prompt": "Scans the IP address range and pings each IP to check if it is active.\nThe function returns a dictionary with IP addresses as keys and a boolean value indicating their active status (True if the ping is successful, False otherwise).\nThe function should raise the exception for: subprocess.CalledProcessError: If a ping command fails due to a subprocess error.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their active status.\nYou should write self-contained code starting with:\n```\nimport subprocess\nfrom ipaddress import IPv4Network\ndef task_func(ip_range):\n```"
+  },
+  {
+   "question": "Should the function return status for all IPs even if some pings time out indefinitely, or stop on error?",
+   "answer": "The function should return a status for all IPs, as each ping failure (including timeout) is caught and results in False.",
+   "inline_prompt": "Scans the IP address range and pings each IP to check if it is active.\nThe function returns a dictionary with IP addresses as keys and a boolean value indicating their active status (True if the ping is successful, False otherwise).\nThe function should raise the exception for: subprocess.CalledProcessError: If a ping command fails due to a subprocess error.\nThe function should output with:\n    dict: A dictionary mapping IP addresses to their active status.\nYou should write self-contained code starting with:\n```\nimport subprocess\nfrom ipaddress import IPv4Network\ndef task_func(ip_range):\n```"
+  }
+ ]
+}

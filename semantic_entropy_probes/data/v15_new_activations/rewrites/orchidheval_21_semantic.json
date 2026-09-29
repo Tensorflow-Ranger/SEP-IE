@@ -1,0 +1,45 @@
+{
+ "id": "orchidheval_21_semantic",
+ "candidates": [
+  {
+   "question": "Should we treat duplicate numbers as separate entries for scaling, or only consider unique values for min/max?",
+   "answer": "Use the smallest and largest numbers in the list, including duplicates, so the minimum and maximum are computed over all elements.",
+   "inline_prompt": "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given a list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    \"\"\""
+  },
+  {
+   "question": "What should we do if all numbers are the same (e.g., [5.0, 5.0])? The denominator would be zero.",
+   "answer": "The input is guaranteed to have at least two elements, but they may be equal; in that case, return a list where each element is transformed to 0.0.",
+   "inline_prompt": "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given a list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1; if all numbers are equal, return a list of zeros.\n    \"\"\""
+  },
+  {
+   "question": "Is the input guaranteed to be non-empty and have at least two elements as stated?",
+   "answer": "Yes, the input is guaranteed to be a list with at least two elements as stated.",
+   "inline_prompt": "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given a list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    \"\"\""
+  },
+  {
+   "question": "Should the output preserve the original order of the list?",
+   "answer": "Yes, the output list must preserve the original order of the input list.",
+   "inline_prompt": "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given a list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1, preserving the original order.\n    \"\"\""
+  },
+  {
+   "question": "Are we allowed to modify the input list in place, or must we return a new list?",
+   "answer": "You must return a new list; do not modify the input list.",
+   "inline_prompt": "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given a list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1.\n    Do not modify the input list; return a new list.\n    \"\"\""
+  },
+  {
+   "question": "What floating-point precision is expected for the output? Should we round or format in a specific way?",
+   "answer": "Not specified beyond what's given; assume standard floating-point behavior with no rounding or formatting.",
+   "inline_prompt": "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given a list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    \"\"\""
+  },
+  {
+   "question": "If the list contains NaN or infinity values, how should they be handled?",
+   "answer": "Not specified beyond what's given; assume standard behavior (the problem guarantees valid input).",
+   "inline_prompt": "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given a list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    \"\"\""
+  },
+  {
+   "question": "Does 'largest' refer to the largest distinct number similarly to 'smallest distinct', or just the overall maximum?",
+   "answer": "Both 'smallest' and 'largest' refer to the overall minimum and maximum values in the list, not distinct values.",
+   "inline_prompt": "from typing import List\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given a list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    \"\"\""
+  }
+ ]
+}
