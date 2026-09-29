@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"",
+  "baseline_mean_p": 0.3361113369464874,
+  "candidates": [
+    {
+      "idx": 6,
+      "question": "How should the function handle cases where the same group of parentheses appears multiple times in the input?",
+      "answer": "Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).",
+      "p1": 0.2232068032026291,
+      "p2": 0.33758535981178284,
+      "mean_p": 0.28039608150720596,
+      "delta": -0.055715255439281464
+    },
+    {
+      "idx": 0,
+      "question": "How should the function handle overlapping or interleaved groups of parentheses that are not properly nested?",
+      "answer": "Not applicable: input is guaranteed to consist only of well-formed balanced groups, so improperly-nested/overlapping sequences never occur.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Not applicable: input is guaranteed to consist only of well-formed balanced groups, so improperly-nested/overlapping sequences never occur.",
+      "p1": 0.24944959580898285,
+      "p2": 0.35501784086227417,
+      "mean_p": 0.3022337183356285,
+      "delta": -0.03387761861085892
+    },
+    {
+      "idx": 4,
+      "question": "How should the function handle invalid or unbalanced parentheses in the input string?",
+      "answer": "Not applicable: the input is guaranteed to consist of well-formed balanced groups, so unbalanced parentheses do not occur.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Not applicable: the input is guaranteed to consist of well-formed balanced groups, so unbalanced parentheses do not occur.",
+      "p1": 0.2528828978538513,
+      "p2": 0.35164061188697815,
+      "mean_p": 0.30226175487041473,
+      "delta": -0.03384958207607269
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected output when the input string contains a mix of valid and invalid parentheses groups?",
+      "answer": "Not applicable: the input is guaranteed to consist entirely of valid, balanced groups.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Not applicable: the input is guaranteed to consist entirely of valid, balanced groups.",
+      "p1": 0.27879059314727783,
+      "p2": 0.36287397146224976,
+      "mean_p": 0.3208322823047638,
+      "delta": -0.015279054641723633
+    },
+    {
+      "idx": 1,
+      "question": "What defines a \"group\" of parentheses when there are multiple layers of nesting within a single group?",
+      "answer": "A group is the maximal balanced span from where depth goes 0->1 until it returns to 0; all nested parens within that span belong to the same single group.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: A group is the maximal balanced span from where depth goes 0->1 until it returns to 0; all nested parens within that span belong to the same single group.",
+      "p1": 0.2613193988800049,
+      "p2": 0.39455220103263855,
+      "mean_p": 0.3279357999563217,
+      "delta": -0.00817553699016571
+    },
+    {
+      "idx": 2,
+      "question": "How should the function treat a group that contains other groups inside it, such as \"(()())\"?",
+      "answer": "It is treated as ONE single group (nesting doesn't create separate groups) -- \"(()())\" would be returned as one string in the result list.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: It is treated as ONE single group (nesting doesn't create separate groups) -- \"(()())\" would be returned as one string in the result list.",
+      "p1": 0.27405136823654175,
+      "p2": 0.40232083201408386,
+      "mean_p": 0.3381861001253128,
+      "delta": 0.0020747631788253784
+    },
+    {
+      "idx": 5,
+      "question": "Are groups considered separate if they are separated by non-parentheses characters other than spaces?",
+      "answer": "Not applicable: the input contains only parentheses and spaces (spaces are ignored); no other separator characters occur.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Not applicable: the input contains only parentheses and spaces (spaces are ignored); no other separator characters occur.",
+      "p1": 0.2923693060874939,
+      "p2": 0.38733378052711487,
+      "mean_p": 0.3398515433073044,
+      "delta": 0.0037402063608169556
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior when the input string is empty or contains only spaces?",
+      "answer": "Return an empty list.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Return an empty list.",
+      "p1": 0.7220473885536194,
+      "p2": 0.6377043724060059,
+      "mean_p": 0.6798758804798126,
+      "delta": 0.3437645435333252
+    }
+  ],
+  "top3": [
+    {
+      "idx": 6,
+      "question": "How should the function handle cases where the same group of parentheses appears multiple times in the input?",
+      "answer": "Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).",
+      "delta": -0.055715255439281464
+    },
+    {
+      "idx": 0,
+      "question": "How should the function handle overlapping or interleaved groups of parentheses that are not properly nested?",
+      "answer": "Not applicable: input is guaranteed to consist only of well-formed balanced groups, so improperly-nested/overlapping sequences never occur.",
+      "delta": -0.03387761861085892
+    },
+    {
+      "idx": 4,
+      "question": "How should the function handle invalid or unbalanced parentheses in the input string?",
+      "answer": "Not applicable: the input is guaranteed to consist of well-formed balanced groups, so unbalanced parentheses do not occur.",
+      "delta": -0.03384958207607269
+    }
+  ],
+  "chosen": {
+    "idx": 6,
+    "question": "How should the function handle cases where the same group of parentheses appears multiple times in the input?",
+    "answer": "Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).",
+    "delta": -0.055715255439281464
+  },
+  "next_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).",
+  "code_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated). Ignore any spaces in the input string.\n    \"\"\"",
+  "test_n_pass": 4,
+  "test_n_total": 4
+}

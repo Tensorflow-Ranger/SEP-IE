@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.",
+  "baseline_mean_p": 0.3108335807919502,
+  "candidates": [
+    {
+      "idx": 6,
+      "question": "What is the expected behavior if the string contains multiple 'y' characters, some of which are at the end?",
+      "answer": "Only the single last character of the string is checked for the y/Y bonus; any other 'y'/'Y' earlier in the string is only counted if it's a plain vowel character, which it isn't (only a,e,i,o,u are in the vowels set).",
+      "prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.\n\nClarification: Only the single last character of the string is checked for the y/Y bonus; any other 'y'/'Y' earlier in the string is only counted if it's a plain vowel character, which it isn't (only a,e,i,o,u are in the vowels set).",
+      "p1": 0.16601966321468353,
+      "p2": 0.39453116059303284,
+      "mean_p": 0.2802754119038582,
+      "delta": -0.03055816888809204
+    },
+    {
+      "idx": 3,
+      "question": "Is the function case-insensitive for all vowels except 'y'/'Y'?",
+      "answer": "Yes, 'aeiouAEIOU' covers both cases; 'y'/'Y' is only counted specifically when it's the last character, not elsewhere.",
+      "prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.\n\nClarification: Yes, 'aeiouAEIOU' covers both cases; 'y'/'Y' is only counted specifically when it's the last character, not elsewhere.",
+      "p1": 0.22663958370685577,
+      "p2": 0.4010147750377655,
+      "mean_p": 0.31382717937231064,
+      "delta": 0.0029935985803604126
+    },
+    {
+      "idx": 1,
+      "question": "Are non-alphabetic characters in the string ignored when counting vowels?",
+      "answer": "Yes, they're simply not in the vowels set and not the trailing y/Y, so they don't add to the count -- not specially rejected, just not counted.",
+      "prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.\n\nClarification: Yes, they're simply not in the vowels set and not the trailing y/Y, so they don't add to the count -- not specially rejected, just not counted.",
+      "p1": 0.224227637052536,
+      "p2": 0.4103592038154602,
+      "mean_p": 0.3172934204339981,
+      "delta": 0.006459839642047882
+    },
+    {
+      "idx": 7,
+      "question": "Should the function count both lowercase and uppercase 'y' as vowels if they are the last character?",
+      "answer": "Yes, per the earlier answer -- both cases count when 'y'/'Y' is the last character.",
+      "prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.\n\nClarification: Yes, per the earlier answer -- both cases count when 'y'/'Y' is the last character.",
+      "p1": 0.241077721118927,
+      "p2": 0.41605332493782043,
+      "mean_p": 0.3285655230283737,
+      "delta": 0.017731942236423492
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider uppercase 'Y' as a vowel if it is the last character of the string?",
+      "answer": "Yes, both 'y' and 'Y' as the last character count as a vowel.",
+      "prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.\n\nClarification: Yes, both 'y' and 'Y' as the last character count as a vowel.",
+      "p1": 0.2646958827972412,
+      "p2": 0.41270914673805237,
+      "mean_p": 0.3387025147676468,
+      "delta": 0.027868933975696564
+    },
+    {
+      "idx": 2,
+      "question": "What happens if the input string is empty?",
+      "answer": "Not applicable/undefined per the implementation: s[-1] on an empty string raises an IndexError, so the function assumes non-empty input.",
+      "prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.\n\nClarification: Not applicable/undefined per the implementation: s[-1] on an empty string raises an IndexError, so the function assumes non-empty input.",
+      "p1": 0.24672074615955353,
+      "p2": 0.43554913997650146,
+      "mean_p": 0.3411349430680275,
+      "delta": 0.03030136227607727
+    },
+    {
+      "idx": 4,
+      "question": "Are accented characters or other non-English letters considered as vowels?",
+      "answer": "No, only the literal characters in 'aeiouAEIOU' plus a trailing y/Y are counted; accented letters are not included.",
+      "prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.\n\nClarification: No, only the literal characters in 'aeiouAEIOU' plus a trailing y/Y are counted; accented letters are not included.",
+      "p1": 0.2790849506855011,
+      "p2": 0.43863433599472046,
+      "mean_p": 0.3588596433401108,
+      "delta": 0.04802606254816055
+    },
+    {
+      "idx": 5,
+      "question": "How should the function handle leading or trailing whitespace in the input string?",
+      "answer": "Whitespace is simply not a vowel character, so it isn't counted; if the string ends in whitespace rather than 'y', the trailing bonus doesn't apply.",
+      "prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.\n\nClarification: Whitespace is simply not a vowel character, so it isn't counted; if the string ends in whitespace rather than 'y', the trailing bonus doesn't apply.",
+      "p1": 0.28214147686958313,
+      "p2": 0.4549269676208496,
+      "mean_p": 0.36853422224521637,
+      "delta": 0.057700641453266144
+    }
+  ],
+  "top3": [
+    {
+      "idx": 6,
+      "question": "What is the expected behavior if the string contains multiple 'y' characters, some of which are at the end?",
+      "answer": "Only the single last character of the string is checked for the y/Y bonus; any other 'y'/'Y' earlier in the string is only counted if it's a plain vowel character, which it isn't (only a,e,i,o,u are in the vowels set).",
+      "delta": -0.03055816888809204
+    },
+    {
+      "idx": 3,
+      "question": "Is the function case-insensitive for all vowels except 'y'/'Y'?",
+      "answer": "Yes, 'aeiouAEIOU' covers both cases; 'y'/'Y' is only counted specifically when it's the last character, not elsewhere.",
+      "delta": 0.0029935985803604126
+    },
+    {
+      "idx": 1,
+      "question": "Are non-alphabetic characters in the string ignored when counting vowels?",
+      "answer": "Yes, they're simply not in the vowels set and not the trailing y/Y, so they don't add to the count -- not specially rejected, just not counted.",
+      "delta": 0.006459839642047882
+    }
+  ],
+  "chosen": {
+    "idx": 6,
+    "question": "What is the expected behavior if the string contains multiple 'y' characters, some of which are at the end?",
+    "answer": "Only the single last character of the string is checked for the y/Y bonus; any other 'y'/'Y' earlier in the string is only counted if it's a plain vowel character, which it isn't (only a,e,i,o,u are in the vowels set).",
+    "delta": -0.03055816888809204
+  },
+  "next_prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. 'y' could also be\n    considered as a vowel.\n\n    Example:\n    \"\"\"\n\nClarification: Only under a specific condition: 'y'/'Y' counts as a vowel ONLY when it is the last character of the string; elsewhere in the string 'y' is not counted.\n\nClarification: Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.\n\nClarification: Only the single last character of the string is checked for the y/Y bonus; any other 'y'/'Y' earlier in the string is only counted if it's a plain vowel character, which it isn't (only a,e,i,o,u are in the vowels set).",
+  "code_prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u', and both uppercase and\n    lowercase versions are included, so 'aeiouAEIOU' are all considered vowels.\n    'y' or 'Y' could also be considered as a vowel only if it is the last character\n    of the string; only the single last character of the string is checked for the y/Y bonus,\n    and any other 'y'/'Y' earlier in the string is only counted if it's a plain vowel character,\n    which it isn't (only a,e,i,o,u are in the vowels set).\n    Example:\n\"\"\"",
+  "test_n_pass": 7,
+  "test_n_total": 7
+}

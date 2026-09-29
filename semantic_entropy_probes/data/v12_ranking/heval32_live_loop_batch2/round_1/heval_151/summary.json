@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "What exactly qualifies as a \u201cvalid odd number\u201d in the list \u2013 must it be a positive odd integer, or are negative odd integers and non\u2011integer odd values also considered valid?",
+      "answer": "A valid odd number must be a positive odd integer; negative odd integers and non-integer odd values are not valid.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": 1.4336106777191162
+    },
+    {
+      "idx": 2,
+      "question": "If the list contains floating\u2011point numbers that are mathematically odd (e.g., 3.0), are they treated as valid odd numbers or excluded?",
+      "answer": "Floating-point numbers like 3.0 are not treated as valid odd integers; only true integers are valid.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd integers\n    in the list. Floating-point numbers like 3.0 are not treated as valid odd integers;\n    only true integers are valid.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": 1.0243629217147827
+    },
+    {
+      "idx": 11,
+      "question": "In the example `double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10`, why is the even number 2 contributing 0\u2014does the specification intend to treat all non\u2011valid odds as contributing zero, or should they be omitted from the sum altogether?",
+      "answer": "In the example double_the_difference([1, 3, 2, 0]), the 2 and 0 (even numbers) do not contribute to the sum; only the odd numbers 1 and 3 contribute 1^2 + 3^2 = 10.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. In the example double_the_difference([1, 3, 2, 0]), the 2 and 0 (even numbers) do not contribute to the sum; only the odd numbers 1 and 3 contribute 1^2 + 3^2 = 10.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": 0.8256924152374268
+    },
+    {
+      "idx": 4,
+      "question": "Is the \u201csum of squares\u201d computed using exact arithmetic, and if the result exceeds typical integer limits, should it overflow, raise an exception, or return a big\u2011integer value?",
+      "answer": "The sum of squares is computed using exact arithmetic; Python's arbitrary-precision integers handle any result size.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. The sum of squares is computed using exact arithmetic; Python's\n    arbitrary-precision integers handle any result size.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n     \n    If the input list is empty, return 0.\n    '''",
+      "score": 0.5696972608566284
+    },
+    {
+      "idx": 7,
+      "question": "Are zero and other even numbers explicitly counted as contributing zero to the sum, or should they be ignored entirely?",
+      "answer": "Zero and other even numbers explicitly contribute zero to the sum (by being excluded, not included).",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. Zero and other even numbers explicitly contribute zero to the sum (by being excluded, not included).\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": 0.4491255283355713
+    },
+    {
+      "idx": 5,
+      "question": "Does the order of elements in the list affect the result in any way, such as when duplicate odd numbers appear?",
+      "answer": "The order of elements in the list does not affect the result; order is irrelevant.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. The order of elements in the list does not affect the result; order is irrelevant.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": -0.33860814571380615
+    },
+    {
+      "idx": 1,
+      "question": "Should non\u2011numeric elements (e.g., strings, None, complex numbers) cause an error, be ignored, or be treated in some other way?",
+      "answer": "Non-numeric elements (strings, None, complex numbers) should cause the function to return 0 or skip them; negative numbers are skipped.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. Non-numeric elements (strings, None, complex numbers) should\n    cause the function to return 0 or skip them; negative numbers are skipped.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": -1.1890113353729248
+    },
+    {
+      "idx": 6,
+      "question": "For an input like `[1, 1, 2]`, should each occurrence of a valid odd number be squared and summed separately, or should duplicates be counted only once?",
+      "answer": "Each occurrence of a valid odd number is squared and summed separately; duplicates are not deduplicated.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. Each occurrence of a valid odd number is squared and summed separately; duplicates are not deduplicated.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": -1.1927778720855713
+    },
+    {
+      "idx": 10,
+      "question": "Is the function expected to return an integer type, a float, or is any numeric type acceptable as long as the numeric value is correct?",
+      "answer": "The function should return an integer type.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. The function should return an integer type.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": -1.7841949462890625
+    },
+    {
+      "idx": 9,
+      "question": "Should the function raise a specific exception for a non\u2011iterable argument, or simply return 0 or another sentinel value?",
+      "answer": "For a non-iterable argument, the function should return 0.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. For a non-iterable argument, the function should return 0.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": -2.0185885429382324
+    },
+    {
+      "idx": 8,
+      "question": "If the input is a subclass of list (e.g., a custom sequence type) that supports iteration, is it accepted, and are any additional protocol requirements needed?",
+      "answer": "A subclass of list that supports iteration is accepted; no additional protocol requirements are needed.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A subclass of list that supports iteration is accepted; no\n    additional protocol requirements are needed.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": -2.0695724487304688
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle NaN or infinite values present in the input list?",
+      "answer": "NaN or infinite values should be skipped or cause the function to return 0.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. NaN or infinite values should be skipped or cause the function to return 0.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": -3.488987684249878
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "What exactly qualifies as a \u201cvalid odd number\u201d in the list \u2013 must it be a positive odd integer, or are negative odd integers and non\u2011integer odd values also considered valid?",
+    "answer": "A valid odd number must be a positive odd integer; negative odd integers and non-integer odd values are not valid.",
+    "score": 1.4336106777191162
+  },
+  "next_prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+  "test_n_pass": 7,
+  "test_n_total": 7
+}

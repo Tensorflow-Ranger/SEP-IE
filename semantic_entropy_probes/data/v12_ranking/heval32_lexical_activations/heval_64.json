@@ -1,0 +1,43 @@
+{
+  "id": "heval_64",
+  "questions": [
+    "Should the function treat uppercase vowels (e.g., 'A', 'E') as vowels, or only the lowercase letters listed?",
+    "Is the input guaranteed to be a single word without spaces or punctuation, or must the function handle strings containing spaces, hyphens, or other non‑alphabetic characters?",
+    "When the letter 'y' appears at the end of the word, does it count as a vowel regardless of its case (e.g., 'Y')?",
+    "If the input string is empty, what count should be returned—zero, an error, or something else?",
+    "How should the function handle non‑ASCII characters or accented vowels such as 'á', 'ë', etc.?",
+    "Are characters that are not letters (e.g., digits, symbols) to be ignored, cause an error, or be counted as non‑vowels?",
+    "If the input is not a string type (e.g., None, integer, list), should the function raise a specific exception or attempt to coerce it to a string?",
+    "Should the function consider only the final character for the special 'y' rule, or also treat a trailing sequence like \"yy\" where the last 'y' counts as a vowel?"
+  ],
+  "answers": [
+    "Yes -- vowel counting is case-insensitive; both lowercase and uppercase vowels ('a'/'A', 'e'/'E', etc.) count, consistent with the example vowels_count('ACEDY') == 3.",
+    "The input can be assumed to be a single word without spaces or punctuation.",
+    "Yes -- the trailing 'y' rule is also case-insensitive; both lowercase 'y' and uppercase 'Y' count when they appear as the last character.",
+    "An empty string should return 0.",
+    "Not applicable -- only the ASCII vowels a/e/i/o/u (and their uppercase forms) plus a trailing y/Y are considered; non-ASCII/accented characters are not handled specially.",
+    "Not applicable -- non-letter characters are simply not vowels and are ignored (not counted, no error).",
+    "Not applicable -- the input is guaranteed to be a string.",
+    "Only the single final character is checked for the trailing-y rule; a sequence like 'yy' only has its last character considered."
+  ],
+  "inline_prompts": [
+    "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels depend on the case: 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word. Note that vowel\n    counting is case-insensitive; both lowercase and uppercase vowels\n    ('a'/'A', 'e'/'E', etc.) count, consistent with the example vowels_count('ACEDY') == 3.\n    Example:\n    \"\"\"",
+    "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels depend on the case: 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word. The input can be\n    assumed to be a single word without spaces or punctuation.\n\n    Example:\n    \"\"\"",
+    "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels depend on the case: 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word, and this rule\n    is case-insensitive; both lowercase 'y' and uppercase 'Y' count when\n    they appear as the last character.\n\n    Example:\n    \"\"\"",
+    "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels depend on the case: 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word. An empty string\n    should return 0.\n\n    Example:\n    \"\"\"",
+    "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels depend on the case: 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word. Note that only\n    the ASCII vowels a/e/i/o/u (and their uppercase forms) plus a trailing y/Y\n    are considered; non-ASCII/accented characters are not handled specially.\n\n    Example:\n    \"\"\"",
+    "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels depend on the case: 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word. Non-letter\n    characters are simply not vowels and are ignored (not counted, no error).\n\n    Example:\n    \"\"\"",
+    "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels depend on the case: 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    \"\"\"",
+    "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels depend on the case: 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word. Only the single\n    final character is checked for the trailing-y rule; a sequence like 'yy'\n    only has its last character considered.\n\n    Example:\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1
+  ]
+}

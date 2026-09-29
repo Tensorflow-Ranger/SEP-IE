@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.",
+  "baseline_mean_p": 0.27613549679517746,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Does the array contain duplicate elements and how does that affect the possibility of sorting via right shifts?",
+      "answer": "Not applicable; the docstring explicitly guarantees the list has unique elements.",
+      "prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.\n\nClarification: Not applicable; the docstring explicitly guarantees the list has unique elements.",
+      "p1": 0.13344420492649078,
+      "p2": 0.32646867632865906,
+      "mean_p": 0.22995644062757492,
+      "delta": -0.04617905616760254
+    },
+    {
+      "idx": 7,
+      "question": "Is the operation allowed to be performed zero times, and how does that affect the initial state of the array?",
+      "answer": "Yes; if the array is already sorted, its minimum is already at index 0, so the 'rotation to minimum' is effectively zero shifts and the check succeeds without any actual movement.",
+      "prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.\n\nClarification: Yes; if the array is already sorted, its minimum is already at index 0, so the 'rotation to minimum' is effectively zero shifts and the check succeeds without any actual movement.",
+      "p1": 0.15205639600753784,
+      "p2": 0.31873881816864014,
+      "mean_p": 0.235397607088089,
+      "delta": -0.04073788970708847
+    },
+    {
+      "idx": 5,
+      "question": "What happens if the array has multiple rotation points that could potentially sort the array?",
+      "answer": "Not possible with unique elements: at most one rotation point (the position of the minimum element) can produce a sorted result, and the function checks exactly that single candidate.",
+      "prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.\n\nClarification: Not possible with unique elements: at most one rotation point (the position of the minimum element) can produce a sorted result, and the function checks exactly that single candidate.",
+      "p1": 0.15349407494068146,
+      "p2": 0.34157270193099976,
+      "mean_p": 0.2475333884358406,
+      "delta": -0.028602108359336853
+    },
+    {
+      "idx": 6,
+      "question": "How are the elements compared during the sorting process\u2014numerically or based on their original positions?",
+      "answer": "Numerically; the function compares the array rotated to start at its minimum value against the numerically sorted list.",
+      "prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.\n\nClarification: Numerically; the function compares the array rotated to start at its minimum value against the numerically sorted list.",
+      "p1": 0.1633879840373993,
+      "p2": 0.33864927291870117,
+      "mean_p": 0.25101862847805023,
+      "delta": -0.025116868317127228
+    },
+    {
+      "idx": 4,
+      "question": "How is the operation of shifting applied to the array when it is empty?",
+      "answer": "Handled explicitly: an empty array returns True immediately, per the docstring.",
+      "prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.\n\nClarification: Handled explicitly: an empty array returns True immediately, per the docstring.",
+      "p1": 0.1586601287126541,
+      "p2": 0.3527649939060211,
+      "mean_p": 0.2557125613093376,
+      "delta": -0.020422935485839844
+    },
+    {
+      "idx": 1,
+      "question": "What defines a \"right shift operation\" when the array has only one element?",
+      "answer": "Trivially already sorted -- a single-element array is always non-decreasing, so the function returns True regardless of shifts.",
+      "prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.\n\nClarification: Trivially already sorted -- a single-element array is always non-decreasing, so the function returns True regardless of shifts.",
+      "p1": 0.17113882303237915,
+      "p2": 0.35778969526290894,
+      "mean_p": 0.26446425914764404,
+      "delta": -0.011671237647533417
+    },
+    {
+      "idx": 3,
+      "question": "What is considered a \"sorted array\" in non-decreasing order\u2014strictly increasing or allowing equal consecutive elements?",
+      "answer": "Non-decreasing allows equal consecutive elements (<=), though since elements are guaranteed unique this distinction doesn't actually arise in practice.",
+      "prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.\n\nClarification: Non-decreasing allows equal consecutive elements (<=), though since elements are guaranteed unique this distinction doesn't actually arise in practice.",
+      "p1": 0.17731823027133942,
+      "p2": 0.3531261384487152,
+      "mean_p": 0.2652221843600273,
+      "delta": -0.010913312435150146
+    },
+    {
+      "idx": 2,
+      "question": "How is the array indexed in the problem description (0-based or 1-based)?",
+      "answer": "The docstring's exposition uses 1-based indexing (arr[1]...arr[N]) for description purposes, but the actual implementation operates on the standard 0-indexed Python list as passed in.",
+      "prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.\n\nClarification: The docstring's exposition uses 1-based indexing (arr[1]...arr[N]) for description purposes, but the actual implementation operates on the standard 0-indexed Python list as passed in.",
+      "p1": 0.17993119359016418,
+      "p2": 0.3654527962207794,
+      "mean_p": 0.2726919949054718,
+      "delta": -0.003443501889705658
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Does the array contain duplicate elements and how does that affect the possibility of sorting via right shifts?",
+      "answer": "Not applicable; the docstring explicitly guarantees the list has unique elements.",
+      "delta": -0.04617905616760254
+    },
+    {
+      "idx": 7,
+      "question": "Is the operation allowed to be performed zero times, and how does that affect the initial state of the array?",
+      "answer": "Yes; if the array is already sorted, its minimum is already at index 0, so the 'rotation to minimum' is effectively zero shifts and the check succeeds without any actual movement.",
+      "delta": -0.04073788970708847
+    },
+    {
+      "idx": 5,
+      "question": "What happens if the array has multiple rotation points that could potentially sort the array?",
+      "answer": "Not possible with unique elements: at most one rotation point (the position of the minimum element) can produce a sorted result, and the function checks exactly that single candidate.",
+      "delta": -0.028602108359336853
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Does the array contain duplicate elements and how does that affect the possibility of sorting via right shifts?",
+    "answer": "Not applicable; the docstring explicitly guarantees the list has unique elements.",
+    "delta": -0.04617905616760254
+  },
+  "next_prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n\nClarification: Not applicable -- with unique elements, there is at most one rotation point that yields sorted order, so no tie-breaking is needed.\n\nClarification: Not applicable; the docstring explicitly guarantees the list has unique elements.",
+  "code_prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N elements arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False. If the given array is empty then return True.\n    Not applicable; the docstring explicitly guarantees the list has unique elements, so no tie-breaking is needed.\"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

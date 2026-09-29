@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_111_lexical",
+  "questions": [
+    "If multiple letters tie for the most repetitions, should the returned dictionary contain all of them as separate keys, each mapped to the same count?",
+    "What should the function return for an empty input string?",
+    "Are spaces themselves ever counted as a \"letter\" for the histogram, or are they purely separators?",
+    "Should the letters in the result dictionary be case-sensitive, given the input is stated to be lowercase?",
+    "What should be returned if the string is non-empty but no letter repeats at all?",
+    "Is the count value in the dictionary the raw occurrence count, or some normalized/relative frequency?",
+    "Should multiple consecutive spaces in the input be treated as a single separator or produce empty tokens?",
+    "Is the order of keys in the returned dictionary significant, or is any valid ordering acceptable?"
+  ],
+  "answers": [
+    "Yes — the prompt already states that if several keys have the same occurrence, all should be returned.",
+    "Not specified beyond what's given; assume an empty dictionary is returned.",
+    "No, spaces are separators only, not counted as letters.",
+    "Yes, since the input is stated to be lowercase, matching is inherently case-sensitive/lowercase-only.",
+    "Not specified beyond what's given; assume the standard behavior of returning the single most-frequent letter(s) even at count 1.",
+    "It's the raw occurrence count.",
+    "Not specified beyond what's given; assume standard single-separator splitting behavior.",
+    "Not specified beyond what's given; any valid ordering is acceptable."
+  ],
+  "inline_prompts": [
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the key with the most repetition and containing the corresponding count.\n    If several keys have the same occurrence, return all of them. Yes — the prompt already states that if several keys have the same occurrence, all should be returned.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the key with the most repetition and containing the corresponding count.\n    If several keys have the same occurrence, return all of them. Assume an empty dictionary is returned\n    if the input is empty or contains no letters.\"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the key with the most repetition and containing the corresponding count.\n    If several keys have the same occurrence, return all of them. No, spaces are separators only, not counted as letters.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the key with the most repetition and containing the corresponding count.\n    If several keys have the same occurrence, return all of them. Yes, since the input is stated to be lowercase, matching is inherently case-sensitive/lowercase-only.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the key with the most repetition and containing the corresponding count.\n    If several keys have the same occurrence, return all of them. Not specified beyond what's given; assume the standard behavior of returning the single most-frequent letter(s) even at count 1.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the key with the most repetition and containing the corresponding count. It's the raw occurrence count.\n    If several keys have the same occurrence, return all of them.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the key with the most repetition and containing the corresponding count.\n    If several keys have the same occurrence, return all of them. Not specified beyond what's given; assume standard single-separator splitting behavior.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the key with the most repetition and containing the corresponding count.\n    If several keys have the same occurrence, return all of them. Not specified beyond what's given; any valid ordering is acceptable.\n    \"\"\""
+  ],
+  "tiers": [
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+  ]
+}

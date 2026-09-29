@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").",
+  "baseline_mean_p": 0.2956148758530617,
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "What defines a \"positive even number\" \u2014 must it be strictly greater than zero?",
+      "answer": "An even integer strictly greater than zero (2, 4, 6, ...).",
+      "prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").\n\nClarification: An even integer strictly greater than zero (2, 4, 6, ...).",
+      "p1": 0.22009995579719543,
+      "p2": 0.3502565622329712,
+      "mean_p": 0.2851782590150833,
+      "delta": -0.010436616837978363
+    },
+    {
+      "idx": 4,
+      "question": "How are tie-breaking rules handled if multiple combinations of even numbers sum to n?",
+      "answer": "Not applicable; the function only returns a boolean for whether some decomposition exists, not the decomposition itself, so there's nothing to break ties on.",
+      "prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").\n\nClarification: Not applicable; the function only returns a boolean for whether some decomposition exists, not the decomposition itself, so there's nothing to break ties on.",
+      "p1": 0.229498952627182,
+      "p2": 0.40419089794158936,
+      "mean_p": 0.3168449252843857,
+      "delta": 0.021230049431324005
+    },
+    {
+      "idx": 3,
+      "question": "Is the sum allowed to consist of only one even number (e.g., n = 2)?",
+      "answer": "Not allowed; per the docstring the sum must consist of exactly 4 positive even numbers, and the minimum such sum is 2+2+2+2=8, so n=2 returns False.",
+      "prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").\n\nClarification: Not allowed; per the docstring the sum must consist of exactly 4 positive even numbers, and the minimum such sum is 2+2+2+2=8, so n=2 returns False.",
+      "p1": 0.25025078654289246,
+      "p2": 0.417924702167511,
+      "mean_p": 0.3340877443552017,
+      "delta": 0.038472868502140045
+    },
+    {
+      "idx": 1,
+      "question": "Are the even numbers used in the sum allowed to repeat or must they be distinct?",
+      "answer": "The function doesn't decompose n into explicit addends at all -- it's a closed-form check (n even and n>=8) -- but mathematically repeats ARE allowed, e.g. 8 = 2+2+2+2.",
+      "prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").\n\nClarification: The function doesn't decompose n into explicit addends at all -- it's a closed-form check (n even and n>=8) -- but mathematically repeats ARE allowed, e.g. 8 = 2+2+2+2.",
+      "p1": 0.28483906388282776,
+      "p2": 0.4449648857116699,
+      "mean_p": 0.36490197479724884,
+      "delta": 0.06928709894418716
+    },
+    {
+      "idx": 7,
+      "question": "Is the order of the even numbers in the sum considered (e.g., does 2 + 4 count as the same as 4 + 2)?",
+      "answer": "Not applicable; the function only checks existence of some decomposition into 4 positive even numbers, order of addends doesn't matter for a sum.",
+      "prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").\n\nClarification: Not applicable; the function only checks existence of some decomposition into 4 positive even numbers, order of addends doesn't matter for a sum.",
+      "p1": 0.31137973070144653,
+      "p2": 0.44598355889320374,
+      "mean_p": 0.37868164479732513,
+      "delta": 0.08306676894426346
+    },
+    {
+      "idx": 5,
+      "question": "Are negative numbers or non-integer values allowed as inputs?",
+      "answer": "Not a specified case for sign, but the modulo/comparison logic would just evaluate normally (e.g. a negative n fails the n>=8 check and returns False).",
+      "prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").\n\nClarification: Not a specified case for sign, but the modulo/comparison logic would just evaluate normally (e.g. a negative n fails the n>=8 check and returns False).",
+      "p1": 0.3226574957370758,
+      "p2": 0.45011594891548157,
+      "mean_p": 0.3863867223262787,
+      "delta": 0.09077184647321701
+    },
+    {
+      "idx": 6,
+      "question": "What happens if n is less than the smallest possible sum of positive even numbers (e.g., n < 2)?",
+      "answer": "Returns False, since the smallest sum of 4 positive even numbers is 8, and the check explicitly requires n >= 8.",
+      "prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").\n\nClarification: Returns False, since the smallest sum of 4 positive even numbers is 8, and the check explicitly requires n >= 8.",
+      "p1": 0.33525681495666504,
+      "p2": 0.4579847455024719,
+      "mean_p": 0.3966207802295685,
+      "delta": 0.1010059043765068
+    },
+    {
+      "idx": 0,
+      "question": "Can the number n be zero or must it be a positive integer?",
+      "answer": "The function accepts n=0 as input with no restriction enforced, but the actual result would be False since n%2==0 is true for 0 while n>=8 is false.",
+      "prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").\n\nClarification: The function accepts n=0 as input with no restriction enforced, but the actual result would be False since n%2==0 is true for 0 while n>=8 is false.",
+      "p1": 0.3845341205596924,
+      "p2": 0.46801748871803284,
+      "mean_p": 0.4262758046388626,
+      "delta": 0.13066092878580093
+    }
+  ],
+  "top3": [
+    {
+      "idx": 2,
+      "question": "What defines a \"positive even number\" \u2014 must it be strictly greater than zero?",
+      "answer": "An even integer strictly greater than zero (2, 4, 6, ...).",
+      "delta": -0.010436616837978363
+    },
+    {
+      "idx": 4,
+      "question": "How are tie-breaking rules handled if multiple combinations of even numbers sum to n?",
+      "answer": "Not applicable; the function only returns a boolean for whether some decomposition exists, not the decomposition itself, so there's nothing to break ties on.",
+      "delta": 0.021230049431324005
+    },
+    {
+      "idx": 3,
+      "question": "Is the sum allowed to consist of only one even number (e.g., n = 2)?",
+      "answer": "Not allowed; per the docstring the sum must consist of exactly 4 positive even numbers, and the minimum such sum is 2+2+2+2=8, so n=2 returns False.",
+      "delta": 0.038472868502140045
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "What defines a \"positive even number\" \u2014 must it be strictly greater than zero?",
+    "answer": "An even integer strictly greater than zero (2, 4, 6, ...).",
+    "delta": -0.010436616837978363
+  },
+  "next_prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers\n    \"\"\"\n\nClarification: No -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\").\n\nClarification: An even integer strictly greater than zero (2, 4, 6, ...).",
+  "code_prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of some positive even numbers, no -- the numbers being summed must be POSITIVE even numbers, so 0 is excluded (per \"4 positive even numbers\"), An even integer strictly greater than zero (2, 4, 6, ...).\"\"\"",
+  "test_n_pass": 6,
+  "test_n_total": 8
+}

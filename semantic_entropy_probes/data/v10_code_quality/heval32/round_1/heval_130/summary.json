@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"",
+  "baseline_mean_p": 0.45940661430358887,
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "How should the function handle very large values of n that could cause performance issues?",
+      "answer": "Not specifically addressed by the spec; the reference implementation computes the sequence iteratively in a single O(n) pass, so it scales linearly with n without special-casing large n.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Not specifically addressed by the spec; the reference implementation computes the sequence iteratively in a single O(n) pass, so it scales linearly with n without special-casing large n.",
+      "p1": 0.24152353405952454,
+      "p2": 0.2963593304157257,
+      "mean_p": 0.2689414322376251,
+      "delta": -0.19046518206596375
+    },
+    {
+      "idx": 4,
+      "question": "How are the indices of the returned list mapped to the Tribonacci sequence?",
+      "answer": "The returned list's index i directly corresponds to tri(i), for i = 0 to n (the list has n+1 elements: tri(0), tri(1), ..., tri(n)).",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: The returned list's index i directly corresponds to tri(i), for i = 0 to n (the list has n+1 elements: tri(0), tri(1), ..., tri(n)).",
+      "p1": 0.2497626394033432,
+      "p2": 0.35645315051078796,
+      "mean_p": 0.3031078949570656,
+      "delta": -0.15629871934652328
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior when n is a negative number?",
+      "answer": "Not applicable -- the docstring guarantees \"a non-negative integer number n\".",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Not applicable -- the docstring guarantees \"a non-negative integer number n\".",
+      "p1": 0.302481472492218,
+      "p2": 0.3776126503944397,
+      "mean_p": 0.34004706144332886,
+      "delta": -0.11935955286026001
+    },
+    {
+      "idx": 6,
+      "question": "Are there any constraints on the value of n beyond being non-negative?",
+      "answer": "No other constraints are specified beyond n being a non-negative integer.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: No other constraints are specified beyond n being a non-negative integer.",
+      "p1": 0.3084486126899719,
+      "p2": 0.3979456424713135,
+      "mean_p": 0.3531971275806427,
+      "delta": -0.10620948672294617
+    },
+    {
+      "idx": 2,
+      "question": "How should the function handle the case when n is zero?",
+      "answer": "Return [1] -- the single-element list containing just tri(0).",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Return [1] -- the single-element list containing just tri(0).",
+      "p1": 0.3496617376804352,
+      "p2": 0.451772004365921,
+      "mean_p": 0.4007168710231781,
+      "delta": -0.05868974328041077
+    },
+    {
+      "idx": 1,
+      "question": "What are the initial values of the Tribonacci sequence?",
+      "answer": "tri(0) = 1 (implicitly, from the function returning [1] for n=0) and tri(1) = 3, as given directly in the recurrence.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: tri(0) = 1 (implicitly, from the function returning [1] for n=0) and tri(1) = 3, as given directly in the recurrence.",
+      "p1": 0.3793603181838989,
+      "p2": 0.49161282181739807,
+      "mean_p": 0.4354865700006485,
+      "delta": -0.02392004430294037
+    },
+    {
+      "idx": 5,
+      "question": "What data type should be used for the elements in the returned list?",
+      "answer": "Numbers (int or float) -- the even-index formula \"1 + n/2\" and the odd-index formula both use true division (/), so some elements are floats (e.g. tri(2) = 1 + 2/2 = 2.0) even though the docstring examples show them as plain numbers.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Numbers (int or float) -- the even-index formula \"1 + n/2\" and the odd-index formula both use true division (/), so some elements are floats (e.g. tri(2) = 1 + 2/2 = 2.0) even though the docstring examples show them as plain numbers.",
+      "p1": 0.4362865090370178,
+      "p2": 0.45359882712364197,
+      "mean_p": 0.4449426680803299,
+      "delta": -0.014463946223258972
+    },
+    {
+      "idx": 0,
+      "question": "What is the definition of the Tribonacci sequence?",
+      "answer": "tri(1) = 3; tri(n) = 1 + n/2 if n is even; tri(n) = tri(n-1) + tri(n-2) + tri(n+1) if n is odd, per the docstring's recurrence.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: tri(1) = 3; tri(n) = 1 + n/2 if n is even; tri(n) = tri(n-1) + tri(n-2) + tri(n+1) if n is odd, per the docstring's recurrence.",
+      "p1": 0.6313676238059998,
+      "p2": 0.5746351480484009,
+      "mean_p": 0.6030013859272003,
+      "delta": 0.14359477162361145
+    }
+  ],
+  "top3": [
+    {
+      "idx": 7,
+      "question": "How should the function handle very large values of n that could cause performance issues?",
+      "answer": "Not specifically addressed by the spec; the reference implementation computes the sequence iteratively in a single O(n) pass, so it scales linearly with n without special-casing large n.",
+      "delta": -0.19046518206596375
+    },
+    {
+      "idx": 4,
+      "question": "How are the indices of the returned list mapped to the Tribonacci sequence?",
+      "answer": "The returned list's index i directly corresponds to tri(i), for i = 0 to n (the list has n+1 elements: tri(0), tri(1), ..., tri(n)).",
+      "delta": -0.15629871934652328
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior when n is a negative number?",
+      "answer": "Not applicable -- the docstring guarantees \"a non-negative integer number n\".",
+      "delta": -0.11935955286026001
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "How should the function handle very large values of n that could cause performance issues?",
+    "answer": "Not specifically addressed by the spec; the reference implementation computes the sequence iteratively in a single O(n) pass, so it scales linearly with n without special-casing large n.",
+    "delta": -0.19046518206596375
+  },
+  "next_prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Not specifically addressed by the spec; the reference implementation computes the sequence iteratively in a single O(n) pass, so it scales linearly with n without special-casing large n.",
+  "code_prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. Not specifically addressed by the spec;\n    the reference implementation computes the sequence iteratively in a single O(n) pass,\n    so it scales linearly with n without special-casing large n.\"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 10
+}

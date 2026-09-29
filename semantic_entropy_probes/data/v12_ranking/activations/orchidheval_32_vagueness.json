@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_32_vagueness",
+  "questions": [
+    "What is the exact format of the input list xs - does it represent coefficients in ascending or descending order of powers?",
+    "What should the function return if the polynomial has no real zeros?",
+    "How should the function handle the case when all coefficients are zero?",
+    "What is the acceptable tolerance or precision for the returned zero point?",
+    "Should the function handle complex zeros or only real zeros?",
+    "What is the expected behavior when the input list has an odd number of coefficients?",
+    "How should the function behave when the largest coefficient is zero but other coefficients are non-zero?",
+    "What is the specific algorithm or method expected to find the zero - numerical approximation, symbolic solving, or any valid approach?"
+  ],
+  "answers": [
+    "Not addressed by the true spec.",
+    "Not addressed by the true spec; the guarantee ensures a real zero exists.",
+    "Not addressed by the true spec; degenerate case, out of scope.",
+    "Not addressed by the true spec.",
+    "Any one valid zero point is acceptable -- the spec doesn't require a specific selection (smallest/largest); given the even-degree+largest-nonzero-coefficient constraint, whichever root a standard numerical method finds is fine.",
+    "Related: only real zeros are expected, since the guarantee is about real-root existence, not complex roots.",
+    "Not addressed; inputs are assumed to satisfy the stated constraints.",
+    "Not addressed; any correct numerical approach is acceptable."
+  ],
+  "inline_prompts": [
+    "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns a zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees a solution. Not addressed by the true spec.\n    \"\"\"",
+    "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns a zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees a solution.\n    Not addressed by the true spec; the guarantee ensures a real zero exists.\n    \"\"\"",
+    "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns a zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees a solution. Note that\n    Not addressed by the true spec; degenerate case, out of scope.",
+    "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns a zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees a solution. Not addressed by the true spec.\n    \"\"\"",
+    "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns a zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees a solution.\n    Any one valid zero point is acceptable -- the spec doesn't require a specific selection (smallest/largest); given the even-degree+largest-nonzero-coefficient constraint, whichever root a standard numerical method finds is fine.\n    \"\"\"",
+    "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns a zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees a solution.\n    Related: only real zeros are expected, since the guarantee is about real-root existence, not complex roots.\n    \"\"\"",
+    "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns a zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees a solution.\n    Not addressed; inputs are assumed to satisfy the stated constraints.",
+    "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns a zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees a solution.\n    Moreover, the implementation is not addressed; any correct numerical approach is acceptable.\n    \"\"\""
+  ],
+  "tiers": [
+    0,
+    0,
+    0,
+    0,
+    2,
+    1,
+    0,
+    0
+  ]
+}

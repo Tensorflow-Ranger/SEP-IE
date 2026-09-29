@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.",
+  "baseline_mean_p": 0.2744539901614189,
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "Are the lists allowed to be modified in any way other than swapping odd elements from lst1 with even elements from lst2?",
+      "answer": "The check only ever cares about the COUNT of odd elements in lst1 vs even elements in lst2, not the actual swap mechanics; any scheme achieving 'lst1 all even' is implicitly assumed possible whenever even(lst2) >= odd(lst1).",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.\n\nClarification: The check only ever cares about the COUNT of odd elements in lst1 vs even elements in lst2, not the actual swap mechanics; any scheme achieving 'lst1 all even' is implicitly assumed possible whenever even(lst2) >= odd(lst1).",
+      "p1": 0.20472925901412964,
+      "p2": 0.287063866853714,
+      "mean_p": 0.24589656293392181,
+      "delta": -0.0285574272274971
+    },
+    {
+      "idx": 4,
+      "question": "Are the counts of odd numbers in lst1 and even numbers in lst2 case-sensitive (e.g., does 0 count as even)?",
+      "answer": "Yes, the standard parity check (i%2==0) treats 0 as even.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.\n\nClarification: Yes, the standard parity check (i%2==0) treats 0 as even.",
+      "p1": 0.275075763463974,
+      "p2": 0.3216543197631836,
+      "mean_p": 0.2983650416135788,
+      "delta": 0.02391105145215988
+    },
+    {
+      "idx": 0,
+      "question": "Can elements from lst1 be swapped with elements from lst2 even if they are not odd or even?",
+      "answer": "No, only ODD elements in lst1 need to be replaced, and only EVEN elements available in lst2 can be used for replacement; other elements are irrelevant.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.\n\nClarification: No, only ODD elements in lst1 need to be replaced, and only EVEN elements available in lst2 can be used for replacement; other elements are irrelevant.",
+      "p1": 0.2710009813308716,
+      "p2": 0.3332929015159607,
+      "mean_p": 0.30214694142341614,
+      "delta": 0.027692951261997223
+    },
+    {
+      "idx": 5,
+      "question": "Are the lists allowed to be empty?",
+      "answer": "Not applicable -- per the docstring, 'It is assumed that the input lists will be non-empty.'",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.\n\nClarification: Not applicable -- per the docstring, 'It is assumed that the input lists will be non-empty.'",
+      "p1": 0.2912803292274475,
+      "p2": 0.34516897797584534,
+      "mean_p": 0.3182246536016464,
+      "delta": 0.04377066344022751
+    },
+    {
+      "idx": 3,
+      "question": "What happens if lst2 has no even numbers and lst1 has odd numbers?",
+      "answer": "even(lst2)=0 < odd(lst1)>0, so it returns 'NO'.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.\n\nClarification: even(lst2)=0 < odd(lst1)>0, so it returns 'NO'.",
+      "p1": 0.29287898540496826,
+      "p2": 0.3522757291793823,
+      "mean_p": 0.3225773572921753,
+      "delta": 0.04812336713075638
+    },
+    {
+      "idx": 7,
+      "question": "Are the elements in the lists allowed to be non-integer values?",
+      "answer": "Not applicable -- the input is guaranteed to be lists of numbers per the type hints, and the parity check assumes integers.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.\n\nClarification: Not applicable -- the input is guaranteed to be lists of numbers per the type hints, and the parity check assumes integers.",
+      "p1": 0.3130964934825897,
+      "p2": 0.34875547885894775,
+      "mean_p": 0.33092598617076874,
+      "delta": 0.05647199600934982
+    },
+    {
+      "idx": 2,
+      "question": "What happens if lst1 is already all even numbers?",
+      "answer": "The odd count in lst1 is 0, so 0 <= even(lst2) is always true regardless of lst2, returning 'YES'.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.\n\nClarification: The odd count in lst1 is 0, so 0 <= even(lst2) is always true regardless of lst2, returning 'YES'.",
+      "p1": 0.29869306087493896,
+      "p2": 0.37565404176712036,
+      "mean_p": 0.33717355132102966,
+      "delta": 0.06271956115961075
+    },
+    {
+      "idx": 6,
+      "question": "What if lst1 and lst2 have the same number of odd and even elements respectively?",
+      "answer": "even(lst2) >= odd(lst1) is satisfied (equal counts), so it returns 'YES'.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.\n\nClarification: even(lst2) >= odd(lst1) is satisfied (equal counts), so it returns 'YES'.",
+      "p1": 0.3834635019302368,
+      "p2": 0.3952604830265045,
+      "mean_p": 0.38936199247837067,
+      "delta": 0.11490800231695175
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "Are the lists allowed to be modified in any way other than swapping odd elements from lst1 with even elements from lst2?",
+      "answer": "The check only ever cares about the COUNT of odd elements in lst1 vs even elements in lst2, not the actual swap mechanics; any scheme achieving 'lst1 all even' is implicitly assumed possible whenever even(lst2) >= odd(lst1).",
+      "delta": -0.0285574272274971
+    },
+    {
+      "idx": 4,
+      "question": "Are the counts of odd numbers in lst1 and even numbers in lst2 case-sensitive (e.g., does 0 count as even)?",
+      "answer": "Yes, the standard parity check (i%2==0) treats 0 as even.",
+      "delta": 0.02391105145215988
+    },
+    {
+      "idx": 0,
+      "question": "Can elements from lst1 be swapped with elements from lst2 even if they are not odd or even?",
+      "answer": "No, only ODD elements in lst1 need to be replaced, and only EVEN elements available in lst2 can be used for replacement; other elements are irrelevant.",
+      "delta": 0.027692951261997223
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "Are the lists allowed to be modified in any way other than swapping odd elements from lst1 with even elements from lst2?",
+    "answer": "The check only ever cares about the COUNT of odd elements in lst1 vs even elements in lst2, not the actual swap mechanics; any scheme achieving 'lst1 all even' is implicitly assumed possible whenever even(lst2) >= odd(lst1).",
+    "delta": -0.0285574272274971
+  },
+  "next_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\n\nClarification: The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.\n\nClarification: The check only ever cares about the COUNT of odd elements in lst1 vs even elements in lst2, not the actual swap mechanics; any scheme achieving 'lst1 all even' is implicitly assumed possible whenever even(lst2) >= odd(lst1).",
+  "code_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers. Elements can be exchanged between lst1 and lst2 to achieve this goal,\n    specifically by swapping any odd element of lst1 with any even element of lst2, one-for-one;\n    the check only ever cares about the COUNT of odd elements in lst1 vs even elements in lst2, not the actual swap mechanics; any scheme achieving 'lst1 all even' is implicitly assumed possible whenever even(lst2) >= odd(lst1).\"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 7
+}

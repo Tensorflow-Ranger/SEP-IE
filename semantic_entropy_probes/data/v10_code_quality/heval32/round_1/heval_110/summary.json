@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"",
+  "baseline_mean_p": 0.5223518460988998,
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "What defines a valid exchange between the lists?",
+      "answer": "Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).",
+      "p1": 0.2714604139328003,
+      "p2": 0.3300422132015228,
+      "mean_p": 0.30075131356716156,
+      "delta": -0.22160053253173828
+    },
+    {
+      "idx": 6,
+      "question": "How are ties resolved when there are multiple ways to achieve the goal?",
+      "answer": "Not applicable -- the function only needs to determine feasibility (YES/NO), not produce a specific exchange sequence, so there's no tie to resolve.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Not applicable -- the function only needs to determine feasibility (YES/NO), not produce a specific exchange sequence, so there's no tie to resolve.",
+      "p1": 0.3689630627632141,
+      "p2": 0.40357527136802673,
+      "mean_p": 0.3862691670656204,
+      "delta": -0.13608267903327942
+    },
+    {
+      "idx": 5,
+      "question": "Are negative numbers considered in determining evenness?",
+      "answer": "Yes, evenness is determined by i % 2 == 0 (or == 1 for odd), which works the same for negative integers as for positive ones in Python.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, evenness is determined by i % 2 == 0 (or == 1 for odd), which works the same for negative integers as for positive ones in Python.",
+      "p1": 0.4133807420730591,
+      "p2": 0.41971221566200256,
+      "mean_p": 0.4165464788675308,
+      "delta": -0.10580536723136902
+    },
+    {
+      "idx": 7,
+      "question": "Are the lists allowed to have non-integer values?",
+      "answer": "Not applicable -- the function operates on lists of numbers where parity (i % 2) is checked, implying integer values as per \"lists of numbers\" in the spec.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Not applicable -- the function operates on lists of numbers where parity (i % 2) is checked, implying integer values as per \"lists of numbers\" in the spec.",
+      "p1": 0.4162701666355133,
+      "p2": 0.4349588453769684,
+      "mean_p": 0.42561450600624084,
+      "delta": -0.096737340092659
+    },
+    {
+      "idx": 1,
+      "question": "Are the lists allowed to be modified in size during exchanges?",
+      "answer": "No -- an exchange is a swap (one-for-one), so both lists keep their original sizes; feasibility is determined by counting, not an actual size-changing operation.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: No -- an exchange is a swap (one-for-one), so both lists keep their original sizes; feasibility is determined by counting, not an actual size-changing operation.",
+      "p1": 0.42951664328575134,
+      "p2": 0.4344850778579712,
+      "mean_p": 0.43200086057186127,
+      "delta": -0.09035098552703857
+    },
+    {
+      "idx": 3,
+      "question": "Can elements be moved from lst1 to lst2 and vice versa?",
+      "answer": "Yes, exchanges are bidirectional swaps between the two lists (an odd element leaves lst1, an even element enters it, effectively swapping positions with an element of lst2).",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, exchanges are bidirectional swaps between the two lists (an odd element leaves lst1, an even element enters it, effectively swapping positions with an element of lst2).",
+      "p1": 0.4468288719654083,
+      "p2": 0.42639726400375366,
+      "mean_p": 0.436613067984581,
+      "delta": -0.08573877811431885
+    },
+    {
+      "idx": 4,
+      "question": "What happens if one of the lists is empty?",
+      "answer": "It's handled by the same counting logic: e.g. an empty lst1 has 0 odd elements, so the answer is always \"YES\" (0 <= even count needed); an empty lst2 has 0 even elements, so it depends on whether lst1 already has 0 odd elements.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: It's handled by the same counting logic: e.g. an empty lst1 has 0 odd elements, so the answer is always \"YES\" (0 <= even count needed); an empty lst2 has 0 even elements, so it depends on whether lst1 already has 0 odd elements.",
+      "p1": 0.4364820420742035,
+      "p2": 0.4370356500148773,
+      "mean_p": 0.4367588460445404,
+      "delta": -0.08559300005435944
+    },
+    {
+      "idx": 0,
+      "question": "Can elements be exchanged multiple times between the lists or only once?",
+      "answer": "There's no limit on the number of exchanges; the docstring explicitly states \"There is no limit on the number of exchanged elements between lst1 and lst2.\"",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: There's no limit on the number of exchanges; the docstring explicitly states \"There is no limit on the number of exchanged elements between lst1 and lst2.\"",
+      "p1": 0.4460213780403137,
+      "p2": 0.4487663805484772,
+      "mean_p": 0.44739387929439545,
+      "delta": -0.0749579668045044
+    }
+  ],
+  "top3": [
+    {
+      "idx": 2,
+      "question": "What defines a valid exchange between the lists?",
+      "answer": "Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).",
+      "delta": -0.22160053253173828
+    },
+    {
+      "idx": 6,
+      "question": "How are ties resolved when there are multiple ways to achieve the goal?",
+      "answer": "Not applicable -- the function only needs to determine feasibility (YES/NO), not produce a specific exchange sequence, so there's no tie to resolve.",
+      "delta": -0.13608267903327942
+    },
+    {
+      "idx": 5,
+      "question": "Are negative numbers considered in determining evenness?",
+      "answer": "Yes, evenness is determined by i % 2 == 0 (or == 1 for odd), which works the same for negative integers as for positive ones in Python.",
+      "delta": -0.10580536723136902
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "What defines a valid exchange between the lists?",
+    "answer": "Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).",
+    "delta": -0.22160053253173828
+  },
+  "next_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Swapping any odd element of lst1 with any even element of lst2, one-for-one; the reference solution determines feasibility by checking whether lst2 has at least as many even numbers as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).",
+  "code_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers. Elements can be exchanged between lst1 and lst2 to achieve this goal,\n    specifically by swapping any odd element of lst1 with any even element of lst2, one-for-one;\n    the reference solution determines feasibility by checking whether lst2 has at least as many even numbers\n    as lst1 has odd numbers (count(even in lst2) >= count(odd in lst1)).\"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 7
+}

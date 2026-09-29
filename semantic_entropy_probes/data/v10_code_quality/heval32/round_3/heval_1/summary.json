@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.",
+  "baseline_mean_p": 0.270001158118248,
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "How should the function handle cases where the depth returns to zero multiple times before the end of the string?",
+      "answer": "Each time depth returns to 0 marks the end of one group; the implementation immediately starts collecting a new group from the next character. So multiple depth-zero returns before the string ends simply produce multiple separate entries in the output list.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.\n\nClarification: Each time depth returns to 0 marks the end of one group; the implementation immediately starts collecting a new group from the next character. So multiple depth-zero returns before the string ends simply produce multiple separate entries in the output list.",
+      "p1": 0.18583324551582336,
+      "p2": 0.33661791682243347,
+      "mean_p": 0.2612255811691284,
+      "delta": -0.008775576949119568
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle cases where the depth never returns to zero after the first opening parenthesis?",
+      "answer": "This cannot occur in valid input: the input is guaranteed to consist only of fully balanced groups, so depth always returns to zero by the end.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.\n\nClarification: This cannot occur in valid input: the input is guaranteed to consist only of fully balanced groups, so depth always returns to zero by the end.",
+      "p1": 0.1796482503414154,
+      "p2": 0.346629798412323,
+      "mean_p": 0.2631390243768692,
+      "delta": -0.006862133741378784
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior when the input string contains non-parenthesis characters other than spaces?",
+      "answer": "This does not occur: the input consists only of parentheses ('(' and ')') and spaces, per the docstring; spaces are ignored and no other characters appear.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.\n\nClarification: This does not occur: the input consists only of parentheses ('(' and ')') and spaces, per the docstring; spaces are ignored and no other characters appear.",
+      "p1": 0.19920077919960022,
+      "p2": 0.32919615507125854,
+      "mean_p": 0.2641984671354294,
+      "delta": -0.0058026909828186035
+    },
+    {
+      "idx": 1,
+      "question": "What defines the starting and ending of a group when there are multiple layers of nesting?",
+      "answer": "A group is the maximal contiguous balanced parenthesis span: it starts where depth goes from 0 to 1 and ends where depth returns to 0. Any parentheses nested inside that span belong to the same single group.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.\n\nClarification: A group is the maximal contiguous balanced parenthesis span: it starts where depth goes from 0 to 1 and ends where depth returns to 0. Any parentheses nested inside that span belong to the same single group.",
+      "p1": 0.21092204749584198,
+      "p2": 0.34567511081695557,
+      "mean_p": 0.2782985791563988,
+      "delta": 0.008297421038150787
+    },
+    {
+      "idx": 7,
+      "question": "How should the function handle groups that are separated by non-parenthesis characters other than spaces?",
+      "answer": "Groups are delimited purely by depth returning to 0. The input contains no separator characters other than spaces (which are ignored), so adjacency of groups does not merge them; each depth-0-to-depth-0 span is its own group.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.\n\nClarification: Groups are delimited purely by depth returning to 0. The input contains no separator characters other than spaces (which are ignored), so adjacency of groups does not merge them; each depth-0-to-depth-0 span is its own group.",
+      "p1": 0.22630874812602997,
+      "p2": 0.35710960626602173,
+      "mean_p": 0.29170917719602585,
+      "delta": 0.021708019077777863
+    },
+    {
+      "idx": 4,
+      "question": "How should the function handle overlapping groups that are not properly nested?",
+      "answer": "This does not occur in valid input, since every group is guaranteed balanced and non-overlapping.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.\n\nClarification: This does not occur in valid input, since every group is guaranteed balanced and non-overlapping.",
+      "p1": 0.23936636745929718,
+      "p2": 0.3660621643066406,
+      "mean_p": 0.3027142658829689,
+      "delta": 0.03271310776472092
+    },
+    {
+      "idx": 0,
+      "question": "How should the function handle parentheses that are not properly balanced or nested?",
+      "answer": "This does not occur in valid input: every group is a well-formed, balanced sequence of parentheses (each '(' has a matching ')'), so unbalanced or improperly-nested sequences never appear.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.\n\nClarification: This does not occur in valid input: every group is a well-formed, balanced sequence of parentheses (each '(' has a matching ')'), so unbalanced or improperly-nested sequences never appear.",
+      "p1": 0.24407869577407837,
+      "p2": 0.3639321029186249,
+      "mean_p": 0.3040053993463516,
+      "delta": 0.03400424122810364
+    },
+    {
+      "idx": 5,
+      "question": "What is the expected behavior when the input string is empty or contains only spaces?",
+      "answer": "Return an empty list.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.\n\nClarification: Return an empty list.",
+      "p1": 0.5771980285644531,
+      "p2": 0.5215637683868408,
+      "mean_p": 0.549380898475647,
+      "delta": 0.279379740357399
+    }
+  ],
+  "top3": [
+    {
+      "idx": 2,
+      "question": "How should the function handle cases where the depth returns to zero multiple times before the end of the string?",
+      "answer": "Each time depth returns to 0 marks the end of one group; the implementation immediately starts collecting a new group from the next character. So multiple depth-zero returns before the string ends simply produce multiple separate entries in the output list.",
+      "delta": -0.008775576949119568
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle cases where the depth never returns to zero after the first opening parenthesis?",
+      "answer": "This cannot occur in valid input: the input is guaranteed to consist only of fully balanced groups, so depth always returns to zero by the end.",
+      "delta": -0.006862133741378784
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior when the input string contains non-parenthesis characters other than spaces?",
+      "answer": "This does not occur: the input consists only of parentheses ('(' and ')') and spaces, per the docstring; spaces are ignored and no other characters appear.",
+      "delta": -0.0058026909828186035
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "How should the function handle cases where the depth returns to zero multiple times before the end of the string?",
+    "answer": "Each time depth returns to 0 marks the end of one group; the implementation immediately starts collecting a new group from the next character. So multiple depth-zero returns before the string ends simply produce multiple separate entries in the output list.",
+    "delta": -0.008775576949119568
+  },
+  "next_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated).\n\nClarification: A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.\n\nClarification: Each time depth returns to 0 marks the end of one group; the implementation immediately starts collecting a new group from the next character. So multiple depth-zero returns before the string ends simply produce multiple separate entries in the output list.",
+  "code_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); each time depth returns to 0 marks the end of one group; the implementation immediately starts collecting a new group from the next character. Everything in between, however deeply nested, belongs to that one group. Each occurrence is treated independently and included separately in the output list, in the order encountered (duplicates are not deduplicated). Ignore any spaces in the input string.\n    \"\"\"",
+  "test_n_pass": 4,
+  "test_n_total": 4
+}

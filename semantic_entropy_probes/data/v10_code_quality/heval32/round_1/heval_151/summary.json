@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+  "baseline_mean_p": 0.29719221591949463,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Are negative odd numbers considered valid for the calculation?",
+      "answer": "No -- the docstring explicitly says to \"ignore numbers that are negative\", so negative odd numbers are excluded regardless of oddness.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''\n\nClarification: No -- the docstring explicitly says to \"ignore numbers that are negative\", so negative odd numbers are excluded regardless of oddness.",
+      "p1": 0.16520074009895325,
+      "p2": 0.3846161365509033,
+      "mean_p": 0.2749084383249283,
+      "delta": -0.022283777594566345
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle non-numeric elements in the list?",
+      "answer": "Not applicable -- the docstring specifies \"a list of numbers\".",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''\n\nClarification: Not applicable -- the docstring specifies \"a list of numbers\".",
+      "p1": 0.22081351280212402,
+      "p2": 0.41462260484695435,
+      "mean_p": 0.3177180588245392,
+      "delta": 0.020525842905044556
+    },
+    {
+      "idx": 5,
+      "question": "What happens if the list contains strings that can be converted to numbers?",
+      "answer": "Not applicable -- the docstring specifies \"a list of numbers\", not strings.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''\n\nClarification: Not applicable -- the docstring specifies \"a list of numbers\", not strings.",
+      "p1": 0.23444847762584686,
+      "p2": 0.4030218720436096,
+      "mean_p": 0.31873517483472824,
+      "delta": 0.021542958915233612
+    },
+    {
+      "idx": 1,
+      "question": "Does the function consider zero as an even number?",
+      "answer": "Zero is excluded from the sum regardless of parity classification, since the filter requires i > 0 (zero fails the positivity check) -- so whether 0 is \"even\" is moot for this function.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''\n\nClarification: Zero is excluded from the sum regardless of parity classification, since the filter requires i > 0 (zero fails the positivity check) -- so whether 0 is \"even\" is moot for this function.",
+      "p1": 0.2758038640022278,
+      "p2": 0.41158950328826904,
+      "mean_p": 0.3436966836452484,
+      "delta": 0.046504467725753784
+    },
+    {
+      "idx": 2,
+      "question": "What defines a \"valid odd number\" in the context of this function?",
+      "answer": "A number that is positive (i > 0), odd (i % 2 != 0), and an integer (no decimal point in its string representation) -- all three conditions must hold.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''\n\nClarification: A number that is positive (i > 0), odd (i % 2 != 0), and an integer (no decimal point in its string representation) -- all three conditions must hold.",
+      "p1": 0.3263724148273468,
+      "p2": 0.39188113808631897,
+      "mean_p": 0.3591267764568329,
+      "delta": 0.06193456053733826
+    },
+    {
+      "idx": 7,
+      "question": "Is a number like -0.0 considered valid and treated as zero?",
+      "answer": "No -- it fails the positivity check (i > 0 is False for -0.0 as well as being a float with \".\" in its string form), so it's excluded either way.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''\n\nClarification: No -- it fails the positivity check (i > 0 is False for -0.0 as well as being a float with \".\" in its string form), so it's excluded either way.",
+      "p1": 0.5003058314323425,
+      "p2": 0.5149574279785156,
+      "mean_p": 0.5076316297054291,
+      "delta": 0.21043941378593445
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle numbers that are not integers, such as 3.0?",
+      "answer": "Excluded -- str(3.0) contains \".\" so it fails the `\".\" not in str(i)` check, even though 3.0 is numerically a whole number.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''\n\nClarification: Excluded -- str(3.0) contains \".\" so it fails the `\".\" not in str(i)` check, even though 3.0 is numerically a whole number.",
+      "p1": 0.5449721217155457,
+      "p2": 0.5253288745880127,
+      "mean_p": 0.5351504981517792,
+      "delta": 0.23795828223228455
+    },
+    {
+      "idx": 4,
+      "question": "Are floating-point numbers with decimal parts considered valid inputs?",
+      "answer": "No -- they are excluded via the `\".\" not in str(i)` check, which filters out any number with a fractional/decimal representation.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''\n\nClarification: No -- they are excluded via the `\".\" not in str(i)` check, which filters out any number with a fractional/decimal representation.",
+      "p1": 0.5480238795280457,
+      "p2": 0.5293066501617432,
+      "mean_p": 0.5386652648448944,
+      "delta": 0.24147304892539978
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Are negative odd numbers considered valid for the calculation?",
+      "answer": "No -- the docstring explicitly says to \"ignore numbers that are negative\", so negative odd numbers are excluded regardless of oddness.",
+      "delta": -0.022283777594566345
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle non-numeric elements in the list?",
+      "answer": "Not applicable -- the docstring specifies \"a list of numbers\".",
+      "delta": 0.020525842905044556
+    },
+    {
+      "idx": 5,
+      "question": "What happens if the list contains strings that can be converted to numbers?",
+      "answer": "Not applicable -- the docstring specifies \"a list of numbers\", not strings.",
+      "delta": 0.021542958915233612
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Are negative odd numbers considered valid for the calculation?",
+    "answer": "No -- the docstring explicitly says to \"ignore numbers that are negative\", so negative odd numbers are excluded regardless of oddness.",
+    "delta": -0.022283777594566345
+  },
+  "next_prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''\n\nClarification: No -- the docstring explicitly says to \"ignore numbers that are negative\", so negative odd numbers are excluded regardless of oddness.",
+  "code_prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. Negative numbers are ignored, so negative odd numbers are\n    excluded regardless of oddness.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+  "test_n_pass": 5,
+  "test_n_total": 7
+}

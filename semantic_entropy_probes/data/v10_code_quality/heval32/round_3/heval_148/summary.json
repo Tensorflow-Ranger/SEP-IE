@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.",
+  "baseline_mean_p": 0.2734699994325638,
+  "candidates": [
+    {
+      "idx": 6,
+      "question": "How are the planets ordered if planet1 is closer to the Sun than planet2?",
+      "answer": "Returns the planets strictly between them, in ascending order of proximity to the sun.",
+      "prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.\n\nClarification: Returns the planets strictly between them, in ascending order of proximity to the sun.",
+      "p1": 0.20274193584918976,
+      "p2": 0.2986249625682831,
+      "mean_p": 0.2506834492087364,
+      "delta": -0.022786550223827362
+    },
+    {
+      "idx": 7,
+      "question": "What is the exact list of valid planet names to check against?",
+      "answer": "(\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"), in order of increasing distance from the Sun.",
+      "prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.\n\nClarification: (\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"), in order of increasing distance from the Sun.",
+      "p1": 0.21534514427185059,
+      "p2": 0.2860349118709564,
+      "mean_p": 0.2506900280714035,
+      "delta": -0.02277997136116028
+    },
+    {
+      "idx": 0,
+      "question": "What is the order of the planets if planet1 is farther from the Sun than planet2?",
+      "answer": "The returned tuple is still ordered by proximity to the sun (ascending index order), regardless of which of planet1/planet2 was passed first -- the code handles both index orders explicitly.",
+      "prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.\n\nClarification: The returned tuple is still ordered by proximity to the sun (ascending index order), regardless of which of planet1/planet2 was passed first -- the code handles both index orders explicitly.",
+      "p1": 0.23766422271728516,
+      "p2": 0.31080421805381775,
+      "mean_p": 0.27423422038555145,
+      "delta": 0.0007642209529876709
+    },
+    {
+      "idx": 1,
+      "question": "What should be done if both planet1 and planet2 are invalid?",
+      "answer": "Returns an empty tuple (), same as when only one is invalid.",
+      "prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.\n\nClarification: Returns an empty tuple (), same as when only one is invalid.",
+      "p1": 0.2749685049057007,
+      "p2": 0.31385624408721924,
+      "mean_p": 0.29441237449645996,
+      "delta": 0.02094237506389618
+    },
+    {
+      "idx": 3,
+      "question": "What happens if planet1 and planet2 are the same planet?",
+      "answer": "Returns an empty tuple (), explicitly checked via `planet1 == planet2`.",
+      "prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.\n\nClarification: Returns an empty tuple (), explicitly checked via `planet1 == planet2`.",
+      "p1": 0.2623392343521118,
+      "p2": 0.3298201262950897,
+      "mean_p": 0.29607968032360077,
+      "delta": 0.022609680891036987
+    },
+    {
+      "idx": 5,
+      "question": "What is the expected behavior if one of the planets is invalid but the other is valid?",
+      "answer": "Returns an empty tuple (), since the validity check requires BOTH names to be valid.",
+      "prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.\n\nClarification: Returns an empty tuple (), since the validity check requires BOTH names to be valid.",
+      "p1": 0.26479238271713257,
+      "p2": 0.32757100462913513,
+      "mean_p": 0.29618169367313385,
+      "delta": 0.02271169424057007
+    },
+    {
+      "idx": 2,
+      "question": "Are the planet names case-sensitive for the input parameters?",
+      "answer": "Yes -- the check is a direct membership test against the exact-cased tuple of planet names, so a differently-cased name would not match and is treated as invalid.",
+      "prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.\n\nClarification: Yes -- the check is a direct membership test against the exact-cased tuple of planet names, so a differently-cased name would not match and is treated as invalid.",
+      "p1": 0.262893408536911,
+      "p2": 0.3295319676399231,
+      "mean_p": 0.29621268808841705,
+      "delta": 0.02274268865585327
+    },
+    {
+      "idx": 4,
+      "question": "How are the planets ordered if planet1 and planet2 are adjacent?",
+      "answer": "The slice between adjacent indices is empty, so an empty tuple () is returned.",
+      "prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.\n\nClarification: The slice between adjacent indices is empty, so an empty tuple () is returned.",
+      "p1": 0.2683161795139313,
+      "p2": 0.3396167755126953,
+      "mean_p": 0.3039664775133133,
+      "delta": 0.03049647808074951
+    }
+  ],
+  "top3": [
+    {
+      "idx": 6,
+      "question": "How are the planets ordered if planet1 is closer to the Sun than planet2?",
+      "answer": "Returns the planets strictly between them, in ascending order of proximity to the sun.",
+      "delta": -0.022786550223827362
+    },
+    {
+      "idx": 7,
+      "question": "What is the exact list of valid planet names to check against?",
+      "answer": "(\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"), in order of increasing distance from the Sun.",
+      "delta": -0.02277997136116028
+    },
+    {
+      "idx": 0,
+      "question": "What is the order of the planets if planet1 is farther from the Sun than planet2?",
+      "answer": "The returned tuple is still ordered by proximity to the sun (ascending index order), regardless of which of planet1/planet2 was passed first -- the code handles both index orders explicitly.",
+      "delta": 0.0007642209529876709
+    }
+  ],
+  "chosen": {
+    "idx": 6,
+    "question": "How are the planets ordered if planet1 is closer to the Sun than planet2?",
+    "answer": "Returns the planets strictly between them, in ascending order of proximity to the sun.",
+    "delta": -0.022786550223827362
+  },
+  "next_prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n\nClarification: Yes -- matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name.\n\nClarification: Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.\n\nClarification: Returns the planets strictly between them, in ascending order of proximity to the sun.",
+  "code_prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closest to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune. Matching is a literal `in`/`.index()` check against the exact-case tuple of names (\"Mercury\", \"Venus\", ...), so a different-case input (e.g. \"mercury\") would not match and would be treated as an invalid planet name. The returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves. Returns the planets strictly between them, in ascending order of proximity to the sun.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing some planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''",
+  "test_n_pass": 7,
+  "test_n_total": 7
+}

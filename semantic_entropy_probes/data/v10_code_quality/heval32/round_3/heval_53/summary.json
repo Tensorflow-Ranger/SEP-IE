@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.",
+  "baseline_mean_p": 0.18670760095119476,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Does the function handle negative integers correctly?",
+      "answer": "Yes, handled correctly via normal addition (e.g. add(-2, 3) == 1).",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.\n\nClarification: Yes, handled correctly via normal addition (e.g. add(-2, 3) == 1).",
+      "p1": 0.13660457730293274,
+      "p2": 0.2751272916793823,
+      "mean_p": 0.20586593449115753,
+      "delta": 0.01915833353996277
+    },
+    {
+      "idx": 1,
+      "question": "What happens if non-integer values are passed as arguments?",
+      "answer": "Not applicable -- inputs are guaranteed to be integers per the type hints.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.\n\nClarification: Not applicable -- inputs are guaranteed to be integers per the type hints.",
+      "p1": 0.1325465589761734,
+      "p2": 0.2847350537776947,
+      "mean_p": 0.20864080637693405,
+      "delta": 0.02193320542573929
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior if the function is called with non-number types?",
+      "answer": "Not applicable -- inputs are guaranteed to be integers per the type hints.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.\n\nClarification: Not applicable -- inputs are guaranteed to be integers per the type hints.",
+      "p1": 0.1325465589761734,
+      "p2": 0.2847350537776947,
+      "mean_p": 0.20864080637693405,
+      "delta": 0.02193320542573929
+    },
+    {
+      "idx": 5,
+      "question": "How does the function handle overflow in integer addition?",
+      "answer": "Not applicable -- Python integers don't overflow.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.\n\nClarification: Not applicable -- Python integers don't overflow.",
+      "p1": 0.1423744112253189,
+      "p2": 0.2824828326702118,
+      "mean_p": 0.21242862194776535,
+      "delta": 0.025721020996570587
+    },
+    {
+      "idx": 3,
+      "question": "Are there any specific edge cases, such as adding zero, that need special handling?",
+      "answer": "Handled by normal addition, no special-casing needed.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.\n\nClarification: Handled by normal addition, no special-casing needed.",
+      "p1": 0.16466712951660156,
+      "p2": 0.27259424328804016,
+      "mean_p": 0.21863068640232086,
+      "delta": 0.0319230854511261
+    },
+    {
+      "idx": 4,
+      "question": "What is the expected behavior when one or both arguments are very large?",
+      "answer": "Handled via Python's native arbitrary-precision integers; no overflow occurs.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.\n\nClarification: Handled via Python's native arbitrary-precision integers; no overflow occurs.",
+      "p1": 0.16631633043289185,
+      "p2": 0.29327842593193054,
+      "mean_p": 0.2297973781824112,
+      "delta": 0.04308977723121643
+    },
+    {
+      "idx": 6,
+      "question": "Is the function expected to return a float or strictly an integer when adding integers?",
+      "answer": "Returns whatever x+y naturally produces; since both x and y are guaranteed ints, the result is an int.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.\n\nClarification: Returns whatever x+y naturally produces; since both x and y are guaranteed ints, the result is an int.",
+      "p1": 0.16807909309864044,
+      "p2": 0.3220149278640747,
+      "mean_p": 0.24504701048135757,
+      "delta": 0.05833940953016281
+    },
+    {
+      "idx": 2,
+      "question": "How does the function treat floating-point numbers passed as integers?",
+      "answer": "Not applicable, same reasoning -- the guaranteed input type is int.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.\n\nClarification: Not applicable, same reasoning -- the guaranteed input type is int.",
+      "p1": 0.2037854641675949,
+      "p2": 0.34950029850006104,
+      "mean_p": 0.276642881333828,
+      "delta": 0.08993528038263321
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Does the function handle negative integers correctly?",
+      "answer": "Yes, handled correctly via normal addition (e.g. add(-2, 3) == 1).",
+      "delta": 0.01915833353996277
+    },
+    {
+      "idx": 1,
+      "question": "What happens if non-integer values are passed as arguments?",
+      "answer": "Not applicable -- inputs are guaranteed to be integers per the type hints.",
+      "delta": 0.02193320542573929
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior if the function is called with non-number types?",
+      "answer": "Not applicable -- inputs are guaranteed to be integers per the type hints.",
+      "delta": 0.02193320542573929
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Does the function handle negative integers correctly?",
+    "answer": "Yes, handled correctly via normal addition (e.g. add(-2, 3) == 1).",
+    "delta": 0.01915833353996277
+  },
+  "next_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.\n\nClarification: None; it's a single O(1) addition operation with no performance edge cases.\n\nClarification: Yes, handled correctly via normal addition (e.g. add(-2, 3) == 1).",
+  "code_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. Yes, handled correctly via normal addition (e.g. add(-2, 3) == 1). None; it's a single O(1) addition operation with no performance edge cases.\"\"\"",
+  "test_n_pass": 105,
+  "test_n_total": 105
+}

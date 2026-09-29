@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_115_vagueness",
+  "questions": [
+    "Does \"handle all water\" mean every well must end up completely empty?",
+    "Can a single operation apply to only one well, or could it be shared across multiple wells at once?",
+    "Is the total operation count the sum of per-well operation counts, computed independently per row?",
+    "Is bucket capacity the same for every well?",
+    "What does \"handle\" mean precisely if not fully removing all water — could it include leaving some water below a threshold?",
+    "Can capacity be zero?",
+    "Is grid guaranteed to be rectangular?",
+    "What is returned for a well that already contains zero water?"
+  ],
+  "answers": [
+    "Yes, the goal is to fully empty every well of all its water.",
+    "No, one operation always applies to exactly one well — it lowers one bucket into one well only.",
+    "Yes, total operations = sum of ceil(well_units/capacity) computed independently per well/row.",
+    "Yes, already stated: capacity is the same for every well.",
+    "'Handle' means fully removing all water; there's no partial-removal threshold — it's the bucket-lowering count needed to empty each well completely.",
+    "Not specified beyond what's given; assume capacity is always positive.",
+    "Not specified beyond what's given; assume grid is rectangular.",
+    "Zero operations, since there's no water to remove."
+  ],
+  "inline_prompts": [
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Yes, the goal is to fully empty every well of all its water.\n    Each well has a corresponding bucket that can be used to extract water from it,\n    and all buckets have the same capacity.\n    Your task is to calculate the number of operations needed to handle all water in the wells.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. No, one operation always applies to exactly one well — it lowers one bucket into one well only. Each well has a corresponding bucket that can be used to extract water from it,\n    and all buckets have the same capacity.\n    Your task is to calculate the number of operations needed to handle all water in the wells.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Yes, total operations = sum of ceil(well_units/capacity) computed independently per well/row. Each well has a corresponding bucket that can be used to extract water from it,\n    and all buckets have the same capacity.\n    Your task is to calculate the number of operations needed to handle all water in the wells.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it,\n    and all buckets have the same capacity. Yes, already stated: capacity is the same for every well.\n    Your task is to calculate the number of operations needed to handle all water in the wells.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it,\n    and all buckets have the same capacity. Handle means fully removing all water;\n    there's no partial-removal threshold — it's the bucket-lowering count needed to empty each well completely.\n    Your task is to calculate the number of operations needed to handle all water in the wells.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it,\n    and all buckets have the same capacity. Assume capacity is always positive.\n    Your task is to calculate the number of operations needed to handle all water in the wells.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Not specified beyond what's given; assume grid is rectangular. Each well has a corresponding bucket that can be used to extract water from it,\n    and all buckets have the same capacity.\n    Your task is to calculate the number of operations needed to handle all water in the wells.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. If there is no water in the well,\n    zero operations, since there's no water to remove. Each well has a corresponding bucket that can be used to extract water from it,\n    and all buckets have the same capacity.\n    Your task is to calculate the number of operations needed to handle all water in the wells.\n    \"\"\""
+  ],
+  "tiers": [
+    1,
+    2,
+    2,
+    0,
+    2,
+    0,
+    0,
+    0
+  ]
+}

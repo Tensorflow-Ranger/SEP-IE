@@ -35,3 +35,17 @@ def load_activation_bundle(activations_dir: Path):
         f"activation rows ({acts.shape[0]}) != metadata rows ({len(meta_rows)})"
     )
     return acts, labels, groups, token_lens, meta_rows
+
+
+def load_combined_activation_bundle(activations_dir: Path):
+    """Like load_activation_bundle, plus dataset_source and ambiguity_type arrays.
+
+    For the combined multi-source dataset (build_combined_dataset.py /
+    src/combined_splits.py) -- `label` here is binary (0=clear, 1=ambiguous),
+    and `dataset_source` identifies which of the three source datasets each
+    row came from (see src/combined_splits.py.DATASET_SOURCES).
+    """
+    acts, labels, groups, token_lens, meta_rows = load_activation_bundle(activations_dir)
+    dataset_source = np.array([m["dataset_source"] for m in meta_rows])
+    ambiguity_type = np.array([m["ambiguity_type"] for m in meta_rows])
+    return acts, labels, groups, token_lens, dataset_source, ambiguity_type, meta_rows

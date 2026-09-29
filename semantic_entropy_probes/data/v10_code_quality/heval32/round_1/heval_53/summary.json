@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+  "baseline_mean_p": 0.6396454572677612,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Does the function add x and y together?",
+      "answer": "Yes, it returns x + y.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.",
+      "p1": 0.10348573327064514,
+      "p2": 0.21285416185855865,
+      "mean_p": 0.1581699475646019,
+      "delta": -0.48147550970315933
+    },
+    {
+      "idx": 3,
+      "question": "What is the behavior when one or both arguments are zero?",
+      "answer": "Standard addition applies: add(0, y) == y, add(x, 0) == x, add(0, 0) == 0.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Standard addition applies: add(0, y) == y, add(x, 0) == x, add(0, 0) == 0.",
+      "p1": 0.16168786585330963,
+      "p2": 0.24467690289020538,
+      "mean_p": 0.2031823843717575,
+      "delta": -0.4364630728960037
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected return type of the function?",
+      "answer": "An integer (the sum of the two integer inputs), per the x: int, y: int signature.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: An integer (the sum of the two integer inputs), per the x: int, y: int signature.",
+      "p1": 0.1563231348991394,
+      "p2": 0.25353294610977173,
+      "mean_p": 0.20492804050445557,
+      "delta": -0.43471741676330566
+    },
+    {
+      "idx": 2,
+      "question": "How does the function handle negative numbers?",
+      "answer": "Negative numbers are added normally via standard arithmetic (e.g. add(-2, 3) == 1).",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Negative numbers are added normally via standard arithmetic (e.g. add(-2, 3) == 1).",
+      "p1": 0.2106495201587677,
+      "p2": 0.2923997938632965,
+      "mean_p": 0.2515246570110321,
+      "delta": -0.3881208002567291
+    },
+    {
+      "idx": 4,
+      "question": "Are there any constraints on the range of values x and y can take?",
+      "answer": "None specified; the function performs plain addition for any integer values.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: None specified; the function performs plain addition for any integer values.",
+      "p1": 0.21943126618862152,
+      "p2": 0.3139714300632477,
+      "mean_p": 0.2667013481259346,
+      "delta": -0.37294410914182663
+    },
+    {
+      "idx": 7,
+      "question": "What should the function do if the inputs are not integers?",
+      "answer": "Not applicable: the signature guarantees x: int, y: int; non-integer inputs are outside the specified input domain.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Not applicable: the signature guarantees x: int, y: int; non-integer inputs are outside the specified input domain.",
+      "p1": 0.21616581082344055,
+      "p2": 0.46413910388946533,
+      "mean_p": 0.34015245735645294,
+      "delta": -0.2994929999113083
+    },
+    {
+      "idx": 1,
+      "question": "What happens if non-integer values are passed as arguments?",
+      "answer": "Not specified/not applicable: the signature declares x: int, y: int; the function simply returns x + y regardless, but only integer inputs are guaranteed by the spec.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Not specified/not applicable: the signature declares x: int, y: int; the function simply returns x + y regardless, but only integer inputs are guaranteed by the spec.",
+      "p1": 0.26569852232933044,
+      "p2": 0.48330843448638916,
+      "mean_p": 0.3745034784078598,
+      "delta": -0.26514197885990143
+    },
+    {
+      "idx": 5,
+      "question": "How does the function handle floating-point numbers if they are passed as arguments?",
+      "answer": "Not applicable per the signature (x: int, y: int); only integers are guaranteed as input.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Not applicable per the signature (x: int, y: int); only integers are guaranteed as input.",
+      "p1": 0.33573517203330994,
+      "p2": 0.49107757210731506,
+      "mean_p": 0.4134063720703125,
+      "delta": -0.22623908519744873
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Does the function add x and y together?",
+      "answer": "Yes, it returns x + y.",
+      "delta": -0.48147550970315933
+    },
+    {
+      "idx": 3,
+      "question": "What is the behavior when one or both arguments are zero?",
+      "answer": "Standard addition applies: add(0, y) == y, add(x, 0) == x, add(0, 0) == 0.",
+      "delta": -0.4364630728960037
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected return type of the function?",
+      "answer": "An integer (the sum of the two integer inputs), per the x: int, y: int signature.",
+      "delta": -0.43471741676330566
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Does the function add x and y together?",
+    "answer": "Yes, it returns x + y.",
+    "delta": -0.48147550970315933
+  },
+  "next_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, it returns x + y.",
+  "code_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. Yes, it returns x + y.\"\"\"\n    \"\"\"The description does not otherwise specify which interpretation should be used.\"\"\"",
+  "test_n_pass": 105,
+  "test_n_total": 105
+}

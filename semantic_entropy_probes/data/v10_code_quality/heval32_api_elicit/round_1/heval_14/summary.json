@@ -1,0 +1,118 @@
+{
+  "round": 1,
+  "baseline_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"",
+  "baseline_mean_p": 0.4133167415857315,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Should the returned list include the empty string as the shortest prefix?",
+      "answer": "No -- the shortest prefix returned is the first single character (length 1), not the empty string.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.",
+      "p1": 0.24515517055988312,
+      "p2": 0.2501082718372345,
+      "mean_p": 0.2476317211985588,
+      "delta": -0.1656850203871727
+    },
+    {
+      "idx": 2,
+      "question": "Must the function preserve the original string's case and any whitespace characters in the prefixes?",
+      "answer": "Yes, prefixes are literal substrings of the input and preserve case and any whitespace characters exactly.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: Yes, prefixes are literal substrings of the input and preserve case and any whitespace characters exactly.",
+      "p1": 0.26567837595939636,
+      "p2": 0.25158199667930603,
+      "mean_p": 0.2586301863193512,
+      "delta": -0.1546865552663803
+    },
+    {
+      "idx": 3,
+      "question": "Should the function raise an exception, return an empty list, or handle differently when the input is not a string (e.g., None or other types)?",
+      "answer": "Not applicable -- input is guaranteed to be a string.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.",
+      "p1": 0.26820534467697144,
+      "p2": 0.2544751465320587,
+      "mean_p": 0.2613402456045151,
+      "delta": -0.15197649598121643
+    },
+    {
+      "idx": 5,
+      "question": "Is there any requirement on the type of the returned collection (e.g., list vs. tuple) beyond being a List[str]?",
+      "answer": "A list of strings (List[str]), as declared in the function signature.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: A list of strings (List[str]), as declared in the function signature.",
+      "p1": 0.2750595808029175,
+      "p2": 0.2664400637149811,
+      "mean_p": 0.2707498222589493,
+      "delta": -0.14256691932678223
+    },
+    {
+      "idx": 7,
+      "question": "Are duplicate prefixes possible (e.g., when the input contains repeated characters), and if so, should they appear multiple times in the output?",
+      "answer": "Not applicable in practice -- each prefix has a strictly increasing length (1 through len(string)), so successive prefixes are always distinct strings.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: Not applicable in practice -- each prefix has a strictly increasing length (1 through len(string)), so successive prefixes are always distinct strings.",
+      "p1": 0.26846328377723694,
+      "p2": 0.2747704088687897,
+      "mean_p": 0.2716168463230133,
+      "delta": -0.1416998952627182
+    },
+    {
+      "idx": 1,
+      "question": "If the input string contains Unicode characters, should each code point be treated as a single character for prefix generation?",
+      "answer": "Not addressed in the spec; treat each Python string index position as one character, per standard string indexing/slicing.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: Not addressed in the spec; treat each Python string index position as one character, per standard string indexing/slicing.",
+      "p1": 0.33785706758499146,
+      "p2": 0.34141960740089417,
+      "mean_p": 0.3396383374929428,
+      "delta": -0.0736784040927887
+    },
+    {
+      "idx": 6,
+      "question": "Should the function handle surrogate pairs or combining characters specially when generating prefixes?",
+      "answer": "Not addressed; not a case the function needs to handle.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: Not addressed; not a case the function needs to handle.",
+      "p1": 0.5032327771186829,
+      "p2": 0.5238120555877686,
+      "mean_p": 0.5135224163532257,
+      "delta": 0.1002056747674942
+    },
+    {
+      "idx": 4,
+      "question": "For an empty input string, what should the function return: an empty list, a list containing only the empty string, or something else?",
+      "answer": "Return an empty list (there are no characters to form a prefix from).",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: Return an empty list (there are no characters to form a prefix from).",
+      "p1": 0.5551514029502869,
+      "p2": 0.5188751816749573,
+      "mean_p": 0.5370132923126221,
+      "delta": 0.12369655072689056
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Should the returned list include the empty string as the shortest prefix?",
+      "answer": "No -- the shortest prefix returned is the first single character (length 1), not the empty string.",
+      "delta": -0.1656850203871727
+    },
+    {
+      "idx": 2,
+      "question": "Must the function preserve the original string's case and any whitespace characters in the prefixes?",
+      "answer": "Yes, prefixes are literal substrings of the input and preserve case and any whitespace characters exactly.",
+      "delta": -0.1546865552663803
+    },
+    {
+      "idx": 3,
+      "question": "Should the function raise an exception, return an empty list, or handle differently when the input is not a string (e.g., None or other types)?",
+      "answer": "Not applicable -- input is guaranteed to be a string.",
+      "delta": -0.15197649598121643
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Should the returned list include the empty string as the shortest prefix?",
+    "answer": "No -- the shortest prefix returned is the first single character (length 1), not the empty string.",
+    "delta": -0.1656850203871727
+  },
+  "next_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.",
+  "code_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with the shortest prefix being the first single character (length 1), not the empty string\n    \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 3
+}

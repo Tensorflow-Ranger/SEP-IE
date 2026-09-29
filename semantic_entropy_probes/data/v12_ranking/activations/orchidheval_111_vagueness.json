@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_111_vagueness",
+  "questions": [
+    "If multiple letters tie for the highest repetition count, should only one be returned, or should all tied letters be included?",
+    "What should the function return for an empty input string?",
+    "Are spaces counted as characters in the histogram, or excluded as separators?",
+    "Should the result be a dictionary with one entry, or could it have multiple entries even without an explicit tie-breaking rule stated?",
+    "What should happen if no letter repeats at all?",
+    "Is the letter case-sensitive, assuming the input is described as lowercase?",
+    "Should consecutive spaces be treated as one separator or produce empty substrings?",
+    "Is there a well-defined single \"correct\" letter when ties exist, or is the ambiguity exactly about that?"
+  ],
+  "answers": [
+    "All tied letters should be included, matching the original spec's tie-breaking rule.",
+    "Not specified beyond what's given; assume an empty dictionary.",
+    "No, spaces are separators, not counted letters.",
+    "It should include all tied letters as separate entries when there's a tie.",
+    "Not specified beyond what's given; the single letter with count 1 would be returned if it's the max.",
+    "Yes, matching is case-sensitive given the lowercase-letters premise.",
+    "Not specified beyond what's given; assume standard single-separator splitting.",
+    "Yes — that's exactly the injected ambiguity; the original spec resolves it by returning all tied letters."
+  ],
+  "inline_prompts": [
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the count. All tied letters should be included, matching the original spec's tie-breaking rule.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the count. Not specified beyond what's given; assume an empty dictionary.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the count. No, spaces are separators, not counted letters.\"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the count. It should include all tied letters as separate entries when there's a tie.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the count. If multiple letters\n    have the same maximum count, the single letter with count 1 would be returned if it's the max. \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the count. Yes, matching is case-sensitive given the lowercase-letters premise.\n    \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the count. Not specified beyond what's given; assume standard single-separator splitting. \"\"\"",
+    "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the count. Yes — that's exactly the injected ambiguity; the original spec resolves it by returning all tied letters.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    0,
+    1,
+    2,
+    0,
+    1,
+    0,
+    2
+  ]
+}

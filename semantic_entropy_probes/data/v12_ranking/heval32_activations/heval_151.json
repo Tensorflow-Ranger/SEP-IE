@@ -1,0 +1,43 @@
+{
+  "id": "heval_151",
+  "questions": [
+    "Should “valid odd numbers” include negative odd numbers, or are only non‑negative odds considered valid?",
+    "Are non‑integer numeric types (e.g., floats, Decimals) allowed in the list, and if so, how is “odd” determined for them?",
+    "How should non‑numeric elements (e.g., strings, None) in the list be handled—ignore them, raise an error, or treat them as zero?",
+    "Is the function required to treat zero as an odd number that contributes 0 to the sum, as shown in the examples, or should zero be excluded entirely?",
+    "Must the function raise an exception for inputs that are not list‑like (e.g., tuples, generators), or should it attempt to process any iterable?",
+    "If the list contains duplicate values, should each occurrence be processed separately, or should duplicates be deduplicated before summing?",
+    "Should the function enforce any size limits on the input list, or is there any performance‑related constraint to consider?",
+    "In the case of extremely large numbers causing integer overflow, is there a defined behavior (e.g., raise OverflowError, return a big integer, or modulo a value)?"
+  ],
+  "answers": [
+    "No -- only POSITIVE odd numbers are included; negative numbers are explicitly ignored.",
+    "Excluded -- the check requires the string representation to contain no '.', which effectively requires true integers, excluding floats.",
+    "Not applicable -- input is guaranteed to be a list of numbers.",
+    "No -- zero is not odd and does not satisfy the odd check, so it contributes nothing and is excluded.",
+    "Not applicable -- input is guaranteed to be a list.",
+    "Each occurrence in the list is processed and summed separately; there is no deduplication.",
+    "None stated.",
+    "Not addressed; Python's arbitrary-precision integers handle large sums automatically, no special OverflowError behavior."
+  ],
+  "inline_prompts": [
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. No -- only POSITIVE odd numbers are included; negative numbers are explicitly ignored.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. Excluded -- the check requires the string representation to contain no '.', which effectively requires true integers, excluding floats.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n     \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. Not applicable -- input is guaranteed to be a list of numbers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. No -- zero is not odd and does not satisfy the odd check, so it contributes nothing and is excluded.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. Each occurrence in the list is processed and summed separately;\n    there is no deduplication.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. None stated.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. Not addressed; Python's arbitrary-precision integers handle large sums automatically, no special OverflowError behavior.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''"
+  ],
+  "tiers": [
+    2,
+    2,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+  ]
+}

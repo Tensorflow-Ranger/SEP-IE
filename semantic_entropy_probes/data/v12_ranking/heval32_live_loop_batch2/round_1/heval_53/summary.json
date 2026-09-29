@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 8,
+      "question": "Does the order of arguments (x then y) matter for the result, or is the operation commutative?",
+      "answer": "The operation is commutative\u2014add(2, 3) and add(3, 2) both return 5. The order does not affect the result.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. The operation is commutative\u2014add(2, 3) and add(3, 2) both return 5. The description does not otherwise specify which interpretation should be used.\"\"\"",
+      "score": -8.197298049926758
+    },
+    {
+      "idx": 10,
+      "question": "Is there a requirement for the function to be pure (no side effects) or can it modify external state?",
+      "answer": "The function must be pure (no side effects)\u2014it only returns a computed value.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. The function must be pure (no side effects)\u2014it only returns a computed value.\"\"\"",
+      "score": -9.161568641662598
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return the sum of x and y, modify one of the arguments in place, or produce some other combined result?",
+      "answer": "The function returns the sum of x and y\u2014the result of arithmetic addition.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. The function returns the sum of x and y\u2014the result of arithmetic addition. The description does not otherwise specify which interpretation should be used. \"\"\"",
+      "score": -9.446340560913086
+    },
+    {
+      "idx": 2,
+      "question": "How should the function behave when either x or y is not an integer (e.g., a float, string, or None)?",
+      "answer": "If x or y is not an integer (float, string, None, etc.), the specification does not define behavior\u2014type validation is the caller's responsibility.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. If x or y is not an integer (float, string, None, etc.), the specification does not define behavior\u2014type validation is the caller's responsibility.\"\"\"",
+      "score": -9.523103713989258
+    },
+    {
+      "idx": 4,
+      "question": "Must the function support arbitrary-precision arithmetic, or is a fixed-width integer representation assumed?",
+      "answer": "The function supports arbitrary-precision arithmetic\u2014Python ints are always arbitrary precision.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. The function supports arbitrary-precision arithmetic\u2014Python ints are always arbitrary precision. The description does not otherwise specify which interpretation should be used. \"\"\"",
+      "score": -10.15254020690918
+    },
+    {
+      "idx": 3,
+      "question": "Is there any special handling for negative numbers, such as treating them differently from positive numbers?",
+      "answer": "There is no special handling for negative numbers\u2014they are added like any other integers.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. There is no special handling for negative numbers\u2014they are added like any other integers.\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+      "score": -11.22610092163086
+    },
+    {
+      "idx": 1,
+      "question": "If the sum exceeds the maximum value for a Python int, is overflow handling required, and if so, what behavior is expected?",
+      "answer": "Python's arbitrary-precision integers handle overflow automatically; no overflow handling is required.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. Python's arbitrary-precision integers handle overflow automatically; no overflow handling is required.\"\"\"",
+      "score": -11.52120590209961
+    },
+    {
+      "idx": 5,
+      "question": "Should the function treat the inputs as signed or unsigned values, and does that affect the result?",
+      "answer": "Integers are treated as signed values; there is no concept of signed vs. unsigned.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. Integers are treated as signed values; there is no concept of signed vs. unsigned.\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+      "score": -11.878379821777344
+    },
+    {
+      "idx": 9,
+      "question": "Should the function handle integer overflow by wrapping around (modular arithmetic), and if so, what modulus should be used?",
+      "answer": "There is no overflow wrapping; Python integers grow to arbitrary size.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. There is no overflow wrapping; Python integers grow to arbitrary size.\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+      "score": -11.91921615600586
+    },
+    {
+      "idx": 11,
+      "question": "Are there any constraints on the range of acceptable values for x and y (e.g., must be non\u2011negative, within a certain interval)?",
+      "answer": "Not applicable. No constraints on the range of x and y; any integers are valid.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. Not applicable. No constraints on the range of x and y; any integers are valid.\"\"\"",
+      "score": -13.910955429077148
+    },
+    {
+      "idx": 6,
+      "question": "In the case of extremely large inputs that could cause performance issues, are there any time or memory constraints to observe?",
+      "answer": "No time or memory constraints are specified. Simple addition is expected.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. No time or memory constraints are specified. Simple addition is expected.\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+      "score": -14.765400886535645
+    },
+    {
+      "idx": 7,
+      "question": "Is the function expected to log or raise an exception for invalid inputs, or simply return a sentinel value?",
+      "answer": "If invalid inputs occur, Python raises a TypeError. The function is not expected to handle exceptions.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. If invalid inputs occur, Python raises a TypeError. The description does not otherwise specify which interpretation should be used.\"\"\"",
+      "score": -18.229618072509766
+    }
+  ],
+  "chosen": {
+    "idx": 8,
+    "question": "Does the order of arguments (x then y) matter for the result, or is the operation commutative?",
+    "answer": "The operation is commutative\u2014add(2, 3) and add(3, 2) both return 5. The order does not affect the result.",
+    "score": -8.197298049926758
+  },
+  "next_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. The operation is commutative\u2014add(2, 3) and add(3, 2) both return 5. The description does not otherwise specify which interpretation should be used.\"\"\"",
+  "test_n_pass": 105,
+  "test_n_total": 105
+}

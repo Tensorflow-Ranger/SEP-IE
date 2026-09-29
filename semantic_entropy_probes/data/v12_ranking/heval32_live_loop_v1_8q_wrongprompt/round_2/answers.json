@@ -1,0 +1,122 @@
+{
+  "heval_1": {
+    "answers": [
+      "Non-parentheses characters are ignored; only parentheses and spaces are processed, with spaces discarded during parsing.",
+      "Unmatched parentheses are treated as incomplete groups that never reach a closing depth of zero, so only complete balanced groups are returned.",
+      "No empty groups appear in the output; only complete groups when the nesting depth returns to zero are included.",
+      "Leading and trailing spaces are ignored; spaces within the input are discarded before processing.",
+      "Adjacent balanced groups like \"()()\" are returned as separate strings [\"()\", \"()\"] because each group closes when depth returns to zero.",
+      "No maximum length limit is specified by the problem; any input length is acceptable.",
+      "Yes, the original order of groups is preserved exactly as they appear in the input string.",
+      "Adjacent nested structures like \"(()())(()())\" are each treated as a single top-level group and returned separately: ['(()(())','(()())']."
+    ]
+  },
+  "heval_109": {
+    "answers": [
+      "Array indexing is 0-based, as is standard in Python.",
+      "The input is guaranteed to contain only integers, as specified in the clear prompt.",
+      "Duplicates are allowed; ties in non-decreasing order are handled by allowing equal adjacent values.",
+      "The function returns a boolean value (True or False).",
+      "There is no explicit maximum size limit; however, the algorithm is O(n) so very large arrays could cause performance issues.",
+      "An empty array is treated as already sorted and returns True.",
+      "There is no constraint on the number of right-shift operations; any non-negative number is allowed.",
+      "If the array is already sorted in non-decreasing order, the function returns True without needing to perform any shifts."
+    ]
+  },
+  "heval_130": {
+    "answers": [
+      "The initial values are tri(0) = 1 and tri(1) = 3, as specified in the solution.",
+      "The function returns the sequence as a Python list.",
+      "The recurrence relation uses regular division (not integer division), producing floating-point results for even n values.",
+      "For odd n, tri(n+1) is computed using the formula for even indices (1 + (n+1)/2), so the forward reference is resolved by pre-computing via the even formula.",
+      "Non-negative includes zero; when n = 0, the returned list is [1].",
+      "There are no explicit limits on the size of n; computation time grows polynomially.",
+      "The sequence is 0-based: the first element at index 0 corresponds to tri(0) = 1.",
+      "The explicit base case tri(1) = 3 takes precedence and is used as the starting point for the recursive definition."
+    ]
+  },
+  "heval_147": {
+    "answers": [
+      "The problem statement uses 1-based indexing for the formula (i ranges from 1 to n), so a[1] = 1*1-1+1 = 1, a[2] = 2*2-2+1 = 3, etc.",
+      "Triples are ordered: we require (i, j, k) where i < j < k, so the positions matter and order is enforced.",
+      "Yes, the three indices in a triple must be strictly distinct (guaranteed by the i < j < k constraint).",
+      "The sum condition is applied to the sum of the three array values: a[i] + a[j] + a[k] must be divisible by 3.",
+      "The output is a single integer: the count of triples satisfying the condition.",
+      "There are no explicit constraints on the size of n; however, the algorithm is O(n^3), so performance becomes an issue for large n.",
+      "For n = 0 or negative inputs, no triples can be formed, so the output is 0.",
+      "Each valid triple is counted separately; if the same values appear at different indices, they form distinct triples."
+    ]
+  },
+  "heval_91": {
+    "answers": [
+      "A 'word' in the context of this problem is any text within a sentence; sentence delimiters (., ?, !) separate words into distinct sentences.",
+      "Consecutive sentence delimiters are each treated as separate sentence terminators, potentially creating empty sentences between them.",
+      "Whitespace after a delimiter before the next sentence is part of standard sentence parsing; leading spaces in a sentence are included in the sentence text.",
+      "The comparison is case-sensitive: only sentences starting with the exact sequence 'I ' (capital I followed by a space) are counted as boredom.",
+      "The sentence must start exactly with the two-character sequence 'I ' (capital I + space); a sentence starting with just 'I' without a following space is not counted.",
+      "Sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '.",
+      "Newline characters are treated as regular characters in the string, not as special delimiters; only '.', '?', and '!' delimit sentences.",
+      "The output should be the count as an integer, which is the return value of the function."
+    ]
+  },
+  "heval_104": {
+    "answers": [
+      "The problem specifies 'positive integers', so negative numbers should not be included in the input; if present, they would not qualify since they are not positive.",
+      "Yes, zero is considered an even digit; any number containing the digit 0 (such as 10, 20, 101) is disqualified.",
+      "Numbers with leading zeros (e.g., '0012') are not applicable here since the input is a list of integers, not strings; Python's integer type does not preserve leading zeros.",
+      "The input list must contain only integers, as stated in the clear prompt.",
+      "Duplicate values in the input list should not be deduplicated in the output if they meet the criteria (all odd digits); if 11 appears twice and qualifies, both occurrences should be included.",
+      "For an empty input list, return an empty list.",
+      "Numbers with identical numeric values (e.g., 5 vs. 05) are equal in integer representation, so they are considered duplicates; ascending numerical order implies deduplication by value.",
+      "Standard integer limits apply; Python supports arbitrarily large integers, so there are no practical range constraints."
+    ]
+  },
+  "heval_110": {
+    "answers": [
+      "An exchange is a single swap of one element from lst1 with one element from lst2; you can perform multiple exchanges.",
+      "Yes, you can perform multiple exchanges, and there is no limit on the number of exchanges.",
+      "Elements retain their original values during exchange; no modification or splitting of numbers occurs.",
+      "Only the parity (odd/even) of each element matters; the order of elements in lst1 after exchanges is irrelevant.",
+      "Duplicates in lst2 are indistinguishable from each other; swapping with one duplicate is equivalent to swapping with another duplicate of the same value.",
+      "Negative numbers follow standard parity rules: negative odd numbers are odd, negative even numbers are even; zero is considered even.",
+      "The problem does not mention non-integer types; the input is assumed to be a list of integers.",
+      "If lst1 already contains only even numbers, the function can return 'YES' immediately without attempting further exchanges."
+    ]
+  },
+  "heval_126": {
+    "answers": [
+      "The function returns True for a list sorted in non-decreasing (ascending) order, not strictly increasing.",
+      "Duplicates are allowed, but if any value appears more than twice, the function returns False.",
+      "If a value appears exactly twice, its position does not affect the check as long as the list remains in non-decreasing order.",
+      "An empty list returns True; a list with a single element returns True.",
+      "The list must be sorted in non-decreasing order (ascending, with equal adjacent values allowed).",
+      "Duplicate values can appear at any positions in the list, as long as no value appears more than twice.",
+      "A constant list (all elements equal) returns True because all elements are equal (non-decreasing) and each value appears at most once (or twice if there are exactly two elements).",
+      "For invalid inputs like non-integers or negative numbers, the expected behavior is to return False, as these violate the assumption that the list contains only non-negative integers."
+    ]
+  },
+  "heval_150": {
+    "answers": [
+      "n is a positive integer; x and y can be any integer (positive, negative, or zero).",
+      "When n is less than 2 (n = 0 or n = 1), n is treated as non-prime and the function returns y.",
+      "Negative numbers are treated as non-prime; if n is negative, the function returns y.",
+      "Non-integer values for n, x, or y should not occur according to the problem specification.",
+      "The output type depends on the types of x and y; the function simply returns one of them based on the primality of n.",
+      "There is no explicit time complexity requirement; the algorithm checks divisibility up to n, which is O(n).",
+      "Invalid inputs (null, NaN, etc.) are not addressed in the problem specification and should not occur.",
+      "There is no tie-breaking rule; the logic is straightforward: if n is prime, return x; otherwise, return y."
+    ]
+  },
+  "heval_80": {
+    "answers": [
+      "The string length must be at least 3 (not exactly 3); any length greater than or equal to 3 can be happy.",
+      "The condition applies to overlapping consecutive triples: for each position i, the three characters at positions i, i+1, and i+2 must all be distinct.",
+      "Yes, each 3-character window must contain three distinct characters (s[i] != s[i+1], s[i+1] != s[i+2], and s[i] != s[i+2]).",
+      "The comparison is case-sensitive: 'a' and 'A' are treated as different characters.",
+      "Non-ASCII Unicode characters are treated as regular characters and are included in the distinctness check.",
+      "Whitespace characters (spaces, tabs, newlines) are counted as part of the string and are included in both length calculation and distinctness checks.",
+      "If the input string contains fewer than 3 characters, the function returns False.",
+      "The expected output format is a boolean value: True for a happy string, False otherwise."
+    ]
+  }
+}

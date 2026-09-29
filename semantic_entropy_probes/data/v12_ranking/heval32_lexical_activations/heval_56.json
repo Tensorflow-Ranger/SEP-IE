@@ -1,0 +1,43 @@
+{
+  "id": "heval_56",
+  "questions": [
+    "Should the function treat the input string as a sequence of tags that must be properly nested (e.g., \"<>\" is valid but \"<><>\" is also valid), or only require that the total count of \"<\" equals the total count of \">\" regardless of order?",
+    "Are overlapping tags considered invalid, such that a pattern like \"<><\" should return False even though the counts match?",
+    "Must the function reject any characters other than \"<\" and \">\", and if so, should it raise an exception or simply return False?",
+    "How should the function handle an empty string—should it be considered correctly bracketed and return True or be treated as an error?",
+    "Is there a maximum allowed length for the input string, and if the limit is exceeded, what is the expected behavior?",
+    "Should the function consider escaped characters (e.g., \"\\<\" or \"\\>\") as literal symbols that do not participate in bracket matching?",
+    "In the case of mismatched nesting like \"<>>\", does the function need to identify the position of the first mismatch, or is a simple Boolean result sufficient?",
+    "Does the function need to support Unicode or other multi-byte representations of the \"<\" and \">\" symbols, or is it limited to ASCII characters only?"
+  ],
+  "answers": [
+    "The check is not about proper nesting order in a hierarchical sense -- it's a running-depth balance check: opening '<' increments, closing '>' decrements, and depth must never go negative and must end at zero.",
+    "Not applicable in that framing -- 'tags' here just means the literal characters '<' and '>'; there's no separate 'overlapping' concept beyond the depth-balance rule.",
+    "Yes -- 'tags' refers only to the literal characters '<' and '>'; the input is guaranteed to consist solely of those characters (not multi-character markup like '<p>' or '<div>').",
+    "An empty string is correctly bracketed and should return True.",
+    "Not applicable -- there is no maximum length constraint.",
+    "Not applicable -- there is no escaping mechanism; every '<' and '>' character participates directly in the balance check.",
+    "A simple Boolean result is sufficient; the function does not need to report mismatch positions.",
+    "Not applicable -- the input is limited to the ASCII characters '<' and '>'."
+  ],
+  "inline_prompts": [
+    "def correct_bracketing(brackets: str):\n    \"\"\" tags is a string of \"<\" and \">\".\n    return True if every opening tag has a corresponding closing tag. The check is not about proper nesting order in a hierarchical sense -- it's a running-depth balance check: opening '<' increments, closing '>' decrements, and depth must never go negative and must end at zero.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" tags is a string of \"<\" and \">\".\n    return True if every opening tag has a corresponding closing tag.\n    Not applicable in that framing -- 'tags' here just means the literal characters '<' and '>';\n    there's no separate 'overlapping' concept beyond the depth-balance rule.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" tags is a string of \"<\" and \">\".\n    return True if every opening tag has a corresponding closing tag.\n    Yes -- 'tags' refers only to the literal characters '<' and '>';\n    the input is guaranteed to consist solely of those characters (not multi-character markup like '<p>' or '<div>'). \n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" tags is a string of \"<\" and \">\".\n    return True if every opening tag has a corresponding closing tag, and an empty string is correctly bracketed.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" tags is a string of \"<\" and \">\".\n    return True if every opening tag has a corresponding closing tag. Not applicable -- there is no maximum length constraint.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" tags is a string of \"<\" and \">\".\n    return True if every opening tag has a corresponding closing tag. Not applicable -- there is no escaping mechanism; every '<' and '>' character participates directly in the balance check.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" tags is a string of \"<\" and \">\".\n    return True if every opening tag has a corresponding closing tag. A simple Boolean result is sufficient; the function does not need to report mismatch positions.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" tags is a string of \"<\" and \">\".\n    return True if every opening tag has a corresponding closing tag.\n    Not applicable -- the input is limited to the ASCII characters '<' and '>'. \"\"\""
+  ],
+  "tiers": [
+    1,
+    1,
+    2,
+    1,
+    0,
+    1,
+    1,
+    0
+  ]
+}

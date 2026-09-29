@@ -1,0 +1,43 @@
+{
+  "id": "heval_150",
+  "questions": [
+    "What exact criteria define a “simple number” for the parameter n?",
+    "Should the function accept non‑integer types for n, x, or y, and if so, how are they handled?",
+    "If n is a simple number, must the function return x exactly as passed, or can it be transformed (e.g., copied, cast)?",
+    "When n is not a simple number, does “otherwise” include cases where n is None, NaN, or an error‑raising value?",
+    "Is there any requirement on the type or structure of the returned value (e.g., must match the type of x or y, or be a specific primitive)?",
+    "How should the function behave when x and y are the same object or value—does it matter which branch is taken?",
+    "Are there performance or side‑effect expectations (e.g., should the function avoid evaluating y if n is simple)?",
+    "Should the function raise an exception for invalid inputs, return a default sentinel, or silently coerce them?"
+  ],
+  "answers": [
+    "'Simple number' means a prime number -- x is returned when n is prime, y otherwise.",
+    "Not applicable -- n, x, y are guaranteed to be of appropriate types; no special handling is specified.",
+    "x (or y) is returned exactly as passed, with no transformation.",
+    "Not applicable -- n is guaranteed to be a valid positive integer; None/NaN cases aren't considered.",
+    "Not applicable -- the return value is just x or y as given, whatever type they are.",
+    "Not applicable -- it doesn't matter whether x and y are equal; the branch taken depends solely on n's primality.",
+    "Not applicable -- no laziness/side-effect requirements are specified; x and y are ordinary values, not expressions with side effects.",
+    "Not applicable -- no exception handling for invalid inputs is specified."
+  ],
+  "inline_prompts": [
+    "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a simple number and should return the value of y otherwise.\n    'Simple number' means a prime number -- x is returned when n is prime, y otherwise.\n    \"\"\"",
+    "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a simple number and should return the value of y otherwise. Not applicable -- n, x, y are guaranteed to be of appropriate types; no special handling is specified.\n    \"\"\"",
+    "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a simple number and should return the value of y otherwise. x (or y) is returned exactly as passed, with no transformation. \"\"\"",
+    "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a simple number and should return the value of y otherwise. Not applicable -- n is guaranteed to be a valid positive integer; None/NaN cases aren't considered.\n    \"\"\"",
+    "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a simple number and should return the value of y otherwise.\n    Not applicable -- the return value is just x or y as given, whatever type they are.",
+    "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a prime number and should return the value of y otherwise.\n    \"\"\"",
+    "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a simple number and should return the value of y otherwise. Not applicable -- no laziness/side-effect requirements are specified; x and y are ordinary values, not expressions with side effects.\n    \"\"\"",
+    "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a simple number and should return the value of y otherwise. Not applicable -- no exception handling for invalid inputs is specified.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

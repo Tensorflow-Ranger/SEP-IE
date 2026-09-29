@@ -1,0 +1,43 @@
+{
+  "id": "heval_40",
+  "questions": [
+    "Should the three elements be required to occupy distinct indices in the list, or is using the same value at the same index multiple times allowed if it appears only once?",
+    "Must the input list contain only integers, or should non‑integer numeric types (e.g., floats, Decimals) be accepted or rejected?",
+    "If the list contains duplicate values, can those duplicates be used as separate elements in the triple, and how many copies are considered available?",
+    "Should the function treat the list as an ordered sequence (preserving index order) or as an unordered multiset when searching for a zero‑sum triple?",
+    "What should the function return for an empty list or a list with fewer than three elements—False, raise an exception, or something else?",
+    "Is there any required time or space complexity guarantee (e.g., O(n²) expected) that influences the implementation choice?",
+    "How should the function behave when the list contains extremely large integers that could cause overflow in intermediate sums—should it rely on Python’s arbitrary‑precision arithmetic or enforce a limit?",
+    "If multiple distinct triples sum to zero, does the function need to identify a particular one (e.g., the first found) or simply return True regardless of which triple is detected?"
+  ],
+  "answers": [
+    "The three elements must occupy three distinct indices in the list (the reference implementation uses three nested loops with i<j<k); a single index cannot be reused.",
+    "Not applicable -- the specification guarantees a list of integers.",
+    "Yes -- \"unique\"/\"distinct\" here refers to three distinct index positions, not that each value must appear only once in the list; a repeated value can be used as long as it occupies a different index each time (e.g. [2, 4, -5, 3, 9, 7] finds a valid triple without requiring singleton values).",
+    "It searches all combinations of three distinct indices with i<j<k, effectively treating the list positionally rather than needing global reordering.",
+    "False -- with fewer than three elements the triple-nested loop never finds a valid i<j<k combination, so it returns False.",
+    "Not applicable -- no complexity requirement is specified; the reference implementation is the straightforward O(n³) triple loop.",
+    "Not applicable -- Python integers have arbitrary precision, so no overflow handling is needed.",
+    "Not applicable -- the function only needs to return True/False, not identify which triple was found."
+  ],
+  "inline_prompts": [
+    "```python\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three unique elements in the list that\n    sum to zero, and False otherwise. The three elements must occupy three distinct indices in the list (the reference implementation uses three nested loops with i<j<k); a single index cannot be reused.\n    \"\"\"\n```",
+    "```python\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three unique elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n```",
+    "```python\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three unique elements in the list that\n    sum to zero, and False otherwise. Yes -- \"unique\"/\"distinct\" here refers to three distinct index positions, not that each value must appear only once in the list; a repeated value can be used as long as it occupies a different index each time (e.g. [2, 4, -5, 3, 9, 7] finds a valid triple without requiring singleton values).\n    \"\"\"\n```",
+    "```python\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three unique elements in the list that\n    sum to zero, and False otherwise. It searches all combinations of three distinct indices with i<j<k, effectively treating the list positionally rather than needing global reordering.\n    \"\"\"\n```",
+    "```python\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three unique elements in the list that\n    sum to zero, and False otherwise. False -- with fewer than three elements the triple-nested loop never finds a valid i<j<k combination, so it returns False.\n    \"\"\"\n```",
+    "```python\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three unique elements in the list that\n    sum to zero, and False otherwise. Not applicable -- no complexity requirement is specified; the reference implementation is the straightforward O(n³) triple loop.\n    \"\"\"\n```",
+    "```python\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three unique elements in the list that\n    sum to zero, and False otherwise. Note that Python integers have arbitrary precision, so no overflow handling is needed.\n    \"\"\"\n```",
+    "```python\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three unique elements in the list that\n    sum to zero, and False otherwise. Not applicable -- the function only needs to return True/False, not identify which triple was found.\n    \"\"\"\n```"
+  ],
+  "tiers": [
+    1,
+    0,
+    2,
+    1,
+    0,
+    0,
+    0,
+    0
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+  "baseline_mean_p": 0.561736598610878,
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "How are lower-case letters with odd order in the alphabet determined?",
+      "answer": "Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).",
+      "p1": 0.3323860466480255,
+      "p2": 0.3559427559375763,
+      "mean_p": 0.3441644012928009,
+      "delta": -0.2175721973180771
+    },
+    {
+      "idx": 0,
+      "question": "What defines a valid whitespace character for splitting the text?",
+      "answer": "Determined by Python's `\" \" in txt` check and `.split()` (splits on any whitespace run) -- specifically, the presence of a literal space character \" \" triggers whitespace-splitting mode, and .split() with no args splits on any whitespace and collapses runs.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Determined by Python's `\" \" in txt` check and `.split()` (splits on any whitespace run) -- specifically, the presence of a literal space character \" \" triggers whitespace-splitting mode, and .split() with no args splits on any whitespace and collapses runs.",
+      "p1": 0.36077043414115906,
+      "p2": 0.34712210297584534,
+      "mean_p": 0.3539462685585022,
+      "delta": -0.2077903300523758
+    },
+    {
+      "idx": 7,
+      "question": "How are tie-breaking rules applied if multiple interpretations of the input are possible?",
+      "answer": "Not applicable -- the three cases (contains space / contains comma / neither) are mutually exclusive and checked in a fixed priority order (space first, then comma, then digit-counting), so there's no ambiguity in which branch applies.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Not applicable -- the three cases (contains space / contains comma / neither) are mutually exclusive and checked in a fixed priority order (space first, then comma, then digit-counting), so there's no ambiguity in which branch applies.",
+      "p1": 0.32633474469184875,
+      "p2": 0.38720980286598206,
+      "mean_p": 0.3567722737789154,
+      "delta": -0.20496432483196259
+    },
+    {
+      "idx": 2,
+      "question": "How should the function handle multiple consecutive whitespace or split characters?",
+      "answer": "For whitespace: txt.split() with no arguments naturally collapses consecutive whitespace and ignores leading/trailing whitespace. For commas: txt.replace(',', ' ').split() likewise collapses consecutive resulting spaces.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: For whitespace: txt.split() with no arguments naturally collapses consecutive whitespace and ignores leading/trailing whitespace. For commas: txt.replace(',', ' ').split() likewise collapses consecutive resulting spaces.",
+      "p1": 0.43475908041000366,
+      "p2": 0.3841226100921631,
+      "mean_p": 0.4094408452510834,
+      "delta": -0.15229575335979462
+    },
+    {
+      "idx": 5,
+      "question": "How should the function handle non-alphabetic characters when counting lower-case letters with odd order?",
+      "answer": "They are simply excluded by the `i.islower()` check in the list comprehension; only lowercase alphabetic characters are considered.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: They are simply excluded by the `i.islower()` check in the list comprehension; only lowercase alphabetic characters are considered.",
+      "p1": 0.47400420904159546,
+      "p2": 0.41977474093437195,
+      "mean_p": 0.4468894749879837,
+      "delta": -0.11484712362289429
+    },
+    {
+      "idx": 3,
+      "question": "What constitutes a 'word' when splitting on whitespace or split characters?",
+      "answer": "A maximal contiguous substring between whitespace (or, in the comma branch, between commas-converted-to-spaces) runs, per Python's str.split() semantics.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: A maximal contiguous substring between whitespace (or, in the comma branch, between commas-converted-to-spaces) runs, per Python's str.split() semantics.",
+      "p1": 0.5074144005775452,
+      "p2": 0.44693008065223694,
+      "mean_p": 0.47717224061489105,
+      "delta": -0.08456435799598694
+    },
+    {
+      "idx": 6,
+      "question": "What should the function return if the input string is empty?",
+      "answer": "Since an empty string contains no space and no comma, it falls to the third branch: returns len([]) == 0.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Since an empty string contains no space and no comma, it falls to the third branch: returns len([]) == 0.",
+      "p1": 0.5563479065895081,
+      "p2": 0.4384799897670746,
+      "mean_p": 0.4974139481782913,
+      "delta": -0.06432265043258667
+    },
+    {
+      "idx": 1,
+      "question": "What characters should be used for splitting if no whitespace exists?",
+      "answer": "The comma character ',' (checked via \",\" in txt), replacing commas with spaces then splitting.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: The comma character ',' (checked via \",\" in txt), replacing commas with spaces then splitting.",
+      "p1": 0.6594780683517456,
+      "p2": 0.4791104793548584,
+      "mean_p": 0.569294273853302,
+      "delta": 0.007557675242424011
+    }
+  ],
+  "top3": [
+    {
+      "idx": 4,
+      "question": "How are lower-case letters with odd order in the alphabet determined?",
+      "answer": "Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).",
+      "delta": -0.2175721973180771
+    },
+    {
+      "idx": 0,
+      "question": "What defines a valid whitespace character for splitting the text?",
+      "answer": "Determined by Python's `\" \" in txt` check and `.split()` (splits on any whitespace run) -- specifically, the presence of a literal space character \" \" triggers whitespace-splitting mode, and .split() with no args splits on any whitespace and collapses runs.",
+      "delta": -0.2077903300523758
+    },
+    {
+      "idx": 7,
+      "question": "How are tie-breaking rules applied if multiple interpretations of the input are possible?",
+      "answer": "Not applicable -- the three cases (contains space / contains comma / neither) are mutually exclusive and checked in a fixed priority order (space first, then comma, then digit-counting), so there's no ambiguity in which branch applies.",
+      "delta": -0.20496432483196259
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "How are lower-case letters with odd order in the alphabet determined?",
+    "answer": "Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).",
+    "delta": -0.2175721973180771
+  },
+  "next_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).",
+  "code_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25, using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc)\n    '''",
+  "test_n_pass": 5,
+  "test_n_total": 8
+}

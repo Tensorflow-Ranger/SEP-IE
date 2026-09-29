@@ -1,0 +1,15 @@
+[v12-live][round 2][elicit] 1/22 heval_113: 12 questions via groq
+Traceback (most recent call last):
+  File "/home/ubuntu/SEP-IE/semantic_entropy_probes/scripts/v12_heval32_live_loop.py", line 306, in <module>
+    main()
+  File "/home/ubuntu/SEP-IE/semantic_entropy_probes/scripts/v12_heval32_live_loop.py", line 300, in main
+    mode_elicit(args, held_out)
+  File "/home/ubuntu/SEP-IE/semantic_entropy_probes/scripts/v12_heval32_live_loop.py", line 170, in mode_elicit
+    qs, provider = elicit_questions_via_api(prompt, args.max_candidates)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/SEP-IE/semantic_entropy_probes/scripts/v12_heval32_live_loop.py", line 93, in elicit_questions_via_api
+    raw, provider = generate_agent(uc, max_tokens=500)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/SEP-IE/semantic_entropy_probes/scripts/coding_agent.py", line 161, in generate_agent
+    raise RuntimeError("all API agent providers failed -- " + " | ".join(errors))
+RuntimeError: all API agent providers failed -- groq: openai/gpt-oss-120b call failed after 5 attempts: 429 rate limited: {"error":{"message":"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m0y8t1zsea0tza8w2gmwt02k` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199878, Requested 959. Please try again in 6m1.584s. Need more tokens? Upgrade to Dev Tier today at https://co | openrouter: qwen/qwen3-coder call failed after 5 attempts: 402 Client Error: Payment Required for url: https://openrouter.ai/api/v1/chat/completions

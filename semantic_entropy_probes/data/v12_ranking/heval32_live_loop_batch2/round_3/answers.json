@@ -1,0 +1,354 @@
+{
+  "heval_113": {
+    "answers": [
+      "Not applicable\u2014the specification states each string consists of only digits, so non-digit characters are not expected in the input.",
+      "Only ASCII digits 0-9 are counted; Unicode digit characters are not addressed in the specification.",
+      "Yes, an empty input list returns an empty list.",
+      "Not applicable\u2014the specification states each string consists of only digits, so negative signs would not appear in the input.",
+      "An empty string contains 0 odd digits; the count of odd digits (1, 3, 5, 7, 9) in an empty string is zero.",
+      "Not specified by the problem; the function assumes the input is a list of strings.",
+      "A list of strings, where each string is the template with all occurrences of 'i' replaced by the odd digit count.",
+      "Not applicable\u2014the specification states each string consists of only digits, so whitespace is not expected in the input.",
+      "Not specified by the problem.",
+      "Not specified by the problem.",
+      "Yes, the function preserves the exact order of elements from the input list in the output.",
+      "Not applicable\u2014the specification states each string consists of only digits, so decimal points are not expected in the input."
+    ]
+  },
+  "heval_125": {
+    "answers": [
+      "When no whitespace is found, the function splits on commas ',' specifically.",
+      "When counting lowercase letters, a letter is counted if its ord value is even (ord('a') = 0, ord('c') = 2, etc.), not based on alphabetical position.",
+      "The specification clarifies that 'odd order in the alphabet' was ambiguous; the correct rule is to count lowercase letters with even ord values (ord('a')=0 is even, ord('b')=1 is odd, etc.).",
+      "Only lowercase letters are counted; uppercase letters are completely ignored in the letter-counting phase.",
+      "If a text has whitespace, split on whitespace (priority 1); if no whitespace but has commas, split on commas (priority 2); otherwise count lowercase letters with even ord values.",
+      "The function counts each occurrence of a qualifying lowercase letter independently; if a letter appears multiple times, each occurrence is counted.",
+      "An empty string returns 0 (the count of lowercase letters with even ord values in an empty string is zero).",
+      "Only commas are used as the secondary split delimiter; digits and punctuation other than commas are not used.",
+      "Only lowercase letters are counted in the final counting phase; uppercase letters are completely ignored.",
+      "The function returns an integer, which is the count of qualifying lowercase letters.",
+      "Only ASCII lowercase letters a-z are considered in the letter-counting fallback; Unicode letters are not addressed.",
+      "If whitespace exists and splitting on whitespace produces a non-empty result, that result is returned; the function does not fall through to letter counting in this case."
+    ]
+  },
+  "heval_129": {
+    "answers": [
+      "A path can visit the same cell more than once (as shown in test cases like [1, 2, 1, 2, 1, 2, 1, 2, 1, 2]).",
+      "Path length k refers to the number of cells in the path (visiting exactly k cells), not the number of edges.",
+      "Not applicable\u2014the specification guarantees the answer is unique, so there is no ambiguity about which path to return.",
+      "The function is guaranteed to find a valid path of length k in the given grid (k is valid for the grid).",
+      "Every integer in [1, N*N] appears exactly once on the cells of the grid; no numbers appear multiple times.",
+      "The specification assumes k is always valid for the grid; the behavior for k larger than maximum possible path length is not specified.",
+      "The starting cell counts as the first element in the path; a path of length k visits exactly k cells including the starting cell.",
+      "The problem does not specify performance constraints, but the solution must be correct and guaranteed unique.",
+      "The function returns an ordered list of integers representing the values on the cells that the minimum path visits.",
+      "For k=1, the function returns a single-element list containing the starting cell value [1].",
+      "The function prefers paths that reach smaller-valued cells earlier in the sequence; it returns the lexicographically smallest path of length k.",
+      "The specification assumes N >= 2; the behavior for N < 2 or N = 0 is not addressed."
+    ]
+  },
+  "heval_134": {
+    "answers": [
+      "For a single-character string like 'A', the function returns True if it is an alphabetical character and is not part of a multi-character word (a single letter is not part of a word, so it returns True).",
+      "An empty string returns False because after splitting on spaces, there is no last element to check, or the last token is empty.",
+      "Yes, whitespace characters at the end should not appear in the string being checked, as the function splits on spaces and checks the last token.",
+      "Digits at the end should cause the function to return False; only alphabetical characters qualify.",
+      "Yes, punctuation marks and special characters should cause the function to return False; only letters (a-z, A-Z) qualify.",
+      "Accented letters like '\u00e9', '\u00fc', '\u00f1' are not explicitly excluded by the specification; the check uses ASCII letter range 97-122 (a-z) case-insensitively.",
+      "Both 'A' and 'a' count as alphabetical and are handled the same way using case-insensitive checking (via ord and lowercasing).",
+      "Non-printable ASCII characters like tab and newline would return False since they fall outside the alphabetical range.",
+      "Unicode spaces or invisible Unicode characters would return False; only ASCII letters in range 97-122 (lowercased) return True.",
+      "The function assumes a string input; handling of None or non-string inputs is not specified.",
+      "If the string ends with a number like '123', the function returns False; only alphabetical characters return True.",
+      "Edge cases like null terminators are not explicitly addressed; the function checks if the last token after space-splitting is a single alphabetical character."
+    ]
+  },
+  "heval_138": {
+    "answers": [
+      "The minimum sum is 2+2+2+2=8, which requires exactly four 2s; this means the answer is based on sums of exactly 4 positive even numbers.",
+      "Any positive even number (2, 4, 6, 8, 10, ...) can be used; the solution does not restrict to a specific subset.",
+      "0 is not treated as a valid positive even number; 'positive' means greater than zero.",
+      "Negative even numbers are not valid; the specification requires positive even numbers only.",
+      "For very large n, the algorithm is O(1)\u2014it simply checks if n is even and n >= 8.",
+      "For n < 0 (negative input), the function returns False; negative numbers cannot be expressed as sums of positive even numbers.",
+      "An integer input like 8 is treated as even; floating-point input like 8.0 is not explicitly addressed but would be handled as a number.",
+      "For n=8, the function returns True because 8 = 2+2+2+2 (exactly four 2s).",
+      "For n not an integer (e.g., 7.5), the behavior is not explicitly specified; the function checks n%2==0, which would fail for floats.",
+      "The algorithm is O(1) constant time; there are no performance constraints.",
+      "The same even number can be used repeatedly; the specification allows any combination of exactly 4 positive even numbers.",
+      "For even n < 8, the function returns False because 4 is the minimum count of even numbers (each at least 2), so the minimum sum is 8."
+    ]
+  },
+  "heval_14": {
+    "answers": [
+      "The list of prefixes excludes the empty string; prefixes start from the first character.",
+      "For an empty input string, the function returns an empty list [].",
+      "The specification does not address combining diacritical marks; it assumes standard Python string indexing at code-point boundaries.",
+      "UTF-16 surrogate pairs and multi-byte UTF-8 sequences are treated as single code points in Python's string model; slicing respects code-point boundaries.",
+      "In Python, a 'code-point boundary' is simply a position between characters in a Python string; each position i corresponds to string[:i+1].",
+      "The solution handles long strings with a simple loop; efficiency is linear O(n) in string length.",
+      "Emoji and other high-code-point characters are counted as single code points in Python strings; string slicing treats them as single characters.",
+      "For a string like 'abc', the prefixes are ['a', 'ab', 'abc'], excluding the empty string.",
+      "Zero-width characters and invisible Unicode characters are treated as code points; they would be included in prefixes if present.",
+      "The return type is a list of strings.",
+      "For grapheme clusters (like emoji with modifiers), Python treats each code point separately; they are not bundled into single prefixes.",
+      "The specification does not address null characters (\\x00); Python would include them as regular characters in the prefix list."
+    ]
+  },
+  "heval_140": {
+    "answers": [
+      "Leading spaces are replaced with underscores if there are 1-2 consecutive spaces, or with a dash if there are more than 2.",
+      "Trailing spaces are replaced with underscores if there are 1-2 consecutive spaces, or with a dash if there are more than 2.",
+      "Tab characters ('\\t') are not considered spaces; they are treated as regular characters and not replaced.",
+      "Newline characters ('\\n') are not considered spaces; they are treated as regular characters and not replaced.",
+      "The function returns a new string; the original string is not modified.",
+      "Form feed ('\\f'), carriage return ('\\r'), and other whitespace characters (except space) are not replaced; only the space character ' ' is replaced.",
+      "Zero-width spaces (U+200B) and other Unicode invisible spaces are not replaced; only the ASCII space character ' ' is replaced.",
+      "An empty string returns an empty string.",
+      "Non-breaking spaces (U+00A0) are not replaced according to the specification; only regular ASCII spaces ' ' are replaced.",
+      "The solution uses a linear scan with explicit space-counting logic; it handles long strings efficiently.",
+      "Escaped space sequences in the string literal (e.g., '\\x20') are treated as spaces and replaced.",
+      "The return type is a string."
+    ]
+  },
+  "heval_142": {
+    "answers": [
+      "For index 0 (a multiple of 3), the entry is squared; this rule also applies to other indices like 3, 6, 9, 12, etc., which are multiples of 3.",
+      "For index 4 (a multiple of 4 but not 3), the entry is cubed; this also applies to 8, 16, 20, 28, etc. (multiples of 4 that are not multiples of 3).",
+      "Negative numbers are squared and cubed using normal mathematical operations: (-2)^2 = 4 and (-2)^3 = -8.",
+      "Floating-point numbers in the list are squared or cubed as-is without conversion; the result may be a float.",
+      "The function returns a new list; the original list is not modified in place.",
+      "An empty input list returns an empty list, and the sum is 0.",
+      "For very large numbers, the solution computes squares and cubes without special overflow handling; results may be very large integers or floats.",
+      "There are no explicit performance constraints; the solution uses a linear scan with constant-time operations per element.",
+      "The function assumes the list contains only numbers; handling of None or non-numeric values is not specified.",
+      "The function returns a single integer (the sum), not a list or array.",
+      "The sum is of type int if all inputs are integers; if any floating-point operations occur, the result is a float.",
+      "The function handles all valid list indices; extremely large indices (e.g., 1000000) are handled the same as any other index."
+    ]
+  },
+  "heval_145": {
+    "answers": [
+      "For negative numbers, the digit sum is calculated by treating the negative sign separately: for -123, the digit sum is -(1+2+3) = -6.",
+      "For the number 0, the digit sum is 0.",
+      "There are no explicit performance constraints for very large numbers; the solution iterates through digits as strings.",
+      "The function returns a new list; the original list is not modified.",
+      "An empty input list returns an empty list.",
+      "Floating-point numbers should not be in the input according to the specification (it processes integers); their handling is not specified.",
+      "For single-digit numbers, the digit sum equals the number itself (e.g., 7 has digit sum 7).",
+      "When two numbers have the same digit sum, the stable sort preserves their original input order exactly.",
+      "The function assumes the list contains only integers; handling of non-numeric values or None is not specified.",
+      "The return type is a list of integers (the original numbers sorted).",
+      "Negative signs are not counted as part of the digit sum; only the absolute values' digits are summed, with the sign applied to the result.",
+      "For very large digit sums, there are no explicit overflow constraints; Python handles arbitrary-precision integers."
+    ]
+  },
+  "heval_148": {
+    "answers": [
+      "Planet names are case-sensitive; only the exact capitalized names ('Mercury', 'Venus', etc.) are recognized.",
+      "If planet1 and planet2 are the same planet, the function returns an empty tuple.",
+      "If either planet is at the edge (Mercury with no planets before it, or Neptune with no planets after it) and there are no planets between, the function returns an empty tuple.",
+      "Partial name matches like 'Merc' for 'Mercury' are not valid; names must be exact.",
+      "Leading or trailing whitespace in planet names (e.g., ' Mercury ') are not matched; exact names only.",
+      "If one or both planet names are misspelled (e.g., 'Merkury'), the function returns an empty tuple.",
+      "The return type is a tuple of planet names.",
+      "No aliases or alternate spellings are recognized; only the eight standard planet names are valid.",
+      "Mixed-case variations like 'MERCURY' or 'MeRcUrY' are not recognized; only the correct capitalization works.",
+      "Extra characters after a valid planet name (e.g., 'Mercury ') do not match; the name must be exact.",
+      "The planets in the result are always in sorted order, closest to farthest from the Sun, regardless of which planet was given first.",
+      "For adjacent planets with no planets between (e.g., planet1='Mercury' and planet2='Venus'), the function returns an empty tuple."
+    ]
+  },
+  "heval_151": {
+    "answers": [
+      "A float like 1.0 is not treated as a valid odd number; the specification requires integers only, and the solution checks for '.' in the string representation to exclude floats.",
+      "In Python, 1.0 == 1 is True, but for this function type matters; 1.0 (float) is rejected while 1 (int) is accepted.",
+      "If the list contains strings or other non-numeric values, they do not satisfy the conditions (i > 0 and i%2!=0 and no decimal point), so they are excluded from the sum.",
+      "If the list contains None values, they do not satisfy the conditions, so they are excluded from the sum.",
+      "Negative floats like -1.5 are rejected because they are negative (i > 0 is required); the non-integer aspect is also a reason for exclusion.",
+      "For very large odd numbers, there are no explicit overflow constraints; Python handles arbitrary-precision integers.",
+      "If the list is empty, the function returns 0 (sum of an empty list).",
+      "Special float values like NaN or Infinity do not satisfy i > 0 and i%2!=0 (NaN comparisons return False), so they are excluded.",
+      "Negative zero (-0.0) is treated as 0 and is even (0%2 == 0), so it is excluded from the sum.",
+      "Complex numbers like 3j or 1+2j do not have a standard modulo operation; they would not satisfy i%2!=0 and are excluded.",
+      "Zero itself is even (0%2 == 0), not odd, so it is excluded from the sum.",
+      "The function returns the sum only; it does not modify the original list."
+    ]
+  },
+  "heval_16": {
+    "answers": [
+      "Yes, an empty string returns 0 as the count of distinct characters (no characters means 0 distinct ones).",
+      "Unicode combining marks are treated as separate characters from their base character when counting distinct characters.",
+      "No, the function is case-insensitive: 'A' and 'a' are counted as the same character.",
+      "Emoji with multiple code points are counted by the total number of distinct code points they contain.",
+      "Yes, whitespace characters (spaces, tabs, newlines) are counted as distinct characters.",
+      "Yes, null characters and other non-printable characters are counted as distinct characters.",
+      "Surrogate pairs and multi-byte UTF-8 sequences are treated as distinct characters in the count.",
+      "Yes, the function handles very long strings efficiently by using a set to track distinct characters.",
+      "Yes, control characters like \\n, \\t, \\x00 are counted as distinct characters.",
+      "Yes, the function distinguishes between different types of whitespace (each has a different code point).",
+      "Different Unicode equivalences (composed vs decomposed forms) are treated as distinct characters.",
+      "The function returns an integer representing the count of distinct characters."
+    ]
+  },
+  "heval_163": {
+    "answers": [
+      "The range [a, b] is inclusive on both ends. The function returns even digits (2, 4, 6, 8) that fall within this inclusive range.",
+      "If a > b, the function still returns the same sorted result by treating the range as going from min(a, b) to max(a, b).",
+      "The function returns a list of even single digits (2, 4, 6, 8) that fall within the range, in ascending order.",
+      "Negative numbers in the range are handled: the range is clamped to [2, 8] regardless of input values.",
+      "The number 0 is not returned as it is not included in the set of even digits (2, 4, 6, 8); the minimum is 2.",
+      "If there are no even digits within the range, the function returns an empty list (e.g., generate_integers(10, 14) => []).",
+      "Yes, a and b are guaranteed to be integers based on the problem specification.",
+      "The function handles very large ranges efficiently by only checking and returning digits 2, 4, 6, 8.",
+      "The exact return type is a list of integers.",
+      "The function returns unique even digits only (no duplicates). Each even digit appears at most once.",
+      "Not applicable; a and b are guaranteed to be valid integers per the problem specification.",
+      "Yes, the function handles extremely large values of a and b efficiently since it only considers the 4 fixed even digits."
+    ]
+  },
+  "heval_19": {
+    "answers": [
+      "The function handles only exact lowercase matches. 'One', 'ONE', 'one' are not recognized; only 'one' is valid.",
+      "The function assumes input contains only valid number words ('zero' through 'nine') separated by spaces. Non-word characters or punctuation are not handled.",
+      "The function does not handle typos or misspelled number words; they would not be in the valid word set and would be ignored.",
+      "Number words are delimited only by spaces in the input.",
+      "Multiple consecutive spaces are handled by filtering out empty strings after splitting.",
+      "If the input is empty, the function returns an empty string.",
+      "The function returns a single string with words separated by single spaces in sorted order (smallest to largest numeric value).",
+      "If the input contains words not in the valid set ('zero' through 'nine'), those words are ignored and skipped.",
+      "There are no constraints on the order or frequency of repeated number words; they will all be sorted by their numeric value.",
+      "The function handles leading or trailing whitespace by filtering out empty strings from the split result.",
+      "No trailing spaces are included in the return value; the result is a clean space-separated string.",
+      "The expected return type is a string with space-separated number words sorted by numeric value."
+    ]
+  },
+  "heval_29": {
+    "answers": [
+      "An empty prefix (empty string) would technically be a prefix of all strings, but the actual behavior depends on the implementation; typically empty prefix is not treated as matching anything meaningful.",
+      "The function is case-sensitive when checking prefix matches: 'A' is not a prefix of 'abc'.",
+      "If the prefix is longer than a string in the list, that string does not match the prefix.",
+      "Yes, a prefix that equals the entire string (e.g., prefix='abc' and string='abc') is considered a valid match since it starts with that prefix.",
+      "Empty strings in the input list do not match any non-empty prefix, but would match an empty prefix.",
+      "Not applicable; the problem does not mention None values, and the input is assumed to be a valid list of strings.",
+      "Yes, the order of matching strings in the output preserves the input list order.",
+      "Yes, the function distinguishes between substring and prefix matching: the prefix must be at the start of the string.",
+      "The function does not explicitly handle leading or trailing whitespace; it treats whitespace as part of the string for prefix matching.",
+      "There are no special Unicode or encoding considerations mentioned; standard Python string prefix matching is used.",
+      "Special regex characters in the prefix are treated literally, not as patterns. The function uses standard string prefix matching, not regex.",
+      "If no strings match the prefix, the function returns an empty list."
+    ]
+  },
+  "heval_31": {
+    "answers": [
+      "The function returns False for 1, as 1 is not considered prime.",
+      "The function returns True for 2, which is the smallest and only even prime number.",
+      "For negative integers, the function returns False as negative numbers cannot be prime.",
+      "For 0, the function returns False as 0 is not prime.",
+      "For very large numbers (e.g., n > 10^15), the trial division algorithm up to n-1 would be extremely slow; there are performance constraints in practice.",
+      "The function does not handle floating-point inputs like 3.0; it assumes integer input.",
+      "The exact trial division algorithm checks divisibility from 2 to n-1. If any divisor is found, return False; otherwise return True.",
+      "The function does not explicitly handle or reject non-integer inputs; it assumes the input is an integer.",
+      "For numbers very close to integer limits, there are no overflow concerns in Python (integers have arbitrary precision).",
+      "The function returns a boolean (True or False).",
+      "There are no built-in caching or optimization requirements; each call performs trial division independently.",
+      "For None or invalid inputs, the function would raise an error as the code assumes a valid integer."
+    ]
+  },
+  "heval_40": {
+    "answers": [
+      "If the list contains duplicate values, each occurrence is considered independently by index. Indices matter, not just values.",
+      "i < j < k means strictly increasing indices (i < j and j < k).",
+      "No, the same element cannot appear multiple times in a valid triple; we select one element from index i, one from index j, and one from index k (all must have distinct indices).",
+      "If the list is empty or has fewer than 3 elements, the function returns False (no valid triple exists).",
+      "The function considers combinations (not permutations) where indices are strictly increasing: i < j < k.",
+      "The function returns a boolean (True if such a triple exists, False otherwise).",
+      "For floating-point numbers, the exact equality check (sum == 0) is used. There is no special floating-point tolerance mentioned.",
+      "For very large numbers, there are no explicit overflow concerns in Python.",
+      "The function does not handle None or non-numeric values; it assumes all list elements are numeric.",
+      "For lists with negative numbers, the function handles them normally. A negative number can be part of a triple that sums to zero.",
+      "An O(n^3) algorithm is acceptable based on the solution provided, which uses triple nested loops.",
+      "The function returns True as soon as the first triple is found (early exit), without checking all possibilities."
+    ]
+  },
+  "heval_52": {
+    "answers": [
+      "The function returns True only if ALL numbers in the list are below the threshold (not just some).",
+      "For floats in the list, they are compared directly to the integer threshold without rounding.",
+      "If the list is empty, the function returns True (vacuously, all elements of an empty list satisfy any condition).",
+      "The function does not consider None or non-numeric values; it assumes all elements are numeric.",
+      "Not applicable; the threshold is assumed to be numeric and valid per the problem specification.",
+      "Yes, for duplicate values in the list, each is checked independently; all must be below the threshold.",
+      "The function handles very large lists by checking each element once (O(n) time complexity).",
+      "The function returns a boolean (True or False).",
+      "Negative numbers are handled normally in the comparison with the threshold.",
+      "The function does not modify the original list; it only checks conditions and returns a boolean.",
+      "For mixed numeric types (int and float), both are compared directly without type coercion.",
+      "If the threshold is negative, the function still works correctly; for example, below_threshold([1, 2, 4, 10], -5) would return False."
+    ]
+  },
+  "heval_53": {
+    "answers": [
+      "The function does not explicitly handle floating-point inputs; it assumes integer input based on the type hint.",
+      "The function returns an int (the sum of two integers is an integer).",
+      "For negative numbers, the function adds them normally: add(-5, 3) would return -2.",
+      "For zero, the function handles it normally: add(0, 5) returns 5.",
+      "The function does not have special handling for overflow; Python integers have arbitrary precision.",
+      "The function does not handle complex numbers; it assumes integer inputs.",
+      "The function does not handle non-numeric inputs; it assumes both x and y are integers.",
+      "The function does not validate that inputs are numeric; it assumes they are.",
+      "There are no special rounding or precision constraints for integer addition.",
+      "The function returns an int.",
+      "There are no special performance requirements for extremely large numbers.",
+      "The function does not handle infinity or NaN values; it assumes integer inputs."
+    ]
+  },
+  "heval_56": {
+    "answers": [
+      "For an empty string, the function returns True (vacuously balanced: depth starts at 0, ends at 0).",
+      "If the string contains only '<' brackets with no '>', the function returns False (depth never reaches 0).",
+      "If the string contains only '>' brackets with no '<', the function returns False (depth goes negative immediately).",
+      "The function handles strings with an odd number of brackets by returning False if the final depth is not 0.",
+      "The function assumes the string contains only '<' and '>' brackets; non-bracket characters would cause errors.",
+      "The function handles only '<' and '>' brackets, not '()', '[]', or '{}'; other bracket types would be treated as invalid characters.",
+      "For very long strings, the algorithm is optimized with O(n) time complexity (single pass), so it handles millions of characters efficiently.",
+      "The exact definition of 'proper nesting' is: every '<' has a matching '>' in the correct order, equivalent to balanced parentheses.",
+      "The function returns a boolean (True or False), not an integer.",
+      "There are no special recursion depth constraints; the algorithm uses iteration, not recursion.",
+      "Whitespace and other separators between brackets cause the function to return False (they are treated as invalid characters).",
+      "The function handles only the literal ASCII '<' and '>'; Unicode variants like mathematical operators would be treated as invalid characters."
+    ]
+  },
+  "heval_59": {
+    "answers": [
+      "If n is already prime, the function is undefined; the problem states 'Assume n > 1 and is not a prime,' so this case is excluded.",
+      "For n = 2 (the smallest prime), the function is undefined per the problem specification (n must not be prime).",
+      "The function does not handle negative integers; the problem assumes n > 1.",
+      "For n = 1, the function is undefined per the problem specification (n must be > 1).",
+      "For numbers with many repeated prime factors (e.g., n = 2^100), the function returns the largest distinct prime factor (2 in this case).",
+      "For very large values of n (e.g., n = 10^100), the trial division factorization algorithm is impractically slow; there are significant performance constraints.",
+      "The function does not handle floating-point inputs; it assumes integer input.",
+      "The function returns an integer (the largest prime factor).",
+      "For numbers with multiple distinct large prime factors, the 'largest' is determined by numeric value comparison.",
+      "The function uses trial division to find all prime factors, checking divisibility from 2 to n.",
+      "There are precision and overflow concerns for extremely large n in practical implementations, though Python handles arbitrary precision integers.",
+      "For negative n or n = 0, the function is undefined per the problem specification (n must be > 1 and composite)."
+    ]
+  },
+  "heval_64": {
+    "answers": [
+      "Uppercase 'Y' at the end of a word is counted as a vowel (same as lowercase 'y').",
+      "For a single-character string like 'a' or 'y', both are treated as vowels if they match the vowel criteria.",
+      "For mixed-case words like 'YoYo', uppercase 'Y' at the end counts as a vowel, lowercase 'Y' at the start does not.",
+      "For a word ending with multiple Y's (e.g., 'happy' ends with 'y'), only the last 'y' counts as a vowel (it's at the end).",
+      "Non-alphabetic characters (digits, punctuation, spaces) in the word are ignored in vowel counting.",
+      "For an empty string, the function would attempt to access index -1 (the last character), which would fail; empty string is a problem edge case.",
+      "Accented vowels like '\u00e1', '\u00e9', '\u00ec', '\u00f2', '\u00f9' are NOT counted as vowels; only ASCII 'a', 'e', 'i', 'o', 'u' are counted.",
+      "The function counts vowels only at the start, middle, and end positions for standard vowels; 'y' only counts at the end.",
+      "For 'y' in the middle of a word like 'gym', it is NOT counted as a vowel (only 'y' at the end qualifies).",
+      "Yes, uppercase versions of vowels (A, E, I, O, U) are counted the same as lowercase vowels.",
+      "For words with no vowels (e.g., 'my' with just 'y' in middle, which doesn't count), the function returns 1 (only the final 'y' counts).",
+      "The function handles only ASCII a, e, i, o, u, y; it does not handle Unicode variants of vowels."
+    ]
+  }
+}

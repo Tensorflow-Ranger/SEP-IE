@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_144_vagueness",
+  "questions": [
+    "Are numerator and denominator always guaranteed to be positive whole numbers, or could they be negative or zero?",
+    "Does \"whole number\" mean any integer (positive, negative, or zero), or strictly non-negative integers?",
+    "Should the product be simplified to lowest terms before checking if it's whole?",
+    "What should happen if the denominator reduces to 1 after simplification?",
+    "How should floating-point rounding errors be avoided when determining if the product is whole?",
+    "Is the input guaranteed to always match the \"<numerator>/<denominator>\" string format exactly?",
+    "Should whitespace within the fraction strings be trimmed before parsing?",
+    "Are there constraints on how large the numerator/denominator values can be?"
+  ],
+  "answers": [
+    "Not specified beyond what's given; that's exactly the injected gap — positivity is no longer guaranteed explicitly, though presumably still positive whole numbers as before.",
+    "Any integer conceptually, but presumably still non-negative given the missing constraint was 'positive whole numbers'.",
+    "Not necessary; just check divisibility directly.",
+    "Not applicable; no simplification step is required.",
+    "Use exact integer arithmetic, avoiding floats.",
+    "Not specified beyond what's given; the exact format constraint was dropped, but assume it's still numerator/denominator digits.",
+    "Not specified beyond what's given; assume no whitespace.",
+    "Not specified beyond what's given; no explicit size constraints."
+  ],
+  "inline_prompts": [
+    "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction. Not specified\n    beyond what's given; that's exactly the injected gap — positivity is no longer\n    guaranteed explicitly, though presumably still positive whole numbers as before.\n    \"\"\"",
+    "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction. Any integer conceptually, but presumably still non-negative given the missing constraint was 'positive whole numbers'. You can assume that x, and n are valid fractions, and do not have zero as denominator.\n    \"\"\"",
+    "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction. Not necessary;\n    just check divisibility directly. You can assume that x, and n are valid fractions,\n    and do not have zero as denominator.\"\"\"\n</original>",
+    "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction. Not applicable; no simplification step is required.\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n    \"\"\"",
+    "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction. Use exact integer arithmetic, avoiding floats.\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n    \"\"\"",
+    "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction. Not specified\n    beyond what's given; the exact format constraint was dropped, but assume it's still\n    numerator/denominator digits.\"\"\"\n</original>",
+    "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction. Not specified\n    beyond what's given; assume no whitespace. You can assume that x, and n are valid\n    fractions, and do not have zero as denominator.\"\"\"",
+    "def simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction. Not specified\n    beyond what's given; no explicit size constraints. You can assume that x, and n are\n    valid fractions, and do not have zero as denominator.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    2,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0
+  ]
+}

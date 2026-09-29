@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').",
+  "baseline_mean_p": 0.23531536757946014,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "Should the output string end with a delimiter (e.g., trailing space or comma) or not?",
+      "answer": "No trailing delimiter; the output is just the sorted words joined by single spaces (see test outputs like 'zero four five seven eight nine').",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').\n\nClarification: No trailing delimiter; the output is just the sorted words joined by single spaces (see test outputs like 'zero four five seven eight nine').",
+      "p1": 0.1876974254846573,
+      "p2": 0.26054129004478455,
+      "mean_p": 0.22411935776472092,
+      "delta": -0.011196009814739227
+    },
+    {
+      "idx": 5,
+      "question": "Must the output list the numbers in ascending numeric order (zero to nine) or in lexical order of the words?",
+      "answer": "Ascending numeric order (smallest to largest), per the clear specification and the value_map used for sorting.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').\n\nClarification: Ascending numeric order (smallest to largest), per the clear specification and the value_map used for sorting.",
+      "p1": 0.2202945351600647,
+      "p2": 0.2746140658855438,
+      "mean_p": 0.24745430052280426,
+      "delta": 0.012138932943344116
+    },
+    {
+      "idx": 3,
+      "question": "Should the output preserve the original delimiter format (e.g., spaces vs commas) used in the input?",
+      "answer": "Output always uses single spaces as the delimiter, regardless of input formatting, since the input itself is defined as space-delimited.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').\n\nClarification: Output always uses single spaces as the delimiter, regardless of input formatting, since the input itself is defined as space-delimited.",
+      "p1": 0.21419163048267365,
+      "p2": 0.2886084020137787,
+      "mean_p": 0.25140001624822617,
+      "delta": 0.01608464866876602
+    },
+    {
+      "idx": 0,
+      "question": "Should the input string contain the number words separated by spaces, commas, or another delimiter?",
+      "answer": "Space-delimited, per the clear specification (\"a space-delimited string of numberals\").",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').\n\nClarification: Space-delimited, per the clear specification (\"a space-delimited string of numberals\").",
+      "p1": 0.22421897947788239,
+      "p2": 0.28266921639442444,
+      "mean_p": 0.2534440979361534,
+      "delta": 0.018128730356693268
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle invalid tokens or misspelled number words\u2014raise an error, ignore them, or something else?",
+      "answer": "Not specified/tested; not a case that occurs -- input is guaranteed to consist of valid number words.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').\n\nClarification: Not specified/tested; not a case that occurs -- input is guaranteed to consist of valid number words.",
+      "p1": 0.23315538465976715,
+      "p2": 0.2737702429294586,
+      "mean_p": 0.2534628137946129,
+      "delta": 0.01814744621515274
+    },
+    {
+      "idx": 1,
+      "question": "Can the input string be empty, and if so, what should the function return?",
+      "answer": "Returns an empty string for empty input (confirmed by test case: '' -> '').",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').\n\nClarification: Returns an empty string for empty input (confirmed by test case: '' -> '').",
+      "p1": 0.24382534623146057,
+      "p2": 0.26937419176101685,
+      "mean_p": 0.2565997689962387,
+      "delta": 0.021284401416778564
+    },
+    {
+      "idx": 2,
+      "question": "Are duplicate number words allowed in the input, and should they appear multiple times in the output?",
+      "answer": "Not explicitly tested, but the reference implementation preserves every token from the split (no deduplication step), so duplicates would appear multiple times in the output.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').\n\nClarification: Not explicitly tested, but the reference implementation preserves every token from the split (no deduplication step), so duplicates would appear multiple times in the output.",
+      "p1": 0.24695852398872375,
+      "p2": 0.3038640022277832,
+      "mean_p": 0.2754112631082535,
+      "delta": 0.040095895528793335
+    },
+    {
+      "idx": 4,
+      "question": "If the input contains leading or trailing whitespace, should it be ignored or affect the output?",
+      "answer": "Extra/leading/trailing whitespace produces empty tokens after split(' '), which are filtered out (`if x`) -- effectively ignored.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').\n\nClarification: Extra/leading/trailing whitespace produces empty tokens after split(' '), which are filtered out (`if x`) -- effectively ignored.",
+      "p1": 0.26643311977386475,
+      "p2": 0.3374636173248291,
+      "mean_p": 0.3019483685493469,
+      "delta": 0.06663300096988678
+    }
+  ],
+  "top3": [
+    {
+      "idx": 7,
+      "question": "Should the output string end with a delimiter (e.g., trailing space or comma) or not?",
+      "answer": "No trailing delimiter; the output is just the sorted words joined by single spaces (see test outputs like 'zero four five seven eight nine').",
+      "delta": -0.011196009814739227
+    },
+    {
+      "idx": 5,
+      "question": "Must the output list the numbers in ascending numeric order (zero to nine) or in lexical order of the words?",
+      "answer": "Ascending numeric order (smallest to largest), per the clear specification and the value_map used for sorting.",
+      "delta": 0.012138932943344116
+    },
+    {
+      "idx": 3,
+      "question": "Should the output preserve the original delimiter format (e.g., spaces vs commas) used in the input?",
+      "answer": "Output always uses single spaces as the delimiter, regardless of input formatting, since the input itself is defined as space-delimited.",
+      "delta": 0.01608464866876602
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "Should the output string end with a delimiter (e.g., trailing space or comma) or not?",
+    "answer": "No trailing delimiter; the output is just the sorted words joined by single spaces (see test outputs like 'zero four five seven eight nine').",
+    "delta": -0.011196009814739227
+  },
+  "next_prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable -- input words are guaranteed to be the exact lowercase forms listed ('zero' through 'nine').\n\nClarification: No trailing delimiter; the output is just the sorted words joined by single spaces (see test outputs like 'zero four five seven eight nine').",
+  "code_prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted; no trailing delimiter; the output is just the sorted words joined by single spaces (see test outputs like 'zero four five seven eight nine').\n    \"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

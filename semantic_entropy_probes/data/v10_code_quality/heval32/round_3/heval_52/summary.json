@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.",
+  "baseline_mean_p": 0.1994602270424366,
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "What happens if the list contains non-integer elements?",
+      "answer": "Not applicable -- the input is guaranteed to be a list of numbers per the type hint.",
+      "prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.\n\nClarification: Not applicable -- the input is guaranteed to be a list of numbers per the type hint.",
+      "p1": 0.12499912083148956,
+      "p2": 0.2939659357070923,
+      "mean_p": 0.20948252826929092,
+      "delta": 0.010022301226854324
+    },
+    {
+      "idx": 4,
+      "question": "What is the expected behavior if the threshold is a very large positive or negative number?",
+      "answer": "Handled by normal numeric comparison, no special casing.",
+      "prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.\n\nClarification: Handled by normal numeric comparison, no special casing.",
+      "p1": 0.14964167773723602,
+      "p2": 0.28059569001197815,
+      "mean_p": 0.2151186838746071,
+      "delta": 0.015658456832170486
+    },
+    {
+      "idx": 5,
+      "question": "How does the function handle lists with mixed data types (e.g., integers and strings)?",
+      "answer": "Not applicable -- the input is guaranteed to be a list of numbers.",
+      "prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.\n\nClarification: Not applicable -- the input is guaranteed to be a list of numbers.",
+      "p1": 0.1406632512807846,
+      "p2": 0.3053065240383148,
+      "mean_p": 0.2229848876595497,
+      "delta": 0.023524660617113113
+    },
+    {
+      "idx": 2,
+      "question": "How does the function handle floating-point numbers in the list?",
+      "answer": "Handled the same as integers via normal numeric comparison (e >= t works for floats too).",
+      "prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.\n\nClarification: Handled the same as integers via normal numeric comparison (e >= t works for floats too).",
+      "p1": 0.1570882797241211,
+      "p2": 0.3189992904663086,
+      "mean_p": 0.23804378509521484,
+      "delta": 0.038583558052778244
+    },
+    {
+      "idx": 7,
+      "question": "How does the function handle lists where all numbers are equal to the threshold?",
+      "answer": "Returns False, since e >= t is True when e equals t (equal counts as 'at or above', not below).",
+      "prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.\n\nClarification: Returns False, since e >= t is True when e equals t (equal counts as 'at or above', not below).",
+      "p1": 0.2042687088251114,
+      "p2": 0.3384445607662201,
+      "mean_p": 0.27135663479566574,
+      "delta": 0.07189640775322914
+    },
+    {
+      "idx": 3,
+      "question": "Is the function expected to return True if exactly one number is below the threshold?",
+      "answer": "No -- ALL numbers must be below the threshold; a single element >= t causes the function to return False.",
+      "prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.\n\nClarification: No -- ALL numbers must be below the threshold; a single element >= t causes the function to return False.",
+      "p1": 0.173661470413208,
+      "p2": 0.4031260311603546,
+      "mean_p": 0.2883937507867813,
+      "delta": 0.08893352374434471
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected behavior when the threshold is zero?",
+      "answer": "Handled normally: returns True only if every element is strictly less than 0.",
+      "prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.\n\nClarification: Handled normally: returns True only if every element is strictly less than 0.",
+      "p1": 0.3353857398033142,
+      "p2": 0.46518731117248535,
+      "mean_p": 0.4002865254878998,
+      "delta": 0.20082629844546318
+    },
+    {
+      "idx": 0,
+      "question": "Does the function return True if all numbers in the list are below the threshold?",
+      "answer": "Yes -- it returns True only if every element in l is strictly less than t.",
+      "prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.\n\nClarification: Yes -- it returns True only if every element in l is strictly less than t.",
+      "p1": 0.3022880554199219,
+      "p2": 0.5705267786979675,
+      "mean_p": 0.4364074170589447,
+      "delta": 0.2369471900165081
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "What happens if the list contains non-integer elements?",
+      "answer": "Not applicable -- the input is guaranteed to be a list of numbers per the type hint.",
+      "delta": 0.010022301226854324
+    },
+    {
+      "idx": 4,
+      "question": "What is the expected behavior if the threshold is a very large positive or negative number?",
+      "answer": "Handled by normal numeric comparison, no special casing.",
+      "delta": 0.015658456832170486
+    },
+    {
+      "idx": 5,
+      "question": "How does the function handle lists with mixed data types (e.g., integers and strings)?",
+      "answer": "Not applicable -- the input is guaranteed to be a list of numbers.",
+      "delta": 0.023524660617113113
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "What happens if the list contains non-integer elements?",
+    "answer": "Not applicable -- the input is guaranteed to be a list of numbers per the type hint.",
+    "delta": 0.010022301226854324
+  },
+  "next_prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t.\n    \"\"\"\n\nClarification: Yes, there's no restriction on t's sign; the comparison works the same regardless.\n\nClarification: Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.\n\nClarification: Not applicable -- the input is guaranteed to be a list of numbers per the type hint.",
+  "code_prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if some numbers in the list l are below threshold t. Yes, there's no restriction on t's sign; the comparison works the same regardless. The loop over an empty list makes no comparisons, so the function returns True vacuously. Not applicable -- the input is guaranteed to be a list of numbers per the type hint.\"\"\"",
+  "test_n_pass": 4,
+  "test_n_total": 6
+}

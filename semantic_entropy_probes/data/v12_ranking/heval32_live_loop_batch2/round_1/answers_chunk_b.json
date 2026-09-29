@@ -1,0 +1,178 @@
+{
+  "heval_16": {
+    "answers": [
+      "No, uppercase and lowercase letters are treated as the same—the function converts the entire string to lowercase before counting distinct characters, so 'A' and 'a' count as one distinct character.",
+      "Yes, whitespace characters like spaces, tabs, and newlines are counted as distinct characters just like any other character in the string.",
+      "Yes, Unicode characters including emojis and accented letters are each counted as a single distinct character.",
+      "Combining diacritical marks are counted separately as their own distinct characters, not combined with their base characters.",
+      "The function expects a string input; non-string types are not addressed by the specification.",
+      "Surrogate pairs in UTF-16 would be counted as individual code units based on how Python's string handling works internally.",
+      "Control characters like null bytes and backspace are included in the distinct character count—they are characters like any other.",
+      "For an empty string, the function returns 0, as there are no characters to count.",
+      "Not applicable. The specification does not restrict the count to printable characters only; all characters are considered.",
+      "The function counts distinct characters based on their code point values; characters are compared by their Unicode values.",
+      "Not applicable. There is no specified upper limit on input string length; Python handles arbitrary lengths.",
+      "Not applicable. The specification does not mention any special handling for extremely long strings or performance constraints."
+    ]
+  },
+  "heval_163": {
+    "answers": [
+      "The range is inclusive of both endpoints—if you want even digits between 2 and 8, you get [2, 4, 6, 8], which includes both 2 and 8.",
+      "If a > b, the function automatically treats the range correctly by using min(a,b) as lower and max(a,b) as upper, so the order doesn't matter.",
+      "By 'even digits' the specification means the even single-digit numbers themselves (2, 4, 6, 8) that fall within the range [a, b], not individual digits extracted from multi-digit numbers.",
+      "The returned even digits are presented in ascending order, regardless of whether a < b or a > b.",
+      "The result contains each even digit at most once. If both a and b are within the range, the digits appear only once in the ascending list.",
+      "The function returns a list of integers representing the even digits in the specified range.",
+      "If a or b is not an integer (e.g., float or Decimal), the specification does not address this; the assumption is positive integers are provided.",
+      "Not applicable. Non-numeric inputs are outside the specification scope.",
+      "Not applicable. The specification refers to even digits (2, 4, 6, 8) as whole numbers, not to individual digits extracted from numbers.",
+      "The specification works with the positive even single digits (2, 4, 6, 8) only. Any integers outside the range [2, 8] are clamped: values below 2 become 2, values above 8 become 8.",
+      "If the range contains no even digits (e.g., generate_integers(17, 89)), the function returns an empty list [].",
+      "Not applicable. There are no specified size limits or overflow concerns, as the only possible digits are 2, 4, 6, and 8."
+    ]
+  },
+  "heval_19": {
+    "answers": [
+      "The input string should be space-delimited—words are separated by single or multiple spaces, and the function filters out empty strings resulting from consecutive spaces.",
+      "Duplicate number words in the input are kept as separate occurrences in the sorted output list, each appearing in its sorted position.",
+      "Leading or trailing whitespace is handled by filtering: after splitting on spaces, empty strings are excluded using the condition 'if x'.",
+      "The output string uses the same space-delimited format as a properly formatted input, with single spaces separating the sorted number words.",
+      "Mixed-case representations (e.g., 'One', 'TWO') are not valid according to the specification—valid choices are specifically the lowercase words 'zero' through 'nine'.",
+      "Not applicable. The specification only defines ten valid number words ('zero' through 'nine'). Invalid words are outside the scope.",
+      "The specification treats the input as a single line. Newlines are not mentioned as delimiters in the clear specification.",
+      "The numbers are sorted in ascending numeric value: 0 (zero) comes before 1 (one), which comes before 2 (two), etc.",
+      "If the input string is empty or contains only whitespace, the function returns an empty string ''.",
+      "Not applicable. The specification assumes valid input containing at least some of the ten valid number words.",
+      "The sort is stable—when two number words have the same numeric value, they maintain their original relative order from the input.",
+      "Not applicable. No maximum length or count limit is specified for the number of words in the input."
+    ]
+  },
+  "heval_29": {
+    "answers": [
+      "The prefix comparison is case-sensitive—'abc' starting with 'A' returns False, while 'abc' starting with 'a' returns True.",
+      "The returned list preserves the original order of matching strings from the input list—no reordering or sorting occurs.",
+      "Strings that are exactly equal to the prefix are included in the output. A string 'abc' matches prefix 'abc'.",
+      "If an element in the input is not a string (e.g., None, integer), it is skipped—the function does not raise an error or convert it.",
+      "Unicode characters and combining marks are treated according to Python's standard string startswith() method—a combining mark attached to a base character would be part of the prefix match.",
+      "An empty prefix matches all strings, so filter_by_prefix(['abc', 'def'], '') returns ['abc', 'def'].",
+      "The function returns a new list object containing the filtered strings—it does not return a view or reference to the original.",
+      "If the input list contains duplicate entries that match the prefix, all duplicates are retained in the output.",
+      "When the input list is empty, the function returns an empty list [].",
+      "The function accepts any iterable of strings (list, tuple, etc.), and will process them identically.",
+      "Leading or trailing whitespace in each string is considered part of the content—' abc' does not start with 'abc'.",
+      "Whitespace and special characters in the prefix are matched literally—filter_by_prefix(['a b', 'ab'], 'a ') returns ['a b']."
+    ]
+  },
+  "heval_31": {
+    "answers": [
+      "The function accepts integers only. Non-integer numeric types like floats should not be passed.",
+      "For inputs less than 2 (including 0, 1, and negative numbers), the function returns False—no prime numbers exist below 2.",
+      "The return value must be the Boolean True or False—no truthy/falsy substitutes are acceptable.",
+      "If the input is not a number at all (e.g., a string, None, complex number), the specification does not define behavior; type validation is assumed by the caller.",
+      "The function must handle arbitrarily large integers correctly. Python's arbitrary precision integers ensure this works.",
+      "Yes, the function treats 2 as an even prime. All other even numbers return False immediately without further checks.",
+      "If the input is a boolean (True/False, which are subclasses of int), they are interpreted as 1 and 0 respectively—both non-prime.",
+      "The algorithm uses trial division: for n, it checks if any integer from 2 to n-1 divides it evenly. This is acceptable per the tests.",
+      "If invalid inputs occur, the specification does not define error handling—the caller is responsible for passing valid integers.",
+      "Numbers with fractional parts like 3.0 are not addressed by the specification; only plain integers are in scope.",
+      "Not applicable. There is no requirement to cache or memoize results; each call is independent.",
+      "Custom numeric types are not addressed by the specification; it expects built-in Python int type."
+    ]
+  },
+  "heval_40": {
+    "answers": [
+      "The three elements must be at distinct indices in the list—you cannot use the same element three times.",
+      "If the list contains duplicate values, triples that differ only by which duplicate instance is used are considered the same (same values, same indices).",
+      "The order in which the three elements appear in the list does not matter—the function checks all combinations where i < j < k.",
+      "The function returns True as soon as any qualifying triple is found—it does not verify all possible triples.",
+      "The list is guaranteed to contain only integers according to the specification.",
+      "If the list has fewer than three elements, the function returns False—there cannot be a triple.",
+      "For large lists, the algorithm uses a triple nested loop (O(n³)), which is acceptable per the test suite.",
+      "Python's arbitrary-precision integers handle any sum without overflow concerns.",
+      "Negative zero (-0) is not distinct from 0 in Python—they are the same value.",
+      "The input is expected to be a flat list of integers; nested lists or other iterables are not addressed.",
+      "The function only needs to return True/False—it does not report which triples exist.",
+      "The input list is treated as read-only; the function does not modify it during execution."
+    ]
+  },
+  "heval_52": {
+    "answers": [
+      "The function returns True if ALL numbers in the list are strictly less than the threshold—not 'some', but every element.",
+      "The function only considers numeric types (integers and floats). Non-numeric types cannot be compared and are not addressed by the spec.",
+      "Nested collections like sub-lists cause an error—the function compares values directly to the threshold, not recursively.",
+      "An empty list returns True—vacuously, all zero elements are below the threshold.",
+      "Not applicable. NaN handling is not specified; the assumption is clean numeric inputs.",
+      "If the list contains duplicate values, each occurrence is checked independently—duplicates are not ignored.",
+      "Negative numbers and zero are valid elements for comparison. The sign of the threshold does not change the meaning of 'below'.",
+      "The function accepts any numeric type as the threshold (int, float, Decimal, etc.) and performs comparison accordingly.",
+      "The function should short-circuit and return False as soon as it finds any element >= t.",
+      "Non-numeric elements that cannot be compared raise a TypeError—they are not skipped or treated as non-below.",
+      "A simple linear scan is acceptable; no streaming or special efficiency requirements are specified.",
+      "The function accepts any iterable, not just list type—tuples, generators, sets all work identically."
+    ]
+  },
+  "heval_53": {
+    "answers": [
+      "The function returns the sum of x and y—the result of arithmetic addition.",
+      "Python's arbitrary-precision integers handle overflow automatically; no overflow handling is required.",
+      "If x or y is not an integer (float, string, None, etc.), the specification does not define behavior—type validation is the caller's responsibility.",
+      "There is no special handling for negative numbers—they are added like any other integers.",
+      "The function supports arbitrary-precision arithmetic—Python ints are always arbitrary precision.",
+      "Integers are treated as signed values; there is no concept of signed vs. unsigned.",
+      "No time or memory constraints are specified. Simple addition is expected.",
+      "If invalid inputs occur, Python raises a TypeError. The function is not expected to handle exceptions.",
+      "The operation is commutative—add(2, 3) and add(3, 2) both return 5. The order does not affect the result.",
+      "There is no overflow wrapping; Python integers grow to arbitrary size.",
+      "The function must be pure (no side effects)—it only returns a computed value.",
+      "Not applicable. No constraints on the range of x and y; any integers are valid."
+    ]
+  },
+  "heval_56": {
+    "answers": [
+      "An empty string is considered properly closed and returns True—there are zero opening brackets requiring closure.",
+      "Only '<' and '>' characters are allowed. Any other characters in the string cause improper bracketing.",
+      "Every '<' must be matched with a later '>' in strictly nested (LIFO) order—opening brackets must be closed before new ones are opened.",
+      "Yes, '><' is improperly closed and returns False—the closing bracket comes before any opening bracket.",
+      "If the count of '<' and '>' is unequal, the function returns False—brackets cannot be balanced.",
+      "The function expects a string input. Non-string types are not addressed by the specification.",
+      "The function returns only a boolean value (True/False)—it evaluates whether brackets are properly closed.",
+      "Any non-bracket characters other than '<' and '>' would make the string improper; the function checks for correct bracket matching only.",
+      "For very long inputs, the algorithm uses a simple linear scan with a depth counter, which is O(n) and has no recursion depth issues.",
+      "The specification uses ASCII '<' (U+003C) and '>' (U+003E) characters. Unicode lookalikes must be exact ASCII matches.",
+      "If correctly closed brackets are followed by extra characters (like '<>abc'), the result is False—non-bracket characters break the requirement.",
+      "There are no ambiguous nesting scenarios—LIFO matching is strictly required. '<<>>' (incorrect nesting) returns False; '<><>' (sequential pairs) returns True."
+    ]
+  },
+  "heval_59": {
+    "answers": [
+      "The function returns the largest (maximum) prime factor—the single prime factor with the highest value.",
+      "If n has multiple prime factors with the same maximum value (e.g., n = p²), the function returns that prime once, not its multiplicity.",
+      "The returned value must be of type int (Python's built-in int type).",
+      "The function assumes n > 1 and is not prime per the specification. Violating these assumptions yields undefined behavior.",
+      "Negative integers are not addressed by the specification. The assumption is n > 1.",
+      "For n = p³, the largest prime factor is simply p. The exponent is not relevant to the output.",
+      "The function uses trial division up to n, checking each potential divisor. This is acceptable per the test cases.",
+      "For n = p·p (perfect square of a prime), the function returns p, the single prime factor.",
+      "The function returns a plain integer, not a tuple or other structure.",
+      "No maximum size constraints are specified. The trial division approach works for the test cases provided.",
+      "Yes, the function is deterministic—the same input always produces the same output across all platforms.",
+      "If n is a subclass of int with overridden arithmetic, the function operates on the integer value directly."
+    ]
+  },
+  "heval_64": {
+    "answers": [
+      "Uppercase vowels (A, E, I, O, U) are counted the same as lowercase vowels—both 'A' and 'a' count toward the vowel total.",
+      "The letter 'y' is counted as a vowel only when it is at the end of the word (last character).",
+      "Non-alphabetic characters (digits, punctuation, whitespace) are ignored—they do not affect the vowel count.",
+      "The function accepts multi-word inputs with spaces. Spaces are ignored in the vowel count.",
+      "For an empty string, the function returns 0.",
+      "If the input is not a string (None, integer, list, etc.), the specification does not define behavior; type validation is assumed.",
+      "Accented vowels like 'á', 'é', 'ø' are not considered vowels by this specification—only the five English vowels (a, e, i, o, u) and 'y' at the end.",
+      "Vowel sequences like 'ae' are counted as two separate vowels—there is no diphthong exception.",
+      "The function is case-insensitive regarding vowels; 'A' and 'a' are equally valid. The definition of a 'word' is simply a string with alphabetic characters.",
+      "Newline and tab characters are ignored in the vowel count—they are non-alphabetic.",
+      "The return type is an integer representing the count.",
+      "The vowel set is fixed globally (a, e, i, o, u, and y only at the end)—locale/language settings do not affect vowel recognition."
+    ]
+  }
+}

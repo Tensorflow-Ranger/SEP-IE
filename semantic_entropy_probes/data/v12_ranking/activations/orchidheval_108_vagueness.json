@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_108_vagueness",
+  "questions": [
+    "Is \"quantity of elements\" meant to be identical to counting values with a digit-sum > 0, or does it imply counting unique elements?",
+    "For negative numbers, is only the first digit treated as signed while the rest remain positive, matching the given example?",
+    "Does 0 count as having a digit sum of exactly 0, thus excluded from the count?",
+    "Should duplicate values in the array each count separately toward the quantity, or are duplicates counted once?",
+    "What is the expected result for an empty array?",
+    "Is the array guaranteed to contain only integers?",
+    "How should very large numbers be handled in terms of digit-sum computation?",
+    "Is there any difference in how single-digit negative numbers are treated compared to multi-digit ones?"
+  ],
+  "answers": [
+    "'Quantity' just means the count of elements (matching 'elements' in the original), not unique values.",
+    "Yes — only the first digit is treated as negative/signed; all remaining digits stay positive, exactly as the example shows (-123 -> -1, 2, 3).",
+    "Not specified beyond what's given; 0 has digit sum 0, so it's excluded since the condition requires > 0.",
+    "Not specified beyond what's given; assume each element counted independently regardless of duplicates.",
+    "Not specified beyond what's given; assume 0 for an empty array.",
+    "Not specified beyond what's given; assume standard integer-only input.",
+    "Not specified beyond what's given; no special handling needed for large numbers.",
+    "No — the same rule applies regardless of digit count: only the leading digit carries the negative sign."
+  ],
+  "inline_prompts": [
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the quantity of elements which have a sum of digits > 0. 'Quantity' just means\n    the count of elements (matching 'elements' in the original), not unique values.\n       e.g. -123 has signed digits -1, 2, and 3.\n    \"\"\"",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the quantity of elements which have a sum of digits > 0. Yes — only the first digit is treated as negative/signed; all remaining digits stay positive, exactly as the example shows (-123 -> -1, 2, 3).\n       e.g. -123 has signed digits -1, 2, and 3.\n    \"\"\"",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the quantity of elements which have a sum of digits > 0. Not specified\n    beyond what's given; 0 has digit sum 0, so it's excluded since the condition\n    requires > 0.\n       e.g. -123 has signed digits -1, 2, and 3.\n    \"\"\"",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the quantity of elements which have a sum of digits > 0. Not specified\n    beyond what's given; assume each element counted independently regardless\n    of duplicates. e.g. -123 has signed digits -1, 2, and 3.\n    \"\"\"",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the quantity of elements which have a sum of digits > 0.\n       e.g. -123 has signed digits -1, 2, and 3.\n    Not specified beyond what's given; assume 0 for an empty array.\n    \"\"\"",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the quantity of elements which have a sum of digits > 0.\n       e.g. -123 has signed digits -1, 2, and 3.\n    Not specified beyond what's given; assume standard integer-only input.\n    \"\"\"",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the quantity of elements which have a sum of digits > 0. For example, -123 has signed digits -1, 2, and 3. Not specified beyond what's given; no special handling needed for large numbers.\n    \"\"\"",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the quantity of elements which have a sum of digits > 0. For example, -123 has\n    digits -1, 2, and 3; no — the same rule applies regardless of digit count: only\n    the leading digit carries the negative sign.\n       e.g. -123 has signed digits -1, 2, and 3.\n    \"\"\""
+  ],
+  "tiers": [
+    1,
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    2
+  ]
+}

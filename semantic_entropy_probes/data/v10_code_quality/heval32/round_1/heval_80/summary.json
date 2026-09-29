@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"",
+  "baseline_mean_p": 0.38515259325504303,
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "Is the function expected to consider overlapping triplets (e.g., in a string of length 4, are the triplets (0,1,2) and (1,2,3) both checked)?",
+      "answer": "Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).",
+      "p1": 0.18249982595443726,
+      "p2": 0.2587139904499054,
+      "mean_p": 0.22060690820217133,
+      "delta": -0.1645456850528717
+    },
+    {
+      "idx": 1,
+      "question": "What defines \"every 3 letters\" \u2014 does it refer to every set of three consecutive characters or every possible combination of three characters?",
+      "answer": "Every set of three CONSECUTIVE characters (a sliding window), not every possible combination of three characters from anywhere in the string.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Every set of three CONSECUTIVE characters (a sliding window), not every possible combination of three characters from anywhere in the string.",
+      "p1": 0.20461049675941467,
+      "p2": 0.3247441351413727,
+      "mean_p": 0.2646773159503937,
+      "delta": -0.12047527730464935
+    },
+    {
+      "idx": 0,
+      "question": "Does the string need to have all characters distinct throughout its entire length or just in every triplet of consecutive characters?",
+      "answer": "Just within every triplet of CONSECUTIVE characters (a sliding window of 3), not across the whole string.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Just within every triplet of CONSECUTIVE characters (a sliding window of 3), not across the whole string.",
+      "p1": 0.21585004031658173,
+      "p2": 0.3189872205257416,
+      "mean_p": 0.26741863042116165,
+      "delta": -0.11773396283388138
+    },
+    {
+      "idx": 3,
+      "question": "Are uppercase and lowercase letters considered distinct?",
+      "answer": "Yes -- comparison is via plain string equality (s[i] == s[i+1] etc.), which is case-sensitive, so 'a' and 'A' are considered different.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes -- comparison is via plain string equality (s[i] == s[i+1] etc.), which is case-sensitive, so 'a' and 'A' are considered different.",
+      "p1": 0.2513239085674286,
+      "p2": 0.32206764817237854,
+      "mean_p": 0.28669577836990356,
+      "delta": -0.09845681488513947
+    },
+    {
+      "idx": 2,
+      "question": "How should the function handle strings with fewer than 3 characters?",
+      "answer": "Return False (length < 3 immediately fails).",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Return False (length < 3 immediately fails).",
+      "p1": 0.24029076099395752,
+      "p2": 0.36959049105644226,
+      "mean_p": 0.3049406260251999,
+      "delta": -0.08021196722984314
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle strings with repeated characters that are not in the same triplet?",
+      "answer": "They're fine -- only characters WITHIN the same 3-consecutive-character window are compared; repeats elsewhere in the string that never fall in the same window don't affect the result.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: They're fine -- only characters WITHIN the same 3-consecutive-character window are compared; repeats elsewhere in the string that never fall in the same window don't affect the result.",
+      "p1": 0.2916225790977478,
+      "p2": 0.38987046480178833,
+      "mean_p": 0.34074652194976807,
+      "delta": -0.04440607130527496
+    },
+    {
+      "idx": 4,
+      "question": "What happens if the string contains non-alphabetic characters?",
+      "answer": "They are compared the same way as letters (plain character equality); no special handling for non-alphabetic characters.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: They are compared the same way as letters (plain character equality); no special handling for non-alphabetic characters.",
+      "p1": 0.3622466027736664,
+      "p2": 0.42020028829574585,
+      "mean_p": 0.3912234455347061,
+      "delta": 0.006070852279663086
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior if the string has exactly 3 characters and they are all distinct?",
+      "answer": "Return True.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Return True.",
+      "p1": 0.5909345746040344,
+      "p2": 0.6648222804069519,
+      "mean_p": 0.6278784275054932,
+      "delta": 0.24272583425045013
+    }
+  ],
+  "top3": [
+    {
+      "idx": 5,
+      "question": "Is the function expected to consider overlapping triplets (e.g., in a string of length 4, are the triplets (0,1,2) and (1,2,3) both checked)?",
+      "answer": "Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).",
+      "delta": -0.1645456850528717
+    },
+    {
+      "idx": 1,
+      "question": "What defines \"every 3 letters\" \u2014 does it refer to every set of three consecutive characters or every possible combination of three characters?",
+      "answer": "Every set of three CONSECUTIVE characters (a sliding window), not every possible combination of three characters from anywhere in the string.",
+      "delta": -0.12047527730464935
+    },
+    {
+      "idx": 0,
+      "question": "Does the string need to have all characters distinct throughout its entire length or just in every triplet of consecutive characters?",
+      "answer": "Just within every triplet of CONSECUTIVE characters (a sliding window of 3), not across the whole string.",
+      "delta": -0.11773396283388138
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "Is the function expected to consider overlapping triplets (e.g., in a string of length 4, are the triplets (0,1,2) and (1,2,3) both checked)?",
+    "answer": "Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).",
+    "delta": -0.1645456850528717
+  },
+  "next_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).",
+  "code_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct, yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\"\"\"",
+  "test_n_pass": 8,
+  "test_n_total": 8
+}

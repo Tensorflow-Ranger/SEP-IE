@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_22_lexical",
+  "questions": [
+    "What exactly constitutes a \"number\" in this context - only integers, or also floats that happen to be whole numbers?",
+    "Should boolean values (True/False) be included since they are technically numeric subtypes in Python?",
+    "How should the function handle string representations of numbers like \"123\" or \"45.67\"?",
+    "What is the expected behavior when encountering complex numbers like 3+4j?",
+    "Should instances of numeric types from external libraries (like numpy.int64, Decimal, Fraction) be considered?",
+    "How should the function behave when given None values - filter them out or raise an error?",
+    "What should happen with special float values like inf, -inf, or nan?",
+    "Is there a specific order requirement for the returned list, or can the integers appear in any order?"
+  ],
+  "answers": [
+    "Only actual int type values -- floats (even whole-number floats like 3.0) should NOT be included, matching the '-> List[int]' return type and examples.",
+    "A related nuance: bool is technically a subclass of int in Python, but the spec's intent is genuine integers, not booleans -- treat True/False as not matching 'integer' for this filter.",
+    "Not addressed by the true spec.",
+    "Not addressed by the true spec.",
+    "Not addressed by the true spec.",
+    "Not addressed; not the injected ambiguity.",
+    "Not addressed by the true spec.",
+    "Not addressed; order isn't the injected ambiguity."
+  ],
+  "inline_prompts": [
+    "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for numbers, including only actual int type values -- floats (even whole-number floats like 3.0) should NOT be included, matching the '-> List[int]' return type and examples. \"\"\"",
+    "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for numbers, with the nuance that bool is technically a subclass of int in Python, but the spec's intent is genuine integers, not booleans -- treat True/False as not matching 'integer' for this filter.\n    \"\"\"",
+    "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for numbers. Not addressed by the true spec. \"\"\"",
+    "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for numbers. Not addressed by the true spec. \"\"\"",
+    "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for numbers. Not addressed by the true spec. \"\"\"",
+    "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for numbers\n    Not addressed; not the injected ambiguity.\n    \"\"\"",
+    "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for numbers. Not addressed by the true spec. \"\"\"",
+    "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for numbers, not addressed; order isn't the injected ambiguity.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

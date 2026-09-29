@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_57_vagueness",
+  "questions": [
+    "What exactly constitutes a \"pattern of increase or decrease\" - does it require strict monotonicity or allow equal consecutive elements?",
+    "Should the function return True for empty lists or lists with only one element?",
+    "How should the function handle lists containing non-numeric elements like strings or None values?",
+    "Does the function need to distinguish between strictly increasing/decreasing versus non-decreasing/non-increasing sequences?",
+    "What should the function return for lists that have mixed patterns (some increasing, some decreasing elements)?",
+    "Should duplicate consecutive elements be considered as breaking the monotonic pattern or maintaining it?",
+    "How should floating-point numbers be compared - with exact equality or within some epsilon tolerance?",
+    "What is the expected behavior for lists containing both positive and negative infinity or NaN values?"
+  ],
+  "answers": [
+    "It requires standard (non-strict) monotonicity for the WHOLE list -- the entire sequence must be non-decreasing or non-increasing throughout, not merely exhibit 'more increases than decreases'; equal consecutive elements are fine.",
+    "Not addressed by the true spec; empty/single-element lists are trivially monotonic.",
+    "Not addressed by the true spec; assume numeric, comparable elements.",
+    "Non-decreasing/non-increasing (non-strict) is the correct standard, not strictly increasing/decreasing -- consistent with the original 'monotonically increasing or decreasing' wording.",
+    "Related: a genuinely mixed-direction sequence (not entirely non-decreasing or non-increasing) does NOT count as monotonic -- there's no partial-credit notion of 'more increases than decreases'.",
+    "Follows from the non-strict interpretation: duplicate consecutive elements don't break monotonicity.",
+    "Not addressed by the true spec; exact comparison is assumed.",
+    "Not addressed by the true spec; assume finite, well-defined numeric values."
+  ],
+  "inline_prompts": [
+    "def monotonic(l: list):\n    \"\"\"Return True is list elements exhibit a pattern of increase or decrease. It requires standard (non-strict) monotonicity for the WHOLE list -- the entire sequence must be non-decreasing or non-increasing throughout, not merely exhibit 'more increases than decreases'; equal consecutive elements are fine.\n    \"\"\"",
+    "def monotonic(l: list):\n    \"\"\"Return True is list elements exhibit a pattern of increase or decrease. Not addressed by the true spec; empty/single-element lists are trivially monotonic.\n    \"\"\"",
+    "def monotonic(l: list):\n    \"\"\"Return True is list elements exhibit a pattern of increase or decrease. Not addressed by the true spec; assume numeric, comparable elements. \"\"\"",
+    "def monotonic(l: list):\n    \"\"\"Return True if list elements exhibit a pattern of non-decreasing or non-increasing (non-strict).\"\"\"",
+    "def monotonic(l: list):\n    \"\"\"Return True if list elements exhibit a pattern of increase or decrease.\n    Related: a genuinely mixed-direction sequence (not entirely non-decreasing or non-increasing) does NOT count as monotonic -- there's no partial-credit notion of 'more increases than decreases'. \n    \"\"\"",
+    "def monotonic(l: list):\n    \"\"\"Return True is list elements exhibit a pattern of increase or decrease. Follows from the non-strict interpretation: duplicate consecutive elements don't break monotonicity.\n    \"\"\"",
+    "def monotonic(l: list):\n    \"\"\"Return True is list elements exhibit a pattern of increase or decrease. Not addressed by the true spec; exact comparison is assumed. \"\"\"",
+    "def monotonic(l: list):\n    \"\"\"Return True is list elements exhibit a pattern of increase or decrease. Not addressed by the true spec; assume finite, well-defined numeric values.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    0,
+    0,
+    2,
+    1,
+    1,
+    0,
+    0
+  ]
+}

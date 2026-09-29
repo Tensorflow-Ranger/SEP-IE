@@ -1,0 +1,1738 @@
+[
+  {
+    "id": "bcb_BigCodeBench/89_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The ambiguity 'score' vs 'Z-score' is the core injected vagueness; tests verify outlier detection behavior which depends on the specific threshold interpretation.",
+    "candidates": [
+      {
+        "question": "Should 'score' use the Z-score standardization method from scipy.stats.zscore, or a different scoring metric like IQR-based or MAD-based scores?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Use scipy.stats.zscore to calculate standardized scores; the reference solution explicitly calls stats.zscore(standardized_data)."
+      },
+      {
+        "question": "Are the 'score' thresholds symmetric (e.g., > 3.0 means both 3.0 and -3.0), or only positive deviations (> 3.0)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Use absolute Z-scores (np.abs) and compare against threshold; reference solution uses np.abs(stats.zscore(standardized_data))."
+      },
+      {
+        "question": "Should the function first standardize the column before calculating scores, or calculate scores on raw data?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Standardize the column first using StandardScaler, then calculate Z-scores; reference uses scaler.fit_transform() followed by stats.zscore()."
+      },
+      {
+        "question": "Should the function remove outliers from the original data or from the standardized data?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Remove from the original data array (data_copy); use outlier indices detected in Z-scores to index into the original."
+      },
+      {
+        "question": "If the parameter is named 'outlier_z_score', should the scoring method always be Z-score even if 'score' is mentioned instead?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, the parameter name outlier_z_score disambiguates the intent; use Z-score method regardless."
+      },
+      {
+        "question": "What happens if the column has zero standard deviation (all identical values)?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "The standardization will produce NaN or inf; tests do not cover this edge case."
+      },
+      {
+        "question": "Should the returned tuple be (original, without_outliers, outlier_indices) or in a different order?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Return order (data_copy, data_without_outliers, outliers) is specified in docstring; tests verify this structure."
+      },
+      {
+        "question": "How should missing or NaN values in the column be handled before calculating scores?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "The prompt does not specify; test cases do not include NaN values."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/99_vagueness",
+    "label_test_relevant": false,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'labels for the features on the axes' lacks clarity on placement (all or outer axes only); tests verify labels are present but not their complete coverage.",
+    "candidates": [
+      {
+        "question": "Should every subplot have its corresponding feature labels, including inner subplots that share axes?",
+        "tier": 2,
+        "test_relevant": false,
+        "answer": "PairGrid automatically labels all axes; seaborn's pairplot labels each subplot independently."
+      },
+      {
+        "question": "Should only outer axes (edges of the grid) have labels, or all subplots?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Seaborn's pairplot labels all axes by default; tests do not differentiate between full labeling and partial."
+      },
+      {
+        "question": "Should axis labels be feature names like 'sepal length (cm)' or generic 'x' and 'y'?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Use actual feature names from iris dataset columns (sepal length, sepal width, etc.); tests check for these names in labels."
+      },
+      {
+        "question": "Should the function return the Figure object or the PairGrid object?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Return the Figure object (pair_plot.fig); docstring specifies plt.Figure as return type."
+      },
+      {
+        "question": "What font family should be used for labels and title?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Arial font must be set globally via plt.rc('font', family='Arial')."
+      },
+      {
+        "question": "Should the plot title include a subtitle or be exactly 'Iris Dataset Pair Plot'?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Title should be exactly 'Iris Dataset Pair Plot'; tests verify this exact string."
+      },
+      {
+        "question": "Should the species hue be applied to the plot for visual distinction?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use hue='species' in pairplot call; reference solution explicitly does this."
+      },
+      {
+        "question": "If a feature has a long name, should it be abbreviated or kept in full in axis labels?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Keep full feature names; iris dataset provides standard names that should not be modified."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/109_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'predefined list' is ambiguous, but reference_text explicitly states the lists: items=['apple', 'banana', 'grape', 'orange', 'pineapple'] and locations=['store1'...'store5'].",
+    "candidates": [
+      {
+        "question": "What are the exact items in the default predefined list of items?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Default items are ['apple', 'banana', 'grape', 'orange', 'pineapple']; reference solution uses these exact defaults."
+      },
+      {
+        "question": "What are the exact locations in the default predefined list?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Default locations are ['store1', 'store2', 'store3', 'store4', 'store5']; reference solution hardcodes these."
+      },
+      {
+        "question": "Should the function accept None for items/locations and only then use defaults, or treat empty lists as defaults?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Use None as default and check with: items = items or [...]; reference solution uses this pattern."
+      },
+      {
+        "question": "Should the bar chart be stacked or grouped?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Use stacked=True in plot call; reference solution explicitly stacks items in the bar chart."
+      },
+      {
+        "question": "Should the chart title be set, and if so, what should it be?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Set title to 'Item Distribution by Location'; tests verify this exact title."
+      },
+      {
+        "question": "Should filtering happen before or after aggregating counts?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Group by location and item, then unstack; filtering is implicit in the groupby operation."
+      },
+      {
+        "question": "How should missing combinations of items and locations be handled?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Use fillna(0) to handle missing combinations; reference solution does this with .unstack().fillna(0)."
+      },
+      {
+        "question": "Should y-axis show absolute counts or percentages?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Show absolute counts; tests check for specific numeric values, not percentages."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/119_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The ambiguity about axis labels is resolved in reference_text: labels should be 'x' and 'y'.",
+    "candidates": [
+      {
+        "question": "Should the x-axis label be 'x' or 'X'?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Use lowercase 'x'; tests check for exact match 'x'."
+      },
+      {
+        "question": "Should the y-axis label be 'y' or 'Y'?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Use lowercase 'y'; tests check for exact match 'y'."
+      },
+      {
+        "question": "Should grid be enabled on the plot?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, enable grid with plt.grid(True); tests verify grid is visible on both axes."
+      },
+      {
+        "question": "Should the range for x be from -10 to 10?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use np.linspace(-10, 10, 400); tests mock this and verify the range."
+      },
+      {
+        "question": "Should the plot show exactly 400 points?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use 400 points in linspace; tests verify this parameter is passed."
+      },
+      {
+        "question": "Should the function call plt.show()?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, call plt.show(); tests mock this function and verify it is called."
+      },
+      {
+        "question": "Should the title be 'y = x^2' or 'y = x**2'?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Use 'y = x^2' as the title string; tests check for this exact string."
+      },
+      {
+        "question": "Should the function return a value or return None?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Return None; docstring and tests confirm NoneType return."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/129_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'table's header elements' could mean <th> in <thead> or any <th> anywhere; reference_text specifies '<th> elements in a <thead>'.",
+    "candidates": [
+      {
+        "question": "Should headers be extracted only from <th> elements in <thead> or from any <th> in the table?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Extract headers from all <th> elements regardless of whether they're in <thead>; reference solution uses table.find_all('th')."
+      },
+      {
+        "question": "Should the function skip header rows when extracting table data?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, skip rows without <td> elements; reference solution checks 'if not cols: continue'."
+      },
+      {
+        "question": "If headers are missing, should column names be None or numeric indices?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "If headers is empty, pass None to DataFrame; pandas will use default numeric indices."
+      },
+      {
+        "question": "Should whitespace in cell content be stripped?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, strip whitespace with .text.strip() for both headers and data cells."
+      },
+      {
+        "question": "What should the default URL be if none is provided?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Default URL is 'http://example.com'; function signature specifies this default."
+      },
+      {
+        "question": "Should the function handle multiple tables or just the first one?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Extract only the first table; reference solution uses soup.find('table') which returns the first match."
+      },
+      {
+        "question": "How should ConnectionError be distinguished from HTTPError?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Catch requests.ConnectionError separately from requests.HTTPError; reference solution handles both with separate except blocks."
+      },
+      {
+        "question": "Should an empty table (no <tr> or <td> elements) raise ValueError?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, raise ValueError if no data rows found; reference solution checks 'if not data'."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/139_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The word 'columns' without 'numeric' is the injected ambiguity; reference_text explicitly states 'numeric columns' in the unambiguous version.",
+    "candidates": [
+      {
+        "question": "Should non-numeric columns like strings and objects be included in histograms?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "No, only numeric columns; use df.select_dtypes(include=np.number).columns."
+      },
+      {
+        "question": "Should datetime columns be treated as numeric?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "No, exclude datetime columns; np.number does not include datetime types."
+      },
+      {
+        "question": "How many bins should each histogram have?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Use pandas default bins (typically 10); tests do not verify specific bin count."
+      },
+      {
+        "question": "Should x-label be 'Value' and y-label be 'Frequency'?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes; tests verify these exact labels with ax.set_xlabel('Value') and ax.set_ylabel('Frequency')."
+      },
+      {
+        "question": "Should the function raise ValueError if the DataFrame is empty?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, raise ValueError for empty DataFrame; tests check this with pd.DataFrame()."
+      },
+      {
+        "question": "Should the function raise ValueError if there are no numeric columns?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, raise ValueError if numeric_cols.size is 0; tests verify this with all-string DataFrame."
+      },
+      {
+        "question": "Should each histogram be in its own subplot or overlaid?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Each histogram gets its own subplot with plt.subplots(); reference solution creates separate fig/ax for each column."
+      },
+      {
+        "question": "Should the function input validation check if input is actually a DataFrame?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check isinstance(df, pd.DataFrame); tests verify with non-DataFrame input."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/149_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'counts of each string' is ambiguous between character counts and frequency counts; reference_text specifies 'character counts'.",
+    "candidates": [
+      {
+        "question": "Should 'Count' be the number of characters in each string?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes; reference solution uses apply(lambda x: len(x)) to count characters."
+      },
+      {
+        "question": "Should 'Count' be the frequency of each string in the list?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "No, use character count not frequency; tests verify len('hello') == 5, not occurrences."
+      },
+      {
+        "question": "What order should columns be in when include_index=True?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Order should be ['Index', 'Element', 'Count']; tests verify this reordering."
+      },
+      {
+        "question": "Should the Index column start at 0 or 1?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Start at 0; reference solution uses np.arange(len(elements))."
+      },
+      {
+        "question": "Should duplicate strings in the input list be deduplicated?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "No, keep duplicates as separate rows; test case shows ['zzz', 'zzz'] produces two rows with count 3 each."
+      },
+      {
+        "question": "Should the function preserve the input order of elements?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, maintain input order in the DataFrame; no sorting is applied."
+      },
+      {
+        "question": "Should empty strings be handled, and if so, what count should they have?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Empty strings have count 0; tests do not cover this edge case."
+      },
+      {
+        "question": "What type should the 'Element' column be?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Object/string type; pandas infers this from the input list."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/159_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Replacing 'NumPy array' with 'array' introduces ambiguity; reference_text clarifies the function expects numpy.array inputs.",
+    "candidates": [
+      {
+        "question": "Should the function accept Python lists and convert them to numpy arrays?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "No, expect numpy.ndarray input; tests pass np.array() objects directly."
+      },
+      {
+        "question": "Should the function work with numpy arrays of any dtype (int, float, complex)?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, struct.pack('d', ...) works with numeric types that can be cast to float."
+      },
+      {
+        "question": "What data type should each array element be packed as?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Pack as double ('d' format); reference solution uses struct.pack('d'*newArray.size, *newArray)."
+      },
+      {
+        "question": "Should the function return gzip-compressed bytes or base64-encoded bytes?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Return raw gzip bytes; reference solution uses buffer.getvalue() which returns bytes, not base64."
+      },
+      {
+        "question": "Should multidimensional arrays be flattened before compression?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "The function only unpacks using *newArray, which works if array is 1D; multidimensional arrays not tested."
+      },
+      {
+        "question": "What happens if the array is empty?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Returns gzipped empty data; tests do not cover this case."
+      },
+      {
+        "question": "Should very large arrays be chunked during compression?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "No chunking is mentioned or tested; entire array is packed at once."
+      },
+      {
+        "question": "Should the return value always be bytes or could it be a string?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Always return bytes; tests verify isinstance(result, bytes)."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_13_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'greatest common divisor of the two integers' is ambiguous for negative integers; tests only use positive values.",
+    "candidates": [
+      {
+        "question": "Should the function return the GCD of absolute values (always positive)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, mathematical GCD is always non-negative; reference solution's while loop naturally handles this with positive remainder chain."
+      },
+      {
+        "question": "What should the function return for negative inputs like gcd(-25, -15)?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Return positive GCD (5), not negative; standard mathematical definition."
+      },
+      {
+        "question": "What should the function return for gcd(0, n)?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Return n; mathematical identity gcd(0, n) = n."
+      },
+      {
+        "question": "Should the function use the Euclidean algorithm or prime factorization?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Use Euclidean algorithm (modulo-based); reference solution implements this with a % b in loop."
+      },
+      {
+        "question": "Is it 'a greatest common divisor' (non-unique) or 'the greatest common divisor' (unique, positive)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Use 'a greatest common divisor' in docstring; reference solution shows any GCD representation is valid mathematically, but implementation returns positive."
+      },
+      {
+        "question": "Should the function handle floating-point inputs?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "No, type hint specifies int; tests only use integers."
+      },
+      {
+        "question": "What is the expected behavior when both inputs are 0?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Mathematically undefined; tests do not cover this case."
+      },
+      {
+        "question": "What is the time complexity concern for very large integers?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Euclidean algorithm is O(log min(a,b)); tests do not check performance."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_38_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'cycling groups of three characters' is ambiguous, but the provided encode_cyclic code shows left-rotation: group[1:] + group[0].",
+    "candidates": [
+      {
+        "question": "Should 'cycling' mean rotating elements left within each group (left shift)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, rotate left by one position: 'abc' -> 'bca'; provided code shows this with group[1:] + group[0]."
+      },
+      {
+        "question": "Should groups of fewer than 3 characters remain unchanged?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, only rotate groups with exactly 3 characters; code checks len(group) == 3."
+      },
+      {
+        "question": "What should decode_cyclic do to reverse the encoding?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Apply encode_cyclic twice (two left rotations restore original); reference solution returns encode_cyclic(encode_cyclic(s))."
+      },
+      {
+        "question": "Should the function handle strings with length not divisible by 3?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, last group can have < 3 chars and remains unchanged; grouping math: (len(s) + 2) // 3."
+      },
+      {
+        "question": "Should the function preserve case sensitivity?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, do not alter case; reference solution and tests preserve all character cases."
+      },
+      {
+        "question": "Can the input string contain special characters or only letters?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Input can contain any characters; tests include letters, numbers, and mixed strings."
+      },
+      {
+        "question": "Should rotation be right-rotation instead of left-rotation?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "No, use left-rotation; test cases verify left-rotation behavior explicitly."
+      },
+      {
+        "question": "Should empty strings be handled?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Empty string returns empty; list comprehension naturally handles len(s)==0."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_63_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'the sum of the three preceding FibFib numbers' is clarified in reference_text as 'fibfib(n-1) + fibfib(n-2) + fibfib(n-3)'.",
+    "candidates": [
+      {
+        "question": "Should fibfib(n) use the sum of fibfib(n-1), fibfib(n-2), and fibfib(n-3)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, exactly these three indices; reference solution and tests verify this formula."
+      },
+      {
+        "question": "Are the base cases fibfib(0)==0, fibfib(1)==0, fibfib(2)==1 correct?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, these are the specified base cases; reference solution explicitly checks these."
+      },
+      {
+        "question": "Should the implementation be recursive or iterative with memoization for efficiency?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Reference solution is simple recursion; tests do not require optimization, only correctness."
+      },
+      {
+        "question": "What should the function return for negative n?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Not specified; tests only use non-negative integers."
+      },
+      {
+        "question": "Can the function use dynamic programming to optimize?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Tests do not check implementation method, only output values."
+      },
+      {
+        "question": "Should input validation check if n is an integer?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Not tested; type hint specifies int but no validation is present."
+      },
+      {
+        "question": "What is the maximum n value the function should handle?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Tests go up to n=14; recursion limits not tested."
+      },
+      {
+        "question": "Should fibfib be tail-recursive to avoid stack overflow?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Not tested; Python doesn't optimize tail recursion anyway."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_85_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'Add even elements from odd positions' is clarified in reference_text as 'add the even elements that are at odd indices'.",
+    "candidates": [
+      {
+        "question": "Should 'odd indices' mean indices 1, 3, 5, ... (every other position starting from 1)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, odd indices are 1, 3, 5, ...; reference solution uses range(1, len(lst), 2)."
+      },
+      {
+        "question": "Should 'even elements' mean values divisible by 2?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check lst[i] % 2 == 0; reference solution filters with this condition."
+      },
+      {
+        "question": "Should the function return the sum of matching elements or a list of matching elements?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Return the sum; reference solution uses sum([...])."
+      },
+      {
+        "question": "If no even elements exist at odd indices, should the function return 0 or None?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Return 0; sum of empty list is 0, and test case [4, 0, 6, 7] expects 0."
+      },
+      {
+        "question": "Should the function handle empty lists?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Docstring says 'non-empty list', but empty list would naturally return 0."
+      },
+      {
+        "question": "Should negative even numbers be included?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, -2, -4, etc. are even; tests do not include negatives but logic would include them."
+      },
+      {
+        "question": "Should zero be considered even?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, 0 % 2 == 0; test case [4, 0, 6, 7] includes 0 and expects sum of 0."
+      },
+      {
+        "question": "What is the correct indexing: 0-based or 1-based?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Use 0-based indexing (standard Python); odd indices are 1, 3, 5, ..."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_107_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'occur within the range' is clarified in reference_text: count palindromic numbers and check if they're even/odd.",
+    "candidates": [
+      {
+        "question": "Should the function count palindromic numbers in the range(1, n)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, identify palindromes by str(i) == str(i)[::-1]."
+      },
+      {
+        "question": "Should the range be inclusive of n or exclusive?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Inclusive; reference solution uses range(1, n+1)."
+      },
+      {
+        "question": "Should the function return (even_count, odd_count) or (odd_count, even_count)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Return (even_count, odd_count); reference solution follows this order."
+      },
+      {
+        "question": "Should single-digit numbers (1-9) all be considered palindromes?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, single digits are trivially palindromic; str(5) == str(5)[::-1] is True."
+      },
+      {
+        "question": "Is 0 considered even or excluded from the count?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "0 is not in range(1, n), so excluded; tests start from 1."
+      },
+      {
+        "question": "Should leading zeros affect palindrome detection (e.g., '010')?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "No leading zeros; integer to string conversion does not create them."
+      },
+      {
+        "question": "What should the function return for n=1?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "(0, 1) because 1 is an odd palindrome; test verifies this."
+      },
+      {
+        "question": "Should the function validate that n is a positive integer?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Not tested; docstring assumes positive integer input."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_135_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'not greater than' (\u2264) is ambiguous; reference_text clarifies 'not greater than or equal to' which means strictly less-than (<).",
+    "candidates": [
+      {
+        "question": "Should 'not greater than' mean strictly less than (<) or less-than-or-equal (\u2264)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Strictly less than (<); reference solution checks arr[i] < arr[i-1]."
+      },
+      {
+        "question": "Should the function return the largest index meeting the condition?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return the largest (rightmost) such index; reference solution keeps updating ind."
+      },
+      {
+        "question": "Should the function return -1 if no such element exists?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return -1; reference solution initializes ind=-1."
+      },
+      {
+        "question": "Is index 0 considered for comparison (no preceding element)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "No, start from index 1; reference solution starts loop at i=1."
+      },
+      {
+        "question": "Should the array be modified or only searched?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Only search; reference solution does not modify the array."
+      },
+      {
+        "question": "What should the function do if the array has no duplicates?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Docstring says 'will not contain duplicate values'; condition arr[i] < arr[i-1] checks for decreases."
+      },
+      {
+        "question": "Should empty arrays return -1?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, test case [] expects -1; loop condition i < len(arr) handles this."
+      },
+      {
+        "question": "Should single-element arrays return -1?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, no preceding element; test case would return -1."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/0_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'each permutation is shuffled before calculating differences' is ambiguous about whether shuffling is once per permutation or independent trials.",
+    "candidates": [
+      {
+        "question": "Should each permutation be shuffled exactly once?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, shuffle each permutation once; reference solution calls shuffle(perm) once per permutation iteration."
+      },
+      {
+        "question": "Should the average be computed across all permutations?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, average the sum_diffs across all permutations; reference solution divides by len(permutations)."
+      },
+      {
+        "question": "Should absolute differences be used?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, abs(perm[i] - perm[i+1]); reference solution uses this."
+      },
+      {
+        "question": "Should the result always be a float?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return float; reference solution divides sum_diffs / len(permutations)."
+      },
+      {
+        "question": "What should be done with empty or single-element lists?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Return 0.0; no pairs exist for single element, empty list has no permutations."
+      },
+      {
+        "question": "Should identical elements in the list be handled differently?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Test expects 0 for [2,2,2]; all differences are 0 regardless of order."
+      },
+      {
+        "question": "Should negative numbers be supported?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, tests include [-3, -2, -1]; absolute difference handles signs."
+      },
+      {
+        "question": "Should the function use itertools.permutations or generate permutations differently?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Use itertools.permutations; reference solution explicitly imports and uses this."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/10_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'create a list of random integers from the sum' is ambiguous; reference_text clarifies the list size is the sum of T1 values.",
+    "candidates": [
+      {
+        "question": "Should the list length equal the sum of all flattened integers in T1?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, total_nums = sum(flattened_list); reference solution uses this as the range length."
+      },
+      {
+        "question": "Should each element in the random list be in range [0, RANGE]?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use random.randint(0, RANGE); reference solution does this."
+      },
+      {
+        "question": "Should the returned tuple be (mean, median, mode)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, in that order; reference solution returns (mean, median, mode)."
+      },
+      {
+        "question": "Should mean and median be floats?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, np.mean() and np.median() return floats; tests verify isinstance(..., float)."
+      },
+      {
+        "question": "Should mode be an integer?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, statistics.mode() returns an int; tests check isinstance(mode, int)."
+      },
+      {
+        "question": "How should T1 be parsed if it's a tuple of string tuples?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Convert strings to ints: list(map(int, x)) for each tuple x."
+      },
+      {
+        "question": "What should happen if T1 is empty?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Raise statistics.StatisticsError; reference solution checks len(T1) <= 0."
+      },
+      {
+        "question": "Should the random seed be fixed for reproducibility?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Tests use @patch('random.randint', return_value=...) to mock randomness, so seeding not required."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/20_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'processing each string to ensure valid syntax' is ambiguous; reference_text clarifies ast.literal_eval is used.",
+    "candidates": [
+      {
+        "question": "Should ast.literal_eval be used to parse string dictionaries?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution uses df['dict_column'].apply(ast.literal_eval)."
+      },
+      {
+        "question": "Should the function handle malformed dictionary strings?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "ast.literal_eval will raise ValueError for malformed input; tests do not verify error handling."
+      },
+      {
+        "question": "Should a pairplot be generated with hue set to dict_column?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, convert dict to string representation and use as hue; reference solution does this."
+      },
+      {
+        "question": "Should the function return (DataFrame, PairGrid)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return (df, ax) where ax is the PairGrid object; tests verify types."
+      },
+      {
+        "question": "Should numeric columns be used in the pairplot?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, pairplot plots all numeric columns by default."
+      },
+      {
+        "question": "Should the DataFrame be modified in-place or a copy returned?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "DataFrame is modified; reference solution assigns to df['dict_column'] and df['hue_column']."
+      },
+      {
+        "question": "What if the CSV has no dict_column?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "KeyError is raised; tests assume dict_column exists in CSV."
+      },
+      {
+        "question": "Should the function handle CSV files with different encodings?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "pd.read_csv handles encoding; not tested."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/30_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'retrieve a specified attribute after validating it' is ambiguous; reference_text clarifies the entire object is validated.",
+    "candidates": [
+      {
+        "question": "Should the entire JSON object be validated against the schema?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check all required fields and their types; reference solution validates before retrieval."
+      },
+      {
+        "question": "Should email format be validated using the provided regex?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use re.fullmatch(EMAIL_REGEX, data['email']); reference solution does this."
+      },
+      {
+        "question": "Should the function raise ValueError if the file doesn't exist?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check os.path.isfile(file_path); reference solution does."
+      },
+      {
+        "question": "Should the function raise ValueError for type mismatches?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, verify isinstance(data[key], type); tests check for type errors."
+      },
+      {
+        "question": "Should the attribute parameter be case-sensitive?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, use exact key lookup; tests use 'name', 'age', 'email' exactly."
+      },
+      {
+        "question": "What if the required attribute is missing from the JSON?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Raise ValueError; reference solution checks 'if key not in data'."
+      },
+      {
+        "question": "Should the function validate nested structures?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "No, only top-level validation; schema does not define nested structures."
+      },
+      {
+        "question": "Should extra fields in the JSON cause an error?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "No, only required fields are checked; tests do not penalize extra fields."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/40_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'correlation matrix of the Z-values or the original data' is clarified in reference_text as 'Z-values only'.",
+    "candidates": [
+      {
+        "question": "Should the correlation matrix be computed from Z-scores, not original data?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, compute correlation on Z-score DataFrame; reference solution calls df.corr() on Z-scores."
+      },
+      {
+        "question": "Should each row be standardized independently?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use axis=1 in zscore; reference solution uses zscore(data_matrix, axis=1)."
+      },
+      {
+        "question": "Should the DataFrame include a 'Mean' column with row-wise means?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, df['Mean'] = df.mean(axis=1); reference solution adds this column."
+      },
+      {
+        "question": "Should the heatmap include annotations?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use annot=True with fmt='.2f'; reference solution does this."
+      },
+      {
+        "question": "Should column names be 'Feature 1', 'Feature 2', etc.?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, create these names dynamically; reference solution generates them in a loop."
+      },
+      {
+        "question": "Should feature columns be included in the correlation or only Mean?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Include all Feature columns in correlation; tests check this structure."
+      },
+      {
+        "question": "What should be the return type?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Return tuple (DataFrame, Axes); tests verify types."
+      },
+      {
+        "question": "Should the Axes object be from the heatmap?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, capture axes from sns.heatmap(); reference solution assigns to ax."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/50_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'using their local or UTC time' is clarified in reference_text as converting to each timezone's local time.",
+    "candidates": [
+      {
+        "question": "Should the function convert Unix timestamp to local time for each timezone?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use datetime.fromtimestamp(timestamp, pytz.timezone(tz)); reference solution does this."
+      },
+      {
+        "question": "Should each datetime be formatted as DATE_FORMAT?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use .strftime(DATE_FORMAT); reference solution applies this."
+      },
+      {
+        "question": "Should the DataFrame have columns 'Timezone' and 'Datetime'?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, exactly these column names; reference solution creates DataFrame with these columns."
+      },
+      {
+        "question": "Should the plot be a bar chart with Timezone on x-axis?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use df.plot.bar(x='Timezone', y='Datetime', ...); reference solution does this."
+      },
+      {
+        "question": "Should the plot title be 'Datetime = f(Timezone)'?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, set title exactly as specified; tests verify this."
+      },
+      {
+        "question": "Should the Datetime column be converted to datetime type?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use pd.to_datetime(); reference solution does this conversion."
+      },
+      {
+        "question": "Should axis labels be 'Timezone' and 'Datetime' respectively?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes; note reference solution has redundant ylabel calls but they set 'Datetime'."
+      },
+      {
+        "question": "Should plt.show() be called?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Yes, reference solution calls plt.close(), which is more test-friendly than plt.show()."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/60_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'grouping identical dictionaries' is clarified in reference_text: save the list of dictionaries as-is to JSON.",
+    "candidates": [
+      {
+        "question": "Should the list of dictionaries be saved to CSV and JSON files separately?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, save to both files; reference solution does this."
+      },
+      {
+        "question": "Should the CSV be saved without an index row?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use index=False; reference solution specifies this."
+      },
+      {
+        "question": "Should JSON be formatted with indentation?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, use indent=4; reference solution does this for readability."
+      },
+      {
+        "question": "Should duplicate dictionaries be deduplicated?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "No, save as-is without deduplication; tests verify the original list is preserved."
+      },
+      {
+        "question": "Should the function return None?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return None; docstring specifies this."
+      },
+      {
+        "question": "Should DataFrame preserve the order of keys in each dictionary?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Pandas handles key order; tests verify CSV and JSON both save the data."
+      },
+      {
+        "question": "What if a dictionary has non-string keys?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "JSON serializes non-string keys as strings; tests include {1: 2, 3: 4} case."
+      },
+      {
+        "question": "Should the function handle mixed key types across dictionaries?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, pandas will handle sparse data with NaN; reference handles this implicitly."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/70_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'sum and mean of the list associated with each e-mail or its values' is ambiguous; reference_text clarifies sum/mean of list elements.",
+    "candidates": [
+      {
+        "question": "Should 'sum' be the sum of all elements in the associated list?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use np.sum(); reference solution does this with .apply(np.sum)."
+      },
+      {
+        "question": "Should 'mean' be the average of all elements in the list?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use np.mean(); reference solution does this with .apply(np.mean)."
+      },
+      {
+        "question": "Should the function return (DataFrame, Axes) or (DataFrame, None) if no data?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Return (empty_df, None) if no data; reference solution checks 'if not email_data'."
+      },
+      {
+        "question": "Should the DataFrame columns be exactly ['email', 'list', 'sum', 'mean']?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, these are the required columns; reference solution creates them."
+      },
+      {
+        "question": "Should the plot show sum and mean as bar chart?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use df[['sum', 'mean']].plot(kind='bar'); reference solution does this."
+      },
+      {
+        "question": "Should the JSON file be read with a specific encoding?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Default UTF-8; tests do not specify encoding."
+      },
+      {
+        "question": "Should empty lists be handled (sum=0, mean=0)?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Empty lists would produce sum=0, mean=NaN; tests do not cover this."
+      },
+      {
+        "question": "Should non-numeric values in lists cause errors?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "np.sum() and np.mean() would fail on non-numeric; tests assume numeric lists."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/80_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'using the data provided in POST requests or the default data if none is provided' is clarified in reference_text as using POST data directly.",
+    "candidates": [
+      {
+        "question": "Should the function use request.get_json() to extract POST data?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution uses request.get_json()."
+      },
+      {
+        "question": "Should logging record the request data as JSON?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use json.dumps(data); reference solution logs with logging.info()."
+      },
+      {
+        "question": "Should render_template be called with the data parameter?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, render_template('index.html', data=data); reference solution does this."
+      },
+      {
+        "question": "Should the function handle None as data gracefully?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, request.get_json() can return None; reference solution passes this to template."
+      },
+      {
+        "question": "Should the Flask app be created with the specified template_folder?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use Flask(__name__, template_folder=template_folder); tests verify this."
+      },
+      {
+        "question": "Should the route handle only POST requests?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use methods=['POST']; reference solution specifies this."
+      },
+      {
+        "question": "Should the logging configuration be separate from the route?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Yes, logging.basicConfig is module-level; tests do not verify this."
+      },
+      {
+        "question": "Should the function return the app instance?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return app; tests verify isinstance(app, Flask)."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/90_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'neighbors are considered within a fixed distance threshold' is ambiguous; reference_text clarifies standard kNN (top k by distance).",
+    "candidates": [
+      {
+        "question": "Should the function return the k nearest neighbors sorted by distance?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, sort by distance and return top k; reference solution uses distances.argsort()[:k]."
+      },
+      {
+        "question": "Should distance be calculated using the Haversine formula?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, for geographic coordinates; reference solution implements Haversine."
+      },
+      {
+        "question": "Should k must be a non-negative integer?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, raise ValueError for negative or non-integer k; tests verify this."
+      },
+      {
+        "question": "Should the function work with DataFrames containing latitude/longitude columns?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution uses data.to_numpy() and data.iloc[]."
+      },
+      {
+        "question": "Should results be returned as a list of [Latitude, Longitude] lists?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution calls .values.tolist()."
+      },
+      {
+        "question": "Should coordinates be in degrees, not radians?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, input is degrees; reference solution converts internally with math.radians()."
+      },
+      {
+        "question": "Should k be clamped to the dataset size?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "No, return all available if k > size; tests expect len(result) == len(data) when k=100."
+      },
+      {
+        "question": "Should the Earth radius be 6371 km?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution uses RADIUS_EARTH_KM = 6371.0."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/100_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'using either daily or cumulative values' is clarified in reference_text as generating daily random values (not cumulative).",
+    "candidates": [
+      {
+        "question": "Should random values be independent for each day (daily)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, generate separate random values for each of 30 days; reference solution generates 30 independent values."
+      },
+      {
+        "question": "Should the seed parameter control reproducibility?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, random.seed(seed) sets the seed; tests verify reproducibility."
+      },
+      {
+        "question": "Should values be in range [0, 100]?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use random.randint(0, 100); reference solution does this."
+      },
+      {
+        "question": "Should the plot have exactly 30 data points?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, 30-day period; tests check date range span."
+      },
+      {
+        "question": "Should the font be Arial?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, plt.rc('font', family='Arial'); reference solution sets this."
+      },
+      {
+        "question": "Should dates be from the past 30 days?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, pd.date_range(end=datetime.now(), periods=30); reference solution uses this."
+      },
+      {
+        "question": "Should the Axes object be returned?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return ax; reference solution returns the axes."
+      },
+      {
+        "question": "Should axis labels and title match the specification exactly?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, 'Date', 'Value', 'Random Time Series Data'; tests verify exact strings."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/110_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'using either the exact or cumulative values' is clarified in reference_text as plotting daily (exact) sales values.",
+    "candidates": [
+      {
+        "question": "Should the function plot daily sales totals, not cumulative sums?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use resample('D').sum() for daily aggregation; reference solution does this."
+      },
+      {
+        "question": "Should the DataFrame be resampled by day?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use df.set_index('Date').resample('D').sum(); reference solution does this."
+      },
+      {
+        "question": "Should the plot title be 'Daily Turnover'?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, set title exactly; tests verify this string."
+      },
+      {
+        "question": "Should the y-axis label be 'Sales'?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution sets ylabel to 'Sales'."
+      },
+      {
+        "question": "Should the function validate input DataFrame structure?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check for 'Date' and 'Sales' columns; reference solution validates this."
+      },
+      {
+        "question": "Should plt.show() be called?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Yes, reference solution calls plt.show()."
+      },
+      {
+        "question": "Should ValueError be raised if no data is available?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check if resampled_df.empty or sum is 0; reference solution does this."
+      },
+      {
+        "question": "Should the Axes object be returned?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return ax; reference solution returns the axes."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/120_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'series length matches the number of days' could mean one per day or all random selections; reference_text specifies random sampling with repetition.",
+    "candidates": [
+      {
+        "question": "Should the series length equal (end_date - start_date).days?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution creates list comprehension with range(num_days) iterations."
+      },
+      {
+        "question": "Should each date be randomly selected from the range?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use randint(0, num_days) to offset from start_date; reference solution does this."
+      },
+      {
+        "question": "Should dates be allowed to repeat?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, sampling with replacement; reference solution generates independent random offsets."
+      },
+      {
+        "question": "Should start_date and end_date be inclusive?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, both are potential values; reference solution uses randint(0, num_days)."
+      },
+      {
+        "question": "Should the function accept datetime.datetime objects?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, parameter type is datetime; reference solution checks isinstance."
+      },
+      {
+        "question": "Should ValueError be raised if start_date > end_date?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, tests verify this error condition."
+      },
+      {
+        "question": "Should the seed parameter control randomness?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use random_seed(seed); reference solution calls this."
+      },
+      {
+        "question": "Should the return type be pandas.Series?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return pd.Series([...]); reference solution wraps list in Series."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/130_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'salts it before or after conversion' is clarified in reference_text as salt + data (salt prepended).",
+    "candidates": [
+      {
+        "question": "Should the salt be generated as random bytes?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use os.urandom(salt_size); reference solution does this."
+      },
+      {
+        "question": "Should the salt be prepended to the hex data?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, salted_data = salt + data; reference solution does this."
+      },
+      {
+        "question": "Should the salt be returned as base64-encoded string?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, base64.b64encode(salt).decode('utf-8'); reference solution does this."
+      },
+      {
+        "question": "Should the hash be returned as hexadecimal string?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, hashlib.sha256(...).hexdigest(); reference solution uses hexdigest()."
+      },
+      {
+        "question": "Should the function handle hex strings with escape sequences (\\x)?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, replace('\\\\x', '') removes them; reference solution does this."
+      },
+      {
+        "question": "Should the function support case-insensitive hex strings?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Yes, binascii.unhexlify handles both; tests include both cases."
+      },
+      {
+        "question": "Should the return type be a tuple of two strings?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, (base64_salt, hex_hash); tests verify this structure."
+      },
+      {
+        "question": "Should the salt length be exactly salt_size bytes before encoding?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, os.urandom(salt_size) generates exact size; tests verify base64 output length."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/140_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'treating empty columns as zero or excluding them' is ambiguous; reference_text clarifies no special handling for missing values.",
+    "candidates": [
+      {
+        "question": "Should StandardScaler be applied directly to specified columns?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use scaler.fit_transform(df[cols]); reference solution does this."
+      },
+      {
+        "question": "Should the function validate that cols is a list?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check isinstance(cols, list); tests verify this error."
+      },
+      {
+        "question": "Should the function validate that input is a DataFrame?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check isinstance(df, pd.DataFrame); reference solution does this."
+      },
+      {
+        "question": "Should ValueError be raised if columns don't exist?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check all(col in df.columns for col in cols); tests verify this."
+      },
+      {
+        "question": "Should missing values be filled before standardization?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "No special handling shown; StandardScaler would raise error on NaN."
+      },
+      {
+        "question": "Should standardized values have mean ~0 and std ~1?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, this is StandardScaler's behavior; tests verify this."
+      },
+      {
+        "question": "Should in-place modification or copy return?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "In-place modification; df[cols] = scaler.fit_transform(...)."
+      },
+      {
+        "question": "Should the function return the modified DataFrame?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return df; reference solution does this."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/150_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'combining duplicates before calculating averages' is ambiguous; reference_text clarifies no deduplication, direct iteration.",
+    "candidates": [
+      {
+        "question": "Should the function iterate through product_keys and calculate profit for each?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, profit = quantity * price for each key; reference solution does this."
+      },
+      {
+        "question": "Should average price and profit be calculated across all products?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use np.mean() on the DataFrame columns; reference solution does this."
+      },
+      {
+        "question": "Should averages be duplicated in every row?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, df['Average Price'] = avg_price assigns to all rows."
+      },
+      {
+        "question": "Should a bar chart be generated?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use df.plot(x='Product', y='Profit', kind='bar'); reference solution does this."
+      },
+      {
+        "question": "Should duplicate product keys be handled?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "No; tests assume unique product_keys or overwriting behavior."
+      },
+      {
+        "question": "Should the function return (DataFrame, Axes)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, return (df, ax); reference solution does this."
+      },
+      {
+        "question": "Should the chart title be 'Profit for each product'?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution sets this title."
+      },
+      {
+        "question": "Should ValueError be raised if a product_key doesn't exist in product_dict?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "No, KeyError is raised; tests verify this with test_case_4."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/160_semantic",
+    "label_test_relevant": true,
+    "label_leaked": true,
+    "label_verdict_note": "The phrase 'using either scipy's normaltest or another statistical method' is clarified in reference_text as using scipy.stats.normaltest.",
+    "candidates": [
+      {
+        "question": "Should the data have exactly 8 columns?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, raise ValueError if data.shape[1] != 8; reference solution checks this."
+      },
+      {
+        "question": "Should each row's average be calculated?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, df['Average'] = df.mean(axis=1); reference solution does this."
+      },
+      {
+        "question": "Should seaborn kdeplot be used for distribution visualization?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, sns.kdeplot(df['Average'], linewidth=3); reference solution uses this."
+      },
+      {
+        "question": "Should scipy.stats.normaltest be used for normality testing?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution calls stats.normaltest(df['Average'])."
+      },
+      {
+        "question": "Should normality test require at least 20 data points?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, check len(df['Average']) >= 20; reference solution does this."
+      },
+      {
+        "question": "Should p-value be None if insufficient data?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, set p = None if < 20 points; reference solution does this."
+      },
+      {
+        "question": "Should column names use constants COLUMN_NAMES?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, use the provided constant; reference solution creates DataFrame with COLUMN_NAMES."
+      },
+      {
+        "question": "Should the return type be (DataFrame, Axes, float or None)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes, reference solution returns (df, ax, p)."
+      }
+    ]
+  }
+]

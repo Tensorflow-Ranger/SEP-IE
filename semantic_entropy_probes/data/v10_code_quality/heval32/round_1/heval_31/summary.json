@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"",
+  "baseline_mean_p": 0.4078489691019058,
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "How does the function handle negative numbers?",
+      "answer": "Negative numbers return False (caught by the n < 2 check).",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).",
+      "p1": 0.18212880194187164,
+      "p2": 0.2357749491930008,
+      "mean_p": 0.20895187556743622,
+      "delta": -0.1988970935344696
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider 1 as a prime number?",
+      "answer": "No -- n < 2 returns False, so 1 is not considered prime.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No -- n < 2 returns False, so 1 is not considered prime.",
+      "p1": 0.19776540994644165,
+      "p2": 0.23650749027729034,
+      "mean_p": 0.217136450111866,
+      "delta": -0.19071251899003983
+    },
+    {
+      "idx": 3,
+      "question": "What is the behavior when the input is a very large number?",
+      "answer": "The function still checks divisibility by every k from 2 to n-2 and returns True/False accordingly; no special large-number handling (this can just be slow, not incorrect).",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: The function still checks divisibility by every k from 2 to n-2 and returns True/False accordingly; no special large-number handling (this can just be slow, not incorrect).",
+      "p1": 0.23991407454013824,
+      "p2": 0.21057438850402832,
+      "mean_p": 0.22524423152208328,
+      "delta": -0.18260473757982254
+    },
+    {
+      "idx": 1,
+      "question": "What happens if a non-integer value is passed to the function?",
+      "answer": "Not applicable: the function assumes an integer input per \"a given number\"; no non-integer handling is specified.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Not applicable: the function assumes an integer input per \"a given number\"; no non-integer handling is specified.",
+      "p1": 0.22559623420238495,
+      "p2": 0.2851729393005371,
+      "mean_p": 0.25538458675146103,
+      "delta": -0.1524643823504448
+    },
+    {
+      "idx": 4,
+      "question": "Are there any constraints on the input type, such as requiring an integer?",
+      "answer": "The function is intended for integers; behavior for non-integers is undefined/not specified.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: The function is intended for integers; behavior for non-integers is undefined/not specified.",
+      "p1": 0.2599545419216156,
+      "p2": 0.2699876129627228,
+      "mean_p": 0.2649710774421692,
+      "delta": -0.14287789165973663
+    },
+    {
+      "idx": 5,
+      "question": "How does the function handle floating-point numbers that are whole numbers (e.g., 4.0)?",
+      "answer": "Not specifically handled/specified; the function is designed for integer input.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Not specifically handled/specified; the function is designed for integer input.",
+      "p1": 0.3358180820941925,
+      "p2": 0.3699714243412018,
+      "mean_p": 0.35289475321769714,
+      "delta": -0.05495421588420868
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected behavior for the input value of 0?",
+      "answer": "Returns False (caught by n < 2).",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Returns False (caught by n < 2).",
+      "p1": 0.41695693135261536,
+      "p2": 0.4571165442466736,
+      "mean_p": 0.43703673779964447,
+      "delta": 0.029187768697738647
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior for the input value of 2?",
+      "answer": "Returns True (2 is prime; the loop range(2, 1) is empty, so it falls through to return True).",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Returns True (2 is prime; the loop range(2, 1) is empty, so it falls through to return True).",
+      "p1": 0.6058880090713501,
+      "p2": 0.5657979249954224,
+      "mean_p": 0.5858429670333862,
+      "delta": 0.1779939979314804
+    }
+  ],
+  "top3": [
+    {
+      "idx": 2,
+      "question": "How does the function handle negative numbers?",
+      "answer": "Negative numbers return False (caught by the n < 2 check).",
+      "delta": -0.1988970935344696
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider 1 as a prime number?",
+      "answer": "No -- n < 2 returns False, so 1 is not considered prime.",
+      "delta": -0.19071251899003983
+    },
+    {
+      "idx": 3,
+      "question": "What is the behavior when the input is a very large number?",
+      "answer": "The function still checks divisibility by every k from 2 to n-2 and returns True/False accordingly; no special large-number handling (this can just be slow, not incorrect).",
+      "delta": -0.18260473757982254
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "How does the function handle negative numbers?",
+    "answer": "Negative numbers return False (caught by the n < 2 check).",
+    "delta": -0.1988970935344696
+  },
+  "next_prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).",
+  "code_prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime. Negative numbers return False (caught by the n < 2 check).\"\"\"",
+  "test_n_pass": 13,
+  "test_n_total": 13
+}

@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_162_lexical",
+  "questions": [
+    "Does \"blank string\" mean strictly an empty string, or also strings containing only whitespace?",
+    "Should the MD5 hash be computed on the string's UTF-8 encoded bytes?",
+    "Should the returned hash be lowercase hexadecimal, matching standard md5 hexdigest conventions?",
+    "Is the input guaranteed to always be a string type?",
+    "Should leading or trailing whitespace in a non-blank string be stripped before hashing?",
+    "Is there a maximum expected length for the input text?",
+    "Should the function handle non-ASCII/Unicode characters in the input specially?",
+    "Are there example input/output pairs elsewhere defining the exact expected hash format?"
+  ],
+  "answers": [
+    "Strictly an empty string (\"\") only — whitespace-only strings are hashed normally.",
+    "Yes, UTF-8 encoded bytes.",
+    "Yes, lowercase hex, matching standard hexdigest().",
+    "Yes, assume always a string.",
+    "No, whitespace is not stripped; it's hashed as-is.",
+    "Not specified beyond what's given; no stated maximum.",
+    "Standard UTF-8 encoding handles non-ASCII normally.",
+    "None given here; standard md5 hexdigest format is assumed."
+  ],
+  "inline_prompts": [
+    "def string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string. If 'text' is a blank string, return None. Strictly an empty string (\"\") only — whitespace-only strings are hashed normally.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string. If 'text' is a blank string, return None. Yes, UTF-8 encoded bytes.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string in lowercase hex, matching standard hexdigest().\n    If 'text' is a blank string, return None.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string. Yes, assume always a string. If 'text' is a blank string, return None.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string. If 'text' is a blank string, return None. No, whitespace is not stripped; it's hashed as-is.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string.\n    If 'text' is a blank string, return None.\n    Not specified beyond what's given; no stated maximum.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string. Standard UTF-8 encoding handles non-ASCII normally. If 'text' is a blank string, return None.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a string 'text', return its md5 hash equivalent string in standard md5 hexdigest format.\n    If 'text' is a blank string, return None.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+  ]
+}

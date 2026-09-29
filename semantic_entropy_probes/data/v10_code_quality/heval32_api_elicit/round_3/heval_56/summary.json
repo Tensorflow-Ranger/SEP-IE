@@ -1,0 +1,118 @@
+{
+  "round": 3,
+  "baseline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.",
+  "baseline_mean_p": 0.19124027341604233,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "Must the final depth be exactly zero for the string to be valid, or is a positive depth (more '<' than '>') also acceptable?",
+      "answer": "The final depth must be exactly zero for the string to be valid -- a positive leftover depth (unmatched opening brackets) makes it return False.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n\nClarification: The final depth must be exactly zero for the string to be valid -- a positive leftover depth (unmatched opening brackets) makes it return False.",
+      "p1": 0.13458213210105896,
+      "p2": 0.23563893139362335,
+      "mean_p": 0.18511053174734116,
+      "delta": -0.006129741668701172
+    },
+    {
+      "idx": 0,
+      "question": "Should an empty string be considered properly closed and thus return True?",
+      "answer": "Yes -- with an empty string, the depth counter never leaves 0, so it returns True (an empty string is properly closed).",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n\nClarification: Yes -- with an empty string, the depth counter never leaves 0, so it returns True (an empty string is properly closed).",
+      "p1": 0.14533278346061707,
+      "p2": 0.25046631693840027,
+      "mean_p": 0.19789955019950867,
+      "delta": 0.006659276783466339
+    },
+    {
+      "idx": 3,
+      "question": "If the depth becomes negative at any point, should the function return False immediately without processing the rest of the string?",
+      "answer": "Yes -- if the running depth ever goes negative, the function returns False immediately without processing the rest of the string.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n\nClarification: Yes -- if the running depth ever goes negative, the function returns False immediately without processing the rest of the string.",
+      "p1": 0.17761871218681335,
+      "p2": 0.26005789637565613,
+      "mean_p": 0.21883830428123474,
+      "delta": 0.027598030865192413
+    },
+    {
+      "idx": 4,
+      "question": "Are there any limits on the maximum allowed depth (e.g., stack overflow concerns) that would affect the result?",
+      "answer": "No specific depth limit is stated.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n\nClarification: No specific depth limit is stated.",
+      "p1": 0.19719861447811127,
+      "p2": 0.2688610553741455,
+      "mean_p": 0.2330298349261284,
+      "delta": 0.04178956151008606
+    },
+    {
+      "idx": 6,
+      "question": "Is the function expected to handle very long input strings efficiently, and are there performance constraints to consider?",
+      "answer": "No specific performance constraint is stated; the implementation is a simple single O(n) pass.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n\nClarification: No specific performance constraint is stated; the implementation is a simple single O(n) pass.",
+      "p1": 0.2148943692445755,
+      "p2": 0.29874762892723083,
+      "mean_p": 0.25682099908590317,
+      "delta": 0.06558072566986084
+    },
+    {
+      "idx": 5,
+      "question": "Should the function treat whitespace or newline characters as irrelevant and ignore them, or should their presence cause a False or error?",
+      "answer": "Not addressed -- the input is guaranteed to consist only of '<' and '>' characters, so whitespace is not expected to appear.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n\nClarification: Not addressed -- the input is guaranteed to consist only of '<' and '>' characters, so whitespace is not expected to appear.",
+      "p1": 0.2092471420764923,
+      "p2": 0.30855849385261536,
+      "mean_p": 0.25890281796455383,
+      "delta": 0.0676625445485115
+    },
+    {
+      "idx": 1,
+      "question": "Is a string containing characters other than '<' and '>' considered invalid, and if so, should the function raise an error or simply return False?",
+      "answer": "Not applicable -- the input is guaranteed to be a string of only '<' and '>' characters.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n\nClarification: Not applicable -- the input is guaranteed to be a string of only '<' and '>' characters.",
+      "p1": 0.24171149730682373,
+      "p2": 0.2894875705242157,
+      "mean_p": 0.2655995339155197,
+      "delta": 0.07435926049947739
+    },
+    {
+      "idx": 7,
+      "question": "Does the function need to support Unicode variants of angle brackets, or only the ASCII characters '<' and '>'?",
+      "answer": "No -- only the ASCII characters '<' and '>' are used; Unicode bracket variants are not addressed.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n\nClarification: No -- only the ASCII characters '<' and '>' are used; Unicode bracket variants are not addressed.",
+      "p1": 0.22422248125076294,
+      "p2": 0.3237624168395996,
+      "mean_p": 0.2739924490451813,
+      "delta": 0.08275217562913895
+    }
+  ],
+  "top3": [
+    {
+      "idx": 2,
+      "question": "Must the final depth be exactly zero for the string to be valid, or is a positive depth (more '<' than '>') also acceptable?",
+      "answer": "The final depth must be exactly zero for the string to be valid -- a positive leftover depth (unmatched opening brackets) makes it return False.",
+      "delta": -0.006129741668701172
+    },
+    {
+      "idx": 0,
+      "question": "Should an empty string be considered properly closed and thus return True?",
+      "answer": "Yes -- with an empty string, the depth counter never leaves 0, so it returns True (an empty string is properly closed).",
+      "delta": 0.006659276783466339
+    },
+    {
+      "idx": 3,
+      "question": "If the depth becomes negative at any point, should the function return False immediately without processing the rest of the string?",
+      "answer": "Yes -- if the running depth ever goes negative, the function returns False immediately without processing the rest of the string.",
+      "delta": 0.027598030865192413
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "Must the final depth be exactly zero for the string to be valid, or is a positive depth (more '<' than '>') also acceptable?",
+    "answer": "The final depth must be exactly zero for the string to be valid -- a positive leftover depth (unmatched opening brackets) makes it return False.",
+    "delta": -0.006129741668701172
+  },
+  "next_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n\nClarification: The final depth must be exactly zero for the string to be valid -- a positive leftover depth (unmatched opening brackets) makes it return False.",
+  "code_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly, yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts. The final depth must be exactly zero for the string to be valid -- a positive leftover depth (unmatched opening brackets) makes it return False.\n    \"\"\"",
+  "test_n_pass": 12,
+  "test_n_total": 12
+}

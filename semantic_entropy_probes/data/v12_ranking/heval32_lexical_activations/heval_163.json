@@ -1,0 +1,43 @@
+{
+  "id": "heval_163",
+  "questions": [
+    "Should the function include the endpoints a and b themselves if they are even, i.e., are the bounds inclusive?",
+    "If a is greater than b, should the function return an empty list, raise an error, or treat the range as descending?",
+    "Must the returned collection be a list, tuple, generator, or any iterable, and should it be mutable?",
+    "How should the function handle non‑integer inputs (e.g., floats, strings) or integers that are not positive?",
+    "If there are no even numbers in the specified range, should the function return an empty list or raise an exception?",
+    "Are duplicate values ever possible in the output, and if so, should they be preserved or deduplicated?",
+    "Does “even elements” refer strictly to numbers divisible by 2, or should it also include numbers that are even after rounding or casting?",
+    "Should the function enforce any maximum size or raise an error for ranges that would produce an excessively large result?"
+  ],
+  "answers": [
+    "Yes, the bounds are inclusive if they fall within the effective range (clipped to 2-8) and are even.",
+    "Not applicable -- the function takes min/max of a and b internally, so the order of a and b doesn't matter.",
+    "The reference implementation returns a list.",
+    "Not applicable -- a and b are guaranteed to be positive integers.",
+    "If there are no even numbers in the (clipped) range, the function returns an empty list.",
+    "Not applicable -- the result is built by iterating each value once, so no duplicates occur.",
+    "'Even' means strictly divisible by 2, on the effective integer range clipped between 2 and 8 -- no rounding/casting is involved.",
+    "Not applicable -- the range is inherently bounded (clipped to 2-8), so no separate size limit is needed."
+  ],
+  "inline_prompts": [
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even elements between a\n    and b, in ascending order. Yes, the bounds are inclusive if they fall within the effective range (clipped to 2-8) and are even.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even elements between a\n    and b, in ascending order. Note that the function takes the min and max of a\n    and b internally, so the order of a and b doesn't matter.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even elements between a\n    and b, in ascending order. The reference implementation returns a list.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even elements between a\n    and b, in ascending order. Not applicable -- a and b are guaranteed to be positive integers.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even elements between a\n    and b, in ascending order. If there are no even numbers in the (clipped) range, the function returns an empty list.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even elements between a\n    and b, in ascending order. Not applicable -- the result is built by iterating each value once, so no duplicates occur.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even elements between a\n    and b, in ascending order. 'Even' means strictly divisible by 2, on the\n    effective integer range clipped between 2 and 8 -- no rounding/casting is\n    involved.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even elements between a\n    and b, in ascending order. Not applicable -- the range is inherently bounded (clipped to 2-8), so no separate size limit is needed.\n    \"\"\""
+  ],
+  "tiers": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+  ]
+}

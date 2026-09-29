@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.",
+  "baseline_mean_p": 0.1285346858203411,
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "How should the function handle non-printable or special characters in the string?",
+      "answer": "Treated as regular characters like any other -- included in the set and thus in the count.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.\n\nClarification: Treated as regular characters like any other -- included in the set and thus in the count.",
+      "p1": 0.11024059355258942,
+      "p2": 0.17132149636745453,
+      "mean_p": 0.14078104496002197,
+      "delta": 0.012246359139680862
+    },
+    {
+      "idx": 7,
+      "question": "What should the function return if the input is not a string?",
+      "answer": "Not applicable -- the input is guaranteed to be a string per the type hint.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.\n\nClarification: Not applicable -- the input is guaranteed to be a string per the type hint.",
+      "p1": 0.12308072298765182,
+      "p2": 0.16114452481269836,
+      "mean_p": 0.1421126239001751,
+      "delta": 0.013577938079833984
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider Unicode characters as distinct elements?",
+      "answer": "Yes, Unicode characters are treated like any other character in the string and counted individually.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.\n\nClarification: Yes, Unicode characters are treated like any other character in the string and counted individually.",
+      "p1": 0.13830338418483734,
+      "p2": 0.1555924266576767,
+      "mean_p": 0.14694790542125702,
+      "delta": 0.01841321960091591
+    },
+    {
+      "idx": 3,
+      "question": "What should the function return if the input string is empty?",
+      "answer": "Returns 0 (the empty set has length 0).",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.\n\nClarification: Returns 0 (the empty set has length 0).",
+      "p1": 0.1328277587890625,
+      "p2": 0.16109351813793182,
+      "mean_p": 0.14696063846349716,
+      "delta": 0.01842595264315605
+    },
+    {
+      "idx": 6,
+      "question": "Is the function expected to handle very large input strings efficiently?",
+      "answer": "Not specifically optimized, but the implementation is O(n) via set(), so it scales linearly with no special handling needed.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.\n\nClarification: Not specifically optimized, but the implementation is O(n) via set(), so it scales linearly with no special handling needed.",
+      "p1": 0.13769324123859406,
+      "p2": 0.20270301401615143,
+      "mean_p": 0.17019812762737274,
+      "delta": 0.04166344180703163
+    },
+    {
+      "idx": 4,
+      "question": "Should the function treat whitespace characters (e.g., spaces, tabs) as distinct elements?",
+      "answer": "Yes, whitespace characters are counted as distinct elements if present in the string.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.\n\nClarification: Yes, whitespace characters are counted as distinct elements if present in the string.",
+      "p1": 0.15131404995918274,
+      "p2": 0.19863392412662506,
+      "mean_p": 0.1749739870429039,
+      "delta": 0.04643930122256279
+    },
+    {
+      "idx": 5,
+      "question": "How should the function handle characters that are not letters (e.g., numbers, symbols)?",
+      "answer": "Treated the same as letters -- included in the distinct-character count.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.\n\nClarification: Treated the same as letters -- included in the distinct-character count.",
+      "p1": 0.14467480778694153,
+      "p2": 0.21297019720077515,
+      "mean_p": 0.17882250249385834,
+      "delta": 0.05028781667351723
+    },
+    {
+      "idx": 2,
+      "question": "Are accented characters (e.g., '\u00e7', '\u00e9') considered the same as their base characters (e.g., 'c', 'e')?",
+      "answer": "No, str.lower() does not strip accents, so '\u00e7' and 'c' are distinct characters and counted separately.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.\n\nClarification: No, str.lower() does not strip accents, so '\u00e7' and 'c' are distinct characters and counted separately.",
+      "p1": 0.260755717754364,
+      "p2": 0.27851608395576477,
+      "mean_p": 0.2696359008550644,
+      "delta": 0.14110121503472328
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "How should the function handle non-printable or special characters in the string?",
+      "answer": "Treated as regular characters like any other -- included in the set and thus in the count.",
+      "delta": 0.012246359139680862
+    },
+    {
+      "idx": 7,
+      "question": "What should the function return if the input is not a string?",
+      "answer": "Not applicable -- the input is guaranteed to be a string per the type hint.",
+      "delta": 0.013577938079833984
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider Unicode characters as distinct elements?",
+      "answer": "Yes, Unicode characters are treated like any other character in the string and counted individually.",
+      "delta": 0.01841321960091591
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "How should the function handle non-printable or special characters in the string?",
+    "answer": "Treated as regular characters like any other -- included in the set and thus in the count.",
+    "delta": 0.012246359139680862
+  },
+  "next_prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: A distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())).\n\nClarification: Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.\n\nClarification: Treated as regular characters like any other -- included in the set and thus in the count.",
+  "code_prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where a distinct element is a unique character (case-insensitive) appearing in the string -- i.e. len(set(string.lower())). Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character. Treated as regular characters like any other -- included in the set and thus in the count. \"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

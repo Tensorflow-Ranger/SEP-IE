@@ -1,0 +1,99 @@
+{
+  "round": 2,
+  "prompt_before": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2.\"\"\"",
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "In the recurrence \u201ctri(n) = tri(n\u20111) + tri(n\u20112) + tri(n+1)\u201d, is the term tri(n+1) referring to a value that has already been computed or to a future value, and how should this be resolved?",
+      "answer": "For odd n, the recurrence tri(n) = tri(n-1) + tri(n-2) + tri(n+1) refers to tri(n+1) as the value already computed in the forward-pass iteration (computed for the next even index).",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1), where tri(n+1) refers to the value already computed in the forward-pass iteration (computed for the next even index); for even n, use tri(n) = 1 + n/2.\"\"\"",
+      "score": 2.428382396697998
+    },
+    {
+      "idx": 7,
+      "question": "What should be the exact length of the returned list: n elements, n+1 elements, or something else?",
+      "answer": "The returned list should contain exactly n + 1 elements (indices 0 through n).",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. The returned list should contain exactly n + 1 elements (indices 0 through n). For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2.\"\"\"",
+      "score": 2.368877410888672
+    },
+    {
+      "idx": 9,
+      "question": "If the recurrence produces contradictory values (e.g., different ways to compute the same index), which rule takes precedence?",
+      "answer": "If the recurrence produces contradictory values, the algorithm computes forward (for even indices) and uses the recurrence (for odd), and values are computed once without conflict by design.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2. If the recurrence produces contradictory values, the algorithm computes forward (for even indices) and uses the recurrence (for odd), and values are computed once without conflict by design.\"\"\"",
+      "score": 1.979567527770996
+    },
+    {
+      "idx": 10,
+      "question": "Are there any constraints on the size of n (e.g., maximum value) to avoid performance or overflow issues, and how should overflow be handled?",
+      "answer": "No explicit constraints on the maximum value of n are mentioned; the function should handle reasonable values.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2. No explicit constraints on the maximum value of n are mentioned; the function should handle reasonable values.\"\"\"",
+      "score": 1.5356991291046143
+    },
+    {
+      "idx": 8,
+      "question": "In what order should the list be returned: from index 0 up to n, or from n down to 0?",
+      "answer": "The list is returned in order from index 0 up to n.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2. The list is returned in order from index 0 up to n.\"\"\"",
+      "score": 1.478574275970459
+    },
+    {
+      "idx": 3,
+      "question": "For even n, does \u201ctri(n) = 1 + n/2\u201d produce an integer result, and should integer division be used (floor) or floating\u2011point division?",
+      "answer": "For even n, the formula tri(n) = 1 + n/2 produces a floating-point result in Python 3 (using true division).",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2, which produces a floating-point result in Python 3 (using true division).\"\"\"",
+      "score": 0.9558863639831543
+    },
+    {
+      "idx": 5,
+      "question": "When n is odd, should the sequence still include values for even indices computed by the even\u2011n formula, or are they derived differently?",
+      "answer": "When n is odd, the sequence includes values for even indices computed by the even-n formula; both formula types are used to build the complete sequence.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2. When n is odd, the sequence includes values for even indices computed by the even-n formula; both formula types are used to build the complete sequence.\"\"\"",
+      "score": 0.8479123115539551
+    },
+    {
+      "idx": 0,
+      "question": "Should the returned list include the 0\u2011th Tribonacci number, and if so, what value should it have?",
+      "answer": "The 0-th Tribonacci number should be included in the output; tri(0) = 1 (base case).",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. The 0-th Tribonacci number should be included in the output; tri(0) = 1 (base case). For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2.\"\"\"",
+      "score": 0.728123664855957
+    },
+    {
+      "idx": 6,
+      "question": "Should the function validate that n is a non\u2011negative integer, and if a non\u2011integer or negative value is passed, raise an error, coerce, or handle it otherwise?",
+      "answer": "The function should accept only non-negative integers; passing non-integer or negative values is not specified as a requirement to handle.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, the function should accept only non-negative integers; passing non-integer or negative values is not specified as a requirement to handle, you have to return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2.\"\"\"",
+      "score": -0.20612716674804688
+    },
+    {
+      "idx": 1,
+      "question": "What is the exact definition of the Tribonacci sequence for the base cases (e.g., tri(0), tri(1), tri(2))?",
+      "answer": "The base cases are: tri(0) = 1 and tri(1) = 3.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. The base cases are: tri(0) = 1 and tri(1) = 3. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2.\"\"\"",
+      "score": -0.36380720138549805
+    },
+    {
+      "idx": 11,
+      "question": "Should the function return Python integers, or is any numeric type (e.g., float, Decimal) acceptable for the sequence values?",
+      "answer": "The function returns floating-point numbers for even indices and may return mixed int/float types in the list.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1); for even n, use tri(n) = 1 + n/2. The function returns floating-point numbers for even indices and may return mixed int/float types in the list.\"\"\"",
+      "score": -0.9235773086547852
+    },
+    {
+      "idx": 4,
+      "question": "Is the \u201codd n\u201d recurrence applied only to compute the element at index n, or does it replace the entire sequence generation rule for all odd indices?",
+      "answer": "The odd n recurrence is applied to compute the element at index n only, using previously computed values.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, the odd n recurrence is applied to compute the element at index n only, using previously computed values; for even n, use tri(n) = 1 + n/2.\"\"\"",
+      "score": -3.8024041652679443
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "In the recurrence \u201ctri(n) = tri(n\u20111) + tri(n\u20112) + tri(n+1)\u201d, is the term tri(n+1) referring to a value that has already been computed or to a future value, and how should this be resolved?",
+    "answer": "For odd n, the recurrence tri(n) = tri(n-1) + tri(n-2) + tri(n+1) refers to tri(n+1) as the value already computed in the forward-pass iteration (computed for the next even index).",
+    "score": 2.428382396697998
+  },
+  "next_prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1), where tri(n+1) refers to the value already computed in the forward-pass iteration (computed for the next even index); for even n, use tri(n) = 1 + n/2.\"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 10
+}

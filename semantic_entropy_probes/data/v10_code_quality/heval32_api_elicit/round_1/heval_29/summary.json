@@ -1,0 +1,118 @@
+{
+  "round": 1,
+  "baseline_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"",
+  "baseline_mean_p": 0.2766554728150368,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "Is the prefix matching case-sensitive or case-insensitive?",
+      "answer": "Case-sensitive -- a standard startswith comparison with no case folding.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.",
+      "p1": 0.09339065849781036,
+      "p2": 0.15729980170726776,
+      "mean_p": 0.12534523010253906,
+      "delta": -0.1513102427124977
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle `None` values or non\u2011string elements within the `strings` list?",
+      "answer": "Not applicable -- input is guaranteed to be a list of strings.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of strings.",
+      "p1": 0.1425754278898239,
+      "p2": 0.20031501352787018,
+      "mean_p": 0.17144522070884705,
+      "delta": -0.10521025210618973
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return the matching strings in the same order they appear in the input list?",
+      "answer": "Yes, the filtered result preserves the original list order.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes, the filtered result preserves the original list order.",
+      "p1": 0.11460515856742859,
+      "p2": 0.2301420420408249,
+      "mean_p": 0.17237360030412674,
+      "delta": -0.10428187251091003
+    },
+    {
+      "idx": 2,
+      "question": "Should strings that are exactly equal to the prefix be included in the result?",
+      "answer": "Yes -- a string exactly equal to the prefix does start with that prefix, so it is included.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- a string exactly equal to the prefix does start with that prefix, so it is included.",
+      "p1": 0.12706387042999268,
+      "p2": 0.23461660742759705,
+      "mean_p": 0.18084023892879486,
+      "delta": -0.09581523388624191
+    },
+    {
+      "idx": 6,
+      "question": "Should the function consider only the start of each string as the prefix, or any occurrence of the prefix within the string?",
+      "answer": "Only the START of the string counts -- the string must start with the prefix, not merely contain it anywhere.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Only the START of the string counts -- the string must start with the prefix, not merely contain it anywhere.",
+      "p1": 0.11412759125232697,
+      "p2": 0.26585936546325684,
+      "mean_p": 0.1899934783577919,
+      "delta": -0.08666199445724487
+    },
+    {
+      "idx": 7,
+      "question": "Are there any length constraints on the input strings or the prefix that would raise an error?",
+      "answer": "None stated.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: None stated.",
+      "p1": 0.300807923078537,
+      "p2": 0.4586750864982605,
+      "mean_p": 0.37974150478839874,
+      "delta": 0.10308603197336197
+    },
+    {
+      "idx": 5,
+      "question": "Must the function treat Unicode characters and diacritics in a special way (e.g., normalization)?",
+      "answer": "Not addressed; not a case the function needs to handle.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Not addressed; not a case the function needs to handle.",
+      "p1": 0.4170517027378082,
+      "p2": 0.5666586756706238,
+      "mean_p": 0.491855189204216,
+      "delta": 0.21519971638917923
+    },
+    {
+      "idx": 4,
+      "question": "What should the function return when the input list is empty or when no strings match the prefix?",
+      "answer": "Return an empty list.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Return an empty list.",
+      "p1": 0.6153001189231873,
+      "p2": 0.7043026685714722,
+      "mean_p": 0.6598013937473297,
+      "delta": 0.38314592093229294
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "Is the prefix matching case-sensitive or case-insensitive?",
+      "answer": "Case-sensitive -- a standard startswith comparison with no case folding.",
+      "delta": -0.1513102427124977
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle `None` values or non\u2011string elements within the `strings` list?",
+      "answer": "Not applicable -- input is guaranteed to be a list of strings.",
+      "delta": -0.10521025210618973
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return the matching strings in the same order they appear in the input list?",
+      "answer": "Yes, the filtered result preserves the original list order.",
+      "delta": -0.10428187251091003
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "Is the prefix matching case-sensitive or case-insensitive?",
+    "answer": "Case-sensitive -- a standard startswith comparison with no case folding.",
+    "delta": -0.1513102427124977
+  },
+  "next_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.",
+  "code_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. Case-sensitive -- a standard startswith comparison with no case folding.\n    \"\"\"",
+  "test_n_pass": 2,
+  "test_n_total": 2
+}

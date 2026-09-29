@@ -1,0 +1,99 @@
+{
+  "round": 2,
+  "prompt_before": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 3,
+      "question": "If n has a repeated prime factor (e.g., n = p\u00b2), should the function return p once (as stated), or return p multiple times?",
+      "answer": "If n has a repeated prime factor (e.g., n = 4 = 2\u00b2), return the prime factor once: the function returns the largest distinct prime factor, not the highest power.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity. If n has a repeated prime factor (e.g., n = 4 = 2\u00b2), return the prime factor once: the function returns the largest distinct prime factor, not the highest power. \"\"\"",
+      "score": -0.3081531524658203
+    },
+    {
+      "idx": 6,
+      "question": "What if n has multiple distinct prime factors with the same maximum value (e.g., n = 2 * 5 * 5)\u2014which one do we return?",
+      "answer": "If multiple prime factors have the same value (impossible\u2014primes are unique), this doesn't apply. If asking about the largest value when n = 2 * 5 * 5, return 5 (the largest).",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity. If multiple prime factors have the same value (impossible\u2014primes are unique), this doesn't apply. If asking about the largest value when n = 2 * 5 * 5, return 5 (the largest).\"\"\"",
+      "score": -0.3965187072753906
+    },
+    {
+      "idx": 11,
+      "question": "For efficiency, should the algorithm check divisibility only up to sqrt(n)?",
+      "answer": "The algorithm checks divisibility for each j from 2 to n+1, determining primality; it is not optimized to sqrt(n).",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. The algorithm checks divisibility for each j from 2 to n+1, determining primality; it is not optimized to sqrt(n). If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -1.0652284622192383
+    },
+    {
+      "idx": 5,
+      "question": "For very large n, should the algorithm be optimized for efficiency?",
+      "answer": "For very large n, the algorithm iterates from 2 to n, checking primality for each divisor; it is not optimized.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. For very large n, the algorithm iterates from 2 to n, checking primality for each divisor; it is not optimized. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -1.4366111755371094
+    },
+    {
+      "idx": 10,
+      "question": "Should the function raise an error if n is 1 or prime, or return a default value?",
+      "answer": "If n is 1 or prime, the function raises an error or returns an error value; the assumptions are violated.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n is 1 or prime, the function raises an error or returns an error value; the assumptions are violated. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -3.1779122352600098
+    },
+    {
+      "idx": 8,
+      "question": "Should the function handle float inputs, or only integers?",
+      "answer": "Float inputs are not handled; the function assumes integer input.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1, is not a prime, and is an integer. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -5.110306262969971
+    },
+    {
+      "idx": 7,
+      "question": "Should the function return an int or could it return something else?",
+      "answer": "The function returns an int.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. The function returns an int. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -5.892425537109375
+    },
+    {
+      "idx": 9,
+      "question": "What if n is None or not a numeric type?",
+      "answer": "If n is None or not numeric, the behavior is undefined.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n is None or not numeric, the behavior is undefined. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -6.128232002258301
+    },
+    {
+      "idx": 4,
+      "question": "Should the function validate that n actually has prime factors, or assume it does?",
+      "answer": "The function assumes n has prime factors and returns the largest one.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. The function assumes n has prime factors and returns the largest one. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -6.295003890991211
+    },
+    {
+      "idx": 0,
+      "question": "The specification assumes n > 1 and n is not prime\u2014what should the function do if these assumptions are violated?",
+      "answer": "The function assumes n > 1 and n is not prime; violating these assumptions produces undefined behavior.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. The function assumes n > 1 and n is not prime; violating these assumptions produces undefined behavior. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -6.569305419921875
+    },
+    {
+      "idx": 1,
+      "question": "Should the function handle n = 2 (which is prime), and if so, what should it return?",
+      "answer": "If n = 2 (which is prime), the behavior is undefined per the assumption; the function may return an error or incorrect result.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity. If n = 2 (which is prime), the behavior is undefined per the assumption; the function may return an error or incorrect result. \"\"\"",
+      "score": -7.203396797180176
+    },
+    {
+      "idx": 2,
+      "question": "What if n is negative or 0\u2014should the function handle these cases?",
+      "answer": "Negative numbers and 0 are not handled; the function assumes n > 1.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. Negative numbers and 0 are not handled; the function assumes n > 1. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -7.379172325134277
+    }
+  ],
+  "chosen": {
+    "idx": 3,
+    "question": "If n has a repeated prime factor (e.g., n = p\u00b2), should the function return p once (as stated), or return p multiple times?",
+    "answer": "If n has a repeated prime factor (e.g., n = 4 = 2\u00b2), return the prime factor once: the function returns the largest distinct prime factor, not the highest power.",
+    "score": -0.3081531524658203
+  },
+  "next_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity. If n has a repeated prime factor (e.g., n = 4 = 2\u00b2), return the prime factor once: the function returns the largest distinct prime factor, not the highest power. \"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

@@ -1,0 +1,43 @@
+{
+  "id": "heval_14",
+  "questions": [
+    "What exactly qualifies a prefix as “significant” – are all character‑by‑character prefixes included or only those meeting a specific criterion?",
+    "Should the returned list contain the empty string as the shortest prefix, or should it start with the first non‑empty character?",
+    "If the input string contains Unicode characters (e.g., combining marks or surrogate pairs), how should prefixes be defined – by code points, grapheme clusters, or bytes?",
+    "Must the function preserve the original string’s case and any whitespace, or should it normalize the input before generating prefixes?",
+    "In what order should duplicate prefixes be handled when the input contains repeated characters – should they appear multiple times or be deduplicated?",
+    "How should the function behave when the input is not a string (e.g., None, bytes, or an object with __str__) – should it raise a TypeError or attempt conversion?",
+    "Is there a maximum length for the returned list (e.g., should it be limited to a certain number of prefixes for very long strings)?",
+    "Should the function return a new list each call, or is it acceptable to return a cached or shared mutable list?"
+  ],
+  "answers": [
+    "“Significant” has no filtering meaning here -- ALL prefixes from the shortest (length 1) to the longest (the full string) are included, exactly as in the original unambiguous version.",
+    "No -- the shortest included prefix has length 1 (the first character); the empty string is never included.",
+    "Not applicable -- the specification and reference implementation just slice by Python string indexing; no special Unicode/grapheme handling is implied.",
+    "The function preserves the string exactly as given -- it does not normalize case or strip whitespace, it simply returns successive substrings of the original.",
+    "Not applicable -- prefixes of different lengths are always distinct strings from each other, so there is no duplicate-prefix case to handle.",
+    "Not applicable -- the specification guarantees a string input; non-string handling is not addressed.",
+    "Not applicable -- there is no length limit; the list always has exactly len(string) entries.",
+    "Not applicable -- the reference implementation always builds and returns a fresh list."
+  ],
+  "inline_prompts": [
+    "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of significant prefixes from shortest to longest of the input string; 'significant' has no filtering meaning here -- ALL prefixes from the shortest (length 1) to the longest (the full string) are included, exactly as in the original unambiguous version. \"\"\"",
+    "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of significant prefixes from shortest to longest of the input string, where the shortest included prefix has length 1 (the first character); the empty string is never included.\n    \"\"\"",
+    "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of significant prefixes from shortest to longest of the input string; not applicable -- the specification and reference implementation just slice by Python string indexing; no special Unicode/grapheme handling is implied.\n    \"\"\"",
+    "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of significant prefixes from shortest to longest of the input string, preserving the string exactly as given -- it does not normalize case or strip whitespace, it simply returns successive substrings of the original.\n    \"\"\"",
+    "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of significant prefixes from shortest to longest of the input string; not applicable -- prefixes of different lengths are always distinct strings from each other, so there is no duplicate-prefix case to handle.\n    \"\"\"",
+    "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of significant prefixes from shortest to longest of the input string; not applicable -- the specification guarantees a string input; non-string handling is not addressed\n    \"\"\"",
+    "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of significant prefixes from shortest to longest of the input string, with the list always having exactly len(string) entries\n    \"\"\"",
+    "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of significant prefixes from shortest to longest of the input string. Not applicable -- the reference implementation always builds and returns a fresh list.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+  ]
+}

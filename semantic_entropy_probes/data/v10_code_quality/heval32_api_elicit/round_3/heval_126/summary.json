@@ -1,0 +1,118 @@
+{
+  "round": 3,
+  "baseline_prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).",
+  "baseline_mean_p": 0.270657941699028,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "Does the \u201cmore than 1 duplicate of the same number\u201d rule apply to the total count of that number in the list (i.e., a value may appear at most twice) or to the number of duplicate *pairs* (i.e., at most one repeated value overall)?",
+      "answer": "It refers to the TOTAL COUNT of that number anywhere in the list -- a value may appear at most twice; a third or later occurrence of the same value makes it False.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).\n\nClarification: It refers to the TOTAL COUNT of that number anywhere in the list -- a value may appear at most twice; a third or later occurrence of the same value makes it False.",
+      "p1": 0.22318114340305328,
+      "p2": 0.2950590252876282,
+      "mean_p": 0.25912008434534073,
+      "delta": -0.011537857353687286
+    },
+    {
+      "idx": 0,
+      "question": "Should the function consider an empty list as sorted and return True?",
+      "answer": "Yes -- for an empty list, both checks are vacuously satisfied, so it returns True.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).\n\nClarification: Yes -- for an empty list, both checks are vacuously satisfied, so it returns True.",
+      "p1": 0.24501881003379822,
+      "p2": 0.3196016252040863,
+      "mean_p": 0.28231021761894226,
+      "delta": 0.011652275919914246
+    },
+    {
+      "idx": 1,
+      "question": "Should a list with a single element be considered sorted and return True?",
+      "answer": "Yes -- a single-element list is vacuously sorted and returns True.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).\n\nClarification: Yes -- a single-element list is vacuously sorted and returns True.",
+      "p1": 0.2521253824234009,
+      "p2": 0.31674233078956604,
+      "mean_p": 0.28443385660648346,
+      "delta": 0.013775914907455444
+    },
+    {
+      "idx": 3,
+      "question": "If duplicates are allowed, may they appear in any positions or must they be adjacent to each other?",
+      "answer": "Not required to be adjacent -- duplicate counts are computed by counting total occurrences of each value anywhere in the list, independent of position.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).\n\nClarification: Not required to be adjacent -- duplicate counts are computed by counting total occurrences of each value anywhere in the list, independent of position.",
+      "p1": 0.3057444095611572,
+      "p2": 0.33190658688545227,
+      "mean_p": 0.31882549822330475,
+      "delta": 0.04816755652427673
+    },
+    {
+      "idx": 2,
+      "question": "Is the list required to be sorted in strictly non\u2011decreasing order (allowing equal adjacent values) or strictly increasing order (no equal adjacent values)?",
+      "answer": "Non-decreasing order -- adjacent equal values are allowed (the check uses `<=`).",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).\n\nClarification: Non-decreasing order -- adjacent equal values are allowed (the check uses `<=`).",
+      "p1": 0.3032449781894684,
+      "p2": 0.33654728531837463,
+      "mean_p": 0.3198961317539215,
+      "delta": 0.049238190054893494
+    },
+    {
+      "idx": 7,
+      "question": "How should the function behave when the input is not a list (e.g., a tuple, generator, or None) \u2013 raise an error, return False, or attempt to process it?",
+      "answer": "Not addressed -- the input is assumed to be a valid list.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).\n\nClarification: Not addressed -- the input is assumed to be a valid list.",
+      "p1": 0.301090270280838,
+      "p2": 0.34658730030059814,
+      "mean_p": 0.3238387852907181,
+      "delta": 0.053180843591690063
+    },
+    {
+      "idx": 5,
+      "question": "Should the function treat a list that is sorted but contains a value appearing three or more times as False even if the overall order is correct?",
+      "answer": "Yes -- if any value appears 3 or more times, the function returns False even if the overall order is otherwise correct.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).\n\nClarification: Yes -- if any value appears 3 or more times, the function returns False even if the overall order is otherwise correct.",
+      "p1": 0.31590545177459717,
+      "p2": 0.33288922905921936,
+      "mean_p": 0.32439734041690826,
+      "delta": 0.05373939871788025
+    },
+    {
+      "idx": 6,
+      "question": "Are non\u2011integer numeric types (e.g., floats) considered invalid input, or should they be accepted and treated like integers?",
+      "answer": "Not addressed -- the docstring assumes 'no negative numbers and only integers', so floats are not a guaranteed input case.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).\n\nClarification: Not addressed -- the docstring assumes 'no negative numbers and only integers', so floats are not a guaranteed input case.",
+      "p1": 0.32812976837158203,
+      "p2": 0.38958099484443665,
+      "mean_p": 0.35885538160800934,
+      "delta": 0.08819743990898132
+    }
+  ],
+  "top3": [
+    {
+      "idx": 4,
+      "question": "Does the \u201cmore than 1 duplicate of the same number\u201d rule apply to the total count of that number in the list (i.e., a value may appear at most twice) or to the number of duplicate *pairs* (i.e., at most one repeated value overall)?",
+      "answer": "It refers to the TOTAL COUNT of that number anywhere in the list -- a value may appear at most twice; a third or later occurrence of the same value makes it False.",
+      "delta": -0.011537857353687286
+    },
+    {
+      "idx": 0,
+      "question": "Should the function consider an empty list as sorted and return True?",
+      "answer": "Yes -- for an empty list, both checks are vacuously satisfied, so it returns True.",
+      "delta": 0.011652275919914246
+    },
+    {
+      "idx": 1,
+      "question": "Should a list with a single element be considered sorted and return True?",
+      "answer": "Yes -- a single-element list is vacuously sorted and returns True.",
+      "delta": 0.013775914907455444
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "Does the \u201cmore than 1 duplicate of the same number\u201d rule apply to the total count of that number in the list (i.e., a value may appear at most twice) or to the number of duplicate *pairs* (i.e., at most one repeated value overall)?",
+    "answer": "It refers to the TOTAL COUNT of that number anywhere in the list -- a value may appear at most twice; a third or later occurrence of the same value makes it False.",
+    "delta": -0.011537857353687286
+  },
+  "next_prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Yes, up to 1 duplicate of the same number is allowed (a number may appear at most twice); more than 2 occurrences of the same value causes False.\n\nClarification: Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True).\n\nClarification: It refers to the TOTAL COUNT of that number anywhere in the list -- a value may appear at most twice; a third or later occurrence of the same value makes it False.",
+  "code_prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. It refers to the TOTAL COUNT of that number anywhere in the list -- a value may appear at most twice; a third or later occurrence of the same value makes it False. Allowed, True -- the False-triggering rule is specifically 'more than 1 duplicate of the SAME number' (i.e. one value appearing 3+ times), not multiple different values each appearing twice (confirmed by test case: [1,2,2,3,3,4] -> True). Assume no negative numbers and only integers.\n    '''",
+  "test_n_pass": 13,
+  "test_n_total": 13
+}

@@ -1,0 +1,157 @@
+{
+  "round": 1,
+  "baseline_prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.",
+  "baseline_mean_p": 0.7912877798080444,
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "What is the expected format for the output sequence A?",
+      "answer": "The output is the N values of A_1,...,A_N printed separated by spaces (or -1 if no good sequence exists).",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: The output is the N values of A_1,...,A_N printed separated by spaces (or -1 if no good sequence exists).",
+      "p1": 0.7581901550292969,
+      "p2": 0.7539694905281067,
+      "mean_p": 0.7560798227787018,
+      "delta": -0.03520795702934265
+    },
+    {
+      "idx": 2,
+      "question": "How should the XOR constraints be handled if they form a cycle that is impossible to satisfy?",
+      "answer": "If the constraints form a cycle whose XOR values are inconsistent, no good sequence exists and -1 must be printed.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: If the constraints form a cycle whose XOR values are inconsistent, no good sequence exists and -1 must be printed.",
+      "p1": 0.76190185546875,
+      "p2": 0.7541671991348267,
+      "mean_p": 0.7580345273017883,
+      "delta": -0.033253252506256104
+    },
+    {
+      "idx": 9,
+      "question": "What is the expected time complexity for solving the problem?",
+      "answer": "The statement gives no explicit time-complexity requirement, only the input size constraints (N\u22642\u00d710^5, M\u226410^5).",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: The statement gives no explicit time-complexity requirement, only the input size constraints (N\u22642\u00d710^5, M\u226410^5).",
+      "p1": 0.7890608906745911,
+      "p2": 0.737196147441864,
+      "mean_p": 0.7631285190582275,
+      "delta": -0.028159260749816895
+    },
+    {
+      "idx": 4,
+      "question": "How should the values of A be chosen to minimize the sum of the sequence?",
+      "answer": "The statement does not prescribe a specific method, only that the output must be a good sequence achieving the minimum possible sum of elements.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: The statement does not prescribe a specific method, only that the output must be a good sequence achieving the minimum possible sum of elements.",
+      "p1": 0.7891812324523926,
+      "p2": 0.742850124835968,
+      "mean_p": 0.7660156786441803,
+      "delta": -0.025272101163864136
+    },
+    {
+      "idx": 8,
+      "question": "How should the system of XOR constraints be represented for efficient solving?",
+      "answer": "The statement does not prescribe a specific data structure or representation for solving the system.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: The statement does not prescribe a specific data structure or representation for solving the system.",
+      "p1": 0.779395341873169,
+      "p2": 0.7558421492576599,
+      "mean_p": 0.7676187455654144,
+      "delta": -0.023669034242630005
+    },
+    {
+      "idx": 7,
+      "question": "What is the maximum possible value for the elements of A?",
+      "answer": "The statement gives no explicit upper bound on individual A_i values, only that Z_i can be up to 10^9 and A_i must be non-negative integers.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: The statement gives no explicit upper bound on individual A_i values, only that Z_i can be up to 10^9 and A_i must be non-negative integers.",
+      "p1": 0.7813854217529297,
+      "p2": 0.7683039307594299,
+      "mean_p": 0.7748446762561798,
+      "delta": -0.016443103551864624
+    },
+    {
+      "idx": 0,
+      "question": "How should the variables X, Y, and Z be interpreted when they are the same for multiple constraints?",
+      "answer": "Repeated identical (X_i,Y_i) constraints are simply additional edges in the same XOR system; consistent duplicates are redundant and inconsistent ones make no good sequence exist.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: Repeated identical (X_i,Y_i) constraints are simply additional edges in the same XOR system; consistent duplicates are redundant and inconsistent ones make no good sequence exist.",
+      "p1": 0.8115418553352356,
+      "p2": 0.7602121233940125,
+      "mean_p": 0.785876989364624,
+      "delta": -0.00541079044342041
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior when multiple valid good sequences exist?",
+      "answer": "The statement explicitly allows printing any one good sequence that achieves the minimum sum when multiple exist.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: The statement explicitly allows printing any one good sequence that achieves the minimum sum when multiple exist.",
+      "p1": 0.8204956650733948,
+      "p2": 0.7766203284263611,
+      "mean_p": 0.7985579967498779,
+      "delta": 0.007270216941833496
+    },
+    {
+      "idx": 10,
+      "question": "How should the graph be handled if it contains multiple connected components?",
+      "answer": "The statement gives no separate rule for multiple connected components; the good-sequence condition just applies to all M constraints together.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: The statement gives no separate rule for multiple connected components; the good-sequence condition just applies to all M constraints together.",
+      "p1": 0.8194133639335632,
+      "p2": 0.7816624641418457,
+      "mean_p": 0.8005379140377045,
+      "delta": 0.009250134229660034
+    },
+    {
+      "idx": 1,
+      "question": "What is the definition of a \"good sequence\" when there are multiple constraints that may conflict?",
+      "answer": "A good sequence must simultaneously satisfy A_{X_i} XOR A_{Y_i} = Z_i for every single i from 1 to M.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: A good sequence must simultaneously satisfy A_{X_i} XOR A_{Y_i} = Z_i for every single i from 1 to M.",
+      "p1": 0.8271461129188538,
+      "p2": 0.7854874134063721,
+      "mean_p": 0.8063167631626129,
+      "delta": 0.015028983354568481
+    },
+    {
+      "idx": 11,
+      "question": "What is the behavior if no valid assignment of A exists due to conflicting constraints?",
+      "answer": "If no assignment of A satisfies all the given XOR constraints, -1 should be printed instead of a sequence.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: If no assignment of A satisfies all the given XOR constraints, -1 should be printed instead of a sequence.",
+      "p1": 0.8369476795196533,
+      "p2": 0.7836551070213318,
+      "mean_p": 0.8103013932704926,
+      "delta": 0.01901361346244812
+    },
+    {
+      "idx": 6,
+      "question": "How should the values of A be initialized when solving the system of XOR constraints?",
+      "answer": "The statement does not specify an initialization method; it only requires that A be a length-N sequence of non-negative integers satisfying the constraints.",
+      "prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: The statement does not specify an initialization method; it only requires that A be a length-N sequence of non-negative integers satisfying the constraints.",
+      "p1": 0.8324295282363892,
+      "p2": 0.7975378036499023,
+      "mean_p": 0.8149836659431458,
+      "delta": 0.02369588613510132
+    }
+  ],
+  "top3": [
+    {
+      "idx": 5,
+      "question": "What is the expected format for the output sequence A?",
+      "answer": "The output is the N values of A_1,...,A_N printed separated by spaces (or -1 if no good sequence exists).",
+      "delta": -0.03520795702934265
+    },
+    {
+      "idx": 2,
+      "question": "How should the XOR constraints be handled if they form a cycle that is impossible to satisfy?",
+      "answer": "If the constraints form a cycle whose XOR values are inconsistent, no good sequence exists and -1 must be printed.",
+      "delta": -0.033253252506256104
+    },
+    {
+      "idx": 9,
+      "question": "What is the expected time complexity for solving the problem?",
+      "answer": "The statement gives no explicit time-complexity requirement, only the input size constraints (N\u22642\u00d710^5, M\u226410^5).",
+      "delta": -0.028159260749816895
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "What is the expected format for the output sequence A?",
+    "answer": "The output is the N values of A_1,...,A_N printed separated by spaces (or -1 if no good sequence exists).",
+    "delta": -0.03520795702934265
+  },
+  "next_prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive.\nWe call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition:\n- For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i.\nDetermine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i.\nNotes on XOR\nFor non-negative integers A and B, their XOR A \\oplus B is defined as follows:\n- In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0.\nFor example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110).\nInput\nThe input is given from Standard Input in the following format:\nN M\nX_1 Y_1 Z_1\nX_2 Y_2 Z_2\n\\vdots\nX_M Y_M Z_M\nOutput\nIf no good sequence exists, print -1.\nIf a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces.\nConstraints\n- 1 \\le N \\le 2\\times 10^5\n- 0 \\le M \\le 10^5\n- 1 \\le X_i, Y_i \\le N\n- 0 \\le Z_i \\le 10^9\n- All input values are integers.\n\nClarification: The output is the N values of A_1,...,A_N printed separated by spaces (or -1 if no good sequence exists).",
+  "code_prompt": "You are given integers N, M and three integer sequences of length M: X = (X_1, X_2, \\ldots, X_M), Y = (Y_1, Y_2, \\ldots, Y_M), and Z = (Z_1, Z_2, \\ldots, Z_M). It is guaranteed that all elements of X and Y are between 1 and N, inclusive. We call a length-N sequence of non-negative integers A = (A_1, A_2, \\ldots, A_N) a good sequence if and only if it satisfies the following condition: For every integer i with 1 \\le i \\le M, the XOR of A_{X_i} and A_{Y_i} is Z_i. Determine whether a good sequence A=(A_1,A_2,\\ldots,A_N) exists, and if it exists, find one good sequence that minimizes the sum of its elements \\displaystyle \\sum_{i=1}^N A_i. The output is the N values of A_1,...,A_N printed separated by spaces (or -1 if no good sequence exists). Notes on XOR For non-negative integers A and B, their XOR A \\oplus B is defined as follows: In the binary representation of A \\oplus B, the digit in the place corresponding to 2^k \\,(k \\ge 0) is 1 if and only if exactly one of the digits in the same place of A and B is 1; otherwise, it is 0. For example, 3 \\oplus 5 = 6 (in binary: 011 \\oplus 101 = 110). Input The input is given from Standard Input in the following format: N M X_1 Y_1 Z_1 X_2 Y_2 Z_2 \\vdots X_M Y_M Z_M Output If no good sequence exists, print -1. If a good sequence exists, print one good sequence that minimizes the sum of its elements, separated by spaces. Constraints 1 \\le N \\le 2\\times 10^5 0 \\le M \\le 10^5 1 \\le X_i, Y_i \\le N 0 \\le Z_i \\le 10^9 All input values are integers.",
+  "test_n_pass": 21,
+  "test_n_total": 43
+}

@@ -1,0 +1,157 @@
+{
+  "round": 1,
+  "baseline_prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.",
+  "baseline_mean_p": 0.8010348677635193,
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "How should we handle cases where multiple selections yield the same maximum sum?",
+      "answer": "The statement only requires outputting the maximum sum value itself, so ties among different selections achieving that sum are irrelevant.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: The statement only requires outputting the maximum sum value itself, so ties among different selections achieving that sum are irrelevant.",
+      "p1": 0.6158575415611267,
+      "p2": 0.6332753896713257,
+      "mean_p": 0.6245664656162262,
+      "delta": -0.1764684021472931
+    },
+    {
+      "idx": 11,
+      "question": "How should we handle cases where all balls have negative values?",
+      "answer": "Since choosing zero balls is allowed, the maximum achievable sum in that case is 0 by selecting no balls.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: Since choosing zero balls is allowed, the maximum achievable sum in that case is 0 by selecting no balls.",
+      "p1": 0.6432415246963501,
+      "p2": 0.6319521069526672,
+      "mean_p": 0.6375968158245087,
+      "delta": -0.16343805193901062
+    },
+    {
+      "idx": 9,
+      "question": "What is the expected output format if there are multiple valid solutions with the same maximum sum?",
+      "answer": "The output is simply the single integer maximum sum; the statement does not ask for the selection itself.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: The output is simply the single integer maximum sum; the statement does not ask for the selection itself.",
+      "p1": 0.6719809770584106,
+      "p2": 0.6237987279891968,
+      "mean_p": 0.6478898525238037,
+      "delta": -0.15314501523971558
+    },
+    {
+      "idx": 1,
+      "question": "What is the definition of \"choosing\" a ball? Does it mean selecting it to be included in the sum?",
+      "answer": "Yes, choosing a ball means including its value in the total sum of the selection.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: Yes, choosing a ball means including its value in the total sum of the selection.",
+      "p1": 0.6820828914642334,
+      "p2": 0.637735903263092,
+      "mean_p": 0.6599093973636627,
+      "delta": -0.14112547039985657
+    },
+    {
+      "idx": 6,
+      "question": "How should we handle cases where the sum of values is negative?",
+      "answer": "The statement does not separately address this; since choosing zero balls is allowed, the achievable maximum sum is at least 0.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: The statement does not separately address this; since choosing zero balls is allowed, the achievable maximum sum is at least 0.",
+      "p1": 0.7292886972427368,
+      "p2": 0.6835173964500427,
+      "mean_p": 0.7064030468463898,
+      "delta": -0.09463182091712952
+    },
+    {
+      "idx": 3,
+      "question": "Are the balls distinguishable beyond their values?",
+      "answer": "Balls are distinguished by their color and index; selection is per individual ball, though multiple balls may share the same value.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: Balls are distinguished by their color and index; selection is per individual ball, though multiple balls may share the same value.",
+      "p1": 0.7317448854446411,
+      "p2": 0.6874004602432251,
+      "mean_p": 0.7095726728439331,
+      "delta": -0.09146219491958618
+    },
+    {
+      "idx": 0,
+      "question": "Are negative values allowed for the ball values?",
+      "answer": "Yes, values can range from -10^9 to 10^9, so negative values are allowed.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: Yes, values can range from -10^9 to 10^9, so negative values are allowed.",
+      "p1": 0.7287105321884155,
+      "p2": 0.6998545527458191,
+      "mean_p": 0.7142825424671173,
+      "delta": -0.08675232529640198
+    },
+    {
+      "idx": 4,
+      "question": "Can we choose zero balls?",
+      "answer": "Yes, per the clarification, choosing zero or more balls is allowed, including choosing none at all.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: Yes, per the clarification, choosing zero or more balls is allowed, including choosing none at all.",
+      "p1": 0.7295877933502197,
+      "p2": 0.7062845230102539,
+      "mean_p": 0.7179361581802368,
+      "delta": -0.08309870958328247
+    },
+    {
+      "idx": 10,
+      "question": "Are there any constraints on the total number of balls that can be chosen?",
+      "answer": "No constraint beyond the requirement that the number of chosen black balls be at least the number of chosen white balls.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: No constraint beyond the requirement that the number of chosen black balls be at least the number of chosen white balls.",
+      "p1": 0.7326823472976685,
+      "p2": 0.7238444685935974,
+      "mean_p": 0.7282634079456329,
+      "delta": -0.07277145981788635
+    },
+    {
+      "idx": 7,
+      "question": "Are the values of the balls sorted in any particular order?",
+      "answer": "No, the input does not specify any particular sorted order for the values.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: No, the input does not specify any particular sorted order for the values.",
+      "p1": 0.7209065556526184,
+      "p2": 0.7386736273765564,
+      "mean_p": 0.7297900915145874,
+      "delta": -0.07124477624893188
+    },
+    {
+      "idx": 8,
+      "question": "Can we choose more than one ball of the same color?",
+      "answer": "Yes, any number of black and any number of white balls (subject to the black\u2265white count condition) may be chosen from the given sets.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: Yes, any number of black and any number of white balls (subject to the black\u2265white count condition) may be chosen from the given sets.",
+      "p1": 0.7578353881835938,
+      "p2": 0.7112347483634949,
+      "mean_p": 0.7345350682735443,
+      "delta": -0.06649979948997498
+    },
+    {
+      "idx": 5,
+      "question": "What is the behavior when the number of black balls is less than the number of white balls?",
+      "answer": "A selection where chosen black balls are fewer than chosen white balls is invalid and not permitted, since black count must be at least white count.",
+      "prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: A selection where chosen black balls are fewer than chosen white balls is invalid and not permitted, since black count must be at least white count.",
+      "p1": 0.7527223825454712,
+      "p2": 0.7536492347717285,
+      "mean_p": 0.7531858086585999,
+      "delta": -0.047849059104919434
+    }
+  ],
+  "top3": [
+    {
+      "idx": 2,
+      "question": "How should we handle cases where multiple selections yield the same maximum sum?",
+      "answer": "The statement only requires outputting the maximum sum value itself, so ties among different selections achieving that sum are irrelevant.",
+      "delta": -0.1764684021472931
+    },
+    {
+      "idx": 11,
+      "question": "How should we handle cases where all balls have negative values?",
+      "answer": "Since choosing zero balls is allowed, the maximum achievable sum in that case is 0 by selecting no balls.",
+      "delta": -0.16343805193901062
+    },
+    {
+      "idx": 9,
+      "question": "What is the expected output format if there are multiple valid solutions with the same maximum sum?",
+      "answer": "The output is simply the single integer maximum sum; the statement does not ask for the selection itself.",
+      "delta": -0.15314501523971558
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "How should we handle cases where multiple selections yield the same maximum sum?",
+    "answer": "The statement only requires outputting the maximum sum value itself, so ties among different selections achieving that sum are irrelevant.",
+    "delta": -0.1764684021472931
+  },
+  "next_prompt": "There are N black balls and M white balls.\nEach ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j.\nChoose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls.\nInput\nThe input is given from Standard Input in the following format:\nN M\nB_1 B_2 \\ldots B_N\nW_1 W_2 \\ldots W_M\nOutput\nPrint the answer.\nConstraints\n- 1 \\leq N,M \\leq 2\\times 10^5\n- -10^9 \\leq B_i, W_j \\leq 10^9\n- All input values are integers.\n\nClarification: The statement only requires outputting the maximum sum value itself, so ties among different selections achieving that sum are irrelevant.",
+  "code_prompt": "There are N black balls and M white balls. Each ball has a value. The value of the i-th black ball (1 \\le i \\le N) is B_i, and the value of the j-th white ball (1 \\le j \\le M) is W_j. Choose balls so that the number of black balls chosen is at least the number of white balls chosen. Among all such choices, find the maximum possible sum of the values of the chosen balls. The statement only requires outputting the maximum sum value itself, so ties among different selections achieving that sum are irrelevant. Input The input is given from Standard Input in the following format: N M B_1 B_2 \\ldots B_N W_1 W_2 \\ldots W_M Output Print the answer. Constraints - 1 \\leq N,M \\leq 2\\times 10^5 - -10^9 \\leq B_i, W_j \\leq 10^9 - All input values are integers.",
+  "test_n_pass": 7,
+  "test_n_total": 43
+}

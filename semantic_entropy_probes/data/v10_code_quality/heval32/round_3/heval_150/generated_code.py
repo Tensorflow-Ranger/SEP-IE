@@ -1,0 +1,8 @@
+def x_or_y(n, x, y):
+    """ A simple program which should return the value of x if n is prime, and should return the value of y otherwise. Note that n being a prime number, per the docstring: return x if n is prime, y otherwise. Not applicable -- the input is guaranteed to be an integer per its usage. """
+    if n < 2:
+        return y
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return y
+    return x

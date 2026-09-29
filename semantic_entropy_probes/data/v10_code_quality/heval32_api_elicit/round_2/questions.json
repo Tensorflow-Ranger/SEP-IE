@@ -1,0 +1,322 @@
+{
+  "heval_1": [
+    "What should the function return when the input string contains no parentheses at all?",
+    "How should the function handle characters other than parentheses and spaces (e.g., letters, digits, punctuation) in the input?",
+    "If the input contains an unbalanced group (e.g., an extra opening or closing parenthesis), should the function raise an error, ignore the malformed part, or treat it in some other way?",
+    "When two balanced groups are adjacent with no separating characters (e.g., \"()()\"), should they be returned as separate strings or combined into one?",
+    "Should empty groups \"()\" be included in the output list, and if so, as the string \"()\" or as an empty string?",
+    "Are nested parentheses ever considered valid input, and if they appear, should the function raise an exception, flatten them, or return the innermost groups only?",
+    "Does the order of groups in the returned list need to match their left\u2011to\u2011right appearance in the original string?",
+    "Should the function preserve the original ordering of characters inside each group exactly as they appear (including any internal spaces that are ignored globally)?"
+  ],
+  "heval_14": [
+    "Should the function raise an exception, return an empty list, or handle specially when the input string is empty?",
+    "Must the returned list contain each prefix as a separate string object, or are shared substrings acceptable?",
+    "Is the function required to preserve the original string's Unicode characters exactly, including surrogate pairs and combining marks?",
+    "Should the function treat newline or other whitespace characters as regular characters when generating prefixes?",
+    "If the input is not a string (e.g., None or an integer), should the function coerce it to a string, raise a TypeError, or handle it differently?",
+    "Must the returned list be a new list instance each call, or can a cached/shared list be returned?",
+    "Are there any performance or memory constraints (e.g., must run in O(n) time and O(n) space) that affect implementation?",
+    "Should the function handle strings containing null characters (`'\\0'`) in any special way?"
+  ],
+  "heval_16": [
+    "Should characters other than letters (e.g., digits, punctuation, whitespace, symbols) be counted as distinct characters?",
+    "If non\u2011letter characters are counted, are they considered case\u2011insensitive as well, or does case only apply to alphabetic letters?",
+    "How should Unicode characters beyond the basic ASCII set (e.g., accented letters, emojis, non\u2011Latin scripts) be treated\u2014are they counted individually after lowercasing?",
+    "Is the input string guaranteed to be a valid `str` object, or must the function handle `None`, bytes, or other types gracefully?",
+    "Should combining characters or composed Unicode sequences be normalized before counting distinct characters?",
+    "Are surrogate pairs or characters represented by multiple code points (e.g., emojis) counted as a single distinct character?",
+    "If the string is empty, should the function return `0` or raise an error?",
+    "Should leading, trailing, or internal whitespace be ignored, trimmed, or counted as distinct characters?"
+  ],
+  "heval_19": [
+    "Should the input string contain the number words separated by spaces, commas, or another delimiter?",
+    "Can the input string be empty, and if so, what should the function return?",
+    "Are duplicate number words allowed in the input, and should they appear multiple times in the output?",
+    "Should the output preserve the original delimiter format (e.g., spaces vs commas) used in the input?",
+    "If the input contains leading or trailing whitespace, should it be ignored or affect the output?",
+    "Must the output list the numbers in ascending numeric order (zero to nine) or in lexical order of the words?",
+    "How should the function handle invalid tokens or misspelled number words\u2014raise an error, ignore them, or something else?",
+    "Should the output string end with a delimiter (e.g., trailing space or comma) or not?"
+  ],
+  "heval_29": [
+    "Should the returned list preserve the original order of the input strings?",
+    "Must the function return a new list object, or is returning a view or the original list acceptable if it contains only matching items?",
+    "How should the function handle `None` values within the input list\u2014should they be ignored, cause an error, or be treated as non\u2011matching strings?",
+    "What is the expected behavior when `prefix` is an empty string\u2014should all strings be returned or none?",
+    "Should the function raise an exception if `strings` is not a list of strings (e.g., contains integers or other types)?",
+    "Is there a limit on the size of the input list, and how should the function behave with extremely large inputs?",
+    "Should duplicate strings in the input list appear duplicated in the output, or should the result be deduplicated?",
+    "How should the function handle Unicode strings and characters that may have multiple representations (e.g., composed vs. decomposed forms)?"
+  ],
+  "heval_31": [
+    "Should the function accept non\u2011integer types (e.g., floats, strings, complex numbers) and, if so, how should they be handled?",
+    "What should the function return for negative integers or zero?",
+    "Is 1 considered a prime number by this function?",
+    "Should the function raise an exception for invalid inputs, or simply return False?",
+    "Must the return value be the boolean `True`/`False`, or are other truthy/falsy values acceptable?",
+    "Is there a maximum input size beyond which the function should raise an error or behave differently?",
+    "Should the function treat `True` and `False` (which are subclasses of `int`) as valid numeric inputs?",
+    "Are there any expectations about handling very large integers (e.g., using arbitrary\u2011precision arithmetic) or performance constraints?"
+  ],
+  "heval_40": [
+    "Should the function consider triples that use the same list element more than once, or must all three elements be at distinct indices?",
+    "If the list contains fewer than three elements, should the function return False or raise an error?",
+    "Must the three elements be in any particular order (e.g., preserving original order) or is order irrelevant?",
+    "How should the function treat non\u2011integer values in the list\u2014should it raise a TypeError, ignore them, or convert them?",
+    "Are duplicate values allowed to form a valid triple (e.g., using the same numeric value from different positions)?",
+    "Should the function consider the possibility of integer overflow or large numbers, and if so, how?",
+    "If multiple triples exist, does the function need to stop after finding the first one, or must it check the entire list?",
+    "Should the function treat the input list as mutable (e.g., may it be modified) or must it leave the list unchanged?"
+  ],
+  "heval_52": [
+    "Should the function return True if **any** element in the list is strictly less than t, or only if **all** elements are below t?",
+    "What should the function return when the input list `l` is empty?",
+    "Must the elements of `l` be numeric types, and if non\u2011numeric items appear, should the function raise an error or ignore them?",
+    "Is the list `l` allowed to contain `None` or other null\u2011like values, and how should those be handled?",
+    "Should the function accept other iterable types (e.g., tuples, sets) in place of a list, or must the argument be exactly a `list`?",
+    "Are negative numbers and zero considered valid values for both the list elements and the threshold `t`?",
+    "If `t` is not an integer (e.g., a float or a string), should the function coerce it, raise a TypeError, or behave differently?",
+    "Should the function treat `bool` values (`True`/`False`) as numeric (where `False`\u202f=\u202f0, `True`\u202f=\u202f1) or reject them as invalid?"
+  ],
+  "heval_53": [
+    "Should the function return an `int` type, or is returning a `float` or other numeric type acceptable if the sum exceeds the range of `int`?",
+    "Must the function raise an exception if either `x` or `y` is not an `int` (e.g., a float, string, or `None`)?",
+    "Is overflow handling required for very large integers, and if so, what behavior is expected (e.g., raise an error, wrap around, or promote to arbitrary-precision)?",
+    "Should the function accept boolean values (`True`/`False`) as arguments, treating them as `1`/`0`, or reject them as non\u2011integer types?",
+    "Is the function required to be pure (no side effects) beyond returning the sum, such as not modifying mutable objects passed in via subclassing of `int`?",
+    "Will the function be used in contexts where type hints are enforced, and thus must it explicitly annotate a return type (`-> int`)?",
+    "Should the function handle `NaN` or infinite values if `x` or `y` are instances of a subclass of `int` that can represent such concepts?",
+    "Is there any requirement for the function to log, print, or otherwise report the operation performed, or must it remain completely silent?"
+  ],
+  "heval_56": [
+    "Should an empty string be considered properly closed and thus return True?",
+    "Is the function expected to return a boolean value (True/False) or could it raise exceptions for invalid input?",
+    "How should the function handle characters other than '<' and '>' in the input string?",
+    "Must the function treat the input as a sequence of matched pairs, i.e., does each '<' need a corresponding later '>'?",
+    "Is there a maximum allowed length for the input string, or should very long strings be handled specially?",
+    "Should the function consider nested brackets valid (e.g., \"<<>>\") and treat them the same as sequential pairs?",
+    "If the input contains a mismatched number of brackets (e.g., more '<' than '>'), should the function return False or raise an error?",
+    "Are whitespace characters within the string to be ignored, trimmed, or cause the input to be invalid?"
+  ],
+  "heval_59": [
+    "Should the function return the largest prime factor as an integer value?",
+    "If n has multiple prime factors of the same maximal value (e.g., repeated factor), should the function return that prime once or consider multiplicity?",
+    "Must the function handle negative inputs by treating their absolute value, or is negative n outside the guaranteed domain?",
+    "Is there any required time or space complexity constraint for the implementation?",
+    "Should the function raise an exception if n is actually prime despite the assumption?",
+    "Are there any limits on the size of n (e.g., fits in Python's int, or may be arbitrarily large requiring special algorithms)?",
+    "Should the function return the factor as a plain int or could it be returned as a different numeric type (e.g., long, Decimal)?",
+    "If n is a perfect power of a prime (e.g., 27 = 3\u00b3), is the largest prime factor simply that prime (3), or should the function consider the exponent?"
+  ],
+  "heval_64": [
+    "Should the function treat uppercase vowels ('A', 'E', 'I', 'O', 'U') as vowels as well as lowercase ones?",
+    "Is the input guaranteed to be a non\u2011empty string, or should empty strings be handled (and what should be returned for them)?",
+    "How should characters that are not letters (e.g., digits, punctuation, whitespace) be treated\u2014are they ignored, cause an error, or counted in any way?",
+    "If the last character is 'Y' or 'y', should it be counted as a vowel even when the string also contains other vowels, and does its case matter?",
+    "Should the function raise an exception for inputs that are not of type `str` (e.g., `None`, numbers, lists), or should it attempt to convert them to strings?",
+    "Are accented or Unicode vowel characters (e.g., '\u00e1', '\u00e9', '\u00f6') considered vowels, or should they be ignored?",
+    "In the case of a string consisting solely of the character 'y' (or 'Y'), should the function count it as one vowel?",
+    "Should the function count each occurrence of a vowel separately, or are duplicate vowels counted only once?"
+  ],
+  "heval_80": [
+    "Should the function return a boolean value (True/False) or some other type (e.g., 1/0, \"yes\"/\"no\")?",
+    "Does the requirement \"every 3 letters are distinct\" apply to each consecutive triple of characters (positions i, i+1, i+2) throughout the string?",
+    "If the string length is exactly 3, is it considered happy only when those three characters are all distinct?",
+    "How should the function handle strings containing non\u2011alphabetic characters (digits, punctuation, whitespace, etc.)\u2014are they treated the same as letters for distinctness?",
+    "Must the function raise an exception for inputs that are not of type `str` (e.g., `None`, integers, lists), or should it simply return `False`?",
+    "Are Unicode characters beyond the basic ASCII set allowed, and if so, does distinctness consider code points or grapheme clusters?",
+    "Should the function treat newline (`\\n`) or other control characters as regular characters when checking distinctness?",
+    "If the string length is less than 3, should the function return `False` or raise an error indicating the input is invalid?"
+  ],
+  "heval_91": [
+    "What exactly constitutes a \"boredom\" in the string\u2014how is it defined or detected?",
+    "Should punctuation marks ('.', '?', '!') be considered part of a sentence when searching for boredoms, or are they only delimiters?",
+    "Are consecutive delimiters (e.g., \"!!\") treated as separate sentence boundaries or as a single delimiter?",
+    "How should leading, trailing, or multiple spaces between words be handled when counting boredoms?",
+    "Must the string end with a delimiter for the final sentence to be counted, or is the last segment counted as a sentence even without one?",
+    "Are words containing the capital \"I\" followed by a space (e.g., \"I am\") counted as a boredom regardless of surrounding punctuation or other characters?",
+    "Should occurrences of \"I \" that span across sentence boundaries (e.g., at the end of one sentence and the start of the next) be counted?",
+    "How should non\u2011alphabetic characters attached to \"I\" (such as \"I,\" or \"I.\") be treated\u2014do they still count as a boredom?"
+  ],
+  "heval_104": [
+    "Should the function accept only lists, or also other iterable types such as tuples or generators?",
+    "Must the input list contain only integers, or should non\u2011integer elements (e.g., floats, strings) raise an error, be ignored, or be converted?",
+    "How should negative numbers be handled\u2014are the minus sign considered a digit, and are their absolute values examined for even digits?",
+    "What is the expected behavior for the integer 0, which consists of a single even digit?",
+    "Should duplicate numbers that meet the criteria appear multiple times in the output, or should the result contain each qualifying number only once?",
+    "In what order should the returned list be sorted\u2014ascending numeric order, descending, or preserving the original order after filtering?",
+    "If the input list is empty or contains no numbers without even digits, should the function return an empty list or raise an exception?",
+    "Should the function raise a specific type of exception (e.g., TypeError, ValueError) for invalid input, and what should the error message be?"
+  ],
+  "heval_109": [
+    "Should the function treat the input as 0\u2011based indexing (i.e., arr[0] \u2026 arr[N\u20111]) or 1\u2011based indexing as described in the docstring?",
+    "Does \u201cright shift operation\u201d allow shifting by more than one position in a single operation, or must each operation shift exactly one position?",
+    "Is the array considered sorted if it is already in non\u2011decreasing order without any shifts, or must at least one shift be performed?",
+    "For arrays containing duplicate values (despite the note), how should equality be handled when checking non\u2011decreasing order?",
+    "Should the function return a boolean value True/False or the strings \"True\"/\"False\"?",
+    "Is an empty array considered trivially sortable (return True) even if the implementation expects a list of length \u22651?",
+    "Must the function handle inputs that are not lists (e.g., tuples, numpy arrays) or raise an error for such types?",
+    "If the array length is 1, is it automatically considered sortable (return True) regardless of its value?"
+  ],
+  "heval_110": [
+    "Must the exchange operation swap exactly one element from lst1 with exactly one element from lst2, or can multiple elements be swapped at once?",
+    "Can an element be exchanged more than once (i.e., participate in multiple swaps) during the process?",
+    "Are the input lists allowed to contain non\u2011numeric types or NaN/Infinity values, and how should those be treated?",
+    "Is the order of elements in lst1 required to remain unchanged after exchanges, or can elements be reordered arbitrarily?",
+    "Does the function need to consider the case where lst1 is already all even and return \"YES\" without performing any exchanges?",
+    "Are duplicate values in the lists treated as distinct elements for the purpose of swapping?",
+    "Is there any limit on the number of exchanges that can be performed (e.g., must be minimal, or any finite number is allowed)?",
+    "Should the function modify the original input lists, or must it leave them unchanged?"
+  ],
+  "heval_113": [
+    "Should the function return a list of integers, a list of strings, or a list preserving the original element types?",
+    "Must the input list contain only strings, or should non\u2011string elements be accepted or cause an error?",
+    "How should the function handle an empty input list\u2014return an empty list or raise an exception?",
+    "If a string contains characters other than digits (e.g., letters, symbols), should those be ignored, cause an error, or be treated as non\u2011odd?",
+    "Should leading or trailing whitespace in each string be stripped before counting odd digits?",
+    "Are negative numbers represented with a leading \u2018\u2011\u2019 considered valid strings, and if so, should the sign be ignored?",
+    "What is the expected behavior when a string is empty\u2014should its count be 0 or trigger an error?",
+    "Should the function preserve the original order of the input list in the output list?"
+  ],
+  "heval_125": [
+    "Should the function treat any whitespace characters (spaces, tabs, newlines, etc.) as delimiters, or only the space character?",
+    "Which specific characters are considered \u201ccertain characters\u201d to split on when no whitespace is present, and is the split performed on each occurrence of any of those characters?",
+    "If the input string contains both whitespace and the \u201ccertain characters,\u201d should the function split on whitespace only, ignoring the other characters?",
+    "When splitting on the \u201ccertain characters,\u201d should consecutive delimiter characters produce empty strings in the result, or should they be omitted?",
+    "If the input string is empty, what should the function return\u2014an empty list, zero, or something else?",
+    "Should the function consider only lowercase letters a\u2011z when counting \u201clower\u2011case letters with odd order,\u201d ignoring any other characters such as uppercase letters, digits, or punctuation?",
+    "How should the function handle non\u2011ASCII characters or letters with diacritics\u2014are they treated as lowercase letters, ignored, or cause an error?",
+    "In the case where the count of odd\u2011order lowercase letters is returned, should the result be an integer type (e.g., `int`) rather than a list containing that integer?"
+  ],
+  "heval_126": [
+    "Should the function return True for an empty list or a list with a single element?",
+    "Is a list considered sorted if it is in non\u2011decreasing order (allowing equal adjacent values) or must it be strictly increasing except for the allowed duplicate?",
+    "When a value appears exactly twice, must the two occurrences be adjacent, or can they be separated by other values?",
+    "If a list contains exactly one duplicate of a number, does the presence of that duplicate affect the sortedness check (e.g., [1,2,2,3] vs [1,2,3,2])?",
+    "Should the function treat the list as sorted in ascending order only, or are descending or any monotonic order acceptable?",
+    "Are inputs other than lists (e.g., tuples, generators) allowed, and if so, how should they be handled?",
+    "Must the function validate that all elements are non\u2011negative integers, and what should it return or raise if an element violates this assumption?",
+    "If the list contains more than one distinct value that each appears twice, is that allowed (e.g., [1,1,2,2]) or does any duplicate beyond the first cause False?"
+  ],
+  "heval_129": [
+    "Must the path be simple (no cell visited more than once) or can cells be revisited?",
+    "Does the path length k refer to the number of cells visited including the start cell, or the number of moves between cells?",
+    "Should the returned result be the minimum possible sum of the visited cell values, the minimum possible product, or some other metric?",
+    "If multiple paths achieve the same minimal metric, should any one be returned, or is there a tie\u2011breaking rule (e.g., lexicographically smallest sequence of values)?",
+    "Are diagonal moves allowed, or only the four orthogonal neighbors sharing an edge?",
+    "Must the path stay within the bounds of the N\u00d7N grid, or are wrap\u2011around moves (torus topology) permitted?",
+    "Is the input grid guaranteed to contain each integer from 1 to N\u00b2 exactly once, or can some numbers appear multiple times while still covering the full range?",
+    "Should the function return the sequence of values along the optimal path, the sum/product of those values, or both?"
+  ],
+  "heval_130": [
+    "What are the initial three values of the Tribonacci sequence that the function should use?",
+    "Should the function accept only integer types, or also other numeric types that can be cast to int?",
+    "How should the function behave when a negative integer is passed as n?",
+    "Is there an upper limit on n, and if so, what should happen when n exceeds that limit (e.g., performance concerns or overflow)?",
+    "Should the function return the sequence as a list of integers, or are other numeric types (e.g., floats, big integers) acceptable?",
+    "If n is not an integer but a numeric value (e.g., a float), should it be truncated, rounded, or cause an error?",
+    "How should the function handle extremely large n that would produce numbers exceeding typical integer size\u2014should it raise an exception, use arbitrary-precision arithmetic, or something else?",
+    "Are there any requirements for the function to validate the input type and raise specific exceptions (e.g., TypeError, ValueError) for invalid inputs?"
+  ],
+  "heval_134": [
+    "Should the function treat an empty string as having no last character and therefore return False?",
+    "Is whitespace (e.g., spaces, tabs, newlines) considered a character that can be \u201cclosely associated with a word,\u201d thus causing the function to return False?",
+    "How should punctuation marks (e.g., period, comma, exclamation) that directly follow a letter be interpreted\u2014do they make the preceding letter \u201cclosely associated\u201d and thus result in False?",
+    "If the string ends with a digit or other non\u2011alphabetic symbol, should the function simply return False, or are there any special cases?",
+    "Does \u201cclosely associated with a word\u201d refer to adjacency without any separating whitespace, meaning that a trailing letter attached to a preceding word counts as False?",
+    "Should hyphens, apostrophes, or other word\u2011joining characters be considered part of a word, thereby making a trailing letter \u201cclosely associated\u201d and returning False?",
+    "Must the function perform case\u2011insensitive checking by lowercasing the character before applying the ASCII range test, or should uppercase letters be accepted directly?",
+    "Are there any performance or input\u2011type constraints (e.g., the function must handle only str objects, raise TypeError for other types)?"
+  ],
+  "heval_138": [
+    "Should the function return a boolean value (True/False) or another type (e.g., 1/0, \"yes\"/\"no\")?",
+    "Are the four even numbers required to be distinct, or can the same even number be used multiple times?",
+    "Must each of the four even numbers be strictly positive (i.e., >\u202f0), or is zero allowed as an even summand?",
+    "Is there an upper bound on the size of n (e.g., must it fit within standard integer limits) that the function needs to handle?",
+    "Should the function treat non\u2011integer inputs (e.g., floats, strings) as invalid and raise an exception, or coerce them to integers?",
+    "How should the function behave for negative values of n\u2014should it return False, raise an error, or handle them specially?",
+    "If n is not reachable as a sum of four positive even numbers, should the function simply return False or provide additional information (e.g., the closest possible sum)?",
+    "Are there performance constraints (e.g., must the function run in O(1) time) that affect the implementation approach?"
+  ],
+  "heval_140": [
+    "Should the function replace only the space character `' '` or also other whitespace characters such as tabs `'\\t'` and newlines `'\\n'`?",
+    "Must the function preserve leading and trailing spaces, converting them to underscores as well?",
+    "If the input string contains consecutive spaces, should each space be replaced individually, resulting in consecutive underscores?",
+    "Should the function return a new string leaving the original `text` unchanged, or modify it in place (if mutable)?",
+    "How should the function handle non\u2011ASCII space characters (e.g., non\u2011breaking space `'\\u00A0'`)?",
+    "Is there any limit on the length of `text` that the function must handle efficiently?",
+    "Should the function treat `None` or other non\u2011string types as errors, or is the guarantee of a string absolute?",
+    "If the input string already contains underscores, does the function need to avoid double\u2011underscoring or any special handling?"
+  ],
+  "heval_142": [
+    "Should the function return a new list with the transformed values or modify the original list in place?",
+    "What should happen if the input list contains non\u2011integer types (e.g., floats, strings, None)?",
+    "How should negative indices be treated\u2014are they considered when determining multiples of 3 or 4?",
+    "If the list is empty, should the function return an empty list or raise an error?",
+    "For indices that are multiples of both 3 and 4 (e.g., 12), is squaring the only operation applied, confirming the precedence rule?",
+    "Are indices counted starting at 0 or 1 for the purpose of the multiple\u2011of checks?",
+    "Should the function handle very large integers that could cause overflow, and if so, how?",
+    "Is there any limit on the size of the input list, and what behavior is expected if that limit is exceeded?"
+  ],
+  "heval_145": [
+    "Should the original list be modified in place or should a new sorted list be returned?",
+    "If two numbers have the same digit sum, how should they be ordered relative to each other?",
+    "How should negative integers be handled when calculating the sum of their digits?",
+    "Are leading zeros (e.g., the integer 007) considered, and if so, how do they affect the digit sum?",
+    "What should the function return when given an empty list?",
+    "Should the function raise an error for non\u2011integer elements, or simply ignore them?",
+    "Is the sorting stable with respect to the original order of equal\u2011sum elements?",
+    "Are very large integers (beyond typical 32\u2011bit range) supported, and does their digit sum need special handling?"
+  ],
+  "heval_147": [
+    "Should the function return the created array `a`, its maximum value, or something else?",
+    "Is the array `a` zero-indexed (Python list) or one-indexed as described in the docstring?",
+    "Must the function validate that `n` is a positive integer, and if not, what should it do (raise an error, return None, etc.)?",
+    "Should the function handle very large `n` efficiently, or is a straightforward O(n) construction acceptable?",
+    "Are there any constraints on the maximum size of `n` (e.g., memory limits) that the implementation must respect?",
+    "Is the result expected to be a list of Python `int` objects, or could other numeric types (e.g., `numpy.int64`) be used?",
+    "Should the function return a copy of the array each call, or is returning a reference to a cached result permissible?",
+    "If `n` is not an integer but a numeric type (e.g., float), should it be coerced to int, truncated, or cause an error?"
+  ],
+  "heval_148": [
+    "Should the function treat planet name strings case\u2011sensitively (e.g., \"Earth\" vs \"earth\")?",
+    "Are leading/trailing whitespace characters in the input strings allowed or should they cause an invalid\u2011planet result?",
+    "Must the function accept alternative spellings or abbreviations (e.g., \"Mars\", \"mars\", \"MARS\") or only the exact full names listed?",
+    "If planet1 and planet2 are the same valid planet, should the function return an empty tuple or treat it as an error?",
+    "When one or both inputs are invalid, should the function return an empty tuple or raise an exception?",
+    "Should the returned tuple contain the planet names as strings exactly as listed (capitalized) or preserve the input\u2019s casing?",
+    "If the inputs are valid but there are no intermediate planets (e.g., \"Mercury\" and \"Venus\"), should the function return an empty tuple?",
+    "Is the order of the returned tuple always from the inner planet to the outer planet regardless of which planet was passed first, even when the inputs are reversed?"
+  ],
+  "heval_150": [
+    "What specific conditions must be satisfied by `n` for the function to return `x`?",
+    "Should `n` be restricted to a particular type (e.g., integer, float, string), and if so, which types are allowed?",
+    "How should the function behave when `n` is `None` or another falsy value?",
+    "If `n` does not meet the conditions for returning `x`, should the function always return `y` regardless of `n`'s type or value?",
+    "Are there any range or boundary constraints on numeric values of `n` (e.g., inclusive vs. exclusive limits)?",
+    "Should the function raise an exception for invalid input types or values, or simply return `y`?",
+    "Is the comparison of `n` to the conditions case\u2011sensitive when `n` is a string?",
+    "Must the function preserve the original type of `x` and `y` when returning them, even if they are mutable objects?"
+  ],
+  "heval_151": [
+    "Should \u201cvalid odd numbers\u201d include negative odd numbers, or are only non\u2011negative odds considered valid?",
+    "Are non\u2011integer numeric types (e.g., floats, Decimals) allowed, and if so, how is \u201codd\u201d determined for them?",
+    "How should non\u2011numeric elements (e.g., strings, None) in the list be treated\u2014ignore, raise an error, or something else?",
+    "Is zero considered an odd number, and why does the example treat it as contributing 0 to the sum?",
+    "Should the function treat NaN or infinite values specially, or are they considered invalid?",
+    "If the list contains duplicate values, should each occurrence be processed separately?",
+    "Must the function preserve the original order of processing, or is order irrelevant to the result?",
+    "Are there any size or performance constraints (e.g., very large lists) that affect how the sum is computed?"
+  ],
+  "heval_163": [
+    "Should the function include the endpoints a and b themselves if they are even numbers?",
+    "Must the function handle cases where a is greater than b, and if so, what order should the returned numbers follow?",
+    "What type of collection should be returned (e.g., list, tuple, generator, etc.)?",
+    "Should the returned numbers be sorted in ascending order regardless of input order?",
+    "How should the function behave when there are no even numbers in the specified range?",
+    "Are a and b guaranteed to be integers, or should the function validate and possibly raise errors for non\u2011integer inputs?",
+    "Is there a maximum allowed size for a and b, or any performance constraints to consider for very large ranges?",
+    "Should the function raise an exception if either a or b is non\u2011positive, or simply treat them as invalid inputs?"
+  ]
+}

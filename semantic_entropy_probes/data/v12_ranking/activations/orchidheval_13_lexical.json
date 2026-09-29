@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_13_lexical",
+  "questions": [
+    "What is the expected behavior when both input numbers are zero?",
+    "How should the function handle negative input values?",
+    "What should be returned when one of the inputs is zero and the other is non-zero?",
+    "Are the input values guaranteed to be integers, or could they be floating-point numbers?",
+    "What is the expected behavior for very large integer inputs that might cause overflow?",
+    "Should the function handle cases where one or both inputs are None?",
+    "What is the expected return type - should it always be a positive integer?",
+    "How should the function behave if the inputs are not numeric types?"
+  ],
+  "answers": [
+    "Not addressed distinctly from the general spec; standard gcd(0,0) convention applies (commonly 0), but this isn't the injected ambiguity.",
+    "Not addressed by the true spec; not the injected ambiguity here.",
+    "Not addressed distinctly; not the injected ambiguity.",
+    "Yes -- inputs are guaranteed to be integers (a: int, b: int), not floating-point numbers.",
+    "Not addressed by the true spec.",
+    "Not addressed; assume valid integer inputs per the type hints.",
+    "Not the injected ambiguity; sign of the return value isn't what's in question here.",
+    "Not addressed distinctly; the true spec's ambiguity is about numeric type (int vs float), not non-numeric types."
+  ],
+  "inline_prompts": [
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two numbers a and b; standard gcd(0,0) convention applies (commonly 0), but this isn't the injected ambiguity. \"\"\"",
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two numbers a and b; not addressed by the true spec; not the injected ambiguity here. \"\"\"",
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two numbers a and b. Not addressed distinctly; not the injected ambiguity. \"\"\"",
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two numbers a and b. Yes -- inputs are guaranteed to be integers (a: int, b: int), not floating-point numbers. \"\"\"",
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two numbers a and b. Not addressed by the true spec. \"\"\"",
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two numbers a and b; not addressed; assume valid integer inputs per the type hints. \"\"\"",
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two numbers a and b, not the injected ambiguity; sign of the return value isn't what's in question here. \"\"\"",
+    "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two numbers a and b; not addressed distinctly; the true spec's ambiguity is about numeric type (int vs float), not non-numeric types. \"\"\""
+  ],
+  "tiers": [
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+  ]
+}

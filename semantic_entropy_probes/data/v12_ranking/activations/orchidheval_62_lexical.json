@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_62_lexical",
+  "questions": [
+    "What is the expected return type and format for the derivative polynomial coefficients?",
+    "How should the function handle empty input lists or lists with only one element?",
+    "Are there any constraints on the input coefficient values or list length?",
+    "Should the function handle negative coefficients or fractional coefficients?",
+    "What is the expected behavior when all coefficients are zero?",
+    "How should leading zeros in the result be handled - should they be preserved or removed?",
+    "Is there a maximum degree or size limit for the input polynomial?",
+    "Should the function validate input types or can it assume the input is always a valid list of numbers?"
+  ],
+  "answers": [
+    "The output should be a list of coefficients in the SAME format as the input (list-of-coefficients, e.g. [xs[1], 2*xs[2], 3*xs[3], ...]) -- not a mathematical string representation like '1 + 4*x + ...'.",
+    "Not addressed by the true spec; a single-coefficient (constant) polynomial's derivative is [0] or an empty list, per standard convention.",
+    "Not addressed by the true spec; assume valid numeric coefficients.",
+    "Not addressed by the true spec; negative/fractional coefficients are handled the same way arithmetically.",
+    "Not addressed by the true spec; result would be a zero-coefficient list.",
+    "Related to the output-format ambiguity: leading (highest-degree) zero coefficients are simply included as-is in the coefficient list, consistent with the same list-of-coefficients format.",
+    "No degree/size limit specified.",
+    "Not addressed; assume a valid list of numeric coefficients."
+  ],
+  "inline_prompts": [
+    "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n    The output should be a list of coefficients in the SAME format as the input (list-of-coefficients, e.g. [xs[1], 2*xs[2], 3*xs[3], ...]) -- not a mathematical string representation like '1 + 4*x + ...'.\n    Return derivative of this polynomial in a natural form.\n    \"\"\"",
+    "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in a natural form. Not addressed by the true spec; a single-coefficient (constant) polynomial's derivative is [0] or an empty list, per standard convention.\n    \"\"\"",
+    "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in a natural form. Assume valid numeric coefficients.\n    \"\"\"",
+    "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in a natural form. Negative/fractional coefficients are handled the same way arithmetically. \"\"\"",
+    "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in a natural form. Not addressed by the true spec; result would be a zero-coefficient list.\n    \"\"\"",
+    "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in a natural form. Related to the output-format ambiguity: leading (highest-degree) zero coefficients are simply included as-is in the coefficient list, consistent with the same list-of-coefficients format.\n    \"\"\"",
+    "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in a natural form. No degree/size limit specified.\n    \"\"\"",
+    "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in a natural form.\n    Not addressed; assume a valid list of numeric coefficients."
+  ],
+  "tiers": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0
+  ]
+}

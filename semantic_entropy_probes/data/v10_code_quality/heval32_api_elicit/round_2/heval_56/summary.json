@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.",
+  "baseline_mean_p": 0.24682315438985825,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 3,
+      "question": "Must the function treat the input as a sequence of matched pairs, i.e., does each '<' need a corresponding later '>'?",
+      "answer": "Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.",
+      "p1": 0.15387040376663208,
+      "p2": 0.22861014306545258,
+      "mean_p": 0.19124027341604233,
+      "delta": -0.05558288097381592
+    },
+    {
+      "idx": 1,
+      "question": "Is the function expected to return a boolean value (True/False) or could it raise exceptions for invalid input?",
+      "answer": "Returns a boolean True/False; no exceptions are raised.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Returns a boolean True/False; no exceptions are raised.",
+      "p1": 0.19852763414382935,
+      "p2": 0.2481745332479477,
+      "mean_p": 0.22335108369588852,
+      "delta": -0.023472070693969727
+    },
+    {
+      "idx": 0,
+      "question": "Should an empty string be considered properly closed and thus return True?",
+      "answer": "Yes, an empty string is properly closed (the depth counter stays at 0 throughout, vacuously balanced) -- returns True.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes, an empty string is properly closed (the depth counter stays at 0 throughout, vacuously balanced) -- returns True.",
+      "p1": 0.1934974640607834,
+      "p2": 0.25948768854141235,
+      "mean_p": 0.22649257630109787,
+      "delta": -0.020330578088760376
+    },
+    {
+      "idx": 5,
+      "question": "Should the function consider nested brackets valid (e.g., \"<<>>\") and treat them the same as sequential pairs?",
+      "answer": "Yes, nested brackets (e.g. '<<>>') are valid and handled correctly by the depth-counting approach -- proper nesting/ordering matters, not just matching total counts.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes, nested brackets (e.g. '<<>>') are valid and handled correctly by the depth-counting approach -- proper nesting/ordering matters, not just matching total counts.",
+      "p1": 0.19649916887283325,
+      "p2": 0.28696712851524353,
+      "mean_p": 0.2417331486940384,
+      "delta": -0.005090005695819855
+    },
+    {
+      "idx": 2,
+      "question": "How should the function handle characters other than '<' and '>' in the input string?",
+      "answer": "Not specified/tested; not a case that occurs -- input is guaranteed to consist only of '<' and '>' characters.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Not specified/tested; not a case that occurs -- input is guaranteed to consist only of '<' and '>' characters.",
+      "p1": 0.21698659658432007,
+      "p2": 0.3072403371334076,
+      "mean_p": 0.26211346685886383,
+      "delta": 0.015290312469005585
+    },
+    {
+      "idx": 7,
+      "question": "Are whitespace characters within the string to be ignored, trimmed, or cause the input to be invalid?",
+      "answer": "Not specified/tested; not a case that occurs -- input is guaranteed to consist only of '<' and '>' characters, no whitespace.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Not specified/tested; not a case that occurs -- input is guaranteed to consist only of '<' and '>' characters, no whitespace.",
+      "p1": 0.21939724683761597,
+      "p2": 0.3052244484424591,
+      "mean_p": 0.26231084764003754,
+      "delta": 0.01548769325017929
+    },
+    {
+      "idx": 6,
+      "question": "If the input contains a mismatched number of brackets (e.g., more '<' than '>'), should the function return False or raise an error?",
+      "answer": "Returns False (not an exception) when the bracket counts/order don't balance to depth 0 at the end.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Returns False (not an exception) when the bracket counts/order don't balance to depth 0 at the end.",
+      "p1": 0.22403490543365479,
+      "p2": 0.3137334883213043,
+      "mean_p": 0.26888419687747955,
+      "delta": 0.022061042487621307
+    },
+    {
+      "idx": 4,
+      "question": "Is there a maximum allowed length for the input string, or should very long strings be handled specially?",
+      "answer": "Not specified; no maximum length is stated.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Not specified; no maximum length is stated.",
+      "p1": 0.2897256314754486,
+      "p2": 0.32944363355636597,
+      "mean_p": 0.3095846325159073,
+      "delta": 0.06276147812604904
+    }
+  ],
+  "top3": [
+    {
+      "idx": 3,
+      "question": "Must the function treat the input as a sequence of matched pairs, i.e., does each '<' need a corresponding later '>'?",
+      "answer": "Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.",
+      "delta": -0.05558288097381592
+    },
+    {
+      "idx": 1,
+      "question": "Is the function expected to return a boolean value (True/False) or could it raise exceptions for invalid input?",
+      "answer": "Returns a boolean True/False; no exceptions are raised.",
+      "delta": -0.023472070693969727
+    },
+    {
+      "idx": 0,
+      "question": "Should an empty string be considered properly closed and thus return True?",
+      "answer": "Yes, an empty string is properly closed (the depth counter stays at 0 throughout, vacuously balanced) -- returns True.",
+      "delta": -0.020330578088760376
+    }
+  ],
+  "chosen": {
+    "idx": 3,
+    "question": "Must the function treat the input as a sequence of matched pairs, i.e., does each '<' need a corresponding later '>'?",
+    "answer": "Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.",
+    "delta": -0.05558288097381592
+  },
+  "next_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n\nClarification: Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.",
+  "code_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly, yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts. Yes -- per the reference implementation, each '<' increments a depth counter and each '>' decrements it; a '>' appearing before its matching '<' (making depth negative) immediately makes the result False, so ordering/nesting matters, not just raw counts.\n    \"\"\"",
+  "test_n_pass": 12,
+  "test_n_total": 12
+}

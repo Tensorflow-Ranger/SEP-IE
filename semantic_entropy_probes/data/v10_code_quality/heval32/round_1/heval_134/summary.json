@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''",
+  "baseline_mean_p": 0.9301982522010803,
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "How is a character considered \"closely associated with a word\"?",
+      "answer": "Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.",
+      "p1": 0.4985627233982086,
+      "p2": 0.42755886912345886,
+      "mean_p": 0.46306079626083374,
+      "delta": -0.4671374559402466
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior if the string ends with a letter followed by a punctuation mark?",
+      "answer": "The trailing punctuation becomes part of the last space-separated token; unless that token is exactly one alphabetic character, the function returns False (e.g. \"hi e.\" -> last token \"e.\" has length 2, not a valid standalone letter, so False).",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: The trailing punctuation becomes part of the last space-separated token; unless that token is exactly one alphabetic character, the function returns False (e.g. \"hi e.\" -> last token \"e.\" has length 2, not a valid standalone letter, so False).",
+      "p1": 0.7788856625556946,
+      "p2": 0.5697100758552551,
+      "mean_p": 0.6742978692054749,
+      "delta": -0.25590038299560547
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle empty strings or strings with no last character?",
+      "answer": "Return False for an empty string (per the reference's own example: check_if_last_char_is_a_letter(\"\") -> False).",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Return False for an empty string (per the reference's own example: check_if_last_char_is_a_letter(\"\") -> False).",
+      "p1": 0.7568632364273071,
+      "p2": 0.6554154753684998,
+      "mean_p": 0.7061393558979034,
+      "delta": -0.22405889630317688
+    },
+    {
+      "idx": 4,
+      "question": "Are non-ASCII alphabetical characters (e.g., accented letters) considered valid?",
+      "answer": "No -- the check 97 <= ord(check.lower()) <= 122 only covers plain ASCII a-z; accented/non-ASCII letters fall outside this range and would return False.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: No -- the check 97 <= ord(check.lower()) <= 122 only covers plain ASCII a-z; accented/non-ASCII letters fall outside this range and would return False.",
+      "p1": 0.7820701599121094,
+      "p2": 0.6733732223510742,
+      "mean_p": 0.7277216911315918,
+      "delta": -0.20247656106948853
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle uppercase letters?",
+      "answer": "They are handled via check.lower() before the ord range check, so uppercase letters are treated the same as their lowercase equivalents (both valid).",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: They are handled via check.lower() before the ord range check, so uppercase letters are treated the same as their lowercase equivalents (both valid).",
+      "p1": 0.7938902974128723,
+      "p2": 0.6883249282836914,
+      "mean_p": 0.7411076128482819,
+      "delta": -0.18909063935279846
+    },
+    {
+      "idx": 0,
+      "question": "What defines an \"alphabetical character\" in this context?",
+      "answer": "A character c such that 97 <= ord(c.lower()) <= 122, i.e. a-z after lowercasing -- standard ASCII letters.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: A character c such that 97 <= ord(c.lower()) <= 122, i.e. a-z after lowercasing -- standard ASCII letters.",
+      "p1": 0.8212970495223999,
+      "p2": 0.6656362414360046,
+      "mean_p": 0.7434666454792023,
+      "delta": -0.18673160672187805
+    },
+    {
+      "idx": 5,
+      "question": "What is the expected behavior if the string ends with a letter but is part of a larger word?",
+      "answer": "Return False -- e.g. \"apple pie\" ends in 'e' but the last token \"pie\" has length 3, not 1, so it's considered part of a word, not standalone.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Return False -- e.g. \"apple pie\" ends in 'e' but the last token \"pie\" has length 3, not 1, so it's considered part of a word, not standalone.",
+      "p1": 0.8598120808601379,
+      "p2": 0.6823242902755737,
+      "mean_p": 0.7710681855678558,
+      "delta": -0.1591300666332245
+    },
+    {
+      "idx": 2,
+      "question": "What constitutes a \"word\" in the context of this function?",
+      "answer": "Per the reference solution's own note: \"a group of characters separated by space\" -- i.e. txt.split(' ') tokens.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Per the reference solution's own note: \"a group of characters separated by space\" -- i.e. txt.split(' ') tokens.",
+      "p1": 0.8393440246582031,
+      "p2": 0.7299143075942993,
+      "mean_p": 0.7846291661262512,
+      "delta": -0.1455690860748291
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "How is a character considered \"closely associated with a word\"?",
+      "answer": "Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.",
+      "delta": -0.4671374559402466
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior if the string ends with a letter followed by a punctuation mark?",
+      "answer": "The trailing punctuation becomes part of the last space-separated token; unless that token is exactly one alphabetic character, the function returns False (e.g. \"hi e.\" -> last token \"e.\" has length 2, not a valid standalone letter, so False).",
+      "delta": -0.25590038299560547
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle empty strings or strings with no last character?",
+      "answer": "Return False for an empty string (per the reference's own example: check_if_last_char_is_a_letter(\"\") -> False).",
+      "delta": -0.22405889630317688
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "How is a character considered \"closely associated with a word\"?",
+    "answer": "Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.",
+    "delta": -0.4671374559402466
+  },
+  "next_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.",
+  "code_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False. and False otherwise.\n    '''",
+  "test_n_pass": 10,
+  "test_n_total": 10
+}

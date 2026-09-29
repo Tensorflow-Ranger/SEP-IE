@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''",
+  "candidates": [
+    {
+      "idx": 10,
+      "question": "Should the function treat the list as sorted when all elements are equal (e.g., `[5, 5, 5]`), given the duplicate rule?",
+      "answer": "No; [5, 5, 5] has three of the same value, which violates the 'no more than 2 duplicates' rule, so it returns False.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. No; [5, 5, 5] has three of the same value,\n    which violates the 'no more than 2 duplicates' rule, so it returns False.\n    Assume no negative numbers and only integers.\n    '''",
+      "score": -7.40308952331543
+    },
+    {
+      "idx": 2,
+      "question": "How should the function treat duplicate values that appear exactly twice versus more than twice\u2014does any duplicate at all cause a False result?",
+      "answer": "Duplicates are allowed up to a count of 2; if any value appears more than twice, return False.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Duplicates are allowed up to a count of 2; if any value appears more than twice, return False. Assume no negative numbers and only integers.\n    '''",
+      "score": -8.155088424682617
+    },
+    {
+      "idx": 1,
+      "question": "Are lists with a single element or an empty list considered sorted, and what should the function return for them?",
+      "answer": "Yes, both single-element and empty lists are considered sorted and return True.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers. Yes, both single-element and empty lists are considered sorted and return True.\n    '''",
+      "score": -10.765966415405273
+    },
+    {
+      "idx": 11,
+      "question": "In the presence of duplicate numbers that are not adjacent, does their position affect the result, or is any repetition sufficient to return `False`?",
+      "answer": "Non-adjacent duplicates still count toward the total; if any value appears more than twice anywhere, return False.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, non-adjacent duplicates still count toward the total; if any value appears more than twice anywhere, return False. Assume no negative numbers and only integers.\n    '''",
+      "score": -12.085424423217773
+    },
+    {
+      "idx": 3,
+      "question": "Must the list be sorted according to the natural numeric order, or can a custom comparator (e.g., absolute value) be used?",
+      "answer": "Natural numeric order (standard less-than-or-equal comparison) is used.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in natural numeric order (standard less-than-or-equal comparison)\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''",
+      "score": -12.674958229064941
+    },
+    {
+      "idx": 0,
+      "question": "Should the function consider a list sorted if it is in strictly increasing order, strictly decreasing order, or either direction?",
+      "answer": "The list must be in ascending (non-decreasing) order only; descending order is not valid.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending (non-decreasing) order only; descending order is not valid.\n    If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''",
+      "score": -12.913287162780762
+    },
+    {
+      "idx": 9,
+      "question": "Are there any performance constraints (e.g., must run in O(n) time) that affect how duplicates and ordering are checked?",
+      "answer": "Not specified; the solution is O(n).",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers. Not specified; the solution is O(n).\n    '''",
+      "score": -13.068772315979004
+    },
+    {
+      "idx": 6,
+      "question": "Should the function return a Boolean value (`True`/`False`) or a string representation (`'True'`/`'False'`), and must it be of a specific type?",
+      "answer": "Return a boolean True or False value.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    Return a boolean True or False value.\n    '''",
+      "score": -14.15184211730957
+    },
+    {
+      "idx": 8,
+      "question": "If the list contains `None` or other sentinel values mixed with numbers, is that considered invalid input, and what response is expected?",
+      "answer": "The problem assumes only integers; mixed types are not addressed.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    The problem assumes only integers; mixed types are not addressed.\n    '''",
+      "score": -14.55206298828125
+    },
+    {
+      "idx": 5,
+      "question": "Does the phrase \u201csorted in an order\u201d require the entire list to follow the same monotonic direction, or can it be partially sorted (e.g., ascending then descending) and still be considered sorted?",
+      "answer": "The entire list must be strictly ascending; any descending portion returns False.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in strictly ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''",
+      "score": -15.690113067626953
+    },
+    {
+      "idx": 4,
+      "question": "If the list contains non\u2011integer numeric types such as floats, should the function raise an error, coerce them, or treat them as valid input?",
+      "answer": "The problem states 'Assume no negative numbers and only integers'; non-integers are not addressed.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers; non-integers are not addressed.\n    '''",
+      "score": -16.50460433959961
+    },
+    {
+      "idx": 7,
+      "question": "How should the function behave when the input is not a list but another iterable (e.g., tuple, generator) containing numbers?",
+      "answer": "Not specified; the solution assumes a list is passed.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    Not specified; the solution assumes a list is passed.\n    '''",
+      "score": -16.86507797241211
+    }
+  ],
+  "chosen": {
+    "idx": 10,
+    "question": "Should the function treat the list as sorted when all elements are equal (e.g., `[5, 5, 5]`), given the duplicate rule?",
+    "answer": "No; [5, 5, 5] has three of the same value, which violates the 'no more than 2 duplicates' rule, so it returns False.",
+    "score": -7.40308952331543
+  },
+  "next_prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. No; [5, 5, 5] has three of the same value,\n    which violates the 'no more than 2 duplicates' rule, so it returns False.\n    Assume no negative numbers and only integers.\n    '''",
+  "test_n_pass": 13,
+  "test_n_total": 13
+}

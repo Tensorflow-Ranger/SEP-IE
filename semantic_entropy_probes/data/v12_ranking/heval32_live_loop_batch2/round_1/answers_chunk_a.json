@@ -1,0 +1,178 @@
+{
+  "heval_113": {
+    "answers": [
+      "No, the function should not treat the list as mutable; it should return a new list. The input list is not modified.",
+      "Not specified by the problem; the problem only mentions strings that consist of digits, so non-digit characters shouldn't appear in the input.",
+      "An empty string should be treated as having zero odd digits, contributing 0 to the count in that position.",
+      "Yes, leading zeros are treated as digits (the digit '0' is even, so they are counted as even, not odd).",
+      "Yes, the output list must preserve the original ordering of the input strings; the i-th position in the output corresponds to the i-th string in the input.",
+      "The function should return strings, where each string is the template 'the number of odd elements Xn the strXng X of the XnputY' with X replaced by the count of odd digits.",
+      "If the input list itself is empty, the function should return an empty list.",
+      "Negative numbers represented with a leading '-' are not a concern because the input only consists of strings of digits, not signed numbers.",
+      "The replacement uses the actual count value itself, not an index. Each instance of 'i' gets replaced by the count n of odd digits in the corresponding string.",
+      "Duplicate strings should each be processed independently and contribute a result based on their own count of odd digits.",
+      "Whitespace should not appear in the input since each string consists only of digits.",
+      "There is no limit on the count value; arbitrarily long strings of digits are supported and produce the corresponding replacement count."
+    ]
+  },
+  "heval_125": {
+    "answers": [
+      "Whitespace includes spaces, tabs, and newlines. When the function checks for whitespace, it uses Python's standard definition that includes these and other Unicode whitespace characters.",
+      "If the input contains both whitespace and commas, the function always splits on whitespace first. The fallback to commas only occurs when no whitespace is present.",
+      "The specific character for the fallback is a comma ','.",
+      "Consecutive occurrences of a splitting character produce a list without empty strings; they are effectively skipped.",
+      "Leading or trailing whitespace or splitting characters do not generate empty strings—they are simply removed during the split.",
+      "When no whitespace or splitting characters are found, the function should return an integer (the count), not a list containing an integer.",
+      "The function counts only lowercase letters 'a'-'z', not Unicode lowercase letters.",
+      "Uppercase letters are ignored entirely in the odd-order count; only lowercase 'a'-'z' are considered.",
+      "Non-alphabetic characters (digits, symbols) are ignored when counting odd-order lowercase letters; they do not cause an error.",
+      "If the input string is empty, the function should return 0.",
+      "The function should preserve the original order of words/segments in the returned list.",
+      "For mixed-type input, the function should raise a TypeError if it cannot be processed as a string."
+    ]
+  },
+  "heval_129": {
+    "answers": [
+      "A minimum path of length k refers to the path whose sequence of cell values, when listed in order, is lexicographically smallest (starting from the cell value 1).",
+      "A path of length k means visiting exactly k cells; this counts the starting cell as the first, so you move k-1 times.",
+      "Cells are allowed to be revisited within the same path, and each visit contributes its value again to the path's total and the ordered list.",
+      "Only the four orthogonal neighbors (up, down, left, right) are considered adjacent; diagonal neighbors are not.",
+      "The specific path returned is the one that is lexicographically smallest in its ordered list of cell values.",
+      "The function should return an ordered list of the values on the cells that the minimum path traverses.",
+      "The grid is guaranteed to be square (N×N).",
+      "Grid values are positive integers guaranteed to be in the range [1, N*N]. They can be any positive integer within that range.",
+      "The grid is guaranteed to satisfy the condition that every integer in [1, N*N] appears exactly once; validation is not needed.",
+      "There is no restriction on the starting cell; it can be any cell regardless of its value.",
+      "If k is larger than the total number of cells N*N, the algorithm handles revisiting cells multiple times to form the path.",
+      "There are implicit time and memory constraints as part of the problem specification; efficient algorithms are expected."
+    ]
+  },
+  "heval_134": {
+    "answers": [
+      "An alphabetical character is defined as ASCII letters A-Z and a-z only; Unicode letters such as accented characters are not included.",
+      "An empty string should return False.",
+      "A character is 'not a part of a word' means it is not in a word group. A word is defined as a group of characters separated by space, so the last character after the last space must be a single alphabetical character (isolated by spaces).",
+      "A combining diacritic after a letter does not make it a single alphabetical character; it requires exactly one letter character.",
+      "Whitespace at the end should be ignored; the function should look at the last non-whitespace character within word context.",
+      "Multi-code-unit Unicode characters are not supported; only single ASCII letters are recognized.",
+      "If the string ends with a symbol visually attached to a word (e.g., 'hello!'), the symbol is not an alphabetical character and the check fails.",
+      "Emojis and pictographic symbols are not considered alphabetical characters.",
+      "Characters from right-to-left scripts are not treated differently; the function only recognizes ASCII letters A-Z/a-z.",
+      "A combining mark without a base letter is not considered a letter and does not satisfy the condition.",
+      "The function should validate that the input is a string and return False if it is not a valid string type.",
+      "Invisible formatting characters at the end (zero-width joiner, zero-width space) are ignored; they do not affect the result."
+    ]
+  },
+  "heval_138": {
+    "answers": [
+      "A positive even number must be strictly greater than zero; 0 and negative evens are excluded.",
+      "The number must be written as the sum of exactly 4 positive even numbers; no other quantity is allowed.",
+      "Yes, the same even number can be used multiple times in the sum (e.g., 2+2+2+2=8).",
+      "Yes, the trivial representation where n itself is a single even number is considered valid if n is even and can be expressed as 4 positive even numbers.",
+      "Yes, 2 can be used repeatedly; in fact, any positive even number can be used. For example, 8 = 2+2+2+2.",
+      "The order of summands does not matter; the sum is unordered.",
+      "The function should return a Boolean value (True or False).",
+      "If n is not an integer, the function should return False.",
+      "For very large integers, arbitrarily large sums can be represented without overflow concerns.",
+      "For non-numeric inputs, the function should return False.",
+      "n = 0 cannot be expressed as a sum of 4 positive even numbers (since positive means > 0), so it should return False.",
+      "Negative even numbers are always disallowed; only positive even numbers can be used."
+    ]
+  },
+  "heval_14": {
+    "answers": [
+      "No, the returned list should not include the empty string; prefixes start from length 1 (the first character).",
+      "Yes, the function must preserve the original string's case and Unicode characters exactly in each prefix.",
+      "Prefixes should be cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing.",
+      "The function should raise a TypeError for non-string inputs (None, bytes, etc.).",
+      "Yes, the order is strictly from shortest to longest, and the full string is included as the final element.",
+      "Newlines and other whitespace characters are considered part of the prefixes.",
+      "For very large strings, returning a full list is acceptable; generators are not required.",
+      "Duplicate prefixes should not be removed; if the input is 'aaa', the output is ['a', 'aa', 'aaa'].",
+      "In UTF-16 encoded strings, surrogate pairs should not be split; however, Python 3 handles this automatically.",
+      "Only the `str` type is accepted; other sequence types like bytes are rejected.",
+      "There are no specific performance or memory complexity guarantees beyond standard list generation.",
+      "Leading and trailing whitespace are treated as significant and included in prefixes; they are not trimmed."
+    ]
+  },
+  "heval_140": {
+    "answers": [
+      "Only the literal space character ' ' is replaced; other whitespace characters like tabs and newlines are left unchanged.",
+      "If the input `text` is not a string, the function should raise an error.",
+      "The function should return the same type as the input; if a `str` is passed, a `str` is returned.",
+      "Consecutive spaces are each replaced individually with underscores; so two spaces become two underscores '__'.",
+      "If the input string already contains underscores, they are left unchanged; no special treatment to avoid double underscores.",
+      "Both leading and trailing spaces are replaced with underscores; they are not trimmed.",
+      "Only the ASCII space ' ' is considered; Unicode spaces like non-breaking space are not replaced.",
+      "The function should return a new string, leaving the input unchanged.",
+      "An O(n) copy algorithm is acceptable; streaming or in-place algorithms are not required.",
+      "The function should handle surrogate pairs and combining characters correctly without breaking grapheme clusters.",
+      "There are no constraints on the maximum length of the output string; arbitrarily large outputs are acceptable.",
+      "The function is locale-agnostic; only the ASCII space character is treated as a space to replace."
+    ]
+  },
+  "heval_142": {
+    "answers": [
+      "The function should return the sum of all transformed values (or equivalently, return a single integer, not a list).",
+      "List indices are zero-based (starting at 0); index 0, 3, 6, 9, etc. are multiples of 3.",
+      "If an index is a multiple of both 3 and 4 (e.g., 0, 12, 24), squaring takes precedence because the condition for squaring (index % 3 == 0) is checked first.",
+      "Non-integer elements should be handled according to their type; if they are floats, they can be squared or cubed. The problem assumes list contains integers.",
+      "The input is expected to be a Python list specifically; other sequence types may not be accepted.",
+      "Negative indices (Python's negative indexing) are not considered; only non-negative indices 0, 1, 2, ... are checked.",
+      "An empty list should return 0 (the sum of an empty set is zero).",
+      "If duplicate values appear at different indices, each occurrence is processed independently based on its own index.",
+      "Python's arbitrary-precision integers handle any size; overflow is not a concern.",
+      "The function should preserve the original ordering by returning a single sum, not a reordered list.",
+      "Yes, the interpretation is exactly as stated: index % 3 == 0 for squaring, and index % 4 == 0 and index % 3 != 0 for cubing.",
+      "For indices that satisfy neither condition, the original value is included unchanged in the sum."
+    ]
+  },
+  "heval_145": {
+    "answers": [
+      "The function should return a new sorted list; the original input list is not modified.",
+      "Numbers with the same digit sum should maintain their original relative order; sorting must be stable.",
+      "Negative integers are allowed, but the minus sign is not counted as a digit. Only the digits of the absolute value are summed, then the sign of the first digit is negated.",
+      "The function should handle only integer types in the input list; non-integers should raise an error or be skipped.",
+      "Lists are the expected input type; other iterables like tuples or generators may not be accepted.",
+      "Yes, the sorting should be stable, preserving the original relative order of elements with equal digit sums.",
+      "The integer 0 has a digit sum of 0.",
+      "An empty list should return an empty list.",
+      "No specific size or performance constraints are documented beyond standard sorting.",
+      "The digit sum is computed exclusively in base-10.",
+      "Very large integers do not cause overflow; Python handles arbitrary-precision arithmetic.",
+      "The function should validate that input elements are integers and raise a TypeError if invalid elements are found."
+    ]
+  },
+  "heval_148": {
+    "answers": [
+      "Yes, planet name strings are case-sensitive; 'Earth' is valid but 'earth' is not.",
+      "Only the eight planet names (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune) are considered valid; abbreviations and alternative names are not accepted.",
+      "If planet1 and planet2 are the same planet, the function should return an empty tuple.",
+      "The returned tuple should list planets in ascending order from the Sun outward (smallest orbit index to largest), regardless of the input order.",
+      "The returned tuple must contain only the planets strictly between the two given planets, excluding the endpoints.",
+      "Leading/trailing whitespace in planet names should be handled by rejecting them as invalid; they must match exactly.",
+      "If either input is not a string (None, integer, etc.), the function should return an empty tuple.",
+      "The function should validate that inputs are exactly the standard eight planet names; synonyms like 'the Earth' are not acceptable.",
+      "The tuple should always be sorted in ascending order from the Sun outward, so if planet1 = 'Neptune' and planet2 = 'Mars', the result is sorted accordingly.",
+      "The tuple should contain planet names as strings in their canonical form (e.g., 'Mercury', 'Venus'), identical to the standard planet name format.",
+      "The function treats orbital positions as a strict linear ordering; retrograde motion and other astronomical nuances are ignored.",
+      "If one argument is valid and the other is an empty string (an invalid name), return an empty tuple."
+    ]
+  },
+  "heval_151": {
+    "answers": [
+      "A valid odd number must be a positive odd integer; negative odd integers and non-integer odd values are not valid.",
+      "Non-numeric elements (strings, None, complex numbers) should cause the function to return 0 or skip them; negative numbers are skipped.",
+      "Floating-point numbers like 3.0 are not treated as valid odd integers; only true integers are valid.",
+      "NaN or infinite values should be skipped or cause the function to return 0.",
+      "The sum of squares is computed using exact arithmetic; Python's arbitrary-precision integers handle any result size.",
+      "The order of elements in the list does not affect the result; order is irrelevant.",
+      "Each occurrence of a valid odd number is squared and summed separately; duplicates are not deduplicated.",
+      "Zero and other even numbers explicitly contribute zero to the sum (by being excluded, not included).",
+      "A subclass of list that supports iteration is accepted; no additional protocol requirements are needed.",
+      "For a non-iterable argument, the function should return 0.",
+      "The function should return an integer type.",
+      "In the example double_the_difference([1, 3, 2, 0]), the 2 and 0 (even numbers) do not contribute to the sum; only the odd numbers 1 and 3 contribute 1^2 + 3^2 = 10."
+    ]
+  }
+}

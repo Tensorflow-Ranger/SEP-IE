@@ -1,0 +1,10 @@
+{
+  "round": 2,
+  "baseline_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A 'boredom' is specifically a sentence that starts with the word 'I' (as its own word, e.g. 'I am...'), where sentences are delimited by '.', '?', or '!'. It is not about emotional tone or repeated words -- it's this literal starts-with-'I' rule.",
+  "question": "What constitutes a valid sentence delimiter in the context of this function?",
+  "answer": "Per the true spec, sentences are delimited by '.', '?', or '!' (re.split(r'[.?!]\\s*', S)); a 'boredom' is specifically a sentence, after that split, whose first two characters are 'I ' (capital I followed by a space) -- not any vaguer notion of monotony or repetition.",
+  "next_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A 'boredom' is specifically a sentence that starts with the word 'I' (as its own word, e.g. 'I am...'), where sentences are delimited by '.', '?', or '!'. It is not about emotional tone or repeated words -- it's this literal starts-with-'I' rule.\n\nClarification: Per the true spec, sentences are delimited by '.', '?', or '!' (re.split(r'[.?!]\\s*', S)); a 'boredom' is specifically a sentence, after that split, whose first two characters are 'I ' (capital I followed by a space) -- not any vaguer notion of monotony or repetition.",
+  "code_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?', or '!' (re.split(r'[.?!]\\s*', S));\n    and a 'boredom' is specifically a sentence, after that split, whose first two characters\n    are 'I ' (capital I followed by a space) -- not any vaguer notion of monotony or repetition.\n    \"\"\"",
+  "test_n_pass": 6,
+  "test_n_total": 6
+}

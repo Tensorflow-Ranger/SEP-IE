@@ -1,0 +1,162 @@
+{
+  "heval_1": {
+    "answers": [
+      "A 'balanced' group is the maximal contiguous span where the running open/close depth starts at 0, goes to 1 on the first '(', and returns to exactly 0 -- tracked via a simple depth counter that never needs to go negative in between; nested parentheses inside that span belong to the same group, not separate ones."
+    ]
+  },
+  "heval_14": {
+    "answers": [
+      "For an empty input string, the loop over range(len(string)) never executes, so the function returns an empty list []."
+    ]
+  },
+  "heval_16": {
+    "answers": [
+      "Yes -- the entire string is lowercased via string.lower() before counting, with no special-casing for non-alphabetic characters; they're simply included in the lowercased set like any other character (lowercasing has no effect on digits/symbols, but they're still counted as distinct elements)."
+    ]
+  },
+  "heval_19": {
+    "answers": [
+      "For an empty input string, splitting and filtering produces an empty list, and ' '.join([]) returns the empty string \"\"."
+    ]
+  },
+  "heval_29": {
+    "answers": [
+      "Yes, case-sensitive -- the check is Python's str.startswith(prefix), which does no case normalization."
+    ]
+  },
+  "heval_31": {
+    "answers": [
+      "The function returns False for any n < 2, which covers both zero and all negative numbers."
+    ]
+  },
+  "heval_40": {
+    "answers": [
+      "Yes, the list can contain duplicate values -- 'distinct' refers to distinct INDICES (i < j < k), not distinct values, so two equal values at different positions are treated as separate elements and can both be used in a valid triple."
+    ]
+  },
+  "heval_53": {
+    "answers": [
+      "Not applicable -- the function signature declares x: int, y: int and the input is guaranteed to be two integers; non-integer inputs aren't a specified case."
+    ]
+  },
+  "heval_52": {
+    "answers": [
+      "For an empty list, the loop over the list never executes, so the function falls through to return True."
+    ]
+  },
+  "heval_56": {
+    "answers": [
+      "There's no explicit pairing/stack tracking of individual brackets -- 'matching' is defined purely by a running depth counter (+1 per '<', -1 per '>') that must never go negative and must end at exactly 0. Any arrangement satisfying that depth invariant counts as correctly bracketed, regardless of how many opens are unmatched at an intermediate point."
+    ]
+  },
+  "heval_59": {
+    "answers": [
+      "If n is a power of a single prime p (e.g. n=8=2^3), that prime p is n's only prime factor and is therefore also its largest -- the reference example confirms this: largest_prime_factor(2048) (2048=2^11) returns 2."
+    ]
+  },
+  "heval_64": {
+    "answers": [
+      "Not applicable / undefined -- the reference implementation accesses s[-1] unconditionally, which raises an IndexError on an empty string; an empty-string call is not a supported case for this function."
+    ]
+  },
+  "heval_80": {
+    "answers": [
+      "If the string has fewer than 3 characters, the function returns False immediately (len(s) < 3 check)."
+    ]
+  },
+  "heval_91": {
+    "answers": [
+      "Neither counts as a boredom -- the check is sentence[0:2] == 'I ' (exact match on the first two characters), which requires an uppercase 'I' followed immediately by a space. A lowercase 'i ' does not match (case-sensitive), and 'I' followed by a non-space character (e.g. 'Ice...') also does not match, since the second character must literally be a space."
+    ]
+  },
+  "heval_104": {
+    "answers": [
+      "A 'digit' is one character of the number's base-10 string representation (str(i)), each converted back to int and checked for parity individually."
+    ]
+  },
+  "heval_109": {
+    "answers": [
+      "A single-element array is trivially already sorted (a right shift moves the one element to the same position it started in), so the function should return True -- consistent with the spec's explicit note that an empty array also returns True."
+    ]
+  },
+  "heval_110": {
+    "answers": [
+      "There are no positional/pairing rules -- the check is a pure count comparison: count odd elements in lst1 and even elements in lst2, and return \"YES\" if lst2 has at least as many even elements as lst1 has odd elements. Any assignment of which specific elements get swapped works, as long as enough even replacements exist in lst2; there's no requirement that exchanges be one-to-one by position."
+    ]
+  },
+  "heval_113": {
+    "answers": [
+      "Not applicable -- the function's contract guarantees a list of strings where each string consists of only digit characters; non-string elements aren't part of the guaranteed input domain (int(d) would raise for such elements)."
+    ]
+  },
+  "heval_125": {
+    "answers": [
+      "Priority order, checked in this exact sequence: split on whitespace if any exists; otherwise split on commas if any exist; otherwise (neither present) fall back to counting lowercase letters at odd alphabet positions. It's a strict if/elif/else chain, not a combined or weighted rule."
+    ]
+  },
+  "heval_126": {
+    "answers": [
+      "Any occurrence anywhere in the list counts, not just consecutive ones -- the reference counts each value's TOTAL occurrences across the whole list, and returns False if any value occurs more than twice (i.e. 3 or more times) anywhere, regardless of position."
+    ]
+  },
+  "heval_129": {
+    "answers": [
+      "Yes -- per the specification, 'a path of length k means visiting exactly k cells (not necessarily distinct)', so a cell can be visited more than once within the same path."
+    ]
+  },
+  "heval_130": {
+    "answers": [
+      "tri(0) returns [1] -- the function has an explicit base case `if n == 0: return [1]`, so the single value at index 0 is 1."
+    ]
+  },
+  "heval_134": {
+    "answers": [
+      "Only the literal space character is treated as a word boundary -- 'word' is explicitly defined as \"a group of characters separated by space\" (txt.split(' ')); no other character (punctuation, tabs, etc.) is treated as a separator."
+    ]
+  },
+  "heval_138": {
+    "answers": [
+      "Yes, n can be negative or zero -- the check is `n % 2 == 0 and n >= 8`, so any n below 8 (including all negative numbers and zero) simply returns False via the normal condition, with no special-case handling or error."
+    ]
+  },
+  "heval_140": {
+    "answers": [
+      "Each maximal run of consecutive spaces is processed independently, since encountering any non-space character resets the run-tracking. Two separate runs of exactly 2 spaces each, separated by a non-space character, are each converted independently to two underscores (\"__\") per run (the >2 threshold for the hyphen rule is evaluated per-run, not cumulatively across runs)."
+    ]
+  },
+  "heval_142": {
+    "answers": [
+      "They get squared, not cubed -- the check order is `if i % 3 == 0: square elif i % 4 == 0 and i % 3 != 0: cube`, so any index that's a multiple of 3 (which includes every multiple of 12) is squared by the first branch; the cube branch explicitly excludes indices divisible by 3, so a multiple-of-12 index can never reach it."
+    ]
+  },
+  "heval_145": {
+    "answers": [
+      "Not applicable -- Python's str(n) for an integer never produces leading zeros, so this case doesn't arise; the digit sum is simply the sum of the digit characters of the standard decimal representation of abs(n), with the sign applied to the first digit."
+    ]
+  },
+  "heval_147": {
+    "answers": [
+      "A 'triple' is any selection of three distinct 1-based INDICES i < j < k (not values) from the array a of length n, using the values a[i], a[j], a[k] found at those positions; i < j < k is a strict ordering constraint on the indices themselves."
+    ]
+  },
+  "heval_148": {
+    "answers": [
+      "The function returns an empty tuple -- it locates the index of each planet in the fixed ordered tuple and returns the planets strictly between those two indices; if planet1 and planet2 are the same planet, that 'between' range is empty."
+    ]
+  },
+  "heval_150": {
+    "answers": [
+      "Per the literal reference code: n == 1 returns y explicitly. For any other n < 2 (i.e. n <= 0), the for-loop over range(2, n) is empty, so execution falls through to the loop's else-clause and returns x -- not y -- even though 0 and negative numbers aren't prime; that's simply what the reference implementation does."
+    ]
+  },
+  "heval_151": {
+    "answers": [
+      "Booleans: since bool is a subclass of int in Python (True == 1, False == 0), True satisfies i > 0, i % 2 != 0, and has no '.' in str(True), so it IS included and squared as if it were 1 (False is excluded since False > 0 is False). Complex numbers: the comparison i > 0 raises a TypeError for complex values, since complex numbers don't support ordering in Python -- complex inputs are not a supported case and would crash the reference implementation."
+    ]
+  },
+  "heval_163": {
+    "answers": [
+      "Not officially defined -- the spec guarantees a and b are positive integers. The reference code itself would still run without erroring on other numeric input (it just clamps lower=max(2,min(a,b)) and upper=min(8,max(a,b)) regardless of sign), but that behavior isn't part of the documented contract."
+    ]
+  }
+}

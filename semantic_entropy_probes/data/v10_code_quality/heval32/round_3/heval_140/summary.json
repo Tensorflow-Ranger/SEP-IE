@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.",
+  "baseline_mean_p": 0.11857616156339645,
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "How does the function handle spaces that are part of special syntax in the input text?",
+      "answer": "Not applicable -- the function has no concept of syntax; it processes the string purely character-by-character.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.\n\nClarification: Not applicable -- the function has no concept of syntax; it processes the string purely character-by-character.",
+      "p1": 0.11935538798570633,
+      "p2": 0.18113240599632263,
+      "mean_p": 0.15024389699101448,
+      "delta": 0.03166773542761803
+    },
+    {
+      "idx": 4,
+      "question": "Is the replacement case-sensitive for space characters?",
+      "answer": "Not applicable -- the space character has no case; this concern only applies to letters.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.\n\nClarification: Not applicable -- the space character has no case; this concern only applies to letters.",
+      "p1": 0.12385637313127518,
+      "p2": 0.189244344830513,
+      "mean_p": 0.1565503589808941,
+      "delta": 0.037974197417497635
+    },
+    {
+      "idx": 3,
+      "question": "How does the function handle spaces that are part of escape sequences (e.g., \\ )?",
+      "answer": "Not applicable -- the function only checks for the literal space character ' '; backslashes are treated as ordinary characters.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.\n\nClarification: Not applicable -- the function only checks for the literal space character ' '; backslashes are treated as ordinary characters.",
+      "p1": 0.1310642659664154,
+      "p2": 0.2088456004858017,
+      "mean_p": 0.16995493322610855,
+      "delta": 0.0513787716627121
+    },
+    {
+      "idx": 6,
+      "question": "Does the function replace spaces within strings enclosed in quotes (e.g., \"hello world\")?",
+      "answer": "Not applicable/no special casing -- quote characters are just ordinary characters, spaces inside quoted sections are processed identically to any other spaces.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.\n\nClarification: Not applicable/no special casing -- quote characters are just ordinary characters, spaces inside quoted sections are processed identically to any other spaces.",
+      "p1": 0.15209682285785675,
+      "p2": 0.20422030985355377,
+      "mean_p": 0.17815856635570526,
+      "delta": 0.05958240479230881
+    },
+    {
+      "idx": 0,
+      "question": "Does the function replace multiple consecutive spaces with multiple underscores?",
+      "answer": "Only for runs of EXACTLY 1 or 2 consecutive spaces (replaced with that same number of underscores); runs of MORE than 2 spaces are replaced with a single '-' instead.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.\n\nClarification: Only for runs of EXACTLY 1 or 2 consecutive spaces (replaced with that same number of underscores); runs of MORE than 2 spaces are replaced with a single '-' instead.",
+      "p1": 0.1551305055618286,
+      "p2": 0.20626574754714966,
+      "mean_p": 0.18069812655448914,
+      "delta": 0.06212196499109268
+    },
+    {
+      "idx": 5,
+      "question": "What if the input text contains Unicode space characters (e.g., U+00A0)?",
+      "answer": "Not applicable/not treated as spaces -- the check is `text[i] == \" \"` (the literal ASCII space), other Unicode whitespace characters are treated as ordinary non-space characters.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.\n\nClarification: Not applicable/not treated as spaces -- the check is `text[i] == \" \"` (the literal ASCII space), other Unicode whitespace characters are treated as ordinary non-space characters.",
+      "p1": 0.16193395853042603,
+      "p2": 0.2480778843164444,
+      "mean_p": 0.2050059214234352,
+      "delta": 0.08642975986003876
+    },
+    {
+      "idx": 2,
+      "question": "Are leading and trailing spaces in the input text replaced with underscores?",
+      "answer": "Yes, leading and trailing space runs are processed the same as any other run (per the docstring example ' Example 2' -> '_Example_2').",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.\n\nClarification: Yes, leading and trailing space runs are processed the same as any other run (per the docstring example ' Example 2' -> '_Example_2').",
+      "p1": 0.1998417228460312,
+      "p2": 0.3059491515159607,
+      "mean_p": 0.25289543718099594,
+      "delta": 0.1343192756175995
+    },
+    {
+      "idx": 1,
+      "question": "What happens if the input text is empty?",
+      "answer": "Returns an empty string.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.\n\nClarification: Returns an empty string.",
+      "p1": 0.6030930876731873,
+      "p2": 0.5765871405601501,
+      "mean_p": 0.5898401141166687,
+      "delta": 0.47126395255327225
+    }
+  ],
+  "top3": [
+    {
+      "idx": 7,
+      "question": "How does the function handle spaces that are part of special syntax in the input text?",
+      "answer": "Not applicable -- the function has no concept of syntax; it processes the string purely character-by-character.",
+      "delta": 0.03166773542761803
+    },
+    {
+      "idx": 4,
+      "question": "Is the replacement case-sensitive for space characters?",
+      "answer": "Not applicable -- the space character has no case; this concern only applies to letters.",
+      "delta": 0.037974197417497635
+    },
+    {
+      "idx": 3,
+      "question": "How does the function handle spaces that are part of escape sequences (e.g., \\ )?",
+      "answer": "Not applicable -- the function only checks for the literal space character ' '; backslashes are treated as ordinary characters.",
+      "delta": 0.0513787716627121
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "How does the function handle spaces that are part of special syntax in the input text?",
+    "answer": "Not applicable -- the function has no concept of syntax; it processes the string purely character-by-character.",
+    "delta": 0.03166773542761803
+  },
+  "next_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.\n\nClarification: Not applicable -- the function has no concept of syntax; it processes the string purely character-by-character.",
+  "code_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores. Not applicable -- the function has no concept of syntax; it processes the string purely character-by-character. Only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement. Other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n    \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 5
+}

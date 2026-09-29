@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.",
+  "baseline_mean_p": 0.24878983944654465,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "If two numbers have the same digit sum, how should they be ordered relative to each other?",
+      "answer": "Ordered by their original index in the input list -- explicitly noted: 'if there are several items with similar sum of their digits, order them based on their index in original list' (a stable sort).",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.\n\nClarification: Ordered by their original index in the input list -- explicitly noted: 'if there are several items with similar sum of their digits, order them based on their index in original list' (a stable sort).",
+      "p1": 0.16287052631378174,
+      "p2": 0.2803880572319031,
+      "mean_p": 0.2216292917728424,
+      "delta": -0.02716054767370224
+    },
+    {
+      "idx": 0,
+      "question": "Should the original list be modified in place or should a new sorted list be returned?",
+      "answer": "Returns a new sorted list -- `sorted()` does not mutate the input, so the original list is left unchanged.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.\n\nClarification: Returns a new sorted list -- `sorted()` does not mutate the input, so the original list is left unchanged.",
+      "p1": 0.20281942188739777,
+      "p2": 0.3058754503726959,
+      "mean_p": 0.25434743613004684,
+      "delta": 0.005557596683502197
+    },
+    {
+      "idx": 3,
+      "question": "Are leading zeros (e.g., the integer 007) considered, and if so, how do they affect the digit sum?",
+      "answer": "Not applicable; Python integers don't retain leading-zero notation (e.g. there's no literal 007 as an int), so this case doesn't occur.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.\n\nClarification: Not applicable; Python integers don't retain leading-zero notation (e.g. there's no literal 007 as an int), so this case doesn't occur.",
+      "p1": 0.23412664234638214,
+      "p2": 0.3256908059120178,
+      "mean_p": 0.2799087241292,
+      "delta": 0.031118884682655334
+    },
+    {
+      "idx": 6,
+      "question": "Is the sorting stable with respect to the original order of equal\u2011sum elements?",
+      "answer": "Yes, explicitly stable -- ties are broken by original index, consistent with the docstring note and Python's `sorted()` being a stable sort by default.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.\n\nClarification: Yes, explicitly stable -- ties are broken by original index, consistent with the docstring note and Python's `sorted()` being a stable sort by default.",
+      "p1": 0.23028331995010376,
+      "p2": 0.33221474289894104,
+      "mean_p": 0.2812490314245224,
+      "delta": 0.03245919197797775
+    },
+    {
+      "idx": 5,
+      "question": "Should the function raise an error for non\u2011integer elements, or simply ignore them?",
+      "answer": "Not specified/tested; guaranteed to be a list of integers per the signature.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.\n\nClarification: Not specified/tested; guaranteed to be a list of integers per the signature.",
+      "p1": 0.2437768131494522,
+      "p2": 0.34176406264305115,
+      "mean_p": 0.2927704378962517,
+      "delta": 0.04398059844970703
+    },
+    {
+      "idx": 7,
+      "question": "Are very large integers (beyond typical 32\u2011bit range) supported, and does their digit sum need special handling?",
+      "answer": "Not specified; Python integers handle arbitrary size natively, and the digit-sum computation via str() works regardless of magnitude.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.\n\nClarification: Not specified; Python integers handle arbitrary size natively, and the digit-sum computation via str() works regardless of magnitude.",
+      "p1": 0.2697542607784271,
+      "p2": 0.3269723951816559,
+      "mean_p": 0.2983633279800415,
+      "delta": 0.04957348853349686
+    },
+    {
+      "idx": 2,
+      "question": "How should negative integers be handled when calculating the sum of their digits?",
+      "answer": "Per the reference implementation, negative numbers have their digits summed using the absolute value, then only the leading (first) digit of that digit-sequence is negated before summing -- it's not simply 'ignore the sign' or 'negate the whole sum'.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.\n\nClarification: Per the reference implementation, negative numbers have their digits summed using the absolute value, then only the leading (first) digit of that digit-sequence is negated before summing -- it's not simply 'ignore the sign' or 'negate the whole sum'.",
+      "p1": 0.3406330645084381,
+      "p2": 0.37154385447502136,
+      "mean_p": 0.35608845949172974,
+      "delta": 0.10729862004518509
+    },
+    {
+      "idx": 4,
+      "question": "What should the function return when given an empty list?",
+      "answer": "Returns an empty list (confirmed by test case: [] -> []).",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.\n\nClarification: Returns an empty list (confirmed by test case: [] -> []).",
+      "p1": 0.32108816504478455,
+      "p2": 0.3991836607456207,
+      "mean_p": 0.36013591289520264,
+      "delta": 0.11134607344865799
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "If two numbers have the same digit sum, how should they be ordered relative to each other?",
+      "answer": "Ordered by their original index in the input list -- explicitly noted: 'if there are several items with similar sum of their digits, order them based on their index in original list' (a stable sort).",
+      "delta": -0.02716054767370224
+    },
+    {
+      "idx": 0,
+      "question": "Should the original list be modified in place or should a new sorted list be returned?",
+      "answer": "Returns a new sorted list -- `sorted()` does not mutate the input, so the original list is left unchanged.",
+      "delta": 0.005557596683502197
+    },
+    {
+      "idx": 3,
+      "question": "Are leading zeros (e.g., the integer 007) considered, and if so, how do they affect the digit sum?",
+      "answer": "Not applicable; Python integers don't retain leading-zero notation (e.g. there's no literal 007 as an int), so this case doesn't occur.",
+      "delta": 0.031118884682655334
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "If two numbers have the same digit sum, how should they be ordered relative to each other?",
+    "answer": "Ordered by their original index in the input list -- explicitly noted: 'if there are several items with similar sum of their digits, order them based on their index in original list' (a stable sort).",
+    "delta": -0.02716054767370224
+  },
+  "next_prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a list of integers.\n\nClarification: Ordered by their original index in the input list -- explicitly noted: 'if there are several items with similar sum of their digits, order them based on their index in original list' (a stable sort).",
+  "code_prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits. If there are several items with similar sum of their digits, order them based on their index in original list.\n    \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 6
+}

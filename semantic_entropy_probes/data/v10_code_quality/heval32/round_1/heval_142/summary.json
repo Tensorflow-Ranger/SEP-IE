@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"",
+  "baseline_mean_p": 0.3195057660341263,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Does the function consider 0 as a valid index for the multiple of 3 or 4 condition?",
+      "answer": "Yes -- index 0 is a multiple of both 3 and 4 (0 % 3 == 0), so per the \"multiple of 3\" branch (checked first), index 0's entry is squared.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: Yes -- index 0 is a multiple of both 3 and 4 (0 % 3 == 0), so per the \"multiple of 3\" branch (checked first), index 0's entry is squared.",
+      "p1": 0.1755528748035431,
+      "p2": 0.2749599814414978,
+      "mean_p": 0.22525642812252045,
+      "delta": -0.09424933791160583
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected output if the list contains non-numeric elements?",
+      "answer": "Not applicable -- the docstring guarantees \"a list of integers\".",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: Not applicable -- the docstring guarantees \"a list of integers\".",
+      "p1": 0.18684178590774536,
+      "p2": 0.28308409452438354,
+      "mean_p": 0.23496294021606445,
+      "delta": -0.08454282581806183
+    },
+    {
+      "idx": 5,
+      "question": "Are the operations applied in the order of checking for multiples of 3 first, then multiples of 4?",
+      "answer": "Yes -- the code checks `if i % 3 == 0` first (square), and only checks `elif i % 4 == 0 and i % 3 != 0` (cube) if the first condition was false.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: Yes -- the code checks `if i % 3 == 0` first (square), and only checks `elif i % 4 == 0 and i % 3 != 0` (cube) if the first condition was false.",
+      "p1": 0.24007759988307953,
+      "p2": 0.3136794865131378,
+      "mean_p": 0.2768785431981087,
+      "delta": -0.04262722283601761
+    },
+    {
+      "idx": 7,
+      "question": "How should the function handle indices that are multiples of 3 and 4 but not 12?",
+      "answer": "This case cannot occur -- an index that is a multiple of both 3 and 4 is, by definition, a multiple of 12 (their LCM); there's no index that's a multiple of both without being a multiple of 12.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: This case cannot occur -- an index that is a multiple of both 3 and 4 is, by definition, a multiple of 12 (their LCM); there's no index that's a multiple of both without being a multiple of 12.",
+      "p1": 0.2188083529472351,
+      "p2": 0.3550661504268646,
+      "mean_p": 0.28693725168704987,
+      "delta": -0.032568514347076416
+    },
+    {
+      "idx": 4,
+      "question": "How are indices treated if the list contains non-integer elements?",
+      "answer": "Not applicable -- indices always come from range(len(lst)) and are always plain integers; only the VALUES at those indices could vary, and the spec assumes a list of integers.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: Not applicable -- indices always come from range(len(lst)) and are always plain integers; only the VALUES at those indices could vary, and the spec assumes a list of integers.",
+      "p1": 0.24371370673179626,
+      "p2": 0.34953323006629944,
+      "mean_p": 0.29662346839904785,
+      "delta": -0.02288229763507843
+    },
+    {
+      "idx": 1,
+      "question": "What happens to elements whose indices are multiples of both 3 and 4 (i.e., multiples of 12)?",
+      "answer": "They are squared, not cubed -- the multiple-of-3 check (i % 3 == 0) is checked first and takes priority, and the multiple-of-4 branch is only reached when i % 3 != 0.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: They are squared, not cubed -- the multiple-of-3 check (i % 3 == 0) is checked first and takes priority, and the multiple-of-4 branch is only reached when i % 3 != 0.",
+      "p1": 0.2640363574028015,
+      "p2": 0.33361852169036865,
+      "mean_p": 0.2988274395465851,
+      "delta": -0.0206783264875412
+    },
+    {
+      "idx": 2,
+      "question": "Are negative integers in the list handled differently than positive integers?",
+      "answer": "No -- squaring/cubing/summing work identically via normal Python arithmetic regardless of sign (per the docstring's own example with negative numbers: [-1,-5,2,-1,-5] -> -126).",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: No -- squaring/cubing/summing work identically via normal Python arithmetic regardless of sign (per the docstring's own example with negative numbers: [-1,-5,2,-1,-5] -> -126).",
+      "p1": 0.25218042731285095,
+      "p2": 0.3858727514743805,
+      "mean_p": 0.3190265893936157,
+      "delta": -0.0004791766405105591
+    },
+    {
+      "idx": 3,
+      "question": "What is the behavior if the list is empty?",
+      "answer": "Return 0 (sum of an empty list).",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: Return 0 (sum of an empty list).",
+      "p1": 0.31875666975975037,
+      "p2": 0.41104885935783386,
+      "mean_p": 0.3649027645587921,
+      "delta": 0.04539699852466583
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Does the function consider 0 as a valid index for the multiple of 3 or 4 condition?",
+      "answer": "Yes -- index 0 is a multiple of both 3 and 4 (0 % 3 == 0), so per the \"multiple of 3\" branch (checked first), index 0's entry is squared.",
+      "delta": -0.09424933791160583
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected output if the list contains non-numeric elements?",
+      "answer": "Not applicable -- the docstring guarantees \"a list of integers\".",
+      "delta": -0.08454282581806183
+    },
+    {
+      "idx": 5,
+      "question": "Are the operations applied in the order of checking for multiples of 3 first, then multiples of 4?",
+      "answer": "Yes -- the code checks `if i % 3 == 0` first (square), and only checks `elif i % 4 == 0 and i % 3 != 0` (cube) if the first condition was false.",
+      "delta": -0.04262722283601761
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Does the function consider 0 as a valid index for the multiple of 3 or 4 condition?",
+    "answer": "Yes -- index 0 is a multiple of both 3 and 4 (0 % 3 == 0), so per the \"multiple of 3\" branch (checked first), index 0's entry is squared.",
+    "delta": -0.09424933791160583
+  },
+  "next_prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: Yes -- index 0 is a multiple of both 3 and 4 (0 % 3 == 0), so per the \"multiple of 3\" branch (checked first), index 0's entry is squared.",
+  "code_prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. Yes -- index 0 is a multiple of both 3 and 4 (0 % 3 == 0), so per the \"multiple of 3\" branch (checked first), index 0's entry is squared.\n    \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 11
+}

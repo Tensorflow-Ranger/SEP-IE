@@ -1,0 +1,157 @@
+{
+  "round": 2,
+  "baseline_prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.",
+  "baseline_mean_p": 0.391774520277977,
+  "candidates": [
+    {
+      "idx": 9,
+      "question": "How is the process handled if multiple \"WA\" substrings are replaced in the same iteration?",
+      "answer": "Only a single WA (the leftmost) is replaced per iteration, not multiple at once.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: Only a single WA (the leftmost) is replaced per iteration, not multiple at once.",
+      "p1": 0.4077020287513733,
+      "p2": 0.4369112551212311,
+      "mean_p": 0.4223066419363022,
+      "delta": 0.030532121658325195
+    },
+    {
+      "idx": 7,
+      "question": "Is the replacement of \"WA\" with \"AC\" case-sensitive?",
+      "answer": "Yes, matching is on the exact uppercase substring \"WA\" since S consists only of uppercase letters.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: Yes, matching is on the exact uppercase substring \"WA\" since S consists only of uppercase letters.",
+      "p1": 0.4337172210216522,
+      "p2": 0.4301071763038635,
+      "mean_p": 0.4319121986627579,
+      "delta": 0.040137678384780884
+    },
+    {
+      "idx": 5,
+      "question": "How should the output be formatted if the string is empty after all replacements?",
+      "answer": "Not applicable, since replacing WA with AC preserves string length, so the string can never become empty given the minimum input length is 1.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: Not applicable, since replacing WA with AC preserves string length, so the string can never become empty given the minimum input length is 1.",
+      "p1": 0.4211627244949341,
+      "p2": 0.4575381278991699,
+      "mean_p": 0.439350426197052,
+      "delta": 0.04757590591907501
+    },
+    {
+      "idx": 2,
+      "question": "Is the order of replacing \"WA\" with \"AC\" specified, or can any occurrence be chosen?",
+      "answer": "Yes, per the clarification, the leftmost occurrence of WA is always replaced first.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: Yes, per the clarification, the leftmost occurrence of WA is always replaced first.",
+      "p1": 0.41883039474487305,
+      "p2": 0.46028217673301697,
+      "mean_p": 0.439556285738945,
+      "delta": 0.04778176546096802
+    },
+    {
+      "idx": 3,
+      "question": "What happens if replacing a \"WA\" with \"AC\" creates a new \"WA\" that overlaps with another \"WA\"?",
+      "answer": "That new WA is simply picked up and handled as the leftmost occurrence in a subsequent operation of the loop.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: That new WA is simply picked up and handled as the leftmost occurrence in a subsequent operation of the loop.",
+      "p1": 0.4467123746871948,
+      "p2": 0.4415157735347748,
+      "mean_p": 0.4441140741109848,
+      "delta": 0.05233955383300781
+    },
+    {
+      "idx": 10,
+      "question": "Is the replacement process guaranteed to terminate for all possible input strings?",
+      "answer": "Yes, it is proven that the process terminates after a finite number of operations.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: Yes, it is proven that the process terminates after a finite number of operations.",
+      "p1": 0.4342631697654724,
+      "p2": 0.46879011392593384,
+      "mean_p": 0.4515266418457031,
+      "delta": 0.059752121567726135
+    },
+    {
+      "idx": 4,
+      "question": "Are there any constraints on the input string that are not explicitly mentioned, such as maximum number of \"WA\" occurrences?",
+      "answer": "No additional constraints exist beyond the given length (1 to 3\u00d710^5) and uppercase-letter constraints.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: No additional constraints exist beyond the given length (1 to 3\u00d710^5) and uppercase-letter constraints.",
+      "p1": 0.46169018745422363,
+      "p2": 0.44227147102355957,
+      "mean_p": 0.4519808292388916,
+      "delta": 0.06020630896091461
+    },
+    {
+      "idx": 1,
+      "question": "Does replacing a \"WA\" with \"AC\" affect the possibility of forming new \"WA\" substrings in the same iteration?",
+      "answer": "Yes, replacing a WA changes the string and can create or remove WA substrings considered in later iterations.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: Yes, replacing a WA changes the string and can create or remove WA substrings considered in later iterations.",
+      "p1": 0.5046928524971008,
+      "p2": 0.47608476877212524,
+      "mean_p": 0.49038881063461304,
+      "delta": 0.09861429035663605
+    },
+    {
+      "idx": 8,
+      "question": "Can the replacement operation be applied to overlapping or nested \"WA\" substrings in different iterations?",
+      "answer": "Yes, each iteration replaces one WA occurrence, and overlapping/nested ones are handled in later iterations as they become the leftmost.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: Yes, each iteration replaces one WA occurrence, and overlapping/nested ones are handled in later iterations as they become the leftmost.",
+      "p1": 0.4697684943675995,
+      "p2": 0.5173043608665466,
+      "mean_p": 0.49353642761707306,
+      "delta": 0.10176190733909607
+    },
+    {
+      "idx": 11,
+      "question": "What is the expected output if the input string is exactly \"WA\"?",
+      "answer": "The output would be \"AC\".",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: The output would be \"AC\".",
+      "p1": 0.47398480772972107,
+      "p2": 0.5226504802703857,
+      "mean_p": 0.4983176440000534,
+      "delta": 0.10654312372207642
+    },
+    {
+      "idx": 0,
+      "question": "Are overlapping occurrences of \"WA\" considered when replacing them?",
+      "answer": "Yes, overlapping WA occurrences can exist, though per the clarification the leftmost one is always replaced first.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: Yes, overlapping WA occurrences can exist, though per the clarification the leftmost one is always replaced first.",
+      "p1": 0.5449055433273315,
+      "p2": 0.5085859298706055,
+      "mean_p": 0.5267457365989685,
+      "delta": 0.13497121632099152
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected behavior if the input string contains no \"WA\" substrings?",
+      "answer": "The string is output unchanged since no operations are performed.",
+      "prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: The string is output unchanged since no operations are performed.",
+      "p1": 0.6296132206916809,
+      "p2": 0.7027859687805176,
+      "mean_p": 0.6661995947360992,
+      "delta": 0.27442507445812225
+    }
+  ],
+  "top3": [
+    {
+      "idx": 9,
+      "question": "How is the process handled if multiple \"WA\" substrings are replaced in the same iteration?",
+      "answer": "Only a single WA (the leftmost) is replaced per iteration, not multiple at once.",
+      "delta": 0.030532121658325195
+    },
+    {
+      "idx": 7,
+      "question": "Is the replacement of \"WA\" with \"AC\" case-sensitive?",
+      "answer": "Yes, matching is on the exact uppercase substring \"WA\" since S consists only of uppercase letters.",
+      "delta": 0.040137678384780884
+    },
+    {
+      "idx": 5,
+      "question": "How should the output be formatted if the string is empty after all replacements?",
+      "answer": "Not applicable, since replacing WA with AC preserves string length, so the string can never become empty given the minimum input length is 1.",
+      "delta": 0.04757590591907501
+    }
+  ],
+  "chosen": {
+    "idx": 9,
+    "question": "How is the process handled if multiple \"WA\" substrings are replaced in the same iteration?",
+    "answer": "Only a single WA (the leftmost) is replaced per iteration, not multiple at once.",
+    "delta": 0.030532121658325195
+  },
+  "next_prompt": "You are given a string S consisting of uppercase English letters.\nApply the following procedure to S, and then output the resulting string:\nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:\n- Among all occurrences of WA in the string, replace one with AC.\nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.\nInput\nThe input is given from Standard Input in the following format:\nS\nOutput\nPrint the resulting string after performing the procedure described in the problem statement on S.\nConstraints\n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.\n\nClarification: A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.\n\nClarification: Only a single WA (the leftmost) is replaced per iteration, not multiple at once.",
+  "code_prompt": "You are given a string S consisting of uppercase English letters.  \nApply the following procedure to S, and then output the resulting string:  \nAs long as the string contains WA as a (contiguous) substring, repeat the following operation:  \n- Among all occurrences of WA in the string, replace one (the leftmost) with AC.  \nA newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.  \nIt can be proved under the constraints of this problem that this operation is repeated at most a finite number of times.  \nInput  \nThe input is given from Standard Input in the following format:  \nS  \nOutput  \nPrint the resulting string after performing the procedure described in the problem statement on S.  \nConstraints  \n- S is a string of uppercase English letters with length between 1 and 3\\times 10^5, inclusive.",
+  "test_n_pass": 41,
+  "test_n_total": 43
+}

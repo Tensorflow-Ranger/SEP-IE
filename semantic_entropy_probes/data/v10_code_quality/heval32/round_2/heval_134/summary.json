@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.",
+  "baseline_mean_p": 0.46306079626083374,
+  "candidates": [
+    {
+      "idx": 3,
+      "question": "How should the function handle strings that are empty or contain only whitespace?",
+      "answer": "Returns False in both cases: for an empty string, split(' ')[-1] is '' (length 0); for a whitespace-only or trailing-space string, the last segment after the final space is also empty.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.\n\nClarification: Returns False in both cases: for an empty string, split(' ')[-1] is '' (length 0); for a whitespace-only or trailing-space string, the last segment after the final space is also empty.",
+      "p1": 0.46745026111602783,
+      "p2": 0.4018813669681549,
+      "mean_p": 0.43466581404209137,
+      "delta": -0.02839498221874237
+    },
+    {
+      "idx": 1,
+      "question": "How is a \"space\" defined\u2014does it include multiple spaces or only single spaces?",
+      "answer": "The check uses txt.split(' '), which splits on each single space character; consecutive spaces would produce empty-string elements between them.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.\n\nClarification: The check uses txt.split(' '), which splits on each single space character; consecutive spaces would produce empty-string elements between them.",
+      "p1": 0.47232887148857117,
+      "p2": 0.4000045657157898,
+      "mean_p": 0.4361667186021805,
+      "delta": -0.02689407765865326
+    },
+    {
+      "idx": 2,
+      "question": "What constitutes an \"alphabetic\" character in this function?",
+      "answer": "A character c where 97 <= ord(c.lower()) <= 122, i.e. an ASCII a-z letter (case folded before the check).",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.\n\nClarification: A character c where 97 <= ord(c.lower()) <= 122, i.e. an ASCII a-z letter (case folded before the check).",
+      "p1": 0.5285479426383972,
+      "p2": 0.40345630049705505,
+      "mean_p": 0.46600212156772614,
+      "delta": 0.002941325306892395
+    },
+    {
+      "idx": 5,
+      "question": "How should the function handle non-ASCII alphabetic characters, such as accented letters?",
+      "answer": "NOT considered a letter here; the check only covers ASCII a-z, so an accented character's ordinal falls outside that range and returns False.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.\n\nClarification: NOT considered a letter here; the check only covers ASCII a-z, so an accented character's ordinal falls outside that range and returns False.",
+      "p1": 0.5028733611106873,
+      "p2": 0.4295694828033447,
+      "mean_p": 0.466221421957016,
+      "delta": 0.003160625696182251
+    },
+    {
+      "idx": 6,
+      "question": "What is considered a \"closely associated with a word\"?",
+      "answer": "It means the last character stands alone as its own single-character 'word' (isolated by spaces on both sides in effect), rather than being part of a longer word.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.\n\nClarification: It means the last character stands alone as its own single-character 'word' (isolated by spaces on both sides in effect), rather than being part of a longer word.",
+      "p1": 0.5371053218841553,
+      "p2": 0.41771799325942993,
+      "mean_p": 0.4774116575717926,
+      "delta": 0.014350861310958862
+    },
+    {
+      "idx": 4,
+      "question": "What happens if the string ends with a space followed by a single alphabetic character?",
+      "answer": "Returns True; the last element from split(' ') would be that single letter (length 1, alphabetic), satisfying both conditions.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.\n\nClarification: Returns True; the last element from split(' ') would be that single letter (length 1, alphabetic), satisfying both conditions.",
+      "p1": 0.5398212671279907,
+      "p2": 0.4431530237197876,
+      "mean_p": 0.49148714542388916,
+      "delta": 0.02842634916305542
+    },
+    {
+      "idx": 0,
+      "question": "What defines a \"word\" in the context of this function?",
+      "answer": "A maximal group of characters separated by spaces, per the docstring note: 'word is a group of characters separated by space.'",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.\n\nClarification: A maximal group of characters separated by spaces, per the docstring note: 'word is a group of characters separated by space.'",
+      "p1": 0.5557481646537781,
+      "p2": 0.44632792472839355,
+      "mean_p": 0.5010380446910858,
+      "delta": 0.037977248430252075
+    },
+    {
+      "idx": 7,
+      "question": "How should the function handle strings where the last character is a letter but the last word has more than one character?",
+      "answer": "Returns False; if the last space-separated segment has length > 1, the len(check)==1 condition fails even though its final character happens to be alphabetic.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.\n\nClarification: Returns False; if the last space-separated segment has length > 1, the len(check)==1 condition fails even though its final character happens to be alphabetic.",
+      "p1": 0.5821203589439392,
+      "p2": 0.44287723302841187,
+      "mean_p": 0.5124987959861755,
+      "delta": 0.0494379997253418
+    }
+  ],
+  "top3": [
+    {
+      "idx": 3,
+      "question": "How should the function handle strings that are empty or contain only whitespace?",
+      "answer": "Returns False in both cases: for an empty string, split(' ')[-1] is '' (length 0); for a whitespace-only or trailing-space string, the last segment after the final space is also empty.",
+      "delta": -0.02839498221874237
+    },
+    {
+      "idx": 1,
+      "question": "How is a \"space\" defined\u2014does it include multiple spaces or only single spaces?",
+      "answer": "The check uses txt.split(' '), which splits on each single space character; consecutive spaces would produce empty-string elements between them.",
+      "delta": -0.02689407765865326
+    },
+    {
+      "idx": 2,
+      "question": "What constitutes an \"alphabetic\" character in this function?",
+      "answer": "A character c where 97 <= ord(c.lower()) <= 122, i.e. an ASCII a-z letter (case folded before the check).",
+      "delta": 0.002941325306892395
+    }
+  ],
+  "chosen": {
+    "idx": 3,
+    "question": "How should the function handle strings that are empty or contain only whitespace?",
+    "answer": "Returns False in both cases: for an empty string, split(' ')[-1] is '' (length 0); for a whitespace-only or trailing-space string, the last segment after the final space is also empty.",
+    "delta": -0.02839498221874237
+  },
+  "next_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False.\n\nClarification: Returns False in both cases: for an empty string, split(' ')[-1] is '' (length 0); for a whitespace-only or trailing-space string, the last segment after the final space is also empty.",
+  "code_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, precisely: the last \"word\" (the substring after the final space, per split(' ')) must have length exactly 1 and be alphabetic -- if the last space-separated token has more than one character, the last character is NOT standalone and the function returns False. Returns False in both cases: for an empty string, split(' ')[-1] is '' (length 0); for a whitespace-only or trailing-space string, the last segment after the final space is also empty. and False otherwise.\n    '''",
+  "test_n_pass": 10,
+  "test_n_total": 10
+}

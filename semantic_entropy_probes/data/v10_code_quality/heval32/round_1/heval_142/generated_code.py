@@ -1,0 +1,12 @@
+def sum_squares(lst):
+    """
+    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a 
+    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. Yes -- index 0 is a multiple of both 3 and 4 (0 % 3 == 0), so per the "multiple of 3" branch (checked first), index 0's entry is squared.
+    """
+    total = 0
+    for i, num in enumerate(lst):
+        if i % 3 == 0:
+            total += num ** 2
+        elif i % 4 == 0:
+            total += num ** 3
+    return total

@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''",
+  "baseline_mean_p": 0.45766445994377136,
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "What is the expected behavior if the list contains negative numbers?",
+      "answer": "Not applicable -- the docstring guarantees \"no negative numbers\".",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Not applicable -- the docstring guarantees \"no negative numbers\".",
+      "p1": 0.24979697167873383,
+      "p2": 0.36038050055503845,
+      "mean_p": 0.30508873611688614,
+      "delta": -0.15257572382688522
+    },
+    {
+      "idx": 4,
+      "question": "How does the function handle lists with non-integer values?",
+      "answer": "Not applicable -- the docstring guarantees \"only integers\".",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Not applicable -- the docstring guarantees \"only integers\".",
+      "p1": 0.2796802520751953,
+      "p2": 0.3700903654098511,
+      "mean_p": 0.3248853087425232,
+      "delta": -0.13277915120124817
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior if the list contains floating-point numbers?",
+      "answer": "Not applicable -- the docstring guarantees \"only integers\".",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Not applicable -- the docstring guarantees \"only integers\".",
+      "p1": 0.2796802520751953,
+      "p2": 0.3700903654098511,
+      "mean_p": 0.3248853087425232,
+      "delta": -0.13277915120124817
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle lists where elements are not strictly increasing but are non-decreasing?",
+      "answer": "Non-decreasing (with allowed equal adjacent values, up to 2 occurrences of the same value) is exactly what counts as \"sorted\" here -- the check is lst[i-1] <= lst[i], not strict <.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Non-decreasing (with allowed equal adjacent values, up to 2 occurrences of the same value) is exactly what counts as \"sorted\" here -- the check is lst[i-1] <= lst[i], not strict <.",
+      "p1": 0.2874836027622223,
+      "p2": 0.3768797218799591,
+      "mean_p": 0.3321816623210907,
+      "delta": -0.12548279762268066
+    },
+    {
+      "idx": 1,
+      "question": "What defines a \"duplicate\" in the context of this function?",
+      "answer": "An element value appearing more than twice in the list (count > 2) counts as having \"more than 1 duplicate\" and causes the function to return False; appearing exactly twice is allowed.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: An element value appearing more than twice in the list (count > 2) counts as having \"more than 1 duplicate\" and causes the function to return False; appearing exactly twice is allowed.",
+      "p1": 0.3221088647842407,
+      "p2": 0.3431278169155121,
+      "mean_p": 0.3326183408498764,
+      "delta": -0.12504611909389496
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider a list with all identical elements as sorted?",
+      "answer": "Only if there are at most 2 occurrences of that repeated value and the list has at most 2 elements total (e.g. [5,5] is fine); 3+ identical elements trigger the \"more than 1 duplicate\" rule and return False regardless of order.",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Only if there are at most 2 occurrences of that repeated value and the list has at most 2 elements total (e.g. [5,5] is fine); 3+ identical elements trigger the \"more than 1 duplicate\" rule and return False regardless of order.",
+      "p1": 0.35403698682785034,
+      "p2": 0.3917745053768158,
+      "mean_p": 0.37290574610233307,
+      "delta": -0.0847587138414383
+    },
+    {
+      "idx": 2,
+      "question": "How should the function handle an empty list?",
+      "answer": "Returns True (the duplicate-count check and the non-decreasing check both vacuously pass for an empty list).",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Returns True (the duplicate-count check and the non-decreasing check both vacuously pass for an empty list).",
+      "p1": 0.3565249741077423,
+      "p2": 0.4055001139640808,
+      "mean_p": 0.38101254403591156,
+      "delta": -0.0766519159078598
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior for a list with a single element?",
+      "answer": "Returns True (trivially sorted, and no duplicates possible).",
+      "prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Returns True (trivially sorted, and no duplicates possible).",
+      "p1": 0.7262860536575317,
+      "p2": 0.575326681137085,
+      "mean_p": 0.6508063673973083,
+      "delta": 0.193141907453537
+    }
+  ],
+  "top3": [
+    {
+      "idx": 5,
+      "question": "What is the expected behavior if the list contains negative numbers?",
+      "answer": "Not applicable -- the docstring guarantees \"no negative numbers\".",
+      "delta": -0.15257572382688522
+    },
+    {
+      "idx": 4,
+      "question": "How does the function handle lists with non-integer values?",
+      "answer": "Not applicable -- the docstring guarantees \"only integers\".",
+      "delta": -0.13277915120124817
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior if the list contains floating-point numbers?",
+      "answer": "Not applicable -- the docstring guarantees \"only integers\".",
+      "delta": -0.13277915120124817
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "What is the expected behavior if the list contains negative numbers?",
+    "answer": "Not applicable -- the docstring guarantees \"no negative numbers\".",
+    "delta": -0.15257572382688522
+  },
+  "next_prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n\nClarification: Not applicable -- the docstring guarantees \"no negative numbers\".",
+  "code_prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in an order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    Not applicable -- the docstring guarantees \"no negative numbers\".\n    '''",
+  "test_n_pass": 12,
+  "test_n_total": 13
+}

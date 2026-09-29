@@ -1,0 +1,118 @@
+{
+  "round": 1,
+  "baseline_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+  "baseline_mean_p": 0.6396454572677612,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Should the function return the sum of x and y, or modify one of the arguments in place?",
+      "answer": "Returns the sum x + y; it does not modify either argument.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.",
+      "p1": 0.16817103326320648,
+      "p2": 0.23213405907154083,
+      "mean_p": 0.20015254616737366,
+      "delta": -0.4394929111003876
+    },
+    {
+      "idx": 1,
+      "question": "What should happen if either x or y is not an integer (e.g., a float, string, or None)?",
+      "answer": "Not applicable -- arguments are guaranteed to be integers per the signature.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Not applicable -- arguments are guaranteed to be integers per the signature.",
+      "p1": 0.19232986867427826,
+      "p2": 0.2962784469127655,
+      "mean_p": 0.24430415779352188,
+      "delta": -0.39534129947423935
+    },
+    {
+      "idx": 3,
+      "question": "Should the function handle negative numbers, and if so, how?",
+      "answer": "Yes, negative numbers are handled via standard addition with no special-casing.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Yes, negative numbers are handled via standard addition with no special-casing.",
+      "p1": 0.2580653429031372,
+      "p2": 0.3294201195240021,
+      "mean_p": 0.29374273121356964,
+      "delta": -0.3459027260541916
+    },
+    {
+      "idx": 2,
+      "question": "Is there a limit on the size of the integers (e.g., should overflow raise an error)?",
+      "answer": "None -- Python integers have arbitrary precision, so there is no overflow.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: None -- Python integers have arbitrary precision, so there is no overflow.",
+      "p1": 0.3340221643447876,
+      "p2": 0.3866315484046936,
+      "mean_p": 0.3603268563747406,
+      "delta": -0.27931860089302063
+    },
+    {
+      "idx": 7,
+      "question": "Is there any logging, side\u2011effects, or additional processing (e.g., printing) required when the function is called?",
+      "answer": "None; the function is a pure computation with no side effects.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: None; the function is a pure computation with no side effects.",
+      "p1": 0.36297938227653503,
+      "p2": 0.450540691614151,
+      "mean_p": 0.406760036945343,
+      "delta": -0.2328854203224182
+    },
+    {
+      "idx": 4,
+      "question": "Is the function expected to raise an exception for missing arguments or extra arguments?",
+      "answer": "Not addressed; not a case the function needs to handle beyond the documented two-argument call.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Not addressed; not a case the function needs to handle beyond the documented two-argument call.",
+      "p1": 0.340544193983078,
+      "p2": 0.5682840943336487,
+      "mean_p": 0.45441414415836334,
+      "delta": -0.1852313131093979
+    },
+    {
+      "idx": 6,
+      "question": "What type of value should be returned (e.g., int, float, or a custom numeric type)?",
+      "answer": "An int, matching the input types and examples.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: An int, matching the input types and examples.",
+      "p1": 0.4429769217967987,
+      "p2": 0.5548644661903381,
+      "mean_p": 0.4989206939935684,
+      "delta": -0.1407247632741928
+    },
+    {
+      "idx": 5,
+      "question": "Should the function support optional keyword arguments (e.g., add(x=1, y=2))?",
+      "answer": "Not addressed; only documented as a positional call add(x, y).",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Not addressed; only documented as a positional call add(x, y).",
+      "p1": 0.5733351111412048,
+      "p2": 0.7603156566619873,
+      "mean_p": 0.6668253839015961,
+      "delta": 0.02717992663383484
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Should the function return the sum of x and y, or modify one of the arguments in place?",
+      "answer": "Returns the sum x + y; it does not modify either argument.",
+      "delta": -0.4394929111003876
+    },
+    {
+      "idx": 1,
+      "question": "What should happen if either x or y is not an integer (e.g., a float, string, or None)?",
+      "answer": "Not applicable -- arguments are guaranteed to be integers per the signature.",
+      "delta": -0.39534129947423935
+    },
+    {
+      "idx": 3,
+      "question": "Should the function handle negative numbers, and if so, how?",
+      "answer": "Yes, negative numbers are handled via standard addition with no special-casing.",
+      "delta": -0.3459027260541916
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Should the function return the sum of x and y, or modify one of the arguments in place?",
+    "answer": "Returns the sum x + y; it does not modify either argument.",
+    "delta": -0.4394929111003876
+  },
+  "next_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.",
+  "code_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. Returns the sum x + y; it does not modify either argument.\"\"\"\n    \"\"\"The description does not otherwise specify which interpretation should be used.\"\"\"",
+  "test_n_pass": 105,
+  "test_n_total": 105
+}

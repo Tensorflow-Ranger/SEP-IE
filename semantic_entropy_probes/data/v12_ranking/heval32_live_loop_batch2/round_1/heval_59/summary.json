@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "If n has multiple prime factors of the same maximal value (e.g., n = p\u00b2), should the function return that prime once, its multiplicity, or something else?",
+      "answer": "If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+      "score": -6.9675140380859375
+    },
+    {
+      "idx": 6,
+      "question": "Does the function need to handle very large integers efficiently (e.g., using Pollard\u2011Rho), or is a simple trial\u2011division approach acceptable?",
+      "answer": "The function uses trial division up to n, checking each potential divisor. This is acceptable per the test cases.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. The function uses trial division up to n, checking each potential divisor. This is acceptable per the test cases. \"\"\"",
+      "score": -9.415306091308594
+    },
+    {
+      "idx": 7,
+      "question": "If n is a product of two equal large primes (e.g., n = p\u00b7p), is the expected output that prime p, and should the function detect this special case?",
+      "answer": "For n = p\u00b7p (perfect square of a prime), the function returns p, the single prime factor.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. For n = p\u00b7p (perfect square of a prime), the function returns p, the single prime factor.\n    \"\"\"",
+      "score": -10.059754371643066
+    },
+    {
+      "idx": 5,
+      "question": "In the case where n is a perfect power of a prime (e.g., 27 = 3\u00b3), is the largest prime factor simply that prime, and is the exponent relevant to the output?",
+      "answer": "For n = p\u00b3, the largest prime factor is simply p. The exponent is not relevant to the output.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. For n = p\u00b3, the largest prime factor is simply p. The exponent is not relevant to the output. \"\"\"",
+      "score": -10.201401710510254
+    },
+    {
+      "idx": 10,
+      "question": "Must the function guarantee deterministic output for the same input across different Python versions and platforms?",
+      "answer": "Yes, the function is deterministic\u2014the same input always produces the same output across all platforms.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. Yes, the function is deterministic\u2014the same input always produces the same output across all platforms.\n    \"\"\"",
+      "score": -10.25273323059082
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return the *largest* prime factor or any prime factor that is larger than all other non\u2011prime factors?",
+      "answer": "The function returns the largest (maximum) prime factor\u2014the single prime factor with the highest value.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest (maximum) prime factor\u2014the single prime factor with the highest value\u2014of n. Assume n > 1 and is not a prime.\n    \"\"\"",
+      "score": -11.11780834197998
+    },
+    {
+      "idx": 8,
+      "question": "Should the function return the result as a plain integer or as a tuple containing additional information (e.g., the factor and its exponent)?",
+      "answer": "The function returns a plain integer, not a tuple or other structure.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. The function returns a plain integer, not a tuple or other structure. \"\"\"",
+      "score": -12.380400657653809
+    },
+    {
+      "idx": 2,
+      "question": "Must the returned value be of type `int`, or are other numeric types (e.g., `numpy.int64`, `fractions.Fraction`) acceptable?",
+      "answer": "The returned value must be of type int (Python's built-in int type).",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. The returned value must be of type int (Python's built-in int type).\"\"\"",
+      "score": -12.810835838317871
+    },
+    {
+      "idx": 3,
+      "question": "Is the function required to raise an exception for inputs that violate the \u201cn > 1 and not a prime\u201d assumption, or may it return a sentinel value?",
+      "answer": "The function assumes n > 1 and is not prime per the specification. Violating these assumptions yields undefined behavior.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. The function assumes n > 1 and is not prime per the specification. Violating these assumptions yields undefined behavior. \"\"\"",
+      "score": -13.018902778625488
+    },
+    {
+      "idx": 9,
+      "question": "Are there any constraints on the maximum size of n (e.g., memory limits, timeouts) that influence the implementation?",
+      "answer": "No maximum size constraints are specified. The trial division approach works for the test cases provided.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. No maximum size constraints are specified. The trial division approach works for the test cases provided.\n    \"\"\"",
+      "score": -13.050668716430664
+    },
+    {
+      "idx": 4,
+      "question": "Should the function treat negative integers by factoring their absolute value, or is negative input considered invalid?",
+      "answer": "Negative integers are not addressed by the specification. The assumption is n > 1.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. Negative integers are not addressed by the specification. The assumption is n > 1. \"\"\"",
+      "score": -13.069884300231934
+    },
+    {
+      "idx": 11,
+      "question": "If n is provided as a subclass of `int` with overridden arithmetic, should the function operate on the subclass instance or on its integer value?",
+      "answer": "If n is a subclass of int with overridden arithmetic, the function operates on the integer value directly.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n is a subclass of int with overridden arithmetic, the function operates on the integer value directly.\n    \"\"\"",
+      "score": -13.101411819458008
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "If n has multiple prime factors of the same maximal value (e.g., n = p\u00b2), should the function return that prime once, its multiplicity, or something else?",
+    "answer": "If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.",
+    "score": -6.9675140380859375
+  },
+  "next_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. If n has multiple prime factors with the same maximum value (e.g., n = p\u00b2), the function returns that prime once, not its multiplicity.\n    \"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

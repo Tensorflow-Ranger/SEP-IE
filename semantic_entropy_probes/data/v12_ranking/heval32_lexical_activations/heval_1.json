@@ -1,0 +1,43 @@
+{
+  "id": "heval_1",
+  "questions": [
+    "What characters are considered “brackets”: only parentheses `(` and `)`, or also other types like `{}`, `[]`?",
+    "Should the function treat characters other than brackets and spaces (e.g., letters, digits, punctuation) as errors, ignore them, or include them in the output groups?",
+    "If the input contains unbalanced or improperly nested brackets, should the function raise an exception, skip the invalid portion, or attempt to recover in some way?",
+    "When two balanced groups are adjacent with no separating characters (e.g., `()()`), should they be returned as separate strings `[\"()\", \"()\"]` or combined into a single group?",
+    "How should leading, trailing, or internal whitespace be handled: removed entirely, preserved inside groups, or used to delimit groups?",
+    "If the input string is empty or contains only spaces, what should the returned list be: an empty list, a list with an empty string, or something else?",
+    "In cases where a balanced group contains nested groups (e.g., `( ( ) )`), should the outer group be returned alone, the inner groups also be returned, or only the top‑level groups?",
+    "Must the order of the returned list reflect the original left‑to‑right order of groups in the input, and if so, how should groups that are nested but not overlapping be ordered?"
+  ],
+  "answers": [
+    "Only parentheses `()` -- the function only ever handles `(` and `)`; other bracket types like `{}` or `[]` are not part of the specification.",
+    "Not applicable -- the input only ever contains parentheses and spaces per the specification; other characters do not occur.",
+    "Not applicable -- the input is guaranteed to consist of well-formed balanced groups only.",
+    "Returned as separate strings -- each maximal depth-0-to-depth-0 span is its own group, per the example `'( ) (( )) (( )( ))'` -> `['()', '(())', '(()())']`.",
+    "Whitespace is simply ignored/skipped entirely; it never appears within a returned group and there is nothing to strip or preserve.",
+    "An empty list -- with no parentheses present, no groups are ever appended to the result.",
+    "Only the outer top-level group is returned as a single string; nested parentheses are not split out into separate entries.",
+    "Yes, the list preserves the original left-to-right order of top-level groups as they close; nested groups are not separately ordered since they are not returned as distinct entries."
+  ],
+  "inline_prompts": [
+    "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested brackets. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string. Only parentheses `()` -- the function only ever handles `(` and `)`; other bracket types like `{}` or `[]` are not part of the specification.\n    \"\"\"",
+    "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested brackets. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string. Not applicable -- the input only ever contains parentheses and spaces per the specification; other characters do not occur.\n    \"\"\"",
+    "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested brackets. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string. Not applicable -- the input is guaranteed to consist of well-formed balanced groups only.\n    \"\"\"",
+    "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested brackets. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Returned as separate strings -- each maximal depth-0-to-depth-0 span is its own group, per the example `'( ) (( )) (( )( ))'` -> `['()', '(())', '(()())']`. Ignore any spaces in the input string.\n    \"\"\"",
+    "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested brackets. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Whitespace is simply ignored/skipped entirely; it never appears within a returned group and there is nothing to strip or preserve.\n    \"\"\"",
+    "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested brackets. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. An empty list -- with no parentheses present, no groups are ever appended to the result. Ignore any spaces in the input string.\n    \"\"\"",
+    "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested brackets. Your goal is to\n    separate those group into separate strings and return the list of those. Only the outer top-level group is returned as a single string; nested parentheses are not split out into separate entries. Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"",
+    "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested brackets. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Yes, the list preserves the original left-to-right order of top-level groups as they close; nested groups are not separately ordered since they are not returned as distinct entries.\n    Ignore any spaces in the input string.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1
+  ]
+}

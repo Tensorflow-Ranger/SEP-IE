@@ -1,0 +1,290 @@
+{
+  "amb_task_26": {
+    "answers": [
+      "The problem statement does not specify any tie-breaking rule; equal values are simply treated by their numeric value with each of the N^3 occurrences counted separately.",
+      "K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).",
+      "It is the literal arithmetic expression: the product A_i\u00b7B_j plus the product B_j\u00b7C_k plus the product C_k\u00b7A_i.",
+      "The sequences A, B, and C are 1-indexed, as shown by the notation A_1,...,A_N.",
+      "Print the single computed answer value (the K-th largest value among all N^3 computed values).",
+      "Each of the N^3 triples is counted as a separate value with multiplicity, so duplicate values each occupy their own rank.",
+      "No, there are no additional constraints beyond 1\u2264A_i,B_i,C_i\u226410^9 given in the statement.",
+      "When N=1, there is only one possible triple (i=j=k=1), so K must equal 1 and the answer is that single computed value.",
+      "The statement does not describe a special tie-breaking order; values are simply sorted by magnitude with duplicates counted at consecutive ranks.",
+      "No, the input sequences are not guaranteed to have distinct elements.",
+      "No expected time complexity is stated in the problem statement.",
+      "This cannot happen since K is bounded by N^3 (the total number of triples with multiplicity), not by the number of unique values."
+    ]
+  },
+  "amb_task_87": {
+    "answers": [
+      "There are exactly four types of oysters, labeled 1, 2, 3, and 4.",
+      "Yes, per the clarification exactly one oyster type causes stomach trouble, so the answer is uniquely determined.",
+      "This cannot occur, since the clarification states exactly one type causes stomach trouble.",
+      "Yes, the problem assumes exactly one oyster type causes stomach trouble.",
+      "This situation does not arise, since the output is a single unique oyster label.",
+      "Yes, only oysters 1, 2, and 3 (those eaten by Takahashi and/or Aoki) are considered; oyster 4 is not eaten by either.",
+      "An oyster type causes stomach trouble if it is the single type, consistent with S_1 and S_2, that explains the sickness pattern of whoever ate it.",
+      "No, an oyster need only be eaten by one of the two people to potentially cause their sickness.",
+      "If both S_1 and S_2 are 'fine', then oysters 1, 2, and 3 are all safe, so oyster 4 is the one causing stomach trouble.",
+      "If both S_1 and S_2 are 'sick', oyster 1 (eaten by both) is the one causing stomach trouble.",
+      "Yes, oysters 1, 2, and 3 (eaten by Takahashi and/or Aoki) are the only ones that could cause the observed sickness, otherwise it is oyster 4.",
+      "This is not applicable, since the answer is guaranteed to be unique."
+    ]
+  },
+  "amb_task_118": {
+    "answers": [
+      "Occurrences are handled one at a time: at each step only the leftmost 'WA' is replaced, then the search for 'WA' restarts on the updated string.",
+      "Any new 'WA' created by a replacement is handled in a subsequent operation, since the procedure repeats as long as the string contains 'WA'.",
+      "The problem only concerns the literal substring 'WA' as given; case is not an issue since S consists of uppercase letters only.",
+      "No, the only constraints are that S consists of uppercase English letters with length between 1 and 3\u00d710^5.",
+      "This case does not occur, since S has length at least 1 per the constraints.",
+      "Only the leftmost 'WA' is replaced per operation, and the process repeats until no 'WA' remains, resolving overlaps sequentially.",
+      "A 'WA' at the end of the string is treated the same as any other occurrence and is eventually replaced if it is the leftmost one remaining.",
+      "The leftmost occurrence is the one whose starting position (index of 'W') is smallest among all current occurrences of 'WA'.",
+      "If the input contains no 'WA' substring, the output is identical to the input string.",
+      "No special tie-breaking is needed since only one (the leftmost) 'WA' is replaced per operation.",
+      "Such a newly created 'WA' is not processed within the same iteration; it is picked up in a later operation of the repeating procedure.",
+      "The output is 'AC'."
+    ]
+  },
+  "amb_task_212": {
+    "answers": [
+      "When M=0 there are no constraints, so every non-negative sequence is good, and the minimal-sum good sequence is all zeros.",
+      "If X_i=Y_i, the constraint becomes 0=Z_i, so it requires Z_i=0 to be satisfiable; otherwise no good sequence exists.",
+      "If constraints conflict (imply different values for the same relationship), no good sequence exists and -1 should be printed.",
+      "This does not occur, since the constraints guarantee 1\u2264X_i,Y_i\u2264N.",
+      "If multiple minimal-sum good sequences exist, printing any one of them is accepted.",
+      "This does not occur, since the constraints guarantee 1\u2264X_i,Y_i\u2264N.",
+      "For underdetermined (free) parts of the sequence, the elements are set to 0 to minimize the total sum.",
+      "If the XOR constraints are inconsistent, no good sequence exists, so -1 should be printed.",
+      "If overdetermined but consistent, a valid assignment satisfying all constraints and minimizing the sum should still be found.",
+      "Dependent constraints are treated as redundant and do not change the resulting minimal-sum sequence.",
+      "If multiple solutions achieve the same minimal sum, any one of them may be output.",
+      "Constraints that are not all independent are simply treated as consistent/redundant information without altering the minimal-sum result."
+    ]
+  },
+  "amb_task_279": {
+    "answers": [
+      "The wind movement happens first at each time step, and the smoke generation at (0,0) happens after, only if (0,0) has no smoke following that movement.",
+      "The problem does not describe multiple contributions merging with special handling; each cell simply either has smoke or not after all smoke moves per the wind direction.",
+      "Yes, smoke generated at (0,0) during step t is present at (0,0) at time t+0.5, i.e., after that step's wind and generation.",
+      "This is not addressed since the grid is infinitely large, so smoke never moves out of bounds.",
+      "Per the clarification, smoke exists only at cell (0,0) at time t=0, with no other cell containing smoke initially.",
+      "The grid is considered to have at most one smoke particle (i.e., presence/absence) per cell.",
+      "The statement does not distinguish separate particles; if wind moves smoke into an already-smoke-containing cell, that cell simply remains marked as containing smoke.",
+      "The wind movement is applied to all existing smoke simultaneously at each time step.",
+      "At each time step t: first all existing smoke moves according to the wind direction, then if (0,0) has no smoke, new smoke is generated there; the state at t+0.5 reflects both of these completed.",
+      "Smoke is considered present at (R,C) at time t+0.5 if it occupies (R,C) after that time step's wind movement (and generation, if applicable) is complete.",
+      "This is not applicable since R and C are constrained to be between -N and N, and the grid is infinite so all coordinates are valid.",
+      "The generation step only affects cell (0,0) and occurs after the movement step, so any smoke that moved into (0,0) during that same step means no new smoke is generated there."
+    ]
+  },
+  "amb_task_321": {
+    "answers": [
+      "'inf' denotes that the sum X exceeds the specified threshold of 10^9.",
+      "The problem does not specify implementation details for large-number handling beyond checking against the 10^9 threshold to decide whether to print 'inf'.",
+      "The problem statement only defines X mathematically as the sum from i=0 to M of N^i, without specifying a computation method.",
+      "When N=1, X equals M+1 (the sum of M+1 ones); if M+1 exceeds 10^9, print 'inf'.",
+      "The problem does not describe overflow handling directly; instead it specifies printing 'inf' whenever X exceeds 10^9.",
+      "No, X is always a positive value since N and M are positive integers and each term N^i is positive.",
+      "Print the exact integer value of X if it does not exceed 10^9.",
+      "M=0 is outside the given constraints, since the constraints require 1\u2264M\u2264100.",
+      "N=0 is outside the given constraints, since the constraints require 1\u2264N\u226410^9.",
+      "The maximum value of X that is printed directly (rather than as 'inf') is 10^9.",
+      "If X cannot be computed or exceeds the 10^9 threshold, print 'inf' instead of the numeric value.",
+      "'inf' should be printed exactly as the lowercase string \"inf\"."
+    ]
+  },
+  "amb_task_417": {
+    "answers": [
+      "Yes, the problem guarantees both the starting cell and the destination cell are roads.",
+      "A front kick affects every cell at most 2 steps away (i.e., 1 or 2 cells) in the chosen direction from the player's current cell, turning any wall among them into a road.",
+      "No, it only affects cells at most 2 steps away in that direction, not the cell the player currently occupies.",
+      "Walls more than 2 steps away in that direction are left unaffected by the kick.",
+      "Yes, turning walls into roads via a kick opens up new cells that can subsequently be moved through.",
+      "Movement is allowed only onto cells that are roads, including cells that were turned into roads by an earlier kick.",
+      "The cleared walls remain roads permanently for the rest of the process.",
+      "Yes, nothing in the statement restricts performing a front kick multiple times, including repeatedly from the same cell.",
+      "Up/down/left/right correspond to decreasing/increasing row index and decreasing/increasing column index respectively, based on the row-from-top, column-from-left indexing.",
+      "They are separate action types that can be freely interleaved and performed in any order, any number of times.",
+      "The statement gives no ordering priority; each performed action (movement or kick) takes effect immediately at the time it is performed.",
+      "Only the number of front kicks is minimized; the number of movement actions used does not factor into determining the optimal path."
+    ]
+  },
+  "amb_task_142": {
+    "answers": [
+      "Two blocks (i,j) and (i',j') are cardinally adjacent if and only if |i-i'|+|j-j'|=1.",
+      "Rows are indexed 1 to H from the north and columns 1 to W from the west, so (1,1) is the top-left (northwest) block.",
+      "This case cannot occur, since the constraints guarantee (A_i,B_i,Y_i) is not equal to (C_i,D_i,Z_i) for every query.",
+      "Moving via walkway to the X-th floor of an adjacent building requires that building to have at least X floors.",
+      "Moving between buildings via walkway is not counted as a stairs use, so it contributes zero to the answer.",
+      "If source and destination are the same block but different floors, the answer is simply |Y_i - Z_i|, achieved via stairs alone.",
+      "F_{i,j} can be at most 10^6.",
+      "This case cannot occur, since the constraints guarantee Y_i \u2264 F_{A_i,B_i} and Z_i \u2264 F_{C_i,D_i} for every query.",
+      "It is the minimum total count of stairs moves over any valid sequence of stairs and walkway moves connecting the source floor to the destination floor.",
+      "The problem statement itself does not specify any required time or complexity bound.",
+      "If source and destination are in the same building (block), the minimum stairs needed is |Y_i - Z_i|.",
+      "This case cannot occur, since the constraints guarantee Y_i \u2264 F_{A_i,B_i} always holds for the given input."
+    ]
+  },
+  "amb_task_5": {
+    "answers": [
+      "Yes, bag A ends up with 0 stones after such an operation.",
+      "The statement does not say order affects which final XOR values are reachable; it only allows the operation to be repeated any number of times in any sequence.",
+      "No, each operation names two (implicitly distinct) bags A and B for that single move.",
+      "All stones currently in bag A are moved into bag B, leaving A with 0 stones and B increased by that amount.",
+      "Yes, B_i values can be zero, such as for an emptied bag.",
+      "It is computed as ordinary bitwise XOR, where a zero value does not flip any bit of the running result.",
+      "No other constraints are stated beyond the total stone count being preserved by the moves.",
+      "This is not addressed in the statement; the operation as described chooses two bags A and B for the move.",
+      "They are whatever stone counts result from applying the move operation any number of times, including zero times, starting from the initial A_i values.",
+      "Yes, the total number of stones stays the same, since stones are only moved, never created or destroyed.",
+      "This is not restricted or addressed by the statement.",
+      "It follows the given definition: the k-th bit of the XOR is 1 iff an odd number of the B_i have a 1 in that bit position."
+    ]
+  },
+  "amb_task_89": {
+    "answers": [
+      "This situation cannot occur, since exactly one oyster type is guaranteed to cause stomach trouble.",
+      "The problem guarantees exactly one oyster type causes stomach trouble.",
+      "This situation cannot occur, since the input is guaranteed consistent with the single true culprit type.",
+      "Yes, the oyster types are labeled 1, 2, 3, and 4.",
+      "Yes, the problem guarantees the input is consistent with exactly one valid causing oyster type.",
+      "Not applicable, since only one valid answer exists for any given input.",
+      "They overlap: both Takahashi and Aoki ate oyster 1, oyster 2 was eaten only by Takahashi, and oyster 3 only by Aoki.",
+      "The causing oyster type's value ranges from 1 to 4.",
+      "Sickness is caused by eating the single oyster type that causes stomach trouble, i.e., by eating any oyster of that type.",
+      "\"Getting sick\" is exactly the reported condition given by S_1/S_2 = sick, taken as a stated fact rather than a mere possibility.",
+      "No constraints beyond each being exactly \"sick\" or \"fine\" are stated.",
+      "If both are \"fine\", the culprit is oyster 4 (eaten by neither); if both are \"sick\", the culprit is oyster 1 (eaten by both)."
+    ]
+  },
+  "amb_task_119": {
+    "answers": [
+      "WA occurrences (two distinct characters) cannot overlap with each other.",
+      "Per the clarification, the leftmost occurrence of WA is always the one replaced first.",
+      "Yes, since the string's contents change after a replacement, this can affect which substrings equal WA afterward.",
+      "Ties are broken by always choosing the leftmost occurrence, per the clarification.",
+      "A newly created WA is simply treated as an occurrence to be handled in a later iteration of the repeat loop, since the process continues while WA occurs.",
+      "It is applied greedily, repeatedly replacing the leftmost occurrence first.",
+      "The number of replacements is finite; the statement asserts the operation terminates after a bounded number of repetitions.",
+      "Print the final resulting string after the procedure terminates.",
+      "Not applicable, since S has length at least 1 per the constraints; no special-case handling is given.",
+      "A contiguous substring is a sequence of characters appearing consecutively, without gaps, within S.",
+      "Indices are determined by scanning the current (updated) string for occurrences of \"WA\" at each step of the loop.",
+      "The replacement process repeats until no WA substring remains in the string."
+    ]
+  },
+  "amb_task_120": {
+    "answers": [
+      "WA occurrences cannot overlap each other, since WA consists of two distinct characters.",
+      "It is simply treated as another occurrence of WA present in the string, to be replaced once it becomes the leftmost occurrence in a later operation.",
+      "Yes, matching is on the literal characters \"W\" and \"A\", consistent with S consisting of uppercase English letters.",
+      "No additional constraints beyond those stated (uppercase English letters, length 1 to 3\u00d710^5) are given.",
+      "Not applicable, since the constraints guarantee S has length at least 1.",
+      "The leftmost occurrence of WA is always replaced first, then the process repeats on the updated string.",
+      "It is treated like any other occurrence; if it is the leftmost WA, it gets replaced.",
+      "It is the occurrence of \"WA\" whose starting index in the string is smallest.",
+      "If no WA is present, the string is unchanged and that is the output.",
+      "Not applicable, since only one occurrence can start at any given position.",
+      "No, only the single leftmost WA is replaced per operation; any new WA created is handled in a subsequent operation of the repeat loop.",
+      "Not applicable, since the constraints guarantee S consists only of uppercase English letters."
+    ]
+  },
+  "amb_task_143": {
+    "answers": [
+      "Block (1,1) is the northernmost, westernmost block, i.e., the top-left corner since north is up and west is left.",
+      "Cardinally adjacent means |i-i'|+|j-j'|=1, so diagonally adjacent blocks are not considered adjacent.",
+      "A walkway move takes him to the same floor number X in the adjacent building, and per the clarification this is only possible if that building has at least X floors.",
+      "Yes, he always starts exactly on the Y_i-th floor of the building in block (A_i,B_i) for that query.",
+      "This case cannot occur, since the constraints guarantee (A_i,B_i,Y_i)\u2260(C_i,D_i,Z_i) for every query.",
+      "Each single up or down floor move via stairs costs exactly 1, so moving between two floors costs the absolute difference in floor numbers if done directly by stairs.",
+      "No, the statement does not impose any upper bound on the number of stairs used in a query.",
+      "If the adjacent building does not have at least X floors, that walkway move simply cannot be performed at all.",
+      "The statement only asks for the minimum stair count achievable over any valid sequence of stair and walkway moves; it does not prescribe a specific method.",
+      "The statement gives no explicit time-complexity requirement, only the input size constraints (H,W\u2264500, Q\u22642\u00d710^5).",
+      "The statement does not give a separate rule for this case; the same general minimization process applies regardless of whether the blocks match.",
+      "He must pass through a sequence of intermediate cardinally adjacent blocks via walkways, since a walkway only connects directly adjacent blocks."
+    ]
+  },
+  "amb_task_144": {
+    "answers": [
+      "This case cannot occur, since the constraints guarantee (A_i,B_i,Y_i)\u2260(C_i,D_i,Z_i) for every query.",
+      "Cardinally adjacent means |i-i'|+|j-j'|=1, so diagonally adjacent blocks are not included.",
+      "Yes, (i,j) is the row from the north and column from the west, so (1,1) is the northernmost, westernmost block.",
+      "A building with exactly X floors qualifies as \"at least X floors,\" so a walkway move to floor X is allowed.",
+      "Moving between buildings via a walkway is not counted as a stair use at all; only up/down floor movement within a building counts.",
+      "The statement gives no separate rule for this case; the same general minimization process applies to any valid pair of positions.",
+      "F_{i,j} can be as large as 10^6, meaning floor numbers (and thus possible stair costs) can be large.",
+      "The statement gives no explicit time limit, only the overall input size constraints (H,W\u2264500, Q\u22642\u00d710^5).",
+      "Since the destination building must have at least X=Y_i floors, moving to the same floor number in an adjacent building costs 0 stairs for that walkway step.",
+      "It is the smallest total number of individual up/down floor movements via stairs needed, over any valid sequence of stairs and walkway moves, to go from the start floor/block to the end floor/block.",
+      "The statement gives no separate rule for this case; the same general minimization process applies.",
+      "The statement gives no separate rule for this case; the same general minimization process (find the minimum total stairs) applies regardless of relative floor height."
+    ]
+  },
+  "amb_task_200": {
+    "answers": [
+      "Yes, values can range from -10^9 to 10^9, so negative values are allowed.",
+      "Yes, choosing a ball means including its value in the total sum of the selection.",
+      "The statement only requires outputting the maximum sum value itself, so ties among different selections achieving that sum are irrelevant.",
+      "Balls are distinguished by their color and index; selection is per individual ball, though multiple balls may share the same value.",
+      "Yes, per the clarification, choosing zero or more balls is allowed, including choosing none at all.",
+      "A selection where chosen black balls are fewer than chosen white balls is invalid and not permitted, since black count must be at least white count.",
+      "The statement does not separately address this; since choosing zero balls is allowed, the achievable maximum sum is at least 0.",
+      "No, the input does not specify any particular sorted order for the values.",
+      "Yes, any number of black and any number of white balls (subject to the black\u2265white count condition) may be chosen from the given sets.",
+      "The output is simply the single integer maximum sum; the statement does not ask for the selection itself.",
+      "No constraint beyond the requirement that the number of chosen black balls be at least the number of chosen white balls.",
+      "Since choosing zero balls is allowed, the maximum achievable sum in that case is 0 by selecting no balls."
+    ]
+  },
+  "amb_task_214": {
+    "answers": [
+      "Repeated identical (X_i,Y_i) constraints are simply additional edges in the same XOR system; consistent duplicates are redundant and inconsistent ones make no good sequence exist.",
+      "A good sequence must simultaneously satisfy A_{X_i} XOR A_{Y_i} = Z_i for every single i from 1 to M.",
+      "If the constraints form a cycle whose XOR values are inconsistent, no good sequence exists and -1 must be printed.",
+      "The statement explicitly allows printing any one good sequence that achieves the minimum sum when multiple exist.",
+      "The statement does not prescribe a specific method, only that the output must be a good sequence achieving the minimum possible sum of elements.",
+      "The output is the N values of A_1,...,A_N printed separated by spaces (or -1 if no good sequence exists).",
+      "The statement does not specify an initialization method; it only requires that A be a length-N sequence of non-negative integers satisfying the constraints.",
+      "The statement gives no explicit upper bound on individual A_i values, only that Z_i can be up to 10^9 and A_i must be non-negative integers.",
+      "The statement does not prescribe a specific data structure or representation for solving the system.",
+      "The statement gives no explicit time-complexity requirement, only the input size constraints (N\u22642\u00d710^5, M\u226410^5).",
+      "The statement gives no separate rule for multiple connected components; the good-sequence condition just applies to all M constraints together.",
+      "If no assignment of A satisfies all the given XOR constraints, -1 should be printed instead of a sequence."
+    ]
+  },
+  "amb_task_280": {
+    "answers": [
+      "All smoke present moves simultaneously as a single step according to the t-th character of S.",
+      "The statement does not address grid boundaries, since the grid is described as infinitely large.",
+      "The statement describes cell occupancy as presence/absence of smoke, not a count, so overlapping movement just results in smoke being present in the union of destination cells.",
+      "Yes, new smoke is generated at (0,0) only if there is no smoke there after the wind movement for that time step.",
+      "It is checked after both the wind movement and the possible regeneration at (0,0) for time t have completed, i.e., after the full step t.",
+      "At time 0, smoke exists only at (0,0) and nowhere else.",
+      "The statement does not address this, since each time step uses a single direction character applied uniformly to all smoke.",
+      "The statement does not restrict (R,C) to being inside any grid region, since the grid is infinite; it only constrains R and C to be between -N and N.",
+      "Since each step moves all smoke by the same single direction, each smoke cell maps to one destination cell, so no merging rule beyond set union is needed.",
+      "The statement only tracks presence/absence of smoke per cell, so a cell already having smoke plus incoming smoke simply remains smoke-present.",
+      "It is checked after that time step's full sequence of wind movement and regeneration at (0,0) has been applied.",
+      "The check at t+0.5 occurs after both the wind blowing and the (0,0) smoke regeneration for time t have taken place, i.e., right after step t finishes and before step t+1 begins."
+    ]
+  },
+  "amb_task_418": {
+    "answers": [
+      "A front kick permanently changes the grid (walls become roads), so it affects the state available for all subsequent moves and kicks.",
+      "The statement does not state that ineffective kicks are disallowed or excluded, only that the goal is the minimum number of front kicks needed to reach the destination.",
+      "The statement does not forbid performing a front kick in the same direction multiple times consecutively.",
+      "A front kick only turns wall cells into road cells within range; cells that are already roads are unaffected.",
+      "Cells outside the town do not change, but the front kick can still be performed even if part of its range lies outside the town.",
+      "A front kick is a separate type of action from moving to an adjacent cell; it does not itself move Takahashi.",
+      "The statement says the two action types can be performed in any order, so there is no fixed order requirement within a turn.",
+      "No, a front kick only affects cells at most 2 steps away in the chosen direction.",
+      "The objective is the minimum number of front kicks needed to reach the fish shop, regardless of the number of moves taken.",
+      "Up decreases the row index by 1, down increases the row index by 1, left decreases the column index by 1, and right increases the column index by 1.",
+      "The statement guarantees the start and destination cells are both roads and implicitly assumes a finite answer exists, since it asks to find the number of front kicks needed.",
+      "Reaching the fish shop means Takahashi's current cell becomes cell (C,D), the location of the fish shop."
+    ]
+  }
+}

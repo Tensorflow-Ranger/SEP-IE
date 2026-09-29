@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_162_vagueness",
+  "questions": [
+    "Since the type of 'text' is no longer specified as a string, could it be a non-string type, and how should that be handled?",
+    "Should the MD5 hash be computed over the UTF-8 encoded bytes of the text?",
+    "Is \"empty string\" strictly \"\", or does it also include whitespace-only strings?",
+    "Should the returned hash be lowercase hexadecimal by default?",
+    "If 'text' is None rather than an empty string, should the function also return None?",
+    "Should leading/trailing whitespace be stripped from non-empty text before hashing?",
+    "Are there constraints on the length or character set of the input text?",
+    "Should non-ASCII characters be encoded in a specific way before hashing?"
+  ],
+  "answers": [
+    "Assume it's still effectively a string; the type annotation was just dropped, not the actual expected type.",
+    "Yes, UTF-8 bytes.",
+    "Strictly an empty string (\"\").",
+    "Yes, lowercase hex.",
+    "Not specified beyond what's given; that's exactly the injected gap — behavior for None isn't defined here.",
+    "No, not stripped.",
+    "Not specified beyond what's given; no stated constraints.",
+    "Standard UTF-8 encoding."
+  ],
+  "inline_prompts": [
+    "def string_to_md5(text):\n    \"\"\"\n    Given a 'text', return its md5 hash equivalent string. Assume it's still effectively a string; the type annotation was just dropped, not the actual expected type. If 'text' is an empty string, return None.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a 'text', return its md5 hash equivalent string. If 'text' is an empty string, return None. Yes, UTF-8 bytes.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a 'text', return its md5 hash equivalent string. If 'text' is strictly an empty string (\"\"),\n    return None.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a 'text', return its md5 hash equivalent string in lowercase hex.\n    If 'text' is an empty string, return None.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a 'text', return its md5 hash equivalent string. If 'text' is an empty string, return None. Not specified beyond what's given; that's exactly the injected gap — behavior for None isn't defined here.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a 'text', return its md5 hash equivalent string. If 'text' is an empty string, return None. No, not stripped.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a 'text', return its md5 hash equivalent string. Not specified beyond what's given; no stated constraints.\n    If 'text' is an empty string, return None.\n    \"\"\"",
+    "def string_to_md5(text):\n    \"\"\"\n    Given a 'text', return its md5 hash equivalent string using standard UTF-8 encoding.\n    If 'text' is an empty string, return None.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    0,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0
+  ]
+}

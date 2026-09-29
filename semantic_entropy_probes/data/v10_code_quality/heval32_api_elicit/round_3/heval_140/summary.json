@@ -1,0 +1,118 @@
+{
+  "round": 3,
+  "baseline_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.",
+  "baseline_mean_p": 0.09986685588955879,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "Must the function preserve other whitespace characters (e.g., tabs, newlines) unchanged?",
+      "answer": "Yes -- only the literal space character ' ' is targeted; other whitespace like tabs and newlines pass through unchanged.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.\n\nClarification: Yes -- only the literal space character ' ' is targeted; other whitespace like tabs and newlines pass through unchanged.",
+      "p1": 0.083112932741642,
+      "p2": 0.11539573222398758,
+      "mean_p": 0.09925433248281479,
+      "delta": -0.0006125234067440033
+    },
+    {
+      "idx": 7,
+      "question": "Should the function raise any exceptions for unexpected conditions (e.g., empty string) or simply return the processed string?",
+      "answer": "No exceptions are raised for any input, including an empty string, which simply returns an empty string.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.\n\nClarification: No exceptions are raised for any input, including an empty string, which simply returns an empty string.",
+      "p1": 0.09644115716218948,
+      "p2": 0.11455588787794113,
+      "mean_p": 0.10549852252006531,
+      "delta": 0.0056316666305065155
+    },
+    {
+      "idx": 2,
+      "question": "Is the replacement case-sensitive, i.e., should only the literal space character `' '` be replaced?",
+      "answer": "Only the literal ASCII space character ' ' triggers the replacement logic; this isn't a case-sensitivity concern since it's not about letters.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.\n\nClarification: Only the literal ASCII space character ' ' triggers the replacement logic; this isn't a case-sensitivity concern since it's not about letters.",
+      "p1": 0.08823054283857346,
+      "p2": 0.12536931037902832,
+      "mean_p": 0.10679992660880089,
+      "delta": 0.006933070719242096
+    },
+    {
+      "idx": 5,
+      "question": "How should Unicode space characters (e.g., non\u2011breaking space, em\u2011space) be treated?",
+      "answer": "Not addressed -- only the literal ' ' (U+0020) character is treated as a space; other Unicode space-like characters are treated as ordinary non-space characters.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.\n\nClarification: Not addressed -- only the literal ' ' (U+0020) character is treated as a space; other Unicode space-like characters are treated as ordinary non-space characters.",
+      "p1": 0.08997888118028641,
+      "p2": 0.12968356907367706,
+      "mean_p": 0.10983122512698174,
+      "delta": 0.009964369237422943
+    },
+    {
+      "idx": 6,
+      "question": "Must the function handle extremely long strings efficiently, or are there performance constraints?",
+      "answer": "No specific performance constraint is stated; the implementation is a single O(n) pass.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.\n\nClarification: No specific performance constraint is stated; the implementation is a single O(n) pass.",
+      "p1": 0.0991402119398117,
+      "p2": 0.12507253885269165,
+      "mean_p": 0.11210637539625168,
+      "delta": 0.012239519506692886
+    },
+    {
+      "idx": 4,
+      "question": "If the input string contains no spaces, should the function return the original string object or a copy?",
+      "answer": "Returns a new string object containing the same content as the original (not necessarily the same object identity).",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.\n\nClarification: Returns a new string object containing the same content as the original (not necessarily the same object identity).",
+      "p1": 0.11383574455976486,
+      "p2": 0.13276560604572296,
+      "mean_p": 0.12330067530274391,
+      "delta": 0.02343381941318512
+    },
+    {
+      "idx": 3,
+      "question": "Should the function return a new string or modify the input string in place (if mutable)?",
+      "answer": "Returns a new string; Python strings are immutable, so a new string object is always produced (built via concatenation).",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.\n\nClarification: Returns a new string; Python strings are immutable, so a new string object is always produced (built via concatenation).",
+      "p1": 0.1247122660279274,
+      "p2": 0.13278828561306,
+      "mean_p": 0.1287502758204937,
+      "delta": 0.028883419930934906
+    },
+    {
+      "idx": 0,
+      "question": "Should leading, trailing, and consecutive spaces all be replaced with underscores, preserving their count?",
+      "answer": "For runs of 1 or 2 consecutive spaces, yes -- each is replaced by the same number of underscores; for runs of 3 or more consecutive spaces, the entire run is replaced by a single '-' instead (not preserving the count).",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.\n\nClarification: For runs of 1 or 2 consecutive spaces, yes -- each is replaced by the same number of underscores; for runs of 3 or more consecutive spaces, the entire run is replaced by a single '-' instead (not preserving the count).",
+      "p1": 0.12019140273332596,
+      "p2": 0.1581331491470337,
+      "mean_p": 0.13916227594017982,
+      "delta": 0.03929542005062103
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "Must the function preserve other whitespace characters (e.g., tabs, newlines) unchanged?",
+      "answer": "Yes -- only the literal space character ' ' is targeted; other whitespace like tabs and newlines pass through unchanged.",
+      "delta": -0.0006125234067440033
+    },
+    {
+      "idx": 7,
+      "question": "Should the function raise any exceptions for unexpected conditions (e.g., empty string) or simply return the processed string?",
+      "answer": "No exceptions are raised for any input, including an empty string, which simply returns an empty string.",
+      "delta": 0.0056316666305065155
+    },
+    {
+      "idx": 2,
+      "question": "Is the replacement case-sensitive, i.e., should only the literal space character `' '` be replaced?",
+      "answer": "Only the literal ASCII space character ' ' triggers the replacement logic; this isn't a case-sensitivity concern since it's not about letters.",
+      "delta": 0.006933070719242096
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "Must the function preserve other whitespace characters (e.g., tabs, newlines) unchanged?",
+    "answer": "Yes -- only the literal space character ' ' is targeted; other whitespace like tabs and newlines pass through unchanged.",
+    "delta": -0.0006125234067440033
+  },
+  "next_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.\n\nClarification: Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required.\n\nClarification: Yes -- only the literal space character ' ' is targeted; other whitespace like tabs and newlines pass through unchanged.",
+  "code_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores. Guaranteed to always receive a string; no type-checking or error-handling for None/other types is required. Only the literal space character ' ' is targeted; other whitespace like tabs and newlines pass through unchanged.\n    \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 5
+}

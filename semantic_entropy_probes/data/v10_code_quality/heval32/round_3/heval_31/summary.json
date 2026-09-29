@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.",
+  "baseline_mean_p": 0.16554611921310425,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Does the function handle non-integer inputs?",
+      "answer": "Not applicable -- the input is guaranteed to be an integer.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.\n\nClarification: Not applicable -- the input is guaranteed to be an integer.",
+      "p1": 0.12646892666816711,
+      "p2": 0.21040602028369904,
+      "mean_p": 0.16843747347593307,
+      "delta": 0.002891354262828827
+    },
+    {
+      "idx": 2,
+      "question": "How does the function handle very large numbers efficiently?",
+      "answer": "Not specified beyond correctness; the implementation is a simple O(n) trial-division loop with no special optimization.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.\n\nClarification: Not specified beyond correctness; the implementation is a simple O(n) trial-division loop with no special optimization.",
+      "p1": 0.16309769451618195,
+      "p2": 0.19343633949756622,
+      "mean_p": 0.17826701700687408,
+      "delta": 0.012720897793769836
+    },
+    {
+      "idx": 1,
+      "question": "What is the behavior when the input is a floating-point number that is not an integer?",
+      "answer": "Not applicable -- non-integer floats are outside the guaranteed input domain.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.\n\nClarification: Not applicable -- non-integer floats are outside the guaranteed input domain.",
+      "p1": 0.13681724667549133,
+      "p2": 0.2539319694042206,
+      "mean_p": 0.19537460803985596,
+      "delta": 0.02982848882675171
+    },
+    {
+      "idx": 7,
+      "question": "How does the function handle the case where n is a negative number with a large absolute value?",
+      "answer": "Falls into the n < 2 branch, so it returns False (not prime), same as any n < 2.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.\n\nClarification: Falls into the n < 2 branch, so it returns False (not prime), same as any n < 2.",
+      "p1": 0.14146849513053894,
+      "p2": 0.2756756544113159,
+      "mean_p": 0.20857207477092743,
+      "delta": 0.04302595555782318
+    },
+    {
+      "idx": 4,
+      "question": "Are numbers like 2, 3, 5, etc., correctly identified as prime?",
+      "answer": "Yes -- e.g. is_prime(2): range(2, 1) is empty, so it correctly returns True.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.\n\nClarification: Yes -- e.g. is_prime(2): range(2, 1) is empty, so it correctly returns True.",
+      "p1": 0.15825679898262024,
+      "p2": 0.28319376707077026,
+      "mean_p": 0.22072528302669525,
+      "delta": 0.055179163813591
+    },
+    {
+      "idx": 5,
+      "question": "How does the function handle the case where n is a very large number with many potential factors?",
+      "answer": "Not specified beyond correctness; the loop terminates as soon as any divisor is found.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.\n\nClarification: Not specified beyond correctness; the loop terminates as soon as any divisor is found.",
+      "p1": 0.17848560214042664,
+      "p2": 0.2975931465625763,
+      "mean_p": 0.23803937435150146,
+      "delta": 0.07249325513839722
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected behavior when n is a perfect square?",
+      "answer": "Handled the same as any composite: a perfect square k*k has divisor k in range(2, n-1) for k>=2, so it's correctly identified as not prime.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.\n\nClarification: Handled the same as any composite: a perfect square k*k has divisor k in range(2, n-1) for k>=2, so it's correctly identified as not prime.",
+      "p1": 0.19685965776443481,
+      "p2": 0.28904473781585693,
+      "mean_p": 0.24295219779014587,
+      "delta": 0.07740607857704163
+    },
+    {
+      "idx": 3,
+      "question": "What is the definition of a prime number used in this function?",
+      "answer": "A number n >= 2 with no divisor k in range(2, n-1); any n < 2 is considered not prime.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.\n\nClarification: A number n >= 2 with no divisor k in range(2, n-1); any n < 2 is considered not prime.",
+      "p1": 0.2049492746591568,
+      "p2": 0.28905194997787476,
+      "mean_p": 0.24700061231851578,
+      "delta": 0.08145449310541153
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Does the function handle non-integer inputs?",
+      "answer": "Not applicable -- the input is guaranteed to be an integer.",
+      "delta": 0.002891354262828827
+    },
+    {
+      "idx": 2,
+      "question": "How does the function handle very large numbers efficiently?",
+      "answer": "Not specified beyond correctness; the implementation is a simple O(n) trial-division loop with no special optimization.",
+      "delta": 0.012720897793769836
+    },
+    {
+      "idx": 1,
+      "question": "What is the behavior when the input is a floating-point number that is not an integer?",
+      "answer": "Not applicable -- non-integer floats are outside the guaranteed input domain.",
+      "delta": 0.02982848882675171
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Does the function handle non-integer inputs?",
+    "answer": "Not applicable -- the input is guaranteed to be an integer.",
+    "delta": 0.002891354262828827
+  },
+  "next_prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: Negative numbers return False (caught by the n < 2 check).\n\nClarification: Yes; both n=0 and n=1 are less than 2, so the function returns False for both.\n\nClarification: Not applicable -- the input is guaranteed to be an integer.",
+  "code_prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime. Negative numbers return False (caught by the n < 2 check), and both n=0 and n=1 are less than 2, so the function returns False for both. Not applicable -- the input is guaranteed to be an integer.\"\"\"",
+  "test_n_pass": 13,
+  "test_n_total": 13
+}

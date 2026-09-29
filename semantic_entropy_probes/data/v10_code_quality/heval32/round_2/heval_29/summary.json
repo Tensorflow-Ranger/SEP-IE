@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.",
+  "baseline_mean_p": 0.1176246851682663,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Should the comparison between the string and the prefix be case-sensitive?",
+      "answer": "Yes, case-sensitive; str.startswith performs an exact-case comparison with no normalization.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.\n\nClarification: Yes, case-sensitive; str.startswith performs an exact-case comparison with no normalization.",
+      "p1": 0.09448129683732986,
+      "p2": 0.17818111181259155,
+      "mean_p": 0.1363312043249607,
+      "delta": 0.018706519156694412
+    },
+    {
+      "idx": 4,
+      "question": "Should the output list maintain the original order of elements from the input list?",
+      "answer": "Yes; the list comprehension preserves the original relative order of the matching elements.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.\n\nClarification: Yes; the list comprehension preserves the original relative order of the matching elements.",
+      "p1": 0.06779259443283081,
+      "p2": 0.21252410113811493,
+      "mean_p": 0.14015834778547287,
+      "delta": 0.022533662617206573
+    },
+    {
+      "idx": 6,
+      "question": "Is the prefix allowed to be longer than the string being checked?",
+      "answer": "The string simply won't start with a longer prefix and is excluded -- str.startswith correctly returns False in that case.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.\n\nClarification: The string simply won't start with a longer prefix and is excluded -- str.startswith correctly returns False in that case.",
+      "p1": 0.07088794559240341,
+      "p2": 0.22085241973400116,
+      "mean_p": 0.14587018266320229,
+      "delta": 0.02824549749493599
+    },
+    {
+      "idx": 2,
+      "question": "Are leading or trailing whitespaces in the strings or prefix considered when checking for the prefix?",
+      "answer": "Yes, compared literally; no trimming of whitespace is performed before the prefix check.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.\n\nClarification: Yes, compared literally; no trimming of whitespace is performed before the prefix check.",
+      "p1": 0.10069122165441513,
+      "p2": 0.21698619425296783,
+      "mean_p": 0.15883870795369148,
+      "delta": 0.041214022785425186
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle non-string elements in the input list?",
+      "answer": "Not applicable; the input is guaranteed to be a list of strings.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.\n\nClarification: Not applicable; the input is guaranteed to be a list of strings.",
+      "p1": 0.10800620913505554,
+      "p2": 0.21694806218147278,
+      "mean_p": 0.16247713565826416,
+      "delta": 0.044852450489997864
+    },
+    {
+      "idx": 7,
+      "question": "Should the function raise an exception if the input list contains non-string elements?",
+      "answer": "No; not applicable, since the input is guaranteed to only contain strings.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.\n\nClarification: No; not applicable, since the input is guaranteed to only contain strings.",
+      "p1": 0.09474123269319534,
+      "p2": 0.24250559508800507,
+      "mean_p": 0.1686234138906002,
+      "delta": 0.05099872872233391
+    },
+    {
+      "idx": 1,
+      "question": "What should happen if the prefix is an empty string?",
+      "answer": "Every string in the list starts with the empty prefix, so the entire input list is returned unchanged.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.\n\nClarification: Every string in the list starts with the empty prefix, so the entire input list is returned unchanged.",
+      "p1": 0.16432370245456696,
+      "p2": 0.34054943919181824,
+      "mean_p": 0.2524365708231926,
+      "delta": 0.1348118856549263
+    },
+    {
+      "idx": 5,
+      "question": "What should the function do if the input list is empty?",
+      "answer": "Returns an empty list.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.\n\nClarification: Returns an empty list.",
+      "p1": 0.3352435529232025,
+      "p2": 0.4841064512729645,
+      "mean_p": 0.4096750020980835,
+      "delta": 0.2920503169298172
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Should the comparison between the string and the prefix be case-sensitive?",
+      "answer": "Yes, case-sensitive; str.startswith performs an exact-case comparison with no normalization.",
+      "delta": 0.018706519156694412
+    },
+    {
+      "idx": 4,
+      "question": "Should the output list maintain the original order of elements from the input list?",
+      "answer": "Yes; the list comprehension preserves the original relative order of the matching elements.",
+      "delta": 0.022533662617206573
+    },
+    {
+      "idx": 6,
+      "question": "Is the prefix allowed to be longer than the string being checked?",
+      "answer": "The string simply won't start with a longer prefix and is excluded -- str.startswith correctly returns False in that case.",
+      "delta": 0.02824549749493599
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Should the comparison between the string and the prefix be case-sensitive?",
+    "answer": "Yes, case-sensitive; str.startswith performs an exact-case comparison with no normalization.",
+    "delta": 0.018706519156694412
+  },
+  "next_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Yes -- \"start with\" means the string must begin with prefix (str.startswith), not merely contain it anywhere.\n\nClarification: Yes, case-sensitive; str.startswith performs an exact-case comparison with no normalization.",
+  "code_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. Yes, case-sensitive; str.startswith performs an exact-case comparison with no normalization. \"\"\"",
+  "test_n_pass": 2,
+  "test_n_total": 2
+}

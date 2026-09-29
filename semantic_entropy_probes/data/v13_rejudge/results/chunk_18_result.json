@@ -1,0 +1,3026 @@
+[
+ {
+  "id": "ccb_amb_task_22",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does the removal of the entire bottom row happen before or after the downward movement step at each time t?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Does \u201ctime T_j\u201d refer to the state after the blocks have finished moving in step T_j (i.e., at time T_j+0.5), or before any movement occurs at time T_j?"
+   },
+   {
+    "question": "If the bottom row is not completely filled, are blocks in the bottom row still allowed to move downward during the movement step?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Blocks should be processed from bottom to top in each step. Each block\u2019s movement depends on the updated state of blocks below it in the same step."
+   },
+   {
+    "question": "When a block is removed because the bottom row was full, is it considered to \u201cexist\u201d at that exact time t for query purposes?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are the time steps indexed starting from t=0 (initial state) or t=1 as the first update, and does a query with T=1 refer to the state after the first update or before it?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Does \u201ctime T_j\u201d refer to the state after the blocks have finished moving in step T_j (i.e., at time T_j+0.5), or before any movement occurs at time T_j?"
+   },
+   {
+    "question": "If multiple blocks would occupy the same cell after moving downward in the same step, is that situation possible, and if so, how is it resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the grid height effectively infinite (i.e., blocks can fall arbitrarily far downward) or limited to 10^9 rows, and what happens if a block would move below row 1?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are the coordinates (X_i, Y_i) given with Y=1 representing the bottom row, and does Y increase upward?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Can the value of W be larger than the number of distinct X_i values, and if so, does it affect the \u201centire bottom row\u201d condition (i.e., must every column from 1 to W be occupied)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_46",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "If multiple positions in S match T, which (a,\u202fb) should be output \u2013 the smallest row index, then smallest column, or any matching position?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are the coordinates (a,\u202fb) 1\u2011based or 0\u2011based in the output?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Must the pattern T match exactly, or are rotations/reflections of T also considered a match?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the program treat the input lines for S and T as having no spaces between characters, and are there any trailing spaces to ignore?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is it guaranteed that at least one occurrence of T exists in S, or should we handle the case where there is none (and if so, what output is required)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are N and M given on the same line separated by a space, and can there be extra whitespace before or after them?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Can N or M be equal to 0, or are they strictly positive integers?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there any limits on the total size of the input (e.g., line length) that could affect reading the grids?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_69",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Should the output integers be printed in increasing order, and if so, separated by spaces or newlines?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The missing integers should be listed in ascending order."
+   },
+   {
+    "question": "If there are no missing integers, should the program output nothing, a blank line, or a specific message?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The program should first output the number of missing integers C, followed by the missing integers X_1 X_2 \u2026 X_C in the second line."
+   },
+   {
+    "question": "Must the output be on a single line, or can it span multiple lines?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are duplicate values allowed in the input sequence A, and how should they be treated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is there a maximum line length for the output, or any limit on how many numbers can appear per line?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should trailing spaces at the end of the output line be considered acceptable or prohibited?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "If the input contains extra whitespace or line breaks beyond the described format, should the program still accept it?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are there any time or memory limits that could affect the choice of algorithm for the given constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_92",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Are the strings S_1 and S_2 provided on the same line separated by a space, or can they appear on separate lines?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Does each person eat exactly one oyster, or could they eat multiple oysters of possibly different types?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Takahashi ate oysters 1 and 2, and Aoki ate oysters 1 and 3."
+   },
+   {
+    "question": "If a person ate multiple oysters, does the sickness status reflect eating any oyster of the harmful type, or must all eaten oysters be of that type to become sick?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are the oyster types numbered 1 through 4 inclusive, and must the output be a single integer between 1 and 4?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "In cases where both persons are fine, is there a unique answer, or should any type be output (e.g., the smallest possible)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "In cases where both persons are sick, is there a unique answer, or should any type be output (e.g., the smallest possible)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "If the input strings are capitalized differently (e.g., \"Sick\", \"FINE\"), should the program treat them case\u2011sensitively or case\u2011insensitively?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the program handle invalid inputs (e.g., strings other than \"sick\" or \"fine\") by printing an error, ignoring them, or is such input guaranteed not to occur?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_112",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Should the indices i used in the operation be 1\u2011based (as described in the statement) or 0\u2011based in the implementation?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is swapping allowed only between adjacent characters (i and i+1) within the bounds of the string, i.e., 1\u202f\u2264\u202fi\u202f<\u202fN?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Must the output be the exact minimum number of swaps, or is any number that is at most the minimum acceptable (e.g., due to rounding)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "If multiple optimal final configurations exist (different positions of the contiguous block of 1s), does it matter which one is achieved, or only the count of swaps?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there any limits on the size of the answer (e.g., should it fit in a 32\u2011bit signed integer, or must we use 64\u2011bit)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the program handle leading or trailing whitespace in the input lines, and are there any extra blank lines allowed?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "In case the string already has all 1s contiguous, is the expected answer 0 or should we output something else?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "You should print a single integer \u2014 the minimum number of operations needed to make all 1s contiguous."
+   },
+   {
+    "question": "Are there any hidden constraints on the total number of test cases (e.g., multiple test cases in one file) or is there exactly one test case per input file?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_138",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does the subgraph have to be induced (i.e., contain all edges of T between its selected vertices) or may we choose any subset of edges among the selected vertices?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "When selecting a subgraph, are isolated vertices (degree 0) allowed, or must every chosen vertex have degree exactly 1 or 4 within the subgraph?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "There must be at least one vertex of degree 4; otherwise, the structure does not qualify as an alkane."
+   },
+   {
+    "question": "If multiple subgraphs achieve the maximum size, is any one acceptable for output, or must we output a specific one (e.g., lexicographically smallest list of vertices)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the answer be the number of vertices in the largest alkane subgraph, or the number of edges, or something else?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are vertices numbered from 1 to N inclusive, and are the edges guaranteed to form a valid tree (i.e., connected and acyclic)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is N=1 considered a valid tree, and if so, does a single vertex count as an alkane subgraph (degree 0 vs required degree 1 or 4)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "There must be at least one vertex of degree 4; otherwise, the structure does not qualify as an alkane."
+   },
+   {
+    "question": "Are self\u2011loops or multiple edges possible in the input, and if they appear, how should they be treated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Must the output be exactly \u201c-1\u201d (without quotes) when no alkane subgraph exists, and otherwise a single integer on its own line?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_161",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "If i = j, is a path of length 0 (the empty path) considered a palindrome and thus the answer 0, or must the path contain at least one edge?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are self\u2011loops allowed (i.e., can C_{i,i} be a letter indicating an edge from i to itself), and if so, do they count as a single\u2011edge palindrome path?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "When no palindrome\u2011forming path exists between i and j, should the output be -1, 0, or some other sentinel value?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "If no such path exists, print -1 for that entry."
+   },
+   {
+    "question": "Must the shortest palindrome path be simple (no repeated vertices), or can vertices and edges be revisited?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The path is not necessarily simple, meaning vertices and edges can be revisited."
+   },
+   {
+    "question": "If multiple palindrome paths have the same minimal length, does the answer need to reflect any tie\u2011breaking rule (e.g., lexicographically smallest label sequence), or is length alone sufficient?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are the edge labels considered case\u2011sensitive, and does the palindrome condition require exact character equality (including case) on both halves?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is the graph guaranteed to be static, or can there be multiple edges between the same ordered pair of vertices with different labels (i.e., is the input format truly one character per ordered pair)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What is the maximum possible length of a path that needs to be considered (e.g., can paths be arbitrarily long, or is there an implicit bound such as N or 2N\u20111)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_181",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Should the output be exactly \"Yes\" and \"No\" with that capitalization, or are other capitalizations (e.g., \"YES\", \"no\") also accepted?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is an empty line or any extra whitespace allowed after the output string?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Must the numbers A_i be provided on a single line, or can they be split across multiple lines?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "If N = 2, does the sequence need to satisfy A_1 < A_2 strictly, or is equality allowed?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there any limits on the total size of the input file beyond the given constraints (e.g., maximum line length)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the program handle leading or trailing spaces in the input lines?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "If the input contains extra numbers beyond the N specified, should they be ignored or cause an error?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "In case of invalid input (e.g., non\u2011integer tokens), is the behavior undefined or should the program output an error?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_204",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Must the chosen balls be distinct (i.e., each ball can be selected at most once), or can the same ball be counted multiple times?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is it required to choose at least one ball of each colour, or is the empty selection (choosing zero black and zero white balls) allowed?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "You may choose zero or more balls; that is, it is allowed to choose no balls at all."
+   },
+   {
+    "question": "If multiple selections achieve the same maximum sum, should any particular one be output, or is only the sum value required?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the answer be the maximum possible sum, the minimum possible sum, or simply the sum of values for a specific selection rule (e.g., choose the highest\u2011valued balls)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are there any limits on the total number of balls that can be chosen besides the equality of counts (e.g., can we choose all balls if N = M)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the program handle cases where N \u2260 M and the optimal sum would be negative\u2014should we output that negative sum or output zero instead?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Must the output be printed as an integer, and if the sum exceeds 64\u2011bit range, should we use arbitrary\u2011precision arithmetic or is overflow undefined?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are the input values guaranteed to be provided on a single line each as shown, or can they be split across multiple lines or contain extra whitespace?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_227",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Should the output be case\u2011sensitive exactly as \u201cYes\u201d and \u201cNo\u201d, or are other capitalizations (e.g., \u201cYES\u201d, \u201cyes\u201d) acceptable?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "If the sequence contains a run of length greater than three (e.g., four or five identical consecutive elements), does that count as satisfying the condition?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "In the case that multiple qualifying triples exist, is any specific one required to be reported, or is only the existence needed?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Must the output be terminated by a newline character, or is a trailing space or no newline also acceptable?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are there any constraints on whitespace in the input (e.g., can the numbers be split across multiple lines, or must they all be on a single line after N)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "If N is exactly 3, should the program still check the single possible triple and output \u201cYes\u201d if all three are equal, or is there a special rule?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the program handle extra whitespace or empty lines before or after the input data without error?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are there any limits on the size of the integers beyond the given range (e.g., could they be negative or larger due to overflow), and how should such out\u2011of\u2011range values be treated?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_247",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the exact definition of \"count of integers\" in each subarray - does it refer to the number of elements or the sum of elements?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "\u201cCounts\u201d refers to the number of distinct integers in each subarray."
+   },
+   {
+    "question": "Are the indices i and j inclusive or exclusive boundaries for the subarrays?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Can the subarrays contain duplicate elements, and if so, how are they counted?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the sequence A guaranteed to be non-empty, or do we need to handle empty sequences?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected behavior when N equals 3 - is there only one valid split?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there any constraints on the values of i and j beyond 1 \u2264 i < j \u2264 N-1?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the output be formatted with any specific precision or just as a plain integer?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What happens if all elements in A are the same value - does this affect the counting?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_267",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the exact definition of a path of length K in this context - does it mean K edges or K vertices?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Can paths share vertices or must all vertices be used exactly once across all paths?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are the paths required to be simple paths (no repeated vertices) or can they revisit vertices?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What should be the output format if the decomposition is not possible - just \"No\" or something else?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is the matrix P required to be filled in row-major order when outputting the solution, or is any valid arrangement acceptable?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Can a path start and end at any vertices, or are there constraints on the endpoints of each path?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What happens if NK is not divisible by K - is this case always impossible or are there exceptions?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are self-loops or multiple edges between the same pair of vertices allowed in the input tree?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_290",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Can x and y be the same letter in a single operation?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What happens if x does not exist in string S during an operation?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is it allowed to choose x and y such that y already exists in S?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Does the order of operations matter when multiple valid sequences exist?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Can we perform operations that result in all characters becoming the same letter?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the exact definition of \"replacing every occurrence\" - does it include overlapping or recursive replacements?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there any restrictions on which pairs of letters can be chosen for x and y?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should we handle cases where S and T are already identical at the start?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_310",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "How are ties broken when multiple people have the same score?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the exact order in which people with the same score are assigned ranks?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are the scores sorted in ascending or descending order when determining ranks?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How are duplicate scores handled in terms of rank assignment?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What happens if all participants have the same score?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a specific ordering requirement for processing scores of equal value?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "How are the final ranks numbered - starting from 1 or 0?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Does the tie-breaking method depend on the original participant indices?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_331",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Can a cake appear in more than one pair across different test cases?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is it allowed for the same cake to be paired with itself (i.e., can a_i = b_i)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the exact definition of \"distinct integers\" in the context of choosing a_1, b_1, ..., a_K, b_K?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are the values of X_i, Y_i, Z_i guaranteed to fit within standard integer types (e.g., 64-bit signed integers)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Does the phrase \"greatest value among P,Q,R\" imply that ties are broken arbitrarily or by some specific rule?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Must all N cakes be used in forming pairs, or can some remain unpaired?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there any constraint preventing multiple test cases from having overlapping N and K values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the program handle cases where K=0, if such inputs are possible?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_355",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What constitutes a valid path in the graph, and how should the weight of a path be calculated if there are multiple possible paths between two vertices?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "We should print the minimum possible weight among all paths connecting s_i and t_i."
+   },
+   {
+    "question": "Is the graph G guaranteed to be connected, or can it have multiple disconnected components?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should overlapping intervals be handled when determining adjacency between vertices?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are self-loops or multiple edges between the same pair of vertices possible in graph G?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected time complexity for processing each query, and is preprocessing allowed?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the output for each query be the minimum possible path weight, maximum possible path weight, or any arbitrary valid path weight?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "We should print the minimum possible weight among all paths connecting s_i and t_i."
+   },
+   {
+    "question": "Can vertex weights be zero or negative, and how does that affect the path weight calculation?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is there a limit on the total number of edges in the graph, and how dense can the graph be?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_378",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of \"coprime positive integers\" - does this mean gcd(P,Q) = 1?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should we handle the case when x is already an integer - do we express it as x/1?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the sequence S allowed to contain duplicate elements, or must all elements be distinct?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What constitutes a \"good sequence\" when N=1 (edge case with empty A sequence)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there any additional constraints on the values in sequence S beyond being positive integers?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should we interpret f(x) when x = 1 - is it 1\u00d71 = 1 or some other value?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Does the gcd condition apply to consecutive pairs or to the entire sequence collectively?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What is the expected behavior when A_i = 1 for some i - does this force S_i = S_{i+1}?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_398",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Can pieces A and B occupy the same vertex at any point during the sequence of moves, or is it only forbidden at the end of each move?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is the graph guaranteed to be connected after any valid sequence of moves, or does connectivity only apply to the initial graph?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What happens if the starting positions S and T are adjacent vertices - does this affect the possibility of swapping?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are self-loops allowed in the graph representation, even though the sample shows simple graphs?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "If the minimum number of operations is zero (already in target state), should we output 0 or treat it as impossible?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Does the \"any number of times\" constraint include zero operations, meaning we must output 0 if already solved?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "When moving pieces, do we need to consider the order of moves affecting edge availability or congestion?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is there a requirement for the final state to have both pieces stationary, or can they continue moving after reaching the swap configuration?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_0_lexical",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the exact definition of \"closer to each other than given threshold\" - does it mean absolute difference less than threshold, or less than or equal to threshold?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle empty lists - should it return True, False, or raise an exception?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle lists with only one element - should it return True, False, or raise an exception?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What should be the behavior when the threshold is negative - is this valid input or should it raise an exception?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should floating-point precision issues be handled when comparing differences to the threshold?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the function consider the same element compared to itself, or only distinct pairs of elements?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What is the expected behavior when the input list contains NaN or infinity values?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are there any constraints on the size of the input list or the range of values that need to be considered for performance requirements?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_11_lexical",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What should happen if the two input strings have different lengths?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are empty strings valid inputs, and if so, what should the output be?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a maximum length constraint for the input strings?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the function handle inputs containing characters other than '0' and '1'?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected behavior when both input strings are empty?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should leading zeros be preserved in the output, or can they be omitted?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a specific order in which the XOR operation should be performed (left-to-right, right-to-left)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What should be the return type and format if one string is significantly longer than the other?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_24_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What should the function return when n is 1, since it has no divisors smaller than itself?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the function handle negative integers, and if so, how should divisors be defined for negative numbers?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected behavior when n is 0, since division by zero is undefined?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Does \"large number\" mean the largest proper divisor, or can it return any large divisor that meets the criteria?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What should be the return type and behavior for prime numbers, which only have 1 as their largest proper divisor?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there any constraints on the range of input values for n that need to be handled?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the function consider 1 as a valid divisor to return, or are we looking for non-trivial divisors only?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected time complexity requirement for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_36_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the exact range of integers to consider - from 0 to n-1, or from 1 to n-1?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "When counting digit appearances, should we count each occurrence of a digit separately or only count distinct digits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What specific digit are we supposed to count, or should we count occurrences of all digits 0-9?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should we handle the case when n is 0 or negative?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should we count digit appearances in the decimal representation of numbers, or in some other base?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "When a number is divisible by both 11 and 13, should it be counted twice or just once?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected return type - an integer count or a more detailed breakdown?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should leading zeros be considered when counting digit appearances in numbers?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_47_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the expected return value when the list is empty?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "How should ties be broken when there are multiple valid median values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the function modify the original list or work with a copy?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What is the expected behavior when the list contains non-numeric elements?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "How should the function handle lists with duplicate values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected return type - should it match the input element types?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the function sort the list internally or assume it's already sorted?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What is the maximum size of list that needs to be supported?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_61_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What should the function return for an empty string?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the function return True or False for a single unmatched bracket?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Does \"corresponding bracket\" mean that every opening bracket must have a matching closing bracket and vice versa?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the function consider the order of brackets (i.e., closing brackets cannot come before their corresponding opening brackets)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What should the function return for strings containing characters other than \"(\" and \")\"?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should nested brackets be considered valid (e.g., \"((()))\")?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected behavior for strings with multiple separate valid bracket pairs (e.g., \"()()\")?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a maximum length for the input string that we need to handle?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_72_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What data type and structure does the parameter q represent (e.g., list, tuple, array)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What does it mean for an object q to be \"balanced\" - is this referring to symmetry, equal weights on both sides, or some other property?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How is the \"sum of its elements\" calculated - do we simply add all elements together regardless of their positions?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What is the data type and value range for the weight limit parameter w?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the function return True when the sum equals the weight limit, or only when it is strictly less than the limit?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What should the function return if q is empty or contains no elements?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "How should the function handle negative values in q - do they contribute negatively to the total weight?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What is the expected behavior if q contains non-numeric elements or if the parameters are of unexpected types?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_83_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does \"start or end with 1\" include numbers that both start AND end with 1, and if so, are they counted once or twice?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the exact range of valid values for n (e.g., is n=1 allowed, and what about very large values of n)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should leading zeros be considered when counting n-digit numbers, or are we only counting positive integers with exactly n digits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle invalid input such as n \u2264 0 or non-integer values of n?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected return type - should it be an integer, string, or does it matter?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are negative n-digit numbers included in the count, or are we only considering positive n-digit integers?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What is the maximum value of n that the function needs to handle efficiently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the function account for potential integer overflow when calculating very large counts for big values of n?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_95_lexical",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does \"same case\" mean all keys must be entirely lowercase, entirely uppercase, or just internally consistent with each other?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "How should keys containing no alphabetic characters (e.g., digits or symbols) be classified for case purposes?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should mixed-case keys (e.g., \"CamelCase\") be treated as neither upper nor lower, causing a False result?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is case-checking applied to every character of each key, or just the first character?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What should happen when the dictionary has exactly one key \u2014 is it trivially \"the same case\"?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are non-string keys guaranteed not to occur, or should the function handle them somehow?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should whitespace-only or empty-string keys be treated as a special case?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is Unicode/non-ASCII letter casing considered, or only standard ASCII letters?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_106_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Given \"calculated number of i\" is defined as the product 1*2*...*i, is this exactly equivalent to factorial, or could a different definition be intended?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Does \"sum of numbers from 1 to i\" mean summing the integers 1 through i, or summing the digits of i?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Is the list 0-indexed in code but conceptually 1-indexed per \"i starts from 1\" \u2014 how should index 0 map to i?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What should be returned for n = 0?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should large values of i risk overflow in the \"calculated number\" computation, or is arbitrary precision assumed?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is \"even\" parity checked on i or on some transformed value?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should negative n produce an error or empty result?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there any difference intended between \"calculated number\" and standard factorial beyond wording?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_120_lexical",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Should the returned list of top k numbers be sorted ascending or descending?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "What should happen if k is greater than the length of arr?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "If there are duplicate values at the k-th largest boundary, how should ties be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Can arr contain negative numbers?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is \"top k\" based on signed value or absolute magnitude?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is arr guaranteed to be non-empty?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the original array be modified, or only a new list returned?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are duplicate values in arr allowed generally?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_135_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Since duplicates are no longer explicitly excluded, are equal consecutive values possible, and does \"not greater than or equal to\" exclude equal values from counting?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is index 0 eligible for comparison, given it has no preceding element?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "If no element satisfies the condition, does the function return -1?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are the array's values guaranteed to be integers, or could floats be present?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is \"largest index\" the highest index found by scanning the whole array?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Are duplicate values now possible, unlike the other variant's explicit guarantee against them?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What is the expected return type?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Should the array be assumed non-empty?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_154_lexical",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does \"is a sequence in\" mean a contiguous substring, or could it also mean a non-contiguous subsequence?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the comparison be case-sensitive when checking rotations against the first word?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are all rotations of the second word considered, including the original (zero-shift) rotation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What should happen if the second word is longer than the first word?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are inputs guaranteed to be non-empty strings?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should whitespace or non-alphabetic characters be treated specially during the check?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   },
+   {
+    "question": "Do the given examples (e.g. cycpattern_check(\"efef\",\"eeff\") => False) fully disambiguate whether \"sequence\" means substring?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the check case-insensitive or an exact character match?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A real, plausible ambiguity related to this prompt, but not the exact one reference_text describes."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_4_semantic",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does the described behavior apply uniformly to all input types mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there implicit assumptions about output format or data structure?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle multiple valid interpretations of the input?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the described operation deterministic or can results vary?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What happens with edge cases like empty, null, or boundary values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the implementation follow standard conventions for this operation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance or memory efficiency constraints mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should errors or invalid inputs be handled?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_27_semantic",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does the described behavior apply uniformly to all input types mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there implicit assumptions about output format or data structure?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle multiple valid interpretations of the input?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the described operation deterministic or can results vary?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What happens with edge cases like empty, null, or boundary values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the implementation follow standard conventions for this operation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance or memory efficiency constraints mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should errors or invalid inputs be handled?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_50_semantic",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does the described behavior apply uniformly to all input types mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there implicit assumptions about output format or data structure?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle multiple valid interpretations of the input?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the described operation deterministic or can results vary?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What happens with edge cases like empty, null, or boundary values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the implementation follow standard conventions for this operation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance or memory efficiency constraints mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should errors or invalid inputs be handled?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_75_semantic",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does the described behavior apply uniformly to all input types mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there implicit assumptions about output format or data structure?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle multiple valid interpretations of the input?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the described operation deterministic or can results vary?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What happens with edge cases like empty, null, or boundary values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the implementation follow standard conventions for this operation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance or memory efficiency constraints mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should errors or invalid inputs be handled?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_97_semantic",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does the described behavior apply uniformly to all input types mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there implicit assumptions about output format or data structure?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle multiple valid interpretations of the input?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the described operation deterministic or can results vary?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What happens with edge cases like empty, null, or boundary values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the implementation follow standard conventions for this operation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance or memory efficiency constraints mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should errors or invalid inputs be handled?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_121_semantic",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does the described behavior apply uniformly to all input types mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there implicit assumptions about output format or data structure?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle multiple valid interpretations of the input?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the described operation deterministic or can results vary?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What happens with edge cases like empty, null, or boundary values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the implementation follow standard conventions for this operation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance or memory efficiency constraints mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should errors or invalid inputs be handled?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_154_semantic",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "Does the described behavior apply uniformly to all input types mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there implicit assumptions about output format or data structure?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function handle multiple valid interpretations of the input?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is the described operation deterministic or can results vary?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What happens with edge cases like empty, null, or boundary values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should the implementation follow standard conventions for this operation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance or memory efficiency constraints mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should errors or invalid inputs be handled?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/5_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/15_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/25_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/35_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/45_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/55_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/65_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/75_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/85_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/95_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/105_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/115_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/125_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/135_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/145_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/155_vagueness",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The labeled ambiguity is a genuine point of confusion that is not explicitly resolved elsewhere in the prompt.",
+  "candidates": [
+   {
+    "question": "What is the precise technical definition of the vague term used?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there multiple valid ways to interpret the unclear description?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should ambiguous or overlapping cases be resolved?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Is there a standard convention that clarifies the vague concept?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "What output format or structure is expected for results?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Should special or edge cases be handled differently?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "Are there performance requirements for the implementation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   },
+   {
+    "question": "How should the function validate or prepare input data?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not addressed by the given reference; a standard convention would apply."
+   }
+  ]
+ }
+]

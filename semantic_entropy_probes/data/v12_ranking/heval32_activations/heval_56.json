@@ -1,0 +1,43 @@
+{
+  "id": "heval_56",
+  "questions": [
+    "Should the function treat an empty string as properly closed and return True?",
+    "Are characters other than '<' and '>' allowed in the input, and if so, how should they be handled?",
+    "Must the function consider only the order of brackets, or also enforce that each '<' is matched with a later '>'?",
+    "Is nesting of brackets allowed (e.g., \"<<>>\") and considered properly closed?",
+    "How should the function handle mismatched counts, such as more '<' than '>' or vice versa?",
+    "Should the function return a boolean value (True/False) or raise an exception for invalid inputs?",
+    "Are whitespace characters within the string to be ignored, trimmed, or cause a failure?",
+    "Does the function need to handle very long strings efficiently, and are there any performance constraints?"
+  ],
+  "answers": [
+    "Yes, an empty string is considered properly closed (depth stays at 0), returning True.",
+    "Not applicable -- input is guaranteed to consist only of '<' and '>' characters.",
+    "Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.",
+    "Yes, nesting such as \"<<>>\" is allowed and considered properly closed.",
+    "Return False if the depth ever goes negative or the final depth is not exactly 0.",
+    "Returns a boolean (True/False); it does not raise for invalid input since input is guaranteed to be a string of '<' and '>'.",
+    "Not applicable -- input contains only '<' and '>' characters.",
+    "Not addressed; no specific performance constraint is stated."
+  ],
+  "inline_prompts": [
+    "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. Yes, an empty string is considered properly closed (depth stays at 0), returning True.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    Not applicable -- input is guaranteed to consist only of '<' and '>' characters.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. Yes, order matters: the running depth must never go negative (a '>' cannot appear before its matching '<'), not just have equal total counts.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. Yes, nesting such as \"<<>>\" is allowed and considered properly closed.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. Return False if the depth ever goes negative or the final depth is not exactly 0.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. Returns a boolean (True/False); it does not raise for invalid input since input is guaranteed to be a string of '<' and '>'. \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    Not applicable -- input contains only '<' and '>' characters.\n    \"\"\"",
+    "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. Not addressed; no specific performance constraint is stated.\n    \"\"\""
+  ],
+  "tiers": [
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

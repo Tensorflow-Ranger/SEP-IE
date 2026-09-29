@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).",
+  "baseline_mean_p": 0.18161558359861374,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Should characters other than letters (e.g., digits, punctuation, whitespace, symbols) be counted as distinct characters?",
+      "answer": "Yes -- the reference behavior lowercases the whole string then takes the set of characters, so any character (letters, digits, punctuation, whitespace) is counted as a distinct element the same way; there is no letter-only restriction.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).\n\nClarification: Yes -- the reference behavior lowercases the whole string then takes the set of characters, so any character (letters, digits, punctuation, whitespace) is counted as a distinct element the same way; there is no letter-only restriction.",
+      "p1": 0.19226127862930298,
+      "p2": 0.16391851007938385,
+      "mean_p": 0.17808989435434341,
+      "delta": -0.0035256892442703247
+    },
+    {
+      "idx": 6,
+      "question": "If the string is empty, should the function return `0` or raise an error?",
+      "answer": "Return 0 for an empty string (confirmed by test case: '' -> 0).",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).\n\nClarification: Return 0 for an empty string (confirmed by test case: '' -> 0).",
+      "p1": 0.18710383772850037,
+      "p2": 0.2133939564228058,
+      "mean_p": 0.20024889707565308,
+      "delta": 0.018633313477039337
+    },
+    {
+      "idx": 1,
+      "question": "If non\u2011letter characters are counted, are they considered case\u2011insensitive as well, or does case only apply to alphabetic letters?",
+      "answer": "Case-insensitivity (via .lower()) only meaningfully affects alphabetic letters; non-letter characters are unaffected by lowercasing but are still counted as distinct elements.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).\n\nClarification: Case-insensitivity (via .lower()) only meaningfully affects alphabetic letters; non-letter characters are unaffected by lowercasing but are still counted as distinct elements.",
+      "p1": 0.2030681073665619,
+      "p2": 0.23482850193977356,
+      "mean_p": 0.21894830465316772,
+      "delta": 0.037332721054553986
+    },
+    {
+      "idx": 2,
+      "question": "How should Unicode characters beyond the basic ASCII set (e.g., accented letters, emojis, non\u2011Latin scripts) be treated\u2014are they counted individually after lowercasing?",
+      "answer": "Not specified/tested; use standard Python str.lower() and set() semantics, no special Unicode normalization beyond that.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).\n\nClarification: Not specified/tested; use standard Python str.lower() and set() semantics, no special Unicode normalization beyond that.",
+      "p1": 0.20623937249183655,
+      "p2": 0.2345130443572998,
+      "mean_p": 0.22037620842456818,
+      "delta": 0.03876062482595444
+    },
+    {
+      "idx": 3,
+      "question": "Is the input string guaranteed to be a valid `str` object, or must the function handle `None`, bytes, or other types gracefully?",
+      "answer": "The input is guaranteed to be a valid str object; no need to handle None, bytes, or other types.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).\n\nClarification: The input is guaranteed to be a valid str object; no need to handle None, bytes, or other types.",
+      "p1": 0.21569642424583435,
+      "p2": 0.23579105734825134,
+      "mean_p": 0.22574374079704285,
+      "delta": 0.04412815719842911
+    },
+    {
+      "idx": 7,
+      "question": "Should leading, trailing, or internal whitespace be ignored, trimmed, or counted as distinct characters?",
+      "answer": "Whitespace is counted as a regular character like any other -- it is not stripped or trimmed before counting.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).\n\nClarification: Whitespace is counted as a regular character like any other -- it is not stripped or trimmed before counting.",
+      "p1": 0.21176500618457794,
+      "p2": 0.24358391761779785,
+      "mean_p": 0.2276744619011879,
+      "delta": 0.04605887830257416
+    },
+    {
+      "idx": 5,
+      "question": "Are surrogate pairs or characters represented by multiple code points (e.g., emojis) counted as a single distinct character?",
+      "answer": "Not specified/tested; use plain Python string iteration where each code point is counted individually (standard Python string indexing semantics).",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).\n\nClarification: Not specified/tested; use plain Python string iteration where each code point is counted individually (standard Python string indexing semantics).",
+      "p1": 0.30649223923683167,
+      "p2": 0.2923795282840729,
+      "mean_p": 0.29943588376045227,
+      "delta": 0.11782030016183853
+    },
+    {
+      "idx": 4,
+      "question": "Should combining characters or composed Unicode sequences be normalized before counting distinct characters?",
+      "answer": "Not specified; no normalization is performed beyond plain lower() + set().",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).\n\nClarification: Not specified; no normalization is performed beyond plain lower() + set().",
+      "p1": 0.3147132396697998,
+      "p2": 0.3308492600917816,
+      "mean_p": 0.3227812498807907,
+      "delta": 0.14116566628217697
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Should characters other than letters (e.g., digits, punctuation, whitespace, symbols) be counted as distinct characters?",
+      "answer": "Yes -- the reference behavior lowercases the whole string then takes the set of characters, so any character (letters, digits, punctuation, whitespace) is counted as a distinct element the same way; there is no letter-only restriction.",
+      "delta": -0.0035256892442703247
+    },
+    {
+      "idx": 6,
+      "question": "If the string is empty, should the function return `0` or raise an error?",
+      "answer": "Return 0 for an empty string (confirmed by test case: '' -> 0).",
+      "delta": 0.018633313477039337
+    },
+    {
+      "idx": 1,
+      "question": "If non\u2011letter characters are counted, are they considered case\u2011insensitive as well, or does case only apply to alphabetic letters?",
+      "answer": "Case-insensitivity (via .lower()) only meaningfully affects alphabetic letters; non-letter characters are unaffected by lowercasing but are still counted as distinct elements.",
+      "delta": 0.037332721054553986
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Should characters other than letters (e.g., digits, punctuation, whitespace, symbols) be counted as distinct characters?",
+    "answer": "Yes -- the reference behavior lowercases the whole string then takes the set of characters, so any character (letters, digits, punctuation, whitespace) is counted as a distinct element the same way; there is no letter-only restriction.",
+    "delta": -0.0035256892442703247
+  },
+  "next_prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of\n    \"\"\"\n\nClarification: Case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting).\n\nClarification: Yes -- the reference behavior lowercases the whole string then takes the set of characters, so any character (letters, digits, punctuation, whitespace) is counted as a distinct element the same way; there is no letter-only restriction.",
+  "code_prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, case-insensitive -- uppercase and lowercase versions of the same letter count as one distinct character (the string is lowercased before counting), yes -- the reference behavior lowercases the whole string then takes the set of characters, so any character (letters, digits, punctuation, whitespace) is counted as a distinct element the same way; there is no letter-only restriction\"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

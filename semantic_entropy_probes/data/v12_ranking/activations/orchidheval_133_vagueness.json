@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_133_vagueness",
+  "questions": [
+    "Does \"round each element first\" mean standard nearest-integer rounding, ceiling, or floor?",
+    "Is rounding done via Python's built-in round() (banker's rounding) or a different method?",
+    "Are negative numbers rounded toward zero, away from zero, or using standard rounding rules?",
+    "Is squaring performed on the rounded value rather than the original float?",
+    "Is the list guaranteed to be non-empty?",
+    "Should zero contribute 0 to the sum after rounding and squaring?",
+    "What is the expected return type — int or float?",
+    "Are all elements guaranteed to be numeric with no other types present?"
+  ],
+  "answers": [
+    "Ceiling (round up / toward positive infinity), matching the original intent.",
+    "Ceiling rounding (math.ceil), not banker's rounding.",
+    "Ceiling still rounds toward positive infinity even for negative numbers (e.g. ceil(-2.5) = -2).",
+    "Yes, squaring happens after rounding.",
+    "Not specified beyond what's given; assume non-empty.",
+    "Yes, 0 contributes 0.",
+    "Int, since ceiling of a squared rounded value is an integer.",
+    "Yes, numeric."
+  ],
+  "inline_prompts": [
+    "def sum_squares(lst):\n    \"\"\"You are given a list of numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list first, using ceiling (round up / toward positive infinity).\"\"\"",
+    "def sum_squares(lst):\n    \"\"\"You are given a list of numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list first using ceiling rounding (math.ceil), not banker's rounding.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"You are given a list of numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list first. Ceiling still rounds toward positive infinity even for negative numbers (e.g. ceil(-2.5) = -2).\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"You are given a list of numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list first, yes, squaring happens after rounding.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"You are given a list of numbers. Assume non-empty. You need to return the sum of squared numbers in the given list, round each element in the list first.\"\"\"",
+    "def sum_squares(lst):\n    \"\"\"You are given a list of numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list first. Yes, 0 contributes 0.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"You are given a list of numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list first. Int, since ceiling of a squared rounded value is an integer.\"\"\"",
+    "def sum_squares(lst):\n    \"\"\"You are given a list of numeric numbers.\n    You need to return the sum of squared numbers in the given list,\n    round each element in the list first.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    2,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

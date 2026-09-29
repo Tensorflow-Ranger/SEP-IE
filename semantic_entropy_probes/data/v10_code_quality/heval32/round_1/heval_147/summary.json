@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"",
+  "baseline_mean_p": 0.4737756848335266,
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "How should the array be handled if n is not a positive integer?",
+      "answer": "Not applicable -- n is guaranteed to be a positive integer per the docstring.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.",
+      "p1": 0.2587444484233856,
+      "p2": 0.4047868847846985,
+      "mean_p": 0.33176566660404205,
+      "delta": -0.14201001822948456
+    },
+    {
+      "idx": 1,
+      "question": "What should be done if n is zero or negative?",
+      "answer": "Not applicable -- the docstring guarantees n is \"a positive integer\".",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- the docstring guarantees n is \"a positive integer\".",
+      "p1": 0.2606683373451233,
+      "p2": 0.4121025502681732,
+      "mean_p": 0.33638544380664825,
+      "delta": -0.13739024102687836
+    },
+    {
+      "idx": 3,
+      "question": "Is the array a list of integers or can it contain other types?",
+      "answer": "A list of integers -- each a[i] = i*i - i + 1 is computed from integer i, producing an integer.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: A list of integers -- each a[i] = i*i - i + 1 is computed from integer i, producing an integer.",
+      "p1": 0.3745862543582916,
+      "p2": 0.4298625588417053,
+      "mean_p": 0.4022244065999985,
+      "delta": -0.07155127823352814
+    },
+    {
+      "idx": 6,
+      "question": "Are there any constraints on the values of the array elements?",
+      "answer": "They're fully determined by the formula a[i] = i*i - i + 1 for i in 1..n; no additional constraints beyond that.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: They're fully determined by the formula a[i] = i*i - i + 1 for i in 1..n; no additional constraints beyond that.",
+      "p1": 0.37292584776878357,
+      "p2": 0.44025343656539917,
+      "mean_p": 0.40658964216709137,
+      "delta": -0.06718604266643524
+    },
+    {
+      "idx": 0,
+      "question": "Are the indices in the array 1-based or 0-based?",
+      "answer": "The formula a[i]=i*i-i+1 is described with i from 1 to n (1-based conceptually for computing values), but the actual Python array A is a normal 0-indexed list, and the triple-search loops (i,j,k) iterate over 0-indexed positions into that list.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: The formula a[i]=i*i-i+1 is described with i from 1 to n (1-based conceptually for computing values), but the actual Python array A is a normal 0-indexed list, and the triple-search loops (i,j,k) iterate over 0-indexed positions into that list.",
+      "p1": 0.37989529967308044,
+      "p2": 0.4417935907840729,
+      "mean_p": 0.41084444522857666,
+      "delta": -0.06293123960494995
+    },
+    {
+      "idx": 4,
+      "question": "What is the expected return type of the function?",
+      "answer": "An integer -- the count of valid triples (len(ans)).",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: An integer -- the count of valid triples (len(ans)).",
+      "p1": 0.44913145899772644,
+      "p2": 0.4986225366592407,
+      "mean_p": 0.4738769978284836,
+      "delta": 0.00010131299495697021
+    },
+    {
+      "idx": 5,
+      "question": "How should the function handle cases where n is very large?",
+      "answer": "Not specifically addressed by the spec; the reference implementation is a straightforward triple-nested loop (O(n^3)), so it scales as such without special-casing.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not specifically addressed by the spec; the reference implementation is a straightforward triple-nested loop (O(n^3)), so it scales as such without special-casing.",
+      "p1": 0.5599679946899414,
+      "p2": 0.4903324544429779,
+      "mean_p": 0.5251502245664597,
+      "delta": 0.051374539732933044
+    },
+    {
+      "idx": 7,
+      "question": "What should the function return if no valid triples can be formed?",
+      "answer": "Return 0.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Return 0.",
+      "p1": 0.6625918745994568,
+      "p2": 0.7534528374671936,
+      "mean_p": 0.7080223560333252,
+      "delta": 0.23424667119979858
+    }
+  ],
+  "top3": [
+    {
+      "idx": 2,
+      "question": "How should the array be handled if n is not a positive integer?",
+      "answer": "Not applicable -- n is guaranteed to be a positive integer per the docstring.",
+      "delta": -0.14201001822948456
+    },
+    {
+      "idx": 1,
+      "question": "What should be done if n is zero or negative?",
+      "answer": "Not applicable -- the docstring guarantees n is \"a positive integer\".",
+      "delta": -0.13739024102687836
+    },
+    {
+      "idx": 3,
+      "question": "Is the array a list of integers or can it contain other types?",
+      "answer": "A list of integers -- each a[i] = i*i - i + 1 is computed from integer i, producing an integer.",
+      "delta": -0.07155127823352814
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "How should the array be handled if n is not a positive integer?",
+    "answer": "Not applicable -- n is guaranteed to be a positive integer per the docstring.",
+    "delta": -0.14201001822948456
+  },
+  "next_prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.",
+  "code_prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 4
+}

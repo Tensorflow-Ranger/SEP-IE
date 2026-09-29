@@ -1,0 +1,118 @@
+{
+  "round": 3,
+  "baseline_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.",
+  "baseline_mean_p": 0.3024952784180641,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "How should multiple consecutive delimiters (e.g., \"...\", \"?!\") be treated when splitting the string into sentences?",
+      "answer": "Sentences are split on each individual delimiter character (with any following whitespace consumed); consecutive delimiters produce empty sentence fragments between them, which simply fail the 'I ' check and don't affect the count.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.\n\nClarification: Sentences are split on each individual delimiter character (with any following whitespace consumed); consecutive delimiters produce empty sentence fragments between them, which simply fail the 'I ' check and don't affect the count.",
+      "p1": 0.26565492153167725,
+      "p2": 0.39076754450798035,
+      "mean_p": 0.3282112330198288,
+      "delta": 0.02571595460176468
+    },
+    {
+      "idx": 5,
+      "question": "How should empty sentences resulting from consecutive delimiters or delimiters at the string boundaries be handled?",
+      "answer": "They're included in the split results but fail the 'I ' prefix check, so they simply have no effect on the count.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.\n\nClarification: They're included in the split results but fail the 'I ' prefix check, so they simply have no effect on the count.",
+      "p1": 0.2750096619129181,
+      "p2": 0.40750494599342346,
+      "mean_p": 0.3412573039531708,
+      "delta": 0.03876202553510666
+    },
+    {
+      "idx": 6,
+      "question": "Should the function treat newline characters or other whitespace characters (e.g., tabs) as part of the sentence content, and do they affect the \"I \" match?",
+      "answer": "Not specially handled -- treated as ordinary whitespace, consumed like any other whitespace following a delimiter.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.\n\nClarification: Not specially handled -- treated as ordinary whitespace, consumed like any other whitespace following a delimiter.",
+      "p1": 0.2890452444553375,
+      "p2": 0.4293726086616516,
+      "mean_p": 0.35920892655849457,
+      "delta": 0.05671364814043045
+    },
+    {
+      "idx": 4,
+      "question": "If a sentence contains more than one occurrence of \"I \", does each occurrence count as a separate boredom, or does the sentence count at most once?",
+      "answer": "Only the start of the sentence is checked, so a sentence counts at most once regardless of how many times \"I \" appears elsewhere within it.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.\n\nClarification: Only the start of the sentence is checked, so a sentence counts at most once regardless of how many times \"I \" appears elsewhere within it.",
+      "p1": 0.28731849789619446,
+      "p2": 0.43372783064842224,
+      "mean_p": 0.36052316427230835,
+      "delta": 0.05802788585424423
+    },
+    {
+      "idx": 2,
+      "question": "Does the pattern \"I \" need to be a whole word (i.e., preceded by a word boundary and followed by a space) or can it appear inside another word?",
+      "answer": "It checks a literal prefix match: the sentence fragment's first two characters must be exactly \"I \" (capital I followed by a space) -- it is not a general word-boundary search elsewhere in the sentence.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.\n\nClarification: It checks a literal prefix match: the sentence fragment's first two characters must be exactly \"I \" (capital I followed by a space) -- it is not a general word-boundary search elsewhere in the sentence.",
+      "p1": 0.3306778371334076,
+      "p2": 0.4100348651409149,
+      "mean_p": 0.37035635113716125,
+      "delta": 0.06786107271909714
+    },
+    {
+      "idx": 7,
+      "question": "What should the function return for inputs that contain no delimiters at all\u2014should the entire string be considered a single sentence?",
+      "answer": "The entire string is treated as a single 'sentence' and checked for the \"I \" prefix.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.\n\nClarification: The entire string is treated as a single 'sentence' and checked for the \"I \" prefix.",
+      "p1": 0.304343044757843,
+      "p2": 0.4373815357685089,
+      "mean_p": 0.37086229026317596,
+      "delta": 0.06836701184511185
+    },
+    {
+      "idx": 3,
+      "question": "Are punctuation marks other than the delimiters (such as commas, quotes, or parentheses) considered part of the sentence content for the purpose of matching \"I \"?",
+      "answer": "Not specially handled -- punctuation other than the delimiters is just part of the sentence content and doesn't affect the prefix check unless it happens to be the very first character.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.\n\nClarification: Not specially handled -- punctuation other than the delimiters is just part of the sentence content and doesn't affect the prefix check unless it happens to be the very first character.",
+      "p1": 0.32519716024398804,
+      "p2": 0.43400174379348755,
+      "mean_p": 0.3795994520187378,
+      "delta": 0.07710417360067368
+    },
+    {
+      "idx": 1,
+      "question": "Should leading or trailing whitespace around each sentence be ignored when searching for the pattern \"I \"?",
+      "answer": "Leading whitespace before 'I' is not stripped -- the check looks at the literal first two characters of the sentence fragment, so leading whitespace would prevent a match.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.\n\nClarification: Leading whitespace before 'I' is not stripped -- the check looks at the literal first two characters of the sentence fragment, so leading whitespace would prevent a match.",
+      "p1": 0.3542015552520752,
+      "p2": 0.4259430468082428,
+      "mean_p": 0.390072301030159,
+      "delta": 0.08757702261209488
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "How should multiple consecutive delimiters (e.g., \"...\", \"?!\") be treated when splitting the string into sentences?",
+      "answer": "Sentences are split on each individual delimiter character (with any following whitespace consumed); consecutive delimiters produce empty sentence fragments between them, which simply fail the 'I ' check and don't affect the count.",
+      "delta": 0.02571595460176468
+    },
+    {
+      "idx": 5,
+      "question": "How should empty sentences resulting from consecutive delimiters or delimiters at the string boundaries be handled?",
+      "answer": "They're included in the split results but fail the 'I ' prefix check, so they simply have no effect on the count.",
+      "delta": 0.03876202553510666
+    },
+    {
+      "idx": 6,
+      "question": "Should the function treat newline characters or other whitespace characters (e.g., tabs) as part of the sentence content, and do they affect the \"I \" match?",
+      "answer": "Not specially handled -- treated as ordinary whitespace, consumed like any other whitespace following a delimiter.",
+      "delta": 0.05671364814043045
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "How should multiple consecutive delimiters (e.g., \"...\", \"?!\") be treated when splitting the string into sentences?",
+    "answer": "Sentences are split on each individual delimiter character (with any following whitespace consumed); consecutive delimiters produce empty sentence fragments between them, which simply fail the 'I ' check and don't affect the count.",
+    "delta": 0.02571595460176468
+  },
+  "next_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".\n\nClarification: They act only as delimiters -- sentences are split on '.', '?', '!' via regex, and the delimiter characters themselves are consumed/stripped, not treated as part of sentence content.\n\nClarification: Sentences are split on each individual delimiter character (with any following whitespace consumed); consecutive delimiters produce empty sentence fragments between them, which simply fail the 'I ' check and don't affect the count.",
+  "code_prompt": "def is_bore(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and yes, case-sensitive;\n    they act only as delimiters -- sentences are split on each individual delimiter character (with any following whitespace consumed); consecutive delimiters produce empty sentence fragments between them, which simply fail the 'I ' check and don't affect the count;\n    it must be capital \"I\" followed by a space, not lowercase \"i\".\n    \"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 6
+}

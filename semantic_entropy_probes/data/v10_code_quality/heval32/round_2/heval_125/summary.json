@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).",
+  "baseline_mean_p": 0.3441644012928009,
+  "candidates": [
+    {
+      "idx": 6,
+      "question": "How are letters with even 0-indexed positions (like 'a', 'c', etc.) counted?",
+      "answer": "Yes; per ord('a')=0, ord('c')=2, etc., letters at even alphabet positions are counted since the check is `ord(i) % 2 == 0`.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).\n\nClarification: Yes; per ord('a')=0, ord('c')=2, etc., letters at even alphabet positions are counted since the check is `ord(i) % 2 == 0`.",
+      "p1": 0.2536625862121582,
+      "p2": 0.33086177706718445,
+      "mean_p": 0.2922621816396713,
+      "delta": -0.05190221965312958
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider multiple consecutive whitespaces as a single delimiter or multiple delimiters?",
+      "answer": "Yes; txt.split() with no arguments treats any run of whitespace as a single delimiter and also strips leading/trailing whitespace.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).\n\nClarification: Yes; txt.split() with no arguments treats any run of whitespace as a single delimiter and also strips leading/trailing whitespace.",
+      "p1": 0.30737364292144775,
+      "p2": 0.3318380117416382,
+      "mean_p": 0.31960582733154297,
+      "delta": -0.024558573961257935
+    },
+    {
+      "idx": 5,
+      "question": "Are uppercase letters converted to lowercase before checking their order in the alphabet?",
+      "answer": "No; uppercase letters are excluded entirely from the third-branch count (`i.islower()` is False for them) rather than being lowercased and counted.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).\n\nClarification: No; uppercase letters are excluded entirely from the third-branch count (`i.islower()` is False for them) rather than being lowercased and counted.",
+      "p1": 0.3148251473903656,
+      "p2": 0.35407528281211853,
+      "mean_p": 0.33445021510124207,
+      "delta": -0.009714186191558838
+    },
+    {
+      "idx": 3,
+      "question": "How are letters with non-integer or non-alphabetic characters handled in the final count?",
+      "answer": "In the fallback (no spaces, no commas) branch, only lowercase alphabetic characters are considered at all (`i.islower()`); non-alphabetic characters are simply skipped, not counted.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).\n\nClarification: In the fallback (no spaces, no commas) branch, only lowercase alphabetic characters are considered at all (`i.islower()`); non-alphabetic characters are simply skipped, not counted.",
+      "p1": 0.3291339874267578,
+      "p2": 0.344146192073822,
+      "mean_p": 0.3366400897502899,
+      "delta": -0.007524311542510986
+    },
+    {
+      "idx": 2,
+      "question": "Are non-alphabetic characters treated as part of words or ignored during splitting?",
+      "answer": "Punctuation attached to a word stays part of that word token in the whitespace/comma-split branches (e.g. 'world!' stays one token); it's only excluded in the third fallback branch, which counts individual lowercase letters.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).\n\nClarification: Punctuation attached to a word stays part of that word token in the whitespace/comma-split branches (e.g. 'world!' stays one token); it's only excluded in the third fallback branch, which counts individual lowercase letters.",
+      "p1": 0.32658419013023376,
+      "p2": 0.355200856924057,
+      "mean_p": 0.3408925235271454,
+      "delta": -0.0032718777656555176
+    },
+    {
+      "idx": 1,
+      "question": "What characters are considered for splitting when no whitespaces exist?",
+      "answer": "Commas (',') are used as the fallback delimiter when there is no whitespace at all in the text.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).\n\nClarification: Commas (',') are used as the fallback delimiter when there is no whitespace at all in the text.",
+      "p1": 0.32055336236953735,
+      "p2": 0.3628383278846741,
+      "mean_p": 0.3416958451271057,
+      "delta": -0.0024685561656951904
+    },
+    {
+      "idx": 7,
+      "question": "What is the behavior if the input contains a mix of whitespaces and the specified split characters?",
+      "answer": "If any whitespace is present, the function splits on whitespace regardless of whether commas are also present; commas are only used as a fallback when there is no whitespace at all.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).\n\nClarification: If any whitespace is present, the function splits on whitespace regardless of whether commas are also present; commas are only used as a fallback when there is no whitespace at all.",
+      "p1": 0.3410886824131012,
+      "p2": 0.3689126670360565,
+      "mean_p": 0.35500067472457886,
+      "delta": 0.010836273431777954
+    },
+    {
+      "idx": 4,
+      "question": "What happens if the input string is empty?",
+      "answer": "Falls through to the third branch (no spaces, no commas found), and since there are also no lowercase letters, returns 0.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).\n\nClarification: Falls through to the third branch (no spaces, no commas found), and since there are also no lowercase letters, returns 0.",
+      "p1": 0.5043268203735352,
+      "p2": 0.44694700837135315,
+      "mean_p": 0.47563691437244415,
+      "delta": 0.13147251307964325
+    }
+  ],
+  "top3": [
+    {
+      "idx": 6,
+      "question": "How are letters with even 0-indexed positions (like 'a', 'c', etc.) counted?",
+      "answer": "Yes; per ord('a')=0, ord('c')=2, etc., letters at even alphabet positions are counted since the check is `ord(i) % 2 == 0`.",
+      "delta": -0.05190221965312958
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider multiple consecutive whitespaces as a single delimiter or multiple delimiters?",
+      "answer": "Yes; txt.split() with no arguments treats any run of whitespace as a single delimiter and also strips leading/trailing whitespace.",
+      "delta": -0.024558573961257935
+    },
+    {
+      "idx": 5,
+      "question": "Are uppercase letters converted to lowercase before checking their order in the alphabet?",
+      "answer": "No; uppercase letters are excluded entirely from the third-branch count (`i.islower()` is False for them) rather than being lowercased and counted.",
+      "delta": -0.009714186191558838
+    }
+  ],
+  "chosen": {
+    "idx": 6,
+    "question": "How are letters with even 0-indexed positions (like 'a', 'c', etc.) counted?",
+    "answer": "Yes; per ord('a')=0, ord('c')=2, etc., letters at even alphabet positions are counted since the check is `ord(i) % 2 == 0`.",
+    "delta": -0.05190221965312958
+  },
+  "next_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc).\n\nClarification: Yes; per ord('a')=0, ord('c')=2, etc., letters at even alphabet positions are counted since the check is `ord(i) % 2 == 0`.",
+  "code_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25, using ord(i) % 2 == 0 with ord('a')=0-based indexing as stated in the docstring (ord('a')=0, ord('b')=1, ...) -- so a letter counts if its 0-indexed alphabet position is even (a=0, c=2, e=4, etc), yes; per ord('a')=0, ord('c')=2, etc., letters at even alphabet positions are counted since the check is `ord(i) % 2 == 0`.\n    '''",
+  "test_n_pass": 5,
+  "test_n_total": 8
+}

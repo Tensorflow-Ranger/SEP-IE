@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.",
+  "baseline_mean_p": 0.23978102207183838,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "Are indices counted starting at 0 or 1 for the purpose of the multiple\u2011of checks?",
+      "answer": "0-based indexing (standard Python `range(len(lst))`); note index 0 is itself a multiple of 3, so lst[0] is always squared.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n\nClarification: 0-based indexing (standard Python `range(len(lst))`); note index 0 is itself a multiple of 3, so lst[0] is always squared.",
+      "p1": 0.1855096071958542,
+      "p2": 0.290646493434906,
+      "mean_p": 0.2380780503153801,
+      "delta": -0.0017029717564582825
+    },
+    {
+      "idx": 1,
+      "question": "What should happen if the input list contains non\u2011integer types (e.g., floats, strings, None)?",
+      "answer": "Not specified/tested; guaranteed to be a list of integers per the signature.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n\nClarification: Not specified/tested; guaranteed to be a list of integers per the signature.",
+      "p1": 0.19665279984474182,
+      "p2": 0.30185800790786743,
+      "mean_p": 0.24925540387630463,
+      "delta": 0.009474381804466248
+    },
+    {
+      "idx": 6,
+      "question": "Should the function handle very large integers that could cause overflow, and if so, how?",
+      "answer": "Not applicable; Python integers have arbitrary precision, so overflow is not a concern.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n\nClarification: Not applicable; Python integers have arbitrary precision, so overflow is not a concern.",
+      "p1": 0.20855353772640228,
+      "p2": 0.3029780089855194,
+      "mean_p": 0.25576577335596085,
+      "delta": 0.015984751284122467
+    },
+    {
+      "idx": 4,
+      "question": "For indices that are multiples of both 3 and 4 (e.g., 12), is squaring the only operation applied, confirming the precedence rule?",
+      "answer": "Yes, squaring takes precedence -- the reference implementation checks `if i % 3 == 0` first (which also covers multiples of 12), so cubing never applies at indices that are multiples of both 3 and 4.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n\nClarification: Yes, squaring takes precedence -- the reference implementation checks `if i % 3 == 0` first (which also covers multiples of 12), so cubing never applies at indices that are multiples of both 3 and 4.",
+      "p1": 0.2444036602973938,
+      "p2": 0.3222167193889618,
+      "mean_p": 0.2833101898431778,
+      "delta": 0.043529167771339417
+    },
+    {
+      "idx": 2,
+      "question": "How should negative indices be treated\u2014are they considered when determining multiples of 3 or 4?",
+      "answer": "Not applicable; indices are the normal 0-based forward iteration indices from `range(len(lst))`, no negative indexing is involved.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n\nClarification: Not applicable; indices are the normal 0-based forward iteration indices from `range(len(lst))`, no negative indexing is involved.",
+      "p1": 0.2432025969028473,
+      "p2": 0.32669946551322937,
+      "mean_p": 0.28495103120803833,
+      "delta": 0.04517000913619995
+    },
+    {
+      "idx": 3,
+      "question": "If the list is empty, should the function return an empty list or raise an error?",
+      "answer": "Returns 0 -- the sum of an empty result list (confirmed by test case: [] -> 0).",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n\nClarification: Returns 0 -- the sum of an empty result list (confirmed by test case: [] -> 0).",
+      "p1": 0.24090251326560974,
+      "p2": 0.34006407856941223,
+      "mean_p": 0.290483295917511,
+      "delta": 0.05070227384567261
+    },
+    {
+      "idx": 7,
+      "question": "Is there any limit on the size of the input list, and what behavior is expected if that limit is exceeded?",
+      "answer": "Not specified; no particular size limit is stated.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n\nClarification: Not specified; no particular size limit is stated.",
+      "p1": 0.27042630314826965,
+      "p2": 0.3248298466205597,
+      "mean_p": 0.2976280748844147,
+      "delta": 0.057847052812576294
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return a new list with the transformed values or modify the original list in place?",
+      "answer": "Neither exactly -- the function builds an internal new list but its real purpose/return value is the SUM (an int) of all entries, not a modified list; the original input list is not mutated.",
+      "prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n\nClarification: Neither exactly -- the function builds an internal new list but its real purpose/return value is the SUM (an int) of all entries, not a modified list; the original input list is not mutated.",
+      "p1": 0.29772913455963135,
+      "p2": 0.37129294872283936,
+      "mean_p": 0.33451104164123535,
+      "delta": 0.09473001956939697
+    }
+  ],
+  "top3": [
+    {
+      "idx": 5,
+      "question": "Are indices counted starting at 0 or 1 for the purpose of the multiple\u2011of checks?",
+      "answer": "0-based indexing (standard Python `range(len(lst))`); note index 0 is itself a multiple of 3, so lst[0] is always squared.",
+      "delta": -0.0017029717564582825
+    },
+    {
+      "idx": 1,
+      "question": "What should happen if the input list contains non\u2011integer types (e.g., floats, strings, None)?",
+      "answer": "Not specified/tested; guaranteed to be a list of integers per the signature.",
+      "delta": 0.009474381804466248
+    },
+    {
+      "idx": 6,
+      "question": "Should the function handle very large integers that could cause overflow, and if so, how?",
+      "answer": "Not applicable; Python integers have arbitrary precision, so overflow is not a concern.",
+      "delta": 0.015984751284122467
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "Are indices counted starting at 0 or 1 for the purpose of the multiple\u2011of checks?",
+    "answer": "0-based indexing (standard Python `range(len(lst))`); note index 0 is itself a multiple of 3, so lst[0] is always squared.",
+    "delta": -0.0017029717564582825
+  },
+  "next_prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. \n    \"\"\"\n\nClarification: As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n\nClarification: 0-based indexing (standard Python `range(len(lst))`); note index 0 is itself a multiple of 3, so lst[0] is always squared.",
+  "code_prompt": "def sum_squares(lst):\n    \"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 (using 0-based indexing, standard Python `range(len(lst))`), and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. As above, 'multiple of 3' is checked first and takes precedence, so it is squared, not cubed.\n    \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 11
+}

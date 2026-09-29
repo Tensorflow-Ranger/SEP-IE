@@ -1,0 +1,386 @@
+{
+  "heval_1": {
+    "answers": [
+      "Return an empty list; no group is ever started since there are no opening parentheses.",
+      "A group starts where the running depth goes from 0 to 1 (an opening '(') and ends where the depth returns to 0 (the matching ')'); everything in between, however deeply nested, belongs to that one group.",
+      "This cannot occur in valid input: the input is guaranteed to consist of well-formed, non-overlapping balanced groups.",
+      "Not a valid input case; the input is guaranteed to consist only of balanced groups (every '(' has a matching ')').",
+      "They are still split into separate groups. Splitting is based purely on the depth returning to 0, not on whether a space separates the groups -- adjacent groups with no space between them split the same way.",
+      "No; every group must contain at least one matched '()' pair to be balanced, so an empty group (zero characters) cannot occur once spaces are removed.",
+      "'Not nested within each other' means top-level groups don't contain one another; each depth-0-to-0 span is exactly one group regardless of the balanced nested parentheses inside it.",
+      "Not applicable; the input is guaranteed to contain only parentheses and spaces, no other characters."
+    ]
+  },
+  "heval_14": {
+    "answers": [
+      "No, the empty string is not included; the returned prefixes range from string[:1] up through string[:len(string)] only.",
+      "Yes; whitespace characters are treated like any other character, and prefixes are exact substrings of the raw input, whitespace included.",
+      "Returns an empty list.",
+      "Treated like any other character; prefixes are purely positional substrings with no filtering by character type.",
+      "Yes; prefixes are exact substrings, so case is preserved and not normalized.",
+      "Not a specified/valid case; the function expects a str argument.",
+      "Duplicates cannot occur: each returned prefix has a distinct length (1 through len(string)), so all prefixes are unique by construction.",
+      "Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string."
+    ]
+  },
+  "heval_16": {
+    "answers": [
+      "Yes; any character, including Unicode ones, is simply an element of the lowercased set, with no special-casing.",
+      "Treated the same as letters -- digits and symbols are counted as distinct characters if present in the string.",
+      "Yes; whitespace characters count like any other character in the set.",
+      "Returns 0 (the set of an empty string has length 0).",
+      "Yes; the string is lowercased before building the set, so 'A' and 'a' count as the same character.",
+      "Yes, treated as distinct from their unaccented base letters (e.g. 'e' vs 'e-with-accent' are different set elements); no accent-folding is performed.",
+      "Returns 1.",
+      "Counted the same as any other character; no special handling for non-ASCII code points."
+    ]
+  },
+  "heval_19": {
+    "answers": [
+      "Split on single spaces (numbers.split(' ')), discarding any resulting empty tokens (from repeated spaces).",
+      "Not applicable; the input is guaranteed to consist only of the ten valid words 'zero' through 'nine'.",
+      "Handled naturally: leading/trailing spaces just produce empty tokens in the split, which are filtered out before sorting.",
+      "Yes; the output is the sorted words joined by single spaces.",
+      "Returns an empty string.",
+      "Each occurrence is kept independently and sorted by its numeric value; duplicates are not removed, e.g. 'one one' stays as two 'one's.",
+      "A single space-delimited string of the number words in ascending numeric order.",
+      "Same as duplicate handling: every occurrence of a repeated word is preserved and placed in its sorted position; nothing is deduplicated."
+    ]
+  },
+  "heval_29": {
+    "answers": [
+      "Yes, case-sensitive; str.startswith performs an exact-case comparison with no normalization.",
+      "Every string in the list starts with the empty prefix, so the entire input list is returned unchanged.",
+      "Yes, compared literally; no trimming of whitespace is performed before the prefix check.",
+      "Not applicable; the input is guaranteed to be a list of strings.",
+      "Yes; the list comprehension preserves the original relative order of the matching elements.",
+      "Returns an empty list.",
+      "The string simply won't start with a longer prefix and is excluded -- str.startswith correctly returns False in that case.",
+      "No; not applicable, since the input is guaranteed to only contain strings."
+    ]
+  },
+  "heval_31": {
+    "answers": [
+      "Yes; both n=0 and n=1 are less than 2, so the function returns False for both.",
+      "Not a specified case; the function assumes n is an integer.",
+      "Handled the same way via trial division up to n-1; no special-casing, just slower for large n.",
+      "Yes; both are >= 2 and have no divisor in range(2, n-1), so both return True.",
+      "Not a specified case; the function assumes an integer input.",
+      "A number n >= 2 with no integer divisor k such that 2 <= k < n-1 dividing it evenly.",
+      "Not applicable; the same trial-division logic applies regardless of magnitude, with no special-casing.",
+      "Not a specified case; the function expects an integer argument as given."
+    ]
+  },
+  "heval_40": {
+    "answers": [
+      "Yes; 'distinct' refers to distinct positions/indices in the list, not distinct values, so equal values at different indices can validly form a triple.",
+      "Yes, negative integers are allowed -- indeed they're typically necessary to sum to zero alongside positives.",
+      "Returns False; the nested loops simply produce no valid i<j<k combination.",
+      "No; the function checks every combination of three positions regardless of the list's order, not just consecutive or sorted elements.",
+      "Not directly relevant: the function returns a single boolean as soon as any qualifying triple is found; it does not enumerate or count triples.",
+      "Zero is treated like any other integer and can participate in a summing triple.",
+      "Just a boolean indicating existence; the specific triple's values are not returned.",
+      "None specified beyond needing at least three elements for any possibility to exist; there's no upper bound."
+    ]
+  },
+  "heval_52": {
+    "answers": [
+      "Yes; the loop over an empty list makes no comparisons, so the function returns True vacuously.",
+      "Returns False; the check is `e >= t`, so a number equal to the threshold is NOT considered below it.",
+      "Not a specified case; the function assumes numeric list elements comparable with >=.",
+      "Allowed; the comparison logic works the same regardless of the threshold's sign.",
+      "Fine, as long as ALL numbers are below the threshold the function still returns True (it checks universally, not just for one).",
+      "Returns False, as soon as any single element is >= the threshold.",
+      "Not a specified case, but the >= comparison would work the same way for floats if present.",
+      "Returns True (that one element satisfies 'all elements below threshold' trivially)."
+    ]
+  },
+  "heval_53": {
+    "answers": [
+      "Yes, handled correctly; Python's + operator works normally for negative integers.",
+      "Not a specified case per the int signature, though Python's + would still work the same way if floats were passed.",
+      "Not applicable; Python integers have arbitrary precision, so no overflow occurs regardless of size.",
+      "Not the specified type per the signature (x: int, y: int), though + would behave the same way if floats were passed.",
+      "Returns the other argument unchanged, per ordinary addition identity (e.g. add(0, 5) == 5).",
+      "None; it's a single O(1) addition operation with no performance edge cases.",
+      "Not applicable; Python ints have arbitrary precision, so there is no such overflow boundary.",
+      "Not a specified case; the function expects int arguments per its signature."
+    ]
+  },
+  "heval_56": {
+    "answers": [
+      "Yes; depth starts and ends at 0 with no brackets processed, so the function returns True.",
+      "A running depth counter: '<' increments it, '>' decrements it; the string is correct only if depth never goes negative during the scan AND ends at exactly 0.",
+      "Not applicable; the input is guaranteed to be a string of only '<' and '>' characters.",
+      "Not applicable; only literal ASCII '<' and '>' characters are used or handled.",
+      "Not applicable, same as above; this isn't a valid input case.",
+      "Handled by the same running-depth rule: depth goes 1,2,1,0 -- never negative, ends at 0, so '<<>>' is correct (True).",
+      "Not a specified case; the function expects a str argument.",
+      "This can't happen with depth-tracking: once depth returns to exactly 0 all opens seen so far are matched, and the function only returns True if depth is exactly 0 after scanning the entire string, so nothing unmatched can remain undetected."
+    ]
+  },
+  "heval_59": {
+    "answers": [
+      "A single value: the largest prime factor itself, not a list.",
+      "Returns that prime itself, e.g. n=9=3^2 gives largest prime factor 3.",
+      "Not a specified case; the docstring assumes n > 1 and n is not prime.",
+      "Not applicable; the docstring explicitly assumes n > 1.",
+      "Returns an integer.",
+      "Repeated prime factors don't change the answer; the function just finds the largest j <= n that both divides n and is prime.",
+      "Same logic applies: it iterates every j from 2 to n and returns the largest one that divides n and is prime.",
+      "Same brute-force logic (checks every j up to n); no special-casing, just slower for large n."
+    ]
+  },
+  "heval_64": {
+    "answers": [
+      "Yes; the vowels string includes both cases ('aeiouAEIOU'), so uppercase vowels are counted the same as lowercase.",
+      "Ignored/not counted as vowels; only characters in 'aeiouAEIOU', or a trailing 'y'/'Y', are counted.",
+      "Not handled explicitly; the function would raise an IndexError trying to access s[-1] on an empty string -- this isn't a guarded/documented case.",
+      "Yes, since both cases are listed explicitly in the vowels string.",
+      "NOT counted as a vowel in that case; only the actual last character of the string is checked for being 'y' or 'Y'.",
+      "A non-empty string representing a word.",
+      "Only the final occurrence (the true last character) is added as a vowel bonus; any earlier 'y' occurrences elsewhere in the string are not counted at all.",
+      "Ignored; such characters are not in the vowels set and are not equal to 'y'/'Y', so they contribute nothing to the count."
+    ]
+  },
+  "heval_80": {
+    "answers": [
+      "Treated the same as any other character; the function only compares characters positionally, with no filtering by type.",
+      "Yes; comparison is by exact character equality (case-sensitive), so 'A' and 'a' are considered different.",
+      "That's fine and doesn't affect the result; the check only looks at each window of 3 CONSECUTIVE letters, not all letters in the whole string.",
+      "Checked normally: happy if length >= 3 (true here) and the single window of those 3 consecutive letters are pairwise distinct.",
+      "Yes, it checks every overlapping window of 3 consecutive letters (s[i], s[i+1], s[i+2] for each i), not just non-overlapping groups.",
+      "For every window of 3 consecutive characters in the string, all three characters in that window must be pairwise different from one another.",
+      "Returns False (explicit check: if len(s) < 3, return False).",
+      "Yes, that's allowed and doesn't violate happiness; only distinctness WITHIN each 3-consecutive-letter window matters."
+    ]
+  },
+  "heval_91": {
+    "answers": [
+      "They simply won't match 'starts with I ' (an empty string can't start with that), so they contribute 0 to the count -- not an error case.",
+      "The split pattern only matches one punctuation character at a time, so consecutive punctuation like '!!' acts as two separate delimiters in sequence, which can produce an empty-string fragment between them; that empty fragment doesn't start with 'I ' so it simply doesn't count.",
+      "Yes; the regex split consumes the delimiter (the punctuation character plus any trailing whitespace), so the resulting sentence fragments don't include the punctuation.",
+      "Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.",
+      "Irrelevant/not checked; only the first two characters of the sentence matter for the boredom check.",
+      "NOT counted; the check is case-sensitive and specifically requires a capital 'I' followed by a space.",
+      "Counts the same as any sentence starting with 'I ' -- it's still a boredom.",
+      "Does NOT count; the check requires the first two characters to be exactly 'I' followed by a literal space, so a lone 'I' with no trailing space fails that check."
+    ]
+  },
+  "heval_104": {
+    "answers": [
+      "Not applicable; the input is guaranteed to be a list of positive integers, so negative numbers don't occur.",
+      "Not applicable; ordinary positive integers have no leading-zero representation.",
+      "Not applicable in the sense of the number 0 itself, since input is guaranteed to be positive integers; an empty INPUT LIST is handled fine and simply returns an empty result.",
+      "A digit character with integer value divisible by 2, i.e. int(c) % 2 == 0 (0, 2, 4, 6, 8).",
+      "Excluded from the result if the number has ANY even digit; only numbers where every single digit is odd are kept.",
+      "Not applicable; the input is guaranteed to be positive integers only.",
+      "Not applicable as valid input (0 isn't a positive integer), though its only digit '0' is even, so it would be excluded if it somehow appeared.",
+      "Valid; a number qualifies if all of its digits (even just the one digit) are odd, so 3 (digit '3', odd) would be included."
+    ]
+  },
+  "heval_109": {
+    "answers": [
+      "Not applicable; the docstring explicitly guarantees the list has unique elements.",
+      "Trivially already sorted -- a single-element array is always non-decreasing, so the function returns True regardless of shifts.",
+      "The docstring's exposition uses 1-based indexing (arr[1]...arr[N]) for description purposes, but the actual implementation operates on the standard 0-indexed Python list as passed in.",
+      "Non-decreasing allows equal consecutive elements (<=), though since elements are guaranteed unique this distinction doesn't actually arise in practice.",
+      "Handled explicitly: an empty array returns True immediately, per the docstring.",
+      "Not possible with unique elements: at most one rotation point (the position of the minimum element) can produce a sorted result, and the function checks exactly that single candidate.",
+      "Numerically; the function compares the array rotated to start at its minimum value against the numerically sorted list.",
+      "Yes; if the array is already sorted, its minimum is already at index 0, so the 'rotation to minimum' is effectively zero shifts and the check succeeds without any actual movement."
+    ]
+  },
+  "heval_110": {
+    "answers": [
+      "The function only checks feasibility via counts, matching the 'no limit on the number of exchanged elements' rule -- exchanges can happen as many times as needed.",
+      "The function doesn't model list mutation directly; it counts odd elements in lst1 and even elements in lst2, and returns YES if lst2 has enough even elements to cover (replace) all of lst1's odd elements.",
+      "The odd count in lst1 is 0, so `even >= odd` (even >= 0) is trivially true, and the function returns YES.",
+      "Not a specified case; the modulo check (i % 2) assumes lst elements are integers.",
+      "A number x where x % 2 == 0.",
+      "The docstring states both input lists are guaranteed to be non-empty; no other size constraints are specified.",
+      "The even count is 0, so if lst1 has any odd numbers, `even >= odd` is False and the function returns NO.",
+      "Not applicable; the function only returns a YES/NO feasibility answer, not a specific exchange plan, so there is nothing to break ties on."
+    ]
+  },
+  "heval_113": {
+    "answers": [
+      "Returns an empty list.",
+      "Not applicable; input is guaranteed to consist of strings of only digits, so every string has digits to count from (a string with all-even digits simply yields a count of 0 in its message).",
+      "Not applicable; input strings are guaranteed to consist only of digit characters, no whitespace.",
+      "'the number of odd elements {n}n the str{n}ng {n} of the {n}nput.' -- every 'i' in the template sentence is replaced by the digit count n (as digits, not the word 'i').",
+      "Not applicable; input is guaranteed to be a list of digit-strings.",
+      "A digit character d where int(d) % 2 == 1 (i.e. one of '1','3','5','7','9').",
+      "Each digit is counted individually regardless of repetition -- e.g. '1111' counts all four 1's as odd digits (n=4).",
+      "Handled the same as any other case; returns a one-element list containing that string's odd-digit-count message."
+    ]
+  },
+  "heval_125": {
+    "answers": [
+      "Yes; txt.split() with no arguments treats any run of whitespace as a single delimiter and also strips leading/trailing whitespace.",
+      "Commas (',') are used as the fallback delimiter when there is no whitespace at all in the text.",
+      "Punctuation attached to a word stays part of that word token in the whitespace/comma-split branches (e.g. 'world!' stays one token); it's only excluded in the third fallback branch, which counts individual lowercase letters.",
+      "In the fallback (no spaces, no commas) branch, only lowercase alphabetic characters are considered at all (`i.islower()`); non-alphabetic characters are simply skipped, not counted.",
+      "Falls through to the third branch (no spaces, no commas found), and since there are also no lowercase letters, returns 0.",
+      "No; uppercase letters are excluded entirely from the third-branch count (`i.islower()` is False for them) rather than being lowercased and counted.",
+      "Yes; per ord('a')=0, ord('c')=2, etc., letters at even alphabet positions are counted since the check is `ord(i) % 2 == 0`.",
+      "If any whitespace is present, the function splits on whitespace regardless of whether commas are also present; commas are only used as a fallback when there is no whitespace at all."
+    ]
+  },
+  "heval_126": {
+    "answers": [
+      "No; if a value appears MORE than twice (count > 2) the function returns False. Appearing exactly twice is fine, but three or more identical values makes it False regardless of order.",
+      "Any value occurring more than twice in the list; occurring exactly twice is allowed, but three-plus occurrences of the same value makes the list not-sorted in this function's specific sense.",
+      "Trivially considered sorted (no duplicate-count or ascending-order violations possible), so returns True.",
+      "Considered sorted; both checks trivially pass for a length-1 list.",
+      "Ascending order -- checking lst[i-1] <= lst[i] for all consecutive pairs.",
+      "Not a specified case; the function assumes a list of non-negative integers per the docstring.",
+      "Allowed and returns True, as long as that value appears at most twice and the overall sequence is non-decreasing (e.g. [1,2,2,3] is sorted).",
+      "Ascending numeric order (each element <= the next), combined with the additional constraint that no value may appear more than twice."
+    ]
+  },
+  "heval_129": {
+    "answers": [
+      "Per the docstring, values are unique: every integer in [1, N*N] appears exactly once in the grid.",
+      "The lexicographically smallest sequence of VALUES visited along the path, comparing the ordered list of cell values step by step -- not the sum of values.",
+      "Yes; a path of length k means visiting exactly k cells, not necessarily distinct -- the path can revisit the same cell multiple times (e.g. oscillating between a cell and a neighbor).",
+      "Yes; the docstring explicitly states 'It is guaranteed that the answer is unique.'",
+      "No; only cells sharing an EDGE with the current cell count as neighbors (up/down/left/right), diagonal cells do not count.",
+      "Yes, same as above: every integer 1..N*N appears exactly once, no duplicates.",
+      "Not applicable in the intended sense; ties are resolved lexicographically by the sequence of visited values, and the problem guarantees this lexicographically-minimum path is unique.",
+      "It means visiting exactly k cells total (including the starting cell), not k moves/edges traversed."
+    ]
+  },
+  "heval_130": {
+    "answers": [
+      "tri(0)=1 as a base case, tri(1)=3, and for n>=2: if n is even, tri(n) = n/2 + 1; if n is odd, the actual reference implementation computes tri(n) = tri(n-1) + tri(n-2) + (n+3)/2.",
+      "tri(0) = 1 (the base case, returned as [1] when n=0), and tri(1) = 3.",
+      "Returns [1] -- just the single base-case value.",
+      "Not a specified/valid case; the docstring states n is a non-negative integer.",
+      "The returned list's index i directly corresponds to tri(i), for i from 0 through n (the first n+1 values of the sequence, in order).",
+      "A non-negative integer.",
+      "No special-casing; the function computes iteratively from index 2 up to n, building the list incrementally (this could be slow for very large n but isn't otherwise restricted).",
+      "Not applicable; the sequence is fully and deterministically defined by the given recurrence, with no ambiguous or tied cases."
+    ]
+  },
+  "heval_134": {
+    "answers": [
+      "A maximal group of characters separated by spaces, per the docstring note: 'word is a group of characters separated by space.'",
+      "The check uses txt.split(' '), which splits on each single space character; consecutive spaces would produce empty-string elements between them.",
+      "A character c where 97 <= ord(c.lower()) <= 122, i.e. an ASCII a-z letter (case folded before the check).",
+      "Returns False in both cases: for an empty string, split(' ')[-1] is '' (length 0); for a whitespace-only or trailing-space string, the last segment after the final space is also empty.",
+      "Returns True; the last element from split(' ') would be that single letter (length 1, alphabetic), satisfying both conditions.",
+      "NOT considered a letter here; the check only covers ASCII a-z, so an accented character's ordinal falls outside that range and returns False.",
+      "It means the last character stands alone as its own single-character 'word' (isolated by spaces on both sides in effect), rather than being part of a longer word.",
+      "Returns False; if the last space-separated segment has length > 1, the len(check)==1 condition fails even though its final character happens to be alphabetic."
+    ]
+  },
+  "heval_138": {
+    "answers": [
+      "The function accepts n=0 as input with no restriction enforced, but the actual result would be False since n%2==0 is true for 0 while n>=8 is false.",
+      "The function doesn't decompose n into explicit addends at all -- it's a closed-form check (n even and n>=8) -- but mathematically repeats ARE allowed, e.g. 8 = 2+2+2+2.",
+      "An even integer strictly greater than zero (2, 4, 6, ...).",
+      "Not allowed; per the docstring the sum must consist of exactly 4 positive even numbers, and the minimum such sum is 2+2+2+2=8, so n=2 returns False.",
+      "Not applicable; the function only returns a boolean for whether some decomposition exists, not the decomposition itself, so there's nothing to break ties on.",
+      "Not a specified case for sign, but the modulo/comparison logic would just evaluate normally (e.g. a negative n fails the n>=8 check and returns False).",
+      "Returns False, since the smallest sum of 4 positive even numbers is 8, and the check explicitly requires n >= 8.",
+      "Not applicable; the function only checks existence of some decomposition into 4 positive even numbers, order of addends doesn't matter for a sum."
+    ]
+  },
+  "heval_140": {
+    "answers": [
+      "Neither purely one unit nor purely individual: runs of 1-2 consecutive spaces are each replaced with that many underscores (one per space), while runs of MORE than 2 consecutive spaces collapse into a single '-'.",
+      "An empty string returns an empty string. A string of only spaces: if the run length is >2 the output is a single '-'; if 1-2 spaces, the output is that many underscores.",
+      "Not applicable; only the literal ASCII space character is treated as a space to replace -- tabs and newlines are passed through unchanged.",
+      "Handled the same as any other space run, following the same 1-2-vs-more-than-2 rule, including a run that extends to the very end of the string (handled by a trailing check after the main loop).",
+      "Not applicable; this is about whitespace-character detection, not letter casing -- the transformation never touches letter case.",
+      "Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.",
+      "Not treated as spaces; only the literal ASCII space character triggers the underscore/dash replacement logic.",
+      "Other whitespace characters (tabs, newlines) are passed through unchanged; only runs of the literal space character follow the underscore/dash rule."
+    ]
+  },
+  "heval_142": {
+    "answers": [
+      "No special-casing; negative entries are squared or cubed by the exact same index-based rule as positive ones.",
+      "Returns 0 (sum of an empty result list).",
+      "Not a specified case; the function applies **2/**3/no-op based purely on index and would work arithmetically for e.g. floats too, though the docstring specifies integers.",
+      "0-indexed, standard Python list indexing; index 0 is itself a multiple of 3, so the first element is always squared.",
+      "The multiple-of-3 rule takes precedence: such indices are squared, not cubed, since the cube branch explicitly requires 'multiple of 4 AND NOT a multiple of 3'.",
+      "Returns a new list's sum; the original input list is never mutated, a separate result list is built.",
+      "Not a specified case; the function assumes lst is indexable and supports len().",
+      "Not a specified case; the function assumes all list elements are numeric."
+    ]
+  },
+  "heval_145": {
+    "answers": [
+      "The sign of the number is applied to its FIRST digit only when computing the digit sum (e.g. for -11, digits [1,1] become [-1,1], summing to 0), not by summing absolute-value digits and negating the whole sum.",
+      "Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.",
+      "Not applicable; digit sums are computed from ordinary integers via str(n), which never has leading zeros.",
+      "Not applicable, same as above; standard integers have no leading-zero string representation.",
+      "Not a specified case; the function assumes a list of integers.",
+      "Returns an empty list.",
+      "Yes, same as the tie-breaking answer above: Python's stable sort keeps equal-key elements in their original relative order.",
+      "Handled normally with no special-casing -- a number with digit sum 0 (like 0 itself) is just sorted into whatever position that key value implies."
+    ]
+  },
+  "heval_147": {
+    "answers": [
+      "The mathematical description uses 1-based indices (i from 1 to n) for exposition, but the actual Python implementation loops over the standard 0-indexed array A built via range(1, n+1).",
+      "Not a documented case (the docstring guarantees n is positive), but mechanically range(1, 0+1) is empty, so A is empty and the function returns 0.",
+      "Not applicable; Python integers have arbitrary precision so no overflow occurs, though the O(n^3) triple loop becomes slow for large n.",
+      "The array a[i] = i*i - i + 1 is a specific deterministic formula; the algorithm treats each position i,j,k independently regardless of whether the resulting values happen to coincide.",
+      "An ordered triple of ARRAY POSITIONS (i,j,k) with i<j<k (strictly increasing indices, not necessarily distinct values), whose corresponding array values sum to a multiple of 3.",
+      "By position: every combination of i<j<k is counted once, regardless of whether the resulting values happen to match another triple's values.",
+      "Not applicable in the misleading sense -- despite the function's name, it counts ALL qualifying triples, not just a single maximum one; 'max' refers to the maximal array of length n, not to selecting the biggest triple.",
+      "A single integer: the count of qualifying triples, not a list of the triples themselves."
+    ]
+  },
+  "heval_148": {
+    "answers": [
+      "Yes; the function compares the indices of planet1 and planet2 in the fixed solar-system order and returns the planets strictly between them, in solar order, regardless of which was passed first.",
+      "Returns an empty tuple; the `planet1 == planet2` check explicitly triggers that early return.",
+      "Yes; the returned tuple is always a contiguous slice of the fixed planet_names tuple (Mercury..Neptune order), so results are always in that canonical order.",
+      "Still returned in canonical solar order (closest-to-sun first among the planets between them); the function slices the fixed-order tuple either way, just choosing which index range to slice.",
+      "Exclusive; the returned tuple contains only planets strictly between the two given orbits, not the two named planets themselves.",
+      "Returns an empty tuple, per the docstring's explicit rule for invalid planet names.",
+      "Same canonical solar-order result either way; the function doesn't preserve input argument order, it always returns planets in their fixed Mercury-to-Neptune sequence.",
+      "Yes; comparison against planet_names is an exact string match, so e.g. lowercase 'earth' would NOT match 'Earth' and would be treated as an invalid planet name."
+    ]
+  },
+  "heval_150": {
+    "answers": [
+      "n is a prime number -- it has no divisor i in range(2, n) with n % i == 0, and n != 1.",
+      "n is NOT prime -- specifically n == 1, or n has some divisor i in range(2, n) with n % i == 0.",
+      "Not a specified case; the function assumes n is an integer, used directly with range() and %.",
+      "Any integer, including n=1 (which is explicitly special-cased to return y since 1 is not prime).",
+      "n=1 explicitly returns y (special-cased). n=0: range(2,0) is empty so the for-else's else-branch fires and x is returned -- meaning 0 is treated as 'prime' by this implementation, a quirk of the code rather than a deliberate primality rule for 0.",
+      "n being a prime number, per the docstring: return x if n is prime, y otherwise.",
+      "None specified; x and y can be any values, simply returned as-is depending on n's primality.",
+      "Not possible; 'prime' and 'not prime' are mutually exclusive, so the function always takes exactly one branch."
+    ]
+  },
+  "heval_151": {
+    "answers": [
+      "No; zero is not odd (0 % 2 == 0), so it's excluded regardless of other conditions.",
+      "Excluded via the check `\".\" not in str(i)`, which filters out floats (whose string form contains a decimal point); only true integers pass.",
+      "No; excluded by the `i > 0` condition -- only strictly positive numbers are considered.",
+      "Not a specified case; the function assumes all list elements are numbers supporting comparison and modulo.",
+      "Handles silently by filtering; there's no explicit error-raising, non-qualifying elements are just excluded via the list comprehension's conditions.",
+      "Excluded entirely by the `\".\" not in str(i)` check, regardless of whether the float's value would otherwise be odd -- any float is filtered out.",
+      "No special-casing; it's a simple linear-time list comprehension over the input, unaffected by value magnitude.",
+      "Only the integer elements (no '.' in their string form) that are also positive and odd are included; floats are always excluded."
+    ]
+  },
+  "heval_163": {
+    "answers": [
+      "Yes; the range() call uses `upper+1` as the exclusive bound, making both the computed lower and upper bounds inclusive.",
+      "Handled automatically: lower=max(2,min(a,b)) and upper=min(8,max(a,b)) sort the two inputs internally, so generate_integers(8,2) gives the same result as generate_integers(2,8).",
+      "Not applicable in practice; the docstring says a and b are positive integers, and the range is always clamped to [2,8] regardless of the actual a/b values, so numbers below 2 never appear.",
+      "Not applicable; standard positive integers have no leading-zero representation.",
+      "Not a specified case; the docstring assumes both are given positive integers.",
+      "Not directly relevant to the actual behavior: despite the docstring discussing 'even digits', the implementation returns EVEN NUMBERS within a range always clamped to [2,8] -- so only the single-digit values 2,4,6,8 can ever appear, and multi-digit digit-parity questions don't arise.",
+      "Ascending order; the range() and list comprehension iterate from lower to upper in increasing order.",
+      "Returns an empty list -- this can happen if the clamped range ends up empty (lower > upper), e.g. when both a and b fall below 2."
+    ]
+  }
+}

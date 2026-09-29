@@ -1,0 +1,157 @@
+{
+  "round": 1,
+  "baseline_prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)",
+  "baseline_mean_p": 0.6717800796031952,
+  "candidates": [
+    {
+      "idx": 11,
+      "question": "What is the exact timing of when the smoke is checked for presence at (R,C) during each time step?",
+      "answer": "The check at t+0.5 occurs after both the wind blowing and the (0,0) smoke regeneration for time t have taken place, i.e., right after step t finishes and before step t+1 begins.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: The check at t+0.5 occurs after both the wind blowing and the (0,0) smoke regeneration for time t have taken place, i.e., right after step t finishes and before step t+1 begins.",
+      "p1": 0.5764088034629822,
+      "p2": 0.6059982776641846,
+      "mean_p": 0.5912035405635834,
+      "delta": -0.08057653903961182
+    },
+    {
+      "idx": 10,
+      "question": "How is the smoke at (R,C) checked if it is updated during the wind step?",
+      "answer": "It is checked after that time step's full sequence of wind movement and regeneration at (0,0) has been applied.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: It is checked after that time step's full sequence of wind movement and regeneration at (0,0) has been applied.",
+      "p1": 0.5537290573120117,
+      "p2": 0.6296871304512024,
+      "mean_p": 0.5917080938816071,
+      "delta": -0.08007198572158813
+    },
+    {
+      "idx": 2,
+      "question": "How is the smoke distributed if multiple cells have smoke and the wind direction causes overlapping movement?",
+      "answer": "The statement describes cell occupancy as presence/absence of smoke, not a count, so overlapping movement just results in smoke being present in the union of destination cells.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: The statement describes cell occupancy as presence/absence of smoke, not a count, so overlapping movement just results in smoke being present in the union of destination cells.",
+      "p1": 0.610049307346344,
+      "p2": 0.599816620349884,
+      "mean_p": 0.604932963848114,
+      "delta": -0.06684711575508118
+    },
+    {
+      "idx": 8,
+      "question": "How is the smoke at (R,C) determined if multiple cells contribute smoke to it during the wind step?",
+      "answer": "Since each step moves all smoke by the same single direction, each smoke cell maps to one destination cell, so no merging rule beyond set union is needed.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: Since each step moves all smoke by the same single direction, each smoke cell maps to one destination cell, so no merging rule beyond set union is needed.",
+      "p1": 0.6289194226264954,
+      "p2": 0.6108424067497253,
+      "mean_p": 0.6198809146881104,
+      "delta": -0.05189916491508484
+    },
+    {
+      "idx": 3,
+      "question": "Is the smoke at (0,0) replenished only if there was no smoke there before the wind step?",
+      "answer": "Yes, new smoke is generated at (0,0) only if there is no smoke there after the wind movement for that time step.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: Yes, new smoke is generated at (0,0) only if there is no smoke there after the wind movement for that time step.",
+      "p1": 0.6458285450935364,
+      "p2": 0.624565839767456,
+      "mean_p": 0.6351971924304962,
+      "delta": -0.036582887172698975
+    },
+    {
+      "idx": 5,
+      "question": "What is the initial state of smoke at time t=0 besides (0,0)?",
+      "answer": "At time 0, smoke exists only at (0,0) and nowhere else.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: At time 0, smoke exists only at (0,0) and nowhere else.",
+      "p1": 0.659149706363678,
+      "p2": 0.6266180276870728,
+      "mean_p": 0.6428838670253754,
+      "delta": -0.028896212577819824
+    },
+    {
+      "idx": 1,
+      "question": "What happens to smoke that moves outside the grid boundaries?",
+      "answer": "The statement does not address grid boundaries, since the grid is described as infinitely large.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: The statement does not address grid boundaries, since the grid is described as infinitely large.",
+      "p1": 0.6792478561401367,
+      "p2": 0.6423454880714417,
+      "mean_p": 0.6607966721057892,
+      "delta": -0.010983407497406006
+    },
+    {
+      "idx": 7,
+      "question": "Are the coordinates (R,C) allowed to be outside the range of the grid?",
+      "answer": "The statement does not restrict (R,C) to being inside any grid region, since the grid is infinite; it only constrains R and C to be between -N and N.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: The statement does not restrict (R,C) to being inside any grid region, since the grid is infinite; it only constrains R and C to be between -N and N.",
+      "p1": 0.681410551071167,
+      "p2": 0.6555914282798767,
+      "mean_p": 0.6685009896755219,
+      "delta": -0.00327908992767334
+    },
+    {
+      "idx": 0,
+      "question": "Does the smoke spread to adjacent cells simultaneously or sequentially during each wind step?",
+      "answer": "All smoke present moves simultaneously as a single step according to the t-th character of S.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: All smoke present moves simultaneously as a single step according to the t-th character of S.",
+      "p1": 0.6891869306564331,
+      "p2": 0.6512125134468079,
+      "mean_p": 0.6701997220516205,
+      "delta": -0.001580357551574707
+    },
+    {
+      "idx": 4,
+      "question": "How is the smoke at (R,C) checked at time t+0.5\u2014before or after the wind step?",
+      "answer": "It is checked after both the wind movement and the possible regeneration at (0,0) for time t have completed, i.e., after the full step t.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: It is checked after both the wind movement and the possible regeneration at (0,0) for time t have completed, i.e., after the full step t.",
+      "p1": 0.6973736882209778,
+      "p2": 0.6706146001815796,
+      "mean_p": 0.6839941442012787,
+      "delta": 0.012214064598083496
+    },
+    {
+      "idx": 6,
+      "question": "How is the smoke handled if multiple wind directions cause conflicting movements for the same cell?",
+      "answer": "The statement does not address this, since each time step uses a single direction character applied uniformly to all smoke.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: The statement does not address this, since each time step uses a single direction character applied uniformly to all smoke.",
+      "p1": 0.6966191530227661,
+      "p2": 0.6776124835014343,
+      "mean_p": 0.6871158182621002,
+      "delta": 0.01533573865890503
+    },
+    {
+      "idx": 9,
+      "question": "What is the behavior of smoke when it moves into a cell that already has smoke?",
+      "answer": "The statement only tracks presence/absence of smoke per cell, so a cell already having smoke plus incoming smoke simply remains smoke-present.",
+      "prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: The statement only tracks presence/absence of smoke per cell, so a cell already having smoke plus incoming smoke simply remains smoke-present.",
+      "p1": 0.747971773147583,
+      "p2": 0.6897705793380737,
+      "mean_p": 0.7188711762428284,
+      "delta": 0.04709109663963318
+    }
+  ],
+  "top3": [
+    {
+      "idx": 11,
+      "question": "What is the exact timing of when the smoke is checked for presence at (R,C) during each time step?",
+      "answer": "The check at t+0.5 occurs after both the wind blowing and the (0,0) smoke regeneration for time t have taken place, i.e., right after step t finishes and before step t+1 begins.",
+      "delta": -0.08057653903961182
+    },
+    {
+      "idx": 10,
+      "question": "How is the smoke at (R,C) checked if it is updated during the wind step?",
+      "answer": "It is checked after that time step's full sequence of wind movement and regeneration at (0,0) has been applied.",
+      "delta": -0.08007198572158813
+    },
+    {
+      "idx": 2,
+      "question": "How is the smoke distributed if multiple cells have smoke and the wind direction causes overlapping movement?",
+      "answer": "The statement describes cell occupancy as presence/absence of smoke, not a count, so overlapping movement just results in smoke being present in the union of destination cells.",
+      "delta": -0.06684711575508118
+    }
+  ],
+  "chosen": {
+    "idx": 11,
+    "question": "What is the exact timing of when the smoke is checked for presence at (R,C) during each time step?",
+    "answer": "The check at t+0.5 occurs after both the wind blowing and the (0,0) smoke regeneration for time t have taken place, i.e., right after step t finishes and before step t+1 begins.",
+    "delta": -0.08057653903961182
+  },
+  "next_prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0).\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)\n\nClarification: The check at t+0.5 occurs after both the wind blowing and the (0,0) smoke regeneration for time t have taken place, i.e., right after step t finishes and before step t+1 begins.",
+  "code_prompt": "There is an infinitely large two-dimensional grid, with a campfire at coordinate (0,0).\nAt time t=0, smoke exists only at cell (0,0).\nYou are given a length-N string S consisting of N, W, S, E. At times t=1,2,\\dots,N, the following happen in order:\n- Wind blows, and all the smoke present at that time moves as follows:\n- If the t-th character of S is N, smoke in cell (r,c) moves to cell (r-1,c).\n- If it is W, smoke in cell (r,c) moves to cell (r,c-1).\n- If it is S, smoke in cell (r,c) moves to cell (r+1,c).\n- If it is E, smoke in cell (r,c) moves to cell (r,c+1).\n- If there is no smoke in cell (0,0), new smoke is generated at cell (0,0). The check at t+0.5 occurs after both the wind blowing and the (0,0) smoke regeneration for time t have taken place, i.e., right after step t finishes and before step t+1 begins.\nTakahashi is standing at cell (R,C).\nFor each integer 1 \\le t \\le N, determine if smoke exists at cell (R,C) at time t+0.5, and print the response according to the required format.\nInput\nThe input is given from Standard Input in the following format:\nN R C\nS\nOutput\nPrint an N-character string.\nConstraints\n- N is an integer between 1 and 200000, inclusive.\n- S is a length N string consisting of N, W, S, E.\n- R and C are integers between -N and N, inclusive.\n- (R,C) \\neq (0,0)",
+  "test_n_pass": 0,
+  "test_n_total": 43
+}

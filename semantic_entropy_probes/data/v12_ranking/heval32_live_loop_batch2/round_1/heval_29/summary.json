@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "If `strings` contains duplicate entries that match the prefix, should duplicates be retained, deduplicated, or limited in some way?",
+      "answer": "If the input list contains duplicate entries that match the prefix, all duplicates are retained in the output.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. If the input list contains duplicate entries that match the prefix, all duplicates are retained in the output.\n    \"\"\"",
+      "score": -2.542548656463623
+    },
+    {
+      "idx": 11,
+      "question": "If the `prefix` contains whitespace or special characters, are there any restrictions on how they are matched (e.g., literal vs. pattern)?",
+      "answer": "Whitespace and special characters in the prefix are matched literally\u2014filter_by_prefix(['a b', 'ab'], 'a ') returns ['a b'].",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. Whitespace and special characters in the prefix are matched literally\u2014filter_by_prefix(['a b', 'ab'], 'a ') returns ['a b'].\n    \"\"\"",
+      "score": -4.3392863273620605
+    },
+    {
+      "idx": 4,
+      "question": "How should the function handle Unicode characters and combining marks when checking for the prefix?",
+      "answer": "Unicode characters and combining marks are treated according to Python's standard string startswith() method\u2014a combining mark attached to a base character would be part of the prefix match.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. Unicode characters and combining marks are treated according to Python's standard string startswith() method\u2014a combining mark attached to a base character would be part of the prefix match.\n    \"\"\"",
+      "score": -4.537966728210449
+    },
+    {
+      "idx": 10,
+      "question": "Should leading or trailing whitespace in each string be considered part of the content when matching the prefix?",
+      "answer": "Leading or trailing whitespace in each string is considered part of the content\u2014' abc' does not start with 'abc'.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. Leading or trailing whitespace in each string is considered part of the content\u2014' abc' does not start with 'abc'.\n    \"\"\"",
+      "score": -4.827148914337158
+    },
+    {
+      "idx": 1,
+      "question": "Must the returned list preserve the original order of matching strings, or can it be sorted or reordered?",
+      "answer": "The returned list preserves the original order of matching strings from the input list\u2014no reordering or sorting occurs.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. The returned list preserves the original order of matching strings from the input list\u2014no reordering or sorting occurs.\n    \"\"\"",
+      "score": -5.811120986938477
+    },
+    {
+      "idx": 0,
+      "question": "Should the function treat the `prefix` comparison as case\u2011sensitive or case\u2011insensitive?",
+      "answer": "The prefix comparison is case-sensitive\u2014'abc' starting with 'A' returns False, while 'abc' starting with 'a' returns True.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. The prefix comparison is case-sensitive\u2014'abc' starting with 'A' returns False, while 'abc' starting with 'a' returns True.\n    \"\"\"",
+      "score": -6.391340255737305
+    },
+    {
+      "idx": 3,
+      "question": "If an element in `strings` is not a string (e.g., `None` or an integer), should the function raise an error, skip it, or convert it?",
+      "answer": "If an element in the input is not a string (e.g., None, integer), it is skipped\u2014the function does not raise an error or convert it.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. If an element in the input is not a string (e.g., None, integer), it is skipped\u2014the function does not raise an error or convert it. \"\"\"",
+      "score": -6.904881477355957
+    },
+    {
+      "idx": 6,
+      "question": "Should the function return a new list object, or is it acceptable to return a view or reference to the original list?",
+      "answer": "The function returns a new list object containing the filtered strings\u2014it does not return a view or reference to the original.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. The function returns a new list object containing the filtered strings\u2014it does not return a view or reference to the original.\n    \"\"\"",
+      "score": -6.914346694946289
+    },
+    {
+      "idx": 5,
+      "question": "Is the `prefix` required to be a non\u2011empty string, and if it is empty, what should the result be?",
+      "answer": "An empty prefix matches all strings, so filter_by_prefix(['abc', 'def'], '') returns ['abc', 'def'].",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. An empty prefix matches all strings, so filter_by_prefix(['abc', 'def'], '') returns ['abc', 'def'].\n    \"\"\"",
+      "score": -10.108799934387207
+    },
+    {
+      "idx": 9,
+      "question": "Does the function need to validate that `strings` is indeed a list (or iterable) and raise a specific exception if not?",
+      "answer": "The function accepts any iterable of strings (list, tuple, etc.), and will process them identically.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. The function accepts any iterable of strings (list, tuple, etc.), and will process them identically.\n    \"\"\"",
+      "score": -11.061864852905273
+    },
+    {
+      "idx": 2,
+      "question": "Should strings that are exactly equal to the `prefix` be included in the output?",
+      "answer": "Strings that are exactly equal to the prefix are included in the output. A string 'abc' matches prefix 'abc'.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. Strings that are exactly equal to the prefix are included in the output. A string 'abc' matches prefix 'abc'. \"\"\"",
+      "score": -11.770001411437988
+    },
+    {
+      "idx": 8,
+      "question": "When `strings` is an empty list, should the function return an empty list or `None`?",
+      "answer": "When the input list is empty, the function returns an empty list [].",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. When the input list is empty, the function returns an empty list []. \"\"\"",
+      "score": -13.018022537231445
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "If `strings` contains duplicate entries that match the prefix, should duplicates be retained, deduplicated, or limited in some way?",
+    "answer": "If the input list contains duplicate entries that match the prefix, all duplicates are retained in the output.",
+    "score": -2.542548656463623
+  },
+  "next_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. If the input list contains duplicate entries that match the prefix, all duplicates are retained in the output.\n    \"\"\"",
+  "test_n_pass": 2,
+  "test_n_total": 2
+}

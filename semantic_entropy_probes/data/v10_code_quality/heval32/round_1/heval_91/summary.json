@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"",
+  "baseline_mean_p": 0.6702627241611481,
+  "candidates": [
+    {
+      "idx": 6,
+      "question": "What is the definition of a 'boredom' in this context?",
+      "answer": "A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".",
+      "p1": 0.28335273265838623,
+      "p2": 0.4102204144001007,
+      "mean_p": 0.34678657352924347,
+      "delta": -0.3234761506319046
+    },
+    {
+      "idx": 2,
+      "question": "What defines a valid sentence in terms of word count or content?",
+      "answer": "Any substring between delimiters counts as a \"sentence\" regardless of word count or content; the only requirement checked is whether it starts with 'I ' (capital I followed by a space).",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Any substring between delimiters counts as a \"sentence\" regardless of word count or content; the only requirement checked is whether it starts with 'I ' (capital I followed by a space).",
+      "p1": 0.34448376297950745,
+      "p2": 0.4172481596469879,
+      "mean_p": 0.3808659613132477,
+      "delta": -0.2893967628479004
+    },
+    {
+      "idx": 5,
+      "question": "How should sentences that end with multiple punctuation marks (e.g., '!?') be split?",
+      "answer": "Each punctuation character independently matches the split regex, so multiple consecutive terminators produce extra (empty) splits between them; this doesn't change which non-empty sentences count.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Each punctuation character independently matches the split regex, so multiple consecutive terminators produce extra (empty) splits between them; this doesn't change which non-empty sentences count.",
+      "p1": 0.32545244693756104,
+      "p2": 0.44118696451187134,
+      "mean_p": 0.3833197057247162,
+      "delta": -0.2869430184364319
+    },
+    {
+      "idx": 3,
+      "question": "How should sentences that start with punctuation (e.g., '?Hello') be handled?",
+      "answer": "They simply won't start with 'I ', so they don't count as boredoms; no special-case handling beyond the literal prefix check.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: They simply won't start with 'I ', so they don't count as boredoms; no special-case handling beyond the literal prefix check.",
+      "p1": 0.3796617388725281,
+      "p2": 0.48805150389671326,
+      "mean_p": 0.43385662138462067,
+      "delta": -0.2364061027765274
+    },
+    {
+      "idx": 7,
+      "question": "How should sentences that contain both uppercase and lowercase letters be treated?",
+      "answer": "The check is purely on the first two characters equaling \"I \" exactly (case-sensitive); the rest of the sentence's casing doesn't matter.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: The check is purely on the first two characters equaling \"I \" exactly (case-sensitive); the rest of the sentence's casing doesn't matter.",
+      "p1": 0.42764812707901,
+      "p2": 0.4644225537776947,
+      "mean_p": 0.44603534042835236,
+      "delta": -0.22422738373279572
+    },
+    {
+      "idx": 1,
+      "question": "How should consecutive punctuation marks (e.g., '!!') be treated when splitting sentences?",
+      "answer": "The regex r'[.?!]\\s*' matches one delimiter character plus any following whitespace as a single split point; consecutive punctuation marks would each independently trigger a split, producing empty strings between them (which then just fail the 'I ' check).",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: The regex r'[.?!]\\s*' matches one delimiter character plus any following whitespace as a single split point; consecutive punctuation marks would each independently trigger a split, producing empty strings between them (which then just fail the 'I ' check).",
+      "p1": 0.5364456176757812,
+      "p2": 0.5420761704444885,
+      "mean_p": 0.5392608940601349,
+      "delta": -0.13100183010101318
+    },
+    {
+      "idx": 0,
+      "question": "Are empty sentences (e.g., consisting only of punctuation) considered as boredoms?",
+      "answer": "No -- an empty sentence's first two characters wouldn't equal 'I ', so it can't count as a boredom.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: No -- an empty sentence's first two characters wouldn't equal 'I ', so it can't count as a boredom.",
+      "p1": 0.5673598051071167,
+      "p2": 0.5436226725578308,
+      "mean_p": 0.5554912388324738,
+      "delta": -0.11477148532867432
+    },
+    {
+      "idx": 4,
+      "question": "Are sentences that contain only whitespace and punctuation considered boredoms?",
+      "answer": "No, since such a sentence's first two characters won't be 'I '.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: No, since such a sentence's first two characters won't be 'I '.",
+      "p1": 0.5674358010292053,
+      "p2": 0.6818699240684509,
+      "mean_p": 0.6246528625488281,
+      "delta": -0.045609861612319946
+    }
+  ],
+  "top3": [
+    {
+      "idx": 6,
+      "question": "What is the definition of a 'boredom' in this context?",
+      "answer": "A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".",
+      "delta": -0.3234761506319046
+    },
+    {
+      "idx": 2,
+      "question": "What defines a valid sentence in terms of word count or content?",
+      "answer": "Any substring between delimiters counts as a \"sentence\" regardless of word count or content; the only requirement checked is whether it starts with 'I ' (capital I followed by a space).",
+      "delta": -0.2893967628479004
+    },
+    {
+      "idx": 5,
+      "question": "How should sentences that end with multiple punctuation marks (e.g., '!?') be split?",
+      "answer": "Each punctuation character independently matches the split regex, so multiple consecutive terminators produce extra (empty) splits between them; this doesn't change which non-empty sentences count.",
+      "delta": -0.2869430184364319
+    }
+  ],
+  "chosen": {
+    "idx": 6,
+    "question": "What is the definition of a 'boredom' in this context?",
+    "answer": "A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".",
+    "delta": -0.3234761506319046
+  },
+  "next_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".",
+  "code_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a sentence\n    (as split by '.', '?', or '!') whose text begins with the exact two-character\n    prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n    \"\"\"",
+  "test_n_pass": 6,
+  "test_n_total": 6
+}

@@ -1,0 +1,99 @@
+{
+  "round": 3,
+  "prompt_before": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. Yes, negative floats\n    like -1.5 are rejected on two counts: they are negative (i > 0 is False) and\n    they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Should a float like 1.0 (representing an integer value) be considered a valid odd number for the sum, or rejected as a float?",
+      "answer": "A float like 1.0 is not treated as a valid odd number; the specification requires integers only, and the solution checks for '.' in the string representation to exclude floats.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. A float like 1.0 is not treated as a valid odd number; the specification requires integers only, and the solution checks for '.' in the string representation to exclude floats. Yes, negative floats\n    like -1.5 are rejected on two counts: they are negative (i > 0 is False) and\n    they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": 4.288938522338867
+    },
+    {
+      "idx": 5,
+      "question": "For very large odd numbers, are there overflow or precision constraints in the sum?",
+      "answer": "For very large odd numbers, there are no explicit overflow constraints; Python handles arbitrary-precision integers.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. Yes, negative floats\n    like -1.5 are rejected on two counts: they are negative (i > 0 is False) and\n    they are floats (contain '.'). For very large odd numbers, there are no explicit\n    overflow constraints; Python handles arbitrary-precision integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": 3.8164451122283936
+    },
+    {
+      "idx": 2,
+      "question": "What should the function do if the list contains strings or other non-numeric values?",
+      "answer": "If the list contains strings or other non-numeric values, they do not satisfy the conditions (i > 0 and i%2!=0 and no decimal point), so they are excluded from the sum.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. If the list contains\n    strings or other non-numeric values, they do not satisfy the conditions\n    (i > 0 and i%2!=0 and no decimal point), so they are excluded from the sum.\n    Yes, negative floats like -1.5 are rejected on two counts: they are negative\n    (i > 0 is False) and they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": 3.789501667022705
+    },
+    {
+      "idx": 10,
+      "question": "What about zero itself\u2014is 0 considered even or odd?",
+      "answer": "Zero itself is even (0%2 == 0), not odd, so it is excluded from the sum.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. Zero itself is even\n    (0%2 == 0), not odd, so it is excluded from the sum. Yes, negative floats\n    like -1.5 are rejected on two counts: they are negative (i > 0 is False) and\n    they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": 3.7241506576538086
+    },
+    {
+      "idx": 1,
+      "question": "In Python, 1.0 == 1 is True, but for this function, should type matter (int vs float)?",
+      "answer": "In Python, 1.0 == 1 is True, but for this function type matters; 1.0 (float) is rejected while 1 (int) is accepted.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. In Python, 1.0 == 1 is True, but for this function type matters; 1.0 (float) is rejected while 1 (int) is accepted. Yes, negative floats\n    like -1.5 are rejected on two counts: they are negative (i > 0 is False) and\n    they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": 3.699502468109131
+    },
+    {
+      "idx": 4,
+      "question": "Should the function handle negative floats like -1.5 (which are both negative and non-integer)?",
+      "answer": "Negative floats like -1.5 are rejected because they are negative (i > 0 is required); the non-integer aspect is also a reason for exclusion.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. Negative floats like\n    -1.5 are rejected because they are negative (i > 0 is required); the non-integer\n    aspect is also a reason for exclusion. Yes, negative floats like -1.5 are\n    rejected on two counts: they are negative (i > 0 is False) and they are floats\n    (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": 3.2352793216705322
+    },
+    {
+      "idx": 6,
+      "question": "Should the function return 0 if the list is empty (confirmed by the prompt)?",
+      "answer": "If the list is empty, the function returns 0 (sum of an empty list).",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. Yes, negative floats\n    like -1.5 are rejected on two counts: they are negative (i > 0 is False) and\n    they are floats (contain '.'). If the list is empty, the function returns 0 (sum of an empty list).\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    '''",
+      "score": 3.1727547645568848
+    },
+    {
+      "idx": 9,
+      "question": "Should the function count complex numbers (e.g., 3j or 1+2j)?",
+      "answer": "Complex numbers like 3j or 1+2j do not have a standard modulo operation; they would not satisfy i%2!=0 and are excluded.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. Complex numbers like 3j or 1+2j do not have a standard modulo operation; they would not satisfy i%2!=0 and are excluded. Yes, negative floats\n    like -1.5 are rejected on two counts: they are negative (i > 0 is False) and\n    they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": 3.049375295639038
+    },
+    {
+      "idx": 7,
+      "question": "What about special float values like NaN or Infinity\u2014should they be rejected or handled?",
+      "answer": "Special float values like NaN or Infinity do not satisfy i > 0 and i%2!=0 (NaN comparisons return False), so they are excluded.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. Special float values\n    like NaN or Infinity do not satisfy i > 0 and i%2!=0 (NaN comparisons return False),\n    so they are excluded. Yes, negative floats like -1.5 are rejected on two counts:\n    they are negative (i > 0 is False) and they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+      "score": 2.867387533187866
+    },
+    {
+      "idx": 3,
+      "question": "What should the function do if the list contains None values?",
+      "answer": "If the list contains None values, they do not satisfy the conditions, so they are excluded from the sum.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. If the list contains\n    None values, they do not satisfy the conditions, so they are excluded from\n    the sum. Yes, negative floats like -1.5 are rejected on two counts: they are\n    negative (i > 0 is False) and they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": 2.4537134170532227
+    },
+    {
+      "idx": 11,
+      "question": "Should the function modify the original list or return only the sum?",
+      "answer": "The function returns the sum only; it does not modify the original list.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. Yes, negative floats\n    like -1.5 are rejected on two counts: they are negative (i > 0 is False) and\n    they are floats (contain '.'). The function returns the sum only; it does not\n    modify the original list.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": 2.4330549240112305
+    },
+    {
+      "idx": 8,
+      "question": "For negative zero (-0.0), should it be treated as 0 (even)?",
+      "answer": "Negative zero (-0.0) is treated as 0 and is even (0%2 == 0), so it is excluded from the sum.",
+      "prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. Negative zero (-0.0) \n    is treated as 0 and is even (0%2 == 0), so it is excluded from the sum. Yes, \n    negative floats like -1.5 are rejected on two counts: they are negative \n    (i > 0 is False) and they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n    \n    If the input list is empty, return 0.\n    '''",
+      "score": 2.411588668823242
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Should a float like 1.0 (representing an integer value) be considered a valid odd number for the sum, or rejected as a float?",
+    "answer": "A float like 1.0 is not treated as a valid odd number; the specification requires integers only, and the solution checks for '.' in the string representation to exclude floats.",
+    "score": 4.288938522338867
+  },
+  "next_prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of valid odd numbers\n    in the list. A valid odd number must be a positive odd integer; negative\n    odd integers and non-integer odd values are not valid. A float like 1.0 is not treated as a valid odd number; the specification requires integers only, and the solution checks for '.' in the string representation to exclude floats. Yes, negative floats\n    like -1.5 are rejected on two counts: they are negative (i > 0 is False) and\n    they are floats (contain '.').\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+  "test_n_pass": 7,
+  "test_n_total": 7
+}

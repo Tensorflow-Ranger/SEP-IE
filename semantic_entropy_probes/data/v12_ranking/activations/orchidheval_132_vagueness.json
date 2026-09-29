@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_132_vagueness",
+  "questions": [
+    "What precisely defines a \"valid subsequence of brackets\" here — balanced and properly matched, or a looser criterion?",
+    "Given is_nested('[]]]]]]][[[[[]') returns False, what structural rule disqualifies it?",
+    "Must the qualifying subsequence be a contiguous substring, or can it be non-contiguous?",
+    "Does \"nested\" require a depth of at least 2?",
+    "Is the presence of unmatched brackets elsewhere in the string irrelevant if one valid nested subsequence exists?",
+    "Is the input guaranteed to contain only square bracket characters?",
+    "Should an empty input string return False by default?",
+    "Could you give the exact formal definition of \"valid\" that the six examples are testing?"
+  ],
+  "answers": [
+    "A properly balanced and matched subsequence.",
+    "It contains no such balanced nested subsequence anywhere, despite looking bracket-heavy.",
+    "Non-contiguous subsequence is allowed, not just a contiguous substring.",
+    "Yes, nesting requires depth of at least 2.",
+    "Yes, irrelevant as long as one valid nested subsequence exists.",
+    "Yes.",
+    "Yes.",
+    "True iff some subsequence forms a balanced, properly nested bracket sequence with depth >= 2."
+  ],
+  "inline_prompts": [
+    "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested, and the subsequence is A properly balanced and matched subsequence.\n\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''",
+    "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested. It contains no such balanced nested subsequence anywhere, despite looking bracket-heavy.\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''",
+    "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested. Non-contiguous subsequence is allowed, not just a contiguous substring.\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''",
+    "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested. Yes, nesting requires depth of at least 2.\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''",
+    "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested. Yes, irrelevant as long as one valid nested subsequence exists.\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''",
+    "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested. Yes.\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''",
+    "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested. Yes.\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''",
+    "def is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True iff some subsequence forms a balanced, properly nested bracket sequence with depth >= 2.\n\n    is_nested('[[]]') ➞ True\n    is_nested('[]]]]]]][[[[[]') ➞ False\n    is_nested('[][]') ➞ False\n    is_nested('[]') ➞ False\n    is_nested('[[][]]') ➞ True\n    is_nested('[[]][[') ➞ True\n    '''"
+  ],
+  "tiers": [
+    2,
+    1,
+    1,
+    2,
+    1,
+    0,
+    0,
+    0
+  ]
+}

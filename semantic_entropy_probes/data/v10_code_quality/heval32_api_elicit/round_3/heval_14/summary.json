@@ -1,0 +1,118 @@
+{
+  "round": 3,
+  "baseline_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.",
+  "baseline_mean_p": 0.23172198981046677,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "How should non\u2011ASCII or Unicode characters be treated\u2014are they counted as single characters regardless of byte length?",
+      "answer": "Standard Python string indexing/slicing is used -- each Python character (code point) is treated as one unit, with no special Unicode handling.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.\n\nClarification: Standard Python string indexing/slicing is used -- each Python character (code point) is treated as one unit, with no special Unicode handling.",
+      "p1": 0.2064473032951355,
+      "p2": 0.20395782589912415,
+      "mean_p": 0.20520256459712982,
+      "delta": -0.026519425213336945
+    },
+    {
+      "idx": 7,
+      "question": "Are there any performance or memory constraints (e.g., must it run in O(n) time and O(n) space)?",
+      "answer": "No specific complexity requirement is stated; a straightforward O(n) or O(n^2) implementation is acceptable.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.\n\nClarification: No specific complexity requirement is stated; a straightforward O(n) or O(n^2) implementation is acceptable.",
+      "p1": 0.21977269649505615,
+      "p2": 0.22186695039272308,
+      "mean_p": 0.22081982344388962,
+      "delta": -0.010902166366577148
+    },
+    {
+      "idx": 2,
+      "question": "Is the order of prefixes strictly increasing by length, and if so, should ties (identical prefixes from repeated characters) be included multiple times?",
+      "answer": "Strictly increasing by length, one prefix per length from 1 to len(string) -- there are no ties since every prefix has a distinct length.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.\n\nClarification: Strictly increasing by length, one prefix per length from 1 to len(string) -- there are no ties since every prefix has a distinct length.",
+      "p1": 0.2258361577987671,
+      "p2": 0.24553221464157104,
+      "mean_p": 0.23568418622016907,
+      "delta": 0.003962196409702301
+    },
+    {
+      "idx": 3,
+      "question": "Should the function accept only `str` instances, or also other sequence types that can be converted to a string?",
+      "answer": "Only `str` instances, per the function's type signature.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.\n\nClarification: Only `str` instances, per the function's type signature.",
+      "p1": 0.2326595038175583,
+      "p2": 0.24515745043754578,
+      "mean_p": 0.23890847712755203,
+      "delta": 0.007186487317085266
+    },
+    {
+      "idx": 0,
+      "question": "Should the function raise an exception, return an empty list, or handle specially when the input string is empty?",
+      "answer": "Return an empty list (there are no prefixes of an empty string).",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.\n\nClarification: Return an empty list (there are no prefixes of an empty string).",
+      "p1": 0.2534233033657074,
+      "p2": 0.26726779341697693,
+      "mean_p": 0.26034554839134216,
+      "delta": 0.028623558580875397
+    },
+    {
+      "idx": 6,
+      "question": "Should the function validate that the argument is indeed a string and raise a `TypeError` for other types?",
+      "answer": "Not specified -- no explicit type validation or TypeError is required.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.\n\nClarification: Not specified -- no explicit type validation or TypeError is required.",
+      "p1": 0.2653414011001587,
+      "p2": 0.26119405031204224,
+      "mean_p": 0.26326772570610046,
+      "delta": 0.0315457358956337
+    },
+    {
+      "idx": 5,
+      "question": "Is there any limit on the maximum length of the input string that the function must handle, and should it raise an error for excessively large inputs?",
+      "answer": "No maximum length is specified.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.\n\nClarification: No maximum length is specified.",
+      "p1": 0.2915996015071869,
+      "p2": 0.2701009213924408,
+      "mean_p": 0.28085026144981384,
+      "delta": 0.049128271639347076
+    },
+    {
+      "idx": 1,
+      "question": "Must the returned list contain distinct string objects (i.e., copies) rather than references to slices of the original string?",
+      "answer": "Not specified -- any correctly-valued string objects are acceptable; there's no requirement they be independent copies vs. slices.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.\n\nClarification: Not specified -- any correctly-valued string objects are acceptable; there's no requirement they be independent copies vs. slices.",
+      "p1": 0.2818458676338196,
+      "p2": 0.2857777178287506,
+      "mean_p": 0.2838117927312851,
+      "delta": 0.05208980292081833
+    }
+  ],
+  "top3": [
+    {
+      "idx": 4,
+      "question": "How should non\u2011ASCII or Unicode characters be treated\u2014are they counted as single characters regardless of byte length?",
+      "answer": "Standard Python string indexing/slicing is used -- each Python character (code point) is treated as one unit, with no special Unicode handling.",
+      "delta": -0.026519425213336945
+    },
+    {
+      "idx": 7,
+      "question": "Are there any performance or memory constraints (e.g., must it run in O(n) time and O(n) space)?",
+      "answer": "No specific complexity requirement is stated; a straightforward O(n) or O(n^2) implementation is acceptable.",
+      "delta": -0.010902166366577148
+    },
+    {
+      "idx": 2,
+      "question": "Is the order of prefixes strictly increasing by length, and if so, should ties (identical prefixes from repeated characters) be included multiple times?",
+      "answer": "Strictly increasing by length, one prefix per length from 1 to len(string) -- there are no ties since every prefix has a distinct length.",
+      "delta": 0.003962196409702301
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "How should non\u2011ASCII or Unicode characters be treated\u2014are they counted as single characters regardless of byte length?",
+    "answer": "Standard Python string indexing/slicing is used -- each Python character (code point) is treated as one unit, with no special Unicode handling.",
+    "delta": -0.026519425213336945
+  },
+  "next_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No -- the shortest prefix returned is the first single character (length 1), not the empty string.\n\nClarification: Not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings.\n\nClarification: Standard Python string indexing/slicing is used -- each Python character (code point) is treated as one unit, with no special Unicode handling.",
+  "code_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with the shortest prefix being the first single character (length 1), not the empty string; not specified; standard Python string slicing (a fresh list of separate string objects) is expected -- no requirement for shared/cached substrings. Standard Python string indexing/slicing is used -- each Python character (code point) is treated as one unit, with no special Unicode handling. \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 3
+}

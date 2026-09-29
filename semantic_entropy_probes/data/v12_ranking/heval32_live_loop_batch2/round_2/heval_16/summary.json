@@ -1,0 +1,99 @@
+{
+  "round": 2,
+  "prompt_before": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 10,
+      "question": "For strings with repeated characters (e.g., 'aaa'), should only unique characters be counted?",
+      "answer": "No; the function counts total characters in the string, including all repetitions of the same character.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character; no; the function counts total characters in the string, including all repetitions of the same character\n    \"\"\"",
+      "score": -0.8467297554016113
+    },
+    {
+      "idx": 2,
+      "question": "What about zero-width characters (e.g., zero-width joiner, zero-width non-joiner)\u2014should they be counted?",
+      "answer": "No; zero-width characters like zero-width joiners are counted as regular characters in the raw code point count.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character, and zero-width characters like zero-width joiners are counted as regular characters in the raw code point count\n    \"\"\"",
+      "score": -1.2674217224121094
+    },
+    {
+      "idx": 7,
+      "question": "Should the function handle right-to-left text differently?",
+      "answer": "The function does not handle right-to-left text differently; all code points are counted uniformly.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character. The function does not handle right-to-left text differently; all code points are counted uniformly. \"\"\"",
+      "score": -1.878739356994629
+    },
+    {
+      "idx": 3,
+      "question": "Should Unicode combining marks and diacritics be counted as separate characters from their base characters?",
+      "answer": "Yes; combining marks and diacritics are counted as separate characters from their base characters.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character, and combining marks and diacritics are counted as separate characters from their base characters\n    \"\"\"",
+      "score": -2.121310234069824
+    },
+    {
+      "idx": 8,
+      "question": "What about surrogate pairs in UTF-16 representation\u2014are these counted as one or two code points?",
+      "answer": "In Python, surrogate pairs are not encountered; each code point is counted as one character.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character. In Python, surrogate pairs are not encountered; each code point is counted as one character. \"\"\"",
+      "score": -2.1591720581054688
+    },
+    {
+      "idx": 6,
+      "question": "Are uppercase and lowercase versions of the same letter (e.g., 'A' vs 'a') counted as distinct characters?",
+      "answer": "Yes; uppercase and lowercase versions are treated as the same character (case-insensitive counting).",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character, and uppercase and lowercase versions are treated as the same character (case-insensitive counting)\n    \"\"\"",
+      "score": -2.4922680854797363
+    },
+    {
+      "idx": 5,
+      "question": "Should the function normalize Unicode (e.g., NFC vs NFD) before counting, or count the raw code points?",
+      "answer": "The function counts raw code points without performing Unicode normalization.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character. The function counts raw code points without performing Unicode normalization. \"\"\"",
+      "score": -3.1006669998168945
+    },
+    {
+      "idx": 0,
+      "question": "Should each Unicode code point be counted separately, or should combining characters and their base characters be grouped together?",
+      "answer": "No; the function counts all characters case-insensitively, so 'A' and 'a' are treated as the same character.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character, and case is ignored so 'A' and 'a' are treated as the same character\n    \"\"\"",
+      "score": -3.12772798538208
+    },
+    {
+      "idx": 9,
+      "question": "Should control characters and whitespace characters (e.g., newline, tab) be counted as distinct?",
+      "answer": "Yes; control characters and whitespace (newline, tab) are counted as distinct characters.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character; control characters and whitespace (newline, tab) are counted as distinct characters\n    \"\"\"",
+      "score": -3.556471824645996
+    },
+    {
+      "idx": 11,
+      "question": "What if the string is empty?",
+      "answer": "The function returns 0 for an empty string.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character. The function returns 0 for an empty string. \"\"\"",
+      "score": -5.138391494750977
+    },
+    {
+      "idx": 1,
+      "question": "For emoji with variation selectors or skin-tone modifiers (e.g., \ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67\u200d\ud83d\udc66), how many distinct characters should be counted?",
+      "answer": "Not applicable; the function counts raw code points without special handling for emoji modifiers or skin-tone variations.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character; not applicable; the function counts raw code points without special handling for emoji modifiers or skin-tone variations \"\"\"",
+      "score": -5.234593391418457
+    },
+    {
+      "idx": 4,
+      "question": "What if the input is None or not a string?",
+      "answer": "The function requires a string input; if None or not a string, the behavior is undefined per the specification.",
+      "prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character. The function requires a string input; if None or not a string, the behavior is undefined per the specification. \"\"\"",
+      "score": -6.231182098388672
+    }
+  ],
+  "chosen": {
+    "idx": 10,
+    "question": "For strings with repeated characters (e.g., 'aaa'), should only unique characters be counted?",
+    "answer": "No; the function counts total characters in the string, including all repetitions of the same character.",
+    "score": -0.8467297554016113
+  },
+  "next_prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct elements does it consist of, where each Unicode character including emojis and accented letters is counted as a single distinct character; no; the function counts total characters in the string, including all repetitions of the same character\n    \"\"\"",
+  "test_n_pass": 2,
+  "test_n_total": 5
+}

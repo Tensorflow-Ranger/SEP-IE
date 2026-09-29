@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"",
+  "baseline_mean_p": 0.40222881734371185,
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "How should numbers be sorted\u2014numerically or lexicographically?",
+      "answer": "Numerically, by their numeric value (smallest to largest), not by alphabetical order of the words.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Numerically, by their numeric value (smallest to largest), not by alphabetical order of the words.",
+      "p1": 0.21899375319480896,
+      "p2": 0.2512756288051605,
+      "mean_p": 0.23513469099998474,
+      "delta": -0.1670941263437271
+    },
+    {
+      "idx": 7,
+      "question": "How are numbers with the same name but different cases (e.g., 'Zero' vs 'zero') treated?",
+      "answer": "Not applicable: input words are guaranteed to be given in lowercase exactly as listed ('zero'..'nine'); case variants are not part of the valid input.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable: input words are guaranteed to be given in lowercase exactly as listed ('zero'..'nine'); case variants are not part of the valid input.",
+      "p1": 0.18375879526138306,
+      "p2": 0.29600927233695984,
+      "mean_p": 0.23988403379917145,
+      "delta": -0.1623447835445404
+    },
+    {
+      "idx": 0,
+      "question": "Are the input numbers case-sensitive?",
+      "answer": "Yes -- the value_map keys are lowercase ('zero','one',...); only exact lowercase spellings are recognized, per the guaranteed valid input.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Yes -- the value_map keys are lowercase ('zero','one',...); only exact lowercase spellings are recognized, per the guaranteed valid input.",
+      "p1": 0.2529987096786499,
+      "p2": 0.3446286618709564,
+      "mean_p": 0.29881368577480316,
+      "delta": -0.10341513156890869
+    },
+    {
+      "idx": 1,
+      "question": "What happens if the input string contains numbers not in the specified list?",
+      "answer": "Not applicable: the input is guaranteed to consist only of the valid words 'zero' through 'nine'.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable: the input is guaranteed to consist only of the valid words 'zero' through 'nine'.",
+      "p1": 0.32713767886161804,
+      "p2": 0.31240731477737427,
+      "mean_p": 0.31977249681949615,
+      "delta": -0.0824563205242157
+    },
+    {
+      "idx": 5,
+      "question": "How should the output string be formatted if there are duplicate numbers in the input?",
+      "answer": "Duplicates are all kept and sorted along with the rest -- e.g. two 'three's both remain in the output, adjacent to each other in sorted order.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Duplicates are all kept and sorted along with the rest -- e.g. two 'three's both remain in the output, adjacent to each other in sorted order.",
+      "p1": 0.2935127019882202,
+      "p2": 0.35240623354911804,
+      "mean_p": 0.32295946776866913,
+      "delta": -0.07926934957504272
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected behavior if the input string contains non-alphabetical characters?",
+      "answer": "Not applicable: the input is guaranteed to be a space-delimited string of the valid number words only.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Not applicable: the input is guaranteed to be a space-delimited string of the valid number words only.",
+      "p1": 0.32992982864379883,
+      "p2": 0.34368327260017395,
+      "mean_p": 0.3368065506219864,
+      "delta": -0.06542226672172546
+    },
+    {
+      "idx": 4,
+      "question": "Are leading or trailing spaces in the input string allowed or should they be stripped?",
+      "answer": "They don't affect the result: splitting on ' ' and filtering out empty tokens handles any extra/leading/trailing spaces gracefully.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: They don't affect the result: splitting on ' ' and filtering out empty tokens handles any extra/leading/trailing spaces gracefully.",
+      "p1": 0.414916455745697,
+      "p2": 0.427105575799942,
+      "mean_p": 0.4210110157728195,
+      "delta": 0.018782198429107666
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected output format if the input is empty?",
+      "answer": "Return an empty string.",
+      "prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Return an empty string.",
+      "p1": 0.7660472989082336,
+      "p2": 0.6315630674362183,
+      "mean_p": 0.698805183172226,
+      "delta": 0.2965763658285141
+    }
+  ],
+  "top3": [
+    {
+      "idx": 2,
+      "question": "How should numbers be sorted\u2014numerically or lexicographically?",
+      "answer": "Numerically, by their numeric value (smallest to largest), not by alphabetical order of the words.",
+      "delta": -0.1670941263437271
+    },
+    {
+      "idx": 7,
+      "question": "How are numbers with the same name but different cases (e.g., 'Zero' vs 'zero') treated?",
+      "answer": "Not applicable: input words are guaranteed to be given in lowercase exactly as listed ('zero'..'nine'); case variants are not part of the valid input.",
+      "delta": -0.1623447835445404
+    },
+    {
+      "idx": 0,
+      "question": "Are the input numbers case-sensitive?",
+      "answer": "Yes -- the value_map keys are lowercase ('zero','one',...); only exact lowercase spellings are recognized, per the guaranteed valid input.",
+      "delta": -0.10341513156890869
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "How should numbers be sorted\u2014numerically or lexicographically?",
+    "answer": "Numerically, by their numeric value (smallest to largest), not by alphabetical order of the words.",
+    "delta": -0.1670941263437271
+  },
+  "next_prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted\n    \"\"\"\n\nClarification: Numerically, by their numeric value (smallest to largest), not by alphabetical order of the words.",
+  "code_prompt": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted numerically, by their numeric value (smallest to largest), not by alphabetical order of the words.\n    \"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

@@ -1,0 +1,118 @@
+{
+  "round": 1,
+  "baseline_prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"",
+  "baseline_mean_p": 0.8132850825786591,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "Should the function treat `x` and `y` as any type, or are there type constraints (e.g., both must be numbers, strings, etc.)?",
+      "answer": "Not addressed; x and y can be any type, they are simply returned as-is with no arithmetic performed on them.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not addressed; x and y can be any type, they are simply returned as-is with no arithmetic performed on them.",
+      "p1": 0.35771888494491577,
+      "p2": 0.5603282451629639,
+      "mean_p": 0.4590235650539398,
+      "delta": -0.35426151752471924
+    },
+    {
+      "idx": 3,
+      "question": "If `n` satisfies multiple possible conditions, which condition takes precedence?",
+      "answer": "Not applicable -- there is only ONE condition (primality), not multiple competing conditions.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- there is only ONE condition (primality), not multiple competing conditions.",
+      "p1": 0.40207383036613464,
+      "p2": 0.6085536479949951,
+      "mean_p": 0.5053137391805649,
+      "delta": -0.3079713433980942
+    },
+    {
+      "idx": 7,
+      "question": "Is the comparison between `n` and the conditions inclusive or exclusive (e.g., `<=` vs `<`)?",
+      "answer": "Not applicable, since there's only the single primality condition, not a numeric range comparison with inclusive/exclusive boundaries.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable, since there's only the single primality condition, not a numeric range comparison with inclusive/exclusive boundaries.",
+      "p1": 0.41335418820381165,
+      "p2": 0.6541525721549988,
+      "mean_p": 0.5337533801794052,
+      "delta": -0.27953170239925385
+    },
+    {
+      "idx": 0,
+      "question": "What specific conditions must be met by `n` for the function to return `x`?",
+      "answer": "n must be a prime number, per the trial-division primality check.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: n must be a prime number, per the trial-division primality check.",
+      "p1": 0.5103090405464172,
+      "p2": 0.6034944653511047,
+      "mean_p": 0.556901752948761,
+      "delta": -0.25638332962989807
+    },
+    {
+      "idx": 2,
+      "question": "How should the function behave when `n` is `None` or another non\u2011numeric type?",
+      "answer": "Not applicable -- input is guaranteed to be an integer.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be an integer.",
+      "p1": 0.4385755956172943,
+      "p2": 0.6800500154495239,
+      "mean_p": 0.5593128055334091,
+      "delta": -0.25397227704524994
+    },
+    {
+      "idx": 4,
+      "question": "Are there any range limits (e.g., negative values, maximum size) for `n` that affect the outcome?",
+      "answer": "n=1 is explicitly handled (returns y, since 1 is not prime); no other special range restriction is stated.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: n=1 is explicitly handled (returns y, since 1 is not prime); no other special range restriction is stated.",
+      "p1": 0.535435676574707,
+      "p2": 0.6209906339645386,
+      "mean_p": 0.5782131552696228,
+      "delta": -0.23507192730903625
+    },
+    {
+      "idx": 6,
+      "question": "What should the function return when `x` or `y` is `None` or otherwise invalid?",
+      "answer": "Not applicable -- not a case the function needs to validate.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- not a case the function needs to validate.",
+      "p1": 0.5112687349319458,
+      "p2": 0.7303171157836914,
+      "mean_p": 0.6207929253578186,
+      "delta": -0.19249215722084045
+    },
+    {
+      "idx": 1,
+      "question": "Should `n` be an integer, or are other numeric types (e.g., float, Decimal) allowed?",
+      "answer": "Not addressed beyond integer usage; input is guaranteed to be an integer.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not addressed beyond integer usage; input is guaranteed to be an integer.",
+      "p1": 0.5380666255950928,
+      "p2": 0.7322089672088623,
+      "mean_p": 0.6351377964019775,
+      "delta": -0.17814728617668152
+    }
+  ],
+  "top3": [
+    {
+      "idx": 5,
+      "question": "Should the function treat `x` and `y` as any type, or are there type constraints (e.g., both must be numbers, strings, etc.)?",
+      "answer": "Not addressed; x and y can be any type, they are simply returned as-is with no arithmetic performed on them.",
+      "delta": -0.35426151752471924
+    },
+    {
+      "idx": 3,
+      "question": "If `n` satisfies multiple possible conditions, which condition takes precedence?",
+      "answer": "Not applicable -- there is only ONE condition (primality), not multiple competing conditions.",
+      "delta": -0.3079713433980942
+    },
+    {
+      "idx": 7,
+      "question": "Is the comparison between `n` and the conditions inclusive or exclusive (e.g., `<=` vs `<`)?",
+      "answer": "Not applicable, since there's only the single primality condition, not a numeric range comparison with inclusive/exclusive boundaries.",
+      "delta": -0.27953170239925385
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "Should the function treat `x` and `y` as any type, or are there type constraints (e.g., both must be numbers, strings, etc.)?",
+    "answer": "Not addressed; x and y can be any type, they are simply returned as-is with no arithmetic performed on them.",
+    "delta": -0.35426151752471924
+  },
+  "next_prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not addressed; x and y can be any type, they are simply returned as-is with no arithmetic performed on them.",
+  "code_prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise. Note that x and y can be any type, they are simply returned as-is with no arithmetic performed on them.\n    \"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 10
+}

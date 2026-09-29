@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 8,
+      "question": "For very long inputs, are there performance or recursion depth constraints that affect the implementation?",
+      "answer": "For very long inputs, the algorithm uses a simple linear scan with a depth counter, which is O(n) and has no recursion depth issues.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. For very long inputs, the algorithm uses a simple linear scan with a depth counter, which is O(n) and has no recursion depth issues.\n    \"\"\"",
+      "score": -14.460041046142578
+    },
+    {
+      "idx": 11,
+      "question": "Are there any specific tie\u2011breaking rules for ambiguous nesting scenarios, such as \u201c<<>>\u201d versus \u201c<><>\u201d, that dictate which interpretation is considered correct?",
+      "answer": "There are no ambiguous nesting scenarios\u2014LIFO matching is strictly required. '<<>>' (incorrect nesting) returns False; '<><>' (sequential pairs) returns True.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. There are no ambiguous nesting scenarios\u2014LIFO matching is strictly required. '<<>>' (incorrect nesting) returns False; '<><>' (sequential pairs) returns True.\n    \"\"\"",
+      "score": -14.595346450805664
+    },
+    {
+      "idx": 2,
+      "question": "Must every \u201c<\u201d be matched with a later \u201c>\u201d in a strictly nested (LIFO) order, or are overlapping pairs acceptable?",
+      "answer": "Every '<' must be matched with a later '>' in strictly nested (LIFO) order\u2014opening brackets must be closed before new ones are opened.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. Every '<' must be matched with a later '>' in strictly nested (LIFO) order\u2014opening brackets must be closed before new ones are opened.\n    \"\"\"",
+      "score": -15.6104736328125
+    },
+    {
+      "idx": 7,
+      "question": "Is whitespace within the string significant, and should it be ignored or cause a failure?",
+      "answer": "Any non-bracket characters other than '<' and '>' would make the string improper; the function checks for correct bracket matching only.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. Any non-bracket characters other than '<' and '>' would make the string improper; the function checks for correct bracket matching only.\n    \"\"\"",
+      "score": -17.320682525634766
+    },
+    {
+      "idx": 6,
+      "question": "Should the function return a boolean value only, or raise errors for malformed inputs?",
+      "answer": "The function returns only a boolean value (True/False)\u2014it evaluates whether brackets are properly closed.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. The function returns only a boolean value (True/False)\u2014it evaluates whether brackets are properly closed.\n    \"\"\"",
+      "score": -17.545923233032227
+    },
+    {
+      "idx": 1,
+      "question": "Are characters other than \u201c<\u201d and \u201c>\u201d allowed in the input, and if so, how should they be handled?",
+      "answer": "Only '<' and '>' characters are allowed. Any other characters in the string cause improper bracketing.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    Only '<' and '>' characters are allowed. Any other characters in the string cause improper bracketing.\n    \"\"\"",
+      "score": -18.204498291015625
+    },
+    {
+      "idx": 10,
+      "question": "If the string contains a correctly closed segment followed by extra characters (e.g., \u201c<>abc\u201d), is the overall result True or False?",
+      "answer": "If correctly closed brackets are followed by extra characters (like '<>abc'), the result is False\u2014non-bracket characters break the requirement.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly and contain no non-bracket characters.\n    \"\"\"",
+      "score": -18.77613639831543
+    },
+    {
+      "idx": 3,
+      "question": "Is a string like \u201c><\u201d considered improperly closed, and should the function return False for it?",
+      "answer": "Yes, '><' is improperly closed and returns False\u2014the closing bracket comes before any opening bracket.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. Yes, '><' is improperly closed and returns False\u2014the closing bracket comes before any opening bracket.\n    \"\"\"",
+      "score": -18.783008575439453
+    },
+    {
+      "idx": 4,
+      "question": "How should the function behave when the number of \u201c<\u201d and \u201c>\u201d characters is unequal?",
+      "answer": "If the count of '<' and '>' is unequal, the function returns False\u2014brackets cannot be balanced.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. If the count of '<' and '>' is unequal, the function returns False\u2014brackets cannot be balanced.\n    \"\"\"",
+      "score": -19.210161209106445
+    },
+    {
+      "idx": 9,
+      "question": "Does the function need to handle Unicode \u201c<\u201d and \u201c>\u201d characters that look similar but are different code points?",
+      "answer": "The specification uses ASCII '<' (U+003C) and '>' (U+003E) characters. Unicode lookalikes must be exact ASCII matches.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    The specification uses ASCII '<' (U+003C) and '>' (U+003E) characters. Unicode lookalikes must be exact ASCII matches.\n    \"\"\"",
+      "score": -19.304122924804688
+    },
+    {
+      "idx": 0,
+      "question": "Should the function treat the empty string as properly closed and return True?",
+      "answer": "An empty string is considered properly closed and returns True\u2014there are zero opening brackets requiring closure.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. An empty string is considered properly closed and returns True\u2014there are zero opening brackets requiring closure.\n    \"\"\"",
+      "score": -21.281143188476562
+    },
+    {
+      "idx": 5,
+      "question": "Does the function need to validate the input type and raise an exception for non\u2011string arguments?",
+      "answer": "The function expects a string input. Non-string types are not addressed by the specification.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    The function expects a string input. Non-string types are not addressed by the specification.\n    return True if brackets close properly.\n    \"\"\"",
+      "score": -21.691957473754883
+    }
+  ],
+  "chosen": {
+    "idx": 8,
+    "question": "For very long inputs, are there performance or recursion depth constraints that affect the implementation?",
+    "answer": "For very long inputs, the algorithm uses a simple linear scan with a depth counter, which is O(n) and has no recursion depth issues.",
+    "score": -14.460041046142578
+  },
+  "next_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. For very long inputs, the algorithm uses a simple linear scan with a depth counter, which is O(n) and has no recursion depth issues.\n    \"\"\"",
+  "test_n_pass": 12,
+  "test_n_total": 12
+}

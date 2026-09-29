@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"",
+  "baseline_mean_p": 0.5813482105731964,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Does the function consider the same element used more than once in the sum?",
+      "answer": "No -- the three values come from three distinct positions i<j<k in the list; distinct indices are required, not distinct values.",
+      "prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n\nClarification: No -- the three values come from three distinct positions i<j<k in the list; distinct indices are required, not distinct values.",
+      "p1": 0.24444866180419922,
+      "p2": 0.34220385551452637,
+      "mean_p": 0.2933262586593628,
+      "delta": -0.2880219519138336
+    },
+    {
+      "idx": 4,
+      "question": "Is the order of elements in the list important for determining the sum?",
+      "answer": "No -- any three elements at positions i<j<k are checked regardless of their relative values; only their sum matters, not their order.",
+      "prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n\nClarification: No -- any three elements at positions i<j<k are checked regardless of their relative values; only their sum matters, not their order.",
+      "p1": 0.25472915172576904,
+      "p2": 0.3890129029750824,
+      "mean_p": 0.3218710273504257,
+      "delta": -0.2594771832227707
+    },
+    {
+      "idx": 5,
+      "question": "How does the function handle duplicate elements in the list?",
+      "answer": "Duplicates are handled normally by position: e.g. [1,1,-2] would check indices (0,1,2) -> 1+1+-2=0 -> True, since the check is about distinct indices, not distinct values.",
+      "prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n\nClarification: Duplicates are handled normally by position: e.g. [1,1,-2] would check indices (0,1,2) -> 1+1+-2=0 -> True, since the check is about distinct indices, not distinct values.",
+      "p1": 0.278323233127594,
+      "p2": 0.37739068269729614,
+      "mean_p": 0.32785695791244507,
+      "delta": -0.25349125266075134
+    },
+    {
+      "idx": 7,
+      "question": "Are the three elements required to be distinct in the list?",
+      "answer": "They must come from three distinct positions (indices) in the list; their values are not required to be distinct from each other.",
+      "prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n\nClarification: They must come from three distinct positions (indices) in the list; their values are not required to be distinct from each other.",
+      "p1": 0.2776256501674652,
+      "p2": 0.38035163283348083,
+      "mean_p": 0.328988641500473,
+      "delta": -0.2523595690727234
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected behavior if the list contains zero?",
+      "answer": "Zero is treated like any other integer; e.g. [0,0,0] would return True (three zero-valued elements at three distinct indices sum to zero).",
+      "prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n\nClarification: Zero is treated like any other integer; e.g. [0,0,0] would return True (three zero-valued elements at three distinct indices sum to zero).",
+      "p1": 0.2836591303348541,
+      "p2": 0.40156489610671997,
+      "mean_p": 0.34261201322078705,
+      "delta": -0.23873619735240936
+    },
+    {
+      "idx": 3,
+      "question": "Can the list contain non-integer values?",
+      "answer": "Not applicable: the docstring specifies a list of integers.",
+      "prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n\nClarification: Not applicable: the docstring specifies a list of integers.",
+      "p1": 0.24084050953388214,
+      "p2": 0.4947073757648468,
+      "mean_p": 0.36777394264936447,
+      "delta": -0.21357426792383194
+    },
+    {
+      "idx": 1,
+      "question": "Are negative numbers allowed in the input list?",
+      "answer": "Yes, the list is a list of integers with no restriction to non-negative values.",
+      "prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n\nClarification: Yes, the list is a list of integers with no restriction to non-negative values.",
+      "p1": 0.34217411279678345,
+      "p2": 0.4635944664478302,
+      "mean_p": 0.4028842896223068,
+      "delta": -0.1784639209508896
+    },
+    {
+      "idx": 2,
+      "question": "What happens if the input list has fewer than three elements?",
+      "answer": "Return False (no valid i<j<k triple can be formed).",
+      "prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n\nClarification: Return False (no valid i<j<k triple can be formed).",
+      "p1": 0.5837096571922302,
+      "p2": 0.675265908241272,
+      "mean_p": 0.6294877827167511,
+      "delta": 0.04813957214355469
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Does the function consider the same element used more than once in the sum?",
+      "answer": "No -- the three values come from three distinct positions i<j<k in the list; distinct indices are required, not distinct values.",
+      "delta": -0.2880219519138336
+    },
+    {
+      "idx": 4,
+      "question": "Is the order of elements in the list important for determining the sum?",
+      "answer": "No -- any three elements at positions i<j<k are checked regardless of their relative values; only their sum matters, not their order.",
+      "delta": -0.2594771832227707
+    },
+    {
+      "idx": 5,
+      "question": "How does the function handle duplicate elements in the list?",
+      "answer": "Duplicates are handled normally by position: e.g. [1,1,-2] would check indices (0,1,2) -> 1+1+-2=0 -> True, since the check is about distinct indices, not distinct values.",
+      "delta": -0.25349125266075134
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Does the function consider the same element used more than once in the sum?",
+    "answer": "No -- the three values come from three distinct positions i<j<k in the list; distinct indices are required, not distinct values.",
+    "delta": -0.2880219519138336
+  },
+  "next_prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n\nClarification: No -- the three values come from three distinct positions i<j<k in the list; distinct indices are required, not distinct values.",
+  "code_prompt": "def triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are elements in the list that\n    sum to zero, and False otherwise. No -- the three values come from three distinct positions i<j<k in the list; distinct indices are required, not distinct values.\n    \"\"\"",
+  "test_n_pass": 9,
+  "test_n_total": 9
+}

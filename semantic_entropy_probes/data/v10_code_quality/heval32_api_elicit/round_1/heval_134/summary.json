@@ -1,0 +1,118 @@
+{
+  "round": 1,
+  "baseline_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''",
+  "baseline_mean_p": 0.9301982522010803,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "What characters are considered \u201calphabetical\u201d \u2013 only ASCII letters A\u2011Z/a\u2011z, or also Unicode letters such as accented characters?",
+      "answer": "Only ASCII letters (checked via an ord() range of 97-122 after lowercasing), not general Unicode letters.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Only ASCII letters (checked via an ord() range of 97-122 after lowercasing), not general Unicode letters.",
+      "p1": 0.7595738768577576,
+      "p2": 0.6041170358657837,
+      "mean_p": 0.6818454563617706,
+      "delta": -0.2483527958393097
+    },
+    {
+      "idx": 2,
+      "question": "What does \u201cclosely associated with a word\u201d mean \u2013 does it exclude letters that are part of a larger word, adjacent punctuation, or letters preceded/followed by apostrophes?",
+      "answer": "It means the last character must be a standalone single-character token separated by spaces -- i.e., not immediately adjacent to other letters forming a longer word.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: It means the last character must be a standalone single-character token separated by spaces -- i.e., not immediately adjacent to other letters forming a longer word.",
+      "p1": 0.8270650506019592,
+      "p2": 0.6724041700363159,
+      "mean_p": 0.7497346103191376,
+      "delta": -0.18046364188194275
+    },
+    {
+      "idx": 6,
+      "question": "If the last visible character is a letter but is preceded by a non\u2011letter that is considered part of the same token (e.g., \u201c#a\u201d), is that \u201cclosely associated\u201d and thus False?",
+      "answer": "False -- a token like \"#a\" has length 2 (not exactly 1), so it fails the check regardless of the preceding character.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: False -- a token like \"#a\" has length 2 (not exactly 1), so it fails the check regardless of the preceding character.",
+      "p1": 0.8446348905563354,
+      "p2": 0.7120262384414673,
+      "mean_p": 0.7783305644989014,
+      "delta": -0.15186768770217896
+    },
+    {
+      "idx": 5,
+      "question": "How should the function handle strings that end with combining diacritical marks or surrogate pairs \u2013 are they treated as letters?",
+      "answer": "Not addressed; the check uses standard Python character/ord comparison, no special handling for combining marks or surrogate pairs.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Not addressed; the check uses standard Python character/ord comparison, no special handling for combining marks or surrogate pairs.",
+      "p1": 0.8289167881011963,
+      "p2": 0.7396753430366516,
+      "mean_p": 0.784296065568924,
+      "delta": -0.14590218663215637
+    },
+    {
+      "idx": 3,
+      "question": "If the last character is a letter but is part of a contraction or possessive (e.g., \u201cdog\u2019s\u201d), should the function return True or False?",
+      "answer": "False -- the last space-separated token there (e.g. \"dog's\") has length greater than 1, so it does not qualify as a standalone single letter.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: False -- the last space-separated token there (e.g. \"dog's\") has length greater than 1, so it does not qualify as a standalone single letter.",
+      "p1": 0.8868979215621948,
+      "p2": 0.7157284617424011,
+      "mean_p": 0.801313191652298,
+      "delta": -0.12888506054878235
+    },
+    {
+      "idx": 4,
+      "question": "Should trailing whitespace or newline characters be ignored when determining the last character, or considered part of the string?",
+      "answer": "Considered part of the string -- e.g. a trailing space makes the last split-token an empty string, which fails the length==1 check, returning False.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Considered part of the string -- e.g. a trailing space makes the last split-token an empty string, which fails the length==1 check, returning False.",
+      "p1": 0.8787124156951904,
+      "p2": 0.7243979573249817,
+      "mean_p": 0.8015551865100861,
+      "delta": -0.12864306569099426
+    },
+    {
+      "idx": 7,
+      "question": "Are there any performance or type constraints (e.g., must accept only str objects, raise TypeError for other types)?",
+      "answer": "Not addressed beyond requiring a string input; no explicit TypeError requirement is stated.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Not addressed beyond requiring a string input; no explicit TypeError requirement is stated.",
+      "p1": 0.8506211638450623,
+      "p2": 0.7982847094535828,
+      "mean_p": 0.8244529366493225,
+      "delta": -0.10574531555175781
+    },
+    {
+      "idx": 1,
+      "question": "How should the function treat an empty string \u2013 should it return False, raise an error, or something else?",
+      "answer": "Return False (explicitly shown in the examples).",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Return False (explicitly shown in the examples).",
+      "p1": 0.9047715067863464,
+      "p2": 0.860174298286438,
+      "mean_p": 0.8824729025363922,
+      "delta": -0.04772534966468811
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "What characters are considered \u201calphabetical\u201d \u2013 only ASCII letters A\u2011Z/a\u2011z, or also Unicode letters such as accented characters?",
+      "answer": "Only ASCII letters (checked via an ord() range of 97-122 after lowercasing), not general Unicode letters.",
+      "delta": -0.2483527958393097
+    },
+    {
+      "idx": 2,
+      "question": "What does \u201cclosely associated with a word\u201d mean \u2013 does it exclude letters that are part of a larger word, adjacent punctuation, or letters preceded/followed by apostrophes?",
+      "answer": "It means the last character must be a standalone single-character token separated by spaces -- i.e., not immediately adjacent to other letters forming a longer word.",
+      "delta": -0.18046364188194275
+    },
+    {
+      "idx": 6,
+      "question": "If the last visible character is a letter but is preceded by a non\u2011letter that is considered part of the same token (e.g., \u201c#a\u201d), is that \u201cclosely associated\u201d and thus False?",
+      "answer": "False -- a token like \"#a\" has length 2 (not exactly 1), so it fails the check regardless of the preceding character.",
+      "delta": -0.15186768770217896
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "What characters are considered \u201calphabetical\u201d \u2013 only ASCII letters A\u2011Z/a\u2011z, or also Unicode letters such as accented characters?",
+    "answer": "Only ASCII letters (checked via an ord() range of 97-122 after lowercasing), not general Unicode letters.",
+    "delta": -0.2483527958393097
+  },
+  "next_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''\n\nClarification: Only ASCII letters (checked via an ord() range of 97-122 after lowercasing), not general Unicode letters.",
+  "code_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character, only considering ASCII letters\n    (checked via an ord() range of 97-122 after lowercasing), and is not\n    closely associated with a word, and False otherwise.\n    '''",
+  "test_n_pass": 7,
+  "test_n_total": 10
+}

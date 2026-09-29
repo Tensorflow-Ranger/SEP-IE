@@ -1,0 +1,254 @@
+{
+  "heval_1": [
+    {
+      "round": 0,
+      "code_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"",
+      "test_n_pass": 4,
+      "test_n_total": 4
+    },
+    {
+      "round": 1,
+      "baseline_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"",
+      "baseline_mean_p": 0.3361113369464874,
+      "elicit_provider": "groq",
+      "candidates": [
+        {
+          "idx": 4,
+          "question": "Must the returned list preserve the original order of groups as they appear in the input string?",
+          "answer": "Yes, the returned list must preserve the original left-to-right order of groups as they appear in the input string.",
+          "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Yes, the returned list must preserve the original left-to-right order of groups as they appear in the input string.",
+          "p1": 0.1997377574443817,
+          "p2": 0.3371756076812744,
+          "mean_p": 0.26845668256282806,
+          "delta": -0.06765465438365936
+        },
+        {
+          "idx": 3,
+          "question": "How should nested parentheses be handled\u2014should they be split into separate groups, cause an error, or be treated as a single group?",
+          "answer": "Nested parentheses are NOT split into separate groups -- a group is the maximal contiguous balanced span (depth 0 to 0); any parentheses nested inside remain part of that same single group.",
+          "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Nested parentheses are NOT split into separate groups -- a group is the maximal contiguous balanced span (depth 0 to 0); any parentheses nested inside remain part of that same single group.",
+          "p1": 0.23521769046783447,
+          "p2": 0.3777879774570465,
+          "mean_p": 0.3065028339624405,
+          "delta": -0.029608502984046936
+        },
+        {
+          "idx": 1,
+          "question": "If the input contains unbalanced parentheses, should the function raise an error, return a partial result, or ignore the unbalanced portion?",
+          "answer": "This case does not occur in valid input -- every group is a well-formed, balanced sequence of parentheses.",
+          "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: This case does not occur in valid input -- every group is a well-formed, balanced sequence of parentheses.",
+          "p1": 0.2610360383987427,
+          "p2": 0.3835846781730652,
+          "mean_p": 0.32231035828590393,
+          "delta": -0.013800978660583496
+        },
+        {
+          "idx": 5,
+          "question": "Should leading or trailing spaces around each group be stripped from the strings in the output list?",
+          "answer": "Not applicable -- groups contain only parentheses; there is no leading/trailing space to strip within a group's own boundaries (spaces between groups are simply ignored/skipped).",
+          "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Not applicable -- groups contain only parentheses; there is no leading/trailing space to strip within a group's own boundaries (spaces between groups are simply ignored/skipped).",
+          "p1": 0.2749216556549072,
+          "p2": 0.375729501247406,
+          "mean_p": 0.3253255784511566,
+          "delta": -0.01078575849533081
+        },
+        {
+          "idx": 0,
+          "question": "Should characters other than parentheses and spaces be considered invalid input, ignored, or treated as part of a group?",
+          "answer": "The input consists only of parentheses and spaces; other characters do not occur in valid input.",
+          "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: The input consists only of parentheses and spaces; other characters do not occur in valid input.",
+          "p1": 0.2841718792915344,
+          "p2": 0.3948914706707001,
+          "mean_p": 0.33953167498111725,
+          "delta": 0.0034203380346298218
+        },
+        {
+          "idx": 7,
+          "question": "Are there any size or performance constraints (e.g., maximum length of the input) that affect how the function should behave?",
+          "answer": "No specific performance constraints are stated in the specification.",
+          "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: No specific performance constraints are stated in the specification.",
+          "p1": 0.32287904620170593,
+          "p2": 0.4072813093662262,
+          "mean_p": 0.36508017778396606,
+          "delta": 0.028968840837478638
+        },
+        {
+          "idx": 2,
+          "question": "Are empty groups (e.g., consecutive spaces or \u201c()\u201d with no content) to be included in the returned list as empty strings?",
+          "answer": "This does not occur: groups are separated purely by the depth returning to 0, and the input contains no empty '()'-with-nothing-inside artifacts distinct from a normal balanced group.",
+          "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: This does not occur: groups are separated purely by the depth returning to 0, and the input contains no empty '()'-with-nothing-inside artifacts distinct from a normal balanced group.",
+          "p1": 0.3199889063835144,
+          "p2": 0.4350791871547699,
+          "mean_p": 0.37753404676914215,
+          "delta": 0.041422709822654724
+        },
+        {
+          "idx": 6,
+          "question": "If the input string is empty or contains only spaces, should the function return an empty list or a list containing an empty string?",
+          "answer": "Return an empty list.",
+          "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Return an empty list.",
+          "p1": 0.7220473885536194,
+          "p2": 0.6377043724060059,
+          "mean_p": 0.6798758804798126,
+          "delta": 0.3437645435333252
+        }
+      ],
+      "top3": [
+        {
+          "idx": 4,
+          "question": "Must the returned list preserve the original order of groups as they appear in the input string?",
+          "answer": "Yes, the returned list must preserve the original left-to-right order of groups as they appear in the input string.",
+          "delta": -0.06765465438365936
+        },
+        {
+          "idx": 3,
+          "question": "How should nested parentheses be handled\u2014should they be split into separate groups, cause an error, or be treated as a single group?",
+          "answer": "Nested parentheses are NOT split into separate groups -- a group is the maximal contiguous balanced span (depth 0 to 0); any parentheses nested inside remain part of that same single group.",
+          "delta": -0.029608502984046936
+        },
+        {
+          "idx": 1,
+          "question": "If the input contains unbalanced parentheses, should the function raise an error, return a partial result, or ignore the unbalanced portion?",
+          "answer": "This case does not occur in valid input -- every group is a well-formed, balanced sequence of parentheses.",
+          "delta": -0.013800978660583496
+        }
+      ],
+      "chosen": {
+        "idx": 4,
+        "question": "Must the returned list preserve the original order of groups as they appear in the input string?",
+        "answer": "Yes, the returned list must preserve the original left-to-right order of groups as they appear in the input string.",
+        "delta": -0.06765465438365936
+      },
+      "next_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n\nClarification: Yes, the returned list must preserve the original left-to-right order of groups as they appear in the input string.",
+      "code_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Yes, the returned list must preserve the original left-to-right order of groups as they appear in the input string. Ignore any spaces in the input string.\n    \"\"\"",
+      "test_n_pass": 4,
+      "test_n_total": 4
+    }
+  ],
+  "heval_104": [
+    {
+      "round": 0,
+      "code_prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"",
+      "test_n_pass": 4,
+      "test_n_total": 4
+    },
+    {
+      "round": 1,
+      "baseline_prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"",
+      "baseline_mean_p": 0.38707080483436584,
+      "elicit_provider": "groq",
+      "candidates": [
+        {
+          "idx": 1,
+          "question": "Are numbers with a digit zero (0) considered to have an even digit and thus be excluded?",
+          "answer": "Yes, 0 is an even digit, so any number containing a 0 digit is excluded from the result.",
+          "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes, 0 is an even digit, so any number containing a 0 digit is excluded from the result.",
+          "p1": 0.1902676671743393,
+          "p2": 0.26753881573677063,
+          "mean_p": 0.22890324145555496,
+          "delta": -0.15816756337881088
+        },
+        {
+          "idx": 4,
+          "question": "Should the returned list be sorted in ascending numerical order, or is another ordering (e.g., lexical) acceptable?",
+          "answer": "The returned list must be sorted in ascending (increasing) numerical order.",
+          "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: The returned list must be sorted in ascending (increasing) numerical order.",
+          "p1": 0.21282333135604858,
+          "p2": 0.2985493838787079,
+          "mean_p": 0.25568635761737823,
+          "delta": -0.1313844472169876
+        },
+        {
+          "idx": 0,
+          "question": "Should the function consider negative numbers, and if so, are the minus sign characters ignored when checking for even digits?",
+          "answer": "Not applicable -- per the specification the input is guaranteed to be a list of positive integers, so negative numbers do not occur.",
+          "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Not applicable -- per the specification the input is guaranteed to be a list of positive integers, so negative numbers do not occur.",
+          "p1": 0.23536045849323273,
+          "p2": 0.2761344611644745,
+          "mean_p": 0.2557474598288536,
+          "delta": -0.13132334500551224
+        },
+        {
+          "idx": 2,
+          "question": "Must the input list contain only integers, or should non\u2011integer types be ignored, cause an error, or be converted?",
+          "answer": "Not applicable -- per the specification the input is guaranteed to be a list of integers; non-integer types are not a case the function needs to handle.",
+          "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Not applicable -- per the specification the input is guaranteed to be a list of integers; non-integer types are not a case the function needs to handle.",
+          "p1": 0.2232607901096344,
+          "p2": 0.2948427200317383,
+          "mean_p": 0.25905175507068634,
+          "delta": -0.1280190497636795
+        },
+        {
+          "idx": 7,
+          "question": "Are leading zeros in numbers (e.g., 007) relevant to the even\u2011digit check, and how should they be treated?",
+          "answer": "Not applicable -- inputs are ordinary positive integers with no leading-zero representation; digits are simply the characters of str(i).",
+          "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Not applicable -- inputs are ordinary positive integers with no leading-zero representation; digits are simply the characters of str(i).",
+          "p1": 0.2245803028345108,
+          "p2": 0.3110605776309967,
+          "mean_p": 0.26782044023275375,
+          "delta": -0.11925036460161209
+        },
+        {
+          "idx": 3,
+          "question": "If the input list contains duplicate integers, should the output list include each qualifying number only once or preserve duplicates before sorting?",
+          "answer": "Duplicates are preserved in the output -- there is no deduplication step; each qualifying element is included as many times as it appears.",
+          "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Duplicates are preserved in the output -- there is no deduplication step; each qualifying element is included as many times as it appears.",
+          "p1": 0.2525450587272644,
+          "p2": 0.29063570499420166,
+          "mean_p": 0.27159038186073303,
+          "delta": -0.11548042297363281
+        },
+        {
+          "idx": 6,
+          "question": "If an element is not an integer but can be interpreted as a numeric string (e.g., \"123\"), should it be processed, ignored, or cause an error?",
+          "answer": "Not applicable -- per the specification elements are guaranteed to be integers, not numeric strings.",
+          "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Not applicable -- per the specification elements are guaranteed to be integers, not numeric strings.",
+          "p1": 0.4348701536655426,
+          "p2": 0.41673508286476135,
+          "mean_p": 0.425802618265152,
+          "delta": 0.03873181343078613
+        },
+        {
+          "idx": 5,
+          "question": "How should the function handle an empty input list\u2014return an empty list or raise an exception?",
+          "answer": "Return an empty list.",
+          "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Return an empty list.",
+          "p1": 0.6066873669624329,
+          "p2": 0.6099287271499634,
+          "mean_p": 0.6083080470561981,
+          "delta": 0.22123724222183228
+        }
+      ],
+      "top3": [
+        {
+          "idx": 1,
+          "question": "Are numbers with a digit zero (0) considered to have an even digit and thus be excluded?",
+          "answer": "Yes, 0 is an even digit, so any number containing a 0 digit is excluded from the result.",
+          "delta": -0.15816756337881088
+        },
+        {
+          "idx": 4,
+          "question": "Should the returned list be sorted in ascending numerical order, or is another ordering (e.g., lexical) acceptable?",
+          "answer": "The returned list must be sorted in ascending (increasing) numerical order.",
+          "delta": -0.1313844472169876
+        },
+        {
+          "idx": 0,
+          "question": "Should the function consider negative numbers, and if so, are the minus sign characters ignored when checking for even digits?",
+          "answer": "Not applicable -- per the specification the input is guaranteed to be a list of positive integers, so negative numbers do not occur.",
+          "delta": -0.13132334500551224
+        }
+      ],
+      "chosen": {
+        "idx": 1,
+        "question": "Are numbers with a digit zero (0) considered to have an even digit and thus be excluded?",
+        "answer": "Yes, 0 is an even digit, so any number containing a 0 digit is excluded from the result.",
+        "delta": -0.15816756337881088
+      },
+      "next_prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes, 0 is an even digit, so any number containing a 0 digit is excluded from the result.",
+      "code_prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x, return a sorted list of all \n    elements that hasn't any even digit. Yes, 0 is an even digit, so any number containing a 0 digit is excluded from the result.\n    \"\"\"",
+      "test_n_pass": 4,
+      "test_n_total": 4
+    }
+  ]
+}

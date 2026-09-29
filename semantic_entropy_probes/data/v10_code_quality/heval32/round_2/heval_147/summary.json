@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.",
+  "baseline_mean_p": 0.33176566660404205,
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "What defines a \"triple\" in this context\u2014specifically, what constitutes a valid triple of elements?",
+      "answer": "An ordered triple of ARRAY POSITIONS (i,j,k) with i<j<k (strictly increasing indices, not necessarily distinct values), whose corresponding array values sum to a multiple of 3.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.\n\nClarification: An ordered triple of ARRAY POSITIONS (i,j,k) with i<j<k (strictly increasing indices, not necessarily distinct values), whose corresponding array values sum to a multiple of 3.",
+      "p1": 0.31830719113349915,
+      "p2": 0.352753609418869,
+      "mean_p": 0.3355304002761841,
+      "delta": 0.003764733672142029
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected output format\u2014should it be a list of triples or a single maximum value?",
+      "answer": "A single integer: the count of qualifying triples, not a list of the triples themselves.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.\n\nClarification: A single integer: the count of qualifying triples, not a list of the triples themselves.",
+      "p1": 0.2973993420600891,
+      "p2": 0.39579251408576965,
+      "mean_p": 0.3465959280729294,
+      "delta": 0.014830261468887329
+    },
+    {
+      "idx": 0,
+      "question": "Are the indices in the array 1-based or 0-based?",
+      "answer": "The mathematical description uses 1-based indices (i from 1 to n) for exposition, but the actual Python implementation loops over the standard 0-indexed array A built via range(1, n+1).",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.\n\nClarification: The mathematical description uses 1-based indices (i from 1 to n) for exposition, but the actual Python implementation loops over the standard 0-indexed array A built via range(1, n+1).",
+      "p1": 0.26943695545196533,
+      "p2": 0.4243927597999573,
+      "mean_p": 0.3469148576259613,
+      "delta": 0.01514919102191925
+    },
+    {
+      "idx": 1,
+      "question": "What should be done if n is zero, even though the docstring says it is guaranteed to be positive?",
+      "answer": "Not a documented case (the docstring guarantees n is positive), but mechanically range(1, 0+1) is empty, so A is empty and the function returns 0.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.\n\nClarification: Not a documented case (the docstring guarantees n is positive), but mechanically range(1, 0+1) is empty, so A is empty and the function returns 0.",
+      "p1": 0.3106206953525543,
+      "p2": 0.42495980858802795,
+      "mean_p": 0.36779025197029114,
+      "delta": 0.036024585366249084
+    },
+    {
+      "idx": 3,
+      "question": "Is the array allowed to have duplicate values, and if so, how does that affect the count of triples?",
+      "answer": "The array a[i] = i*i - i + 1 is a specific deterministic formula; the algorithm treats each position i,j,k independently regardless of whether the resulting values happen to coincide.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.\n\nClarification: The array a[i] = i*i - i + 1 is a specific deterministic formula; the algorithm treats each position i,j,k independently regardless of whether the resulting values happen to coincide.",
+      "p1": 0.3317514955997467,
+      "p2": 0.4109702408313751,
+      "mean_p": 0.3713608682155609,
+      "delta": 0.03959520161151886
+    },
+    {
+      "idx": 2,
+      "question": "How should the array be handled if n is very large, leading to potential integer overflow?",
+      "answer": "Not applicable; Python integers have arbitrary precision so no overflow occurs, though the O(n^3) triple loop becomes slow for large n.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.\n\nClarification: Not applicable; Python integers have arbitrary precision so no overflow occurs, though the O(n^3) triple loop becomes slow for large n.",
+      "p1": 0.32497847080230713,
+      "p2": 0.4187619984149933,
+      "mean_p": 0.3718702346086502,
+      "delta": 0.040104568004608154
+    },
+    {
+      "idx": 5,
+      "question": "Are the triples required to be distinct in terms of their positions in the array or their values?",
+      "answer": "By position: every combination of i<j<k is counted once, regardless of whether the resulting values happen to match another triple's values.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.\n\nClarification: By position: every combination of i<j<k is counted once, regardless of whether the resulting values happen to match another triple's values.",
+      "p1": 0.34994906187057495,
+      "p2": 0.4338715076446533,
+      "mean_p": 0.39191028475761414,
+      "delta": 0.06014461815357208
+    },
+    {
+      "idx": 6,
+      "question": "How are ties handled when determining the maximum value among triples?",
+      "answer": "Not applicable in the misleading sense -- despite the function's name, it counts ALL qualifying triples, not just a single maximum one; 'max' refers to the maximal array of length n, not to selecting the biggest triple.",
+      "prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.\n\nClarification: Not applicable in the misleading sense -- despite the function's name, it counts ALL qualifying triples, not just a single maximum one; 'max' refers to the maximal array of length n, not to selecting the biggest triple.",
+      "p1": 0.48895227909088135,
+      "p2": 0.45796725153923035,
+      "mean_p": 0.47345976531505585,
+      "delta": 0.1416940987110138
+    }
+  ],
+  "top3": [
+    {
+      "idx": 4,
+      "question": "What defines a \"triple\" in this context\u2014specifically, what constitutes a valid triple of elements?",
+      "answer": "An ordered triple of ARRAY POSITIONS (i,j,k) with i<j<k (strictly increasing indices, not necessarily distinct values), whose corresponding array values sum to a multiple of 3.",
+      "delta": 0.003764733672142029
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected output format\u2014should it be a list of triples or a single maximum value?",
+      "answer": "A single integer: the count of qualifying triples, not a list of the triples themselves.",
+      "delta": 0.014830261468887329
+    },
+    {
+      "idx": 0,
+      "question": "Are the indices in the array 1-based or 0-based?",
+      "answer": "The mathematical description uses 1-based indices (i from 1 to n) for exposition, but the actual Python implementation loops over the standard 0-indexed array A built via range(1, n+1).",
+      "delta": 0.01514919102191925
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "What defines a \"triple\" in this context\u2014specifically, what constitutes a valid triple of elements?",
+    "answer": "An ordered triple of ARRAY POSITIONS (i,j,k) with i<j<k (strictly increasing indices, not necessarily distinct values), whose corresponding array values sum to a multiple of 3.",
+    "delta": 0.003764733672142029
+  },
+  "next_prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n    \"\"\"\n\nClarification: Not applicable -- n is guaranteed to be a positive integer per the docstring.\n\nClarification: An ordered triple of ARRAY POSITIONS (i,j,k) with i<j<k (strictly increasing indices, not necessarily distinct values), whose corresponding array values sum to a multiple of 3.",
+  "code_prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n        The task is to find the maximum number of ordered triples of ARRAY POSITIONS (i,j,k) with i<j<k (strictly increasing indices, not necessarily distinct values), whose corresponding array values sum to a multiple of 3.\n    \"\"\"",
+  "test_n_pass": 4,
+  "test_n_total": 4
+}

@@ -1,0 +1,162 @@
+{
+  "heval_1": {
+    "answers": [
+      "Non-ASCII characters like Unicode parentheses should be ignored for grouping purposes; only ASCII '(' and ')' are treated as parentheses.",
+      "A group is complete when the nesting depth returns to zero after processing characters, so '(())' is one complete group with depth returning to 0, not two separate groups.",
+      "Empty groups are never part of the output; only balanced groups with matching opening and closing parentheses are returned.",
+      "Escaped parentheses are not supported; only literal '(' and ')' characters serve as grouping delimiters.",
+      "Multiple consecutive spaces are simply ignored entirely and have no effect on grouping or output structure.",
+      "Groups are returned in the exact order they appear in the input string, preserving original ordering.",
+      "The returned list contains groups as raw substrings including their surrounding parentheses, e.g., '()' or '(()())'.",
+      "Multiple consecutive balanced groups separated by spaces are treated as separate groups, not merged; e.g., '(()) (())' returns two groups.",
+      "Characters other than parentheses and spaces\u2014such as letters, digits, or punctuation\u2014should be ignored for grouping purposes.",
+      "Leading or trailing spaces anywhere in the input are ignored; they do not affect the grouping logic.",
+      "Unmatched parentheses (extra opening or closing) should result in silently discarding the unmatched parts; only complete balanced groups are returned.",
+      "An empty input string returns an empty list, and a string containing only spaces also returns an empty list."
+    ]
+  },
+  "heval_109": {
+    "answers": [
+      "The function should treat array indices as 0-based in Python (since input is a Python list); the docstring notation arr[1]...arr[N] is just mathematical convention and does not affect implementation.",
+      "The function must check whether any number of successive right-shifts (zero or more) can produce a sorted array; a single shift alone may not be sufficient.",
+      "A sorted array is defined as non-decreasing (allowing equal consecutive elements), not strictly increasing; e.g., [1, 2, 2, 3] is sorted.",
+      "If multiple rotations produce the same sorted sequence due to duplicates, any valid rotation is sufficient; the function only needs to confirm that at least one rotation exists that produces sorted order.",
+      "The function should return True if the array is already sorted without any shifts needed; at least one shift is not required.",
+      "The function must handle only Python list objects; tuples and generators are not required to be supported.",
+      "The array must contain integers only; if non-numeric elements are present (strings, None, etc.), the function should raise an error or return False.",
+      "There is no specified maximum size N for the array; the function must work for arrays of any practical size.",
+      "The original array must remain unchanged in memory (no side effects); the function returns only a boolean result, never modifies the input list.",
+      "An empty array returns True as specified; a single-element array is trivially sortable and should also return True.",
+      "If multiple right-shift operations lead to a sorted array, any successful rotation is sufficient; reporting the minimal number of shifts is not required.",
+      "A right-shift must be a cyclic rotation of the entire array; the last element wraps to index 0 and all other elements shift right by one position."
+    ]
+  },
+  "heval_130": {
+    "answers": [
+      "The seed values are tri(0) = 1 and tri(1) = 3, which establish the starting points for the recurrence relations.",
+      "Yes, the returned list includes the term for index 0: tri(0) = 1.",
+      "The 'tri(n+1)' in the odd-n recurrence refers to the value already computed in the current forward-pass iteration for the next even index (not a future unknown value).",
+      "For even n, the formula 'tri(n) = 1 + n/2' produces a floating-point value in Python 3 (e.g., tri(2) = 2.0), not an integer.",
+      "When n is odd, after computing tri(n) using the odd-n formula, the subsequently needed tri(n+1) uses the value already computed with the even-n formula in the same forward pass.",
+      "The sequence is defined consistently for all non-negative integers n; the parity-based formulas do not produce conflicts.",
+      "The function should raise an exception if n is not an integer (e.g., if n is a float or string).",
+      "The returned list is ordered as [tri(0), tri(1), ..., tri(n)], from smallest index to largest index.",
+      "There are no explicit constraints on numeric type or overflow handling; the function supports arbitrarily large integers and floating-point results.",
+      "First n + 1 numbers means the list length must be exactly n+1, always including tri(0) through tri(n).",
+      "There are no performance constraints specified; iterating forward through indices is acceptable.",
+      "The function should validate that n is non-negative; if a negative value is supplied, it should raise an exception or return an empty list."
+    ]
+  },
+  "heval_147": {
+    "answers": [
+      "The array indices should be treated as 1-based in the formula a[i] = i*i - i + 1 (where i ranges 1 to n), but when implementing in Python with 0-based indexing, adjust accordingly to get the correct values.",
+      "When computing a[i], use the 1-based index from the mathematical formula (not the Python 0-based index) so that a[0] in Python corresponds to the value for i=1.",
+      "The three indices i, j, k must be strictly distinct; triples like (i, i, j) are never valid.",
+      "If n is less than 3, the function should return 0, since there cannot be three distinct indices.",
+      "There are no specified constraints on the maximum value of n; the function must work for any practical positive integer.",
+      "Each unordered set of three indices should be counted only once; permutations of the same three indices count as one triple, so the count comes from combinations where i < j < k.",
+      "In the phrase 'a[i] + a[j] + a[k] is divisible by 3,' divisible means the sum modulo 3 equals exactly 0; any remainder other than 0 disqualifies the triple.",
+      "The returned count should be an integer type that fits within Python's standard int.",
+      "The function does not need to validate input types; assume n is a valid positive integer.",
+      "The function should be pure with no side effects; no printing or logging is permitted.",
+      "For large numbers, use the divisibility check directly; Python handles big integers natively, so modular arithmetic is not required.",
+      "Triples can be enumerated in any order internally; there are no specific tie-breaking or ordering requirements."
+    ]
+  },
+  "heval_91": {
+    "answers": [
+      "Consecutive sentence delimiters like '...' or '?!' should each be treated as a single delimiter event, not creating empty sentences between them.",
+      "Leading and trailing whitespace around sentences should be stripped when determining if a sentence starts with 'I '; the check is for the pattern 'I ' after stripping.",
+      "The function should use case-sensitive matching for 'I '; only uppercase 'I' followed by a space counts as a boredom, not lowercase 'i '.",
+      "If a sentence begins with quotation marks or other punctuation before the 'I ' (e.g., '\"I am...'), the leading punctuation is not ignored; the sentence must start directly with 'I ' to count as a boredom.",
+      "Empty sentences (with no words after a delimiter) should be ignored; they are not counted as boredoms.",
+      "Newline characters (\\n) are treated as regular characters within a sentence, not as delimiters; only '.', '?', and '!' are sentence delimiters.",
+      "The function counts a sentence as a boredom if and only if the sentence starts with 'I ' (case-sensitive); later occurrences of 'I' in the sentence are irrelevant.",
+      "If a sentence starts with 'I' followed by multiple spaces (e.g., 'I   love...'), it does not count as a boredom; exactly one space after 'I' is required for the 'I ' pattern.",
+      "Only ASCII punctuation marks '.', '?', and '!' are valid sentence delimiters; Unicode punctuation characters are not recognized as delimiters.",
+      "Delimiters embedded inside quotes or parentheses are treated as actual sentence boundaries; no special handling exempts them from being delimiters.",
+      "The function should return an integer count of boredoms.",
+      "If the input is None or not a string type, the function should return 0 or raise an exception depending on the expected behavior for invalid inputs."
+    ]
+  },
+  "heval_104": {
+    "answers": [
+      "The function treats only positive integers as valid input; negative integers are not included in the input list (the function accepts a list of positive integers only).",
+      "If an element in the input list is not an integer (e.g., a float, string, or None), the function should skip it or raise an error; only integers are processed.",
+      "Duplicate numbers in the input list are allowed and should each appear in the output independently; no deduplication is performed.",
+      "The returned list must be sorted in ascending numerical order.",
+      "The integer 0 itself should be excluded because it contains only the even digit 0.",
+      "Leading zeros in string representation (e.g., '007') are not applicable here; the input is a list of integers with their standard numeric form.",
+      "If the input list is empty, the function should return an empty list.",
+      "The digit '0' is always considered even, so any number containing the digit 0 is excluded from the result.",
+      "There is no limit on integer size; the function must support arbitrarily large integers.",
+      "The function must preserve the original type of elements as Python int objects (not convert to strings for output).",
+      "The input list is assumed to be flat with only integer elements; nested collections are not supported.",
+      "For duplicate qualifying numbers, the original relative order from the input is not preserved in the output since the result is sorted."
+    ]
+  },
+  "heval_110": {
+    "answers": [
+      "The function does not need to preserve the original order of elements in lst1 after exchanges; only the parity (odd/even status) matters, not their positions.",
+      "The input lists are assumed to contain only numeric types; non-numeric elements do not need to be handled.",
+      "Each element from lst2 can be used to replace multiple odd elements in lst1 in principle, but what matters is counting: if there are enough even numbers in lst2 to match the count of odd numbers in lst1, return 'YES'.",
+      "Only odd elements in lst1 should be the target for replacement; exchanging even elements is not part of the strategy.",
+      "Zero is considered even, and negative numbers follow standard even/odd classification (e.g., -2 is even, -3 is odd).",
+      "If lst1 already contains only even numbers, the function should return 'YES' immediately; no exchanges are needed.",
+      "Duplicate values in lst1 and lst2 are distinct for counting purposes; even if two values are numerically identical, they count as separate elements.",
+      "The function must return the strings 'YES' and 'NO' exactly (case-sensitive); no other truthy/falsey values are acceptable.",
+      "If lst2 is empty, it provides zero even numbers; an empty lst1 is already all even, so return 'YES'. If both are empty, return 'YES'.",
+      "There is no explicit limit on the number of exchanges; the function can assume unlimited swaps as long as the count condition is met.",
+      "The function should not modify the input lists in place; inputs remain unchanged.",
+      "If lst2 contains more even numbers than needed, the function only needs to confirm that enough even numbers exist; reporting which specific elements are exchanged is not required."
+    ]
+  },
+  "heval_126": {
+    "answers": [
+      "A single-element list is considered sorted and satisfies the duplicate rule trivially (no duplicates possible).",
+      "A list with exactly two identical numbers like [3, 3] is considered sorted if the order requirement is met; however, two occurrences of the same value do not violate the 'no more than 2 duplicates' rule.",
+      "The order must be non-decreasing (ascending order, allowing equal adjacent values), not strictly increasing; [1, 2, 2, 3] is sorted.",
+      "An empty list should return True; an empty list is trivially sorted.",
+      "For a list like [1, 2, 1, 2, 1], the duplicate rule applies globally across the entire list: if any value appears more than twice, return False (this example has three 1s and two 2s, so it returns False).",
+      "Duplicate counts are evaluated globally across the entire list, not just for consecutive duplicates.",
+      "Boolean values (True/False) should be rejected as non-integer inputs; the function should return False for lists containing booleans.",
+      "A subclass of list that behaves like a list of integers should be accepted if all elements are valid integers.",
+      "The function must verify that every element is an integer type (not just numeric with no fractional part); floats like 1.0 should be rejected.",
+      "Very large integer values that could cause overflow in comparisons should be handled normally; Python integers have arbitrary precision, so overflow is not a concern.",
+      "If the list contains mixed types like [1, '2', 3], the function should return False immediately due to non-integer elements.",
+      "A list sorted in descending order like [5, 4, 3, 2, 1] does not satisfy the ascending-order requirement; only ascending order (non-decreasing) counts as sorted, so this returns False."
+    ]
+  },
+  "heval_150": {
+    "answers": [
+      "The function should accept non-integer types for n (like floats), but only integer values of n should be checked for primality; float inputs like 3.0 that represent integers should be treated as their integer value.",
+      "When n is negative or zero, the function should return y (since negative numbers and zero are not prime by definition).",
+      "n is not considered prime when it equals 1; by mathematical definition, 1 is not prime, so return y.",
+      "Floating-point values of n that are mathematically integers (e.g., 3.0) should be treated as their integer equivalent and checked for primality.",
+      "If x or y are mutable objects like lists or dictionaries, the function should return the original reference (not a copy).",
+      "The function should return y if n is not a valid integer input, treating invalid inputs as 'not prime.'",
+      "There are no specified performance constraints; a simple trial-division algorithm is acceptable for checking primality.",
+      "The specification does not require special handling of extremely large integers beyond Python's native capabilities.",
+      "There is no tie-breaking rule for prime numbers that are perfect squares (which is impossible for primes > 2), so this scenario does not apply.",
+      "The function should use only the mathematical definition of prime (exactly two distinct positive divisors: 1 and itself); Gaussian integers and other domains are not required.",
+      "If x or y are functions or callables, the function should return the callable itself without invoking it.",
+      "If x and y have different types (e.g., x is int, y is string), return whichever is selected (x or y) in its original type without type conversion."
+    ]
+  },
+  "heval_80": {
+    "answers": [
+      "The function should return a boolean value (True/False), not other types like 1/0 or 'yes'/'no'.",
+      "Visually identical characters with different Unicode code points (like '\u00e9' vs '\u00e9') should be treated as distinct characters based on their actual code points.",
+      "Case differences are considered distinct; 'A' and 'a' are different characters.",
+      "The input must be of type str; other sequence types (lists, bytes) should not be accepted.",
+      "Whitespace and newline characters are counted as regular characters for the distinctness check.",
+      "Characters that form a single glyph through combining characters should be counted as their individual code points for distinctness comparison.",
+      "The length requirement is inclusive; a string of exactly length 3 is evaluated for distinctness, not automatically considered unhappy.",
+      "For strings longer than 3, every consecutive triple (positions i, i+1, i+2) must have all three characters distinct; at least one non-distinct triple means the string is unhappy.",
+      "The function should return False for inputs that are not strings (like None or integers); an exception is not required.",
+      "Distinctness comparison should use Unicode code points directly without normalization.",
+      "For a string with duplicate characters separated by more than two positions (e.g., 'abca'), it may still be unhappy if any sliding window of three has duplicates (e.g., 'abca' has 'aba' with duplicate 'a', so it's unhappy).",
+      "There are no specified performance constraints; O(n) time complexity is straightforward to achieve by checking each triple once."
+    ]
+  }
+}

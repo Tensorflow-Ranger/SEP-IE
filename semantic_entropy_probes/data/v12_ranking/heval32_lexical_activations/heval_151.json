@@ -1,0 +1,43 @@
+{
+  "id": "heval_151",
+  "questions": [
+    "What precisely does the term “key” refer to in the context of selecting numbers from the list?",
+    "Should non‑integer numeric types such as floats or Decimals be ignored entirely, or can they be considered “key” if they represent whole numbers?",
+    "If a number is both negative and an integer, is it ignored solely because it is negative, or does its integer status affect the decision in any way?",
+    "Are duplicate values in the input list each processed separately, or should each distinct value be considered only once when summing squares?",
+    "Must the function raise an exception for elements that are not numbers (e.g., strings, None), or should such elements simply be ignored like negatives?",
+    "Is the returned result required to be of a specific numeric type (e.g., int vs. float) when the sum involves large values that could overflow a standard integer?",
+    "Should the function treat NaN or infinite values as “not integers” and thus ignore them, or is there a defined handling for such special floating‑point cases?",
+    "In the example `double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10`, why is the square of 2 omitted, and does that imply a rule about ordering or selection beyond the “key” definition?"
+  ],
+  "answers": [
+    "\"Key\" is the injected placeholder for \"odd\" -- only odd integers are included (with negatives and non-integers still excluded).",
+    "Only true integers are considered; floats (even whole-valued ones) are excluded per the 'not integers' clause, independent of the odd/key filter.",
+    "A number is excluded if it is negative, regardless of whether it would otherwise qualify as odd.",
+    "Yes, each list element (including duplicates) is processed independently in the sum.",
+    "Not applicable -- the input is guaranteed to be a list of numbers; no exception handling for non-numeric elements is specified.",
+    "Not applicable -- the sum is plain Python int/float arithmetic; no special type constraint is specified.",
+    "Not applicable -- NaN/infinity aren't part of the specified input domain.",
+    "The square of 2 is omitted because 2 is even, not odd -- 'key' means odd, so only odd numbers (1 and 3) are squared and summed."
+  ],
+  "inline_prompts": [
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are key. Ignore numbers that are negative or not integers.\n    Key is the injected placeholder for \"odd\" -- only odd integers are included\n    (with negatives and non-integers still excluded).\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are key. Ignore numbers that are negative or not integers.\n    Only true integers are considered; floats (even whole-valued ones) are excluded per the 'not integers' clause, independent of the odd/key filter.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are key. Ignore numbers that are negative or not integers.\n    A number is excluded if it is negative, regardless of whether it would otherwise qualify as odd.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are key. Ignore numbers that are negative or not integers.\n    Yes, each list element (including duplicates) is processed independently in the sum.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are key. Ignore numbers that are negative or not integers.\n    Not applicable -- the input is guaranteed to be a list of numbers; no exception handling for non-numeric elements is specified.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are key. Ignore numbers that are negative or not integers.\n    Not applicable -- the sum is plain Python int/float arithmetic; no special type constraint is specified.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are key. Ignore numbers that are negative or not integers.\n    Not applicable -- NaN/infinity aren't part of the specified input domain.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+    "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are key. Ignore numbers that are negative or not integers.\n    The square of 2 is omitted because 2 is even, not odd -- 'key' means odd, so only odd numbers (1 and 3) are squared and summed.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''"
+  ],
+  "tiers": [
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2
+  ]
+}

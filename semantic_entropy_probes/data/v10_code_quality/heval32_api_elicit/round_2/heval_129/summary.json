@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.",
+  "baseline_mean_p": 0.36192910373210907,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 3,
+      "question": "If multiple paths achieve the same minimal metric, should any one be returned, or is there a tie\u2011breaking rule (e.g., lexicographically smallest sequence of values)?",
+      "answer": "Ties don't occur in practice -- 'It is guaranteed that the answer is unique.' The comparison itself is lexicographic ordering of the value sequences.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.\n\nClarification: Ties don't occur in practice -- 'It is guaranteed that the answer is unique.' The comparison itself is lexicographic ordering of the value sequences.",
+      "p1": 0.2069358080625534,
+      "p2": 0.35249051451683044,
+      "mean_p": 0.2797131612896919,
+      "delta": -0.08221594244241714
+    },
+    {
+      "idx": 6,
+      "question": "Is the input grid guaranteed to contain each integer from 1 to N\u00b2 exactly once, or can some numbers appear multiple times while still covering the full range?",
+      "answer": "Exactly once -- the clear specification fixes this: 'Every integer in the range [1, N*N] inclusive appears exactly once on the cells of the grid.'",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.\n\nClarification: Exactly once -- the clear specification fixes this: 'Every integer in the range [1, N*N] inclusive appears exactly once on the cells of the grid.'",
+      "p1": 0.29379767179489136,
+      "p2": 0.38985592126846313,
+      "mean_p": 0.34182679653167725,
+      "delta": -0.020102307200431824
+    },
+    {
+      "idx": 1,
+      "question": "Does the path length k refer to the number of cells visited including the start cell, or the number of moves between cells?",
+      "answer": "Path length k refers to the number of cells visited, including the start cell (per the explicit note in the solution).",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.\n\nClarification: Path length k refers to the number of cells visited, including the start cell (per the explicit note in the solution).",
+      "p1": 0.301434725522995,
+      "p2": 0.38284727931022644,
+      "mean_p": 0.3421410024166107,
+      "delta": -0.019788101315498352
+    },
+    {
+      "idx": 0,
+      "question": "Must the path be simple (no cell visited more than once) or can cells be revisited?",
+      "answer": "Cells CAN be revisited -- the path does not need to be simple; the solution explicitly notes 'a path of length k means visiting exactly k cells (not necessarily distinct)'.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.\n\nClarification: Cells CAN be revisited -- the path does not need to be simple; the solution explicitly notes 'a path of length k means visiting exactly k cells (not necessarily distinct)'.",
+      "p1": 0.3198998272418976,
+      "p2": 0.3712201416492462,
+      "mean_p": 0.3455599844455719,
+      "delta": -0.01636911928653717
+    },
+    {
+      "idx": 4,
+      "question": "Are diagonal moves allowed, or only the four orthogonal neighbors sharing an edge?",
+      "answer": "Only orthogonal moves are allowed (cells sharing an edge with the current cell), no diagonal moves.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.\n\nClarification: Only orthogonal moves are allowed (cells sharing an edge with the current cell), no diagonal moves.",
+      "p1": 0.3167099356651306,
+      "p2": 0.3840504288673401,
+      "mean_p": 0.35038018226623535,
+      "delta": -0.011548921465873718
+    },
+    {
+      "idx": 7,
+      "question": "Should the function return the sequence of values along the optimal path, the sum/product of those values, or both?",
+      "answer": "Return the ordered list of values on the cells visited along the minimum path (per 'Return an ordered list of the values on the cells that the minimum path go through'), not the sum/product.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.\n\nClarification: Return the ordered list of values on the cells visited along the minimum path (per 'Return an ordered list of the values on the cells that the minimum path go through'), not the sum/product.",
+      "p1": 0.3487592935562134,
+      "p2": 0.427130788564682,
+      "mean_p": 0.3879450410604477,
+      "delta": 0.026015937328338623
+    },
+    {
+      "idx": 5,
+      "question": "Must the path stay within the bounds of the N\u00d7N grid, or are wrap\u2011around moves (torus topology) permitted?",
+      "answer": "Must stay strictly within the grid bounds -- 'You CANNOT go off the grid,' no wrap-around/torus behavior is allowed.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.\n\nClarification: Must stay strictly within the grid bounds -- 'You CANNOT go off the grid,' no wrap-around/torus behavior is allowed.",
+      "p1": 0.3496786057949066,
+      "p2": 0.43011701107025146,
+      "mean_p": 0.38989780843257904,
+      "delta": 0.02796870470046997
+    },
+    {
+      "idx": 2,
+      "question": "Should the returned result be the minimum possible sum of the visited cell values, the minimum possible product, or some other metric?",
+      "answer": "Neither sum nor product directly -- the metric to minimize is the lexicographic order of the sequence of values visited, as explicitly defined in the docstring's comparison rule.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.\n\nClarification: Neither sum nor product directly -- the metric to minimize is the lexicographic order of the sequence of values visited, as explicitly defined in the docstring's comparison rule.",
+      "p1": 0.34489771723747253,
+      "p2": 0.45990514755249023,
+      "mean_p": 0.4024014323949814,
+      "delta": 0.040472328662872314
+    }
+  ],
+  "top3": [
+    {
+      "idx": 3,
+      "question": "If multiple paths achieve the same minimal metric, should any one be returned, or is there a tie\u2011breaking rule (e.g., lexicographically smallest sequence of values)?",
+      "answer": "Ties don't occur in practice -- 'It is guaranteed that the answer is unique.' The comparison itself is lexicographic ordering of the value sequences.",
+      "delta": -0.08221594244241714
+    },
+    {
+      "idx": 6,
+      "question": "Is the input grid guaranteed to contain each integer from 1 to N\u00b2 exactly once, or can some numbers appear multiple times while still covering the full range?",
+      "answer": "Exactly once -- the clear specification fixes this: 'Every integer in the range [1, N*N] inclusive appears exactly once on the cells of the grid.'",
+      "delta": -0.020102307200431824
+    },
+    {
+      "idx": 1,
+      "question": "Does the path length k refer to the number of cells visited including the start cell, or the number of moves between cells?",
+      "answer": "Path length k refers to the number of cells visited, including the start cell (per the explicit note in the solution).",
+      "delta": -0.019788101315498352
+    }
+  ],
+  "chosen": {
+    "idx": 3,
+    "question": "If multiple paths achieve the same minimal metric, should any one be returned, or is there a tie\u2011breaking rule (e.g., lexicographically smallest sequence of values)?",
+    "answer": "Ties don't occur in practice -- 'It is guaranteed that the answer is unique.' The comparison itself is lexicographic ordering of the value sequences.",
+    "delta": -0.08221594244241714
+  },
+  "next_prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.\n\nClarification: Ties don't occur in practice -- 'It is guaranteed that the answer is unique.' The comparison itself is lexicographic ordering of the value sequences.",
+  "code_prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid. The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves, is considered for the path. You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell. It is guaranteed that the answer is unique. The comparison itself is lexicographic ordering of the value sequences.\n    \"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 11
+}

@@ -1,0 +1,43 @@
+{
+  "id": "heval_163",
+  "questions": [
+    "Should the function include the endpoints a and b when checking for even digits?",
+    "Are a and b guaranteed to be integers, and what should happen if they are not?",
+    "Must a be less than or equal to b, or should the function handle the case where a > b?",
+    "Should the function return a list of integers, a string, or another collection type?",
+    "If a number contains multiple even digits, should each digit be returned separately or only once per number?",
+    "How should the function treat numbers that have no even digits—should they be omitted or represented by a placeholder?",
+    "What is the expected order of the returned even digits (e.g., ascending, descending, or as they appear in the range)?",
+    "Should leading zeros be considered when extracting even digits from numbers?"
+  ],
+  "answers": [
+    "Yes, the range is inclusive of the (clamped) endpoints.",
+    "Yes, a and b are guaranteed to be positive integers; non-integer handling is not applicable.",
+    "The function handles a > b internally (it clamps using min/max of the two), so either input order works correctly.",
+    "A list of integers.",
+    "It means the even NUMBERS themselves in the range (i.e. 2,4,6,8 as clamped), not individual digit characters extracted from multi-digit numbers.",
+    "Not applicable under the correct interpretation -- numbers outside the effective range are simply excluded, not represented by a placeholder.",
+    "Always ascending order, regardless of whether a or b was larger in the input.",
+    "Not applicable -- the returned values are small integers (2,4,6,8 as constrained by the clamped range), not digit-string representations."
+  ],
+  "inline_prompts": [
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b. Yes, the range is inclusive of the (clamped) endpoints.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b. Yes, a and b are guaranteed to be positive integers; non-integer\n    handling is not applicable.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b. The function handles a > b internally (it clamps using min/max of the two),\n    so either input order works correctly.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return a list of even digits between a\n    and b.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even NUMBERS themselves in the range (i.e. 2,4,6,8 as clamped), not individual digit characters extracted from multi-digit numbers.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b. Not applicable under the correct interpretation -- numbers outside the effective range are simply excluded, not represented by a placeholder.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b in always ascending order, regardless of whether a or b was larger in the input.\n    \"\"\"",
+    "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b. Not applicable -- the returned values are small integers (2,4,6,8 as constrained by the clamped range), not digit-string representations.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    0,
+    2,
+    0,
+    1,
+    0,
+    2,
+    0
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.",
+  "baseline_mean_p": 0.19456929713487625,
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "What defines a \"digit\" for numbers with trailing zeros, such as 100?",
+      "answer": "Every character of the number's string representation is treated as a digit, including trailing zeros (e.g. 100 -> digits [1,0,0] -> sum=1).",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n\nClarification: Every character of the number's string representation is treated as a digit, including trailing zeros (e.g. 100 -> digits [1,0,0] -> sum=1).",
+      "p1": 0.10148419439792633,
+      "p2": 0.20354539155960083,
+      "mean_p": 0.15251479297876358,
+      "delta": -0.04205450415611267
+    },
+    {
+      "idx": 4,
+      "question": "Are numbers like 0 considered valid input, and how should they be treated?",
+      "answer": "Yes, treated normally: digits_sum(0) = 0.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n\nClarification: Yes, treated normally: digits_sum(0) = 0.",
+      "p1": 0.17243929207324982,
+      "p2": 0.24807776510715485,
+      "mean_p": 0.21025852859020233,
+      "delta": 0.01568923145532608
+    },
+    {
+      "idx": 7,
+      "question": "Should the function modify the original list or return a new sorted list?",
+      "answer": "Returns a new sorted list; sorted(...) does not mutate the input nums list.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n\nClarification: Returns a new sorted list; sorted(...) does not mutate the input nums list.",
+      "p1": 0.15535922348499298,
+      "p2": 0.270412802696228,
+      "mean_p": 0.2128860130906105,
+      "delta": 0.018316715955734253
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle numbers with a single digit?",
+      "answer": "Handled the same way; digits_sum of a single-digit number n is just n itself (or -n if negative, since the sign applies to that one digit).",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n\nClarification: Handled the same way; digits_sum of a single-digit number n is just n itself (or -n if negative, since the sign applies to that one digit).",
+      "p1": 0.1724841147661209,
+      "p2": 0.288973867893219,
+      "mean_p": 0.23072899132966995,
+      "delta": 0.0361596941947937
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle numbers that have the same digit sum?",
+      "answer": "Ordered by their original index in the input list -- the sort is stable, and the docstring explicitly notes items with similar digit sums should be ordered by original index.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n\nClarification: Ordered by their original index in the input list -- the sort is stable, and the docstring explicitly notes items with similar digit sums should be ordered by original index.",
+      "p1": 0.16474582254886627,
+      "p2": 0.29818856716156006,
+      "mean_p": 0.23146719485521317,
+      "delta": 0.036897897720336914
+    },
+    {
+      "idx": 1,
+      "question": "Should leading zeros in numbers be considered when calculating the digit sum?",
+      "answer": "Not applicable -- standard integers don't have a leading-zero string representation via str(n).",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n\nClarification: Not applicable -- standard integers don't have a leading-zero string representation via str(n).",
+      "p1": 0.1911582052707672,
+      "p2": 0.3046060800552368,
+      "mean_p": 0.24788214266300201,
+      "delta": 0.05331284552812576
+    },
+    {
+      "idx": 5,
+      "question": "What is the expected behavior when the input list is empty?",
+      "answer": "Returns an empty list, per the docstring's explicit example order_by_points([]) == [].",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n\nClarification: Returns an empty list, per the docstring's explicit example order_by_points([]) == [].",
+      "p1": 0.24074147641658783,
+      "p2": 0.3184582591056824,
+      "mean_p": 0.2795998677611351,
+      "delta": 0.08503057062625885
+    },
+    {
+      "idx": 0,
+      "question": "How should negative integers be handled in terms of digit sum calculation?",
+      "answer": "The sign is applied only to the number's first digit (via `n[0] = n[0] * neg`), not to every digit; e.g. -11 has digits [1,1], first digit negated to [-1,1], sum=0.",
+      "prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n\nClarification: The sign is applied only to the number's first digit (via `n[0] = n[0] * neg`), not to every digit; e.g. -11 has digits [1,1], first digit negated to [-1,1], sum=0.",
+      "p1": 0.28699401021003723,
+      "p2": 0.3879559338092804,
+      "mean_p": 0.3374749720096588,
+      "delta": 0.14290567487478256
+    }
+  ],
+  "top3": [
+    {
+      "idx": 2,
+      "question": "What defines a \"digit\" for numbers with trailing zeros, such as 100?",
+      "answer": "Every character of the number's string representation is treated as a digit, including trailing zeros (e.g. 100 -> digits [1,0,0] -> sum=1).",
+      "delta": -0.04205450415611267
+    },
+    {
+      "idx": 4,
+      "question": "Are numbers like 0 considered valid input, and how should they be treated?",
+      "answer": "Yes, treated normally: digits_sum(0) = 0.",
+      "delta": 0.01568923145532608
+    },
+    {
+      "idx": 7,
+      "question": "Should the function modify the original list or return a new sorted list?",
+      "answer": "Returns a new sorted list; sorted(...) does not mutate the input nums list.",
+      "delta": 0.018316715955734253
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "What defines a \"digit\" for numbers with trailing zeros, such as 100?",
+    "answer": "Every character of the number's string representation is treated as a digit, including trailing zeros (e.g. 100 -> digits [1,0,0] -> sum=1).",
+    "delta": -0.04205450415611267
+  },
+  "next_prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits.\n    \"\"\"\n\nClarification: Not applicable -- the docstring specifies \"a list of integers\".\n\nClarification: Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n\nClarification: Every character of the number's string representation is treated as a digit, including trailing zeros (e.g. 100 -> digits [1,0,0] -> sum=1).",
+  "code_prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    according to the sum of their digits, where every character of the number's string representation is treated as a digit, including trailing zeros (e.g. 100 -> digits [1,0,0] -> sum=1). Ties are broken by preserving the original relative order from the input list, since Python's sorted() is a stable sort.\n    \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 6
+}

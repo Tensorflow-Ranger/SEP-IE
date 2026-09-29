@@ -1,0 +1,43 @@
+{
+  "id": "heval_142",
+  "questions": [
+    "Should the function modify the original list or work on a copy before summing?",
+    "Are list indices considered zero‑based (starting at 0) or one‑based (starting at 1) for determining multiples of 3 and 4?",
+    "If an index is a multiple of both 3 and 4 (e.g., 12), should the value be squared, cubed, or processed in some other way?",
+    "For indices that are multiples of 4 but also multiples of 3, does the “not a multiple of 3” clause override the cubing rule?",
+    "Should non‑integer elements in the list raise an error, be ignored, or be coerced to integers before processing?",
+    "How should negative indices (if the list is accessed with negative indexing) be treated in the multiple‑of‑3/4 checks?",
+    "Is the sum to be returned as an int, a float, or should it preserve the exact numeric type of the intermediate results?",
+    "If the input list is empty, should the function return 0, raise an exception, or handle it in another manner?"
+  ],
+  "answers": [
+    "Not applicable -- the function builds a new result list internally; it doesn't mutate the input lst.",
+    "Indices are zero-based, matching standard Python list indexing.",
+    "If an index is a multiple of both 3 and 4, it is squared (the multiple-of-3 check takes precedence).",
+    "Yes -- the cubing rule only applies to multiples of 4 that are NOT also multiples of 3; multiples of both take the squaring rule instead.",
+    "Not applicable -- the input is guaranteed to be a list of integers; no coercion or error handling for non-integers is specified.",
+    "Not applicable -- indices are generated via range(len(lst)), which never produces negative indices.",
+    "The sum's type follows normal Python int/float arithmetic based on the (unchanged) input values -- no fixed type is specified.",
+    "An empty list returns 0, since summing an empty result list is 0."
+  ],
+  "inline_prompts": [
+    "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a\n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function builds a new result list internally; it doesn't mutate the input lst. The function will\n    pass the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a\n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. Indices are zero-based, matching standard Python list indexing. The function will\n    pass the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a\n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. If an index is a multiple of both 3 and 4, it is squared (the multiple-of-3 check takes precedence). The function will\n    pass the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a\n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. Yes -- the cubing rule only applies to multiples of 4 that are NOT also multiples of 3; multiples of both take the squaring rule instead. The function will\n    pass the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a\n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will\n    pass the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a\n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will\n    pass the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a\n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will\n    pass the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries. The sum's type follows normal Python int/float arithmetic based on the (unchanged) input values -- no fixed type is specified.\n    \"\"\"",
+    "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a\n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will\n    pass the entries in the list whose indexes are not a multiple of 3 or 4. An empty list returns 0, since summing an empty result list is 0. The function shall then return the sum of all entries.\n    \"\"\""
+  ],
+  "tiers": [
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+  ]
+}

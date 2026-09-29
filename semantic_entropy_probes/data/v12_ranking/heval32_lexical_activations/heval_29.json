@@ -1,0 +1,43 @@
+{
+  "id": "heval_29",
+  "questions": [
+    "Should the prefix match be case‑sensitive or case‑insensitive?",
+    "If a string in the input list is exactly equal to the prefix, is it considered a match?",
+    "How should non‑string elements in the input list be handled (e.g., raise an error, ignore, or convert)?",
+    "Must the returned list preserve the original order of matching strings, or can it be reordered?",
+    "Should duplicate strings in the input list appear multiple times in the output, or should duplicates be removed?",
+    "What should the function return when the input list is empty or when no strings match the prefix?",
+    "Is the prefix allowed to be an empty string, and if so, what strings should be included in the result?",
+    "How should Unicode characters and locale‑specific case folding be treated when checking the prefix?"
+  ],
+  "answers": [
+    "Case-sensitive -- the reference implementation uses plain `str.startswith`, which is case-sensitive.",
+    "Yes -- `startswith` returns True when the string equals the prefix exactly.",
+    "Not applicable -- the specification guarantees a list of strings.",
+    "Yes -- the reference implementation preserves the original order via a single left-to-right list comprehension.",
+    "Duplicates are not removed -- every matching element, including repeats, appears in the output.",
+    "An empty list, as shown directly in the docstring example.",
+    "Yes -- an empty prefix matches every string, since every string starts with the empty string under `str.startswith`.",
+    "Not applicable -- plain `str.startswith` is used with no special Unicode/locale handling."
+  ],
+  "inline_prompts": [
+    "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given pattern. Case-sensitive -- the reference implementation uses plain `str.startswith`, which is case-sensitive.\n    \"\"\"",
+    "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given pattern. Yes -- `startswith` returns True when the string equals the prefix exactly.\n    \"\"\"",
+    "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given pattern. Not applicable -- the specification guarantees a list of strings.\n    \"\"\"",
+    "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given pattern. Yes -- the reference implementation preserves the original order via a single left-to-right list comprehension.\n    \"\"\"",
+    "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given pattern. Duplicates are not removed -- every matching element, including repeats, appears in the output.\n    \"\"\"",
+    "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given pattern. An empty list, as shown directly in the docstring example. \"\"\"",
+    "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given pattern. Note that an empty prefix matches every string, since every string starts with the empty string under `str.startswith`.\n    \"\"\"",
+    "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given pattern. Not applicable -- plain `str.startswith` is used with no special Unicode/locale handling.\n    \"\"\""
+  ],
+  "tiers": [
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0
+  ]
+}

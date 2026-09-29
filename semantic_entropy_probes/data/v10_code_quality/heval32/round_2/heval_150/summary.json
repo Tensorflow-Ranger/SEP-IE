@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.",
+  "baseline_mean_p": 0.4799596965312958,
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "What is the definition of \"certain conditions\" in the docstring?",
+      "answer": "n being a prime number, per the docstring: return x if n is prime, y otherwise.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.",
+      "p1": 0.2596038281917572,
+      "p2": 0.37405019998550415,
+      "mean_p": 0.3168270140886307,
+      "delta": -0.1631326824426651
+    },
+    {
+      "idx": 4,
+      "question": "How are edge cases, such as n = 0 or n = 1, handled?",
+      "answer": "n=1 explicitly returns y (special-cased). n=0: range(2,0) is empty so the for-else's else-branch fires and x is returned -- meaning 0 is treated as 'prime' by this implementation, a quirk of the code rather than a deliberate primality rule for 0.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n=1 explicitly returns y (special-cased). n=0: range(2,0) is empty so the for-else's else-branch fires and x is returned -- meaning 0 is treated as 'prime' by this implementation, a quirk of the code rather than a deliberate primality rule for 0.",
+      "p1": 0.30579259991645813,
+      "p2": 0.45204395055770874,
+      "mean_p": 0.37891827523708344,
+      "delta": -0.10104142129421234
+    },
+    {
+      "idx": 6,
+      "question": "Are there any constraints on the values of x and y?",
+      "answer": "None specified; x and y can be any values, simply returned as-is depending on n's primality.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: None specified; x and y can be any values, simply returned as-is depending on n's primality.",
+      "p1": 0.32543736696243286,
+      "p2": 0.43400436639785767,
+      "mean_p": 0.37972086668014526,
+      "delta": -0.10023882985115051
+    },
+    {
+      "idx": 1,
+      "question": "What conditions determine when the function should return y?",
+      "answer": "n is NOT prime -- specifically n == 1, or n has some divisor i in range(2, n) with n % i == 0.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n is NOT prime -- specifically n == 1, or n has some divisor i in range(2, n) with n % i == 0.",
+      "p1": 0.35242894291877747,
+      "p2": 0.4949766993522644,
+      "mean_p": 0.42370282113552094,
+      "delta": -0.05625687539577484
+    },
+    {
+      "idx": 0,
+      "question": "What conditions determine when the function should return x?",
+      "answer": "n is a prime number -- it has no divisor i in range(2, n) with n % i == 0, and n != 1.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n is a prime number -- it has no divisor i in range(2, n) with n % i == 0, and n != 1.",
+      "p1": 0.3743762969970703,
+      "p2": 0.4938167333602905,
+      "mean_p": 0.4340965151786804,
+      "delta": -0.045863181352615356
+    },
+    {
+      "idx": 3,
+      "question": "What is considered a valid input for n?",
+      "answer": "Any integer, including n=1 (which is explicitly special-cased to return y since 1 is not prime).",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: Any integer, including n=1 (which is explicitly special-cased to return y since 1 is not prime).",
+      "p1": 0.3627863824367523,
+      "p2": 0.5222123265266418,
+      "mean_p": 0.4424993544816971,
+      "delta": -0.037460342049598694
+    },
+    {
+      "idx": 7,
+      "question": "What is the behavior if both conditions are met?",
+      "answer": "Not possible; 'prime' and 'not prime' are mutually exclusive, so the function always takes exactly one branch.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: Not possible; 'prime' and 'not prime' are mutually exclusive, so the function always takes exactly one branch.",
+      "p1": 0.3775569796562195,
+      "p2": 0.5120418667793274,
+      "mean_p": 0.44479942321777344,
+      "delta": -0.03516027331352234
+    },
+    {
+      "idx": 2,
+      "question": "What happens if n is not an integer?",
+      "answer": "Not a specified case; the function assumes n is an integer, used directly with range() and %.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: Not a specified case; the function assumes n is an integer, used directly with range() and %.",
+      "p1": 0.4764135479927063,
+      "p2": 0.6341273188591003,
+      "mean_p": 0.5552704334259033,
+      "delta": 0.07531073689460754
+    }
+  ],
+  "top3": [
+    {
+      "idx": 5,
+      "question": "What is the definition of \"certain conditions\" in the docstring?",
+      "answer": "n being a prime number, per the docstring: return x if n is prime, y otherwise.",
+      "delta": -0.1631326824426651
+    },
+    {
+      "idx": 4,
+      "question": "How are edge cases, such as n = 0 or n = 1, handled?",
+      "answer": "n=1 explicitly returns y (special-cased). n=0: range(2,0) is empty so the for-else's else-branch fires and x is returned -- meaning 0 is treated as 'prime' by this implementation, a quirk of the code rather than a deliberate primality rule for 0.",
+      "delta": -0.10104142129421234
+    },
+    {
+      "idx": 6,
+      "question": "Are there any constraints on the values of x and y?",
+      "answer": "None specified; x and y can be any values, simply returned as-is depending on n's primality.",
+      "delta": -0.10023882985115051
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "What is the definition of \"certain conditions\" in the docstring?",
+    "answer": "n being a prime number, per the docstring: return x if n is prime, y otherwise.",
+    "delta": -0.1631326824426651
+  },
+  "next_prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.",
+  "code_prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n is prime, and should return the value of y otherwise. Note that n being a prime number, per the docstring: return x if n is prime, y otherwise. \"\"\"",
+  "test_n_pass": 10,
+  "test_n_total": 10
+}

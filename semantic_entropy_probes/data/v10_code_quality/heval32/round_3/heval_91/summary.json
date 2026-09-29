@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.",
+  "baseline_mean_p": 0.25522516667842865,
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "How should the function handle sentences that start with \"I \" but are part of a larger word, such as \"Iam\"?",
+      "answer": "'Iam'[0:2] is 'Ia', not 'I ', so it would NOT count as a boredom -- the check strictly requires 'I' followed by a literal space as the first two characters.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.\n\nClarification: 'Iam'[0:2] is 'Ia', not 'I ', so it would NOT count as a boredom -- the check strictly requires 'I' followed by a literal space as the first two characters.",
+      "p1": 0.1766054928302765,
+      "p2": 0.2939907908439636,
+      "mean_p": 0.23529814183712006,
+      "delta": -0.019927024841308594
+    },
+    {
+      "idx": 4,
+      "question": "How should the function handle overlapping sentence delimiters, such as \"I!?\"?",
+      "answer": "re.split treats each delimiter character as its own split point, so consecutive delimiters just produce empty fragments between them, which don't count as boredoms.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.\n\nClarification: re.split treats each delimiter character as its own split point, so consecutive delimiters just produce empty fragments between them, which don't count as boredoms.",
+      "p1": 0.21267172694206238,
+      "p2": 0.34132835268974304,
+      "mean_p": 0.2770000398159027,
+      "delta": 0.02177487313747406
+    },
+    {
+      "idx": 1,
+      "question": "How should the function handle sentences that start with \"I \" but are followed by other characters?",
+      "answer": "Counted as a boredom as long as the first two characters are exactly 'I ' (capital I followed by a space); anything after that doesn't matter.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.\n\nClarification: Counted as a boredom as long as the first two characters are exactly 'I ' (capital I followed by a space); anything after that doesn't matter.",
+      "p1": 0.24057887494564056,
+      "p2": 0.31542831659317017,
+      "mean_p": 0.27800359576940536,
+      "delta": 0.022778429090976715
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider empty sentences or sentences with only whitespace as valid?",
+      "answer": "Handled normally: sentence[0:2] on an empty or short string just won't equal 'I ' (Python slicing doesn't raise), so they simply don't count as boredoms.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.\n\nClarification: Handled normally: sentence[0:2] on an empty or short string just won't equal 'I ' (Python slicing doesn't raise), so they simply don't count as boredoms.",
+      "p1": 0.23124060034751892,
+      "p2": 0.35628029704093933,
+      "mean_p": 0.2937604486942291,
+      "delta": 0.038535282015800476
+    },
+    {
+      "idx": 6,
+      "question": "What is the expected behavior if the input string is empty?",
+      "answer": "re.split on an empty string returns [''], and ''[0:2] is '', which isn't 'I ', so the result is 0.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.\n\nClarification: re.split on an empty string returns [''], and ''[0:2] is '', which isn't 'I ', so the result is 0.",
+      "p1": 0.23681655526161194,
+      "p2": 0.3725309669971466,
+      "mean_p": 0.3046737611293793,
+      "delta": 0.04944859445095062
+    },
+    {
+      "idx": 3,
+      "question": "What happens if a sentence starts with \"I \" but is followed by a punctuation mark like \"I !\"?",
+      "answer": "As long as the resulting sentence fragment begins with 'I ' it counts; splitting happens on the delimiter itself, so the text before the '!' would be its own fragment and would count if it starts with 'I '.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.\n\nClarification: As long as the resulting sentence fragment begins with 'I ' it counts; splitting happens on the delimiter itself, so the text before the '!' would be its own fragment and would count if it starts with 'I '.",
+      "p1": 0.2708718180656433,
+      "p2": 0.3552904427051544,
+      "mean_p": 0.31308113038539886,
+      "delta": 0.057855963706970215
+    },
+    {
+      "idx": 2,
+      "question": "Are sentences split by any occurrence of '.', '?', or '!' or only by standalone occurrences?",
+      "answer": "Any occurrence: re.split splits on every occurrence of '.', '?', or '!', consuming any following whitespace too.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.\n\nClarification: Any occurrence: re.split splits on every occurrence of '.', '?', or '!', consuming any following whitespace too.",
+      "p1": 0.27367860078811646,
+      "p2": 0.3834601044654846,
+      "mean_p": 0.32856935262680054,
+      "delta": 0.07334418594837189
+    },
+    {
+      "idx": 5,
+      "question": "Are leading or trailing whitespaces in a sentence considered when checking if it starts with \"I \"?",
+      "answer": "Not stripped beyond what \\s* after the delimiter consumes; leading whitespace remaining in a sentence would prevent it from starting with exactly 'I ' unless already positioned right after a delimiter+whitespace.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.\n\nClarification: Not stripped beyond what \\s* after the delimiter consumes; leading whitespace remaining in a sentence would prevent it from starting with exactly 'I ' unless already positioned right after a delimiter+whitespace.",
+      "p1": 0.3577416241168976,
+      "p2": 0.4166632890701294,
+      "mean_p": 0.3872024565935135,
+      "delta": 0.13197728991508484
+    }
+  ],
+  "top3": [
+    {
+      "idx": 7,
+      "question": "How should the function handle sentences that start with \"I \" but are part of a larger word, such as \"Iam\"?",
+      "answer": "'Iam'[0:2] is 'Ia', not 'I ', so it would NOT count as a boredom -- the check strictly requires 'I' followed by a literal space as the first two characters.",
+      "delta": -0.019927024841308594
+    },
+    {
+      "idx": 4,
+      "question": "How should the function handle overlapping sentence delimiters, such as \"I!?\"?",
+      "answer": "re.split treats each delimiter character as its own split point, so consecutive delimiters just produce empty fragments between them, which don't count as boredoms.",
+      "delta": 0.02177487313747406
+    },
+    {
+      "idx": 1,
+      "question": "How should the function handle sentences that start with \"I \" but are followed by other characters?",
+      "answer": "Counted as a boredom as long as the first two characters are exactly 'I ' (capital I followed by a space); anything after that doesn't matter.",
+      "delta": 0.022778429090976715
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "How should the function handle sentences that start with \"I \" but are part of a larger word, such as \"Iam\"?",
+    "answer": "'Iam'[0:2] is 'Ia', not 'I ', so it would NOT count as a boredom -- the check strictly requires 'I' followed by a literal space as the first two characters.",
+    "delta": -0.019927024841308594
+  },
+  "next_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A sentence (as split by '.', '?', or '!') whose text begins with the exact two-character prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\".\n\nClarification: Still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two characters need to be 'I' followed by a space, regardless of what follows after that.\n\nClarification: 'Iam'[0:2] is 'Ia', not 'I ', so it would NOT count as a boredom -- the check strictly requires 'I' followed by a literal space as the first two characters.",
+  "code_prompt": "def is_bore(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a sentence\n    (as split by '.', '?', or '!') whose text begins with the exact two-character\n    prefix \"I \" (capital I followed by a space) -- i.e. starts with the word \"I\",\n    still counts; the check is `sentence[0:2] == 'I '`, i.e. only the first two\n    characters need to be 'I' followed by a space, regardless of what follows\n    after that. Note that 'Iam'[0:2] is 'Ia', not 'I ', so it would NOT count as a boredom --\n    the check strictly requires 'I' followed by a literal space as the first two characters.\n    \"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 6
+}

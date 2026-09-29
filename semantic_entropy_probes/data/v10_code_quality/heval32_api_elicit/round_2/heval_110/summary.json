@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".",
+  "baseline_mean_p": 0.34751175343990326,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Must the exchange operation swap exactly one element from lst1 with exactly one element from lst2, or can multiple elements be swapped at once?",
+      "answer": "Not a literal one-for-one swap mechanic -- per the reference implementation, it's really a count comparison: whether lst2 has enough even numbers to 'cover' all the odd numbers in lst1 (unrestricted replacement), not paired index-based swaps.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".\n\nClarification: Not a literal one-for-one swap mechanic -- per the reference implementation, it's really a count comparison: whether lst2 has enough even numbers to 'cover' all the odd numbers in lst1 (unrestricted replacement), not paired index-based swaps.",
+      "p1": 0.22876740992069244,
+      "p2": 0.3352898955345154,
+      "mean_p": 0.2820286527276039,
+      "delta": -0.06548310071229935
+    },
+    {
+      "idx": 6,
+      "question": "Is there any limit on the number of exchanges that can be performed (e.g., must be minimal, or any finite number is allowed)?",
+      "answer": "No limit is specified -- 'There is no limit on the number of exchanged elements between lst1 and lst2.'",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".\n\nClarification: No limit is specified -- 'There is no limit on the number of exchanged elements between lst1 and lst2.'",
+      "p1": 0.3763081133365631,
+      "p2": 0.3983573913574219,
+      "mean_p": 0.3873327523469925,
+      "delta": 0.03982099890708923
+    },
+    {
+      "idx": 3,
+      "question": "Is the order of elements in lst1 required to remain unchanged after exchanges, or can elements be reordered arbitrarily?",
+      "answer": "Not specified -- the function only returns 'YES'/'NO', not the resulting list, so element ordering in lst1 is not part of the observable behavior.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".\n\nClarification: Not specified -- the function only returns 'YES'/'NO', not the resulting list, so element ordering in lst1 is not part of the observable behavior.",
+      "p1": 0.38174954056739807,
+      "p2": 0.40329670906066895,
+      "mean_p": 0.3925231248140335,
+      "delta": 0.04501137137413025
+    },
+    {
+      "idx": 2,
+      "question": "Are the input lists allowed to contain non\u2011numeric types or NaN/Infinity values, and how should those be treated?",
+      "answer": "Not specified/tested; guaranteed to be lists of numbers (ints) per the signature and examples.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".\n\nClarification: Not specified/tested; guaranteed to be lists of numbers (ints) per the signature and examples.",
+      "p1": 0.3876080811023712,
+      "p2": 0.40025633573532104,
+      "mean_p": 0.39393220841884613,
+      "delta": 0.04642045497894287
+    },
+    {
+      "idx": 7,
+      "question": "Should the function modify the original input lists, or must it leave them unchanged?",
+      "answer": "Left unchanged -- the reference implementation only reads/counts elements, it does not mutate lst1 or lst2.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".\n\nClarification: Left unchanged -- the reference implementation only reads/counts elements, it does not mutate lst1 or lst2.",
+      "p1": 0.3837272524833679,
+      "p2": 0.40467602014541626,
+      "mean_p": 0.3942016363143921,
+      "delta": 0.04668988287448883
+    },
+    {
+      "idx": 5,
+      "question": "Are duplicate values in the lists treated as distinct elements for the purpose of swapping?",
+      "answer": "Yes, treated individually -- the reference implementation just counts occurrences (odd count in lst1, even count in lst2) without regard to value duplication.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".\n\nClarification: Yes, treated individually -- the reference implementation just counts occurrences (odd count in lst1, even count in lst2) without regard to value duplication.",
+      "p1": 0.4337618052959442,
+      "p2": 0.4139922261238098,
+      "mean_p": 0.423877015709877,
+      "delta": 0.07636526226997375
+    },
+    {
+      "idx": 1,
+      "question": "Can an element be exchanged more than once (i.e., participate in multiple swaps) during the process?",
+      "answer": "Not applicable under the count-based interpretation used by the reference implementation -- each element is conceptually used at most once as a replacement.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".\n\nClarification: Not applicable under the count-based interpretation used by the reference implementation -- each element is conceptually used at most once as a replacement.",
+      "p1": 0.42740198969841003,
+      "p2": 0.4344640076160431,
+      "mean_p": 0.43093299865722656,
+      "delta": 0.0834212452173233
+    },
+    {
+      "idx": 4,
+      "question": "Does the function need to consider the case where lst1 is already all even and return \"YES\" without performing any exchanges?",
+      "answer": "Yes -- in that case the odd count in lst1 is 0, which is always <= the even count in lst2, so the result is 'YES'.",
+      "prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".\n\nClarification: Yes -- in that case the odd count in lst1 is 0, which is always <= the even count in lst2, so the result is 'YES'.",
+      "p1": 0.44175398349761963,
+      "p2": 0.42975878715515137,
+      "mean_p": 0.4357563853263855,
+      "delta": 0.08824463188648224
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Must the exchange operation swap exactly one element from lst1 with exactly one element from lst2, or can multiple elements be swapped at once?",
+      "answer": "Not a literal one-for-one swap mechanic -- per the reference implementation, it's really a count comparison: whether lst2 has enough even numbers to 'cover' all the odd numbers in lst1 (unrestricted replacement), not paired index-based swaps.",
+      "delta": -0.06548310071229935
+    },
+    {
+      "idx": 6,
+      "question": "Is there any limit on the number of exchanges that can be performed (e.g., must be minimal, or any finite number is allowed)?",
+      "answer": "No limit is specified -- 'There is no limit on the number of exchanged elements between lst1 and lst2.'",
+      "delta": 0.03982099890708923
+    },
+    {
+      "idx": 3,
+      "question": "Is the order of elements in lst1 required to remain unchanged after exchanges, or can elements be reordered arbitrarily?",
+      "answer": "Not specified -- the function only returns 'YES'/'NO', not the resulting list, so element ordering in lst1 is not part of the observable behavior.",
+      "delta": 0.04501137137413025
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Must the exchange operation swap exactly one element from lst1 with exactly one element from lst2, or can multiple elements be swapped at once?",
+    "answer": "Not a literal one-for-one swap mechanic -- per the reference implementation, it's really a count comparison: whether lst2 has enough even numbers to 'cover' all the odd numbers in lst1 (unrestricted replacement), not paired index-based swaps.",
+    "delta": -0.06548310071229935
+  },
+  "next_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers.\n    Elements can be exchanged between lst1 and lst2 to achieve this goal.\n    If it is possible to make all the elements of lst1 even through exchanges, \n    return \"YES\". Otherwise, return \"NO\".\n    \"\"\"\n\nClarification: Yes, the function returns exactly the strings \"YES\" or \"NO\".\n\nClarification: Not a literal one-for-one swap mechanic -- per the reference implementation, it's really a count comparison: whether lst2 has enough even numbers to 'cover' all the odd numbers in lst1 (unrestricted replacement), not paired index-based swaps.",
+  "code_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform exchanges to make lst1 \n    a list of only even numbers. Yes, the function returns exactly the strings \"YES\" or \"NO\".\n    Elements can be exchanged between lst1 and lst2 to achieve this goal, not a literal one-for-one swap mechanic --\n    per the reference implementation, it's really a count comparison: whether lst2 has enough even numbers to 'cover'\n    all the odd numbers in lst1 (unrestricted replacement), not paired index-based swaps.\n    \"\"\"",
+  "test_n_pass": 7,
+  "test_n_total": 7
+}

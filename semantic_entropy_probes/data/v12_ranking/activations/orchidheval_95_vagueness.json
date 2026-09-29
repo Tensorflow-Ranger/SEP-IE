@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_95_vagueness",
+  "questions": [
+    "What does \"some case\" mean precisely — any single consistent case shared by all keys, or literally any casing at all?",
+    "If all keys are already lowercase, does the \"some case\" branch make the \"lower case\" branch redundant, or are they mutually exclusive?",
+    "Should uppercase-only keys satisfy the \"some case\" condition even though they don't satisfy \"lower case\"?",
+    "How should mixed-case keys (neither strictly lower nor one consistent case) be classified?",
+    "Are keys with no cased characters (e.g. numeric strings) considered to satisfy either condition trivially?",
+    "Is \"some case\" meant to include the possibility of all keys being uppercase, or any arbitrary matching case?",
+    "Should a dictionary where keys are of two different consistent cases (some upper, some lower) return False?",
+    "Does the empty-dictionary rule (return False) override any of these case considerations?"
+  ],
+  "answers": [
+    "\"Some case\" means either all-lowercase or all-uppercase specifically, not any arbitrary consistent casing.",
+    "This isn't the aspect the specification actually leaves ambiguous, though it raises a genuine, related consideration; not addressed by the given specification, so assume standard/reasonable convention for this case.",
+    "This isn't the aspect the specification actually leaves ambiguous, though it raises a genuine, related consideration; not addressed by the given specification, so assume standard/reasonable convention for this case.",
+    "This isn't the aspect the specification actually leaves ambiguous, though it raises a genuine, related consideration; not addressed by the given specification, so assume standard/reasonable convention for this case.",
+    "Not addressed by the given specification (unrelated to the actual injected ambiguity); assume standard/conventional behavior for this case.",
+    "\"Some case\" refers only to the two explicit cases (all-lower or all-upper), not other casing styles.",
+    "This isn't the aspect the specification actually leaves ambiguous, though it raises a genuine, related consideration; not addressed by the given specification, so assume standard/reasonable convention for this case.",
+    "Not addressed by the given specification (unrelated to the actual injected ambiguity); assume standard/conventional behavior for this case."
+  ],
+  "inline_prompts": [
+    "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in some case, else return False.\n    The function should return False is the given dictionary is empty.\n    \"\"\"",
+    "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in some case, else return False.\n    This isn't the aspect the specification actually leaves ambiguous, though it raises a genuine, related consideration; not addressed by the given specification, so assume standard/reasonable convention for this case.\n    The function should return False is the given dictionary is empty.\n    \"\"\"",
+    "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in some case, else return False.\n    This isn't the aspect the specification actually leaves ambiguous, though it raises a genuine, related consideration; not addressed by the given specification, so assume standard/reasonable convention for this case.\n    The function should return False is the given dictionary is empty.\n    \"\"\"",
+    "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in some case, else return False.\n    This isn't the aspect the specification actually leaves ambiguous, though it raises a genuine, related consideration; not addressed by the given specification, so assume standard/reasonable convention for this case.\n    The function should return False is the given dictionary is empty.\n    \"\"\"",
+    "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in some case, else return False.\n    The function should return False is the given dictionary is empty.\n    Not addressed by the given specification (unrelated to the actual injected ambiguity); assume standard/conventional behavior for this case.\n    \"\"\"",
+    "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in some case, else return False.\n    Some case refers only to the two explicit cases (all-lower or all-upper),\n    not other casing styles. The function should return False is the given \n    dictionary is empty.\n    \"\"\"",
+    "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in some case, else return False.\n    This isn't the aspect the specification actually leaves ambiguous, though it raises a genuine, related consideration; not addressed by the given specification, so assume standard/reasonable convention for this case.\n    The function should return False is the given dictionary is empty.\n    \"\"\"",
+    "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in some case, else return False.\n    The function should return False is the given dictionary is empty.\n    Not addressed by the given specification (unrelated to the actual injected ambiguity); assume standard/conventional behavior for this case.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    1,
+    1,
+    1,
+    0,
+    2,
+    1,
+    0
+  ]
+}

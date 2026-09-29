@@ -1,0 +1,118 @@
+{
+  "round": 1,
+  "baseline_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"",
+  "baseline_mean_p": 0.38515259325504303,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 3,
+      "question": "Are uppercase and lowercase letters considered distinct (i.e., is the comparison case\u2011sensitive)?",
+      "answer": "Yes, case-sensitive; distinctness is a literal character comparison, not case-folded.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, case-sensitive; distinctness is a literal character comparison, not case-folded.",
+      "p1": 0.24753931164741516,
+      "p2": 0.3308529257774353,
+      "mean_p": 0.28919611871242523,
+      "delta": -0.0959564745426178
+    },
+    {
+      "idx": 7,
+      "question": "Should the function raise an exception for invalid input types (e.g., None, integers, lists), or simply return False?",
+      "answer": "Not applicable -- input is guaranteed to be a string.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a string.",
+      "p1": 0.23119981586933136,
+      "p2": 0.3524908721446991,
+      "mean_p": 0.29184534400701523,
+      "delta": -0.0933072492480278
+    },
+    {
+      "idx": 0,
+      "question": "Should the string be considered happy if its length is exactly 3, or must it be greater than 3?",
+      "answer": "Length must be AT LEAST 3 (>=3); exactly 3 qualifies as long as those 3 characters are distinct.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Length must be AT LEAST 3 (>=3); exactly 3 qualifies as long as those 3 characters are distinct.",
+      "p1": 0.24268430471420288,
+      "p2": 0.34134936332702637,
+      "mean_p": 0.2920168340206146,
+      "delta": -0.0931357592344284
+    },
+    {
+      "idx": 1,
+      "question": "Does the \u201cevery 3 letters are distinct\u201d condition apply to each consecutive triple of characters (e.g., positions 0\u20112, 1\u20113, 2\u20114, \u2026) or to non\u2011overlapping groups of three (e.g., positions 0\u20112, 3\u20115, 6\u20118, \u2026)?",
+      "answer": "Overlapping, sliding-window triples -- every consecutive window of 3 characters (positions 0-2, 1-3, 2-4, ...), not non-overlapping groups.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Overlapping, sliding-window triples -- every consecutive window of 3 characters (positions 0-2, 1-3, 2-4, ...), not non-overlapping groups.",
+      "p1": 0.289227694272995,
+      "p2": 0.3351738750934601,
+      "mean_p": 0.31220078468322754,
+      "delta": -0.07295180857181549
+    },
+    {
+      "idx": 2,
+      "question": "If the string length is not a multiple of 3, how should the remaining 1 or 2 characters at the end be treated?",
+      "answer": "Not applicable -- since windows are overlapping/sliding, every character is covered, so there is no 'leftover characters' case.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Not applicable -- since windows are overlapping/sliding, every character is covered, so there is no 'leftover characters' case.",
+      "p1": 0.30457422137260437,
+      "p2": 0.4165272116661072,
+      "mean_p": 0.3605507165193558,
+      "delta": -0.024601876735687256
+    },
+    {
+      "idx": 4,
+      "question": "Should non\u2011alphabetic characters (digits, punctuation, whitespace, etc.) be allowed in the string, and if so, are they subject to the distinctness rule?",
+      "answer": "Allowed; the function operates on any characters in the string and applies the same distinctness rule to them.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Allowed; the function operates on any characters in the string and applies the same distinctness rule to them.",
+      "p1": 0.33353111147880554,
+      "p2": 0.4163845479488373,
+      "mean_p": 0.3749578297138214,
+      "delta": -0.010194763541221619
+    },
+    {
+      "idx": 5,
+      "question": "Must the string contain only letters, or is any Unicode character permitted?",
+      "answer": "Not addressed; any string characters are compared via standard Python character equality.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Not addressed; any string characters are compared via standard Python character equality.",
+      "p1": 0.33371251821517944,
+      "p2": 0.42417433857917786,
+      "mean_p": 0.37894342839717865,
+      "delta": -0.00620916485786438
+    },
+    {
+      "idx": 6,
+      "question": "If the string contains Unicode characters that are composed of multiple code points (e.g., accented characters), should distinctness be evaluated on code points or on grapheme clusters?",
+      "answer": "Not addressed; comparison is on Python string characters (code points) directly, not grapheme clusters.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Not addressed; comparison is on Python string characters (code points) directly, not grapheme clusters.",
+      "p1": 0.37292423844337463,
+      "p2": 0.43716368079185486,
+      "mean_p": 0.40504395961761475,
+      "delta": 0.019891366362571716
+    }
+  ],
+  "top3": [
+    {
+      "idx": 3,
+      "question": "Are uppercase and lowercase letters considered distinct (i.e., is the comparison case\u2011sensitive)?",
+      "answer": "Yes, case-sensitive; distinctness is a literal character comparison, not case-folded.",
+      "delta": -0.0959564745426178
+    },
+    {
+      "idx": 7,
+      "question": "Should the function raise an exception for invalid input types (e.g., None, integers, lists), or simply return False?",
+      "answer": "Not applicable -- input is guaranteed to be a string.",
+      "delta": -0.0933072492480278
+    },
+    {
+      "idx": 0,
+      "question": "Should the string be considered happy if its length is exactly 3, or must it be greater than 3?",
+      "answer": "Length must be AT LEAST 3 (>=3); exactly 3 qualifies as long as those 3 characters are distinct.",
+      "delta": -0.0931357592344284
+    }
+  ],
+  "chosen": {
+    "idx": 3,
+    "question": "Are uppercase and lowercase letters considered distinct (i.e., is the comparison case\u2011sensitive)?",
+    "answer": "Yes, case-sensitive; distinctness is a literal character comparison, not case-folded.",
+    "delta": -0.0959564745426178
+  },
+  "next_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, case-sensitive; distinctness is a literal character comparison, not case-folded.",
+  "code_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct, yes, case-sensitive; distinctness is a literal character comparison, not case-folded.\n    \"\"\"",
+  "test_n_pass": 8,
+  "test_n_total": 8
+}

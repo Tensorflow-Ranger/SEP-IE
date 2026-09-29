@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.",
+  "baseline_mean_p": 0.18330372869968414,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 3,
+      "question": "Should the function raise an exception for invalid inputs, or simply return False?",
+      "answer": "Return False, not raise an exception -- there is no invalid-input handling in this function; it's guaranteed to receive a valid integer.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.\n\nClarification: Return False, not raise an exception -- there is no invalid-input handling in this function; it's guaranteed to receive a valid integer.",
+      "p1": 0.12081348896026611,
+      "p2": 0.14262473583221436,
+      "mean_p": 0.13171911239624023,
+      "delta": -0.05158461630344391
+    },
+    {
+      "idx": 2,
+      "question": "Is 1 considered a prime number by this function?",
+      "answer": "No, 1 is not considered prime (confirmed by test case: is_prime(1) == False).",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.\n\nClarification: No, 1 is not considered prime (confirmed by test case: is_prime(1) == False).",
+      "p1": 0.15656931698322296,
+      "p2": 0.1957891881465912,
+      "mean_p": 0.17617925256490707,
+      "delta": -0.007124476134777069
+    },
+    {
+      "idx": 4,
+      "question": "Must the return value be the boolean `True`/`False`, or are other truthy/falsy values acceptable?",
+      "answer": "Yes, the return value must be the boolean True/False (per docstring and all test cases).",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.\n\nClarification: Yes, the return value must be the boolean True/False (per docstring and all test cases).",
+      "p1": 0.15160566568374634,
+      "p2": 0.21763381361961365,
+      "mean_p": 0.18461973965168,
+      "delta": 0.0013160109519958496
+    },
+    {
+      "idx": 1,
+      "question": "What should the function return for negative integers or zero?",
+      "answer": "False for negative integers and zero (per reference logic: any n < 2 returns False).",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.\n\nClarification: False for negative integers and zero (per reference logic: any n < 2 returns False).",
+      "p1": 0.19373109936714172,
+      "p2": 0.22970609366893768,
+      "mean_p": 0.2117185965180397,
+      "delta": 0.02841486781835556
+    },
+    {
+      "idx": 0,
+      "question": "Should the function accept non\u2011integer types (e.g., floats, strings, complex numbers) and, if so, how should they be handled?",
+      "answer": "Not specified/tested; input is guaranteed to be a valid integer, no special handling for other types is needed.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.\n\nClarification: Not specified/tested; input is guaranteed to be a valid integer, no special handling for other types is needed.",
+      "p1": 0.20961005985736847,
+      "p2": 0.22071833908557892,
+      "mean_p": 0.2151641994714737,
+      "delta": 0.03186047077178955
+    },
+    {
+      "idx": 5,
+      "question": "Is there a maximum input size beyond which the function should raise an error or behave differently?",
+      "answer": "Not specified; no maximum input size is stated.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.\n\nClarification: Not specified; no maximum input size is stated.",
+      "p1": 0.33718404173851013,
+      "p2": 0.29957717657089233,
+      "mean_p": 0.31838060915470123,
+      "delta": 0.1350768804550171
+    },
+    {
+      "idx": 7,
+      "question": "Are there any expectations about handling very large integers (e.g., using arbitrary\u2011precision arithmetic) or performance constraints?",
+      "answer": "Not specified; no special handling or performance constraint is stated for very large integers.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.\n\nClarification: Not specified; no special handling or performance constraint is stated for very large integers.",
+      "p1": 0.33525270223617554,
+      "p2": 0.30719897150993347,
+      "mean_p": 0.3212258368730545,
+      "delta": 0.13792210817337036
+    },
+    {
+      "idx": 6,
+      "question": "Should the function treat `True` and `False` (which are subclasses of `int`) as valid numeric inputs?",
+      "answer": "Not specified/tested; not a case that occurs.",
+      "prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.\n\nClarification: Not specified/tested; not a case that occurs.",
+      "p1": 0.3969618082046509,
+      "p2": 0.4509839117527008,
+      "mean_p": 0.42397285997867584,
+      "delta": 0.2406691312789917
+    }
+  ],
+  "top3": [
+    {
+      "idx": 3,
+      "question": "Should the function raise an exception for invalid inputs, or simply return False?",
+      "answer": "Return False, not raise an exception -- there is no invalid-input handling in this function; it's guaranteed to receive a valid integer.",
+      "delta": -0.05158461630344391
+    },
+    {
+      "idx": 2,
+      "question": "Is 1 considered a prime number by this function?",
+      "answer": "No, 1 is not considered prime (confirmed by test case: is_prime(1) == False).",
+      "delta": -0.007124476134777069
+    },
+    {
+      "idx": 4,
+      "question": "Must the return value be the boolean `True`/`False`, or are other truthy/falsy values acceptable?",
+      "answer": "Yes, the return value must be the boolean True/False (per docstring and all test cases).",
+      "delta": 0.0013160109519958496
+    }
+  ],
+  "chosen": {
+    "idx": 3,
+    "question": "Should the function raise an exception for invalid inputs, or simply return False?",
+    "answer": "Return False, not raise an exception -- there is no invalid-input handling in this function; it's guaranteed to receive a valid integer.",
+    "delta": -0.05158461630344391
+  },
+  "next_prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime.\n    \"\"\"\n\nClarification: No specific performance requirement is stated.\n\nClarification: Return False, not raise an exception -- there is no invalid-input handling in this function; it's guaranteed to receive a valid integer.",
+  "code_prompt": "def is_prime(n):\n    \"\"\"Return true if a number is prime. No specific performance requirement is stated. Return False, not raise an exception -- there is no invalid-input handling in this function; it's guaranteed to receive a valid integer.\"\"\"",
+  "test_n_pass": 13,
+  "test_n_total": 13
+}

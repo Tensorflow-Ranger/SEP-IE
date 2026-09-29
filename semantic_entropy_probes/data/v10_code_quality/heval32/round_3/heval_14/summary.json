@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.",
+  "baseline_mean_p": 0.215154230594635,
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "What is the expected behavior if the input string is None or not a string?",
+      "answer": "Not applicable -- the input is guaranteed to be a string per the type hint and docstring.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.\n\nClarification: Not applicable -- the input is guaranteed to be a string per the type hint and docstring.",
+      "p1": 0.1618223637342453,
+      "p2": 0.2148493230342865,
+      "mean_p": 0.1883358433842659,
+      "delta": -0.02681838721036911
+    },
+    {
+      "idx": 2,
+      "question": "Are leading or trailing whitespaces in the input string considered when generating prefixes?",
+      "answer": "Yes, whitespace characters are treated like any other character and are included in the prefixes as-is.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.\n\nClarification: Yes, whitespace characters are treated like any other character and are included in the prefixes as-is.",
+      "p1": 0.19257140159606934,
+      "p2": 0.19257931411266327,
+      "mean_p": 0.1925753578543663,
+      "delta": -0.022578872740268707
+    },
+    {
+      "idx": 4,
+      "question": "Is the function expected to handle Unicode characters in the input string?",
+      "answer": "Handled like any other character, since Python strings are Unicode by default; the function just indexes by character.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.\n\nClarification: Handled like any other character, since Python strings are Unicode by default; the function just indexes by character.",
+      "p1": 0.19868385791778564,
+      "p2": 0.20061635971069336,
+      "mean_p": 0.1996501088142395,
+      "delta": -0.015504121780395508
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider the empty string as a valid prefix even if it's not included in the output?",
+      "answer": "No, the empty string is not included in the output; the shortest prefix returned has length 1 (string[:1]).",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.\n\nClarification: No, the empty string is not included in the output; the shortest prefix returned has length 1 (string[:1]).",
+      "p1": 0.21662846207618713,
+      "p2": 0.23415552079677582,
+      "mean_p": 0.22539199143648148,
+      "delta": 0.010237760841846466
+    },
+    {
+      "idx": 3,
+      "question": "How are prefixes handled if the input string contains special characters or non-printable characters?",
+      "answer": "Treated like any other character -- included in the prefixes without special filtering.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.\n\nClarification: Treated like any other character -- included in the prefixes without special filtering.",
+      "p1": 0.21109241247177124,
+      "p2": 0.250865638256073,
+      "mean_p": 0.23097902536392212,
+      "delta": 0.01582479476928711
+    },
+    {
+      "idx": 6,
+      "question": "Are prefixes considered unique based on their content or their position in the string?",
+      "answer": "By position: one entry is generated per length from 1 to len(string), with no deduplication of content.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.\n\nClarification: By position: one entry is generated per length from 1 to len(string), with no deduplication of content.",
+      "p1": 0.23406027257442474,
+      "p2": 0.23069000244140625,
+      "mean_p": 0.2323751375079155,
+      "delta": 0.017220906913280487
+    },
+    {
+      "idx": 7,
+      "question": "How should the function handle cases where the input string has repeated characters?",
+      "answer": "Handled the same way; each prefix is generated by index regardless of whether characters repeat.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.\n\nClarification: Handled the same way; each prefix is generated by index regardless of whether characters repeat.",
+      "p1": 0.2870005965232849,
+      "p2": 0.2882957458496094,
+      "mean_p": 0.28764817118644714,
+      "delta": 0.07249394059181213
+    },
+    {
+      "idx": 1,
+      "question": "What happens if the input string is empty?",
+      "answer": "Return an empty list (there are no characters to form prefixes from).",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.\n\nClarification: Return an empty list (there are no characters to form prefixes from).",
+      "p1": 0.3551636040210724,
+      "p2": 0.391549289226532,
+      "mean_p": 0.3733564466238022,
+      "delta": 0.15820221602916718
+    }
+  ],
+  "top3": [
+    {
+      "idx": 5,
+      "question": "What is the expected behavior if the input string is None or not a string?",
+      "answer": "Not applicable -- the input is guaranteed to be a string per the type hint and docstring.",
+      "delta": -0.02681838721036911
+    },
+    {
+      "idx": 2,
+      "question": "Are leading or trailing whitespaces in the input string considered when generating prefixes?",
+      "answer": "Yes, whitespace characters are treated like any other character and are included in the prefixes as-is.",
+      "delta": -0.022578872740268707
+    },
+    {
+      "idx": 4,
+      "question": "Is the function expected to handle Unicode characters in the input string?",
+      "answer": "Handled like any other character, since Python strings are Unicode by default; the function just indexes by character.",
+      "delta": -0.015504121780395508
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "What is the expected behavior if the input string is None or not a string?",
+    "answer": "Not applicable -- the input is guaranteed to be a string per the type hint and docstring.",
+    "delta": -0.02681838721036911
+  },
+  "next_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"\n\nClarification: No, the empty string (length 0) is not included; the shortest prefix returned is length 1 (string[:1]).\n\nClarification: Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string.\n\nClarification: Not applicable -- the input is guaranteed to be a string per the type hint and docstring.",
+  "code_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with the shortest prefix being of length 1 (string[:1]) and the empty string (length 0) not included. Order is strictly by increasing length (shortest to longest), regardless of any character repetition in the string. Not applicable -- the input is guaranteed to be a string per the type hint and docstring. \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 3
+}

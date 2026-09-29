@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 10,
+      "question": "In the phrase \u201cevery 3 letters are distinct,\u201d does \u201cdistinct\u201d mean all three characters are different from each other, or that each character does not repeat anywhere else in the entire string?",
+      "answer": "It means all three characters in each consecutive window must be different from each other.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct. It means all three characters in each consecutive window must be different from each other.\n    \"\"\"",
+      "score": -10.04837417602539
+    },
+    {
+      "idx": 1,
+      "question": "If the string length is exactly 3, does it need to satisfy the \u201cevery 3 letters are distinct\u201d rule, and how is that evaluated?",
+      "answer": "Yes, a 3-character string is happy if all 3 characters are distinct from each other.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct, yes, a 3-character string is happy if all 3 characters are distinct from each other.\n    \"\"\"",
+      "score": -10.960192680358887
+    },
+    {
+      "idx": 5,
+      "question": "If the string length is not a multiple of three, how are the remaining 1 or 2 trailing characters handled in the distinctness check?",
+      "answer": "Trailing characters participate in consecutive windows; a string of length 5 has windows at positions 0-2, 1-3, 2-4.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct, with trailing characters participating in consecutive windows; a string of length 5 has windows at positions 0-2, 1-3, 2-4.\"\"\"",
+      "score": -11.233997344970703
+    },
+    {
+      "idx": 6,
+      "question": "Must the string contain only letters, or are other Unicode code points allowed, and if so, how are they compared for distinctness?",
+      "answer": "The solution compares all characters; non-letters are allowed and participate in distinctness checks.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct. The solution compares all characters; non-letters are allowed and participate in distinctness checks.\n    \"\"\"",
+      "score": -11.582731246948242
+    },
+    {
+      "idx": 8,
+      "question": "Is there any maximum allowed length for the input string, and if the string is extremely long, should performance considerations affect the result?",
+      "answer": "Not specified; the solution is O(n).",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct.\n    Not specified; the solution is O(n).\"\"\"",
+      "score": -12.515890121459961
+    },
+    {
+      "idx": 3,
+      "question": "Are uppercase and lowercase letters considered distinct, i.e., is the check case\u2011sensitive?",
+      "answer": "Yes, uppercase and lowercase are considered distinct: 'A' and 'a' are different.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct, with uppercase and lowercase considered different: 'A' and 'a' are different.\"\"\"",
+      "score": -12.740703582763672
+    },
+    {
+      "idx": 4,
+      "question": "Should overlapping groups of three characters be examined (e.g., positions 0\u20112, 1\u20113, 2\u20114) or only non\u2011overlapping consecutive triples?",
+      "answer": "Overlapping consecutive windows are examined; every 3-character window starting at positions 0, 1, 2, ... is checked.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct, with overlapping consecutive windows examined; every 3-character window starting at positions 0, 1, 2, ... is checked.\"\"\"",
+      "score": -12.74643611907959
+    },
+    {
+      "idx": 0,
+      "question": "What should the function return for a happy string \u2013 a boolean True, the string \"True\", 1, or something else?",
+      "answer": "Return a boolean True or False.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct.\n    Return a boolean True or False.\"\"\"",
+      "score": -12.833048820495605
+    },
+    {
+      "idx": 2,
+      "question": "How should the function treat non\u2011alphabetic characters (digits, punctuation, whitespace) when checking distinctness?",
+      "answer": "Not specified; the solution checks distinctness of all characters, including non-alphabetic ones.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct, including non-alphabetic characters. \"\"\"",
+      "score": -13.058260917663574
+    },
+    {
+      "idx": 9,
+      "question": "Should the function consider the string \u201chappy\u201d if it contains combining characters or diacritics that visually appear as a single letter?",
+      "answer": "Not specified; the solution treats each character code unit independently.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct. Not specified; the solution treats each character code unit independently.\n    \"\"\"",
+      "score": -15.081071853637695
+    },
+    {
+      "idx": 11,
+      "question": "If the input string contains surrogate pairs or other multi\u2011code\u2011unit characters, how should those be counted toward length and distinctness?",
+      "answer": "Not specified; the solution treats each code unit as a single character.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct. Not specified; the solution treats each code unit as a single character.\n    \"\"\"",
+      "score": -15.40851879119873
+    },
+    {
+      "idx": 7,
+      "question": "How should the function behave when given a non\u2011string input such as None, an integer, or a list \u2013 raise an exception, return False, or coerce to string?",
+      "answer": "Not specified; the solution assumes a string is passed.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct.\n    Not specified; the solution assumes a string is passed.\"\"\"",
+      "score": -15.588233947753906
+    }
+  ],
+  "chosen": {
+    "idx": 10,
+    "question": "In the phrase \u201cevery 3 letters are distinct,\u201d does \u201cdistinct\u201d mean all three characters are different from each other, or that each character does not repeat anywhere else in the entire string?",
+    "answer": "It means all three characters in each consecutive window must be different from each other.",
+    "score": -10.04837417602539
+  },
+  "next_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct. It means all three characters in each consecutive window must be different from each other.\n    \"\"\"",
+  "test_n_pass": 8,
+  "test_n_total": 8
+}

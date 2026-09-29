@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_49_lexical",
+  "questions": [
+    "What is the expected return type and range of values for n?",
+    "What is the expected return type and range of values for p?",
+    "How should negative values of n be handled?",
+    "How should negative values of p be handled?",
+    "What should be returned when p equals zero?",
+    "Should the result be reduced modulo p or should we return the full value of 2^n?",
+    "What is the maximum allowed value of n before overflow considerations apply?",
+    "How should the case where both n and p are zero be handled?"
+  ],
+  "answers": [
+    "Not addressed; a non-negative integer is expected.",
+    "Not addressed; a positive integer modulus is expected.",
+    "Not addressed by the true spec; n is assumed non-negative.",
+    "Not addressed by the true spec; p is assumed positive.",
+    "Not addressed by the true spec; p=0 is out of the valid domain.",
+    "The result should be reduced MODULO p (2^n % p), not divided by p or returned as the full un-reduced value -- matches the function name 'modp' and docstring 'modulo p'.",
+    "No explicit overflow bound specified; standard numerics apply.",
+    "Not addressed by the true spec; out of the valid domain."
+  ],
+  "inline_prompts": [
+    "def modp(n: int, p: int):\n    \"\"\"Return 2^n over p (be aware of numerics; not addressed; a non-negative integer is expected).\n    \"\"\"",
+    "def modp(n: int, p: int):\n    \"\"\"Return 2^n over p (be aware of numerics; not addressed; a positive integer modulus is expected).\n    \"\"\"",
+    "def modp(n: int, p: int):\n    \"\"\"Return 2^n over p (be aware of numerics; not addressed by the true spec; n is assumed non-negative).\n    \"\"\"",
+    "def modp(n: int, p: int):\n    \"\"\"Return 2^n over p (be aware of numerics; not addressed by the true spec; p is assumed positive).\n    \"\"\"",
+    "def modp(n: int, p: int):\n    \"\"\"Return 2^n over p (be aware of numerics; not addressed by the true spec; p=0 is out of the valid domain).\"\"\"",
+    "def modp(n: int, p: int):\n    \"\"\"Return 2^n over p (be aware of numerics), the result should be reduced MODULO p (2^n % p), not divided by p or returned as the full un-reduced value -- matches the function name 'modp' and docstring 'modulo p'. \n    \"\"\"",
+    "def modp(n: int, p: int):\n    \"\"\"Return 2^n over p (be aware of numerics; no explicit overflow bound specified; standard numerics apply).\"\"\"",
+    "def modp(n: int, p: int):\n    \"\"\"Return 2^n over p (be aware of numerics). Not addressed by the true spec; out of the valid domain.\n    \"\"\""
+  ],
+  "tiers": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0
+  ]
+}

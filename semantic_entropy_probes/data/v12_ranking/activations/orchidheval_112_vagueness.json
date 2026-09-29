@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_112_vagueness",
+  "questions": [
+    "Does \"some characters\" mean all matching characters must be deleted, or just enough to make the result a palindrome?",
+    "If multiple different deletion choices could produce a palindrome, which one should the function return?",
+    "Is the choice of which matching characters to delete left to the implementation, or is there a fixed deterministic rule?",
+    "Should the function try to preserve the maximum possible length after deletion?",
+    "What should happen if s is empty?",
+    "Is matching between s and c case-sensitive?",
+    "Should the relative order of remaining characters be preserved?",
+    "What should be returned if no deletion of matching characters can produce a palindrome?"
+  ],
+  "answers": [
+    "All characters in s equal to any character in c must be deleted — it's not a selective/optional deletion.",
+    "N/A — deletion isn't a choice; all qualifying characters are always removed, so there's exactly one resulting string.",
+    "There's a fixed deterministic rule: delete every character in s that matches any character in c.",
+    "Not applicable — the deletion isn't length-optimizing; all matching characters are removed regardless of resulting length.",
+    "Not specified beyond what's given; return ('', True) for empty s.",
+    "Not specified beyond what's given; assume case-sensitive matching.",
+    "Yes, relative order of remaining characters is preserved.",
+    "Not applicable — deletion is deterministic (delete all matches), so whatever remains is checked as-is."
+  ],
+  "inline_prompts": [
+    "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted some characters in s that are equal to any character in c\n    All characters in s equal to any character in c must be deleted — it's not a selective/optional deletion.\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    \"\"\"",
+    "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to delete all characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    \"\"\"",
+    "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted some characters in s that are equal to any character in c. There's a fixed deterministic rule: delete every character in s that matches any character in c.\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    \"\"\"",
+    "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted some characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Note: Not applicable — the deletion isn't length-optimizing; all matching characters are removed regardless of resulting length.\n    \"\"\"",
+    "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted some characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Not specified beyond what's given; return ('', True) for empty s.\n    \"\"\"",
+    "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted some characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Note: Not specified beyond what's given; assume case-sensitive matching.\n    \"\"\"",
+    "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted some characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Yes, relative order of remaining characters is preserved.\n    \"\"\"",
+    "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted some characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Not applicable — deletion is deterministic (delete all matches), so whatever remains is checked as-is.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    2,
+    2,
+    1,
+    0,
+    1,
+    0,
+    1
+  ]
+}

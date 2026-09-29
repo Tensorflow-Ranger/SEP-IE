@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"",
+  "baseline_mean_p": 0.49049726128578186,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "What defines a properly closed bracket sequence?",
+      "answer": "A sequence where, scanning left to right, the running depth (incremented on '<', decremented on '>') never goes negative, and ends at exactly 0 -- proper nesting/ordering is required, not just equal counts.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: A sequence where, scanning left to right, the running depth (incremented on '<', decremented on '>') never goes negative, and ends at exactly 0 -- proper nesting/ordering is required, not just equal counts.",
+      "p1": 0.22084948420524597,
+      "p2": 0.2955782413482666,
+      "mean_p": 0.2582138627767563,
+      "delta": -0.23228339850902557
+    },
+    {
+      "idx": 4,
+      "question": "How are ties resolved when the number of '<' and '>' are equal but not properly nested?",
+      "answer": "Equal counts are not sufficient -- if depth goes negative at any point (a '>' appears before its matching '<'), the function returns False immediately, regardless of the final counts being equal.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Equal counts are not sufficient -- if depth goes negative at any point (a '>' appears before its matching '<'), the function returns False immediately, regardless of the final counts being equal.",
+      "p1": 0.20539094507694244,
+      "p2": 0.33240407705307007,
+      "mean_p": 0.26889751106500626,
+      "delta": -0.2215997502207756
+    },
+    {
+      "idx": 7,
+      "question": "Is the input guaranteed to be non-empty?",
+      "answer": "No, empty input is valid and returns True per the depth-tracking logic (loop simply doesn't execute, depth stays 0).",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: No, empty input is valid and returns True per the depth-tracking logic (loop simply doesn't execute, depth stays 0).",
+      "p1": 0.2565251588821411,
+      "p2": 0.3579954504966736,
+      "mean_p": 0.30726030468940735,
+      "delta": -0.1832369565963745
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle leading or trailing brackets?",
+      "answer": "They are processed like any other character via the same depth-tracking logic; a leading '>' immediately triggers depth<0 -> False, and a trailing unmatched '<' leaves depth>0 at the end -> False.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: They are processed like any other character via the same depth-tracking logic; a leading '>' immediately triggers depth<0 -> False, and a trailing unmatched '<' leaves depth>0 at the end -> False.",
+      "p1": 0.30775365233421326,
+      "p2": 0.376932829618454,
+      "mean_p": 0.3423432409763336,
+      "delta": -0.14815402030944824
+    },
+    {
+      "idx": 3,
+      "question": "What happens if the input contains characters other than '<' and '>'?",
+      "answer": "Not applicable: the input is guaranteed to be a string of only '<' and '>' characters.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Not applicable: the input is guaranteed to be a string of only '<' and '>' characters.",
+      "p1": 0.3115536570549011,
+      "p2": 0.3921017646789551,
+      "mean_p": 0.3518277108669281,
+      "delta": -0.13866955041885376
+    },
+    {
+      "idx": 2,
+      "question": "Are multiple consecutive '<' or '>' allowed?",
+      "answer": "Yes, any sequence is allowed as long as depth never goes negative and ends at 0; consecutive identical brackets are handled the same as any other bracket via simple depth counting.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Yes, any sequence is allowed as long as depth never goes negative and ends at 0; consecutive identical brackets are handled the same as any other bracket via simple depth counting.",
+      "p1": 0.291111558675766,
+      "p2": 0.41921767592430115,
+      "mean_p": 0.35516461730003357,
+      "delta": -0.1353326439857483
+    },
+    {
+      "idx": 5,
+      "question": "What is the expected behavior for a single '<' or '>' in the input?",
+      "answer": "A single '<' leaves depth=1 at the end -> returns False. A single '>' immediately makes depth=-1 -> returns False.",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: A single '<' leaves depth=1 at the end -> returns False. A single '>' immediately makes depth=-1 -> returns False.",
+      "p1": 0.35548606514930725,
+      "p2": 0.4422766864299774,
+      "mean_p": 0.39888137578964233,
+      "delta": -0.09161588549613953
+    },
+    {
+      "idx": 1,
+      "question": "How should the function handle empty input?",
+      "answer": "Returns True (depth stays 0 throughout, and ends at 0).",
+      "prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: Returns True (depth stays 0 throughout, and ends at 0).",
+      "p1": 0.37073034048080444,
+      "p2": 0.4946339428424835,
+      "mean_p": 0.432682141661644,
+      "delta": -0.05781511962413788
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "What defines a properly closed bracket sequence?",
+      "answer": "A sequence where, scanning left to right, the running depth (incremented on '<', decremented on '>') never goes negative, and ends at exactly 0 -- proper nesting/ordering is required, not just equal counts.",
+      "delta": -0.23228339850902557
+    },
+    {
+      "idx": 4,
+      "question": "How are ties resolved when the number of '<' and '>' are equal but not properly nested?",
+      "answer": "Equal counts are not sufficient -- if depth goes negative at any point (a '>' appears before its matching '<'), the function returns False immediately, regardless of the final counts being equal.",
+      "delta": -0.2215997502207756
+    },
+    {
+      "idx": 7,
+      "question": "Is the input guaranteed to be non-empty?",
+      "answer": "No, empty input is valid and returns True per the depth-tracking logic (loop simply doesn't execute, depth stays 0).",
+      "delta": -0.1832369565963745
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "What defines a properly closed bracket sequence?",
+    "answer": "A sequence where, scanning left to right, the running depth (incremented on '<', decremented on '>') never goes negative, and ends at exactly 0 -- proper nesting/ordering is required, not just equal counts.",
+    "delta": -0.23228339850902557
+  },
+  "next_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly.\n    \"\"\"\n\nClarification: A sequence where, scanning left to right, the running depth (incremented on '<', decremented on '>') never goes negative, and ends at exactly 0 -- proper nesting/ordering is required, not just equal counts.",
+  "code_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if brackets close properly. A sequence where, scanning left to right, the running depth (incremented on '<', decremented on '>') never goes negative, and ends at exactly 0 -- proper nesting/ordering is required, not just equal counts.\n    \"\"\"",
+  "test_n_pass": 12,
+  "test_n_total": 12
+}

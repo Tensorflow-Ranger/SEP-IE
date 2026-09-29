@@ -1,0 +1,118 @@
+{
+  "round": 3,
+  "baseline_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).",
+  "baseline_mean_p": 0.14415547996759415,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 6,
+      "question": "If the prefix is longer than a string, should that string be excluded without error?",
+      "answer": "That string is simply excluded from the result (via `str.startswith`), no error is raised.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).\n\nClarification: That string is simply excluded from the result (via `str.startswith`), no error is raised.",
+      "p1": 0.08956523984670639,
+      "p2": 0.21890021860599518,
+      "mean_p": 0.15423272922635078,
+      "delta": 0.010077249258756638
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return a new list or modify the input list in place?",
+      "answer": "Return a new list; the input list is not modified.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).\n\nClarification: Return a new list; the input list is not modified.",
+      "p1": 0.11042163521051407,
+      "p2": 0.20857402682304382,
+      "mean_p": 0.15949783101677895,
+      "delta": 0.0153423510491848
+    },
+    {
+      "idx": 4,
+      "question": "Should duplicate strings in the input be preserved in the output, and in what order?",
+      "answer": "Yes, duplicates are preserved in the output, in their original relative order.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).\n\nClarification: Yes, duplicates are preserved in the output, in their original relative order.",
+      "p1": 0.11356115341186523,
+      "p2": 0.2253255695104599,
+      "mean_p": 0.16944336146116257,
+      "delta": 0.02528788149356842
+    },
+    {
+      "idx": 1,
+      "question": "What should happen if either argument is None or not of the expected type?",
+      "answer": "Not specified -- inputs are assumed to be valid (a list of strings and a string prefix).",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).\n\nClarification: Not specified -- inputs are assumed to be valid (a list of strings and a string prefix).",
+      "p1": 0.12271343916654587,
+      "p2": 0.2481587827205658,
+      "mean_p": 0.18543611094355583,
+      "delta": 0.041280630975961685
+    },
+    {
+      "idx": 7,
+      "question": "Should the function raise an exception for invalid inputs or simply return an empty list?",
+      "answer": "Not specified -- no exception-raising behavior is required for invalid inputs; the function simply filters.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).\n\nClarification: Not specified -- no exception-raising behavior is required for invalid inputs; the function simply filters.",
+      "p1": 0.1391279548406601,
+      "p2": 0.24832341074943542,
+      "mean_p": 0.19372568279504776,
+      "delta": 0.04957020282745361
+    },
+    {
+      "idx": 5,
+      "question": "What is the expected behavior when the input list contains non\u2011string elements?",
+      "answer": "Not specified -- all elements are assumed to be strings.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).\n\nClarification: Not specified -- all elements are assumed to be strings.",
+      "p1": 0.14147458970546722,
+      "p2": 0.2600250542163849,
+      "mean_p": 0.20074982196092606,
+      "delta": 0.05659434199333191
+    },
+    {
+      "idx": 3,
+      "question": "Is an empty prefix considered a match for all strings, and should those be included?",
+      "answer": "Yes -- every string starts with the empty prefix, so an empty prefix matches (and includes) all strings.",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).\n\nClarification: Yes -- every string starts with the empty prefix, so an empty prefix matches (and includes) all strings.",
+      "p1": 0.13777098059654236,
+      "p2": 0.2650983929634094,
+      "mean_p": 0.2014346867799759,
+      "delta": 0.057279206812381744
+    },
+    {
+      "idx": 2,
+      "question": "How should the function treat empty strings in the input list?",
+      "answer": "Treated like any other string -- an empty string is included in the output only if the prefix is also empty (since it starts with the empty prefix).",
+      "prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).\n\nClarification: Treated like any other string -- an empty string is included in the output only if the prefix is also empty (since it starts with the empty prefix).",
+      "p1": 0.1559937298297882,
+      "p2": 0.2746236026287079,
+      "mean_p": 0.21530866622924805,
+      "delta": 0.0711531862616539
+    }
+  ],
+  "top3": [
+    {
+      "idx": 6,
+      "question": "If the prefix is longer than a string, should that string be excluded without error?",
+      "answer": "That string is simply excluded from the result (via `str.startswith`), no error is raised.",
+      "delta": 0.010077249258756638
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return a new list or modify the input list in place?",
+      "answer": "Return a new list; the input list is not modified.",
+      "delta": 0.0153423510491848
+    },
+    {
+      "idx": 4,
+      "question": "Should duplicate strings in the input be preserved in the output, and in what order?",
+      "answer": "Yes, duplicates are preserved in the output, in their original relative order.",
+      "delta": 0.02528788149356842
+    }
+  ],
+  "chosen": {
+    "idx": 6,
+    "question": "If the prefix is longer than a string, should that string be excluded without error?",
+    "answer": "That string is simply excluded from the result (via `str.startswith`), no error is raised.",
+    "delta": 0.010077249258756638
+  },
+  "next_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: Case-sensitive -- a standard startswith comparison with no case folding.\n\nClarification: Yes, the returned list preserves the original order of the input strings (via list comprehension).\n\nClarification: That string is simply excluded from the result (via `str.startswith`), no error is raised.",
+  "code_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix. Case-sensitive -- a standard startswith comparison with no case folding. That string is simply excluded from the result (via `str.startswith`), no error is raised. Yes, the returned list preserves the original order of the input strings (via list comprehension).\"\"\"",
+  "test_n_pass": 2,
+  "test_n_total": 2
+}

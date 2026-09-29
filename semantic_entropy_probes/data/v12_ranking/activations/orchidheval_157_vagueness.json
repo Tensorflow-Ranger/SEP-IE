@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_157_vagueness",
+  "questions": [
+    "Does \"a figure\" imply the three sides might not necessarily form a valid triangle, and how should that be handled?",
+    "Are a, b, and c guaranteed to be positive numbers?",
+    "Can the sides be provided in any order, or is there an assumed order (e.g. c is the longest)?",
+    "Should floating-point tolerance be applied when checking the Pythagorean relationship?",
+    "Should the function verify the triangle inequality before checking the right-angle condition?",
+    "Are the inputs guaranteed to be integers, or could they include floats?",
+    "What should be returned for degenerate cases, such as a zero-length side?",
+    "Should the function assume the \"figure\" is always a triangle regardless of wording?"
+  ],
+  "answers": [
+    "No — despite the wording change to 'a figure', it's still assumed to be a triangle; the function should still verify the right-angle condition.",
+    "Not specified beyond what's given; assume positive.",
+    "Any order, since c isn't assumed to be the hypotenuse.",
+    "Not specified beyond what's given; exact equality is typically assumed.",
+    "Not explicitly required, but implicitly the Pythagorean check only succeeds for valid triangles anyway.",
+    "Not specified beyond what's given; assume either.",
+    "Return False for a degenerate zero-length side.",
+    "Yes, 'figure' is just a reworded synonym for 'triangle' here, not a broader shape."
+  ],
+  "inline_prompts": [
+    "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a figure. Return True if the three\n    sides form a right-angled triangle, False otherwise. Note that despite the\n    wording change to 'a figure', it's still assumed to be a triangle; the function\n    should still verify the right-angle condition. A right-angled triangle is a\n    triangle in which one angle is right angle or 90 degree.\n    '''",
+    "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a figure. Return True if the three\n    sides form a right-angled triangle, False otherwise. Assume the inputs are\n    positive. A right-angled triangle is a triangle in which one angle is right\n    angle or 90 degree.\n    '''",
+    "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a figure. Return True if the three\n    sides form a right-angled triangle, False otherwise. A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree. Any order, since c isn't assumed to be the hypotenuse.\n    '''",
+    "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a figure. Return True if the three\n    sides form a right-angled triangle, False otherwise. A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree. Not specified beyond what's given; exact equality is typically assumed.\n    '''",
+    "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a figure. Return True if the three\n    sides form a right-angled triangle, False otherwise. A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree. Not explicitly required, but implicitly the Pythagorean check only succeeds for valid triangles anyway.\n    '''",
+    "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a figure. Return True if the three\n    sides form a right-angled triangle, False otherwise. A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree. Not specified beyond what's given; assume either.\n    '''",
+    "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a figure. Return True if the three\n    sides form a right-angled triangle, False otherwise. A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree. Return False for a degenerate zero-length side.\n    '''",
+    "def right_angle_triangle(a, b, c):\n    '''\n    Given the lengths of the three sides of a figure. Yes, 'figure' is just a reworded synonym for 'triangle' here, not a broader shape. Return True if the three\n    sides form a right-angled triangle, False otherwise.\n    A right-angled triangle is a triangle in which one angle is right angle or \n    90 degree.\n    '''"
+  ],
+  "tiers": [
+    2,
+    0,
+    1,
+    0,
+    2,
+    0,
+    0,
+    2
+  ]
+}

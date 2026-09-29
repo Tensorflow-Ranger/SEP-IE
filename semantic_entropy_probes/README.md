@@ -264,3 +264,72 @@ non-convergence and flat/early-elevated Spearman curves actually indicate.
   K≥1 run they agree in direction and rough magnitude (0.31 test vs.
   0.21±0.05 CV at the best layer), which is reassuring but not fully
   independent evidence.
+
+## Combined binary dataset: does this generalize past ClarifyCodeBench?
+
+A second dataset combines four independently-built sources — ClarifyCodeBench
+(deletion edits), [Orchid](https://huggingface.co/datasets/SII-YDD/Orchid)
+(lexical/vagueness word-substitution edits, HumanEval + BigCodeBench +
+BigCodeBench-Expand configs), and [human-eval-comm](https://github.com/jie-jw-wu/human-eval-comm)
+(LLM-rewritten incompleteness edits) — into one **binary** clear-vs-ambiguous
+target (K≥1 collapsed to one class), specifically to test whether the K-task's
+finding holds up across construction methods, and to stress-test for
+stylistic confounds the way Confounds 1–2 above already did once.
+
+It found (and fixed) three more confounds this way — the same
+`Clarifications:`-header bug reappearing via a stale file reference, a
+last-token trailing/leading-whitespace artifact in Orchid-HEval, and a
+group-leakage bug in the first cross-source generalization check — before
+landing on a result in the same spirit as the K-task's: real,
+statistically-significant in-distribution signal (AUROC≈0.75–0.77,
+p≈0.01), but only weak-to-modest genuine cross-source transfer
+(AUROC≈0.52–0.64 with plain logistic regression) once every known confound
+is removed. A supervised-contrastive (SupCon) probe trained on raw,
+un-PCA'd activations pushes cross-source transfer to ≈0.60 ± 0.01 (5-seed),
+at a cost to pooled accuracy — a genuine, non-cherry-picked improvement over
+every other probe/feature variant tried. Adding a 4th source
+(Orchid-BCB-Expand, 976 more BigCodeBench problems, 2,745 rows) as a 4th
+LODO fold left this picture unchanged: it transfers about as poorly as its
+sibling Orchid-BCB (AUROC≈0.52–0.54), and the SupCon win holds up at the
+same winning config on the larger 4-fold mean (0.597 vs. 0.560/0.556
+baseline). Full writeup, including the concrete evidence for why one source
+(Orchid-HEval) transfers better than the others and the full SupCon
+ablation: **[FINDINGS.md's "Combined binary
+dataset" section](FINDINGS.md#combined-binary-dataset-clarifycodebench--orchid--human-eval-comm)**.
+
+Reproduce:
+
+```bash
+cd semantic_entropy_probes
+python scripts/fetch_combined_sources.py
+python scripts/build_combined_dataset.py
+python src/extract_activations.py --data data/ambiguity_dataset_combined.jsonl --out-dir activations_combined
+python scripts/train_binary_probes.py
+python scripts/confound_tests.py
+python scripts/improve_cross_transfer.py
+python scripts/train_supcon_probe.py
+python scripts/add_bcb_expand_fold.py  # fills in the orchid_bcb_expand LODO column only
+```
+
+**Two-source subset (clarifycodebench + orchid_heval only)**: dropping
+orchid_bcb, orchid_bcb_expand, and humanevalcomm — the sources whose small
+edit-fraction made them weak transfer partners — raises both the pooled
+ceiling (AUROC 0.778/0.780) and the LODO floor (mean AUROC 0.616/0.599,
+vs. 0.560/0.556 on all 5 sources). This also surfaced and fixed a real bug:
+`cross_source_only` SupCon is structurally undefined for LODO with only 2
+sources (each fold's train set has just 1 source, so the loss has zero valid
+cross-source positive pairs and silently trains on no gradient signal) — a
+first run mistakenly reported it as the best-ever cross-source result before
+this was caught; with the bug fixed, that config is now skipped for LODO,
+and plain LR/MLP (0.616/0.599) is the best cross-source number for this
+subset, with SupCon roughly flat (0.607). Built by filtering
+`activations_combined/` rather than re-extracting — see **[FINDINGS.md's
+"Two-source subset" section](FINDINGS.md#two-source-subset-clarifycodebench--orchid_heval-only)**.
+
+```bash
+python scripts/build_ccb_heval_subset.py
+python scripts/train_binary_probes.py --activations-dir activations_ccb_heval --data data/ambiguity_dataset_ccb_heval.jsonl --results-dir results_ccb_heval
+python scripts/confound_tests.py --activations-dir activations_ccb_heval --data data/ambiguity_dataset_ccb_heval.jsonl --results-dir results_ccb_heval
+python scripts/improve_cross_transfer.py --activations-dir activations_ccb_heval --results-dir results_ccb_heval
+python scripts/train_supcon_probe.py --activations-dir activations_ccb_heval --results-dir results_ccb_heval
+```

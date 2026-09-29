@@ -1,0 +1,1937 @@
+{
+  "heval_1": {
+    "task_id": "HumanEval/1",
+    "entry_point": "separate_paren_groups",
+    "ambiguous_prompt": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested brackets. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"",
+    "clear_prompt": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    \"\"\"\n",
+    "missing_detail": "\"brackets\": Could refer generally to parentheses `()`, square brackets `[]`, or curly braces `{}`. Ambiguous here because the function name `separate_paren_groups` and the example `( ) (( )) (( )( ))` specifically use parentheses `()`, creating confusion about whether the function should handle only `()` or other types like `[]` or `{}` as well.",
+    "solution": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n    result = []\n    current_string = []\n    current_depth = 0\n\n    for c in paren_string:\n        if c == '(':\n            current_depth += 1\n            current_string.append(c)\n        elif c == ')':\n            current_depth -= 1\n            current_string.append(c)\n\n            if current_depth == 0:\n                result.append(''.join(current_string))\n                current_string.clear()\n\n    return result\n",
+    "test_case": [
+      {
+        "input": "'(()()) ((())) () ((())()())'",
+        "output": "['(()())', '((()))', '()', '((())()())']",
+        "relation": "=="
+      },
+      {
+        "input": "'() (()) ((())) (((())))'",
+        "output": "['()', '(())', '((()))', '(((())))']",
+        "relation": "=="
+      },
+      {
+        "input": "'(()(())((())))'",
+        "output": "['(()(())((())))']",
+        "relation": "=="
+      },
+      {
+        "input": "'( ) (( )) (( )( ))'",
+        "output": "['()', '(())', '(()())']",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_14": {
+    "task_id": "HumanEval/14",
+    "entry_point": "all_prefixes",
+    "ambiguous_prompt": "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of significant prefixes from shortest to longest of the input string\n    \"\"\"",
+    "clear_prompt": "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of all prefixes from shortest to longest of the input string\n    \"\"\"\n",
+    "missing_detail": "\"significant\": Could mean important, meaningful, or noteworthy based on some unspecified criteria. Ambiguous here, as it obscures whether *all* prefixes are returned (as the example shows) or only a subset based on undefined conditions.",
+    "solution": "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of all prefixes from shortest to longest of the input string\n    >>> all_prefixes('abc')\n    ['a', 'ab', 'abc']\n    \"\"\"\n    result = []\n\n    for i in range(len(string)):\n        result.append(string[:i+1])\n    return result\n",
+    "test_case": [
+      {
+        "input": "''",
+        "output": "[]",
+        "relation": "=="
+      },
+      {
+        "input": "'asdfgh'",
+        "output": "['a', 'as', 'asd', 'asdf', 'asdfg', 'asdfgh']",
+        "relation": "=="
+      },
+      {
+        "input": "'WWW'",
+        "output": "['W', 'WW', 'WWW']",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_16": {
+    "task_id": "HumanEval/16",
+    "entry_point": "count_distinct_characters",
+    "ambiguous_prompt": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct figures (regardless of case) does it consist of\n    \"\"\"",
+    "clear_prompt": "\n\ndef count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct characters (regardless of case) does it consist of\n    \"\"\"\n",
+    "missing_detail": "\"figures\": Could mean numerals (0-9) or characters in general (letters, symbols, digits). Ambiguous here, as it might suggest counting only digits instead of all distinct characters shown in the examples.",
+    "solution": "\n\ndef count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct characters (regardless of case) does it consist of\n    >>> count_distinct_characters('xyzXYZ')\n    3\n    >>> count_distinct_characters('Jerry')\n    4\n    \"\"\"\n    return len(set(string.lower()))\n",
+    "test_case": [
+      {
+        "input": "''",
+        "output": "0",
+        "relation": "=="
+      },
+      {
+        "input": "'abcde'",
+        "output": "5",
+        "relation": "=="
+      },
+      {
+        "input": "'abcde' + 'cade' + 'CADE'",
+        "output": "5",
+        "relation": "=="
+      },
+      {
+        "input": "'aaaaAAAAaaaa'",
+        "output": "1",
+        "relation": "=="
+      },
+      {
+        "input": "'Jerry jERRY JeRRRY'",
+        "output": "5",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_19": {
+    "task_id": "HumanEval/19",
+    "entry_point": "sort_numbers",
+    "ambiguous_prompt": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with terms sorted from smallest to largest\n    \"\"\"",
+    "clear_prompt": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    \"\"\"\n",
+    "missing_detail": "\"terms\": Could mean the numerical value represented by the words ('one' < 'three') or the words themselves sorted lexicographically ('five' < 'one' < 'three'). This obscures whether the sorting should be numerical or alphabetical.",
+    "solution": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n    value_map = {\n        'zero': 0,\n        'one': 1,\n        'two': 2,\n        'three': 3,\n        'four': 4,\n        'five': 5,\n        'six': 6,\n        'seven': 7,\n        'eight': 8,\n        'nine': 9\n    }\n    return ' '.join(sorted([x for x in numbers.split(' ') if x], key=lambda x: value_map[x]))\n",
+    "test_case": [
+      {
+        "input": "''",
+        "output": "",
+        "relation": "=="
+      },
+      {
+        "input": "'three'",
+        "output": "three",
+        "relation": "=="
+      },
+      {
+        "input": "'three five nine'",
+        "output": "three five nine",
+        "relation": "=="
+      },
+      {
+        "input": "'five zero four seven nine eight'",
+        "output": "zero four five seven eight nine",
+        "relation": "=="
+      },
+      {
+        "input": "'six five four three two one zero'",
+        "output": "zero one two three four five six",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_29": {
+    "task_id": "HumanEval/29",
+    "entry_point": "filter_by_prefix",
+    "ambiguous_prompt": "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given pattern.\n    \"\"\"",
+    "clear_prompt": "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given prefix.\n    \"\"\"\n",
+    "missing_detail": "\"pattern\": Could mean a literal string prefix or a more complex regular expression/wildcard pattern. Ambiguous here, as it obscures whether the function performs simple prefix matching or complex pattern matching.",
+    "solution": "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given prefix.\n    >>> filter_by_prefix([], 'a')\n    []\n    >>> filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a')\n    ['abc', 'array']\n    \"\"\"\n    return [x for x in strings if x.startswith(prefix)]\n",
+    "test_case": [
+      {
+        "input": "[], 'john'",
+        "output": "[]",
+        "relation": "=="
+      },
+      {
+        "input": "['xxx', 'asd', 'xxy', 'john doe', 'xxxAAA', 'xxx'], 'xxx'",
+        "output": "['xxx', 'xxxAAA', 'xxx']",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_31": {
+    "task_id": "HumanEval/31",
+    "entry_point": "is_prime",
+    "ambiguous_prompt": "def is_prime(n):\n    \"\"\"Return true if a given figure is prime, and false otherwise.\n    \"\"\"",
+    "clear_prompt": "\n\ndef is_prime(n):\n    \"\"\"Return true if a given number is prime, and false otherwise.\n    \"\"\"\n",
+    "missing_detail": "\"figure\": Could mean a numerical value or a geometric shape. Ambiguous here, as it might incorrectly suggest the function operates on geometric shapes rather than just numbers.",
+    "solution": "\n\ndef is_prime(n):\n    \"\"\"Return true if a given number is prime, and false otherwise.\n    >>> is_prime(6)\n    False\n    >>> is_prime(101)\n    True\n    >>> is_prime(11)\n    True\n    >>> is_prime(13441)\n    True\n    >>> is_prime(61)\n    True\n    >>> is_prime(4)\n    False\n    >>> is_prime(1)\n    False\n    \"\"\"\n    if n < 2:\n        return False\n    for k in range(2, n - 1):\n        if n % k == 0:\n            return False\n    return True\n",
+    "test_case": [
+      {
+        "input": "6",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "101",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "11",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "13441",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "61",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "4",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "1",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "5",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "11",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "17",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "5 * 17",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "11 * 7",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "13441 * 19",
+        "output": "False",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_40": {
+    "task_id": "HumanEval/40",
+    "entry_point": "triples_sum_to_zero",
+    "ambiguous_prompt": "```python\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three unique elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n```",
+    "clear_prompt": "\n\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n    \"\"\"\n",
+    "missing_detail": "\"unique\": Could mean distinct or one-of-a-kind. Ambiguous here, as \"unique\" could be misinterpreted to mean the list must contain three numbers that appear only once in the list, rather than three distinct numbers that sum to zero, regardless of their frequency.",
+    "solution": "\n\ndef triples_sum_to_zero(l: list):\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n\n    >>> triples_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> triples_sum_to_zero([1, 3, -2, 1])\n    True\n    >>> triples_sum_to_zero([1, 2, 3, 7])\n    False\n    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])\n    True\n    >>> triples_sum_to_zero([1])\n    False\n    \"\"\"\n    for i in range(len(l)):\n        for j in range(i + 1, len(l)):\n            for k in range(j + 1, len(l)):\n                if l[i] + l[j] + l[k] == 0:\n                    return True\n    return False\n",
+    "test_case": [
+      {
+        "input": "[1, 3, 5, 0]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 3, 5, -1]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 3, -2, 1]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 3, 7]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 5, 7]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[2, 4, -5, 3, 9, 7]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 3, 5, -100]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[100, 3, 5, -100]",
+        "output": "False",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_52": {
+    "task_id": "HumanEval/52",
+    "entry_point": "below_threshold",
+    "ambiguous_prompt": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are under threshold t.\n    \"\"\"",
+    "clear_prompt": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    \"\"\"\n",
+    "missing_detail": "\"under\": Could mean strictly less than (<) or less than or equal to (<=). Ambiguous here, as it slightly obscures whether the threshold value itself is included or excluded.",
+    "solution": "\n\ndef below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    for e in l:\n        if e >= t:\n            return False\n    return True\n",
+    "test_case": [
+      {
+        "input": "[1, 2, 4, 10], 100",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 20, 4, 10], 5",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 20, 4, 10], 21",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 20, 4, 10], 22",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 8, 4, 10], 11",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 8, 4, 10], 10",
+        "output": "False",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_53": {
+    "task_id": "HumanEval/53",
+    "entry_point": "add",
+    "ambiguous_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    \"\"\"",
+    "clear_prompt": "\n\ndef add(x: int, y: int):\n    \"\"\"Add two numbers x and y\n    \"\"\"\n",
+    "missing_detail": "\"Combine\": Could mean mathematical addition, string concatenation, merging into a collection, or other forms of joining. Ambiguous here, as it doesn't explicitly state the operation is addition, even though the examples imply it.",
+    "solution": "\n\ndef add(x: int, y: int):\n    \"\"\"Add two numbers x and y\n    >>> add(2, 3)\n    5\n    >>> add(5, 7)\n    12\n    \"\"\"\n    return x + y\n",
+    "test_case": [
+      {
+        "input": "0, 1",
+        "output": "1",
+        "relation": "=="
+      },
+      {
+        "input": "1, 0",
+        "output": "1",
+        "relation": "=="
+      },
+      {
+        "input": "2, 3",
+        "output": "5",
+        "relation": "=="
+      },
+      {
+        "input": "5, 7",
+        "output": "12",
+        "relation": "=="
+      },
+      {
+        "input": "7, 5",
+        "output": "12",
+        "relation": "=="
+      },
+      {
+        "input": "654, 114",
+        "output": "768",
+        "relation": "=="
+      },
+      {
+        "input": "25, 759",
+        "output": "784",
+        "relation": "=="
+      },
+      {
+        "input": "281, 250",
+        "output": "531",
+        "relation": "=="
+      },
+      {
+        "input": "228, 142",
+        "output": "370",
+        "relation": "=="
+      },
+      {
+        "input": "754, 104",
+        "output": "858",
+        "relation": "=="
+      },
+      {
+        "input": "692, 758",
+        "output": "1450",
+        "relation": "=="
+      },
+      {
+        "input": "913, 558",
+        "output": "1471",
+        "relation": "=="
+      },
+      {
+        "input": "89, 604",
+        "output": "693",
+        "relation": "=="
+      },
+      {
+        "input": "432, 32",
+        "output": "464",
+        "relation": "=="
+      },
+      {
+        "input": "30, 95",
+        "output": "125",
+        "relation": "=="
+      },
+      {
+        "input": "223, 238",
+        "output": "461",
+        "relation": "=="
+      },
+      {
+        "input": "517, 616",
+        "output": "1133",
+        "relation": "=="
+      },
+      {
+        "input": "27, 574",
+        "output": "601",
+        "relation": "=="
+      },
+      {
+        "input": "203, 733",
+        "output": "936",
+        "relation": "=="
+      },
+      {
+        "input": "665, 718",
+        "output": "1383",
+        "relation": "=="
+      },
+      {
+        "input": "558, 429",
+        "output": "987",
+        "relation": "=="
+      },
+      {
+        "input": "225, 459",
+        "output": "684",
+        "relation": "=="
+      },
+      {
+        "input": "603, 284",
+        "output": "887",
+        "relation": "=="
+      },
+      {
+        "input": "828, 890",
+        "output": "1718",
+        "relation": "=="
+      },
+      {
+        "input": "6, 777",
+        "output": "783",
+        "relation": "=="
+      },
+      {
+        "input": "825, 163",
+        "output": "988",
+        "relation": "=="
+      },
+      {
+        "input": "714, 432",
+        "output": "1146",
+        "relation": "=="
+      },
+      {
+        "input": "348, 284",
+        "output": "632",
+        "relation": "=="
+      },
+      {
+        "input": "159, 220",
+        "output": "379",
+        "relation": "=="
+      },
+      {
+        "input": "980, 781",
+        "output": "1761",
+        "relation": "=="
+      },
+      {
+        "input": "344, 104",
+        "output": "448",
+        "relation": "=="
+      },
+      {
+        "input": "94, 389",
+        "output": "483",
+        "relation": "=="
+      },
+      {
+        "input": "99, 367",
+        "output": "466",
+        "relation": "=="
+      },
+      {
+        "input": "867, 352",
+        "output": "1219",
+        "relation": "=="
+      },
+      {
+        "input": "618, 270",
+        "output": "888",
+        "relation": "=="
+      },
+      {
+        "input": "826, 44",
+        "output": "870",
+        "relation": "=="
+      },
+      {
+        "input": "747, 470",
+        "output": "1217",
+        "relation": "=="
+      },
+      {
+        "input": "549, 127",
+        "output": "676",
+        "relation": "=="
+      },
+      {
+        "input": "996, 944",
+        "output": "1940",
+        "relation": "=="
+      },
+      {
+        "input": "387, 80",
+        "output": "467",
+        "relation": "=="
+      },
+      {
+        "input": "565, 300",
+        "output": "865",
+        "relation": "=="
+      },
+      {
+        "input": "849, 643",
+        "output": "1492",
+        "relation": "=="
+      },
+      {
+        "input": "633, 906",
+        "output": "1539",
+        "relation": "=="
+      },
+      {
+        "input": "882, 370",
+        "output": "1252",
+        "relation": "=="
+      },
+      {
+        "input": "591, 196",
+        "output": "787",
+        "relation": "=="
+      },
+      {
+        "input": "721, 71",
+        "output": "792",
+        "relation": "=="
+      },
+      {
+        "input": "46, 677",
+        "output": "723",
+        "relation": "=="
+      },
+      {
+        "input": "233, 791",
+        "output": "1024",
+        "relation": "=="
+      },
+      {
+        "input": "296, 81",
+        "output": "377",
+        "relation": "=="
+      },
+      {
+        "input": "875, 238",
+        "output": "1113",
+        "relation": "=="
+      },
+      {
+        "input": "887, 103",
+        "output": "990",
+        "relation": "=="
+      },
+      {
+        "input": "389, 284",
+        "output": "673",
+        "relation": "=="
+      },
+      {
+        "input": "464, 650",
+        "output": "1114",
+        "relation": "=="
+      },
+      {
+        "input": "854, 373",
+        "output": "1227",
+        "relation": "=="
+      },
+      {
+        "input": "166, 379",
+        "output": "545",
+        "relation": "=="
+      },
+      {
+        "input": "363, 214",
+        "output": "577",
+        "relation": "=="
+      },
+      {
+        "input": "686, 273",
+        "output": "959",
+        "relation": "=="
+      },
+      {
+        "input": "718, 959",
+        "output": "1677",
+        "relation": "=="
+      },
+      {
+        "input": "699, 663",
+        "output": "1362",
+        "relation": "=="
+      },
+      {
+        "input": "73, 623",
+        "output": "696",
+        "relation": "=="
+      },
+      {
+        "input": "650, 175",
+        "output": "825",
+        "relation": "=="
+      },
+      {
+        "input": "546, 746",
+        "output": "1292",
+        "relation": "=="
+      },
+      {
+        "input": "250, 167",
+        "output": "417",
+        "relation": "=="
+      },
+      {
+        "input": "473, 388",
+        "output": "861",
+        "relation": "=="
+      },
+      {
+        "input": "276, 947",
+        "output": "1223",
+        "relation": "=="
+      },
+      {
+        "input": "655, 704",
+        "output": "1359",
+        "relation": "=="
+      },
+      {
+        "input": "570, 224",
+        "output": "794",
+        "relation": "=="
+      },
+      {
+        "input": "701, 332",
+        "output": "1033",
+        "relation": "=="
+      },
+      {
+        "input": "863, 786",
+        "output": "1649",
+        "relation": "=="
+      },
+      {
+        "input": "794, 57",
+        "output": "851",
+        "relation": "=="
+      },
+      {
+        "input": "234, 841",
+        "output": "1075",
+        "relation": "=="
+      },
+      {
+        "input": "32, 824",
+        "output": "856",
+        "relation": "=="
+      },
+      {
+        "input": "323, 410",
+        "output": "733",
+        "relation": "=="
+      },
+      {
+        "input": "274, 67",
+        "output": "341",
+        "relation": "=="
+      },
+      {
+        "input": "216, 935",
+        "output": "1151",
+        "relation": "=="
+      },
+      {
+        "input": "965, 580",
+        "output": "1545",
+        "relation": "=="
+      },
+      {
+        "input": "897, 735",
+        "output": "1632",
+        "relation": "=="
+      },
+      {
+        "input": "322, 217",
+        "output": "539",
+        "relation": "=="
+      },
+      {
+        "input": "671, 511",
+        "output": "1182",
+        "relation": "=="
+      },
+      {
+        "input": "405, 905",
+        "output": "1310",
+        "relation": "=="
+      },
+      {
+        "input": "936, 658",
+        "output": "1594",
+        "relation": "=="
+      },
+      {
+        "input": "469, 146",
+        "output": "615",
+        "relation": "=="
+      },
+      {
+        "input": "271, 142",
+        "output": "413",
+        "relation": "=="
+      },
+      {
+        "input": "252, 762",
+        "output": "1014",
+        "relation": "=="
+      },
+      {
+        "input": "574, 551",
+        "output": "1125",
+        "relation": "=="
+      },
+      {
+        "input": "269, 764",
+        "output": "1033",
+        "relation": "=="
+      },
+      {
+        "input": "598, 438",
+        "output": "1036",
+        "relation": "=="
+      },
+      {
+        "input": "919, 597",
+        "output": "1516",
+        "relation": "=="
+      },
+      {
+        "input": "408, 370",
+        "output": "778",
+        "relation": "=="
+      },
+      {
+        "input": "224, 141",
+        "output": "365",
+        "relation": "=="
+      },
+      {
+        "input": "521, 505",
+        "output": "1026",
+        "relation": "=="
+      },
+      {
+        "input": "93, 773",
+        "output": "866",
+        "relation": "=="
+      },
+      {
+        "input": "48, 881",
+        "output": "929",
+        "relation": "=="
+      },
+      {
+        "input": "112, 156",
+        "output": "268",
+        "relation": "=="
+      },
+      {
+        "input": "642, 163",
+        "output": "805",
+        "relation": "=="
+      },
+      {
+        "input": "811, 696",
+        "output": "1507",
+        "relation": "=="
+      },
+      {
+        "input": "432, 610",
+        "output": "1042",
+        "relation": "=="
+      },
+      {
+        "input": "65, 394",
+        "output": "459",
+        "relation": "=="
+      },
+      {
+        "input": "390, 610",
+        "output": "1000",
+        "relation": "=="
+      },
+      {
+        "input": "479, 541",
+        "output": "1020",
+        "relation": "=="
+      },
+      {
+        "input": "257, 994",
+        "output": "1251",
+        "relation": "=="
+      },
+      {
+        "input": "566, 881",
+        "output": "1447",
+        "relation": "=="
+      },
+      {
+        "input": "965, 11",
+        "output": "976",
+        "relation": "=="
+      },
+      {
+        "input": "696, 738",
+        "output": "1434",
+        "relation": "=="
+      },
+      {
+        "input": "117, 698",
+        "output": "815",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_56": {
+    "task_id": "HumanEval/56",
+    "entry_point": "correct_bracketing",
+    "ambiguous_prompt": "def correct_bracketing(brackets: str):\n    \"\"\" tags is a string of \"<\" and \">\".\n    return True if every opening tag has a corresponding closing tag.\n    \"\"\"",
+    "clear_prompt": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n    \"\"\"\n",
+    "missing_detail": "\"tags\": Could mean the literal characters `<` and `>`, or structured markup elements (like HTML tags, e.g., `<p>`, `<div>`). Ambiguous here, as it might incorrectly suggest the function handles complex markup structures instead of just balancing the specific characters `<` and `>`.",
+    "solution": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    depth = 0\n    for b in brackets:\n        if b == \"<\":\n            depth += 1\n        else:\n            depth -= 1\n        if depth < 0:\n            return False\n    return depth == 0\n",
+    "test_case": [
+      {
+        "input": "'<>'",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "'<<><>>'",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "'<><><<><>><>'",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "'<><><<<><><>><>><<><><<>>>'",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "'<<<><>>>>'",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "'><<>'",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "'<'",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "'<<<<'",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "'>'",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "'<<>'",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "'<><><<><>><>><<>'",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "'<><><<><>><>>><>'",
+        "output": "False",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_59": {
+    "task_id": "HumanEval/59",
+    "entry_point": "largest_prime_factor",
+    "ambiguous_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return the largest main factor of n. Assume n > 1 and is not a prime.\n    \"\"\"",
+    "clear_prompt": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n",
+    "missing_detail": "\"main\": Could mean principal, most important, or largest. Ambiguous here, as \"main factor\" lacks a standard mathematical definition, unlike \"prime factor\", making it unclear what property the factor should possess besides being the largest.",
+    "solution": "\n\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\n    >>> largest_prime_factor(13195)\n    29\n    >>> largest_prime_factor(2048)\n    2\n    \"\"\"\n    def is_prime(k):\n        if k < 2:\n            return False\n        for i in range(2, k - 1):\n            if k % i == 0:\n                return False\n        return True\n    largest = 1\n    for j in range(2, n + 1):\n        if n % j == 0 and is_prime(j):\n            largest = max(largest, j)\n    return largest\n",
+    "test_case": [
+      {
+        "input": "15",
+        "output": "5",
+        "relation": "=="
+      },
+      {
+        "input": "27",
+        "output": "3",
+        "relation": "=="
+      },
+      {
+        "input": "63",
+        "output": "7",
+        "relation": "=="
+      },
+      {
+        "input": "330",
+        "output": "11",
+        "relation": "=="
+      },
+      {
+        "input": "13195",
+        "output": "29",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_64": {
+    "task_id": "HumanEval/64",
+    "entry_point": "vowels_count",
+    "ambiguous_prompt": "FIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels depend on the case: 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    \"\"\"",
+    "clear_prompt": "\nFIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n\"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    \"\"\"\n",
+    "missing_detail": "\"depend on the case\": Could mean that the definition of vowels is strictly case-sensitive (only 'a', 'e', 'i', 'o', 'u' count, not 'A', 'E', 'I', 'O', 'U'). Ambiguous here, as it contradicts the example `vowels_count(\"ACEDY\")` which implies case-insensitivity by counting 'A' and 'E'.",
+    "solution": "\nFIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n    \"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    >>> vowels_count(\"abcde\")\n    2\n    >>> vowels_count(\"ACEDY\")\n    3\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    n_vowels = sum(c in vowels for c in s)\n    if s[-1] == 'y' or s[-1] == 'Y':\n        n_vowels += 1\n    return n_vowels\n",
+    "test_case": [
+      {
+        "input": "\"abcde\"",
+        "output": "2",
+        "relation": "=="
+      },
+      {
+        "input": "\"Alone\"",
+        "output": "3",
+        "relation": "=="
+      },
+      {
+        "input": "\"key\"",
+        "output": "2",
+        "relation": "=="
+      },
+      {
+        "input": "\"bye\"",
+        "output": "1",
+        "relation": "=="
+      },
+      {
+        "input": "\"keY\"",
+        "output": "2",
+        "relation": "=="
+      },
+      {
+        "input": "\"bYe\"",
+        "output": "1",
+        "relation": "=="
+      },
+      {
+        "input": "\"ACEDY\"",
+        "output": "3",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_80": {
+    "task_id": "HumanEval/80",
+    "entry_point": "is_happy",
+    "ambiguous_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 consecutive items are distinct\n    \"\"\"",
+    "clear_prompt": "\ndef is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct\n    \"\"\"\n",
+    "missing_detail": "\"items\": Could mean characters (letters), elements of a sequence, or potentially other units. Ambiguous here, as replacing the specific term \"letters\" obscures whether the distinctness check applies strictly to individual characters within the string or could imply a different type of element if the input context were broader.",
+    "solution": "\ndef is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct\n    For example:\n    is_happy(a) => False\n    is_happy(aa) => False\n    is_happy(abcd) => True\n    is_happy(aabb) => False\n    is_happy(adb) => True\n    is_happy(xyy) => False\n    \"\"\"\n    if len(s) < 3:\n      return False\n\n    for i in range(len(s) - 2):\n      \n      if s[i] == s[i+1] or s[i+1] == s[i+2] or s[i] == s[i+2]:\n        return False\n    return True\n",
+    "test_case": [
+      {
+        "input": "\"a\"",
+        "output": "False ",
+        "relation": "=="
+      },
+      {
+        "input": "\"aa\"",
+        "output": "False ",
+        "relation": "=="
+      },
+      {
+        "input": "\"abcd\"",
+        "output": "True ",
+        "relation": "=="
+      },
+      {
+        "input": "\"aabb\"",
+        "output": "False ",
+        "relation": "=="
+      },
+      {
+        "input": "\"adb\"",
+        "output": "True ",
+        "relation": "=="
+      },
+      {
+        "input": "\"xyy\"",
+        "output": "False ",
+        "relation": "=="
+      },
+      {
+        "input": "\"iopaxpoi\"",
+        "output": "True ",
+        "relation": "=="
+      },
+      {
+        "input": "\"iopaxioi\"",
+        "output": "False ",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_91": {
+    "task_id": "HumanEval/91",
+    "entry_point": "is_bored",
+    "ambiguous_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. A boredom is a sentence that starts with the subject \"I\".\n    Sentences are delimited by '.', '?' or '!'.\n    \"\"\"",
+    "clear_prompt": "\ndef is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. A boredom is a sentence that starts with the word \"I\".\n    Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n",
+    "missing_detail": "\"subject\": Could mean the literal word \"I\" at the beginning of the sentence, or the grammatical subject of the sentence being the pronoun \"I\". Ambiguous here, as it's unclear if sentences like \"Because I was tired...\" count, where \"I\" is the subject but not the starting word.",
+    "solution": "\ndef is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. A boredom is a sentence that starts with the word \"I\".\n    Sentences are delimited by '.', '?' or '!'.\n   \n    For example:\n    >>> is_bored(\"Hello world\")\n    0\n    >>> is_bored(\"The sky is blue. The sun is shining. I love this weather\")\n    1\n    \"\"\"\n    import re\n    sentences = re.split(r'[.?!]\\s*', S)\n    return sum(sentence[0:2] == 'I ' for sentence in sentences)\n",
+    "test_case": [
+      {
+        "input": "\"Hello world\"",
+        "output": "0",
+        "relation": "=="
+      },
+      {
+        "input": "\"Is the sky blue?\"",
+        "output": "0",
+        "relation": "=="
+      },
+      {
+        "input": "\"I love It !\"",
+        "output": "1",
+        "relation": "=="
+      },
+      {
+        "input": "\"bIt\"",
+        "output": "0",
+        "relation": "=="
+      },
+      {
+        "input": "\"I feel good today. I will be productive. will kill It\"",
+        "output": "2",
+        "relation": "=="
+      },
+      {
+        "input": "\"You and I are going for a walk\"",
+        "output": "0",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_104": {
+    "task_id": "HumanEval/104",
+    "entry_point": "unique_digits",
+    "ambiguous_prompt": "def unique_digits(x):\n    \"\"\"Given a list of positive integers x. return a sorted list of all\n    constituents that hasn't any even digit.\n    \"\"\"",
+    "clear_prompt": "\ndef unique_digits(x):\n    \"\"\"Given a list of positive integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n",
+    "missing_detail": "\"constituents\": Could mean the elements/numbers within the input list `x`, or the individual digits that make up each number in the list. Ambiguous here, as it obscures whether the function should filter the original numbers based on their digits or potentially return the digits themselves.",
+    "solution": "\ndef unique_digits(x):\n    \"\"\"Given a list of positive integers x. return a sorted list of all \n    elements that hasn't any even digit.\n\n    Note: Returned list should be sorted in increasing order.\n    \n    For example:\n    >>> unique_digits([15, 33, 1422, 1])\n    [1, 15, 33]\n    >>> unique_digits([152, 323, 1422, 10])\n    []\n    \"\"\"\n    odd_digit_elements = []\n    for i in x:\n        if all (int(c) % 2 == 1 for c in str(i)):\n            odd_digit_elements.append(i)\n    return sorted(odd_digit_elements)\n",
+    "test_case": [
+      {
+        "input": "[15, 33, 1422, 1]",
+        "output": "[1, 15, 33]",
+        "relation": "=="
+      },
+      {
+        "input": "[152, 323, 1422, 10]",
+        "output": "[]",
+        "relation": "=="
+      },
+      {
+        "input": "[12345, 2033, 111, 151]",
+        "output": "[111, 151]",
+        "relation": "=="
+      },
+      {
+        "input": "[135, 103, 31]",
+        "output": "[31, 135]",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_109": {
+    "task_id": "HumanEval/109",
+    "entry_point": "move_one_ball",
+    "ambiguous_prompt": "def move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N integers arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array in a regular order by performing\n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n\n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index.\n\n    If it is possible to obtain a regular state by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"",
+    "clear_prompt": "\ndef move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N integers arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n    \"\"\"\n",
+    "missing_detail": "\"regular order\": Could mean sorted non-decreasingly (as implied by the original), sorted non-increasingly, following *some* predictable pattern (like arithmetic progression), or conforming to an unspecified rule. Ambiguous here, as it replaces the specific \"sorted in non-decreasing order\" with a vague term, making the target state unclear.",
+    "solution": "\ndef move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N integers arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n\n    Note: The given list is guaranteed to have unique elements.\n\n    For Example:\n    \n    move_one_ball([3, 4, 5, 1, 2])==>True\n    Explanation: By performin 2 right shift operations, non-decreasing order can\n                 be achieved for the given array.\n    move_one_ball([3, 5, 4, 1, 2])==>False\n    Explanation:It is not possible to get non-decreasing order for the given\n                array by performing any number of right shift operations.\n                \n    \"\"\"\n    if len(arr)==0:\n      return True\n    sorted_array=sorted(arr)\n    my_arr=[]\n    \n    min_value=min(arr)\n    min_index=arr.index(min_value)\n    my_arr=arr[min_index:]+arr[0:min_index]\n    for i in range(len(arr)):\n      if my_arr[i]!=sorted_array[i]:\n        return False\n    return True\n",
+    "test_case": [
+      {
+        "input": "[3, 4, 5, 1, 2]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[3, 5, 10, 1, 2]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[4, 3, 1, 2]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[3, 5, 4, 1, 2]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[]",
+        "output": "True",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_110": {
+    "task_id": "HumanEval/110",
+    "entry_point": "exchange",
+    "ambiguous_prompt": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform an adjustment of elements\n    between them to make lst1 a list of only even numbers.\n    There is no limit on the number of adjusted elements between lst1 and lst2.\n    If it is possible to adjust elements between the lst1 and lst2 to make\n    all the elements of lst1 to be even, return \"YES\".\n    Otherwise, return \"NO\".\n    \"\"\"",
+    "clear_prompt": "\ndef exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform an exchange of elements\n    between them to make lst1 a list of only even numbers.\n    There is no limit on the number of exchanged elements between lst1 and lst2.\n    If it is possible to exchange elements between the lst1 and lst2 to make\n    all the elements of lst1 to be even, return \"YES\".\n    Otherwise, return \"NO\".\n    \"\"\"\n",
+    "missing_detail": "\"adjustment\": Could mean swapping elements (like the original \"exchange\"), moving elements one-way, modifying elements in place, or other unspecified operations. Ambiguous here, as it obscures the specific mechanism (swapping) intended for manipulating elements between the two lists to achieve the desired state for `lst1`.",
+    "solution": "\ndef exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform an exchange of elements\n    between them to make lst1 a list of only even numbers.\n    There is no limit on the number of exchanged elements between lst1 and lst2.\n    If it is possible to exchange elements between the lst1 and lst2 to make\n    all the elements of lst1 to be even, return \"YES\".\n    Otherwise, return \"NO\".\n    For example:\n    exchange([1, 2, 3, 4], [1, 2, 3, 4]) => \"YES\"\n    exchange([1, 2, 3, 4], [1, 5, 3, 4]) => \"NO\"\n    It is assumed that the input lists will be non-empty.\n    \"\"\"\n    odd = 0\n    even = 0\n    for i in lst1:\n        if i%2 == 1:\n            odd += 1\n    for i in lst2:\n        if i%2 == 0:\n            even += 1\n    if even >= odd:\n        return \"YES\"\n    return \"NO\"\n            \n",
+    "test_case": [
+      {
+        "input": "[1, 2, 3, 4], [1, 2, 3, 4]",
+        "output": "YES",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 3, 4], [1, 5, 3, 4]",
+        "output": "NO",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 3, 4], [2, 1, 4, 3]",
+        "output": "YES",
+        "relation": "=="
+      },
+      {
+        "input": "[5, 7, 3], [2, 6, 4]",
+        "output": "YES",
+        "relation": "=="
+      },
+      {
+        "input": "[5, 7, 3], [2, 6, 3]",
+        "output": "NO",
+        "relation": "=="
+      },
+      {
+        "input": "[3, 2, 6, 1, 8, 9], [3, 5, 5, 1, 1, 1]",
+        "output": "NO",
+        "relation": "=="
+      },
+      {
+        "input": "[100, 200], [200, 200]",
+        "output": "YES",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_113": {
+    "task_id": "HumanEval/113",
+    "entry_point": "odd_count",
+    "ambiguous_prompt": "def odd_count(lst):\n    \"\"\"Given a list of strings, where each string consists of only digits, return a list.\n    Each element i of the output should be \"the number of odd characters in the\n    string i of the input.\" where all the i's should be replaced by the number\n    of odd digits in the i'th string of the input.\n    \"\"\"",
+    "clear_prompt": "\ndef odd_count(lst):\n    \"\"\"Given a list of strings, where each string consists of only digits, return a list.\n    Each element i of the output should be \"the number of odd elements in the\n    string i of the input.\" where all the i's should be replaced by the number\n    of odd digits in the i'th string of the input.\n    \"\"\"\n",
+    "missing_detail": "\"characters\": Could refer to the symbols themselves (digits in this case) or potentially their positions. Ambiguous here, as \"odd characters\" might be interpreted as characters at odd indices rather than characters representing odd digits, despite the examples clarifying the latter.",
+    "solution": "\ndef odd_count(lst):\n    \"\"\"Given a list of strings, where each string consists of only digits, return a list.\n    Each element i of the output should be \"the number of odd elements in the\n    string i of the input.\" where all the i's should be replaced by the number\n    of odd digits in the i'th string of the input.\n\n    >>> odd_count(['1234567'])\n    [\"the number of odd elements 4n the str4ng 4 of the 4nput.\"]\n    >>> odd_count(['3',\"11111111\"])\n    [\"the number of odd elements 1n the str1ng 1 of the 1nput.\",\n     \"the number of odd elements 8n the str8ng 8 of the 8nput.\"]\n    \"\"\"\n    res = []\n    for arr in lst:\n        n = sum(int(d)%2==1 for d in arr)\n        res.append(\"the number of odd elements \" + str(n) + \"n the str\"+ str(n) +\"ng \"+ str(n) +\" of the \"+ str(n) +\"nput.\")\n    return res\n",
+    "test_case": [
+      {
+        "input": "['1234567']",
+        "output": "['the number of odd elements 4n the str4ng 4 of the 4nput.']",
+        "relation": "=="
+      },
+      {
+        "input": "['3','11111111']",
+        "output": "['the number of odd elements 1n the str1ng 1 of the 1nput.', 'the number of odd elements 8n the str8ng 8 of the 8nput.']",
+        "relation": "=="
+      },
+      {
+        "input": "['271', '137', '314']",
+        "output": "['the number of odd elements 2n the str2ng 2 of the 2nput.', 'the number of odd elements 3n the str3ng 3 of the 3nput.', 'the number of odd elements 2n the str2ng 2 of the 2nput.']",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_125": {
+    "task_id": "HumanEval/125",
+    "entry_point": "split_words",
+    "ambiguous_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd value in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''",
+    "clear_prompt": "\ndef split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n",
+    "missing_detail": "\"value\": Could mean the ASCII numerical value of the character or the custom-defined position (ord('a')=0). Ambiguous here, as it introduces confusion about whether to use real ASCII values (e.g., 'a'=97, which is odd) or the explicit 0-25 mapping stated in the description.",
+    "solution": "\ndef split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    Examples\n    split_words(\"Hello world!\") \u279e [\"Hello\", \"world!\"]\n    split_words(\"Hello,world!\") \u279e [\"Hello\", \"world!\"]\n    split_words(\"abcdef\") == 3 \n    '''\n    if \" \" in txt:\n        return txt.split()\n    elif \",\" in txt:\n        return txt.replace(',',' ').split()\n    else:\n        return len([i for i in txt if i.islower() and ord(i)%2 == 0])\n",
+    "test_case": [
+      {
+        "input": "\"Hello world!\"",
+        "output": "['Hello', 'world!']",
+        "relation": "=="
+      },
+      {
+        "input": "\"Hello,world!\"",
+        "output": "['Hello', 'world!']",
+        "relation": "=="
+      },
+      {
+        "input": "\"Hello world,!\"",
+        "output": "['Hello', 'world,!']",
+        "relation": "=="
+      },
+      {
+        "input": "\"Hello,Hello,world !\"",
+        "output": "['Hello,Hello,world', '!']",
+        "relation": "=="
+      },
+      {
+        "input": "\"abcdef\"",
+        "output": "3",
+        "relation": "=="
+      },
+      {
+        "input": "\"aaabb\"",
+        "output": "2",
+        "relation": "=="
+      },
+      {
+        "input": "\"aaaBb\"",
+        "output": "1",
+        "relation": "=="
+      },
+      {
+        "input": "\"\"",
+        "output": "0",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_126": {
+    "task_id": "HumanEval/126",
+    "entry_point": "is_sorted",
+    "ambiguous_prompt": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 instance of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''",
+    "clear_prompt": "\ndef is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n    '''\n",
+    "missing_detail": "\"instance\": Could mean any single occurrence of a number, or it could be interpreted similarly to \"duplicate\" (an occurrence beyond the first). Ambiguous here because \"more than 1 instance\" literally means a number appears two or more times, which contradicts the example `is_sorted([1, 2, 2, 3, 3, 4]) \u279e True` where numbers appearing twice are allowed.",
+    "solution": "\ndef is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    '''\n    count_digit = dict([(i, 0) for i in lst])\n    for i in lst:\n        count_digit[i]+=1 \n    if any(count_digit[i] > 2 for i in lst):\n        return False\n    if all(lst[i-1] <= lst[i] for i in range(1, len(lst))):\n        return True\n    else:\n        return False\n    \n    \n",
+    "test_case": [
+      {
+        "input": "[5]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 3, 4, 5]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 3, 2, 4, 5]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 3, 4, 5, 6]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 3, 4, 5, 6, 7]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 3, 2, 4, 5, 6, 7]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[3, 2, 1]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 2, 2, 3, 4]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 3, 3, 3, 4]",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 2, 3, 3, 4]",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "[1, 2, 3, 4]",
+        "output": "True",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_129": {
+    "task_id": "HumanEval/129",
+    "entry_point": "minPath",
+    "ambiguous_prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears exactly once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which touch you current cell.\n    \"\"\"",
+    "clear_prompt": "\ndef minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears exactly once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n",
+    "missing_detail": "\"touch\": Could mean sharing an edge (adjacent horizontally or vertically) or sharing an edge or a corner (including diagonal cells). Ambiguous here, as it obscures whether diagonal movement is permitted, unlike the original description's explicit \"share an edge\".",
+    "solution": "\ndef minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears exactly once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    Please note that a path of length k means visiting exactly k cells (not\n    necessarily distinct).\n    You CANNOT go off the grid.\n    A path A (of length k) is considered less than a path B (of length k) if\n    after making the ordered lists of the values on the cells that A and B go\n    through (let's call them lst_A and lst_B), lst_A is lexicographically less\n    than lst_B, in other words, there exist an integer index i (1 <= i <= k)\n    such that lst_A[i] < lst_B[i] and for any j (1 <= j < i) we have\n    lst_A[j] = lst_B[j].\n    It is guaranteed that the answer is unique.\n    Return an ordered list of the values on the cells that the minimum path go through.\n\n    Examples:\n\n        Input: grid = [ [1,2,3], [4,5,6], [7,8,9]], k = 3\n        Output: [1, 2, 1]\n\n        Input: grid = [ [5,9,3], [4,1,6], [7,8,2]], k = 1\n        Output: [1]\n    \"\"\"\n    n = len(grid)\n    val = n * n + 1\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] == 1:\n                temp = []\n                if i != 0:\n                    temp.append(grid[i - 1][j])\n\n                if j != 0:\n                    temp.append(grid[i][j - 1])\n\n                if i != n - 1:\n                    temp.append(grid[i + 1][j])\n\n                if j != n - 1:\n                    temp.append(grid[i][j + 1])\n\n                val = min(temp)\n\n    ans = []\n    for i in range(k):\n        if i % 2 == 0:\n            ans.append(1)\n        else:\n            ans.append(val)\n    return ans\n",
+    "test_case": [
+      {
+        "input": "[[1, 2, 3], [4, 5, 6], [7, 8, 9]], 3",
+        "output": "[1, 2, 1]",
+        "relation": "=="
+      },
+      {
+        "input": "[[5, 9, 3], [4, 1, 6], [7, 8, 2]], 1",
+        "output": "[1]",
+        "relation": "=="
+      },
+      {
+        "input": "[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], 4",
+        "output": "[1, 2, 1, 2]",
+        "relation": "=="
+      },
+      {
+        "input": "[[6, 4, 13, 10], [5, 7, 12, 1], [3, 16, 11, 15], [8, 14, 9, 2]], 7",
+        "output": "[1, 10, 1, 10, 1, 10, 1]",
+        "relation": "=="
+      },
+      {
+        "input": "[[8, 14, 9, 2], [6, 4, 13, 15], [5, 7, 1, 12], [3, 10, 11, 16]], 5",
+        "output": "[1, 7, 1, 7, 1]",
+        "relation": "=="
+      },
+      {
+        "input": "[[11, 8, 7, 2], [5, 16, 14, 4], [9, 3, 15, 6], [12, 13, 10, 1]], 9",
+        "output": "[1, 6, 1, 6, 1, 6, 1, 6, 1]",
+        "relation": "=="
+      },
+      {
+        "input": "[[12, 13, 10, 1], [9, 3, 15, 6], [5, 16, 14, 4], [11, 8, 7, 2]], 12",
+        "output": "[1, 6, 1, 6, 1, 6, 1, 6, 1, 6, 1, 6]",
+        "relation": "=="
+      },
+      {
+        "input": "[[2, 7, 4], [3, 1, 5], [6, 8, 9]], 8",
+        "output": "[1, 3, 1, 3, 1, 3, 1, 3]",
+        "relation": "=="
+      },
+      {
+        "input": "[[6, 1, 5], [3, 8, 9], [2, 7, 4]], 8",
+        "output": "[1, 5, 1, 5, 1, 5, 1, 5]",
+        "relation": "=="
+      },
+      {
+        "input": "[[1, 2], [3, 4]], 10",
+        "output": "[1, 2, 1, 2, 1, 2, 1, 2, 1, 2]",
+        "relation": "=="
+      },
+      {
+        "input": "[[1, 3], [3, 2]], 10",
+        "output": "[1, 3, 1, 3, 1, 3, 1, 3, 1, 3]",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_130": {
+    "task_id": "HumanEval/130",
+    "entry_point": "tri",
+    "ambiguous_prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in\n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n    Tribonacci sequence is defined by the recurrence:\n    tri(1) = 3\n    tri(n) = 1 + n / 2, if n is level.\n    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n    \"\"\"",
+    "clear_prompt": "\ndef tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n    Tribonacci sequence is defined by the recurrence:\n    tri(1) = 3\n    tri(n) = 1 + n / 2, if n is even.\n    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n    \"\"\"\n",
+    "missing_detail": "\"level\": Could mean \"even\" (as likely intended, replacing the original word), flat, a stage, or having no variations. Ambiguous here because it lacks a clear mathematical definition in the context of defining a sequence term based on the properties of 'n', unlike the precise term \"even\".",
+    "solution": "\ndef tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n    Tribonacci sequence is defined by the recurrence:\n    tri(1) = 3\n    tri(n) = 1 + n / 2, if n is even.\n    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n    For example:\n    tri(2) = 1 + (2 / 2) = 2\n    tri(4) = 3\n    tri(3) = tri(2) + tri(1) + tri(4)\n           = 2 + 3 + 3 = 8 \n    You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    Examples:\n    tri(3) = [1, 3, 2, 8]\n    \"\"\"\n    if n == 0:\n        return [1]\n    my_tri = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            my_tri.append(i / 2 + 1)\n        else:\n            my_tri.append(my_tri[i - 1] + my_tri[i - 2] + (i + 3) / 2)\n    return my_tri\n",
+    "test_case": [
+      {
+        "input": "3",
+        "output": "[1, 3, 2.0, 8.0]",
+        "relation": "=="
+      },
+      {
+        "input": "4",
+        "output": "[1, 3, 2.0, 8.0, 3.0]",
+        "relation": "=="
+      },
+      {
+        "input": "5",
+        "output": "[1, 3, 2.0, 8.0, 3.0, 15.0]",
+        "relation": "=="
+      },
+      {
+        "input": "6",
+        "output": "[1, 3, 2.0, 8.0, 3.0, 15.0, 4.0]",
+        "relation": "=="
+      },
+      {
+        "input": "7",
+        "output": "[1, 3, 2.0, 8.0, 3.0, 15.0, 4.0, 24.0]",
+        "relation": "=="
+      },
+      {
+        "input": "8",
+        "output": "[1, 3, 2.0, 8.0, 3.0, 15.0, 4.0, 24.0, 5.0]",
+        "relation": "=="
+      },
+      {
+        "input": "9",
+        "output": "[1, 3, 2.0, 8.0, 3.0, 15.0, 4.0, 24.0, 5.0, 35.0]",
+        "relation": "=="
+      },
+      {
+        "input": "20",
+        "output": "[1, 3, 2.0, 8.0, 3.0, 15.0, 4.0, 24.0, 5.0, 35.0, 6.0, 48.0, 7.0, 63.0, 8.0, 80.0, 9.0, 99.0, 10.0, 120.0, 11.0]",
+        "relation": "=="
+      },
+      {
+        "input": "0",
+        "output": "[1]",
+        "relation": "=="
+      },
+      {
+        "input": "1",
+        "output": "[1, 3]",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_134": {
+    "task_id": "HumanEval/134",
+    "entry_point": "check_if_last_char_is_a_letter",
+    "ambiguous_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is a key character and is not\n    a part of a word, and False otherwise.\n    '''",
+    "clear_prompt": "\ndef check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    '''\n",
+    "missing_detail": "\"key character\": Could mean an important character, a specific type of character (like alphabetical, numerical, or symbolic), or potentially relate to concepts like encryption keys or dictionary keys. Ambiguous here, as it replaces the specific \"alphabetical character\" with the undefined \"key character\", making it unclear which characters qualify for the check.",
+    "solution": "\ndef check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    a part of a word, and False otherwise.\n    Note: \"word\" is a group of characters separated by space.\n\n    Examples:\n    check_if_last_char_is_a_letter(\"apple pie\") \u279e False\n    check_if_last_char_is_a_letter(\"apple pi e\") \u279e True\n    check_if_last_char_is_a_letter(\"apple pi e \") \u279e False\n    check_if_last_char_is_a_letter(\"\") \u279e False \n    '''\n \n    check = txt.split(' ')[-1]\n    return True if len(check) == 1 and (97 <= ord(check.lower()) <= 122) else False\n",
+    "test_case": [
+      {
+        "input": "\"apple\"",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "\"apple pi e\"",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "\"eeeee\"",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "\"A\"",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "\"Pumpkin pie \"",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "\"Pumpkin pie 1\"",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "\"\"",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "\"eeeee e \"",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "\"apple pie\"",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "\"apple pi e \"",
+        "output": "False",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_138": {
+    "task_id": "HumanEval/138",
+    "entry_point": "is_equal_to_sum_even",
+    "ambiguous_prompt": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 valid even numbers\n    \"\"\"",
+    "clear_prompt": "\ndef is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    \"\"\"\n",
+    "missing_detail": "\"valid\": Could mean positive (as in the original description), non-zero, or conforming to some other unspecified criteria. Ambiguous here because it replaces the mathematically precise term \"positive\" with a vague one, obscuring whether only even numbers greater than zero (2, 4, 6...) are allowed.",
+    "solution": "\ndef is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n%2 == 0 and n >= 8\n",
+    "test_case": [
+      {
+        "input": "4",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "6",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "8",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "10",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "11",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "12",
+        "output": "True",
+        "relation": "=="
+      },
+      {
+        "input": "13",
+        "output": "False",
+        "relation": "=="
+      },
+      {
+        "input": "16",
+        "output": "True",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_140": {
+    "task_id": "HumanEval/140",
+    "entry_point": "fix_spaces",
+    "ambiguous_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then mark all consecutive spaces with - \n    \"\"\"",
+    "clear_prompt": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \"\"\"\n",
+    "missing_detail": "\"mark\": Could mean replace, indicate, or flag. Ambiguous here, as it obscures the intended action of replacing the consecutive spaces with a hyphen, potentially suggesting annotation or simple identification instead.",
+    "solution": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    new_text = \"\"\n    i = 0\n    start, end = 0, 0\n    while i < len(text):\n        if text[i] == \" \":\n            end += 1\n        else:\n            if end - start > 2:\n                new_text += \"-\"+text[i]\n            elif end - start > 0:\n                new_text += \"_\"*(end - start)+text[i]\n            else:\n                new_text += text[i]\n            start, end = i+1, i+1\n        i+=1\n    if end - start > 2:\n        new_text += \"-\"\n    elif end - start > 0:\n        new_text += \"_\"\n    return new_text\n",
+    "test_case": [
+      {
+        "input": "\"Example\"",
+        "output": "Example",
+        "relation": "=="
+      },
+      {
+        "input": "\"Mudasir Hanif \"",
+        "output": "Mudasir_Hanif_",
+        "relation": "=="
+      },
+      {
+        "input": "\"Yellow Yellow  Dirty  Fellow\"",
+        "output": "Yellow_Yellow__Dirty__Fellow",
+        "relation": "=="
+      },
+      {
+        "input": "\"Exa   mple\"",
+        "output": "Exa-mple",
+        "relation": "=="
+      },
+      {
+        "input": "\"   Exa 1 2 2 mple\"",
+        "output": "-Exa_1_2_2_mple",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_142": {
+    "task_id": "HumanEval/142",
+    "entry_point": "sum_squares",
+    "ambiguous_prompt": "def sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a\n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will\n    pass the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries.\n    \"\"\"",
+    "clear_prompt": "\n\n\ndef sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will not \n    change the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries. \n    \"\"\"\n",
+    "missing_detail": "\"pass\": Could mean to leave the entry unchanged (similar to the Python `pass` statement, doing nothing) or to skip/ignore the entry entirely. Ambiguous here, as it obscures whether entries whose indices are not multiples of 3 or 4 are included in the final sum or discarded.",
+    "solution": "\n\n\ndef sum_squares(lst):\n    \"\"\"\"\n    This function will take a list of integers. For all entries in the list, the function shall square the integer entry if its index is a \n    multiple of 3 and will cube the integer entry if its index is a multiple of 4 and not a multiple of 3. The function will not \n    change the entries in the list whose indexes are not a multiple of 3 or 4. The function shall then return the sum of all entries. \n    \n    Examples:\n    For lst = [1,2,3] the output should be 6\n    For lst = []  the output should be 0\n    For lst = [-1,-5,2,-1,-5]  the output should be -126\n    \"\"\"\n    result =[]\n    for i in range(len(lst)):\n        if i %3 == 0:\n            result.append(lst[i]**2)\n        elif i % 4 == 0 and i%3 != 0:\n            result.append(lst[i]**3)\n        else:\n            result.append(lst[i])\n    return sum(result)\n",
+    "test_case": [
+      {
+        "input": "[1,2,3]",
+        "output": "6",
+        "relation": "=="
+      },
+      {
+        "input": "[1,4,9]",
+        "output": "14",
+        "relation": "=="
+      },
+      {
+        "input": "[]",
+        "output": "0",
+        "relation": "=="
+      },
+      {
+        "input": "[1,1,1,1,1,1,1,1,1]",
+        "output": "9",
+        "relation": "=="
+      },
+      {
+        "input": "[-1,-1,-1,-1,-1,-1,-1,-1,-1]",
+        "output": "-3",
+        "relation": "=="
+      },
+      {
+        "input": "[0]",
+        "output": "0",
+        "relation": "=="
+      },
+      {
+        "input": "[-1,-5,2,-1,-5]",
+        "output": "-126",
+        "relation": "=="
+      },
+      {
+        "input": "[-56,-99,1,0,-2]",
+        "output": "3030",
+        "relation": "=="
+      },
+      {
+        "input": "[-1,0,0,0,0,0,0,0,-1]",
+        "output": "0",
+        "relation": "=="
+      },
+      {
+        "input": "[-16, -9, -2, 36, 36, 26, -20, 25, -40, 20, -4, 12, -26, 35, 37]",
+        "output": "-14196",
+        "relation": "=="
+      },
+      {
+        "input": "[-1, -3, 17, -1, -15, 13, -1, 14, -14, -12, -5, 14, -14, 6, 13, 11, 16, 16, 4, 10]",
+        "output": "-1448",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_145": {
+    "task_id": "HumanEval/145",
+    "entry_point": "order_by_points",
+    "ambiguous_prompt": "def order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    in ascending order according to their points.\n    \"\"\"",
+    "clear_prompt": "\ndef order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    in ascending order according to the sum of their digits.\n    \"\"\"\n",
+    "missing_detail": "\"points\": Could mean the sum of the digits (as intended and shown in the example), or some other undefined scoring system or characteristic assigned to the numbers. Ambiguous here, as it obscures the specific method for calculating the sorting value, relying solely on the example for clarification.",
+    "solution": "\ndef order_by_points(nums):\n    \"\"\"\n    Write a function which sorts the given list of integers\n    in ascending order according to the sum of their digits.\n    Note: if there are several items with similar sum of their digits,\n    order them based on their index in original list.\n\n    For example:\n    >>> order_by_points([1, 11, -1, -11, -12]) == [-1, -11, 1, -12, 11]\n    >>> order_by_points([]) == []\n    \"\"\"\n    def digits_sum(n):\n        neg = 1\n        if n < 0: n, neg = -1 * n, -1 \n        n = [int(i) for i in str(n)]\n        n[0] = n[0] * neg\n        return sum(n)\n    return sorted(nums, key=digits_sum)\n",
+    "test_case": [
+      {
+        "input": "[1, 11, -1, -11, -12]",
+        "output": "[-1, -11, 1, -12, 11]",
+        "relation": "=="
+      },
+      {
+        "input": "[1234,423,463,145,2,423,423,53,6,37,3457,3,56,0,46]",
+        "output": "[0, 2, 3, 6, 53, 423, 423, 423, 1234, 145, 37, 46, 56, 463, 3457]",
+        "relation": "=="
+      },
+      {
+        "input": "[]",
+        "output": "[]",
+        "relation": "=="
+      },
+      {
+        "input": "[1, -11, -32, 43, 54, -98, 2, -3]",
+        "output": "[-3, -32, -98, -11, 1, 2, 43, 54]",
+        "relation": "=="
+      },
+      {
+        "input": "[1,2,3,4,5,6,7,8,9,10,11]",
+        "output": "[1, 10, 2, 11, 3, 4, 5, 6, 7, 8, 9]",
+        "relation": "=="
+      },
+      {
+        "input": "[0,6,6,-76,-21,23,4]",
+        "output": "[-76, -21, 0, 4, 23, 6, 6]",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_147": {
+    "task_id": "HumanEval/147",
+    "entry_point": "get_max_triples",
+    "ambiguous_prompt": "def get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n        Return the number of key triples (a[i], a[j], a[k]) of a where i < j < k,\n    and a[i] + a[j] + a[k] is a multiple of 3.\n    \"\"\"",
+    "clear_prompt": "\ndef get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n        Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, \n    and a[i] + a[j] + a[k] is a multiple of 3.\n    \"\"\"\n",
+    "missing_detail": "\"key\": Could mean important/significant, or simply qualifying/valid. Ambiguous here, as it might imply counting only a specific subset of \"important\" triples rather than all triples meeting the mathematical condition.",
+    "solution": "\ndef get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n        Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, \n    and a[i] + a[j] + a[k] is a multiple of 3.\n\n    Example :\n        Input: n = 5\n        Output: 1\n        Explanation: \n        a = [1, 3, 7, 13, 21]\n        The only valid triple is (1, 7, 13).\n    \"\"\"\n    A = [i*i - i + 1 for i in range(1,n+1)]\n    ans = []\n    for i in range(n):\n        for j in range(i+1,n):\n            for k in range(j+1,n):\n                if (A[i]+A[j]+A[k])%3 == 0:\n                    ans += [(A[i],A[j],A[k])]\n    return len(ans)\n",
+    "test_case": [
+      {
+        "input": "5",
+        "output": "1",
+        "relation": "=="
+      },
+      {
+        "input": "6",
+        "output": "4",
+        "relation": "=="
+      },
+      {
+        "input": "10",
+        "output": "36",
+        "relation": "=="
+      },
+      {
+        "input": "100",
+        "output": "53361",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_148": {
+    "task_id": "HumanEval/148",
+    "entry_point": "bf",
+    "ambiguous_prompt": "def bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closerst to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing all planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not recognized planet names. \n    '''",
+    "clear_prompt": "\ndef bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closerst to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing all planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    '''\n",
+    "missing_detail": "\"recognized\": Could mean strictly one of the eight listed planets, or potentially imply a broader validation mechanism (e.g., case-insensitivity, allowing common misspellings, or even recognizing other celestial bodies not explicitly listed).",
+    "solution": "\ndef bf(planet1, planet2):\n    '''\n    There are eight planets in our solar system: the closerst to the Sun \n    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, \n    Uranus, Neptune.\n    Write a function that takes two planet names as strings planet1 and planet2. \n    The function should return a tuple containing all planets whose orbits are \n    located between the orbit of planet1 and the orbit of planet2, sorted by \n    the proximity to the sun. \n    The function should return an empty tuple if planet1 or planet2\n    are not correct planet names. \n    Examples\n    bf(\"Jupiter\", \"Neptune\") ==> (\"Saturn\", \"Uranus\")\n    bf(\"Earth\", \"Mercury\") ==> (\"Venus\")\n    bf(\"Mercury\", \"Uranus\") ==> (\"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\")\n    '''\n    planet_names = (\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\")\n    if planet1 not in planet_names or planet2 not in planet_names or planet1 == planet2:\n        return ()\n    planet1_index = planet_names.index(planet1)\n    planet2_index = planet_names.index(planet2)\n    if planet1_index < planet2_index:\n        return (planet_names[planet1_index + 1: planet2_index])\n    else:\n        return (planet_names[planet2_index + 1 : planet1_index])\n",
+    "test_case": [
+      {
+        "input": "\"Jupiter\", \"Neptune\"",
+        "output": "('Saturn', 'Uranus')",
+        "relation": "=="
+      },
+      {
+        "input": "\"Earth\", \"Mercury\"",
+        "output": "('Venus',)",
+        "relation": "=="
+      },
+      {
+        "input": "\"Mercury\", \"Uranus\"",
+        "output": "('Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn')",
+        "relation": "=="
+      },
+      {
+        "input": "\"Neptune\", \"Venus\"",
+        "output": "('Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus')",
+        "relation": "=="
+      },
+      {
+        "input": "\"Earth\", \"Earth\"",
+        "output": "()",
+        "relation": "=="
+      },
+      {
+        "input": "\"Mars\", \"Earth\"",
+        "output": "()",
+        "relation": "=="
+      },
+      {
+        "input": "\"Jupiter\", \"Makemake\"",
+        "output": "()",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_150": {
+    "task_id": "HumanEval/150",
+    "entry_point": "x_or_y",
+    "ambiguous_prompt": "def x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a simple number and should return the value of y otherwise.\n    \"\"\"",
+    "clear_prompt": "\ndef x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a prime number and should return the value of y otherwise.\n    \"\"\"\n",
+    "missing_detail": "\"simple number\": Could mean a prime number, an even number, or a number with minimal digits. Ambiguous here, as \"simple\" has no precise mathematical definition, leading to uncertainty about whether primality (original intent) or another property determines x/y selection.",
+    "solution": "\ndef x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a prime number and should return the value of y otherwise.\n\n    Examples:\n    for x_or_y(7, 34, 12) == 34\n    for x_or_y(15, 8, 5) == 5\n    \n    \"\"\"\n    if n == 1:\n        return y\n    for i in range(2, n):\n        if n % i == 0:\n            return y\n            break\n    else:\n        return x\n",
+    "test_case": [
+      {
+        "input": "7, 34, 12",
+        "output": "34",
+        "relation": "=="
+      },
+      {
+        "input": "15, 8, 5",
+        "output": "5",
+        "relation": "=="
+      },
+      {
+        "input": "3, 33, 5212",
+        "output": "33",
+        "relation": "=="
+      },
+      {
+        "input": "1259, 3, 52",
+        "output": "3",
+        "relation": "=="
+      },
+      {
+        "input": "7919, -1, 12",
+        "output": "-1",
+        "relation": "=="
+      },
+      {
+        "input": "3609, 1245, 583",
+        "output": "583",
+        "relation": "=="
+      },
+      {
+        "input": "91, 56, 129",
+        "output": "129",
+        "relation": "=="
+      },
+      {
+        "input": "6, 34, 1234",
+        "output": "1234",
+        "relation": "=="
+      },
+      {
+        "input": "1, 2, 0",
+        "output": "0",
+        "relation": "=="
+      },
+      {
+        "input": "2, 2, 0",
+        "output": "2",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_151": {
+    "task_id": "HumanEval/151",
+    "entry_point": "double_the_difference",
+    "ambiguous_prompt": "def double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are key. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''",
+    "clear_prompt": "\ndef double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n",
+    "missing_detail": "\"key\": Could mean important, a dictionary key, or relating to cryptography. Ambiguous here, as it replaces the specific mathematical condition \"odd\" with a vague term, making it unclear which numbers should be squared and summed.",
+    "solution": "\ndef double_the_difference(lst):\n    '''\n    Given a list of numbers, return the sum of squares of the numbers\n    in the list that are odd. Ignore numbers that are negative or not integers.\n    \n    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10\n    double_the_difference([-1, -2, 0]) == 0\n    double_the_difference([9, -2]) == 81\n    double_the_difference([0]) == 0  \n   \n    If the input list is empty, return 0.\n    '''\n    return sum([i**2 for i in lst if i > 0 and i%2!=0 and \".\" not in str(i)])\n",
+    "test_case": [
+      {
+        "input": "[]",
+        "output": "0 ",
+        "relation": "=="
+      },
+      {
+        "input": "[5, 4]",
+        "output": "25 ",
+        "relation": "=="
+      },
+      {
+        "input": "[0.1, 0.2, 0.3]",
+        "output": "0 ",
+        "relation": "=="
+      },
+      {
+        "input": "[-10, -20, -30]",
+        "output": "0 ",
+        "relation": "=="
+      },
+      {
+        "input": "[-1, -2, 8]",
+        "output": "0",
+        "relation": "=="
+      },
+      {
+        "input": "[0.2, 3, 5]",
+        "output": "34",
+        "relation": "=="
+      },
+      {
+        "input": "[-99, -97, -95, -93, -91, -89, -87, -85, -83, -81, -79, -77, -75, -73, -71, -69, -67, -65, -63, -61, -59, -57, -55, -53, -51, -49, -47, -45, -43, -41, -39, -37, -35, -33, -31, -29, -27, -25, -23, -21, -19, -17, -15, -13, -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99]",
+        "output": "166650",
+        "relation": "=="
+      }
+    ]
+  },
+  "heval_163": {
+    "task_id": "HumanEval/163",
+    "entry_point": "generate_integers",
+    "ambiguous_prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even elements between a\n    and b, in ascending order.\n    \"\"\"",
+    "clear_prompt": "\ndef generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b, in ascending order.\n    \"\"\"\n",
+    "missing_detail": "\"elements\": Could mean the integers themselves within the specified range or the individual digits comprising those integers. Ambiguous here, as it obscures whether the function should operate on the integers as whole numbers (like 2, 4, 6, 8) or their constituent digits.",
+    "solution": "\ndef generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b, in ascending order.\n\n    For example:\n    generate_integers(2, 8) => [2, 4, 6, 8]\n    generate_integers(8, 2) => [2, 4, 6, 8]\n    generate_integers(10, 14) => []\n    \"\"\"\n    lower = max(2, min(a, b))\n    upper = min(8, max(a, b))\n\n    return [i for i in range(lower, upper+1) if i % 2 == 0]\n",
+    "test_case": [
+      {
+        "input": "2, 10",
+        "output": "[2, 4, 6, 8]",
+        "relation": "=="
+      },
+      {
+        "input": "10, 2",
+        "output": "[2, 4, 6, 8]",
+        "relation": "=="
+      },
+      {
+        "input": "132, 2",
+        "output": "[2, 4, 6, 8]",
+        "relation": "=="
+      },
+      {
+        "input": "17, 89",
+        "output": "[]",
+        "relation": "=="
+      }
+    ]
+  }
+}

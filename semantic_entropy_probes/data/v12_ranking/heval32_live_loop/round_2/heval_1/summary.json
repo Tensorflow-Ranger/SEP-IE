@@ -1,0 +1,99 @@
+{
+  "round": 2,
+  "prompt_before": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces in the input string.\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "If the input includes nested groups that are themselves balanced (e.g., \"(())()\"), should the outermost group be split into \"(())\" and \"()\", or should the inner pair be considered a separate group as well?",
+      "answer": "For nested groups like '(())()', the output should be ['(())' , '()'] because each group is complete when depth returns to zero, not considering inner nesting structure.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. For nested groups like '(())()', the output should be ['(())' , '()'] because each group is complete when depth returns to zero, not considering inner nesting structure. Ignore any spaces in the input string.\n    \"\"\"",
+      "score": 1.1600784063339233
+    },
+    {
+      "idx": 9,
+      "question": "In the case of overlapping groups caused by stray characters (e.g., \"(()())\"), is the entire string considered one group or should it be split into multiple groups based on depth returning to zero?",
+      "answer": "In '(()())', this is one single group because depth never returns to zero until the very end; it should be returned as ['(()())'].",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. In '(()())', this is one single group because depth never returns to zero until the very end; it should be returned as ['(()())']. Ignore any spaces in the input string.\n    \"\"\"",
+      "score": 1.127620816230774
+    },
+    {
+      "idx": 5,
+      "question": "Is the order of groups in the returned list required to match their left\u2011to\u2011right appearance in the original string, or can it be sorted or otherwise reordered?",
+      "answer": "The order of groups in the returned list must match their left-to-right appearance in the original string.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. The order of groups in the returned list must match their left-to-right appearance in the original string. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces in the input string.\n    \"\"\"",
+      "score": 0.26063108444213867
+    },
+    {
+      "idx": 0,
+      "question": "Should characters other than parentheses and spaces (e.g., letters, digits, punctuation) be ignored, cause an error, or be treated as part of a group?",
+      "answer": "Characters other than parentheses and spaces are not part of valid input; the function should ignore spaces and process only '(' and ')' characters.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces in the input string. Characters other than parentheses and spaces are not part of valid input; the function should ignore spaces and process only '(' and ')' characters.\n    \"\"\"",
+      "score": 0.03457963466644287
+    },
+    {
+      "idx": 3,
+      "question": "How should consecutive spaces between groups be handled\u2014are they simply ignored, or do they delimit separate groups?",
+      "answer": "Consecutive spaces are ignored; they do not delimit separate groups.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Consecutive spaces are ignored; they do not delimit separate groups. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces in the input string.\n    \"\"\"",
+      "score": -0.6436017751693726
+    },
+    {
+      "idx": 2,
+      "question": "Are empty groups represented by an empty string (\"\") in the output list, and if so, under what circumstances can they occur?",
+      "answer": "Empty groups are not possible in the output; a group only appears once the depth returns to zero, ensuring all groups are non-empty.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces in the input string. Empty groups are not possible in the output; a group only appears once the depth returns to zero, ensuring all groups are non-empty.\n    \"\"\"",
+      "score": -0.8251357078552246
+    },
+    {
+      "idx": 8,
+      "question": "Should the function treat tab characters, newline characters, or other whitespace the same as spaces (i.e., ignore them), or are they considered invalid input?",
+      "answer": "Tab and newline characters should be treated like spaces and ignored.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces, tab and newline characters in the input string.\n    \"\"\"",
+      "score": -1.168486475944519
+    },
+    {
+      "idx": 1,
+      "question": "If the input contains unmatched parentheses (e.g., an extra opening or closing brace), should the function raise an exception, discard the incomplete group, or attempt to balance them somehow?",
+      "answer": "The function should discard incomplete groups (unmatched parentheses) and not attempt to balance them.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces in the input string. The function should discard incomplete groups (unmatched parentheses) and not attempt to balance them.\n    \"\"\"",
+      "score": -1.2544233798980713
+    },
+    {
+      "idx": 6,
+      "question": "Must the returned list contain only strings consisting exclusively of '(' and ')' characters, or should it preserve any other characters that were present inside the balanced groups?",
+      "answer": "Each returned group should consist exclusively of '(' and ')' characters.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces in the input string. Each returned group should consist exclusively of '(' and ')' characters.\n    \"\"\"",
+      "score": -1.462104082107544
+    },
+    {
+      "idx": 11,
+      "question": "Should the function validate that each returned group is strictly balanced, and if an internal imbalance is detected, what is the expected response (error, omission, correction)?",
+      "answer": "The function should trust that all returned groups are strictly balanced by construction of the algorithm (depth returns to zero for each group).",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. The function should trust that all returned groups are strictly balanced by construction of the algorithm (depth returns to zero for each group). Ignore any spaces in the input string.\n    \"\"\"",
+      "score": -1.6871085166931152
+    },
+    {
+      "idx": 4,
+      "question": "When the input string is empty or contains only spaces, should the function return an empty list, a list containing an empty string, or raise an error?",
+      "answer": "An empty input or input containing only spaces should return an empty list.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces in the input string. An empty input or input containing only spaces should return an empty list.\n    \"\"\"",
+      "score": -1.7138080596923828
+    },
+    {
+      "idx": 10,
+      "question": "Are there any length or performance constraints (e.g., maximum input size) that would affect how the function should handle very large strings?",
+      "answer": "The function should handle very large strings efficiently; no explicit maximum size is imposed in the specification.",
+      "prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. Ignore any spaces in the input string. The function should handle very large strings efficiently; no explicit maximum size is imposed in the specification. \"\"\"",
+      "score": -2.693808078765869
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "If the input includes nested groups that are themselves balanced (e.g., \"(())()\"), should the outermost group be split into \"(())\" and \"()\", or should the inner pair be considered a separate group as well?",
+    "answer": "For nested groups like '(())()', the output should be ['(())' , '()'] because each group is complete when depth returns to zero, not considering inner nesting structure.",
+    "score": 1.1600784063339233
+  },
+  "next_prompt": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of parentheses. Your goal is to\n    separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Nested parentheses are part of the same group; a group is complete only when depth returns to zero, so '(())' is one group, not two. For nested groups like '(())()', the output should be ['(())' , '()'] because each group is complete when depth returns to zero, not considering inner nesting structure. Ignore any spaces in the input string.\n    \"\"\"",
+  "test_n_pass": 4,
+  "test_n_total": 4
+}

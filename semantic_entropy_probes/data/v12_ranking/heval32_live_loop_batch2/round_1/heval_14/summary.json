@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "If the input contains combining characters or grapheme clusters, should prefixes be cut at code\u2011point boundaries or at grapheme boundaries?",
+      "answer": "Prefixes should be cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. \"\"\"",
+      "score": -7.7693986892700195
+    },
+    {
+      "idx": 11,
+      "question": "Should the function treat leading or trailing whitespace as significant when generating prefixes, or trim them before processing?",
+      "answer": "Leading and trailing whitespace are treated as significant and included in prefixes; they are not trimmed.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, including leading and trailing whitespace which are treated as significant and included in prefixes; they are not trimmed. \"\"\"",
+      "score": -8.119851112365723
+    },
+    {
+      "idx": 4,
+      "question": "Is the order of prefixes strictly from shortest to longest, and does that include the full string as the final element?",
+      "answer": "Yes, the order is strictly from shortest to longest, and the full string is included as the final element.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, yes, the order is strictly from shortest to longest, and the full string is included as the final element\n    \"\"\"",
+      "score": -9.34506893157959
+    },
+    {
+      "idx": 3,
+      "question": "Should the function raise an exception, return an empty list, or handle non\u2011string inputs (e.g., None, bytes) in a specific way?",
+      "answer": "The function should raise a TypeError for non-string inputs (None, bytes, etc.).",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string. The function should raise a TypeError for non-string inputs (None, bytes, etc.). \"\"\"",
+      "score": -9.926137924194336
+    },
+    {
+      "idx": 9,
+      "question": "Does the function need to handle immutable vs. mutable sequence types differently, or is only the `str` type accepted?",
+      "answer": "Only the `str` type is accepted; other sequence types like bytes are rejected.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string. Only the `str` type is accepted; other sequence types like bytes are rejected. \"\"\"",
+      "score": -11.133122444152832
+    },
+    {
+      "idx": 8,
+      "question": "In the case of surrogate pairs in UTF\u201116 encoded strings, how should prefixes be formed to avoid splitting a surrogate pair?",
+      "answer": "In UTF-16 encoded strings, surrogate pairs should not be split; however, Python 3 handles this automatically.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with the understanding that in UTF-16 encoded strings, surrogate pairs should not be split; however, Python 3 handles this automatically. \"\"\"",
+      "score": -11.223058700561523
+    },
+    {
+      "idx": 0,
+      "question": "Should the returned list include the empty string as the shortest prefix?",
+      "answer": "No, the returned list should not include the empty string; prefixes start from length 1 (the first character).",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, excluding the empty string; prefixes start from length 1 (the first character)\n    \"\"\"",
+      "score": -12.155771255493164
+    },
+    {
+      "idx": 1,
+      "question": "Must the function preserve the original string's case and Unicode characters exactly in each prefix?",
+      "answer": "Yes, the function must preserve the original string's case and Unicode characters exactly in each prefix.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, preserving the original string's case and Unicode characters exactly in each prefix\n    \"\"\"",
+      "score": -12.30341911315918
+    },
+    {
+      "idx": 6,
+      "question": "If the input is a very large string, is there any limit on the number of prefixes returned or a requirement to use a generator instead of a list?",
+      "answer": "For very large strings, returning a full list is acceptable; generators are not required.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string. For very large strings, returning a full list is acceptable; generators are not required. \"\"\"",
+      "score": -12.675130844116211
+    },
+    {
+      "idx": 5,
+      "question": "For a string containing newline or other whitespace characters, are those characters considered part of the prefixes?",
+      "answer": "Newlines and other whitespace characters are considered part of the prefixes.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, where newlines and other whitespace characters are considered part of the prefixes\n    \"\"\"",
+      "score": -13.192218780517578
+    },
+    {
+      "idx": 7,
+      "question": "Should duplicate prefixes be removed when the input contains repeated characters (e.g., \"aaa\")?",
+      "answer": "Duplicate prefixes should not be removed; if the input is 'aaa', the output is ['a', 'aa', 'aaa'].",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, including all duplicates if they arise from repeated characters\n    \"\"\"",
+      "score": -13.914703369140625
+    },
+    {
+      "idx": 10,
+      "question": "Are there any performance or memory complexity guarantees expected for the implementation?",
+      "answer": "There are no specific performance or memory complexity guarantees beyond standard list generation.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string. There are no specific performance or memory complexity guarantees beyond standard list generation. \"\"\"",
+      "score": -15.205708503723145
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "If the input contains combining characters or grapheme clusters, should prefixes be cut at code\u2011point boundaries or at grapheme boundaries?",
+    "answer": "Prefixes should be cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing.",
+    "score": -7.7693986892700195
+  },
+  "next_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. \"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 3
+}

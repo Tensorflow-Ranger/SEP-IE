@@ -1,0 +1,17 @@
+def tri(n):
+    """Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in 
+    the last couple centuries. However, what people don't know is Tribonacci sequence.
+      You are given a non-negative integer number n, you have to a return a list of the 
+    first n + 1 numbers of the Tribonacci sequence. For odd n, use tri(n) = tri(n-1) + tri(n-2) + tri(n+1), where tri(n+1) refers to the value already computed in the forward-pass iteration (computed for the next even index); for even n, use tri(n) = 1 + n/2."""
+    if n < 0:
+        return []
+    result = [0] * (n + 1)
+    result[0] = 0
+    if n >= 1:
+        result[1] = 1
+    for i in range(2, n + 1):
+        if i % 2 == 0:
+            result[i] = 1 + i // 2
+        else:
+            result[i] = result[i-1] + result[i-2] + result[i+1]
+    return result

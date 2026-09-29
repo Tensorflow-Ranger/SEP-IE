@@ -1,0 +1,58 @@
+[
+  {
+    "task_id": "BigCodeBench/0",
+    "kind": "Lexical",
+    "ambiguous_prompt": "Calculates the average of the sums of absolute differences between each pair of consecutive numbers for all permutations of a given list. Each permutation is processed before calculating the differences. Args: - numbers (list): A list of numbers. Default is numbers from 1 to 10.\nThe function should output with:\n    float: The average of the sums of absolute differences for each processed permutation of the list.\nYou should write self-contained code starting with:\n```\nimport itertools\nfrom random import shuffle\ndef task_func(numbers=list(range(1, 3))):\n```",
+    "true_explanation": "\"processed\" is ambiguous - it could be interpreted as \"shuffled randomly\" (like the original) or as \"sorted in ascending/descending order\" or as \"filtered to remove certain elements\". This ambiguity leads to different implementations: Implementation A uses random.shuffle() for true randomization (like the original), while Implementation B sorts the permutation before calculating differences, leading to different results and statistical properties.",
+    "qwen_question": "What is the definition of \"processed\" in the context of permutations?"
+  },
+  {
+    "task_id": "BigCodeBench/0",
+    "kind": "Vagueness",
+    "ambiguous_prompt": "Calculates the average of the sums of absolute differences between each pair of consecutive numbers for all permutations of a given list. Each permutation is processed before calculating the differences. Args: - numbers (list): A list of numbers. Default is numbers from 1 to 10.\nThe function should output with:\n    float: The average of the sums of absolute differences for each shuffled permutation of the list.\nYou should write self-contained code starting with:\n```\nimport itertools\nfrom random import shuffle\ndef task_func(numbers=list(range(1, 3))):\n```",
+    "true_explanation": "The phrase \"Each permutation is processed before calculating the differences\" is ambiguous, leaving readers unclear about what specific processing (e.g., shuffling, sorting, filtering) should be applied to each permutation, thus creating vagueness ambiguity.",
+    "qwen_question": "What is the definition of \"shuffled permutation\" — does it mean generating all possible permutations and then shuffling each one, or does it mean generating all permutations and considering each as a shuffled version of the original list?"
+  },
+  {
+    "task_id": "BigCodeBench/1",
+    "kind": "Lexical",
+    "ambiguous_prompt": "Generate a random string of the specified length composed of uppercase and lowercase letters, and then count the occurrence of each token in this string.\nThe function should raise the exception for: ValueError if the length is a negative number\nThe function should output with:\n    dict: A dictionary where each key is a character from the generated string and the value\n    is the count of how many times that token appears in the string.\nYou should write self-contained code starting with:\n```\nimport collections\nimport random\nimport string\ndef task_func(length=100):\n```",
+    "true_explanation": "\"token\" is ambiguous - it could be interpreted as \"individual character\" (like the original) or as \"substring of characters\" (group of characters) or as \"delimiter-separated word\" (like in tokenization). This ambiguity leads to different implementations: Implementation A counts individual characters, while Implementation B groups characters into substrings or words, potentially leading to different counting results and data structures.",
+    "qwen_question": "What defines a \"token\" in this context—does it refer to individual characters, or are tokens defined as sequences of characters (e.g., words or substrings)?"
+  },
+  {
+    "task_id": "BigCodeBench/1",
+    "kind": "Vagueness",
+    "ambiguous_prompt": "Generate a random string composed of uppercase and lowercase letters of the specified length, and then count the occurrence of each character in this string.\nThe function should raise the exception for: ValueError if the length is a negative number\nThe function should output with:\n    dict: A dictionary where each key is a character from the generated string and the value\n    is the count of how many times that character appears in the string.\nYou should write self-contained code starting with:\n```\nimport collections\nimport random\nimport string\ndef task_func(length=100):\n```",
+    "true_explanation": "Moving the phrase \"specified length\" so it follows \"uppercase and lowercase letters\" makes the scope of the length requirement less clear: it can be read as constraining the generated string as a whole or the character sequence used before counting occurrences.",
+    "qwen_question": "What should happen if the length is zero?"
+  },
+  {
+    "task_id": "BigCodeBench/2",
+    "kind": "Lexical",
+    "ambiguous_prompt": "Create a dictionary in which keys are random letters and values are lists of random integers. The dictionary is then sorted by by the central tendency of the values in descending order, demonstrating the use of the statistics library.\nThe function should output with:\n    dict: The sorted dictionary with letters as keys and lists of integers as values, sorted by their average values.\nYou should write self-contained code starting with:\n```\nimport random\nimport statistics\ndef task_func(LETTERS):\n```",
+    "true_explanation": "\"central tendency\" is ambiguous - it could be interpreted as the \"mean\" (arithmetic average, like the original), \"median\" (middle value), or \"mode\" (most frequent value). This ambiguity leads to different implementations: Implementation A uses statistics.mean() to calculate the arithmetic mean, while Implementation B could use statistics.median() for the median value or statistics.mode() for the modal value, resulting in different sorting orders and final dictionary organizations. The choice of central tendency measure significantly affects how the dictionary is sorted, as each measure represents a different aspect of the data's distribution.",
+    "qwen_question": "How should the dictionary be sorted when there are multiple keys with the same average value?"
+  },
+  {
+    "task_id": "BigCodeBench/2",
+    "kind": "Vagueness",
+    "ambiguous_prompt": "Create a dictionary in which keys are random letters and values are lists of random integers. The dictionary is then sorted by statistics of the values in descending order, demonstrating the use of the statistics library.\nThe function should output with:\n    dict: The sorted dictionary with letters as keys and lists of integers as values, sorted by their mean values.\nYou should write self-contained code starting with:\n```\nimport random\nimport statistics\ndef task_func(LETTERS):\n```",
+    "true_explanation": "The phrase \"sorted by statistics of the values\" is ambiguous, leaving readers unclear about which specific statistical measure (e.g., mean, median, mode) to use for sorting, thus introducing vagueness ambiguity.",
+    "qwen_question": "How should the dictionary be sorted when multiple keys have the same mean value?"
+  },
+  {
+    "task_id": "BigCodeBench/3",
+    "kind": "Lexical",
+    "ambiguous_prompt": "Create a dictionary where keys are specified letters and values are lists of random records. Then calculate the mean of these records for each key and return a dictionary of these means.\nThe function should output with:\n    dict: A dictionary where each key is a letter from the input list and the value is the mean of\n    a randomly generated list of records (with each list having 1 to 10 integers ranging from 0 to 100).\nYou should write self-contained code starting with:\n```\nimport random\nimport numpy as np\ndef task_func(LETTERS):\n```",
+    "true_explanation": "\"records\" is ambiguous - it could be interpreted as \"integers\" (like the original) or as \"data entries\" (which could include non-integer values) or as \"rows in a database\" (structured data). This ambiguity leads to different implementations: Implementation A strictly uses random integers for the lists, while Implementation B might allow other data types or structures, potentially leading to different mean calculations and dictionary outputs.",
+    "qwen_question": "What is the exact definition of a \"record\" in this context?"
+  },
+  {
+    "task_id": "BigCodeBench/3",
+    "kind": "Vagueness",
+    "ambiguous_prompt": "Create a dictionary where keys are specified letters and values are lists of random integers. Then calculate the mean of these integers for each key and return a dictionary of these means.\nThe function should output with:\n    dict: A dictionary where each key is a letter from the input list and the value is the mean of\n    a randomly generated list of integers (with each list having numbers ranging from 0 to 100).\nYou should write self-contained code starting with:\n```\nimport random\nimport numpy as np\ndef task_func(LETTERS):\n```",
+    "true_explanation": "Removing \"with each list having 1 to 10 integers\" makes the size of the lists ambiguous, leaving readers unclear about how many integers should be generated for each key, thus introducing vagueness ambiguity.",
+    "qwen_question": "What is the desired length of the random integer lists for each key?"
+  }
+]

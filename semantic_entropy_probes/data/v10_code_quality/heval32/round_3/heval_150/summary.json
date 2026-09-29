@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.",
+  "baseline_mean_p": 0.3168270140886307,
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "How should the function handle non-integer inputs for n?",
+      "answer": "Not applicable -- the input is guaranteed to be an integer per its usage.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.\n\nClarification: Not applicable -- the input is guaranteed to be an integer per its usage.",
+      "p1": 0.2311372309923172,
+      "p2": 0.3447502851486206,
+      "mean_p": 0.2879437580704689,
+      "delta": -0.028883256018161774
+    },
+    {
+      "idx": 5,
+      "question": "Are there any constraints on the types of x and y?",
+      "answer": "None specified -- x and y are returned as-is whatever type they are; the function doesn't inspect or constrain them.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.\n\nClarification: None specified -- x and y are returned as-is whatever type they are; the function doesn't inspect or constrain them.",
+      "p1": 0.24805010855197906,
+      "p2": 0.33869805932044983,
+      "mean_p": 0.29337408393621445,
+      "delta": -0.02345293015241623
+    },
+    {
+      "idx": 0,
+      "question": "What defines a prime number in this context?",
+      "answer": "A number n for which no i in range(2, n) divides it evenly, with n==1 explicitly excluded and treated as not prime.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.\n\nClarification: A number n for which no i in range(2, n) divides it evenly, with n==1 explicitly excluded and treated as not prime.",
+      "p1": 0.23244927823543549,
+      "p2": 0.36199286580085754,
+      "mean_p": 0.2972210720181465,
+      "delta": -0.01960594207048416
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle cases where n is a large number?",
+      "answer": "Handled correctly but with O(n) trial division (no special optimization); the same primality logic applies regardless of size.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.\n\nClarification: Handled correctly but with O(n) trial division (no special optimization); the same primality logic applies regardless of size.",
+      "p1": 0.25787433981895447,
+      "p2": 0.3770820200443268,
+      "mean_p": 0.3174781799316406,
+      "delta": 0.0006511658430099487
+    },
+    {
+      "idx": 7,
+      "question": "What is the definition of \"certain conditions\" in the docstring?",
+      "answer": "'n is a prime number': return x when n is prime, y otherwise, per the clear specification.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.\n\nClarification: 'n is a prime number': return x when n is prime, y otherwise, per the clear specification.",
+      "p1": 0.3099362850189209,
+      "p2": 0.36330491304397583,
+      "mean_p": 0.33662059903144836,
+      "delta": 0.019793584942817688
+    },
+    {
+      "idx": 2,
+      "question": "What behavior is expected when n is less than 2?",
+      "answer": "For n==1, explicitly returns y; for n<=0, range(2, n) is empty, so the for-else triggers and returns x -- a quirk of the trial-division implementation for n<2 other than n==1.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.\n\nClarification: For n==1, explicitly returns y; for n<=0, range(2, n) is empty, so the for-else triggers and returns x -- a quirk of the trial-division implementation for n<2 other than n==1.",
+      "p1": 0.2854486405849457,
+      "p2": 0.44226086139678955,
+      "mean_p": 0.3638547509908676,
+      "delta": 0.04702773690223694
+    },
+    {
+      "idx": 4,
+      "question": "What is the expected behavior when n is 0 or 1?",
+      "answer": "n==1 explicitly returns y; n==0 returns x per the empty-range/for-else behavior described above.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.\n\nClarification: n==1 explicitly returns y; n==0 returns x per the empty-range/for-else behavior described above.",
+      "p1": 0.3262471854686737,
+      "p2": 0.43577638268470764,
+      "mean_p": 0.3810117840766907,
+      "delta": 0.06418476998806
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle negative values of n?",
+      "answer": "Per the same trial-division quirk, negative n causes range(2, n) to be empty, so the for-else triggers and it returns x, even though negative n isn't prime.",
+      "prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.\n\nClarification: Per the same trial-division quirk, negative n causes range(2, n) to be empty, so the for-else triggers and it returns x, even though negative n isn't prime.",
+      "p1": 0.36469244956970215,
+      "p2": 0.45679542422294617,
+      "mean_p": 0.41074393689632416,
+      "delta": 0.09391692280769348
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "How should the function handle non-integer inputs for n?",
+      "answer": "Not applicable -- the input is guaranteed to be an integer per its usage.",
+      "delta": -0.028883256018161774
+    },
+    {
+      "idx": 5,
+      "question": "Are there any constraints on the types of x and y?",
+      "answer": "None specified -- x and y are returned as-is whatever type they are; the function doesn't inspect or constrain them.",
+      "delta": -0.02345293015241623
+    },
+    {
+      "idx": 0,
+      "question": "What defines a prime number in this context?",
+      "answer": "A number n for which no i in range(2, n) divides it evenly, with n==1 explicitly excluded and treated as not prime.",
+      "delta": -0.01960594207048416
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "How should the function handle non-integer inputs for n?",
+    "answer": "Not applicable -- the input is guaranteed to be an integer per its usage.",
+    "delta": -0.028883256018161774
+  },
+  "next_prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n matches \n    certain conditions, and should return the value of y otherwise.\n    \"\"\"\n\nClarification: Not applicable -- \"is n prime\" is a single well-defined boolean condition with no overlapping/conflicting cases.\n\nClarification: n being a prime number, per the docstring: return x if n is prime, y otherwise.\n\nClarification: Not applicable -- the input is guaranteed to be an integer per its usage.",
+  "code_prompt": "def x_or_y(n, x, y):\n    \"\"\" A simple program which should return the value of x if n is prime, and should return the value of y otherwise. Note that n being a prime number, per the docstring: return x if n is prime, y otherwise. Not applicable -- the input is guaranteed to be an integer per its usage. \"\"\"",
+  "test_n_pass": 10,
+  "test_n_total": 10
+}

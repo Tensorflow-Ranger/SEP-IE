@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.",
+  "baseline_mean_p": 0.20015254616737366,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "Is there any requirement for the function to log, print, or otherwise report the operation performed, or must it remain completely silent?",
+      "answer": "Silent -- the function just returns the sum, with no printing, logging, or other reporting.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.\n\nClarification: Silent -- the function just returns the sum, with no printing, logging, or other reporting.",
+      "p1": 0.10644993931055069,
+      "p2": 0.17559684813022614,
+      "mean_p": 0.1410233937203884,
+      "delta": -0.059129152446985245
+    },
+    {
+      "idx": 5,
+      "question": "Will the function be used in contexts where type hints are enforced, and thus must it explicitly annotate a return type (`-> int`)?",
+      "answer": "Not required beyond the existing signature; no additional annotation is needed.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.\n\nClarification: Not required beyond the existing signature; no additional annotation is needed.",
+      "p1": 0.12990035116672516,
+      "p2": 0.2229544222354889,
+      "mean_p": 0.17642738670110703,
+      "delta": -0.023725159466266632
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return an `int` type, or is returning a `float` or other numeric type acceptable if the sum exceeds the range of `int`?",
+      "answer": "Python integers have arbitrary precision, so overflow isn't a concern -- the return value is simply the plain int result of x + y.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.\n\nClarification: Python integers have arbitrary precision, so overflow isn't a concern -- the return value is simply the plain int result of x + y.",
+      "p1": 0.1563059687614441,
+      "p2": 0.2030172348022461,
+      "mean_p": 0.1796616017818451,
+      "delta": -0.020490944385528564
+    },
+    {
+      "idx": 4,
+      "question": "Is the function required to be pure (no side effects) beyond returning the sum, such as not modifying mutable objects passed in via subclassing of `int`?",
+      "answer": "Yes, the function is pure with no side effects -- it simply returns x + y.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.\n\nClarification: Yes, the function is pure with no side effects -- it simply returns x + y.",
+      "p1": 0.16224296391010284,
+      "p2": 0.24356278777122498,
+      "mean_p": 0.2029028758406639,
+      "delta": 0.0027503296732902527
+    },
+    {
+      "idx": 1,
+      "question": "Must the function raise an exception if either `x` or `y` is not an `int` (e.g., a float, string, or `None`)?",
+      "answer": "Not specified/tested; not a case that occurs -- both x and y are guaranteed to be ints per the signature.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.\n\nClarification: Not specified/tested; not a case that occurs -- both x and y are guaranteed to be ints per the signature.",
+      "p1": 0.16461698710918427,
+      "p2": 0.28659552335739136,
+      "mean_p": 0.2256062552332878,
+      "delta": 0.025453709065914154
+    },
+    {
+      "idx": 6,
+      "question": "Should the function handle `NaN` or infinite values if `x` or `y` are instances of a subclass of `int` that can represent such concepts?",
+      "answer": "Not applicable; not a case that occurs -- x and y are plain ints, not subclasses representing NaN/infinity.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.\n\nClarification: Not applicable; not a case that occurs -- x and y are plain ints, not subclasses representing NaN/infinity.",
+      "p1": 0.207520991563797,
+      "p2": 0.2896353006362915,
+      "mean_p": 0.24857814610004425,
+      "delta": 0.04842559993267059
+    },
+    {
+      "idx": 2,
+      "question": "Is overflow handling required for very large integers, and if so, what behavior is expected (e.g., raise an error, wrap around, or promote to arbitrary-precision)?",
+      "answer": "Not applicable; Python ints don't overflow, arbitrary precision is inherent to the type.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.\n\nClarification: Not applicable; Python ints don't overflow, arbitrary precision is inherent to the type.",
+      "p1": 0.20491649210453033,
+      "p2": 0.3066987693309784,
+      "mean_p": 0.25580763071775436,
+      "delta": 0.05565508455038071
+    },
+    {
+      "idx": 3,
+      "question": "Should the function accept boolean values (`True`/`False`) as arguments, treating them as `1`/`0`, or reject them as non\u2011integer types?",
+      "answer": "Not specified/tested; not a case that occurs.",
+      "prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.\n\nClarification: Not specified/tested; not a case that occurs.",
+      "p1": 0.24223019182682037,
+      "p2": 0.3954043686389923,
+      "mean_p": 0.31881728023290634,
+      "delta": 0.11866473406553268
+    }
+  ],
+  "top3": [
+    {
+      "idx": 7,
+      "question": "Is there any requirement for the function to log, print, or otherwise report the operation performed, or must it remain completely silent?",
+      "answer": "Silent -- the function just returns the sum, with no printing, logging, or other reporting.",
+      "delta": -0.059129152446985245
+    },
+    {
+      "idx": 5,
+      "question": "Will the function be used in contexts where type hints are enforced, and thus must it explicitly annotate a return type (`-> int`)?",
+      "answer": "Not required beyond the existing signature; no additional annotation is needed.",
+      "delta": -0.023725159466266632
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return an `int` type, or is returning a `float` or other numeric type acceptable if the sum exceeds the range of `int`?",
+      "answer": "Python integers have arbitrary precision, so overflow isn't a concern -- the return value is simply the plain int result of x + y.",
+      "delta": -0.020490944385528564
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "Is there any requirement for the function to log, print, or otherwise report the operation performed, or must it remain completely silent?",
+    "answer": "Silent -- the function just returns the sum, with no printing, logging, or other reporting.",
+    "delta": -0.059129152446985245
+  },
+  "next_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"\n\nClarification: Returns the sum x + y; it does not modify either argument.\n\nClarification: Silent -- the function just returns the sum, with no printing, logging, or other reporting.",
+  "code_prompt": "def add(x: int, y: int):\n    \"\"\"Combine two numbers x and y. Returns the sum x + y; it does not modify either argument, and is silent -- the function just returns the sum, with no printing, logging, or other reporting.\"\"\"",
+  "test_n_pass": 105,
+  "test_n_total": 105
+}

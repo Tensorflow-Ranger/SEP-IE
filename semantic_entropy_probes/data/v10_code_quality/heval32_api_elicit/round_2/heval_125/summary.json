@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.",
+  "baseline_mean_p": 0.34572775661945343,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "In the case where the count of odd\u2011order lowercase letters is returned, should the result be an integer type (e.g., `int`) rather than a list containing that integer?",
+      "answer": "Yes, in that branch the function returns a bare integer, not a list containing the integer (confirmed by test case: 'abcdef' -> 3, not [3]).",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.\n\nClarification: Yes, in that branch the function returns a bare integer, not a list containing the integer (confirmed by test case: 'abcdef' -> 3, not [3]).",
+      "p1": 0.239128977060318,
+      "p2": 0.3150593340396881,
+      "mean_p": 0.27709415555000305,
+      "delta": -0.06863360106945038
+    },
+    {
+      "idx": 3,
+      "question": "When splitting on the \u201ccertain characters,\u201d should consecutive delimiter characters produce empty strings in the result, or should they be omitted?",
+      "answer": "Using `.replace(',', ' ').split()`, Python's parameterless `.split()` collapses consecutive whitespace automatically, so consecutive commas do not produce empty strings in the result -- they're effectively omitted.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.\n\nClarification: Using `.replace(',', ' ').split()`, Python's parameterless `.split()` collapses consecutive whitespace automatically, so consecutive commas do not produce empty strings in the result -- they're effectively omitted.",
+      "p1": 0.2721336781978607,
+      "p2": 0.3658085763454437,
+      "mean_p": 0.3189711272716522,
+      "delta": -0.02675662934780121
+    },
+    {
+      "idx": 2,
+      "question": "If the input string contains both whitespace and the \u201ccertain characters,\u201d should the function split on whitespace only, ignoring the other characters?",
+      "answer": "Yes -- per the if/elif structure in the reference implementation, if a space is present in the text, splitting happens on space only, and any commas in the string are not treated as delimiters in that case (e.g. 'Hello,Hello,world !' -> ['Hello,Hello,world', '!']).",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.\n\nClarification: Yes -- per the if/elif structure in the reference implementation, if a space is present in the text, splitting happens on space only, and any commas in the string are not treated as delimiters in that case (e.g. 'Hello,Hello,world !' -> ['Hello,Hello,world', '!']).",
+      "p1": 0.28483182191848755,
+      "p2": 0.35390716791152954,
+      "mean_p": 0.31936949491500854,
+      "delta": -0.026358261704444885
+    },
+    {
+      "idx": 0,
+      "question": "Should the function treat any whitespace characters (spaces, tabs, newlines, etc.) as delimiters, or only the space character?",
+      "answer": "Only the literal ASCII space character ' ' (the reference implementation specifically checks `\" \" in txt`, not tabs or newlines).",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.\n\nClarification: Only the literal ASCII space character ' ' (the reference implementation specifically checks `\" \" in txt`, not tabs or newlines).",
+      "p1": 0.297317773103714,
+      "p2": 0.3553282916545868,
+      "mean_p": 0.3263230323791504,
+      "delta": -0.01940472424030304
+    },
+    {
+      "idx": 5,
+      "question": "Should the function consider only lowercase letters a\u2011z when counting \u201clower\u2011case letters with odd order,\u201d ignoring any other characters such as uppercase letters, digits, or punctuation?",
+      "answer": "Yes, only lowercase letters a-z are counted (via `i.islower()`), ignoring uppercase, digits, and punctuation.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.\n\nClarification: Yes, only lowercase letters a-z are counted (via `i.islower()`), ignoring uppercase, digits, and punctuation.",
+      "p1": 0.31665119528770447,
+      "p2": 0.3502724766731262,
+      "mean_p": 0.33346183598041534,
+      "delta": -0.012265920639038086
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle non\u2011ASCII characters or letters with diacritics\u2014are they treated as lowercase letters, ignored, or cause an error?",
+      "answer": "Not specified/tested; not a case that occurs -- standard Python `islower()`/`ord()` semantics are used with no special accented-character handling.",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.\n\nClarification: Not specified/tested; not a case that occurs -- standard Python `islower()`/`ord()` semantics are used with no special accented-character handling.",
+      "p1": 0.31903940439224243,
+      "p2": 0.3649558126926422,
+      "mean_p": 0.3419976085424423,
+      "delta": -0.0037301480770111084
+    },
+    {
+      "idx": 1,
+      "question": "Which specific characters are considered \u201ccertain characters\u201d to split on when no whitespace is present, and is the split performed on each occurrence of any of those characters?",
+      "answer": "Comma ',' is the specific character to split on when no whitespace is present (per the clear specification).",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.\n\nClarification: Comma ',' is the specific character to split on when no whitespace is present (per the clear specification).",
+      "p1": 0.3240818679332733,
+      "p2": 0.36474931240081787,
+      "mean_p": 0.3444155901670456,
+      "delta": -0.001312166452407837
+    },
+    {
+      "idx": 4,
+      "question": "If the input string is empty, what should the function return\u2014an empty list, zero, or something else?",
+      "answer": "Returns 0 for an empty input string (confirmed by test case: '' -> 0; falls through to the else branch, which computes an integer count over an empty string).",
+      "prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.\n\nClarification: Returns 0 for an empty input string (confirmed by test case: '' -> 0; falls through to the else branch, which computes an integer count over an empty string).",
+      "p1": 0.334027498960495,
+      "p2": 0.3563632369041443,
+      "mean_p": 0.34519536793231964,
+      "delta": -0.0005323886871337891
+    }
+  ],
+  "top3": [
+    {
+      "idx": 7,
+      "question": "In the case where the count of odd\u2011order lowercase letters is returned, should the result be an integer type (e.g., `int`) rather than a list containing that integer?",
+      "answer": "Yes, in that branch the function returns a bare integer, not a list containing the integer (confirmed by test case: 'abcdef' -> 3, not [3]).",
+      "delta": -0.06863360106945038
+    },
+    {
+      "idx": 3,
+      "question": "When splitting on the \u201ccertain characters,\u201d should consecutive delimiter characters produce empty strings in the result, or should they be omitted?",
+      "answer": "Using `.replace(',', ' ').split()`, Python's parameterless `.split()` collapses consecutive whitespace automatically, so consecutive commas do not produce empty strings in the result -- they're effectively omitted.",
+      "delta": -0.02675662934780121
+    },
+    {
+      "idx": 2,
+      "question": "If the input string contains both whitespace and the \u201ccertain characters,\u201d should the function split on whitespace only, ignoring the other characters?",
+      "answer": "Yes -- per the if/elif structure in the reference implementation, if a space is present in the text, splitting happens on space only, and any commas in the string are not treated as delimiters in that case (e.g. 'Hello,Hello,world !' -> ['Hello,Hello,world', '!']).",
+      "delta": -0.026358261704444885
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "In the case where the count of odd\u2011order lowercase letters is returned, should the result be an integer type (e.g., `int`) rather than a list containing that integer?",
+    "answer": "Yes, in that branch the function returns a bare integer, not a list containing the integer (confirmed by test case: 'abcdef' -> 3, not [3]).",
+    "delta": -0.06863360106945038
+  },
+  "next_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    '''\n\nClarification: Returned directly as a bare integer, not wrapped in a list.\n\nClarification: Yes, in that branch the function returns a bare integer, not a list containing the integer (confirmed by test case: 'abcdef' -> 3, not [3]).",
+  "code_prompt": "def split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on certain characters, if no such characters exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25, returned directly as a bare integer, not wrapped in a list.\n    '''",
+  "test_n_pass": 7,
+  "test_n_total": 8
+}

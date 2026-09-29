@@ -1,0 +1,162 @@
+{
+  "heval_1": {
+    "answers": [
+      "It's the span from where the running depth first goes from 0 to 1 until it returns to 0; all parentheses nested inside that span, however many levels deep, belong to that same single group, not separate ones."
+    ]
+  },
+  "heval_14": {
+    "answers": [
+      "No -- per the reference (range(len(string)), appending string[:i+1]), prefixes start at length 1; the empty string is never included, only prefixes from length 1 up to the full string length."
+    ]
+  },
+  "heval_16": {
+    "answers": [
+      "Non-alphabetic characters are treated as ordinary distinct characters like any other (counted via set(string.lower())); case-insensitivity (.lower()) only affects letters, since digits/symbols have no case to normalize."
+    ]
+  },
+  "heval_19": {
+    "answers": [
+      "Not applicable in a special sense -- inputs are number-words ('zero' through 'nine'); ties (equal values) simply keep their original relative order under a standard stable sort, with no additional tie-breaking rule needed."
+    ]
+  },
+  "heval_29": {
+    "answers": [
+      "Yes -- str.startswith('') is always True for any string, so an empty prefix matches every string in the input list; nothing in the reference restricts the prefix from being empty."
+    ]
+  },
+  "heval_31": {
+    "answers": [
+      "Per the docstring, n is a 'given number' and the reference implementation assumes an integer (it does modulo arithmetic and range comparisons); non-integer inputs are not a case the function needs to handle."
+    ]
+  },
+  "heval_40": {
+    "answers": [
+      "They must be three distinct elements of the list -- the reference iterates with strictly increasing indices i<j<k, so it never reuses the same list position twice, even if the same value appears at multiple positions."
+    ]
+  },
+  "heval_52": {
+    "answers": [
+      "The true (unmodified) docstring says all numbers in the list must be below threshold t -- the function returns True only if every element is below t, and False as soon as any single element is >= t."
+    ]
+  },
+  "heval_53": {
+    "answers": [
+      "Not applicable -- per the true spec ('Add two numbers x and y'), inputs are numeric; the reference just does x + y, which is the specified operation (addition), not some other combination like multiplication or concatenation."
+    ]
+  },
+  "heval_56": {
+    "answers": [
+      "A running depth counter: each '<' increments depth, each '>' decrements it. A 'matching closing bracket' is one that occurs while depth is still positive -- order matters, since a '>' before any unmatched '<' drives depth negative. The string is correctly bracketed only if depth never goes negative and returns to exactly 0 at the end."
+    ]
+  },
+  "heval_59": {
+    "answers": [
+      "Not applicable -- per the true spec, n is assumed to satisfy n > 1 and not be prime; negative n is outside the guaranteed input domain."
+    ]
+  },
+  "heval_64": {
+    "answers": [
+      "Yes -- per the reference (if s[-1] == 'y' or s[-1] == 'Y'), only the very last character of the input string is checked; 'y' appearing elsewhere in the string is never counted as a vowel."
+    ]
+  },
+  "heval_80": {
+    "answers": [
+      "Same rule as for longer strings: the reference checks each consecutive window of 3 characters and requires all three to be pairwise different. For a 3-character string there's exactly one such window (the whole string), which must have 3 distinct characters."
+    ]
+  },
+  "heval_91": {
+    "answers": [
+      "Per the true spec, sentences are delimited by '.', '?', or '!' (re.split(r'[.?!]\\s*', S)); a 'boredom' is specifically a sentence, after that split, whose first two characters are 'I ' (capital I followed by a space) -- not any vaguer notion of monotony or repetition."
+    ]
+  },
+  "heval_104": {
+    "answers": [
+      "Not applicable -- per the true spec, input is a list of positive integers; the reference does str(i) and checks each character is an odd digit, which assumes i is already an int, so floats or strings are not a case the function needs to handle."
+    ]
+  },
+  "heval_109": {
+    "answers": [
+      "Same definition as for any size: shifting all elements one position right, moving the last element to index 0. For a single-element array this is a no-op (the one element stays in place), and since the array is already trivially sorted, the function returns True."
+    ]
+  },
+  "heval_110": {
+    "answers": [
+      "Only exchanged -- the reference never adds or removes elements from either list; it counts odd elements in lst1 and even elements in lst2, and checks whether there are enough even elements in lst2 to swap in for every odd element in lst1 (even >= odd), preserving both lists' sizes."
+    ]
+  },
+  "heval_113": {
+    "answers": [
+      "An empty list []. The reference loops over lst and appends one result string per input string, so zero input strings yields zero output strings."
+    ]
+  },
+  "heval_125": {
+    "answers": [
+      "Per the true spec, if there's no whitespace, split on commas (','); if there's also no comma, don't split into words at all -- instead return the count of lowercase letters at even positions in the alphabet (ord('a')=0, ord('c')=2, etc., i.e. ord(i)%2==0)."
+    ]
+  },
+  "heval_126": {
+    "answers": [
+      "Per the reference, it counts how many times each distinct value appears in the list; if any value appears more than twice (count > 2), the function returns False regardless of order. Exactly two occurrences of a value is allowed; three or more is not."
+    ]
+  },
+  "heval_129": {
+    "answers": [
+      "Per the true spec, path A is 'less than' path B if, comparing their ordered lists of cell values position by position, A is lexicographically smaller than B. The problem guarantees the minimum path (by this lexicographic ordering) is unique, so ties by this specific ordering don't occur."
+    ]
+  },
+  "heval_130": {
+    "answers": [
+      "The docstring only explicitly defines tri(1)=3 as a base case; the reference handles n=0 as a separate special case, returning [1] (a list containing just the value 1) rather than computing tri(0) via the recurrence."
+    ]
+  },
+  "heval_134": {
+    "answers": [
+      "Per the reference, 'word' means a maximal run of characters separated by a literal space character (' '). The function checks whether the last word (after splitting on spaces) is exactly one character long and that character is an ASCII letter -- so a 'non-letter' boundary here specifically means a space character or the start/end of the string."
+    ]
+  },
+  "heval_138": {
+    "answers": [
+      "The reference's actual condition is n % 2 == 0 and n >= 8 -- this correctly handles negative, zero, or small positive n by simply returning False (since the smallest sum of four positive even numbers is 2+2+2+2=8), no special-casing needed."
+    ]
+  },
+  "heval_140": {
+    "answers": [
+      "A run of exactly 2 consecutive spaces is replaced with two underscores (one underscore per space, via the 'end - start > 0' branch); only runs of MORE than 2 consecutive spaces get collapsed to a single '-'."
+    ]
+  },
+  "heval_142": {
+    "answers": [
+      "Per the reference, the check for 'index is a multiple of 3' comes first and takes priority; the cube branch explicitly excludes multiples of 3 (elif i % 4 == 0 and i % 3 != 0). So an index that's a multiple of 12 (multiple of both 3 and 4) is squared, not cubed."
+    ]
+  },
+  "heval_145": {
+    "answers": [
+      "Per the reference's digits_sum helper, for a negative number the sign is tracked separately and applied to only the FIRST digit of the number's absolute value -- e.g. -11 has digit sum -1+1=0, not -(1+1)=-2."
+    ]
+  },
+  "heval_147": {
+    "answers": [
+      "A triple is any three elements a[i], a[j], a[k] of the array where the indices satisfy i < j < k (strictly increasing, three distinct positions in order); the function counts how many such index-triples have a[i]+a[j]+a[k] divisible by 3."
+    ]
+  },
+  "heval_148": {
+    "answers": [
+      "Per the reference, if planet1 == planet2 the function returns an empty tuple () -- the same as the case of an invalid planet name."
+    ]
+  },
+  "heval_150": {
+    "answers": [
+      "Per the reference, n is treated as prime if none of the integers from 2 up to n-1 evenly divide it (trial division), and n=1 is explicitly excluded via a special case (if n == 1: return y) before the loop, so 1 is never treated as prime."
+    ]
+  },
+  "heval_151": {
+    "answers": [
+      "Floats are excluded entirely, even whole-number floats like 3.0 -- the reference's check '.' not in str(i) filters out anything whose string representation contains a decimal point, so 3.0 (which stringifies to \"3.0\") is skipped regardless of its numeric value."
+    ]
+  },
+  "heval_163": {
+    "answers": [
+      "It refers to whole numbers that are themselves single digits (0-9) and fall within the range -- per the reference, it clamps the range to [max(2, min(a,b)), min(8, max(a,b))] and returns every even integer in that clamped range, not the individual digit characters of larger numbers."
+    ]
+  }
+}

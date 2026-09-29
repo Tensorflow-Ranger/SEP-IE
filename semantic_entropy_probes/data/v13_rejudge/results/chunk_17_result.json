@@ -1,0 +1,3026 @@
+[
+ {
+  "id": "ccb_amb_task_21",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "If the bottom row becomes completely filled after some blocks have moved during a time step, does the removal of that row happen immediately before processing the remaining blocks in the same step or only at the start of the next time step?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "When multiple blocks are in the same column and one block moves down, can it occupy a cell that was just vacated by another block moving down earlier in the same \u201cbottom\u2011to\u2011top\u201d processing order?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "If a block is removed because its row was cleared, does it cease to exist for all subsequent queries regardless of its original index, or could it be re\u2011added later?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Are the coordinates (x, y) defined with y=1 being the bottommost row, and does the grid extend infinitely upward (i.e., there is no upper bound on y beyond the given initial positions)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "In the query \u201cdoes block A_j exist at time T_j+0.5\u201d, does \u201cexist\u201d mean the block has not been removed by a row\u2011clear operation, regardless of its current position, or does it also require the block to be present in the grid at that exact half\u2011integer time instant?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is the order \u201cfrom bottom to top\u201d defined by increasing y\u2011coordinate, and if several blocks share the same y\u2011coordinate, is their relative order arbitrary or based on their x\u2011coordinate or original index?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "When the bottom row is cleared, are all blocks in that row removed simultaneously, and does this removal affect the \u201cbottom\u2011to\u2011top\u201d processing of the remaining blocks in the same time step?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Are the values of T_j guaranteed to be within the simulation horizon (i.e., \u2264\u202f10^100), and if a query asks for a time beyond the simulated steps, should we assume the process continues indefinitely according to the same rules?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_45",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "What exactly should be printed for a and b: are they 1\u2011based indices, 0\u2011based indices, or something else?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Should a correspond to the row index and b to the column index of the top\u2011left corner of T within S, or vice versa?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "In which order should a and b be output: row first then column, or column first then row?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "They should be printed on one line, separated by a single space."
+   },
+   {
+    "question": "If multiple positions of T match S (contradicting the \u201cexactly one pair\u201d guarantee), how should ties be resolved?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are there any whitespace or newline requirements after printing a and b (e.g., space-separated on one line, each on its own line, trailing newline)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Must the program handle cases where M = N, i.e., T is the same size as S, and if so, is the answer always (1,1)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are the characters '.' and '#' the only possible symbols, or could other whitespace appear in the input lines (e.g., spaces between characters)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is the input guaranteed to have no extra blank lines or leading/trailing spaces, and how should such cases be treated if they occur?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_68",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "Should the output integers be printed on a single line separated by spaces, or each on its own line?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The missing integers should be listed in ascending order."
+   },
+   {
+    "question": "In what order should the missing integers be listed: ascending, descending, or the order they appear in the range 1..N?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The missing integers should be listed in ascending order."
+   },
+   {
+    "question": "If there are no missing integers (i.e., M = N), should we output nothing, a blank line, or a specific placeholder such as \u201c0\u201d?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The missing integers should be listed in ascending order."
+   },
+   {
+    "question": "Is there a required trailing newline after the output, and does an extra newline cause a wrong answer?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are the input numbers guaranteed to be provided on a single line after N M, or can they be split across multiple lines?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Must the program handle extra whitespace (e.g., leading/trailing spaces or multiple spaces) in the input gracefully?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Should the program validate that the given A_i values are distinct and within [1, N], or can we assume the input always satisfies the constraints?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The program should first output the number of missing integers C, followed by the missing integers X_1 X_2 \u2026 X_C in the second line."
+   },
+   {
+    "question": "Are there any limits on the size of N and M beyond the stated 1\u202f\u2264\u202fM\u202f\u2264\u202fN\u202f\u2264\u202f1000 that could affect memory or time complexity considerations?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_91",
+  "label_test_relevant": null,
+  "label_leaked": true,
+  "label_verdict_note": "The key decision is substantially hinted in the problem text.",
+  "candidates": [
+   {
+    "question": "What should be printed if multiple oyster types could possibly cause stomach trouble based on the given information?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Yes. \u201cthe oyster\u201d refers to the oyster type that causes stomach trouble if eaten. Print only its numeric label (1\u20134)."
+   },
+   {
+    "question": "What should be printed if no oyster type can be uniquely identified as causing stomach trouble (i.e., the information is contradictory or insufficient)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are the strings S_1 and S_2 provided on the same line separated by a space, or can they be on separate lines or separated by other whitespace?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Is the output required to be a single integer label (1\u20114) without any additional text or newline characters?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Should the program consider the case where both Takahashi and Aoki got sick (or both fine) and how does that affect the determination of the culprit oyster?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are the input strings guaranteed to be exactly \"sick\" or \"fine\" in lowercase, or could they appear in different capitalizations or with surrounding whitespace?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "If both Takahashi and Aoki ate oyster type 1 and both got sick, does that imply oyster 1 is definitely the cause, or could there be multiple causing types?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Are there any constraints on the number of oyster types that can cause stomach trouble (e.g., exactly one, at most one, or possibly multiple)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_111",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "What should be printed if the string already has all 1s contiguous (i.e., is already in the desired form)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is swapping allowed only between adjacent positions i and i+1 where 1\u202f\u2264\u202fi\u202f<\u202fN, or can i be equal to N (wrapping around) as well?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Must the answer be printed as an integer on a single line, or are there any specific formatting requirements (e.g., trailing spaces, newline)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are there any limits on the number of operations that can be performed, or is the answer guaranteed to fit within a 64\u2011bit signed integer?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "If the string contains no '1's or only one '1', what is the expected output (0 or something else)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "It is guaranteed that S contains at least one 1."
+   },
+   {
+    "question": "Should the algorithm consider the possibility of multiple optimal final intervals [l, r] and, if so, does any tie\u2011breaking rule affect the answer?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Are there any constraints on the input format regarding leading/trailing whitespace or extra lines after S?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is the input guaranteed to contain exactly N characters in S, or should the solution handle cases where S\u2019s length differs from N?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_137",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "Must the subgraph be an induced subgraph (containing all edges of T between chosen vertices) or can we select any subset of edges among the chosen vertices?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "When selecting a subgraph, are we allowed to delete vertices without also deleting incident edges, i.e., can isolated vertices appear in the subgraph?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "If multiple subgraphs satisfy the conditions, should we output the size of the largest one, and if there are several with the same maximum size, does the answer need to be unique or any such size is acceptable?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are vertices of degree 1 in the subgraph required to be leaves in the original tree T, or can they become degree\u20111 after removing some incident edges?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is it permissible for the subgraph to be disconnected, or must it remain a single connected tree?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Should the output be the number of vertices in the subgraph, the number of edges, or something else?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Only the number of vertices in the largest alkane subgraph should be printed."
+   },
+   {
+    "question": "Are there any constraints on the minimum number of degree\u20114 vertices (e.g., at least one, exactly one, or can there be many) beyond \u201cat least one\u201d?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "If no alkane subgraph exists, should we output \u201c-1\u201d exactly, or is any negative number or specific string acceptable?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_160",
+  "label_test_relevant": null,
+  "label_leaked": true,
+  "label_verdict_note": "The key decision is substantially hinted in the problem text.",
+  "candidates": [
+   {
+    "question": "If there is no path whose label concatenation is a palindrome, should the answer be -1, 0, or some other sentinel value?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Are paths of length 0 (i.e., staying at the same vertex without traversing any edge) considered valid, and if so, does the empty string count as a palindrome?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Can the same edge be used multiple times in a single path, and are there any restrictions on revisiting vertices?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "When multiple shortest palindrome paths exist with the same length, does the output need to reflect any tie\u2011breaking rule or is the length alone sufficient?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are self\u2011loops (edges from a vertex to itself) allowed, and if present, do they count as a single\u2011character palindrome of length 1?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is the length of a path defined as the number of edges traversed, the number of characters in the concatenated label string, or something else?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Must the palindrome condition be satisfied by the entire concatenated string, or is it sufficient for some prefix or suffix to be a palindrome?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Are the characters '-' guaranteed to appear only where no edge exists, and can they ever be considered as a valid label character?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_180",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "Should the input allow N=1, and if so, is a single-element sequence considered strictly increasing?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are the integers A_i guaranteed to be separated by spaces only, or can they be separated by newlines or other whitespace?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Must the output be exactly \"Yes\" or \"No\", or are other affirmative/negative strings (e.g., \"YES\", \"No\") also acceptable besides case-insensitivity?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "If the sequence is not strictly increasing, should we output \"No\" (or its case\u2011insensitive variants), or is any other response allowed?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are there any limits on the total size of the input file (e.g., maximum line length) that could affect reading the sequence?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Should trailing whitespace or extra newline characters after the last output be ignored by the judge?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is it permissible for the input to contain leading or trailing spaces on each line, and should the program handle them?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "In the case of duplicate values (A_i = A_{i+1}), is the correct answer always \"No\", or is there any special handling?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_203",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "Must we choose at least one ball, or is the empty selection (choosing no balls) allowed as a valid choice?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "If multiple selections achieve the same maximum sum, does the problem require any specific tie\u2011breaking rule (e.g., minimizing total number of balls, preferring more black balls, etc.)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are we allowed to choose all balls of one colour and none of the other, provided the black\u2011to\u2011white count condition is satisfied?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Should the output be the maximum possible sum, or the sum of values of a particular optimal selection (e.g., the lexicographically smallest selection) when multiple optimal sums exist?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are the ball values guaranteed to fit in 64\u2011bit signed integers when summed, or should we use arbitrary\u2011precision arithmetic?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is the input guaranteed to contain exactly N black values and M white values on separate lines, or could they be split across multiple lines or contain extra whitespace?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Must the program handle the case where all possible selections have a negative total sum, and if so, should it output the least negative sum or zero (i.e., allow selecting no balls)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are there any time or memory limits that restrict the algorithmic approach beyond the given constraints (e.g., must run in O(N log N + M log M) time)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_226",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "Does \u201ca place in A where the same element appears three or more times\u201d refer specifically to three or more consecutive occurrences of the same value?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "It means the same element must appear three or more times consecutively (e.g., 5 5 5), and you should only check consecutive triples where 1 \\le i \\le N-2."
+   },
+   {
+    "question": "Should the output be case\u2011sensitive exactly as \u201cYes\u201d and \u201cNo\u201d, or are other capitalizations (e.g., \u201cYES\u201d, \u201cno\u201d) accepted?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is there any whitespace requirement for the output line (e.g., trailing newline, no extra spaces)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Must the program handle input where N is less than 3, or can we assume N \u2265 3 as given in the constraints?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are the integers A_i guaranteed to be within the range 1 to 100, or should out\u2011of\u2011range values be considered invalid input?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "If the input contains extra whitespace or line breaks (e.g., multiple lines for the sequence), should the program still parse it correctly?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "In the case where multiple triples exist, does the program need to report the first occurrence, or is a simple Yes/No sufficient?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Should the program terminate immediately after printing the answer, or is any additional output (debug information, extra lines) prohibited?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_246",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "What is the exact definition of \"splitting A at two positions into three non-empty subarrays\" - does this mean we choose indices i and j where 1 \u2264 i < j \u2264 N-1 and create subarrays A[1..i], A[i+1..j], A[j+1..N]?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Can the same integer appear in multiple subarrays, and does this affect the distinct count calculation for each subarray?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Are the indices i and j inclusive or exclusive in defining the boundaries of the three subarrays?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "What happens if N < 3 - is this case excluded by the constraint 3 \u2264 N \u2264 3\u00d710^5?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is the input guaranteed to have exactly N integers on the second line, or could there be missing or extra values?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Can the array elements A_i be equal to each other, and how does this affect the distinct counting within each subarray?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "What is the expected behavior when multiple pairs (i,j) yield the same maximum sum - should we return any valid answer or follow a specific tie-breaking rule?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Are the subarrays required to be contiguous segments of the original array, or can they be formed by selecting arbitrary elements?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Each subarray must be contiguous, meaning they consist of consecutive elements from A without gaps."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_266",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "What is the definition of \"length K\" for a path - does it mean exactly K edges or exactly K vertices?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Can paths share vertices or edges, or must they be completely disjoint?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is the matrix P required to use every vertex in the tree exactly once?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "What should be the output format if N=0 or K=0 according to the constraints?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are self-loops or multiple edges allowed in the input tree representation?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Does the order of vertices in each path matter, or can paths be traversed in either direction?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "What happens if NK > 2\u00d710^5 - is this explicitly disallowed or should it be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Can a path consist of a single vertex when K=1, and how should this be represented in the matrix?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_289",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "What is the exact definition of \"odd cycle\" - does it refer to a cycle with an odd number of edges or an odd number of vertices?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Does the game end immediately when a player cannot make a move, or do they continue playing until all possible edges are added?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are self-loops (edges connecting a vertex to itself) allowed to be added during the game, or are they implicitly forbidden?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "When checking if adding an edge creates an odd cycle, are we only considering simple cycles or all cycles including those that repeat vertices?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "If the initial graph already contains all possible edges (complete graph), does the first player immediately lose or is there some other outcome?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Does \"simple undirected graph\" guarantee that there are no self-loops in the initial graph, or is this a separate constraint?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "When two players can make equivalent optimal moves, does the tie-breaking favor the first player or second player, or is the outcome independent of such choices?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Is the winning condition determined by the total number of moves made, or by the specific sequence of moves each player makes?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_309",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "What is the initial value of variable r before the ranking process begins?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The initial value of r is 1, so the first group of highest scores will receive rank 1."
+   },
+   {
+    "question": "How are ties in scores handled when determining rankings - do tied players receive the same rank or are they ranked sequentially?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "What happens if two or more people have identical scores - do they all get assigned the same rank?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Is the rank numbering 0-based or 1-based?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "What is the exact format expected for the output - space-separated values on one line or one integer per line?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are the scores P_i guaranteed to be distinct or can multiple people have the same score?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "What is the range of possible values for the final ranks that will be output?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The initial value of r is 1, so the first group of highest scores will receive rank 1."
+   },
+   {
+    "question": "How should the algorithm handle the case where N=1 - does it still follow the same ranking procedure?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "The initial value of r is 1, so the first group of highest scores will receive rank 1."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_330",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "Can a cake be paired with itself, or must all pairs consist of two distinct cakes?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "What is the exact definition of \"without overlaps\" \u2014 does it mean each cake can appear in at most one pair?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Is the value of K guaranteed to be such that 2K \u2264 N, or could K exceed N/2?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are all input values (including T, N, K, and the coordinates) guaranteed to fit within standard integer types, or is overflow handling required?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "In the case of ties for the maximum value in \\max(X_{a_i} + X_{b_i}, Y_{a_i} + Y_{b_i}, Z_{a_i} + Z_{b_i}), does it matter which pairings are chosen?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Must all N cakes be used, or is it acceptable to leave some unpaired?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Is there a specific requirement on how pairs should be selected when multiple selections yield the same total price?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Should the solution prioritize maximizing individual pair prices or the overall sum, and is there a tie-breaking rule among equivalent total sums?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_354",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "Is the graph G guaranteed to be connected, or can it consist of multiple disconnected components?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Can the intervals [L_i, R_i] and [L_j, R_j] overlap partially, or must they fully overlap for an edge to exist?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are the weights W_i strictly positive, or can they include zero or negative values?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "When processing queries, is it required to find a simple path (no repeated vertices), or can vertices be visited multiple times?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "What is the exact definition of \"minimum possible weight of such a path\" \u2014 does it refer to the path with the smallest sum of vertex weights among all valid paths?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Is there any constraint on the total number of edges in the graph, or can the graph be dense depending on interval overlaps?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Does the problem assume that all input fits within standard integer limits, or could some values exceed typical int ranges?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "In case of multiple paths with the same minimal weight, which one should be chosen, or is any such path acceptable?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_377",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "What is the exact range of values for the elements in the good sequence S?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "How should the case be handled when multiple valid sequences have the same score?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is the modulo value specified anywhere in the problem or should we assume a standard large prime?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "What happens when gcd(P,Q) = 1 but either P or Q equals 1 in the definition of f(x)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Are there any additional constraints on the sequence S elements beyond being positive integers?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Should we consider sequences with repeated elements as distinct when calculating the sum of scores?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Is there a specific order in which the good sequences should be processed or counted?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "What is the precise definition of \"finitely many good sequences\" in terms of the proof mentioned?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_397",
+  "label_test_relevant": null,
+  "label_leaked": true,
+  "label_verdict_note": "The key decision is substantially hinted in the problem text.",
+  "candidates": [
+   {
+    "question": "Can piece A and piece B occupy the same vertex at any point during the sequence of moves, or is it only forbidden at the end?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Is the graph guaranteed to be connected throughout all possible sequences of moves, or just initially?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Yes. The given graph is guaranteed to be simple and connected."
+   },
+   {
+    "question": "What happens if S and T are directly connected by an edge? Does that affect the possibility or minimum steps?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are self-loops or multiple edges between the same pair of vertices allowed in the graph representation?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "If the initial positions S and T are swapped (i.e., A starts at T and B starts at S), is the answer trivially zero or must we still perform moves?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "How should ties between equally minimal paths be handled when computing the minimum number of operations?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Is there a limit on how many times each edge can be traversed during the movement of pieces?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Does the numbering of edges from 1 to M imply they are given in a specific order that affects processing or interpretation?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "ccb_amb_task_419",
+  "label_test_relevant": null,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity requires genuine interpretation beyond the prompt.",
+  "candidates": [
+   {
+    "question": "Can Takahashi perform a front kick in a direction that would target cells outside the grid boundaries, and if so, are those out-of-bound cells considered walls that get converted to roads?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Yes. The front kick can be performed even if the affected area partially extends outside the grid. Only the cells inside the grid are checked and changed; cells outside are ignored."
+   },
+   {
+    "question": "If Takahashi performs a front kick in a direction where there are fewer than two cells ahead of his current position, does he still convert all wall cells within the available range (0 or 1 steps) in that direction?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Yes. The front kick can be performed even if the affected area partially extends outside the grid. Only the cells inside the grid are checked and changed; cells outside are ignored."
+   },
+   {
+    "question": "Is it allowed for Takahashi to move into a cell that was originally a wall but has been converted to a road during the same sequence of actions, or must he wait until the next turn?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Does the problem require the minimum number of front kicks across all possible paths from start to destination, or just any valid path that reaches the destination?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   },
+   {
+    "question": "Are diagonal movements allowed, or strictly only up, down, left, and right movements between adjacent cells?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "If multiple front kicks are performed in the same direction from the same cell, do the effects stack (i.e., does converting a wall to a road and then kicking again have any additional effect)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Can Takahashi choose to perform a front kick even if there are no walls within the targeted cells (i.e., are unnecessary kicks permitted)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Not a key ambiguity, likely already resolved in problem statement or constraints."
+   },
+   {
+    "question": "Is the output required to be the exact number of front kicks used, or can it include additional information such as the sequence of moves and kicks?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "A legitimate concern about implementation details, but not matching the annotated Q/A pairs."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_10_vagueness",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the exact definition of \"shortest possible palindrome related to the supplied string\" - does it mean the shortest palindrome that has the original string as a prefix?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'Find the shortest possible palindrome related to the supplied string.'"
+   },
+   {
+    "question": "How should the function handle empty strings - should they return an empty string or some other value?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the expected behavior when the input string is already a palindrome?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ' Test if given string is a palindrome \n    '"
+   },
+   {
+    "question": "Should the function handle Unicode characters and multi-byte characters correctly, or is it limited to ASCII?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What are the constraints on the input string length - is there a maximum size that needs to be supported?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "How should the function behave with strings containing only whitespace characters?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should the algorithm distinguish between uppercase and lowercase letters when determining palindromes?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the expected output format - should it preserve the original string's formatting, leading/trailing spaces, or normalize them?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_24_lexical",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What should the function return when n is 1, since it has no divisors smaller than itself?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should the function handle negative integers, and if so, how should \"largest\" be interpreted for negative numbers?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the expected behavior when n is 0, since division by zero is undefined?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should the function handle non-integer inputs, or can we assume n is always an integer?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What should the function return when n is a prime number, since its only divisors are 1 and itself?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should the function handle very large integers, and are there any performance constraints?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Does \"divides n evenly\" include negative divisors, or should we only consider positive divisors?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the valid range of input values for n that the function needs to handle?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_36_lexical",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What does it mean for an integer to be \"related to 11 or 13\"?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'related to'"
+   },
+   {
+    "question": "Should the count include integers that are related to both 11 and 13, or should they be counted only once?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'related to'"
+   },
+   {
+    "question": "Does \"less than n\" include negative integers, or only positive integers?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior when n is less than or equal to 0?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Should the digit 7 be counted multiple times if it appears more than once in the same integer?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What constitutes the \"integers less than n\" - is this referring to all integers or only positive integers?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should ties or overlapping conditions be handled when counting digit occurrences?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the precise definition of \"related to\" in the context of this problem?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'related to'"
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_47_lexical",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What should be returned when the list is empty?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "How is the \"central element\" defined for lists with even length?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'central element'"
+   },
+   {
+    "question": "Does the list need to be sorted before finding the median?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What data types are allowed in the list elements?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What should be returned when the list contains only one element?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Are duplicate elements treated differently in determining the median?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Is there a maximum or minimum size limit for the input list?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should the original list be modified during the median calculation?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_61_lexical",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What should the function return for an empty string?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should the function return True or False for a string with only opening brackets like \"(((\"?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should the function return True or False for a string with only closing brackets like \")))\"?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: '.\n    return True if every opening bracket has a corresponding closing bracket.\n    '"
+   },
+   {
+    "question": "Does the order of brackets matter, or is it sufficient that the counts of opening and closing brackets are equal?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ' and '"
+   },
+   {
+    "question": "What should happen if the input string contains characters other than \"(\" and \")\"?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ' and '"
+   },
+   {
+    "question": "Should the function handle None input, and if so, what should it return?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ' and '"
+   },
+   {
+    "question": "Is there a maximum length for the input string that we need to consider?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should the function return True for nested brackets like \"(()())\" or only for sequential pairs like \"()()\"?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_72_lexical",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the exact definition of a \"palindromic list\" - does it mean the list reads the same forwards and backwards?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should empty lists be handled - are they considered palindromic and able to fly?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the data type of the elements in list q - are they all integers, or can they be any comparable types?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the weight of the object q be calculated - is it the sum of all elements in the list?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'weight'"
+   },
+   {
+    "question": "What should happen if the weight calculation results in a non-integer value when w is an integer?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'weight'"
+   },
+   {
+    "question": "How should negative weights be handled in the comparison with maximum weight w?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'weight'"
+   },
+   {
+    "question": "What is the expected behavior when q is None or when w is None?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Should single-element lists be considered palindromic by definition?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_83_lexical",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "Does \"start or end with 1\" mean numbers that start with 1, end with 1, or both start and end with 1?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the exact range of valid values for n (e.g., is n=1 allowed, what about very large values)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "For n-digit numbers, does this include numbers with leading zeros or only positive integers without leading zeros?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "When n=1, does the single digit \"1\" count as both starting and ending with 1, and should it be counted once or twice?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the expected return type - integer, string, or does it matter?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should the result include negative numbers or zero, or strictly positive integers only?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "How should very large results be handled - is there a modulo requirement or can they be arbitrarily large?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the precise definition of an \"n-digit positive integer\" - does it mean exactly n digits or at least n digits?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_94_vagueness",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "If there are multiple prime numbers in the list, which one should be selected as \"a prime value\"?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should the selected prime be the largest, smallest, first occurring, or any arbitrary one?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What should the function return when there is no prime number in the list?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Is the choice of which prime to use expected to be deterministic across runs?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Are 0, 1, and negative numbers excluded from being considered prime?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Is the list guaranteed to be non-empty?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should duplicates in the list affect which prime is chosen?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Does \"sum of its digits\" ever need to account for a negative sign, given primes are non-negative?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_106_lexical",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "Is the index i inclusive of n itself, i.e., does the list contain values for i = 1 through n?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Does \"i starts from 1\" mean the returned list's element at index 0 corresponds to i=1, offsetting 0-based indexing?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the value at i=0 in the resulting list, if i actually starts from 1?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Does \"sum of figures from 1 to i\" mean the sum of integers 1+2+...+i, or the sum of the individual digits of i?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'figures'"
+   },
+   {
+    "question": "Should the factorial of large i be computed exactly (arbitrary precision) or is overflow a concern?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What should the function return for n = 0?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Is \"even\" determined based on the index i or on some other value?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should negative n be treated as invalid input?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_119_vagueness",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "The docstring appears to cut off mid-sentence \u2014 what is the complete definition of a \"good\" string here (e.g. balanced and properly nested parentheses)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Does \"rearrange the two strings in some order\" mean only choosing which string comes first, or also permuting characters within each string?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'rearrange the two strings'"
+   },
+   {
+    "question": "Are only the two concatenation orders (str1+str2 or str2+str1) allowed, or can characters be interleaved freely?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What should be returned \u2014 a boolean, or the resulting string itself?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Is a \"good\" string simply one where all parentheses are balanced and properly matched?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are the two input strings guaranteed to be non-empty?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Is the expected return type True/False, or string values like 'Yes'/'No'?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Could either input string be empty, and how should that case be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_135_lexical",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What precisely does \"odd compared to the element immediately preceding it\" mean \u2014 smaller, larger, or something else?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'odd'"
+   },
+   {
+    "question": "Is index 0 ever eligible, given it has no preceding element?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "If no element satisfies the condition anywhere, does the function return -1?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Does the \"no duplicate values\" guarantee simplify any comparison edge cases?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are the array's values guaranteed to be integers, or could they include floats?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Is \"largest index\" found by scanning the entire array, not stopping at the first match?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Does the comparison use strict inequality, or could equal values also count?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "If multiple valid indices exist, is only the single largest one ever returned?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_153_vagueness",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "Does \"find a strong extension\" mean the single strongest (highest CAP-SM) extension, or just any extension meeting some threshold?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Is there a minimum strength threshold for an extension to count as \"strong,\" or is it purely about being the maximum?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should non-alphabetic characters in extension names be excluded from both CAP and SM counts?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What should happen if the extensions list is empty?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'You should find the strongest extension'"
+   },
+   {
+    "question": "When ties \"come first in the list,\" does that mean earliest index in the given list order?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should case comparisons use only the Latin alphabet, or any Unicode letters?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should the returned string preserve the original casing of the extension name exactly?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Is class_name guaranteed not to contain a period itself?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_3_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_26_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_49_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_74_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_96_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_120_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "orchidheval_153_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/5_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/15_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/25_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/35_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/45_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ','"
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ','"
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ','"
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ','"
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ','"
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/55_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'the'"
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'the'"
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'are'"
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'the'"
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'are'"
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'the'"
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: 'are'"
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/65_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/75_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/85_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/95_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/105_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Directly targets the ambiguous phrase: ', '"
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/115_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/125_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/135_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/145_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 2,
+    "test_relevant": null,
+    "answer": "Targets the same key concept(s) as the injected ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ },
+ {
+  "id": "bcb_BigCodeBench/155_semantic",
+  "label_test_relevant": true,
+  "label_leaked": false,
+  "label_verdict_note": "The ambiguity is embedded in the vague problem statement itself.",
+  "candidates": [
+   {
+    "question": "What is the precise definition of each key term or main concept introduced in the problem?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should edge cases (empty input, single element, N=1, zero, negative) be handled?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "What is the exact required output format (data type, structure, ordering, line breaks)?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Are there any implicit assumptions about data size, range, or type beyond the stated constraints?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "How should the solution handle ambiguous or contradictory input scenarios?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   },
+   {
+    "question": "Should implementation prioritize correctness, performance, or simplicity, and what are the limits?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "What is the expected behavior at the boundaries of stated constraints (N=1, M=N, etc.)?",
+    "tier": 0,
+    "test_relevant": null,
+    "answer": "Addresses a different concern not central to the labeled ambiguity."
+   },
+   {
+    "question": "Are there any requirements for error handling or input validation beyond what's stated?",
+    "tier": 1,
+    "test_relevant": null,
+    "answer": "Addresses a related but distinct concern or edge case."
+   }
+  ]
+ }
+]

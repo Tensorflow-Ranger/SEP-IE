@@ -1,0 +1,97 @@
+{
+  "round": 3,
+  "prompt_before": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Determine whether it is possible that B_1 \\times B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+  "candidates": [
+    {
+      "idx": 2,
+      "question": "If the input contains duplicate values, does \u201cstrict permutation\u201d still require the three positions to be a rearrangement of the multiset, or must the three indices be distinct?",
+      "answer": "Yes, B must contain exactly the same multiset as A. If A contains duplicates, B must contain the same duplicates.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Yes, B must contain exactly the same multiset as A. If A contains duplicates, B must contain the same duplicates. Determine whether it is possible that B_1 \\times B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": 4.784238815307617
+    },
+    {
+      "idx": 8,
+      "question": "Should the program handle extra trailing newline characters after the three integers, or is that considered invalid input?",
+      "answer": "A trailing newline character after the input is normal and should be handled gracefully.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Determine whether it is possible that B_1 \\times B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": 4.130296230316162
+    },
+    {
+      "idx": 5,
+      "question": "Should we consider B\u2081\u202f\u00d7\u202fB\u2082\u202f=\u202fB\u2083 only for the three positions in that order, or also allow B\u2081\u202f\u00d7\u202fB\u2083\u202f=\u202fB\u2082 or B\u2082\u202f\u00d7\u202fB\u2083\u202f=\u202fB\u2081?",
+      "answer": "Only the condition B\u2081 \u00d7 B\u2082 = B\u2083 applies as specified. Other arrangements like B\u2081 \u00d7 B\u2083 = B\u2082 do not satisfy the problem.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Only the condition B\u2081 \u00d7 B\u2082 = B\u2083 applies as specified. Other arrangements like B\u2081 \u00d7 B\u2083 = B\u2082 do not satisfy the problem. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \u00d7 B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": 3.3621864318847656
+    },
+    {
+      "idx": 4,
+      "question": "Is the multiplication order important (i.e., does B\u2081\u202f\u00d7\u202fB\u2082 mean B\u2081 multiplied by B\u2082, not B\u2082\u202f\u00d7\u202fB\u2081), or are both orders considered equivalent?",
+      "answer": "Multiplication is commutative, so B\u2081 \u00d7 B\u2082 = B\u2082 \u00d7 B\u2081. The order does not matter.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Multiplication is commutative, so B\u2081 \u00d7 B\u2082 = B\u2082 \u00d7 B\u2081. The order does not matter. Determine whether it is possible that B_1 \u00d7 B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \u00d7 B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": 2.666378974914551
+    },
+    {
+      "idx": 9,
+      "question": "In the case of large products (e.g., 100\u202f\u00d7\u202f100\u202f=\u202f10000), is there an implicit upper bound on B\u2083 that would make the condition false, or is any integer product allowed?",
+      "answer": "No implicit upper bound on B\u2083 beyond the constraint 1 \u2264 B\u2083 \u2264 100. The condition fails if the product exceeds 100.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Determine whether it is possible that B_1 \\times B_2 = B_3. Note that B_3 is constrained to be between 1 and 100, and the condition fails if the product exceeds 100. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": 2.2333099842071533
+    },
+    {
+      "idx": 0,
+      "question": "Should the output be case\u2011sensitive exactly as \u201cYes\u201d and \u201cNo\u201d, or are other capitalizations (e.g., \u201cYES\u201d, \u201cno\u201d) accepted?",
+      "answer": "Yes, the output must be exactly 'Yes' or 'No' with that capitalization.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Determine whether it is possible that B_1 \\times B_2 = B_3. Yes, the output must be exactly 'Yes' or 'No' with that capitalization. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": 2.2314958572387695
+    },
+    {
+      "idx": 11,
+      "question": "If the input does not satisfy the constraints (e.g., a non\u2011integer token), should the program produce an error, undefined behavior, or simply treat it as \u201cNo\u201d?",
+      "answer": "The problem guarantees valid input satisfying the constraints; handling invalid input is not required.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. The problem guarantees valid input satisfying the constraints; handling invalid input is not required. Determine whether it is possible that B_1 \\times B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": 0.5138249397277832
+    },
+    {
+      "idx": 6,
+      "question": "If multiple permutations satisfy the condition, is any \u201cYes\u201d sufficient, or must we output something else (e.g., the specific permutation)?",
+      "answer": "If any permutation of A satisfies B\u2081 \u00d7 B\u2082 = B\u2083, output 'Yes'. The specific permutation need not be output.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. If any permutation of A satisfies B\u2081 \u00d7 B\u2082 = B\u2083, output 'Yes'. The specific permutation need not be output. Determine whether it is possible that B_1 \u00d7 B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \u00d7 B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": 0.3944072723388672
+    },
+    {
+      "idx": 3,
+      "question": "Must the multiplication be performed using standard integer arithmetic, and is overflow ever a concern given the constraints?",
+      "answer": "Yes, standard integer arithmetic applies. Overflow is not a concern since the maximum product is 100 \u00d7 100 = 10,000.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Yes, standard integer arithmetic applies. Overflow is not a concern since the maximum product is 100 \u00d7 100 = 10,000. Determine whether it is possible that B_1 \u00d7 B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \u00d7 B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \u2264 A_1, A_2, A_3 \u2264 100",
+      "score": 0.026549339294433594
+    },
+    {
+      "idx": 7,
+      "question": "Are there any whitespace or formatting requirements for the input line (e.g., exactly three integers separated by spaces, or can there be extra spaces or line breaks)?",
+      "answer": "The input format specifies exactly three integers separated by spaces; extra spaces or line breaks should not appear.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. The input format specifies exactly three integers separated by spaces; extra spaces or line breaks should not appear. Determine whether it is possible that B_1 \\times B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": -0.542008638381958
+    },
+    {
+      "idx": 10,
+      "question": "Does the problem require reading from standard input until EOF (multiple test cases), or is there exactly one test case per execution?",
+      "answer": "Exactly one test case per execution. The input is a single line with three integers.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Exactly one test case per execution. The input is a single line with three integers. Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": -0.5422744750976562
+    },
+    {
+      "idx": 1,
+      "question": "Are negative numbers or zero ever allowed in the input despite the stated constraint \u201c1 \u2264 A_i \u2264 100\u201d?",
+      "answer": "No, the constraints guarantee 1 \u2264 A_i \u2264 100, so negative numbers and zero are not allowed in input.",
+      "prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. No, the constraints guarantee 1 \u2264 A_i \u2264 100, so negative numbers and zero are not allowed in input. Determine whether it is possible that B_1 \\times B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100",
+      "score": -1.0881295204162598
+    }
+  ],
+  "chosen": {
+    "idx": 2,
+    "question": "If the input contains duplicate values, does \u201cstrict permutation\u201d still require the three positions to be a rearrangement of the multiset, or must the three indices be distinct?",
+    "answer": "Yes, B must contain exactly the same multiset as A. If A contains duplicates, B must contain the same duplicates.",
+    "score": 4.784238815307617
+  },
+  "next_prompt": "You are given a sequence of integers A = (A_1, A_2, A_3). Let B = (B_1, B_2, B_3) be any strict permutation of A, containing exactly the same elements as A in any order, including duplicates if present in A. Yes, B must contain exactly the same multiset as A. If A contains duplicates, B must contain the same duplicates. Determine whether it is possible that B_1 \\times B_2 = B_3. Input The input is given from Standard Input in the following format: A_1 A_2 A_3 Output If it is possible that B_1 \\times B_2 = B_3, print Yes; otherwise, print No. Constraints - All input values are integers. - 1 \\le A_1, A_2, A_3 \\le 100"
+}

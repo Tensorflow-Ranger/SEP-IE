@@ -1,0 +1,99 @@
+{
+  "round": 1,
+  "prompt_before": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise.\n    '''",
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "What exactly qualifies as \u201calphabetical character\u201d \u2013 only ASCII letters A\u2011Z/a\u2011z, or also Unicode letters such as accented characters and letters from non\u2011Latin scripts?",
+      "answer": "An alphabetical character is defined as ASCII letters A-Z and a-z only; Unicode letters such as accented characters are not included.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character as defined\n    here: An alphabetical character is defined as ASCII letters A-Z and a-z only; Unicode letters such as accented characters are not included,\n    and is not closely associated with a word, and False otherwise.\n    '''",
+      "score": -1.408358097076416
+    },
+    {
+      "idx": 2,
+      "question": "What does \u201cclosely associated with a word\u201d mean \u2013 does it exclude characters that are part of a hyphenated word, an apostrophe\u2011joined contraction, or a trailing punctuation mark attached to a word?",
+      "answer": "A character is 'not a part of a word' means it is not in a word group. A word is defined as a group of characters separated by space, so the last character after the last space must be a single alphabetical character (isolated by spaces).",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. A character is 'not a part of a word' means it is not in a word group. A word is defined as a group of characters separated by space, so the last character after the last space must be a single alphabetical character (isolated by spaces).\n    '''",
+      "score": -5.584076881408691
+    },
+    {
+      "idx": 7,
+      "question": "Are emojis or other pictographic symbols considered \u201calphabetical characters\u201d for the purpose of this check?",
+      "answer": "Emojis and pictographic symbols are not considered alphabetical characters.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character, Emojis and pictographic symbols are not considered alphabetical characters, and is not\n    closely associated with a word, and False otherwise.\n    '''",
+      "score": -6.438737392425537
+    },
+    {
+      "idx": 6,
+      "question": "If the string ends with a digit or symbol that is visually attached to a preceding word (e.g., \u201chello!\u201d), does the presence of that symbol affect the result, or only the character itself?",
+      "answer": "If the string ends with a symbol visually attached to a word (e.g., 'hello!'), the symbol is not an alphabetical character and the check fails.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. If the string ends with a symbol visually attached to a word (e.g., 'hello!'), the symbol is not an alphabetical character and the check fails.\n    '''",
+      "score": -6.662713050842285
+    },
+    {
+      "idx": 10,
+      "question": "Does the function need to validate that the input is a string type, and if not, should it coerce, raise a TypeError, or return False?",
+      "answer": "The function should validate that the input is a string and return False if it is not a valid string type.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. The function should validate that the input is a string and return False if it is not a valid string type.\n    '''",
+      "score": -7.209020614624023
+    },
+    {
+      "idx": 3,
+      "question": "If the last character is a letter but preceded by a combining diacritic (e.g., \u201ce\u0301\u201d), is that considered \u201cclosely associated with a word\u201d or still a valid letter?",
+      "answer": "A combining diacritic after a letter does not make it a single alphabetical character; it requires exactly one letter character.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. A combining diacritic after a letter does not make it a single alphabetical character; it requires exactly one letter character.\n    '''",
+      "score": -7.389744281768799
+    },
+    {
+      "idx": 8,
+      "question": "Should the function treat characters from right\u2011to\u2011left scripts (e.g., Arabic, Hebrew) differently when determining \u201clast character\u201d?",
+      "answer": "Characters from right-to-left scripts are not treated differently; the function only recognizes ASCII letters A-Z/a-z.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. Characters from right-to-left scripts are not treated differently; the function only recognizes ASCII letters A-Z/a-z.\n    '''",
+      "score": -7.426041603088379
+    },
+    {
+      "idx": 5,
+      "question": "How must the function handle surrogate pairs or other multi\u2011code\u2011unit Unicode characters that represent a single visual letter?",
+      "answer": "Multi-code-unit Unicode characters are not supported; only single ASCII letters are recognized.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. Multi-code-unit Unicode characters are not supported; only single ASCII letters are recognized.\n    '''",
+      "score": -7.7770867347717285
+    },
+    {
+      "idx": 4,
+      "question": "Should whitespace characters (spaces, tabs, newlines) at the end of the string be ignored when determining the last character, or cause the function to return False?",
+      "answer": "Whitespace at the end should be ignored; the function should look at the last non-whitespace character within word context.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. Whitespace at the end should be ignored; the function should look at the last non-whitespace character within word context.\n    '''",
+      "score": -9.003092765808105
+    },
+    {
+      "idx": 9,
+      "question": "In the case of a string that ends with a combining mark without a base letter (e.g., \u201c\\u0301\u201d), is that considered a letter or not?",
+      "answer": "A combining mark without a base letter is not considered a letter and does not satisfy the condition.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. A combining mark without a base letter is not considered a letter and does not satisfy the condition.\n    '''",
+      "score": -9.764753341674805
+    },
+    {
+      "idx": 11,
+      "question": "If the string contains invisible formatting characters (zero\u2011width joiner, zero\u2011width space) at the end, are they ignored, treated as non\u2011letters, or cause an error?",
+      "answer": "Invisible formatting characters at the end (zero-width joiner, zero-width space) are ignored; they do not affect the result.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. Invisible formatting characters at the end (zero-width joiner, zero-width space) are ignored; they do not affect the result.\n    '''",
+      "score": -10.853858947753906
+    },
+    {
+      "idx": 1,
+      "question": "How should the function treat an empty string \u2013 should it return False, raise an exception, or handle it in some other way?",
+      "answer": "An empty string should return False.",
+      "prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character and is not\n    closely associated with a word, and False otherwise. An empty string should return False.\n    '''",
+      "score": -11.976360321044922
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "What exactly qualifies as \u201calphabetical character\u201d \u2013 only ASCII letters A\u2011Z/a\u2011z, or also Unicode letters such as accented characters and letters from non\u2011Latin scripts?",
+    "answer": "An alphabetical character is defined as ASCII letters A-Z and a-z only; Unicode letters such as accented characters are not included.",
+    "score": -1.408358097076416
+  },
+  "next_prompt": "def check_if_last_char_is_a_letter(txt):\n    '''\n    Create a function that returns True if the last character\n    of a given string is an alphabetical character as defined\n    here: An alphabetical character is defined as ASCII letters A-Z and a-z only; Unicode letters such as accented characters are not included,\n    and is not closely associated with a word, and False otherwise.\n    '''",
+  "test_n_pass": 7,
+  "test_n_total": 10
+}

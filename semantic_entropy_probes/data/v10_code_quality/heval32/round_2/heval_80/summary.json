@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).",
+  "baseline_mean_p": 0.22060690820217133,
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "Is the function required to check all possible triplets, including overlapping ones?",
+      "answer": "Yes, it checks every overlapping window of 3 consecutive letters (s[i], s[i+1], s[i+2] for each i), not just non-overlapping groups.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\n\nClarification: Yes, it checks every overlapping window of 3 consecutive letters (s[i], s[i+1], s[i+2] for each i), not just non-overlapping groups.",
+      "p1": 0.16875147819519043,
+      "p2": 0.22793033719062805,
+      "mean_p": 0.19834090769290924,
+      "delta": -0.022266000509262085
+    },
+    {
+      "idx": 5,
+      "question": "What is the definition of \"every 3 letters are distinct\"?",
+      "answer": "For every window of 3 consecutive characters in the string, all three characters in that window must be pairwise different from one another.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\n\nClarification: For every window of 3 consecutive characters in the string, all three characters in that window must be pairwise different from one another.",
+      "p1": 0.20051909983158112,
+      "p2": 0.2379378378391266,
+      "mean_p": 0.21922846883535385,
+      "delta": -0.0013784393668174744
+    },
+    {
+      "idx": 1,
+      "question": "Are uppercase and lowercase letters considered distinct?",
+      "answer": "Yes; comparison is by exact character equality (case-sensitive), so 'A' and 'a' are considered different.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\n\nClarification: Yes; comparison is by exact character equality (case-sensitive), so 'A' and 'a' are considered different.",
+      "p1": 0.22881780564785004,
+      "p2": 0.25642654299736023,
+      "mean_p": 0.24262217432260513,
+      "delta": 0.022015266120433807
+    },
+    {
+      "idx": 7,
+      "question": "Are characters allowed to repeat in non-consecutive positions?",
+      "answer": "Yes, that's allowed and doesn't violate happiness; only distinctness WITHIN each 3-consecutive-letter window matters.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\n\nClarification: Yes, that's allowed and doesn't violate happiness; only distinctness WITHIN each 3-consecutive-letter window matters.",
+      "p1": 0.22371938824653625,
+      "p2": 0.2621094286441803,
+      "mean_p": 0.24291440844535828,
+      "delta": 0.02230750024318695
+    },
+    {
+      "idx": 6,
+      "question": "What should the function return if the string is empty or has length less than 3?",
+      "answer": "Returns False (explicit check: if len(s) < 3, return False).",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\n\nClarification: Returns False (explicit check: if len(s) < 3, return False).",
+      "p1": 0.21777482330799103,
+      "p2": 0.283060759305954,
+      "mean_p": 0.2504177913069725,
+      "delta": 0.029810883104801178
+    },
+    {
+      "idx": 2,
+      "question": "What happens if the string has duplicate characters but not in any three consecutive letters?",
+      "answer": "That's fine and doesn't affect the result; the check only looks at each window of 3 CONSECUTIVE letters, not all letters in the whole string.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\n\nClarification: That's fine and doesn't affect the result; the check only looks at each window of 3 CONSECUTIVE letters, not all letters in the whole string.",
+      "p1": 0.23716667294502258,
+      "p2": 0.29244837164878845,
+      "mean_p": 0.2648075222969055,
+      "delta": 0.04420061409473419
+    },
+    {
+      "idx": 3,
+      "question": "How should the function handle strings with length exactly 3?",
+      "answer": "Checked normally: happy if length >= 3 (true here) and the single window of those 3 consecutive letters are pairwise distinct.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\n\nClarification: Checked normally: happy if length >= 3 (true here) and the single window of those 3 consecutive letters are pairwise distinct.",
+      "p1": 0.2378907948732376,
+      "p2": 0.3375549912452698,
+      "mean_p": 0.2877228930592537,
+      "delta": 0.06711598485708237
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider non-alphabetic characters in the string when checking for distinctness?",
+      "answer": "Treated the same as any other character; the function only compares characters positionally, with no filtering by type.",
+      "prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\n\nClarification: Treated the same as any other character; the function only compares characters positionally, with no filtering by type.",
+      "p1": 0.3007120192050934,
+      "p2": 0.31081584095954895,
+      "mean_p": 0.30576393008232117,
+      "delta": 0.08515702188014984
+    }
+  ],
+  "top3": [
+    {
+      "idx": 4,
+      "question": "Is the function required to check all possible triplets, including overlapping ones?",
+      "answer": "Yes, it checks every overlapping window of 3 consecutive letters (s[i], s[i+1], s[i+2] for each i), not just non-overlapping groups.",
+      "delta": -0.022266000509262085
+    },
+    {
+      "idx": 5,
+      "question": "What is the definition of \"every 3 letters are distinct\"?",
+      "answer": "For every window of 3 consecutive characters in the string, all three characters in that window must be pairwise different from one another.",
+      "delta": -0.0013784393668174744
+    },
+    {
+      "idx": 1,
+      "question": "Are uppercase and lowercase letters considered distinct?",
+      "answer": "Yes; comparison is by exact character equality (case-sensitive), so 'A' and 'a' are considered different.",
+      "delta": 0.022015266120433807
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "Is the function required to check all possible triplets, including overlapping ones?",
+    "answer": "Yes, it checks every overlapping window of 3 consecutive letters (s[i], s[i+1], s[i+2] for each i), not just non-overlapping groups.",
+    "delta": -0.022266000509262085
+  },
+  "next_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct\n    \"\"\"\n\nClarification: Yes, all overlapping consecutive triplets are checked (the loop slides by 1 each time, so both (0,1,2) and (1,2,3) are checked for a length-4 string).\n\nClarification: Yes, it checks every overlapping window of 3 consecutive letters (s[i], s[i+1], s[i+2] for each i), not just non-overlapping groups.",
+  "code_prompt": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 letters are distinct, yes, it checks every overlapping window of 3 consecutive letters (s[i], s[i+1], s[i+2] for each i), not just non-overlapping groups.\"\"\"",
+  "test_n_pass": 8,
+  "test_n_total": 8
+}

@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_50_vagueness",
+  "questions": [
+    "What is the expected behavior when the input string contains uppercase letters?",
+    "How should non-alphabetic characters (numbers, symbols, spaces) be handled during encoding?",
+    "What should happen if the input string is empty?",
+    "Are there any constraints on the length of the input string?",
+    "Should the decoding function handle invalid encoded strings gracefully?",
+    "What is the exact range of valid input characters for this encoding scheme?",
+    "How should the function behave when encountering Unicode characters outside the standard English alphabet?",
+    "Is there a specific error handling requirement for null or None inputs?"
+  ],
+  "answers": [
+    "Not addressed by the true spec; only lowercase letters are handled, per encode_shift's implementation.",
+    "Not addressed by the true spec; only lowercase letters are shifted, others untouched by encode_shift's own logic.",
+    "Not addressed by the true spec; empty string returns empty string.",
+    "No length constraint specified.",
+    "Not addressed; assume valid encoded input.",
+    "Related to which characters are shifted: only lowercase a-z are valid/expected input characters for this scheme.",
+    "Not addressed by the true spec; only standard ASCII lowercase letters, per encode_shift's implementation.",
+    "Not addressed; assume valid string input."
+  ],
+  "inline_prompts": [
+    "def encode_shift(s: str):\n    \"\"\"\n    returns encoded string by shifting some characters by 5 in the alphabet. Only lowercase letters are handled, per encode_shift's implementation.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\n\ndef decode_shift(s: str):\n    \"\"\"\n    takes as input string encoded with encode_shift function. Returns decoded string.\n    \"\"\"",
+    "def encode_shift(s: str):\n    \"\"\"\n    returns encoded string by shifting some characters by 5 in the alphabet. Only lowercase letters are shifted, others are left untouched.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\n\ndef decode_shift(s: str):\n    \"\"\"\n    takes as input string encoded with encode_shift function. Returns decoded string.\n    \"\"\"",
+    "def encode_shift(s: str):\n    \"\"\"\n    returns encoded string by shifting some characters by 5 in the alphabet. Not addressed by the true spec; empty string returns empty string.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\n\ndef decode_shift(s: str):\n    \"\"\"\n    takes as input string encoded with encode_shift function. Returns decoded string.\n    \"\"\"",
+    "def encode_shift(s: str):\n    \"\"\"\n    returns encoded string by shifting some characters by 5 in the alphabet. No length constraint specified.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\n\ndef decode_shift(s: str):\n    \"\"\"\n    takes as input string encoded with encode_shift function. Returns decoded string.\n    \"\"\"",
+    "def encode_shift(s: str):\n    \"\"\"\n    returns encoded string by shifting some characters by 5 in the alphabet.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\n\ndef decode_shift(s: str):\n    \"\"\"\n    takes as input string encoded with encode_shift function. Returns decoded string. Not addressed; assume valid encoded input.\n    \"\"\"",
+    "def encode_shift(s: str):\n    \"\"\"\n    returns encoded string by shifting some characters by 5 in the alphabet. Only lowercase a-z are valid/expected input characters for this scheme.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\n\ndef decode_shift(s: str):\n    \"\"\"\n    takes as input string encoded with encode_shift function. Returns decoded string.\n    \"\"\"",
+    "def encode_shift(s: str):\n    \"\"\"\n    returns encoded string by shifting some characters by 5 in the alphabet.\n    Not addressed by the true spec; only standard ASCII lowercase letters, per encode_shift's implementation.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\n\ndef decode_shift(s: str):\n    \"\"\"\n    takes as input string encoded with encode_shift function. Returns decoded string.\n    \"\"\"",
+    "def encode_shift(s: str):\n    \"\"\"\n    returns encoded string by shifting some characters by 5 in the alphabet. Not addressed; assume valid string input.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\n\ndef decode_shift(s: str):\n    \"\"\"\n    takes as input string encoded with encode_shift function. Returns decoded string.\n    \"\"\""
+  ],
+  "tiers": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0
+  ]
+}

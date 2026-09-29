@@ -1,0 +1,118 @@
+{
+  "round": 1,
+  "baseline_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"",
+  "baseline_mean_p": 0.6702627241611481,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "Should the function be case-sensitive when evaluating words that contribute to a boredom?",
+      "answer": "Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".",
+      "p1": 0.274539053440094,
+      "p2": 0.45298510789871216,
+      "mean_p": 0.3637620806694031,
+      "delta": -0.306500643491745
+    },
+    {
+      "idx": 0,
+      "question": "What exactly constitutes a \"boredom\" in a sentence, and how should it be detected?",
+      "answer": "A boredom is specifically a sentence that starts with the word \"I\" (i.e., begins with \"I \") -- not a sentence expressing monotony or repetition in a semantic sense.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: A boredom is specifically a sentence that starts with the word \"I\" (i.e., begins with \"I \") -- not a sentence expressing monotony or repetition in a semantic sense.",
+      "p1": 0.3079412281513214,
+      "p2": 0.4295642077922821,
+      "mean_p": 0.36875271797180176,
+      "delta": -0.3015100061893463
+    },
+    {
+      "idx": 3,
+      "question": "Are leading, trailing, or multiple spaces within the string significant for counting boredoms?",
+      "answer": "Not specially stripped beyond what the regex split produces; a boredom is detected by checking if the resulting sentence begins with \"I \".",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Not specially stripped beyond what the regex split produces; a boredom is detected by checking if the resulting sentence begins with \"I \".",
+      "p1": 0.3967648148536682,
+      "p2": 0.45852431654930115,
+      "mean_p": 0.4276445657014847,
+      "delta": -0.2426181584596634
+    },
+    {
+      "idx": 7,
+      "question": "What should the function return for an input that contains no delimiters at all?",
+      "answer": "The whole string is treated as a single sentence; it counts as a boredom (1) if and only if it starts with \"I \", otherwise 0.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: The whole string is treated as a single sentence; it counts as a boredom (1) if and only if it starts with \"I \", otherwise 0.",
+      "p1": 0.38584980368614197,
+      "p2": 0.46979087591171265,
+      "mean_p": 0.4278203397989273,
+      "delta": -0.24244238436222076
+    },
+    {
+      "idx": 1,
+      "question": "Should punctuation marks other than '.', '?', and '!' (e.g., commas, semicolons) be considered part of a sentence or ignored?",
+      "answer": "Not treated as sentence delimiters; only '.', '?', and '!' split sentences.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Not treated as sentence delimiters; only '.', '?', and '!' split sentences.",
+      "p1": 0.40375813841819763,
+      "p2": 0.48415476083755493,
+      "mean_p": 0.4439564496278763,
+      "delta": -0.2263062745332718
+    },
+    {
+      "idx": 5,
+      "question": "How should empty sentences (e.g., strings between delimiters with no words) be handled?",
+      "answer": "Not applicable -- an empty sentence trivially does not start with \"I \" and simply doesn't count as a boredom.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Not applicable -- an empty sentence trivially does not start with \"I \" and simply doesn't count as a boredom.",
+      "p1": 0.4247922897338867,
+      "p2": 0.49395906925201416,
+      "mean_p": 0.45937567949295044,
+      "delta": -0.21088704466819763
+    },
+    {
+      "idx": 2,
+      "question": "How should consecutive delimiters (e.g., \"...\", \"?!\") be treated when determining sentence boundaries?",
+      "answer": "Handled by the regex split on the delimiter pattern, which produces the same sentence boundaries as a single delimiter would.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Handled by the regex split on the delimiter pattern, which produces the same sentence boundaries as a single delimiter would.",
+      "p1": 0.39723703265190125,
+      "p2": 0.5272719860076904,
+      "mean_p": 0.46225450932979584,
+      "delta": -0.20800821483135223
+    },
+    {
+      "idx": 6,
+      "question": "Must the input string contain only alphabetic characters and spaces, or are numbers and other symbols allowed?",
+      "answer": "Not addressed; any characters are permitted in the string, no special restriction.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Not addressed; any characters are permitted in the string, no special restriction.",
+      "p1": 0.4744572937488556,
+      "p2": 0.5190805196762085,
+      "mean_p": 0.49676890671253204,
+      "delta": -0.17349381744861603
+    }
+  ],
+  "top3": [
+    {
+      "idx": 4,
+      "question": "Should the function be case-sensitive when evaluating words that contribute to a boredom?",
+      "answer": "Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".",
+      "delta": -0.306500643491745
+    },
+    {
+      "idx": 0,
+      "question": "What exactly constitutes a \"boredom\" in a sentence, and how should it be detected?",
+      "answer": "A boredom is specifically a sentence that starts with the word \"I\" (i.e., begins with \"I \") -- not a sentence expressing monotony or repetition in a semantic sense.",
+      "delta": -0.3015100061893463
+    },
+    {
+      "idx": 3,
+      "question": "Are leading, trailing, or multiple spaces within the string significant for counting boredoms?",
+      "answer": "Not specially stripped beyond what the regex split produces; a boredom is detected by checking if the resulting sentence begins with \"I \".",
+      "delta": -0.2426181584596634
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "Should the function be case-sensitive when evaluating words that contribute to a boredom?",
+    "answer": "Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".",
+    "delta": -0.306500643491745
+  },
+  "next_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!'.\n    \"\"\"\n\nClarification: Yes, case-sensitive; it must be capital \"I\" followed by a space, not lowercase \"i\".",
+  "code_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and yes, case-sensitive;\n    it must be capital \"I\" followed by a space, not lowercase \"i\".\n    \"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 6
+}

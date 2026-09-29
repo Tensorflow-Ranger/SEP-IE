@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.",
+  "baseline_mean_p": 0.11013566702604294,
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "What is the expected behavior when the input text contains non-ASCII space characters?",
+      "answer": "Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.",
+      "p1": 0.08567765355110168,
+      "p2": 0.15147466957569122,
+      "mean_p": 0.11857616156339645,
+      "delta": 0.008440494537353516
+    },
+    {
+      "idx": 2,
+      "question": "Are tabs, newlines, and other whitespace characters considered as space characters for replacement?",
+      "answer": "Not applicable; only the literal ASCII space character is treated as a space to replace -- tabs and newlines are passed through unchanged.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ASCII space character is treated as a space to replace -- tabs and newlines are passed through unchanged.",
+      "p1": 0.10194555670022964,
+      "p2": 0.1599365621805191,
+      "mean_p": 0.13094105944037437,
+      "delta": 0.020805392414331436
+    },
+    {
+      "idx": 6,
+      "question": "Are Unicode space characters (e.g., '\\u00A0') treated as spaces or not?",
+      "answer": "Not treated as spaces; only the literal ASCII space character triggers the underscore/dash replacement logic.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not treated as spaces; only the literal ASCII space character triggers the underscore/dash replacement logic.",
+      "p1": 0.11641580611467361,
+      "p2": 0.1803978681564331,
+      "mean_p": 0.14840683713555336,
+      "delta": 0.03827117010951042
+    },
+    {
+      "idx": 4,
+      "question": "Is the replacement of spaces case-sensitive or case-insensitive?",
+      "answer": "Not applicable; this is about whitespace-character detection, not letter casing -- the transformation never touches letter case.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; this is about whitespace-character detection, not letter casing -- the transformation never touches letter case.",
+      "p1": 0.1272512972354889,
+      "p2": 0.18575723469257355,
+      "mean_p": 0.15650426596403122,
+      "delta": 0.04636859893798828
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected output when the input text contains a mix of spaces and other whitespace characters?",
+      "answer": "Other whitespace characters (tabs, newlines) are passed through unchanged; only runs of the literal space character follow the underscore/dash rule.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Other whitespace characters (tabs, newlines) are passed through unchanged; only runs of the literal space character follow the underscore/dash rule.",
+      "p1": 0.12771204113960266,
+      "p2": 0.22441419959068298,
+      "mean_p": 0.17606312036514282,
+      "delta": 0.06592745333909988
+    },
+    {
+      "idx": 0,
+      "question": "Does the function consider multiple consecutive spaces as a single entity to replace with a single underscore or replace each space individually?",
+      "answer": "Neither purely one unit nor purely individual: runs of 1-2 consecutive spaces are each replaced with that many underscores (one per space), while runs of MORE than 2 consecutive spaces collapse into a single '-'.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Neither purely one unit nor purely individual: runs of 1-2 consecutive spaces are each replaced with that many underscores (one per space), while runs of MORE than 2 consecutive spaces collapse into a single '-'.",
+      "p1": 0.20814263820648193,
+      "p2": 0.24563917517662048,
+      "mean_p": 0.2268909066915512,
+      "delta": 0.11675523966550827
+    },
+    {
+      "idx": 3,
+      "question": "How does the function handle leading or trailing spaces in the input text?",
+      "answer": "Handled the same as any other space run, following the same 1-2-vs-more-than-2 rule, including a run that extends to the very end of the string (handled by a trailing check after the main loop).",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Handled the same as any other space run, following the same 1-2-vs-more-than-2 rule, including a run that extends to the very end of the string (handled by a trailing check after the main loop).",
+      "p1": 0.16144967079162598,
+      "p2": 0.29361313581466675,
+      "mean_p": 0.22753140330314636,
+      "delta": 0.11739573627710342
+    },
+    {
+      "idx": 1,
+      "question": "What happens if the input text is empty or contains only spaces?",
+      "answer": "An empty string returns an empty string. A string of only spaces: if the run length is >2 the output is a single '-'; if 1-2 spaces, the output is that many underscores.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: An empty string returns an empty string. A string of only spaces: if the run length is >2 the output is a single '-'; if 1-2 spaces, the output is that many underscores.",
+      "p1": 0.2359876036643982,
+      "p2": 0.33608973026275635,
+      "mean_p": 0.28603866696357727,
+      "delta": 0.17590299993753433
+    }
+  ],
+  "top3": [
+    {
+      "idx": 5,
+      "question": "What is the expected behavior when the input text contains non-ASCII space characters?",
+      "answer": "Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.",
+      "delta": 0.008440494537353516
+    },
+    {
+      "idx": 2,
+      "question": "Are tabs, newlines, and other whitespace characters considered as space characters for replacement?",
+      "answer": "Not applicable; only the literal ASCII space character is treated as a space to replace -- tabs and newlines are passed through unchanged.",
+      "delta": 0.020805392414331436
+    },
+    {
+      "idx": 6,
+      "question": "Are Unicode space characters (e.g., '\\u00A0') treated as spaces or not?",
+      "answer": "Not treated as spaces; only the literal ASCII space character triggers the underscore/dash replacement logic.",
+      "delta": 0.03827117010951042
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "What is the expected behavior when the input text contains non-ASCII space characters?",
+    "answer": "Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.",
+    "delta": 0.008440494537353516
+  },
+  "next_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n\nClarification: Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement.",
+  "code_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores. Not applicable; only the literal ' ' character (ASCII code point 32) is recognized as a space needing replacement. Other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n    \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 5
+}

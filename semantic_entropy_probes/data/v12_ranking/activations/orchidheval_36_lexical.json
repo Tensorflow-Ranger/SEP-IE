@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_36_lexical",
+  "questions": [
+    "What does it mean for an integer to be \"related to 11 or 13\"?",
+    "Should the count include integers that are related to both 11 and 13, or should they be counted only once?",
+    "Does \"less than n\" include negative integers, or only positive integers?",
+    "What is the expected behavior when n is less than or equal to 0?",
+    "Should the digit 7 be counted multiple times if it appears more than once in the same integer?",
+    "What constitutes the \"integers less than n\" - is this referring to all integers or only positive integers?",
+    "How should ties or overlapping conditions be handled when counting digit occurrences?",
+    "What is the precise definition of \"related to\" in the context of this problem?"
+  ],
+  "answers": [
+    "'Related to' means DIVISIBLE BY 11 or 13 -- the original, unambiguous spec uses 'divisible by', not some looser mathematical relation.",
+    "Related follow-up: integers divisible by both are still counted, digit occurrences are simply tallied across the qualifying integers without double-counting the integer itself.",
+    "Not addressed distinctly; 'less than n' refers to positive integers in the intended range 1..n-1 (or similar), following the classic FizzBuzz-style problem convention.",
+    "Not addressed by the true spec.",
+    "Not addressed distinctly; each occurrence of digit 7 within a number is counted.",
+    "Not addressed distinctly; duplicate of the range question above.",
+    "Related to the divisible-by-both nuance: qualifying integers (divisible by 11 or 13) are considered once each for digit counting, avoiding double counting.",
+    "'Related to' means DIVISIBLE BY 11 or 13, precisely -- not some vaguer numeric relation."
+  ],
+  "inline_prompts": [
+    "```python\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.\n    \"\"\"\n```",
+    "```python\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are related to 11 or 13. Related follow-up: integers divisible by both are still counted, digit occurrences are simply tallied across the qualifying integers without double-counting the integer itself.\n    \"\"\"\n```",
+    "```python\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are related to 11 or 13. Not addressed distinctly; 'less than n' refers to positive integers in the intended range 1..n-1 (or similar), following the classic FizzBuzz-style problem convention.\n    \"\"\"\n```",
+    "```python\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are related to 11 or 13. Not addressed by the true spec.\n    \"\"\"\n```",
+    "```python\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are related to 11 or 13. Not addressed distinctly; each occurrence of digit 7 within a number is counted.\n    \"\"\"\n```",
+    "```python\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are related to 11 or 13. Not addressed distinctly; duplicate of the range question above.\n    \"\"\"\n```",
+    "```python\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are related to 11 or 13. Related to the divisible-by-both nuance: qualifying integers (divisible by 11 or 13) are considered once each for digit counting, avoiding double counting.\n    \"\"\"\n```",
+    "```python\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are related to 11 or 13, where 'related to' means divisible by 11 or 13, precisely -- not some vaguer numeric relation.\n    \"\"\"\n```"
+  ],
+  "tiers": [
+    2,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    2
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.",
+  "baseline_mean_p": 0.20963159203529358,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Does the function consider the range as inclusive of both a and b?",
+      "answer": "Yes; the range() call uses `upper+1` as the exclusive bound, making both the computed lower and upper bounds inclusive.",
+      "prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.\n\nClarification: Yes; the range() call uses `upper+1` as the exclusive bound, making both the computed lower and upper bounds inclusive.",
+      "p1": 0.23457278311252594,
+      "p2": 0.2333279550075531,
+      "mean_p": 0.23395036906003952,
+      "delta": 0.02431877702474594
+    },
+    {
+      "idx": 6,
+      "question": "What is the order of the returned list?",
+      "answer": "Ascending order; the range() and list comprehension iterate from lower to upper in increasing order.",
+      "prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.\n\nClarification: Ascending order; the range() and list comprehension iterate from lower to upper in increasing order.",
+      "p1": 0.23581144213676453,
+      "p2": 0.23449179530143738,
+      "mean_p": 0.23515161871910095,
+      "delta": 0.025520026683807373
+    },
+    {
+      "idx": 4,
+      "question": "What if a or b is not a positive integer?",
+      "answer": "Not a specified case; the docstring assumes both are given positive integers.",
+      "prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.\n\nClarification: Not a specified case; the docstring assumes both are given positive integers.",
+      "p1": 0.26726165413856506,
+      "p2": 0.25477731227874756,
+      "mean_p": 0.2610194832086563,
+      "delta": 0.05138789117336273
+    },
+    {
+      "idx": 3,
+      "question": "How are numbers with leading zeros handled?",
+      "answer": "Not applicable; standard positive integers have no leading-zero representation.",
+      "prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.\n\nClarification: Not applicable; standard positive integers have no leading-zero representation.",
+      "p1": 0.2986867427825928,
+      "p2": 0.26394975185394287,
+      "mean_p": 0.2813182473182678,
+      "delta": 0.07168665528297424
+    },
+    {
+      "idx": 7,
+      "question": "What if there are no even numbers in the range?",
+      "answer": "Returns an empty list -- this can happen if the clamped range ends up empty (lower > upper), e.g. when both a and b fall below 2.",
+      "prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.\n\nClarification: Returns an empty list -- this can happen if the clamped range ends up empty (lower > upper), e.g. when both a and b fall below 2.",
+      "p1": 0.3085015118122101,
+      "p2": 0.2575521767139435,
+      "mean_p": 0.2830268442630768,
+      "delta": 0.0733952522277832
+    },
+    {
+      "idx": 1,
+      "question": "What happens if a is greater than b?",
+      "answer": "Handled automatically: lower=max(2,min(a,b)) and upper=min(8,max(a,b)) sort the two inputs internally, so generate_integers(8,2) gives the same result as generate_integers(2,8).",
+      "prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.\n\nClarification: Handled automatically: lower=max(2,min(a,b)) and upper=min(8,max(a,b)) sort the two inputs internally, so generate_integers(8,2) gives the same result as generate_integers(2,8).",
+      "p1": 0.3174435496330261,
+      "p2": 0.2615174949169159,
+      "mean_p": 0.289480522274971,
+      "delta": 0.07984893023967743
+    },
+    {
+      "idx": 2,
+      "question": "Are negative numbers or zero considered in the range?",
+      "answer": "Not applicable in practice; the docstring says a and b are positive integers, and the range is always clamped to [2,8] regardless of the actual a/b values, so numbers below 2 never appear.",
+      "prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.\n\nClarification: Not applicable in practice; the docstring says a and b are positive integers, and the range is always clamped to [2,8] regardless of the actual a/b values, so numbers below 2 never appear.",
+      "p1": 0.3124598562717438,
+      "p2": 0.35416272282600403,
+      "mean_p": 0.3333112895488739,
+      "delta": 0.12367969751358032
+    },
+    {
+      "idx": 5,
+      "question": "How are numbers with even digits but odd values treated?",
+      "answer": "Not directly relevant to the actual behavior: despite the docstring discussing 'even digits', the implementation returns EVEN NUMBERS within a range always clamped to [2,8] -- so only the single-digit values 2,4,6,8 can ever appear, and multi-digit digit-parity questions don't arise.",
+      "prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.\n\nClarification: Not directly relevant to the actual behavior: despite the docstring discussing 'even digits', the implementation returns EVEN NUMBERS within a range always clamped to [2,8] -- so only the single-digit values 2,4,6,8 can ever appear, and multi-digit digit-parity questions don't arise.",
+      "p1": 0.4538343548774719,
+      "p2": 0.38647085428237915,
+      "mean_p": 0.42015260457992554,
+      "delta": 0.21052101254463196
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Does the function consider the range as inclusive of both a and b?",
+      "answer": "Yes; the range() call uses `upper+1` as the exclusive bound, making both the computed lower and upper bounds inclusive.",
+      "delta": 0.02431877702474594
+    },
+    {
+      "idx": 6,
+      "question": "What is the order of the returned list?",
+      "answer": "Ascending order; the range() and list comprehension iterate from lower to upper in increasing order.",
+      "delta": 0.025520026683807373
+    },
+    {
+      "idx": 4,
+      "question": "What if a or b is not a positive integer?",
+      "answer": "Not a specified case; the docstring assumes both are given positive integers.",
+      "delta": 0.05138789117336273
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Does the function consider the range as inclusive of both a and b?",
+    "answer": "Yes; the range() call uses `upper+1` as the exclusive bound, making both the computed lower and upper bounds inclusive.",
+    "delta": 0.02431877702474594
+  },
+  "next_prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b.\n    \"\"\"\n\nClarification: Despite the name, it means numbers that are themselves even (i % 2 == 0), not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8], the even NUMBERS in that range.\n\nClarification: Yes; the range() call uses `upper+1` as the exclusive bound, making both the computed lower and upper bounds inclusive.",
+  "code_prompt": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even numbers between a\n    and b. Despite the name, it means numbers that are themselves even (i % 2 == 0),\n    not numbers composed of even digits; e.g. generate_integers(2,8) returns [2,4,6,8],\n    the even NUMBERS in that range. Yes; the range() call uses `upper+1` as the exclusive bound,\n    making both the computed lower and upper bounds inclusive.\n    \"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 4
+}

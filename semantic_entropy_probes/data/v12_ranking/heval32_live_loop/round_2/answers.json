@@ -1,0 +1,162 @@
+{
+  "heval_1": {
+    "answers": [
+      "Characters other than parentheses and spaces are not part of valid input; the function should ignore spaces and process only '(' and ')' characters.",
+      "The function should discard incomplete groups (unmatched parentheses) and not attempt to balance them.",
+      "Empty groups are not possible in the output; a group only appears once the depth returns to zero, ensuring all groups are non-empty.",
+      "Consecutive spaces are ignored; they do not delimit separate groups.",
+      "An empty input or input containing only spaces should return an empty list.",
+      "The order of groups in the returned list must match their left-to-right appearance in the original string.",
+      "Each returned group should consist exclusively of '(' and ')' characters.",
+      "For nested groups like '(())()', the output should be ['(())' , '()'] because each group is complete when depth returns to zero, not considering inner nesting structure.",
+      "Tab and newline characters should be treated like spaces and ignored.",
+      "In '(()())', this is one single group because depth never returns to zero until the very end; it should be returned as ['(()())'].",
+      "The function should handle very large strings efficiently; no explicit maximum size is imposed in the specification.",
+      "The function should trust that all returned groups are strictly balanced by construction of the algorithm (depth returns to zero for each group)."
+    ]
+  },
+  "heval_109": {
+    "answers": [
+      "The array contains only integers (not other types like floats or strings).",
+      "The array must contain integers that are comparable.",
+      "Duplicate values are allowed in the array.",
+      "A single right-shift operation moves the last element to index 0 and shifts all others right by one position; only one such operation is performed per invocation, but you can call the shift operation multiple times to achieve the goal.",
+      "Zero right-shift operations are allowed, meaning the function can return True if the original array is already sorted.",
+      "If the array can be sorted by multiple different numbers of right shifts, return True; finding the minimum number of shifts is not required.",
+      "The function should leave the original array unchanged and not modify it in-place.",
+      "Non-numeric but comparable types like strings are not mentioned in the specification; the input is assumed to be integers.",
+      "If the array contains non-orderable elements, that is not part of the input specification; arrays contain only integers.",
+      "An empty array (length 0) should return True; the falsy values like None are not part of valid input.",
+      "A single-element array is automatically sorted in non-decreasing order, so return True.",
+      "There are no explicit constraints on array size mentioned in the specification; algorithmic efficiency is not mandated."
+    ]
+  },
+  "heval_130": {
+    "answers": [
+      "The 0-th Tribonacci number should be included in the output; tri(0) = 1 (base case).",
+      "The base cases are: tri(0) = 1 and tri(1) = 3.",
+      "For odd n, the recurrence tri(n) = tri(n-1) + tri(n-2) + tri(n+1) refers to tri(n+1) as the value already computed in the forward-pass iteration (computed for the next even index).",
+      "For even n, the formula tri(n) = 1 + n/2 produces a floating-point result in Python 3 (using true division).",
+      "The odd n recurrence is applied to compute the element at index n only, using previously computed values.",
+      "When n is odd, the sequence includes values for even indices computed by the even-n formula; both formula types are used to build the complete sequence.",
+      "The function should accept only non-negative integers; passing non-integer or negative values is not specified as a requirement to handle.",
+      "The returned list should contain exactly n + 1 elements (indices 0 through n).",
+      "The list is returned in order from index 0 up to n.",
+      "If the recurrence produces contradictory values, the algorithm computes forward (for even indices) and uses the recurrence (for odd), and values are computed once without conflict by design.",
+      "No explicit constraints on the maximum value of n are mentioned; the function should handle reasonable values.",
+      "The function returns floating-point numbers for even indices and may return mixed int/float types in the list."
+    ]
+  },
+  "heval_147": {
+    "answers": [
+      "A 'valid triple' consists of three distinct indices i, j, k (where i < j < k) such that a[i] + a[j] + a[k] is divisible by 3.",
+      "The triples are ordered by their indices (i, j, k), so order matters; (a[i], a[j], a[k]) with i < j < k is counted once, not as permutations.",
+      "The three indices i, j, k must be distinct and strictly ordered (i < j < k).",
+      "The condition is that a[i] + a[j] + a[k] must be a multiple of 3 (i.e., divisible by 3).",
+      "The array a is indexed from 1 to n inclusive in the problem statement, but the implementation uses 0-based indexing in code.",
+      "The function accepts only positive integers for n; non-integer or non-positive inputs are not part of the specification.",
+      "The count should include only one representative per distinct ordered triple (i, j, k), not permutations.",
+      "There are no explicit constraints on the maximum value of n; the function should work for reasonable sizes.",
+      "If multiple triples satisfy the validity criteria, the function counts all of them with no tie-breaking rule.",
+      "The function should return the count as a plain integer, not wrapped in a data structure.",
+      "Time complexity is O(n³) since all triples must be enumerated; no specific performance constraint is mandated.",
+      "The term 'valid triple' refers to both the property of the indices (i < j < k) and the array values (their sum divisible by 3)."
+    ]
+  },
+  "heval_91": {
+    "answers": [
+      "Sentences are case-sensitive; the leading word must be exactly an uppercase 'I' followed by a space to count as a boredom.",
+      "Consecutive sentence delimiters (e.g., '...', '?!') should each be treated as separate delimiters, creating multiple sentence boundaries.",
+      "A delimiter at the very beginning or end of the string creates an empty sentence that should be ignored (not counted).",
+      "Leading or trailing whitespace around a sentence is not explicitly handled; the regex split on '[.?!]\\s*' will handle following spaces.",
+      "The word 'I' must be a standalone token starting the sentence, followed by a space; 'I'm' would not match 'I ' at the sentence start.",
+      "Punctuation attached to the word 'I' (e.g., 'I,', 'I!') prevents that sentence from being counted as a boredom (the pattern checks for 'I ').",
+      "Newline characters (\\n) are not treated as sentence delimiters in the solution; only '.', '?', and '!' delimit sentences.",
+      "If the input string contains no delimiters, the entire string is treated as a single sentence and checked for starting with 'I '.",
+      "The function should return an integer count of boredoms.",
+      "Quoted text with delimiters inside should follow normal splitting rules; the delimiters split sentences regardless of quotes.",
+      "Unicode punctuation marks that look like period, question mark, or exclamation mark are not treated as delimiters; only ASCII '.', '?', '!' are recognized.",
+      "If the input is not a string (e.g., None, a list), that is not part of the specification; the function assumes a valid string input."
+    ]
+  },
+  "heval_104": {
+    "answers": [
+      "The function accepts only positive integers in the input list; negative numbers should not be processed.",
+      "Non-integer types in the input list should not be processed; only integers qualify.",
+      "Negative numbers are not considered 'positive integers', so they should be excluded from the result.",
+      "If an integer contains the digit zero (which is even), that entire integer is excluded from the result because zero is an even digit.",
+      "Numbers containing any even digit (including zero) should be excluded entirely from the result.",
+      "The resulting list should be sorted in ascending numeric order.",
+      "The output list must contain each qualifying integer exactly once, even if the input contains duplicates.",
+      "When the input list is empty, return an empty list.",
+      "Very large integers are handled as long as Python can process them; no explicit maximum size is imposed.",
+      "The digit '0' is treated as even for all numbers, including the number zero itself, so zero is always excluded.",
+      "Leading zeros are not relevant in Python's integer representation; integers like 007 are stored as 7.",
+      "If the input list contains duplicates that meet the criteria, the output should contain each unique value once, and the list should be sorted."
+    ]
+  },
+  "heval_110": {
+    "answers": [
+      "If both lst1 and lst2 are empty, return 'NO' (there are no even numbers in lst2 to exchange).",
+      "The input lists are assumed to contain only numeric types (integers or floats); the specification does not require non-numeric handling.",
+      "The order of elements does not matter; any odd element in lst1 can be replaced with any even element from lst2.",
+      "An element can only be exchanged once; it cannot be moved from lst2 to lst1 and then back to lst2.",
+      "The function checks if there are enough even numbers in lst2 to replace all odd numbers in lst1; if so, return 'YES'.",
+      "Zero is treated as an even number for determining success.",
+      "Duplicate values in the lists are considered distinct elements for exchange purposes; however, the key is the count of even numbers needed vs. available.",
+      "The function must preserve the original length of lst1 after exchanges; elements are swapped, not added or removed.",
+      "If lst2 has more even numbers than needed, the function simply needs to confirm that enough even numbers exist; a minimal number of exchanges is not required.",
+      "Negative even numbers are considered valid even numbers for replacement purposes.",
+      "There is no explicit limit on the size of the input lists; the implementation should handle reasonable sizes.",
+      "For invalid inputs (e.g., None, non-list types), the function should return 'NO'."
+    ]
+  },
+  "heval_126": {
+    "answers": [
+      "A list with a single element is considered sorted, and the duplicate rule does not apply (only one copy exists).",
+      "The list must be sorted in strictly ascending or non-decreasing order (duplicates allowed up to a limit).",
+      "A list with exactly two identical numbers satisfies the 'no more than 2 duplicates' rule and is acceptable.",
+      "If a value appears more than twice even non-consecutively, it violates the duplicate rule and the function returns False.",
+      "The function must return a boolean value (True or False).",
+      "For inputs that are not lists of integers (e.g., floats, strings, None), the function should return False.",
+      "The order of sorting must be consistent throughout the list (ascending); a list that is partially ascending then descending is not sorted.",
+      "An empty list is considered sorted and should return True.",
+      "Duplicate values are allowed only if they appear at most twice; a single occurrence is not considered a 'duplicate'.",
+      "If a list contains numbers that are equal but appear in different positions (e.g., [2, 1, 2]), the list is not sorted in ascending order.",
+      "A list that is already sorted with a pair of equal adjacent elements (e.g., [1, 2, 2, 3]) is considered sorted, as long as no value appears more than twice.",
+      "There is no explicit upper bound on list size mentioned; performance considerations should not affect the correctness of the implementation."
+    ]
+  },
+  "heval_150": {
+    "answers": [
+      "A number is considered prime if it is greater than 1 and has no divisors other than 1 and itself; 1 is not prime.",
+      "The function should accept only integer types for n, x, and y; non-integer types should use the 'otherwise' case (return y).",
+      "A negative integer is never prime; return y for negative n.",
+      "When n is 0, it is not prime, so return y; when n is 1, it is not prime, so return y.",
+      "The returned value must be exactly the object passed as x or y (not a copy for immutable types).",
+      "For mutable containers like lists or dicts, the function should return the original reference (not a shallow or deep copy).",
+      "If x and y are of different types, the function can return either type depending on the primality of n; no type matching is required.",
+      "For invalid inputs (e.g., non-numeric n), the function should return y as the 'otherwise' case.",
+      "The primality test should be deterministic and correct for all reasonable integer values of n.",
+      "The function should handle large integers; the specification does not impose a limit.",
+      "A prime power (e.g., 4 = 2²) is not considered prime; only numbers with exactly two distinct divisors (1 and itself) are prime.",
+      "If n is provided as a string representation of a number, that is not part of the specification; n should be an integer."
+    ]
+  },
+  "heval_80": {
+    "answers": [
+      "The function should return a boolean value (True for happy, False otherwise).",
+      "Non-ASCII characters (emojis, accented letters) are considered distinct letters for the purpose of the three-letter distinctness check.",
+      "Whitespace characters are counted as distinct characters in the distinctness check; they must also be distinct from the two adjacent letters in any triple.",
+      "If the string length is exactly 3, it must satisfy the distinctness condition (all three characters must be different).",
+      "For strings longer than 3, every consecutive triple (positions i, i+1, i+2 for i from 0 to len(s)-3) must have all three characters distinct.",
+      "The check is case-sensitive; 'A' and 'a' are considered different characters.",
+      "For None or non-string types, the function should raise a TypeError or return False; coercion is not specified.",
+      "Newline and other control characters are treated like any other character in the distinctness test.",
+      "The specification allows digits and punctuation in the string; they are subject to the same distinctness rule as letters.",
+      "Unicode combining characters (e.g., 'é' composed as 'e' + combining acute) are counted based on how Python iterates the string.",
+      "The function should check all overlapping windows starting at positions 0 through len(s)-3 (inclusive).",
+      "If the input string is empty or has length less than 3, the function should return False."
+    ]
+  }
+}

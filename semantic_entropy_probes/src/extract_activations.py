@@ -101,8 +101,12 @@ def extract(
                 "row_index": i,
                 "id": row["id"],
                 "source_problem_id": row["source_problem_id"],
-                "label": row["label"],  # ambiguity count K in {0,1,2,3}
-                "ambiguity_types": row["ambiguity_types"],
+                "label": row["label"],  # ambiguity count K in {0,1,2,3}, or binary 0/1
+                "ambiguity_types": row.get("ambiguity_types"),
+                # combined-dataset-only fields (build_combined_dataset.py); absent
+                # (None) for the original ClarifyCodeBench-only pipeline's data.
+                "dataset_source": row.get("dataset_source"),
+                "ambiguity_type": row.get("ambiguity_type"),
                 "prompt_token_len": n_tokens,
             }
         )

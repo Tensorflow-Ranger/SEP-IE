@@ -1,0 +1,215 @@
+{
+  "amb_id": "amb_task_142",
+  "round": 0,
+  "code_prompt": "There is a city divided into H \\times W blocks, and there is exactly one building in each block.\nSpecifically, in the block at the i-th row from the north (1\\leq i\\leq H) and the j-th column from the west (1\\leq j\\leq W) (hereafter referred to as block (i,j)), there is a building of F_{i,j} floors.\nTakahashi has two ways of moving. If he is on the X-th floor (1\\leq X\\leq F_{i,j}) of the building in block (i,j), he can:\n- Move up or down one floor within the same building using stairs. If X=1, he cannot move down; if X=F_{i,j}, he cannot move up.\n- Choose a building with at least X floors in a cardinally adjacent block, and move to the X-th floor of that building using a (sky) walkway.\nHere, two blocks (i,j) and (i',j') are cardinally adjacent if and only if \\lvert i - i'\\rvert + \\lvert j - j'\\rvert = 1.\nYou are given Q queries to be answered. The i-th query (1\\leq i\\leq Q) is the following.\nFind the minimum possible number of times that Takahashi uses stairs to move from the Y_i-th floor of the building in block (A_i,B_i) to the Z_i-th floor of the building in block (C_i,D_i).\nThe count of times using stairs is incremented each time he moves up or down one floor, possibly multiple times within the same building. (For example, moving from the 1st floor to the 6th floor of a building counts as 5 uses of stairs.)\nNote that he does not have to minimize the number of times he uses walkways.\nInput\nThe input is given from Standard Input in the following format:\nH W\nF_{1,1} F_{1,2} \\ldots F_{1,W}\nF_{2,1} F_{2,2} \\ldots F_{2,W}\n\\vdots\nF_{H,1} F_{H,2} \\ldots F_{H,W}\nQ\nA_1 B_1 Y_1 C_1 D_1 Z_1\nA_2 B_2 Y_2 C_2 D_2 Z_2\n\\vdots\nA_Q B_Q Y_Q C_Q D_Q Z_Q\nOutput\nPrint Q lines. The i-th line should contain the answer to the i-th query as an integer.\nConstraints\n- 1\\leq H \\leq 500\n- 1\\leq W \\leq 500\n- 1\\leq F_{i,j} \\leq 10^6\n- 1\\leq Q\\leq 2\\times 10^5\n- 1\\leq A_i,C_i\\leq H\n- 1\\leq B_i,D_i\\leq W\n- 1\\leq Y_i\\leq F_{A_i,B_i}\n- 1\\leq Z_i\\leq F_{C_i,D_i}\n- (A_i,B_i,Y_i)\\neq (C_i,D_i,Z_i)\n- All input values are integers.",
+  "n_pass": 18,
+  "n_total": 41,
+  "elapsed_s": 12.8,
+  "test_results": [
+    {
+      "idx": 0,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '16\\n2' want '10\\n2'"
+    },
+    {
+      "idx": 1,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 2,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '6\\n5' want '0\\n5\\n'"
+    },
+    {
+      "idx": 3,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '1\\n1\\n0\\n3\\n1\\n1' want '1\\n1\\n0\\n1\\n1\\n1\\n'"
+    },
+    {
+      "idx": 4,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '4\\n8\\n4\\n11\\n4' want '4\\n0\\n4\\n5\\n4\\n'"
+    },
+    {
+      "idx": 5,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 6,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 7,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 8,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '372969\\n938925\\n932196\\n181720\\n543866\\n117871\\n293686\\n599641\\n651542\\n530447\\n430\\n181572\\n1062417\\n105925\\n214878\\n117252\\n954877\\n537518\\n886001\\n1115\\n583054\\n249548\\n22453\\n776118\\n164672\\n35978\\n734973\\n844297\\n492862\\n107' want '310997\\n68343\\n330272\\n181720\\n543866\\n117871\\n293686\\n599641\\n651542\\n391941\\n430\\n181572\\n467019\\n105925\\n214878\\n117252\\n333111\\n307776\\n366035\\n1115\\n182114\\n249548\\n22453\\n88478\\n164672\\n35978\\n131731\\n265121\\n220862\\n431500'"
+    },
+    {
+      "idx": 9,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '367440\\n196154\\n459400\\n317954\\n22356\\n570059\\n537465\\n20599\\n988313\\n57682\\n54400\\n36645\\n210151\\n151798\\n33947\\n322546\\n475213\\n174784\\n369469\\n445402\\n223691\\n405028\\n63627\\n661814\\n135535\\n356007\\n23490\\n204043\\n399675\\n81926' want '42020\\n95016\\n459400\\n317954\\n22356\\n66881\\n138379\\n20599\\n221647\\n57682\\n54400\\n36645\\n210151\\n151798\\n33947\\n237342\\n475213\\n174784\\n76409\\n445402\\n223691\\n346862\\n63627\\n661814\\n135535\\n301251\\n23490\\n204043\\n168991\\n81926\\n302'"
+    },
+    {
+      "idx": 10,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '772538\\n1401623\\n438404\\n953767\\n70627\\n1345\\n178633\\n367701\\n941089\\n408354\\n264675\\n722056\\n497256\\n822365\\n224292\\n171106\\n291776\\n124847\\n936695\\n517504\\n236253\\n896463\\n227590\\n303440\\n676841\\n535440\\n97214\\n22472\\n254326\\n4' want '772538\\n737245\\n297202\\n442997\\n70627\\n1345\\n178633\\n367701\\n750545\\n77048\\n27345\\n151308\\n497256\\n822365\\n159374\\n60072\\n141590\\n124847\\n606301\\n267350\\n236253\\n680217\\n227590\\n303440\\n289403\\n266976\\n53710\\n22472\\n246380\\n14314'"
+    },
+    {
+      "idx": 11,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '56\\n6\\n228\\n5\\n22\\n46\\n12\\n14\\n172\\n132\\n58\\n161\\n10\\n118\\n57\\n24\\n64\\n47\\n15\\n70\\n110\\n166\\n35\\n179\\n77\\n228\\n8' want '56\\n6\\n96\\n5\\n22\\n16\\n12\\n14\\n172\\n130\\n18\\n127\\n10\\n84\\n57\\n24\\n64\\n25\\n15\\n42\\n76\\n102\\n35\\n115\\n77\\n194\\n8\\n'"
+    },
+    {
+      "idx": 12,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 13,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '11\\n94\\n14\\n15\\n17\\n4\\n17\\n59\\n44\\n96\\n6\\n7\\n34\\n48\\n105\\n11\\n2\\n94\\n35\\n14' want '11\\n16\\n14\\n15\\n17\\n4\\n17\\n59\\n44\\n42\\n6\\n7\\n34\\n48\\n27\\n11\\n2\\n20\\n35\\n14\\n'"
+    },
+    {
+      "idx": 14,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '10\\n7\\n4\\n6\\n1\\n5' want '2\\n7\\n4\\n2\\n1\\n5\\n'"
+    },
+    {
+      "idx": 15,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '2\\n1\\n1\\n14\\n13' want '2\\n1\\n1\\n6\\n5\\n'"
+    },
+    {
+      "idx": 16,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 17,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '4\\n12\\n3' want '4\\n4\\n3\\n'"
+    },
+    {
+      "idx": 18,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '3\\n0\\n2\\n4\\n5\\n0' want '3\\n0\\n2\\n4\\n3\\n0\\n'"
+    },
+    {
+      "idx": 19,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 20,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 21,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 22,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 23,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 24,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '73\\n80\\n95\\n35\\n205\\n98\\n130\\n70\\n2\\n113\\n61\\n103\\n157\\n95\\n60\\n58\\n79\\n135' want '73\\n80\\n95\\n35\\n71\\n98\\n130\\n50\\n2\\n63\\n61\\n103\\n105\\n95\\n60\\n58\\n79\\n15\\n'"
+    },
+    {
+      "idx": 25,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '44\\n165\\n14\\n19\\n54\\n79\\n50\\n98\\n3\\n21\\n19\\n1\\n18\\n93\\n66' want '44\\n91\\n14\\n19\\n54\\n79\\n50\\n98\\n3\\n21\\n19\\n1\\n18\\n93\\n42\\n'"
+    },
+    {
+      "idx": 26,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '5\\n80\\n11\\n76\\n1\\n10\\n7\\n9\\n59\\n26\\n209\\n5\\n55\\n16\\n106\\n29\\n109' want '5\\n80\\n11\\n76\\n1\\n10\\n7\\n9\\n1\\n26\\n135\\n5\\n55\\n16\\n82\\n29\\n109\\n'"
+    },
+    {
+      "idx": 27,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 28,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '132467\\n718610\\n23267\\n219771\\n391786\\n403073\\n1546\\n1320145\\n426017\\n1245082\\n71543\\n86277\\n14296\\n327671\\n797415\\n565744\\n981346\\n1056517\\n110646\\n616180\\n1202596\\n271411\\n60025\\n66424\\n105779\\n535762\\n14874\\n104573\\n132511\\n11' want '132467\\n189876\\n23267\\n219771\\n136460\\n37541\\n1546\\n655671\\n426017\\n406254\\n71543\\n86277\\n14296\\n266189\\n653161\\n565744\\n810818\\n446759\\n110646\\n616180\\n337922\\n140479\\n46911\\n26192\\n105779\\n320682\\n14874\\n104573\\n132511\\n674641\\n'"
+    },
+    {
+      "idx": 29,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 30,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 31,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '214779\\n69730\\n148971\\n90884\\n36098\\n289334\\n649045\\n20354\\n907090\\n532751\\n242405\\n396513\\n61995\\n77940\\n214622\\n644598\\n656161\\n195046\\n242162\\n1021577\\n859873\\n889546\\n52865\\n64845\\n622076\\n768051\\n940719\\n1289840\\n796770\\n299' want '214779\\n69730\\n148971\\n90884\\n36098\\n289334\\n649045\\n20354\\n239362\\n532751\\n242405\\n396513\\n61995\\n77940\\n214622\\n644598\\n298253\\n195046\\n242162\\n279787\\n219881\\n889546\\n52865\\n64845\\n622076\\n243141\\n472909\\n552660\\n401654\\n29978'"
+    },
+    {
+      "idx": 32,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '0\\n2' want '0\\n0\\n'"
+    },
+    {
+      "idx": 33,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 34,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '45\\n42\\n30\\n103\\n51\\n83\\n104\\n114\\n17\\n210\\n139' want '43\\n42\\n30\\n81\\n51\\n83\\n80\\n114\\n17\\n94\\n139\\n'"
+    },
+    {
+      "idx": 35,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '88232\\n412165\\n117163\\n752833\\n232393\\n1030326\\n4757\\n109094\\n8812\\n693968\\n573463\\n12911\\n466933\\n551163\\n25830\\n135017\\n1718818\\n157463\\n1088452\\n84750\\n464378\\n230196\\n781143\\n167646\\n329847\\n51130\\n252548\\n224007\\n312894\\n376' want '88232\\n412165\\n117163\\n57119\\n232393\\n815532\\n4757\\n109094\\n8812\\n691912\\n573463\\n12911\\n259033\\n551163\\n25830\\n135017\\n866158\\n157463\\n259102\\n84750\\n464378\\n230196\\n295315\\n167646\\n329847\\n51130\\n252548\\n224007\\n312894\\n376550\\n'"
+    },
+    {
+      "idx": 36,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 37,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 38,
+      "pass": true,
+      "msg": ""
+    },
+    {
+      "idx": 39,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '65\\n38\\n140\\n4\\n175\\n84\\n213\\n22\\n9\\n164\\n23\\n130\\n149\\n21\\n4\\n60\\n39' want '65\\n38\\n82\\n4\\n47\\n84\\n115\\n22\\n9\\n130\\n23\\n130\\n149\\n21\\n4\\n60\\n39\\n'"
+    },
+    {
+      "idx": 40,
+      "pass": false,
+      "msg": "WRONG_ANSWER: got '246\\n21\\n66\\n43\\n29\\n146\\n76\\n42\\n72\\n84\\n7\\n127\\n26\\n75\\n112\\n42\\n70\\n49\\n6' want '166\\n21\\n42\\n43\\n29\\n28\\n58\\n42\\n70\\n80\\n7\\n71\\n26\\n75\\n112\\n42\\n2\\n49\\n6\\n'"
+    }
+  ]
+}

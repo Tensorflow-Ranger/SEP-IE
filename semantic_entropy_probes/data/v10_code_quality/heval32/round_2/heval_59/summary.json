@@ -1,0 +1,117 @@
+{
+  "round": 2,
+  "baseline_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.",
+  "baseline_mean_p": 0.16632315143942833,
+  "candidates": [
+    {
+      "idx": 0,
+      "question": "Does the function need to return the largest prime factor in ascending order or is a single value sufficient?",
+      "answer": "A single value: the largest prime factor itself, not a list.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.",
+      "p1": 0.11569628119468689,
+      "p2": 0.17313328385353088,
+      "mean_p": 0.1444147825241089,
+      "delta": -0.021908368915319443
+    },
+    {
+      "idx": 1,
+      "question": "What should the function return if n is a perfect square of a prime number?",
+      "answer": "Returns that prime itself, e.g. n=9=3^2 gives largest prime factor 3.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: Returns that prime itself, e.g. n=9=3^2 gives largest prime factor 3.",
+      "p1": 0.1122584268450737,
+      "p2": 0.20575547218322754,
+      "mean_p": 0.15900694951415062,
+      "delta": -0.00731620192527771
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior if n is 1?",
+      "answer": "Not applicable; the docstring explicitly assumes n > 1.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: Not applicable; the docstring explicitly assumes n > 1.",
+      "p1": 0.11131474375724792,
+      "p2": 0.22672437131404877,
+      "mean_p": 0.16901955753564835,
+      "delta": 0.0026964060962200165
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior if n is a very large number with multiple large prime factors?",
+      "answer": "Same brute-force logic (checks every j up to n); no special-casing, just slower for large n.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: Same brute-force logic (checks every j up to n); no special-casing, just slower for large n.",
+      "p1": 0.1614096760749817,
+      "p2": 0.19289463758468628,
+      "mean_p": 0.17715215682983398,
+      "delta": 0.010829005390405655
+    },
+    {
+      "idx": 4,
+      "question": "Should the function return the largest prime factor as an integer or as a string representation?",
+      "answer": "Returns an integer.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: Returns an integer.",
+      "p1": 0.15146134793758392,
+      "p2": 0.23106780648231506,
+      "mean_p": 0.1912645772099495,
+      "delta": 0.024941425770521164
+    },
+    {
+      "idx": 2,
+      "question": "How should the function handle negative values of n?",
+      "answer": "Not a specified case; the docstring assumes n > 1 and n is not prime.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: Not a specified case; the docstring assumes n > 1 and n is not prime.",
+      "p1": 0.1410774290561676,
+      "p2": 0.25190985202789307,
+      "mean_p": 0.19649364054203033,
+      "delta": 0.030170489102602005
+    },
+    {
+      "idx": 5,
+      "question": "What is the expected behavior if n has multiple prime factors with the same value?",
+      "answer": "Repeated prime factors don't change the answer; the function just finds the largest j <= n that both divides n and is prime.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: Repeated prime factors don't change the answer; the function just finds the largest j <= n that both divides n and is prime.",
+      "p1": 0.15628169476985931,
+      "p2": 0.25384530425071716,
+      "mean_p": 0.20506349951028824,
+      "delta": 0.03874034807085991
+    },
+    {
+      "idx": 6,
+      "question": "How should the function handle cases where n is a product of multiple prime factors, some of which are repeated?",
+      "answer": "Same logic applies: it iterates every j from 2 to n and returns the largest one that divides n and is prime.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: Same logic applies: it iterates every j from 2 to n and returns the largest one that divides n and is prime.",
+      "p1": 0.25414273142814636,
+      "p2": 0.29631245136260986,
+      "mean_p": 0.2752275913953781,
+      "delta": 0.10890443995594978
+    }
+  ],
+  "top3": [
+    {
+      "idx": 0,
+      "question": "Does the function need to return the largest prime factor in ascending order or is a single value sufficient?",
+      "answer": "A single value: the largest prime factor itself, not a list.",
+      "delta": -0.021908368915319443
+    },
+    {
+      "idx": 1,
+      "question": "What should the function return if n is a perfect square of a prime number?",
+      "answer": "Returns that prime itself, e.g. n=9=3^2 gives largest prime factor 3.",
+      "delta": -0.00731620192527771
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior if n is 1?",
+      "answer": "Not applicable; the docstring explicitly assumes n > 1.",
+      "delta": 0.0026964060962200165
+    }
+  ],
+  "chosen": {
+    "idx": 0,
+    "question": "Does the function need to return the largest prime factor in ascending order or is a single value sufficient?",
+    "answer": "A single value: the largest prime factor itself, not a list.",
+    "delta": -0.021908368915319443
+  },
+  "next_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.",
+  "code_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense. A single value: the largest prime factor itself, not a list.\"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

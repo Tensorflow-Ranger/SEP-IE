@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_44_vagueness",
+  "questions": [
+    "What is the valid range of values for the input integer x?",
+    "What is the valid range of values for the base parameter?",
+    "How should negative numbers be handled during base conversion?",
+    "What should be returned when the base is 1 or less than 1?",
+    "What should be returned when the input x is 0?",
+    "Should the output string include any prefix notation (like \"0x\" for hex or \"0b\" for binary)?",
+    "How should invalid input combinations be handled - should they raise exceptions or return specific error values?",
+    "What is the expected behavior when the base is greater than 36 (where standard alphanumeric digits run out)?"
+  ],
+  "answers": [
+    "Not addressed by the true spec; x is a non-negative integer.",
+    "The base parameter must be less than 10 (bases >= 10 are not supported, since the original spec explicitly restricts 'base numbers are less than 10').",
+    "Not addressed by the true spec.",
+    "Not addressed by the true spec; base<1 is outside the valid range and not required to be handled specially.",
+    "Not addressed by the true spec.",
+    "Not addressed by the true spec; a plain digit-string is expected, no prefix.",
+    "Not addressed by the true spec.",
+    "Related to the base-range ambiguity: bases beyond single-digit representation (>=10) are outside the supported range entirely, not merely a formatting concern at 36."
+  ],
+  "inline_prompts": [
+    "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    Not addressed by the true spec; x is a non-negative integer.\n    \"\"\"",
+    "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion. The base parameter must be less than 10 (bases >= 10 are not supported, since the original spec explicitly restricts 'base numbers are less than 10').\"\"\"",
+    "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion. Not addressed by the true spec.\n    \"\"\"",
+    "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    Note: base < 1 is outside the valid range and not required to be handled specially.\n    \"\"\"",
+    "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion. Not addressed by the true spec.\n    \"\"\"",
+    "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion. Not addressed by the true spec; a plain digit-string is expected, no prefix.\n    \"\"\"",
+    "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion. Not addressed by the true spec.\n    \"\"\"",
+    "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    Related to the base-range ambiguity: bases beyond single-digit representation (>=10) are outside the supported range entirely, not merely a formatting concern at 36."
+  ],
+  "tiers": [
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ]
+}

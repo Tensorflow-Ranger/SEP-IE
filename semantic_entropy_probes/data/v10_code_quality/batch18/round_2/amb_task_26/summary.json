@@ -1,0 +1,157 @@
+{
+  "round": 2,
+  "baseline_prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).",
+  "baseline_mean_p": 0.6854173541069031,
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "What is the expected output format for the answer?",
+      "answer": "Print the single integer value that is the K-th value, with no additional formatting.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: Print the single integer value that is the K-th value, with no additional formatting.",
+      "p1": 0.6342641711235046,
+      "p2": 0.5295495986938477,
+      "mean_p": 0.5819068849086761,
+      "delta": -0.10351046919822693
+    },
+    {
+      "idx": 1,
+      "question": "Are the sequences A, B, and C allowed to have duplicate elements?",
+      "answer": "Yes, the statement gives no constraint that A, B, or C must have distinct elements.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: Yes, the statement gives no constraint that A, B, or C must have distinct elements.",
+      "p1": 0.6838855147361755,
+      "p2": 0.6586207151412964,
+      "mean_p": 0.671253114938736,
+      "delta": -0.014164239168167114
+    },
+    {
+      "idx": 3,
+      "question": "How should the K-th value be determined if multiple values have the same computed value?",
+      "answer": "Each of the N^3 computed values is treated as a separate entry, so duplicate values each occupy their own position in the sorted order.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: Each of the N^3 computed values is treated as a separate entry, so duplicate values each occupy their own position in the sorted order.",
+      "p1": 0.7229781150817871,
+      "p2": 0.6816083192825317,
+      "mean_p": 0.7022932171821594,
+      "delta": 0.016875863075256348
+    },
+    {
+      "idx": 9,
+      "question": "What is the expected behavior when N is 1?",
+      "answer": "When N=1 there is only one triple (i=j=k=1), so K must be 1 and the answer is A_1B_1+B_1C_1+C_1A_1.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: When N=1 there is only one triple (i=j=k=1), so K must be 1 and the answer is A_1B_1+B_1C_1+C_1A_1.",
+      "p1": 0.7401716709136963,
+      "p2": 0.684096097946167,
+      "mean_p": 0.7121338844299316,
+      "delta": 0.026716530323028564
+    },
+    {
+      "idx": 8,
+      "question": "Are there any constraints on the data types of the intermediate values during computation?",
+      "answer": "The statement does not explicitly state a data type constraint, but values can be large so 64-bit (or larger) arithmetic is implied.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: The statement does not explicitly state a data type constraint, but values can be large so 64-bit (or larger) arithmetic is implied.",
+      "p1": 0.723287045955658,
+      "p2": 0.7054204940795898,
+      "mean_p": 0.7143537700176239,
+      "delta": 0.028936415910720825
+    },
+    {
+      "idx": 4,
+      "question": "Are the indices i, j, k allowed to be the same or must they be distinct?",
+      "answer": "They are allowed to be the same or different; no distinctness constraint is stated.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: They are allowed to be the same or different; no distinctness constraint is stated.",
+      "p1": 0.755637526512146,
+      "p2": 0.6982966065406799,
+      "mean_p": 0.726967066526413,
+      "delta": 0.04154971241950989
+    },
+    {
+      "idx": 0,
+      "question": "How should the values be ordered when there are duplicates to determine the K-th value?",
+      "answer": "Values are sorted in descending order and the K-th value in that sorted order (counting duplicates separately) is taken.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: Values are sorted in descending order and the K-th value in that sorted order (counting duplicates separately) is taken.",
+      "p1": 0.7497740983963013,
+      "p2": 0.725783109664917,
+      "mean_p": 0.7377786040306091,
+      "delta": 0.052361249923706055
+    },
+    {
+      "idx": 11,
+      "question": "Is the K-th value 1-based or 0-based?",
+      "answer": "It is 1-based, since K ranges from 1 to min(N^3, 5\u00d710^5).",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: It is 1-based, since K ranges from 1 to min(N^3, 5\u00d710^5).",
+      "p1": 0.7496213316917419,
+      "p2": 0.7293474078178406,
+      "mean_p": 0.7394843697547913,
+      "delta": 0.054067015647888184
+    },
+    {
+      "idx": 6,
+      "question": "How should the values be sorted if they are not unique?",
+      "answer": "They are sorted in descending order with duplicate values kept as separate entries in that order.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: They are sorted in descending order with duplicate values kept as separate entries in that order.",
+      "p1": 0.7475019097328186,
+      "p2": 0.7408983707427979,
+      "mean_p": 0.7442001402378082,
+      "delta": 0.05878278613090515
+    },
+    {
+      "idx": 10,
+      "question": "How should the values be handled if they exceed the range of standard integer types?",
+      "answer": "The statement does not explicitly address this beyond requiring correct integer output.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: The statement does not explicitly address this beyond requiring correct integer output.",
+      "p1": 0.7590014338493347,
+      "p2": 0.7336036562919617,
+      "mean_p": 0.7463025450706482,
+      "delta": 0.06088519096374512
+    },
+    {
+      "idx": 2,
+      "question": "What is the exact definition of the expression A_iB_j + B_jC_k + C_kA_i?",
+      "answer": "It is the sum of the three pairwise products A_i\u00b7B_j + B_j\u00b7C_k + C_k\u00b7A_i for the chosen indices i, j, k.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: It is the sum of the three pairwise products A_i\u00b7B_j + B_j\u00b7C_k + C_k\u00b7A_i for the chosen indices i, j, k.",
+      "p1": 0.7624603509902954,
+      "p2": 0.7336106896400452,
+      "mean_p": 0.7480355203151703,
+      "delta": 0.06261816620826721
+    },
+    {
+      "idx": 7,
+      "question": "Is the K-th value considered in ascending or descending order?",
+      "answer": "Descending order, since K-th value means K-th largest per the clarification.",
+      "prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: Descending order, since K-th value means K-th largest per the clarification.",
+      "p1": 0.7789512872695923,
+      "p2": 0.7508251070976257,
+      "mean_p": 0.764888197183609,
+      "delta": 0.07947084307670593
+    }
+  ],
+  "top3": [
+    {
+      "idx": 5,
+      "question": "What is the expected output format for the answer?",
+      "answer": "Print the single integer value that is the K-th value, with no additional formatting.",
+      "delta": -0.10351046919822693
+    },
+    {
+      "idx": 1,
+      "question": "Are the sequences A, B, and C allowed to have duplicate elements?",
+      "answer": "Yes, the statement gives no constraint that A, B, or C must have distinct elements.",
+      "delta": -0.014164239168167114
+    },
+    {
+      "idx": 3,
+      "question": "How should the K-th value be determined if multiple values have the same computed value?",
+      "answer": "Each of the N^3 computed values is treated as a separate entry, so duplicate values each occupy their own position in the sorted order.",
+      "delta": 0.016875863075256348
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "What is the expected output format for the answer?",
+    "answer": "Print the single integer value that is the K-th value, with no additional formatting.",
+    "delta": -0.10351046919822693
+  },
+  "next_prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K.\nFor each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value.\nInput\nThe input is given from Standard Input in the following format:\nN K\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\nC_1 C_2 \\ldots C_N\nOutput\nPrint the answer.\nConstraints\n- 1\\leq N \\leq 2\\times 10^5\n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)\n- 1\\leq A_i,B_i,C_i \\leq 10^9\n- All input values are integers.\n\nClarification: K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5).\n\nClarification: Print the single integer value that is the K-th value, with no additional formatting.",
+  "code_prompt": "You are given three integer sequences of length N, namely A=(A_1,A_2,\\ldots,A_N), B=(B_1,B_2,\\ldots,B_N), and C=(C_1,C_2,\\ldots,C_N), and an integer K. For each of the N^3 choices of integers i,j,k (1\\leq i,j,k\\leq N), compute the value A_iB_j + B_jC_k + C_kA_i. Among all these values, find the K-th value. K is 1-based, as indicated by the constraint 1\u2264K\u2264min(N^3,5\u00d710^5). Print the single integer value that is the K-th value, with no additional formatting.  \nInput  \nThe input is given from Standard Input in the following format:  \nN K  \nA_1 A_2 \\ldots A_N  \nB_1 B_2 \\ldots B_N  \nC_1 C_2 \\ldots C_N  \nOutput  \nPrint the answer.  \nConstraints  \n- 1\\leq N \\leq 2\\times 10^5  \n- 1\\leq K \\leq \\min(N^3,5\\times 10^5)  \n- 1\\leq A_i,B_i,C_i \\leq 10^9  \n- All input values are integers.",
+  "test_n_pass": 6,
+  "test_n_total": 43
+}

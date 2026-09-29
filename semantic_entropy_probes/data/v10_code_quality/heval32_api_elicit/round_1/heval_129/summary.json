@@ -1,0 +1,118 @@
+{
+  "round": 1,
+  "baseline_prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"",
+  "baseline_mean_p": 0.4949580281972885,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "Should the function return the minimum metric value, the actual sequence of coordinates, or both?",
+      "answer": "The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.",
+      "p1": 0.34013280272483826,
+      "p2": 0.3837254047393799,
+      "mean_p": 0.36192910373210907,
+      "delta": -0.13302892446517944
+    },
+    {
+      "idx": 5,
+      "question": "If multiple paths achieve the same minimum metric, should any particular tie\u2011breaking rule be applied (e.g., lexicographically smallest sequence of coordinates)?",
+      "answer": "The answer is guaranteed to be unique per the specification, so no additional tie-breaking rule is needed beyond the lexicographic comparison.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The answer is guaranteed to be unique per the specification, so no additional tie-breaking rule is needed beyond the lexicographic comparison.",
+      "p1": 0.3315497040748596,
+      "p2": 0.4443744719028473,
+      "mean_p": 0.38796208798885345,
+      "delta": -0.10699594020843506
+    },
+    {
+      "idx": 3,
+      "question": "Are diagonal neighbor moves allowed, or only the four orthogonal (up, down, left, right) moves?",
+      "answer": "No, only the four orthogonal (up/down/left/right) neighbor moves that share an edge are allowed.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: No, only the four orthogonal (up/down/left/right) neighbor moves that share an edge are allowed.",
+      "p1": 0.3585911691188812,
+      "p2": 0.42573848366737366,
+      "mean_p": 0.39216482639312744,
+      "delta": -0.10279320180416107
+    },
+    {
+      "idx": 1,
+      "question": "Is the starting cell counted as part of the path length k, i.e., does a path of length k contain k cells or k moves?",
+      "answer": "A path of length k means visiting exactly k CELLS (not k moves).",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: A path of length k means visiting exactly k CELLS (not k moves).",
+      "p1": 0.39003515243530273,
+      "p2": 0.4386851489543915,
+      "mean_p": 0.4143601506948471,
+      "delta": -0.0805978775024414
+    },
+    {
+      "idx": 0,
+      "question": "Does the \"minimum path of length k\" refer to the smallest possible sum of cell values visited, the smallest number of steps, or some other metric?",
+      "answer": "The lexicographically smallest sequence of the values on the visited cells (comparing position by position), not a sum or step count.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The lexicographically smallest sequence of the values on the visited cells (comparing position by position), not a sum or step count.",
+      "p1": 0.3729841709136963,
+      "p2": 0.47268879413604736,
+      "mean_p": 0.4228364825248718,
+      "delta": -0.07212154567241669
+    },
+    {
+      "idx": 4,
+      "question": "Must the path stay entirely within the grid boundaries, or are wrap\u2011around moves (toroidal topology) permitted?",
+      "answer": "No, the path must stay entirely within the grid boundaries; going off the grid is not allowed.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: No, the path must stay entirely within the grid boundaries; going off the grid is not allowed.",
+      "p1": 0.42175430059432983,
+      "p2": 0.44204360246658325,
+      "mean_p": 0.43189895153045654,
+      "delta": -0.06305907666683197
+    },
+    {
+      "idx": 2,
+      "question": "May cells be revisited multiple times within the same path, or must each cell be visited at most once?",
+      "answer": "Yes, cells CAN be revisited; they are not required to be distinct.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: Yes, cells CAN be revisited; they are not required to be distinct.",
+      "p1": 0.4551522135734558,
+      "p2": 0.43017667531967163,
+      "mean_p": 0.4426644444465637,
+      "delta": -0.05229358375072479
+    },
+    {
+      "idx": 6,
+      "question": "Are there any constraints on the values of k relative to N (e.g., k \u2264 N*N), or can k be larger than the number of distinct cells?",
+      "answer": "Not addressed beyond k being a positive integer; since cells can be revisited, k is not bounded by N*N.",
+      "prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: Not addressed beyond k being a positive integer; since cells can be revisited, k is not bounded by N*N.",
+      "p1": 0.5500836968421936,
+      "p2": 0.4825279116630554,
+      "mean_p": 0.5163058042526245,
+      "delta": 0.021347776055336
+    }
+  ],
+  "top3": [
+    {
+      "idx": 7,
+      "question": "Should the function return the minimum metric value, the actual sequence of coordinates, or both?",
+      "answer": "The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.",
+      "delta": -0.13302892446517944
+    },
+    {
+      "idx": 5,
+      "question": "If multiple paths achieve the same minimum metric, should any particular tie\u2011breaking rule be applied (e.g., lexicographically smallest sequence of coordinates)?",
+      "answer": "The answer is guaranteed to be unique per the specification, so no additional tie-breaking rule is needed beyond the lexicographic comparison.",
+      "delta": -0.10699594020843506
+    },
+    {
+      "idx": 3,
+      "question": "Are diagonal neighbor moves allowed, or only the four orthogonal (up, down, left, right) moves?",
+      "answer": "No, only the four orthogonal (up/down/left/right) neighbor moves that share an edge are allowed.",
+      "delta": -0.10279320180416107
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "Should the function return the minimum metric value, the actual sequence of coordinates, or both?",
+    "answer": "The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.",
+    "delta": -0.13302892446517944
+  },
+  "next_prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid.\n\n    You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"\n\nClarification: The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves.",
+  "code_prompt": "def minPath(grid, k):\n    \"\"\"\n    Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n    each cell of the grid contains a value. Every integer in the range [1, N * N]\n    inclusive appears at least once on the cells of the grid. The actual ordered sequence of the VALUES on the visited cells, not just the metric and not the coordinates themselves, is considered for the path. You have to find the minimum path of length k in the grid. You can start\n    from any cell, and in each step you can move to any of the neighbor cells,\n    in other words, you can go to cells which share an edge with you current\n    cell.\n    \"\"\"",
+  "test_n_pass": 1,
+  "test_n_total": 11
+}

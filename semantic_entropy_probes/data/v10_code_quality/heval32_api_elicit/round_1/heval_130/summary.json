@@ -1,0 +1,118 @@
+{
+  "round": 1,
+  "baseline_prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"",
+  "baseline_mean_p": 0.45940661430358887,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "Should the returned list include the starting value(s) as part of the \u201cfirst n + 1 numbers,\u201d and if so, how are they indexed?",
+      "answer": "Yes, the returned list has n+1 elements total: tri(0) through tri(n) inclusive.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Yes, the returned list has n+1 elements total: tri(0) through tri(n) inclusive.",
+      "p1": 0.24520134925842285,
+      "p2": 0.3649202883243561,
+      "mean_p": 0.30506081879138947,
+      "delta": -0.1543457955121994
+    },
+    {
+      "idx": 3,
+      "question": "Must the function validate that\u202fn\u202fis an integer, and what error should be raised for non\u2011integer types?",
+      "answer": "Not applicable -- input is guaranteed to be an integer.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be an integer.",
+      "p1": 0.2836912274360657,
+      "p2": 0.38190966844558716,
+      "mean_p": 0.3328004479408264,
+      "delta": -0.12660616636276245
+    },
+    {
+      "idx": 2,
+      "question": "Is the function expected to handle negative inputs for\u202fn, and if so, what should be returned or raised?",
+      "answer": "Not applicable -- input is guaranteed to be a non-negative integer.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to be a non-negative integer.",
+      "p1": 0.30759185552597046,
+      "p2": 0.39194121956825256,
+      "mean_p": 0.3497665375471115,
+      "delta": -0.10964007675647736
+    },
+    {
+      "idx": 6,
+      "question": "Is there any required handling for the case\u202fn\u202f=\u202f0 (e.g., return a list with a single element, an empty list, or raise an error)?",
+      "answer": "Return a list containing the single value [1] -- an explicit special case for n=0.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Return a list containing the single value [1] -- an explicit special case for n=0.",
+      "p1": 0.3124689757823944,
+      "p2": 0.4234580993652344,
+      "mean_p": 0.3679635375738144,
+      "delta": -0.09144307672977448
+    },
+    {
+      "idx": 5,
+      "question": "How should the function behave when\u202fn\u202fis extremely large (e.g., causing integer overflow or memory issues)\u2014should it raise an exception, truncate, or use arbitrary\u2011precision arithmetic?",
+      "answer": "Not addressed; no special exception/truncation behavior is specified, standard Python arithmetic applies.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Not addressed; no special exception/truncation behavior is specified, standard Python arithmetic applies.",
+      "p1": 0.3928575813770294,
+      "p2": 0.41116610169410706,
+      "mean_p": 0.40201184153556824,
+      "delta": -0.05739477276802063
+    },
+    {
+      "idx": 0,
+      "question": "What are the initial three values of the Tribonacci sequence that should be used to generate the list?",
+      "answer": "The sequence starts with tri(0)=1 (a special case) and tri(1)=3; subsequent values follow the given recurrence.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: The sequence starts with tri(0)=1 (a special case) and tri(1)=3; subsequent values follow the given recurrence.",
+      "p1": 0.3690039813518524,
+      "p2": 0.4397084414958954,
+      "mean_p": 0.4043562114238739,
+      "delta": -0.055050402879714966
+    },
+    {
+      "idx": 7,
+      "question": "Should the function be pure (no side effects) and guarantee that the returned list is a new object each call, not a shared mutable default?",
+      "answer": "Not addressed; not a case that affects correctness, and no shared mutable default is used.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Not addressed; not a case that affects correctness, and no shared mutable default is used.",
+      "p1": 0.41578349471092224,
+      "p2": 0.4418452978134155,
+      "mean_p": 0.4288143962621689,
+      "delta": -0.030592218041419983
+    },
+    {
+      "idx": 4,
+      "question": "Should the function return a list of integers, or are other numeric types (e.g., floats, Decimals) acceptable for large terms?",
+      "answer": "The even-n formula (1 + n/2) uses Python's true division and can produce floats; the reference implementation does not force integer conversion.",
+      "prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: The even-n formula (1 + n/2) uses Python's true division and can produce floats; the reference implementation does not force integer conversion.",
+      "p1": 0.5169832110404968,
+      "p2": 0.5159603953361511,
+      "mean_p": 0.516471803188324,
+      "delta": 0.05706518888473511
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "Should the returned list include the starting value(s) as part of the \u201cfirst n + 1 numbers,\u201d and if so, how are they indexed?",
+      "answer": "Yes, the returned list has n+1 elements total: tri(0) through tri(n) inclusive.",
+      "delta": -0.1543457955121994
+    },
+    {
+      "idx": 3,
+      "question": "Must the function validate that\u202fn\u202fis an integer, and what error should be raised for non\u2011integer types?",
+      "answer": "Not applicable -- input is guaranteed to be an integer.",
+      "delta": -0.12660616636276245
+    },
+    {
+      "idx": 2,
+      "question": "Is the function expected to handle negative inputs for\u202fn, and if so, what should be returned or raised?",
+      "answer": "Not applicable -- input is guaranteed to be a non-negative integer.",
+      "delta": -0.10964007675647736
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "Should the returned list include the starting value(s) as part of the \u201cfirst n + 1 numbers,\u201d and if so, how are they indexed?",
+    "answer": "Yes, the returned list has n+1 elements total: tri(0) through tri(n) inclusive.",
+    "delta": -0.1543457955121994
+  },
+  "next_prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    \"\"\"\n\nClarification: Yes, the returned list has n+1 elements total: tri(0) through tri(n) inclusive.",
+  "code_prompt": "def tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n      You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence. Yes, the returned list has n+1 elements total: tri(0) through tri(n) inclusive.\"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 10
+}

@@ -1,0 +1,71 @@
+{
+  "round": 3,
+  "prompt_before": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and the comparison is case-sensitive; only sentences starting with capital 'I ' are counted as boredom, and sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '.\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 6,
+      "question": "Should the function treat the entire input as a single line, or can it span multiple lines with line breaks considered part of sentences?",
+      "answer": "The function should treat the entire input as a single string regardless of line breaks; line breaks are not special delimiters and are part of sentence content.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and the comparison is case-sensitive; only sentences starting with capital 'I ' are counted as boredom, and sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '. The function should treat the entire input as a single string regardless of line breaks; line breaks are not special delimiters and are part of sentence content.\n    \"\"\"",
+      "score": 1.2619062662124634
+    },
+    {
+      "idx": 4,
+      "question": "Must the sentence contain at least one character after the initial \"I \" (e.g., \"I a\") to be counted, or is \"I \" alone sufficient?",
+      "answer": "A sentence must contain at least the substring 'I ' followed by at least one more character to be counted; 'I ' alone (if it were the entire sentence) would not satisfy the requirement of starting with 'I ' as a distinct word.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and the comparison is case-sensitive; only sentences starting with capital 'I ' are counted as boredom, and a sentence must contain at least the substring 'I ' followed by at least one more character to be counted; sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '.\n    \"\"\"",
+      "score": 0.7263796329498291
+    },
+    {
+      "idx": 2,
+      "question": "How should empty sentences (e.g., text between two delimiters with no characters) be treated?",
+      "answer": "Empty sentences (text between two delimiters with no characters) are treated as sentences but cannot start with 'I ', so they contribute 0 to the count.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and the comparison is case-sensitive; only sentences starting with capital 'I ' are counted as boredom, and sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I ', and empty sentences (text between two delimiters with no characters) are treated as sentences but cannot start with 'I ', so they contribute 0 to the count.\n    \"\"\"",
+      "score": 0.6002731323242188
+    },
+    {
+      "idx": 3,
+      "question": "Is the delimiter character itself considered part of the preceding sentence for the purpose of counting?",
+      "answer": "The delimiter character (., ?, !) is not part of the preceding sentence for the count; sentences end just before the delimiter.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and the delimiter character (., ?, !) is not part of the preceding sentence for the count; sentences end just before the delimiter. The comparison is case-sensitive; only sentences starting with capital 'I ' are counted as boredom, and sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '.\n    \"\"\"",
+      "score": 0.18860316276550293
+    },
+    {
+      "idx": 7,
+      "question": "If the input ends without a terminating delimiter, should the final fragment be treated as a sentence for counting purposes?",
+      "answer": "If the input ends without a terminating delimiter, the final fragment should be treated as a sentence and checked for the 'I ' pattern just like any other sentence.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and the comparison is case-sensitive; only sentences starting with capital 'I ' are counted as boredom, and sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '. If the input ends without a terminating delimiter, the final fragment should be treated as a sentence and checked for the 'I ' pattern just like any other sentence.\n    \"\"\"",
+      "score": 0.11891829967498779
+    },
+    {
+      "idx": 0,
+      "question": "Should sentences be trimmed of leading whitespace before checking if they start with the exact substring \"I \"?",
+      "answer": "Sentences should not be trimmed; leading whitespace is checked as-is, but the specific check is for the exact substring 'I ' (capital I followed by space).",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and the comparison is case-sensitive; only sentences starting with capital 'I ' are counted as boredom, and sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '. Sentences should not be trimmed; leading whitespace is checked as-is, but the specific check is for the exact substring 'I ' (capital I followed by space).\n    \"\"\"",
+      "score": -0.35581541061401367
+    },
+    {
+      "idx": 5,
+      "question": "Are other whitespace characters (tabs, newlines) allowed between the 'I' and the following space, and do they affect the \"I \" check?",
+      "answer": "Only a regular space is checked between 'I' and the following character; tabs, newlines, or other whitespace break the 'I ' pattern and are not counted.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and the comparison is case-sensitive; only sentences starting with capital 'I ' are counted as boredom, and sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '. Only a regular space is checked between 'I' and the following character; tabs, newlines, or other whitespace break the 'I ' pattern and are not counted.\n    \"\"\"",
+      "score": -0.8704982995986938
+    },
+    {
+      "idx": 1,
+      "question": "Are multiple consecutive delimiters (e.g., \"!!\") considered as separate sentence boundaries or ignored?",
+      "answer": "Multiple consecutive delimiters create empty sentences between them; empty sentences are handled but don't start with 'I ', so they don't count as boredoms.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and multiple consecutive delimiters create empty sentences between them; empty sentences are handled but don't start with 'I ', so they don't count as boredoms. Only sentences starting with capital 'I ' are counted as boredom, and sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '.\n    \"\"\"",
+      "score": -1.5748776197433472
+    }
+  ],
+  "chosen": {
+    "idx": 6,
+    "question": "Should the function treat the entire input as a single line, or can it span multiple lines with line breaks considered part of sentences?",
+    "answer": "The function should treat the entire input as a single string regardless of line breaks; line breaks are not special delimiters and are part of sentence content.",
+    "score": 1.2619062662124634
+  },
+  "next_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and the comparison is case-sensitive; only sentences starting with capital 'I ' are counted as boredom, and sentences that consist solely of 'I' without any following characters are not counted as boredom, because they do not start with 'I '. The function should treat the entire input as a single string regardless of line breaks; line breaks are not special delimiters and are part of sentence content.\n    \"\"\"",
+  "test_n_pass": 6,
+  "test_n_total": 6
+}

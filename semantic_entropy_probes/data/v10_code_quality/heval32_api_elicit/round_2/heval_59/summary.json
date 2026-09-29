@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.",
+  "baseline_mean_p": 0.16455085575580597,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 7,
+      "question": "If n is a perfect power of a prime (e.g., 27 = 3\u00b3), is the largest prime factor simply that prime (3), or should the function consider the exponent?",
+      "answer": "Yes -- e.g. for n=27=3^3, the largest prime factor is simply 3 (confirmed by test case: 27 -> 3), regardless of the exponent/multiplicity.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.\n\nClarification: Yes -- e.g. for n=27=3^3, the largest prime factor is simply 3 (confirmed by test case: 27 -> 3), regardless of the exponent/multiplicity.",
+      "p1": 0.0892498642206192,
+      "p2": 0.16461795568466187,
+      "mean_p": 0.12693390995264053,
+      "delta": -0.037616945803165436
+    },
+    {
+      "idx": 4,
+      "question": "Should the function raise an exception if n is actually prime despite the assumption?",
+      "answer": "Not specified; explicitly assumed that n is not prime, so this case doesn't occur and doesn't need to raise anything.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.\n\nClarification: Not specified; explicitly assumed that n is not prime, so this case doesn't occur and doesn't need to raise anything.",
+      "p1": 0.12042537331581116,
+      "p2": 0.1880810409784317,
+      "mean_p": 0.15425320714712143,
+      "delta": -0.01029764860868454
+    },
+    {
+      "idx": 1,
+      "question": "If n has multiple prime factors of the same maximal value (e.g., repeated factor), should the function return that prime once or consider multiplicity?",
+      "answer": "Return that prime value once -- the function returns a single largest-prime-factor value, not a list, so multiplicity of that factor doesn't change the return value.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.\n\nClarification: Return that prime value once -- the function returns a single largest-prime-factor value, not a list, so multiplicity of that factor doesn't change the return value.",
+      "p1": 0.14370405673980713,
+      "p2": 0.16762609779834747,
+      "mean_p": 0.1556650772690773,
+      "delta": -0.008885778486728668
+    },
+    {
+      "idx": 5,
+      "question": "Are there any limits on the size of n (e.g., fits in Python's int, or may be arbitrarily large requiring special algorithms)?",
+      "answer": "Not specified; assume n fits within Python's native (arbitrary-precision) int type, no explicit size limit stated.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.\n\nClarification: Not specified; assume n fits within Python's native (arbitrary-precision) int type, no explicit size limit stated.",
+      "p1": 0.14363345503807068,
+      "p2": 0.16990023851394653,
+      "mean_p": 0.1567668467760086,
+      "delta": -0.007784008979797363
+    },
+    {
+      "idx": 0,
+      "question": "Should the function return the largest prime factor as an integer value?",
+      "answer": "Yes, the function returns an integer value.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.\n\nClarification: Yes, the function returns an integer value.",
+      "p1": 0.17311562597751617,
+      "p2": 0.21580539643764496,
+      "mean_p": 0.19446051120758057,
+      "delta": 0.029909655451774597
+    },
+    {
+      "idx": 2,
+      "question": "Must the function handle negative inputs by treating their absolute value, or is negative n outside the guaranteed domain?",
+      "answer": "Not specified/tested; outside the guaranteed domain -- n is assumed to be > 1, so negative inputs don't occur.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.\n\nClarification: Not specified/tested; outside the guaranteed domain -- n is assumed to be > 1, so negative inputs don't occur.",
+      "p1": 0.15578915178775787,
+      "p2": 0.2394351065158844,
+      "mean_p": 0.19761212915182114,
+      "delta": 0.03306127339601517
+    },
+    {
+      "idx": 6,
+      "question": "Should the function return the factor as a plain int or could it be returned as a different numeric type (e.g., long, Decimal)?",
+      "answer": "A plain int.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.\n\nClarification: A plain int.",
+      "p1": 0.19241276383399963,
+      "p2": 0.22307784855365753,
+      "mean_p": 0.20774530619382858,
+      "delta": 0.043194450438022614
+    },
+    {
+      "idx": 3,
+      "question": "Is there any required time or space complexity constraint for the implementation?",
+      "answer": "Not specified; no explicit time/space complexity constraint is stated.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.\n\nClarification: Not specified; no explicit time/space complexity constraint is stated.",
+      "p1": 0.26096534729003906,
+      "p2": 0.23371578752994537,
+      "mean_p": 0.24734056740999222,
+      "delta": 0.08278971165418625
+    }
+  ],
+  "top3": [
+    {
+      "idx": 7,
+      "question": "If n is a perfect power of a prime (e.g., 27 = 3\u00b3), is the largest prime factor simply that prime (3), or should the function consider the exponent?",
+      "answer": "Yes -- e.g. for n=27=3^3, the largest prime factor is simply 3 (confirmed by test case: 27 -> 3), regardless of the exponent/multiplicity.",
+      "delta": -0.037616945803165436
+    },
+    {
+      "idx": 4,
+      "question": "Should the function raise an exception if n is actually prime despite the assumption?",
+      "answer": "Not specified; explicitly assumed that n is not prime, so this case doesn't occur and doesn't need to raise anything.",
+      "delta": -0.01029764860868454
+    },
+    {
+      "idx": 1,
+      "question": "If n has multiple prime factors of the same maximal value (e.g., repeated factor), should the function return that prime once or consider multiplicity?",
+      "answer": "Return that prime value once -- the function returns a single largest-prime-factor value, not a list, so multiplicity of that factor doesn't change the return value.",
+      "delta": -0.008885778486728668
+    }
+  ],
+  "chosen": {
+    "idx": 7,
+    "question": "If n is a perfect power of a prime (e.g., 27 = 3\u00b3), is the largest prime factor simply that prime (3), or should the function consider the exponent?",
+    "answer": "Yes -- e.g. for n=27=3^3, the largest prime factor is simply 3 (confirmed by test case: 27 -> 3), regardless of the exponent/multiplicity.",
+    "delta": -0.037616945803165436
+  },
+  "next_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: Not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed.\n\nClarification: Yes -- e.g. for n=27=3^3, the largest prime factor is simply 3 (confirmed by test case: 27 -> 3), regardless of the exponent/multiplicity.",
+  "code_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime; not applicable -- input is guaranteed to satisfy 'n > 1 and is not a prime,' so no validation/error-raising is needed. For example, for n=27=3^3, the largest prime factor is simply 3 (confirmed by test case: 27 -> 3), regardless of the exponent/multiplicity.\"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

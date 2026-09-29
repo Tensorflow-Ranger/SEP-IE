@@ -47,7 +47,7 @@ baseline, since both are "standardize a feature matrix, sweep C on a held-out
 val set, evaluate on test" -- the only difference is what X is. The 1-D
 length baseline has n_features=1, so PCA is skipped for it automatically.
 
-## backend={"sklearn","torch"}
+## backend={"sklearn","torch","torch_mlp"}
 
 `sklearn` (default) is the pipeline described above. `torch` swaps in
 src/torch_probe.py's TorchLogisticProbe (Adam on GPU, same L2-regularized
@@ -58,7 +58,10 @@ when running many layers back-to-back and the GPU is otherwise idle; see
 src/torch_probe.py's docstring for the empirical sklearn-vs-torch validation
 that motivated its specific hyperparameters (an under-tuned patience setting
 initially converged to chance-level results on some layers before that was
-caught and fixed).
+caught and fixed). `torch_mlp` swaps in src/torch_mlp_probe.py's
+TorchMLPProbe -- one ReLU hidden layer + dropout, GPU/Adam, same C=inverse-
+weight-decay convention -- as the nonlinear "ML" counterpart to plain
+logistic regression, regularized via both weight_decay and dropout.
 """
 
 from __future__ import annotations
@@ -74,6 +77,7 @@ from sklearn.metrics import accuracy_score, f1_score, mean_absolute_error, roc_a
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+from src.torch_mlp_probe import TorchMLPProbe
 from src.torch_probe import TorchLogisticProbe
 
 DEFAULT_C_GRID = (0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0)
@@ -82,13 +86,16 @@ N_PCA_COMPONENTS = 100
 ALL_CLASSES = (0, 1, 2, 3)
 
 
-def _build_pipeline(C: float, seed: int, n_train: int, n_features: int, backend: str = "sklearn") -> Pipeline:
+def _build_pipeline(C: float, seed: int, n_train: int, n_features: int, backend: str = "sklearn",
+                     use_pca: bool = True) -> Pipeline:
     steps = [("scale", StandardScaler())]
     n_components = min(N_PCA_COMPONENTS, n_train - 1, n_features)
-    if n_features > n_components:
+    if use_pca and n_features > n_components:
         steps.append(("pca", PCA(n_components=n_components, random_state=seed)))
     if backend == "torch":
         clf = TorchLogisticProbe(C=C, class_weight="balanced", seed=seed)
+    elif backend == "torch_mlp":
+        clf = TorchMLPProbe(C=C, class_weight="balanced", seed=seed)
     else:
         clf = LogisticRegression(C=C, class_weight="balanced", max_iter=MAX_ITER, random_state=seed)
     steps.append(("clf", clf))
@@ -107,7 +114,7 @@ def _fit(pipeline: Pipeline, X, y) -> bool:
         pipeline.fit(X, y)
         converged = not any(issubclass(w.category, ConvergenceWarning) for w in caught)
     clf = pipeline.named_steps["clf"]
-    if isinstance(clf, TorchLogisticProbe):
+    if isinstance(clf, (TorchLogisticProbe, TorchMLPProbe)):
         converged = clf.n_iter_ < clf.max_iter
     return converged
 
@@ -162,6 +169,7 @@ def fit_and_eval(
     seed: int = 0,
     macro_labels=ALL_CLASSES,
     backend: str = "sklearn",
+    use_pca: bool = True,
 ) -> dict:
     """Standardize+PCA on train, select C by val Spearman, refit on train+val, score on test.
 
@@ -185,7 +193,7 @@ def fit_and_eval(
     best_c, best_val_spearman = c_grid[0], -np.inf
     any_unconverged = False
     for c in c_grid:
-        pipe = _build_pipeline(c, seed, n_train=len(y_train), n_features=n_features, backend=backend)
+        pipe = _build_pipeline(c, seed, n_train=len(y_train), n_features=n_features, backend=backend, use_pca=use_pca)
         converged = _fit(pipe, X_train, y_train)
         any_unconverged = any_unconverged or not converged
         val_expected = _expected_value(pipe.predict_proba(X_val), pipe.classes_)
@@ -197,7 +205,8 @@ def fit_and_eval(
     X_trainval = np.concatenate([X_train, X_val], axis=0)
     y_trainval = np.concatenate([y_train, y_val], axis=0)
 
-    pipe_final = _build_pipeline(best_c, seed, n_train=len(y_trainval), n_features=n_features, backend=backend)
+    pipe_final = _build_pipeline(best_c, seed, n_train=len(y_trainval), n_features=n_features, backend=backend,
+                                  use_pca=use_pca)
     converged_final = _fit(pipe_final, X_trainval, y_trainval)
     any_unconverged = any_unconverged or not converged_final
 

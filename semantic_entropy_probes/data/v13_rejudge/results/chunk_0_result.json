@@ -1,0 +1,2298 @@
+[
+  {
+    "id": "ccb_amb_task_1",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "The ambiguous prompt lacks specific mention of handling zeros/negatives. The constraint explicitly states '1 ≤ A_i ≤ 10^9', which directly resolves the ambiguity by specifying all elements are positive integers.",
+    "candidates": [
+      {
+        "question": "Should a sequence with N=1 be considered a geometric progression, and if so, what should the output be?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed by reference; a standard convention would treat single elements as trivial geometric progressions (always true)."
+      },
+      {
+        "question": "Is a constant sequence (all A_i equal) regarded as a geometric progression, and does it require a specific common ratio?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed by reference; a constant sequence would have common ratio 1, which is a valid geometric progression by standard definition."
+      },
+      {
+        "question": "Must the common ratio be an integer, or can it be any rational or real number?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed by reference; the definition of geometric progression allows any non-zero common ratio (rational or real)."
+      },
+      {
+        "question": "If the common ratio is fractional, how should division be handled given that A_i are integers—should we check exact equality using rational arithmetic?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "The reference_text does not specify; however, typical implementations would check if A_i/A_{i-1} is constant, allowing exact equality via integer arithmetic (A_i * A_{i-2} == A_{i-1}^2)."
+      },
+      {
+        "question": "Are sequences containing zero allowed as terms, and if so, how should a zero common ratio be treated?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 states all elements must be positive integers (1 ≤ A_i ≤ 10^9), so zero is not allowed and this is not a real ambiguity."
+      },
+      {
+        "question": "Should we consider floating-point precision issues when verifying the ratio, or must the check be performed using exact integer arithmetic?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed by reference; given all A_i are integers, exact integer arithmetic would be the natural approach."
+      },
+      {
+        "question": "If the sequence length N is 2, is any pair of numbers automatically a geometric progression, or must we still verify a ratio?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Any pair of distinct positive numbers forms a geometric progression (common ratio = A_2/A_1). If A_1 = A_2, the common ratio is 1. Either way, verification is trivial for N=2."
+      },
+      {
+        "question": "What exact capitalization and spelling (e.g., \"Yes\"/\"No\") are required for the output, and should there be a trailing newline?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The prompt specifies 'print Yes' and 'print No', establishing the required output format."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_24",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "The prompt does not leak the bottom-to-top processing rule. The ambiguity lies in the timing of row removal and block movement, which is not resolved elsewhere in the prompt.",
+    "candidates": [
+      {
+        "question": "If the bottom row becomes completely filled after some blocks move downward during a time step, does the removal of that row happen before or after those blocks move?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 clarifies that blocks are processed from bottom to top, and each block's movement depends on the updated state of blocks below it in the same step, establishing the order."
+      },
+      {
+        "question": "When the entire bottom row is removed, are the blocks in that row deleted instantly at the start of the time step, or after all downward movements for that step have been processed?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 establishes that blocks are processed from bottom to top in each step; removal of a completed bottom row should occur after movements but affects subsequent movements in the same step."
+      },
+      {
+        "question": "If multiple blocks would move into the same cell during the same time step, is that situation possible, and if so, how should it be resolved?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The constraint '1 ≤ X_i ≤ W' ensures each block occupies a unique column initially, and the movement rules prevent collisions within the same column during a time step."
+      },
+      {
+        "question": "Does the removal of the bottom row affect the \"bottom row\" definition for the remaining blocks within the same time step (i.e., does the next row become the new bottom row for further moves)?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not explicitly addressed by reference; by standard interpretation, after removal, the new bottom row would be the next row up, but movement in the same step would not re-trigger this."
+      },
+      {
+        "question": "Are blocks considered to exist at non-integer times only at the half-step moments (e.g., T+0.5), and does the query ask about the state after the removal step but before any movement at time T+1?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A2 answers queries at time T+0.5, which occurs after all movements and removals for that time step have completed."
+      },
+      {
+        "question": "Can the value of W be larger than the number of distinct X-coordinates among the blocks, and if so, are empty columns simply ignored?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; W defines the grid width and empty columns are irrelevant to the mechanics."
+      },
+      {
+        "question": "Is there any limit on the total number of time steps simulated (e.g., does the process stop earlier if all blocks are removed), or must we conceptually continue up to 10^100 regardless of block existence?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Queries specify T ≤ 10^9, so implementation only needs to compute up to the queried time; after all blocks are gone, all queries return false."
+      },
+      {
+        "question": "If a block is removed because its row was cleared, does it cease to exist for all future queries, even if the same (X, Y) coordinates could be re-occupied by another block later?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Once a block is removed, it no longer exists. Blocks are indexed by their initial position, not by coordinates."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_48",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "The output format is specified in the problem: 'Print a and b in this order.' The ambiguity about whether coordinates are 1-indexed or 0-indexed is not leaked elsewhere.",
+    "candidates": [
+      {
+        "question": "Should the output coordinates (a, b) be 1-indexed or 0-indexed?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed by reference; the problem defines cells at 1-indexed positions (i-th row, j-th column from left), suggesting 1-indexed output."
+      },
+      {
+        "question": "In which order should a and b be printed: row first then column, or column then row?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A2 specifies they should be printed on one line, separated by a single space. Reference A3 uses the term '(a,b)' but does not disambiguate meaning; the problem statement 'Print a and b' leaves ordering ambiguous, but 'a' typically refers to the row."
+      },
+      {
+        "question": "If multiple occurrences of T exist in S, which occurrence should be output (e.g., the topmost-leftmost one)?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A3 states there is exactly one valid pair (a,b), guaranteeing uniqueness so no tie-breaking is needed."
+      },
+      {
+        "question": "Must the entire M×M pattern T match exactly, including both '.' and '#', or is it sufficient to match only the black cells?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 states every cell of T must exactly match the corresponding part of S, including both '.' and '#'."
+      },
+      {
+        "question": "Are rotations or reflections of T considered a match, or must the orientation be identical?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 specifies exact match only; rotations and reflections are not considered."
+      },
+      {
+        "question": "Is it guaranteed that T appears at least once in S, or should we handle the case where there is no match?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Reference A3 states there is exactly one valid pair, implying at least one match is guaranteed by problem constraints."
+      },
+      {
+        "question": "Should the output be separated by a space, a newline, or any other delimiter?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A2 specifies one line, separated by a single space."
+      },
+      {
+        "question": "Are there any constraints on whitespace or line endings in the input (e.g., trailing spaces after each row)?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard input format assumes no trailing spaces unless explicitly mentioned; the grid is given as N lines of N characters."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_71",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "The key ambiguity (any pair vs. optimal pair) is directly answered by Reference A1, which specifies finding the maximum probability among all pairs.",
+    "candidates": [
+      {
+        "question": "If multiple pairs of dice achieve the same maximal probability, should we output that probability value or any additional information such as which pair to choose?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem asks only for the probability value, not the pair itself; additional information is not required."
+      },
+      {
+        "question": "Are the numbers on a die's faces guaranteed to be distinct, or can the same number appear on multiple faces of the same die?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed by reference; allowing duplicates is plausible (e.g., a die with [1,1,2,2,3,3]) and would be handled naturally by counting matching numbers."
+      },
+      {
+        "question": "Should the probability be printed as a decimal number, a fraction, or is any format acceptable as long as the numeric value meets the error tolerance?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem accepts any format within the error tolerance of 10^{-8}; decimal format is standard."
+      },
+      {
+        "question": "Is it allowed to choose the same die twice (i.e., roll the same die two times) when selecting the two dice, or must the two dice be distinct?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed by reference; typical interpretation is that 'choosing two dice' implies distinct indices, but allowing the same die would also be a valid interpretation."
+      },
+      {
+        "question": "If a die has only one face (K_i = 1), does rolling it count as a valid choice for the pair of dice?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed by reference; a single-faced die is a valid die with K_i ≥ 1, and it should be considered."
+      },
+      {
+        "question": "Are the face values A_{i,j} guaranteed to be sorted in any order, or can they appear in arbitrary order?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Not relevant; sorting has no impact on probability calculation."
+      },
+      {
+        "question": "Must the output be printed on a single line, or are line breaks or additional whitespace permitted?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard output format: single number on one line."
+      },
+      {
+        "question": "In the case where N = 2 and both dice have identical face sets, is the optimal probability simply 1, or should we consider the uniform randomness of each die's roll?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "If both dice have identical face sets, the probability that both show the same number is the sum of (1/K_i)^2 for each unique face value, not necessarily 1."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_94",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "The key ambiguity (contiguous vs. any subsequence) is directly answered by Reference A1, which clarifies subsequences are not necessarily contiguous.",
+    "candidates": [
+      {
+        "question": "Should the subsequence be required to preserve the original order of indices in (A_1,…,A_{R_i})?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; this is the definition of a subsequence: elements must appear in the same relative order."
+      },
+      {
+        "question": "Is the subsequence allowed to be empty, and if so, should its length be reported as 0?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not explicitly addressed by reference; by definition, a strictly increasing subsequence is non-empty, and the empty subsequence (length 0) would violate this."
+      },
+      {
+        "question": "Must the elements of the subsequence be strictly less than or equal to X_i, or strictly less than X_i?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem specifies 'elements at most X_i', which means ≤ X_i."
+      },
+      {
+        "question": "If multiple subsequences achieve the maximum length, does the answer depend on any tie-breaking rule (e.g., smallest last element) or is only the length required?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Only the maximum length is required; tie-breaking is not specified."
+      },
+      {
+        "question": "Are the queries independent, i.e., does answering one query affect the array or subsequent queries?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; each query is answered independently based on the original array A."
+      },
+      {
+        "question": "Can the values of R_i be given out of order, and must each query be answered based on the prefix up to that specific R_i regardless of previous queries?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; each query is independent and uses only the prefix A_1 to A_{R_i}."
+      },
+      {
+        "question": "Is the guarantee 'X_i ≥ min{A_1,…,A_{R_i}}' inclusive, meaning X_i can equal the minimum element, and does that affect feasibility of a non-empty subsequence?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; if X_i equals the minimum, at least one element (the minimum) is included, ensuring feasibility of at least length 1."
+      },
+      {
+        "question": "Are there any limits on the sum of N and Q across multiple test cases, or is there only a single test case per input file?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem specifies a single test case; N and Q are given once per execution."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_114",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A2 clarifies the valid range of i is 1 ≤ i ≤ N-1, and Reference A3 confirms the output should be a single integer. The guarantee in A2 states S contains at least one '1'.",
+    "candidates": [
+      {
+        "question": "What should be printed if the string already has all 1s contiguous (i.e., is already in the desired form)?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The answer is 0 (zero operations), as no changes are needed."
+      },
+      {
+        "question": "Is the answer guaranteed to fit within a 32-bit signed integer, or should we output a larger integer type?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "With N ≤ 5×10^5, the worst-case number of swaps is O(N^2), which may exceed 32-bit limits; a 64-bit integer should be used for safety."
+      },
+      {
+        "question": "Are we allowed to swap characters at positions i and i+1 where i = N (i.e., does the operation wrap around or is it invalid)?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 specifies the valid range of i is 1 ≤ i ≤ N-1, so i = N is invalid (out of bounds)."
+      },
+      {
+        "question": "Must the output be a single integer followed by a newline, or are additional spaces or lines acceptable?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard output format: single integer on one line."
+      },
+      {
+        "question": "If the string contains no '1' characters, what is the required output (e.g., 0 or some special value)?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Reference A2 guarantees S contains at least one '1', so this case will not occur."
+      },
+      {
+        "question": "Are there any time- or memory-limit constraints that could affect the choice of algorithm beyond the given N bound?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard competitive programming constraints apply; a polynomial-time algorithm (e.g., O(N^2)) should suffice."
+      },
+      {
+        "question": "Should we consider the string indexing to be 1-based as described, but implement using 0-based indexing internally, or does it affect the definition of the operation?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Internal 0-based indexing can be used; the operation swaps adjacent positions, regardless of whether they are referred to as 1-based or 0-based."
+      },
+      {
+        "question": "In case of multiple optimal sequences of swaps, does the problem require any specific sequence to be output, or only the minimal number of operations?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Only the minimal number is required."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_140",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 guarantees that S always contains at least one '2', so the empty result case is not a real ambiguity in this problem.",
+    "candidates": [
+      {
+        "question": "Should the output be an empty string when S contains no '2' characters, or should we output a specific placeholder such as 0 or a newline?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Reference A1 guarantees S contains at least one '2', so this case will not occur."
+      },
+      {
+        "question": "Is the input guaranteed to contain only the characters '0'–'9', or could there be whitespace or other symbols that need to be ignored?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem specifies S consists of digits, so only '0'–'9' are present."
+      },
+      {
+        "question": "Must the program preserve leading zeros in the resulting string, i.e., output exactly the concatenated '2's without any numeric conversion?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; the output is a string of '2's concatenated, preserving any leading zeros (though all are '2's, not '0's)."
+      },
+      {
+        "question": "If the input line contains trailing newline characters or spaces, should those be trimmed before processing?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard input processing trims trailing newlines; spaces are not mentioned, so if present, they should be treated as non-digit characters and ignored."
+      },
+      {
+        "question": "Are there any limits on the size of the output string beyond the original length constraint (e.g., memory or line length restrictions)?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The output is a substring of the input, so it fits within the same constraints."
+      },
+      {
+        "question": "Should the program handle multiple test cases in a single file, or is there exactly one string S per execution?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem specifies a single string S per execution."
+      },
+      {
+        "question": "Is the output required to end with a newline character, or is a trailing newline optional?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard output format includes a newline."
+      },
+      {
+        "question": "In case of an empty input (no characters at all), is this considered invalid, or should the program output nothing?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The constraint specifies 1 ≤ length ≤ 100, so empty input is not possible."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_163",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 clarifies that 'subarray' means a contiguous segment, directly addressing the central ambiguity.",
+    "candidates": [
+      {
+        "question": "Does the subarray need to contain at least two equal elements, i.e., must the repeated value appear at least twice within that subarray?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 defines the problem as finding a subarray with a 'repeated value', implying at least two occurrences of the same value within the subarray."
+      },
+      {
+        "question": "Should the repeated value be required to appear elsewhere in the entire array outside the subarray, or is it sufficient that it repeats only inside the subarray?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not explicitly stated; the problem asks for a subarray with a repeated value (appearing multiple times within that subarray), not requiring external duplicates."
+      },
+      {
+        "question": "If multiple subarrays have the same minimal length, is any length acceptable, or must we output additional information such as the starting index?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Only the length is required."
+      },
+      {
+        "question": "Are subarrays defined as contiguous segments of the original sequence, or can they be any subsequence (not necessarily contiguous)?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 specifies a subarray is a contiguous segment; subsequences are not considered."
+      },
+      {
+        "question": "Is the array 1-indexed or 0-indexed for the purpose of describing positions, or does it not matter for the answer?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Indexing does not affect the answer (the length of the shortest subarray)."
+      },
+      {
+        "question": "Must the subarray be non-empty but can it consist of a single element if that element appears elsewhere in the array?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "A single-element subarray cannot contain a repeated value by definition."
+      },
+      {
+        "question": "Are there any constraints on the size of the integers beyond the given limits that could affect overflow or memory considerations?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard constraints apply; no special considerations needed."
+      },
+      {
+        "question": "Should the output be exactly '−1' (without quotes) when no such subarray exists, and no extra whitespace or newline characters?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard output format: '-1' followed by a newline."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_183",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 explicitly defines 'strictly increasing' as A_i < A_{i+1} for each i. Reference A3 clarifies that 'case-insensitive' means variations like 'YES', 'yes', or 'yEs' are all accepted.",
+    "candidates": [
+      {
+        "question": "Should the output be exactly \"Yes\" or can other case variations like \"YES\" or \"yes\" be used, given the judge is case-insensitive?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A3 states the judge is case-insensitive and accepts any capitalization variation."
+      },
+      {
+        "question": "If the sequence is not strictly increasing, what should be printed (e.g., \"No\", \"NO\", or something else)?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A2 specifies printing 'No' if the sequence is not strictly increasing."
+      },
+      {
+        "question": "Are there any extra whitespace requirements for the output line (e.g., trailing spaces or newline)?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard output format: 'Yes' or 'No' followed by a newline, no extra whitespace."
+      },
+      {
+        "question": "Must the input numbers be separated by spaces only, or are line breaks between them also allowed?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The input format specifies one line with space-separated integers."
+      },
+      {
+        "question": "Is N guaranteed to match the actual count of integers provided on the second line, or should the program handle mismatched counts?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem guarantees the input is well-formed; mismatches are not expected."
+      },
+      {
+        "question": "Can N be equal to 1, or is the lower bound strictly 2 as stated?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The constraint specifies N ≥ 2."
+      },
+      {
+        "question": "Are duplicate values considered non-increasing, and should they cause a \"No\" answer?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 defines strictly increasing as A_i < A_{i+1}, so duplicates (A_i = A_{i+1}) violate this and should return 'No'."
+      },
+      {
+        "question": "Should the program handle leading or trailing whitespace in the input lines?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard input parsing handles leading/trailing whitespace automatically."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_206",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 guarantees the stack always has at least one card, directly addressing the key ambiguity.",
+    "candidates": [
+      {
+        "question": "What should happen if a type-2 query is executed when the stack is empty?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Reference A1 guarantees the stack always has at least one card, so this case will not occur."
+      },
+      {
+        "question": "Does the initial stack of 100 zero-labeled cards count toward the maximum stack size, i.e., can the stack grow beyond 100 cards after pushes?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not explicitly stated; the problem mentions 100 initial cards but does not restrict growth beyond 100."
+      },
+      {
+        "question": "Are the initial 100 cards considered part of the stack for the purpose of removal, so that the first type-2 query will output 0 if no pushes have occurred?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; the stack starts with 100 zeros and type-2 queries remove from the top."
+      },
+      {
+        "question": "Must the program enforce that the integer x in a type-1 query lies within the given range 1 ≤ x ≤ 100, or can out-of-range values be ignored or cause an error?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem guarantees 1 ≤ x ≤ 100 in the constraints; out-of-range is not expected."
+      },
+      {
+        "question": "Should the output for each type-2 query be printed on its own line without extra spaces or trailing whitespace?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; each output on its own line with no extra whitespace."
+      },
+      {
+        "question": "Is there any requirement on the order of processing when multiple queries are given on the same line or with extra whitespace?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Queries are processed in order as given."
+      },
+      {
+        "question": "Will the input always conform to the described format (no missing values, no extra tokens), or should the solution handle malformed lines?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem guarantees well-formed input."
+      },
+      {
+        "question": "Are there any limits on the total number of cards that can be on the stack at any time, and if so, what should be done when that limit is exceeded?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not explicitly stated; typical stack implementations would allow arbitrary growth limited only by memory."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_229",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 clarifies the range of k is 0 to M-1, directly addressing the main ambiguity.",
+    "candidates": [
+      {
+        "question": "Should the inversion count for each k be computed independently on the sequence B derived from that specific k, or can results be reused across different k values?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Each k produces a different sequence B, so inversions must be computed independently."
+      },
+      {
+        "question": "When computing B_i = (A_i + k) mod M, is the modulo operation defined to always return a value in the range [0, M-1]?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; the modulo operation returns a value in [0, M-1]."
+      },
+      {
+        "question": "Are the output lines required to be printed in order of increasing k (i.e., k = 0, 1, …, M-1), and must each line end with a newline character?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; output lines for k = 0 to M-1 in order, each followed by a newline."
+      },
+      {
+        "question": "If N or M equals 0 (though constraints say ≥1), how should the program behave, or is such input guaranteed never to occur?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Constraints guarantee N, M ≥ 1."
+      },
+      {
+        "question": "Must the inversion number be output as a 64-bit integer (e.g., long long) to avoid overflow, or is a 32-bit integer sufficient?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Maximum inversions is N*(N-1)/2; with N ≤ 2×10^5, this fits in a 32-bit integer, but 64-bit is safer."
+      },
+      {
+        "question": "Are there any time or memory limits that could affect the choice of algorithm, or are they the standard limits for the contest platform?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard constraints apply; an O(N*M*log(N)) or O(N^2*M) solution may be acceptable depending on the time limit."
+      },
+      {
+        "question": "Should the program handle duplicate values in B (i.e., treat them as non-inversions since the condition is strict A_i > A_j)?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; inversions require strict inequality, so equal values do not count as inversions."
+      },
+      {
+        "question": "Is there any required handling for extremely large input sizes (e.g., reading with fast I/O) beyond the given constraints?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard I/O should suffice; fast I/O may be beneficial but is not essential."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_249",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 clarifies subarrays must be contiguous. Reference A2 specifies 'counts' refers to the number of distinct integers, not total elements.",
+    "candidates": [
+      {
+        "question": "What exactly does \"count of integers\" mean in each subarray - does it refer to the number of elements or the count of distinct integers?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A2 specifies 'counts' refers to the number of distinct integers in each subarray."
+      },
+      {
+        "question": "Are the indices i and j inclusive or exclusive in defining the subarrays, and do they represent 0-based or 1-based indexing?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem uses 1-based indexing with inclusive ranges: the first subarray is A_1 to A_i, the second is A_{i+1} to A_j, the third is A_{j+1} to A_N."
+      },
+      {
+        "question": "Can the subarrays contain zero elements, or must all three subarrays be non-empty as implied by the constraint 1 ≤ i < j ≤ N-1?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The constraint ensures all three subarrays are non-empty."
+      },
+      {
+        "question": "What is the exact format of the input - are the integers on the second line separated by spaces, tabs, or any whitespace?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard input format: space-separated integers."
+      },
+      {
+        "question": "What should be the output format - just the integer answer or should it include any additional formatting?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Output a single integer."
+      },
+      {
+        "question": "Are duplicate values in the sequence allowed, and if so, how do they affect the counting?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Duplicates are allowed and count only once when determining distinct values."
+      },
+      {
+        "question": "What is the expected behavior when N=3, the minimum possible value according to constraints?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "For N=3, the only valid split is i=1, j=2, giving three subarrays of length 1 each; the sum of distinct counts is 3."
+      },
+      {
+        "question": "Should the solution handle the case where all elements in a subarray are the same value, and how does that affect the count?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "If all elements are identical, the distinct count is 1."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_269",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 clarifies edges are undirected (bidirectional). Reference A2 specifies the matrix P must contain each vertex exactly once (a permutation). Reference A3 states to print 'No' if decomposition is impossible.",
+    "candidates": [
+      {
+        "question": "Can a path of length K consist of K+1 vertices connected by K edges, or does it mean K vertices connected by K-1 edges?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not explicitly stated by reference; typically 'path of length K' means K edges (connecting K+1 vertices), but context could suggest K vertices. The reference likely means K edges, given standard graph terminology."
+      },
+      {
+        "question": "Are the vertices in each row of matrix P required to be distinct, or can a vertex appear multiple times within the same path?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Reference A2 states each vertex appears exactly once across all rows, implying no vertex can repeat even within a single path."
+      },
+      {
+        "question": "Can two different paths in the decomposition share vertices or edges, or must all paths be vertex-disjoint and edge-disjoint?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A2 specifies each vertex appears exactly once, so paths must be vertex-disjoint (and therefore edge-disjoint)."
+      },
+      {
+        "question": "Is the tree rooted at a specific vertex, or can paths start and end at any vertices in the tree?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The tree is unrooted; paths can start and end anywhere."
+      },
+      {
+        "question": "When K=1, does this mean each path consists of a single vertex with no edges, and how should such paths be represented in the matrix?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "If K=1, each path is a single vertex with no edges, and the matrix would have N rows and 1 column, containing each vertex once."
+      },
+      {
+        "question": "For the case where N=1 and K=1, should the output be \"Yes\" if the tree consists of exactly one vertex?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; a single vertex is trivially decomposable into one path of length 1 (a single vertex)."
+      },
+      {
+        "question": "Are self-loops or multiple edges between the same pair of vertices allowed in the input, even though it's specified as a tree?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "No; a tree by definition has no self-loops or multiple edges."
+      },
+      {
+        "question": "What is the expected behavior when NK=1 (i.e., a single vertex tree) - should this always output \"Yes\" or does it depend on the values of N and K?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "If NK=1, then N=1 and K=1; the tree is a single vertex, which is always decomposable into one path of one vertex, so output is 'Yes'."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_292",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 specifies output of '-1' when transformation is impossible. The reference does not leak this constraint elsewhere in the prompt.",
+    "candidates": [
+      {
+        "question": "What should be printed if it is impossible to make S identical to T?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 states to print '-1' if impossible."
+      },
+      {
+        "question": "Can x and y be the same letter in the operation?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not explicitly addressed; allowing x = y would be a no-op and thus not useful for any operation, suggesting x ≠ y is likely intended."
+      },
+      {
+        "question": "Is it allowed to choose x that does not exist in the current string S?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed by reference; if x doesn't exist, the operation has no effect, which could be allowed but is not useful."
+      },
+      {
+        "question": "What happens if both x and y already map to the same character in the transformation graph?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "Not addressed; this would depend on how replacements are tracked across multiple operations."
+      },
+      {
+        "question": "Should the output format include any specific wording or just the number?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Just the number (-1 or the count)."
+      },
+      {
+        "question": "How should ties between different sequences of operations with the same minimum count be handled?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Only the minimum count is required; no tie-breaking is specified."
+      },
+      {
+        "question": "Are there any additional constraints on the input format beyond what's explicitly stated?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard input format applies."
+      },
+      {
+        "question": "What is the expected behavior when N = 1 and S[0] = T[0]?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "If S = T (even with N=1), the answer is 0 operations."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_312",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 specifies r is initially 1 (ranking starts at 1). Reference A2 clarifies x should be the maximum score among undetermined ranks.",
+    "candidates": [
+      {
+        "question": "What is the initial value of variable r before any operations are performed?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 specifies the initial value of r is 1."
+      },
+      {
+        "question": "How are ties in scores handled when determining rankings - are people with the same score given the same rank?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "The algorithm assigns the same rank r to all people with the maximum score, then increments r by the count of people who received that rank, achieving the standard tied ranking system."
+      },
+      {
+        "question": "In what order should the output ranks be printed - by person label or by some other criteria?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Output ranks in order of person label (1 to N on separate lines)."
+      },
+      {
+        "question": "What happens if all people have the same score - do they all get rank 1?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; all N people receive rank 1."
+      },
+      {
+        "question": "Should the rank increment by 1 for each group of people with the same score, or by the number of people in that group?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A2 clarifies that r is incremented by k (the count of people with score x), implementing the standard tied ranking."
+      },
+      {
+        "question": "Is the input guaranteed to have exactly N scores, or do we need to handle missing/extra input values?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The input format guarantees exactly N scores."
+      },
+      {
+        "question": "What is the expected behavior when N=1 - does that person get rank 1?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; a single person gets rank 1."
+      },
+      {
+        "question": "Are the scores P_i guaranteed to be in any particular range or distribution beyond the given constraints?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Scores are constrained to 1 ≤ P_i ≤ 100; no further constraints on distribution."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_333",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 clarifies the goal is to sort P in ascending order. The reference doesn't leak this elsewhere in the prompt.",
+    "candidates": [
+      {
+        "question": "What is the exact definition of \"sort P in order\" - does it mean sorting in ascending or descending order?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 specifies sorting in ascending order so that P_1 < P_2 < ... < P_N."
+      },
+      {
+        "question": "Can the same index i be chosen multiple times during the process, or is each index usable only once?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Indices can be reused; there's no restriction on which index to choose in each operation."
+      },
+      {
+        "question": "Is the initial permutation P guaranteed to be sortable using the given operations, or do we need to detect impossible cases?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Any permutation can be sorted using adjacent swaps (bubble sort), so all inputs are sortable."
+      },
+      {
+        "question": "What happens if N=1 - is the cost 0 or is this case excluded by the constraint N≥2?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Constraint specifies N ≥ 2."
+      },
+      {
+        "question": "Are there any restrictions on the order in which swaps must be performed, or can they be done in any sequence?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Swaps can be done in any order; the goal is to minimize total cost, not to follow a specific sequence."
+      },
+      {
+        "question": "Does the cost accumulate additively for each swap operation, or is there a different cost calculation method?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; total cost is the sum of costs for each swap operation."
+      },
+      {
+        "question": "What is the expected behavior when the input violates the constraints (e.g., non-permutation input)?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The problem guarantees valid input."
+      },
+      {
+        "question": "Is there a limit on the total cost value that might affect the choice of data types for implementation?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Maximum cost is bounded by N^2; with N ≤ 2×10^5, a 64-bit integer is safe."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_357",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 clarifies [l, r] is a closed interval including both endpoints. Reference A2 specifies that the minimum weight path should be returned.",
+    "candidates": [
+      {
+        "question": "What is the definition of \"the possible weight of such a path\" when multiple paths exist between s_i and t_i?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A2 specifies the minimum possible weight among all paths connecting the vertices."
+      },
+      {
+        "question": "Is the graph G guaranteed to be connected, or can it consist of multiple disconnected components?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The graph is not guaranteed to be connected; disconnected components are possible."
+      },
+      {
+        "question": "Are self-loops allowed in the graph G, and if so, how do they affect path existence or weight calculation?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Self-loops are possible if [L_i, R_i] and [L_i, R_i] overlap (trivially true), creating an edge from vertex i to itself, which doesn't affect shortest paths."
+      },
+      {
+        "question": "Can the intervals [L_i, R_i] overlap partially, and does that affect edge creation in any way?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes, intervals can overlap; an edge exists between i and j if their intervals have no intersection (are disjoint)."
+      },
+      {
+        "question": "How should ties or multiple valid paths be handled when determining the output weight?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Only the minimum weight is output; no tie-breaking is needed."
+      },
+      {
+        "question": "Does the path weight include all intermediate nodes, or only the start and end nodes?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The path weight includes all vertices on the path (start, intermediate, and end)."
+      },
+      {
+        "question": "Are there any constraints on the total sum of weights in a path that could cause overflow issues?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "With N ≤ 2×10^5 and W_i ≤ 10^9, the maximum path weight is bounded; a 64-bit integer suffices."
+      },
+      {
+        "question": "Should the output for each query be the minimum possible weight among all paths, or any arbitrary valid path's weight?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A2 specifies the minimum possible weight."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_380",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 clarifies the modulus is 998244353. Reference A2 specifies the input format with N on the first line and N-1 integers on the second line. Reference A3 guarantees finitely many good sequences.",
+    "candidates": [
+      {
+        "question": "What is the exact definition of \"modulo\" in the output specification - what modulus should be used?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 specifies the modulus is 998244353."
+      },
+      {
+        "question": "How should the case be handled when no good sequences exist - should we output 0 or is at least one guaranteed?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Reference A3 guarantees finitely many good sequences exist; the problem doesn't specify if at least one exists, so 0 is a valid output."
+      },
+      {
+        "question": "Are intermediate calculations allowed to overflow, or must they be performed modulo some value throughout?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "To avoid overflow, intermediate calculations should be performed modulo 998244353."
+      },
+      {
+        "question": "Is the gcd condition strictly necessary for a sequence to be considered good, or is it just an additional constraint?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "The gcd condition is part of the definition of 'good sequence' and is necessary."
+      },
+      {
+        "question": "What is the precise mathematical domain for the values in sequence S - must they be positive integers or could they be any positive rationals?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "S consists of positive integers only."
+      },
+      {
+        "question": "How should ties or equivalent sequences be handled in the summation - are they counted multiple times or once?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Each distinct good sequence is counted once."
+      },
+      {
+        "question": "Is there a guarantee that coprime integers P and Q satisfying the equation are unique for each ratio?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; by definition of coprimality, P and Q are unique for each ratio."
+      },
+      {
+        "question": "Should the empty product (when N=0) be considered as contributing 1 to the sum, or is N≥2 always guaranteed?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Constraint specifies N ≥ 2."
+      }
+    ]
+  },
+  {
+    "id": "ccb_amb_task_400",
+    "label_test_relevant": null,
+    "label_leaked": false,
+    "label_verdict_note": "Reference A1 confirms the graph is connected and edges are bidirectional. The ambiguity about whether pieces can occupy the same vertex is not leaked elsewhere in the prompt.",
+    "candidates": [
+      {
+        "question": "Can piece A and piece B occupy the same vertex at any point during the sequence of moves, or is this forbidden throughout the entire process?",
+        "tier": 1,
+        "test_relevant": null,
+        "answer": "The problem states 'you cannot make a move that results in both pieces ending up on the same vertex', prohibiting shared occupancy during moves, but not necessarily at intermediate states."
+      },
+      {
+        "question": "Is the graph guaranteed to be connected, or do we need to handle disconnected components in our solution?",
+        "tier": 2,
+        "test_relevant": null,
+        "answer": "Reference A1 states the graph is guaranteed to be simple and connected."
+      },
+      {
+        "question": "What is the exact definition of \"adjacent vertex\" - does it mean directly connected by a single edge?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Yes; adjacent means directly connected by an edge."
+      },
+      {
+        "question": "Are self-loops or multiple edges between the same pair of vertices allowed in the graph?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "No; the problem specifies the graph is simple (no self-loops or multiple edges)."
+      },
+      {
+        "question": "If S and T are directly connected by an edge, can we swap the pieces in one move, or does it still require two moves?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "If S and T are adjacent, moving A from S to T and B from T to S in two moves swaps them, but they cannot both be at adjacent vertices without being on the same vertex temporarily."
+      },
+      {
+        "question": "Does the numbering of edges from 1 to M have any significance to the problem, or is it just for identification?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "It's just for identification; the numbering has no algorithmic significance."
+      },
+      {
+        "question": "Are we required to output exactly one integer (-1 or the minimum operations), or should we also output additional information?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Output only the minimum number of operations or -1 if impossible."
+      },
+      {
+        "question": "What is the time complexity requirement for the solution - is the given constraint on N and M sufficient to determine the expected algorithmic approach?",
+        "tier": 0,
+        "test_relevant": null,
+        "answer": "Standard constraints suggest a BFS or similar polynomial-time algorithm is expected."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_2_lexical",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The ambiguity between 'decimal places' (count vs. value) directly affects the test cases: test 1 expects 0.5 (the value), not 1 (the count), making this a meaningful ambiguity.",
+    "candidates": [
+      {
+        "question": "What is the expected behavior when the input number is exactly an integer with no decimal places?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "The decimal part should be 0.0, as shown in the reference solution (number % 1.0)."
+      },
+      {
+        "question": "How should negative floating point numbers be handled, given the specification mentions \"positive\" but the function signature doesn't enforce this?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "The modulo operation (%) works on negative numbers; for negative inputs, the result would be the decimal part relative to the floor, e.g., -3.5 % 1.0 = 0.5 in Python."
+      },
+      {
+        "question": "What is the precise definition of \"decimal places\" - should trailing zeros be preserved or removed?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "The reference solution returns the fractional value (0.5, 0.33, 0.456), not a count or string with trailing zeros."
+      },
+      {
+        "question": "What is the expected return type and format when the decimal portion is zero?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Return 0.0 as a float."
+      },
+      {
+        "question": "How should the function handle special floating-point values like infinity or NaN?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Not addressed by tests; typical behavior would be that modulo on infinity/NaN returns NaN."
+      },
+      {
+        "question": "What is the required precision for the returned decimal portion - should it maintain the original number's precision?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Standard floating-point precision (tolerance within 1e-6 as shown in tests)."
+      },
+      {
+        "question": "Should the function handle scientific notation inputs, and if so, how should the decimal places be calculated?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Scientific notation is just an input format; once parsed, the calculation is the same."
+      },
+      {
+        "question": "What is the expected behavior when the input is zero or very close to zero within floating-point precision limits?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "For 0, the decimal part is 0.0; for values close to zero, the decimal part is the fractional portion."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_12_lexical",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The ambiguity between 'leading' (first vs. lexicographically smallest) is critical: the reference solution returns the first occurrence in order, not the lexicographically smallest.",
+    "candidates": [
+      {
+        "question": "What should be returned if the input list contains only empty strings?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "The longest empty string still has length 0; if all are empty, return the first one (None if list is empty)."
+      },
+      {
+        "question": "How should the function handle null or None values within the input list?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Not addressed by reference; the specification says 'non-empty list of strings', implying all elements are strings."
+      },
+      {
+        "question": "What is the expected behavior when the input list contains strings of equal maximum length?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Reference solution returns the first one encountered in the list order, as shown in example 1: ['x', 'y', 'z'] returns 'x'."
+      },
+      {
+        "question": "Should the function handle non-string objects in the list, and if so, how?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "The specification states 'list of strings'; non-string objects are not expected."
+      },
+      {
+        "question": "What should be the return type when all strings in a non-empty list have zero length?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Return the first empty string."
+      },
+      {
+        "question": "How should the function behave if the input list contains duplicate strings?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Duplicates are handled naturally; the first occurrence is returned."
+      },
+      {
+        "question": "What is the maximum expected size of the input list in terms of memory constraints?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No specific constraint; typical memory limits apply."
+      },
+      {
+        "question": "Should the function handle Unicode strings with special characters or emojis differently?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No; len() works correctly on Unicode strings."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_25_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'as per its appearance in factorization' is ambiguous and affects output: the reference expects [2,2,2] for 8 (listing each factor per its multiplicity), not [2].",
+    "candidates": [
+      {
+        "question": "What should the function return for input n = 1, which has no prime factors?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "Not explicitly addressed; by convention, 1 has no prime factors, so an empty list [] is expected."
+      },
+      {
+        "question": "How should the function handle negative integers as input?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Not addressed by tests; typically factorization applies to absolute value."
+      },
+      {
+        "question": "What is the expected behavior when n = 0 is passed as input?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "0 is not factorizable; typically invalid."
+      },
+      {
+        "question": "Should the function handle floating-point numbers or non-integer inputs?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No; input is specified as an integer."
+      },
+      {
+        "question": "What is the maximum value of n that the function needs to support?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No specific limit stated; typical implementation supports large integers."
+      },
+      {
+        "question": "How should repeated prime factors be represented - as separate list elements or with exponents?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Reference solution lists each prime factor the number of times it appears (e.g., 8 = 2^3 → [2, 2, 2])."
+      },
+      {
+        "question": "Should the function validate that the input is a positive integer greater than 1?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "The problem specifies valid inputs; error handling is not required."
+      },
+      {
+        "question": "What should be the return type format - a list of integers representing each prime factor occurrence?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; return a list of integers in ascending order."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_37_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'somehow similar' is ambiguous; the reference clarifies that odd indices should be 'identical' to the original, not just similar.",
+    "candidates": [
+      {
+        "question": "What is the exact definition of \"somehow similar to l in the odd indicies\" - should the odd indices remain unchanged or can they be rearranged?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Reference solution keeps odd indices identical to the original; they are unchanged."
+      },
+      {
+        "question": "How should the sorting of even indices be performed - in ascending order, descending order, or is the order unspecified?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Ascending order; the reference sorts evens in ascending order."
+      },
+      {
+        "question": "What should happen when the list has fewer than 2 elements - should it return the original list or handle it differently?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "A list with 1 element has one even-index element (at index 0) and no odd-index elements; return [element]."
+      },
+      {
+        "question": "How should duplicate values at even indices be handled during sorting - should they be preserved or removed?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Duplicates are preserved; sorting includes all duplicates."
+      },
+      {
+        "question": "What is the expected behavior when the input list is empty - should it return an empty list or raise an error?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Not explicitly specified; an empty list likely returns an empty list."
+      },
+      {
+        "question": "Should the original list be modified in-place or should a new list be returned?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "A new list is returned; the original is unchanged."
+      },
+      {
+        "question": "How should the function handle non-numeric values at even indices - should it sort them lexicographically or raise an error?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Tests use numeric values; lexicographic sorting would work for mixed types if needed."
+      },
+      {
+        "question": "What should be the behavior when even indices don't exist (e.g., list with only odd number of elements starting from index 1)?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Even indices are 0, 2, 4, ...; they always exist for lists of length ≥ 1."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_48_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'Checks the given string' is vague and doesn't specify what is being checked. The reference clarifies it checks if the string is a palindrome.",
+    "candidates": [
+      {
+        "question": "What constitutes a palindrome - should case sensitivity be considered?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "The reference solution performs case-sensitive comparison."
+      },
+      {
+        "question": "Should spaces and punctuation marks be included in the palindrome check?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "The reference solution includes all characters, including spaces and punctuation if present."
+      },
+      {
+        "question": "How should empty strings be handled - are they palindromes?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; an empty string is trivially a palindrome (no characters to violate the condition)."
+      },
+      {
+        "question": "What is the expected behavior for strings containing only whitespace?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Whitespace characters are included in the comparison; a string of spaces is a palindrome."
+      },
+      {
+        "question": "Should the function handle Unicode characters or only ASCII?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "The reference works with any characters; Unicode is handled naturally."
+      },
+      {
+        "question": "What is the maximum length of input string that needs to be supported?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No specific limit; typical memory constraints apply."
+      },
+      {
+        "question": "Should leading and trailing whitespace be stripped before checking?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "No; the reference checks the string as-is, including leading/trailing whitespace."
+      },
+      {
+        "question": "How should null or None inputs be handled - throw exception or return false?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is specified as a string; None is not expected."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_62_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'coefficients of a sequence' is ambiguous; the reference clarifies it's a polynomial. The derivative operation is standard calculus.",
+    "candidates": [
+      {
+        "question": "What should be returned when the input list is empty?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "An empty list [] (the derivative of an empty polynomial)."
+      },
+      {
+        "question": "What should be returned when the input list contains only a constant term (length 1)?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "An empty list []; the derivative of a constant is 0 (or represented as no terms)."
+      },
+      {
+        "question": "Should the output list maintain the same length as the input list, or should trailing zeros be removed?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "The output has length one less than input (the derivative of degree n is degree n-1). Trailing zero coefficients are removed."
+      },
+      {
+        "question": "What is the expected behavior when the input list contains non-numeric coefficients?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is specified as coefficients; non-numeric values are not expected."
+      },
+      {
+        "question": "Should the function handle complex numbers or only real numbers?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Derivative operation works on any numeric type; the reference uses real numbers."
+      },
+      {
+        "question": "What should be the output format - should it be a list or can it be any iterable?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Return a list."
+      },
+      {
+        "question": "Are there any constraints on the maximum degree of the polynomial or size of coefficients?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No specific constraints; standard memory limits apply."
+      },
+      {
+        "question": "Should the function modify the input list in-place or always return a new list?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Return a new list; the input should not be modified."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_73_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The absence of 'minimum' in the original ambiguous version makes it unclear whether to return the minimum number or any number of changes. The reference clarifies that the minimum number is required.",
+    "candidates": [
+      {
+        "question": "What is the maximum length of the input array?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No specific constraint; typical memory limits apply."
+      },
+      {
+        "question": "Are there any constraints on the values of the integers in the array?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Integers are expected; the reference handles any integer values."
+      },
+      {
+        "question": "Can the array contain negative integers?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; negative integers are valid (the reference works on any integer)."
+      },
+      {
+        "question": "Is an empty array considered palindromic?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "An empty array is trivially palindromic (no elements to contradict the condition)."
+      },
+      {
+        "question": "Is a single-element array considered palindromic?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; a single element is trivially palindromic."
+      },
+      {
+        "question": "Should we minimize the number of changes or just count the minimum required?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Return the minimum number of changes required."
+      },
+      {
+        "question": "Do we need to return the actual modified array or just the count of changes?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Return only the count of changes, not the modified array."
+      },
+      {
+        "question": "What should be returned if the input array is already palindromic?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Return 0 (no changes needed)."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_84_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing 'positive integer' makes 'number N' ambiguous; the reference clarifies N is a positive integer and the operation is on its digit sum.",
+    "candidates": [
+      {
+        "question": "What is the range of valid values for N?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "0 ≤ N ≤ 10000 (from the example in the reference)."
+      },
+      {
+        "question": "Can N be negative, and if so, how should negative numbers be handled?",
+        "tier": 1,
+        "test_relevant": false,
+        "answer": "Constraints imply N ≥ 0; negative numbers are not expected."
+      },
+      {
+        "question": "Should the function handle floating-point numbers or only integers?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is an integer."
+      },
+      {
+        "question": "What should be returned if N is zero?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "For N=0, digit sum is 0, binary of 0 is '0'."
+      },
+      {
+        "question": "How should the binary representation of the digit sum be formatted - with or without '0b' prefix?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Without the '0b' prefix; the reference uses [2:] to remove it."
+      },
+      {
+        "question": "Should leading zeros be included in the binary output?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "No; bin() in Python omits leading zeros."
+      },
+      {
+        "question": "What is the expected behavior if N is None or not a number?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is specified as an integer; None is not expected."
+      },
+      {
+        "question": "Are there any constraints on the maximum size of N that might affect implementation?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "0 ≤ N ≤ 10000; the maximum digit sum is 1+0+0+0+0 = 1 for 10000."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_96_lexical",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'top n' is ambiguous: could mean 'first n primes' or 'n largest primes'. Reference clarifies it means 'all primes less than n'.",
+    "candidates": [
+      {
+        "question": "Does \"top n\" mean the n largest primes less than n, or simply all primes less than n up to a count of n?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "The reference returns all primes less than n (not limited to the n largest), as shown: count_up_to(20) returns [2,3,5,7,11,13,17,19], not the 20 largest."
+      },
+      {
+        "question": "Should the primes be returned sorted in ascending or descending order?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Ascending order; the reference appends primes in ascending order."
+      },
+      {
+        "question": "If there are fewer than n primes less than n, should the function return all primes that exist, or pad the result somehow?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Return all primes that exist below n (no padding)."
+      },
+      {
+        "question": "Is n itself potentially prime and excluded because the range is strictly \"less than n\"?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the range is (2, n), excluding n itself."
+      },
+      {
+        "question": "What should be returned for n = 0 or n = 1, where no primes exist below them?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Return an empty list []."
+      },
+      {
+        "question": "Should the function treat negative n as invalid input, and if so how?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is specified as non-negative; negative values are not expected."
+      },
+      {
+        "question": "Are 2 and other small primes always included when applicable?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; 2 is included if n > 2."
+      },
+      {
+        "question": "Is there an expected time complexity requirement given n could be very large?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No specific requirement; a simple sieve or trial division approach is acceptable."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_107_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'might be within' is ambiguous and could suggest uncertainty. The reference clarifies all palindromes in the range should be counted.",
+    "candidates": [
+      {
+        "question": "Does \"might be within the range\" suggest a conditional/uncertain inclusion criterion beyond simply falling in range(1, n)?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "No; the reference counts all palindromes within the range, not a subset."
+      },
+      {
+        "question": "Should the range be inclusive of both 1 and n, or exclude n as Python's range() would?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Inclusive of both 1 and n; the reference uses range(1, n+1)."
+      },
+      {
+        "question": "Is \"parity\" referring to digit-count parity or numeric value parity of the palindrome?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Numeric value parity (whether the number is even or odd), as shown in the reference."
+      },
+      {
+        "question": "What is the expected order of even and odd counts in the output tuple?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "(even_count, odd_count); the reference returns this order."
+      },
+      {
+        "question": "Are single-digit numbers considered valid palindromes for this count?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; 1-9 are all palindromes."
+      },
+      {
+        "question": "Should n=1 or n=0 be treated as valid inputs, and what would the expected output be?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; n=0 gives (0,0) [no palindromes], n=1 gives (0,1) [only 1 is odd]."
+      },
+      {
+        "question": "Is there any additional condition implied by \"might be\" that filters out some otherwise-qualifying palindromes?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "No; the reference counts all qualifying palindromes."
+      },
+      {
+        "question": "Should negative results ever occur, or is the count always non-negative by construction?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Counts are always non-negative."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_121_lexical",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The word 'aggregate' is ambiguous (sum, count, product, etc.). The reference clarifies it means 'sum' based on the examples.",
+    "candidates": [
+      {
+        "question": "Are \"even positions\" 0-indexed or 1-indexed?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "0-indexed; the reference uses enumerate and idx%2==0."
+      },
+      {
+        "question": "Does \"aggregate\" specifically mean sum, rather than count or product?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Yes; the reference uses sum() to aggregate the odd elements at even positions."
+      },
+      {
+        "question": "Is \"odd\" determined by the element's own value regardless of its magnitude or sign?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; x%2==1 checks if x is odd (works for positive and negative integers)."
+      },
+      {
+        "question": "Is the list guaranteed to contain at least one element at an even position?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Even positions (0, 2, ...) exist for any non-empty list."
+      },
+      {
+        "question": "How is oddness defined for negative numbers?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "An integer is odd if abs(x) % 2 == 1, or equivalently x % 2 != 0."
+      },
+      {
+        "question": "Should the aggregate default to 0 if no odd elements exist at even positions?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; sum of an empty list is 0."
+      },
+      {
+        "question": "Is the return type expected to always be an integer?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference returns an integer sum."
+      },
+      {
+        "question": "Are duplicate values at multiple qualifying positions each counted separately?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; each qualifying element contributes to the sum independently."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_136_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'certain integers' is ambiguous; the reference clarifies 'a' refers to the largest negative integer.",
+    "candidates": [
+      {
+        "question": "What does \"certain integers\" mean for computing 'a' -- should it include negative numbers, zero, or only some subset?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Reference clarifies 'a' is the largest negative integer (x < 0)."
+      },
+      {
+        "question": "Should 'a' be the largest negative integer specifically, or the largest integer in the list overall?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "The largest negative integer specifically; positive and zero are excluded."
+      },
+      {
+        "question": "Is 'b' restricted to strictly positive integers (excluding zero)?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference filters for x > 0."
+      },
+      {
+        "question": "If there is no integer matching the criteria for 'a', should that tuple element be None?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference uses None if no negative integers exist."
+      },
+      {
+        "question": "If there are no positive integers in the list, should 'b' be None?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference uses None if no positive integers exist."
+      },
+      {
+        "question": "Can the input list contain non-integer values (floats, strings), and if so, should they be ignored?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is specified as a list of integers; non-integers are not expected."
+      },
+      {
+        "question": "Should duplicate values be treated specially when finding the largest/smallest?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "No; duplicates are handled naturally (max/min select one)."
+      },
+      {
+        "question": "Is the input list guaranteed to be non-empty?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "The problem likely expects non-empty input; empty lists would return (None, None)."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_155_lexical",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The word 'number' is ambiguous (integer vs. float). The reference clarifies it's an integer and processes its digits.",
+    "candidates": [
+      {
+        "question": "How should negative numbers be handled -- should the minus sign be ignored when counting digits?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference uses abs(num) to ignore the sign."
+      },
+      {
+        "question": "Is the digit 0 considered an even digit for this count?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; 0 % 2 == 0, so 0 is even."
+      },
+      {
+        "question": "Should the input always be treated as an integer, or could it be a float with a fractional part?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Input is an integer; floats are not expected."
+      },
+      {
+        "question": "What is the order of the returned tuple -- (even_count, odd_count) or the reverse?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "(even_count, odd_count); the reference returns this order."
+      },
+      {
+        "question": "Is num guaranteed to be a valid integer, or could it be passed as a string?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is an integer; strings are not expected."
+      },
+      {
+        "question": "How should the number 0 itself be handled?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "0 has one digit (0), which is even, so return (1, 0)."
+      },
+      {
+        "question": "Should leading zeros in a numeric string representation be counted as digits?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Integers don't have leading zeros; this is not applicable."
+      },
+      {
+        "question": "Is there an expected range limit on how large num can be?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No specific limit; standard integer constraints apply."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_6_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The semantic ambiguity about whether groups are delineated by spaces or must be inferred from nesting is critical. The reference solution shows groups are separated by spaces.",
+    "candidates": [
+      {
+        "question": "Are groups within the input string separated by space characters, or must they be inferred based on some other criterion?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Groups are separated by spaces; the reference splits on spaces: paren_string.split(' ')."
+      },
+      {
+        "question": "Should each group consist only of balanced parentheses, or can groups be unbalanced?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "The problem guarantees valid input; each group should be balanced."
+      },
+      {
+        "question": "How should the function handle empty strings or extra spaces in the input?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "The reference filters out empty groups: if x in the list comprehension."
+      },
+      {
+        "question": "What is the expected output for a group with no parentheses (just an empty string)?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Skipped by the filter; an empty string contributes no group to the output."
+      },
+      {
+        "question": "Should the output list preserve the order of groups as they appear in the input?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference processes groups in input order."
+      },
+      {
+        "question": "How should the function handle input with trailing or leading spaces?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Standard string splitting handles this; split(' ') produces empty strings that are filtered."
+      },
+      {
+        "question": "What is the maximum nesting depth supported by the function?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "No specific limit; limited by memory and recursion/iteration depth."
+      },
+      {
+        "question": "Should mismatched parentheses (e.g., too many closes) be handled as an error, or should the function attempt to parse them?",
+        "tier": 1,
+        "test_relevant": true,
+        "answer": "The reference assumes well-formed input; mismatches would produce incorrect depths but no error."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_30_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The semantic ambiguity between returning a new list vs. modifying in-place is critical. The reference returns a new list.",
+    "candidates": [
+      {
+        "question": "Should the function return a new list or modify the input list in-place?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "The reference returns a new list via list comprehension: [e for e in l if e > 0]."
+      },
+      {
+        "question": "How should the function handle None or null values in the input list?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is specified as a list of integers; None is not expected."
+      },
+      {
+        "question": "Should the function include 0 in the output if it's present, or exclude it as non-positive?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Exclude 0; the condition is e > 0 (strictly positive)."
+      },
+      {
+        "question": "What is the order of elements in the output list - should they be in original order or sorted?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Original order is preserved; the reference uses list comprehension which maintains order."
+      },
+      {
+        "question": "Should the function handle duplicate positive numbers by removing duplicates?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "No; duplicates are preserved."
+      },
+      {
+        "question": "What should be returned for an empty input list?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "An empty list []."
+      },
+      {
+        "question": "What should be returned if no positive numbers exist in the input?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "An empty list []."
+      },
+      {
+        "question": "Should the function handle very large positive integers or any numeric type?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "The condition e > 0 works for any numeric type."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_54_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'identical characters' is ambiguous: could mean same set vs. same frequencies. The reference checks if the character sets are identical (not frequencies).",
+    "candidates": [
+      {
+        "question": "Should both strings contain exactly the same characters with the exact same frequencies, or just the same set of characters?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "The reference compares character sets only (set(s0) == set(s1)), not frequencies."
+      },
+      {
+        "question": "Should the comparison be case-sensitive or case-insensitive?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Case-sensitive; the reference compares strings directly."
+      },
+      {
+        "question": "How should the function handle empty strings?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Two empty strings have the same character set (empty), so they return True."
+      },
+      {
+        "question": "Should spaces and special characters be included in the comparison?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; all characters including spaces are included."
+      },
+      {
+        "question": "What should the function return for identical input strings (where both frequency and set match)?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "True; identical strings have identical character sets."
+      },
+      {
+        "question": "Should the function handle Unicode characters or only ASCII?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "set() and comparison work on any Unicode characters."
+      },
+      {
+        "question": "Is the return type expected to be a boolean?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference returns True or False."
+      },
+      {
+        "question": "What should the function return if one string is empty and the other is not?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "False; empty and non-empty strings have different character sets."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_77_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'can be expressed as a cube' is ambiguous: could mean 'is a cube of an integer' vs. 'is a cube of some real number'. Reference clarifies it's the former.",
+    "candidates": [
+      {
+        "question": "Should the function check if a is the cube of an integer, or if a can be the result of cubing any real number?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "The reference checks if a is a perfect cube of an integer: int(round(a ** (1/3))) ** 3 == a."
+      },
+      {
+        "question": "How should negative integers be handled - is -8 considered a cube?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; -8 = (-2)^3, so it's a perfect cube. The reference uses abs(a) for the calculation, treating negatives correctly."
+      },
+      {
+        "question": "What should the function return for 0?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "True; 0 = 0^3 is a perfect cube."
+      },
+      {
+        "question": "Should the function handle floating-point inputs?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is specified as an integer; floats are not expected."
+      },
+      {
+        "question": "How should the function handle very large integers where cubing might cause overflow?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Python handles arbitrarily large integers; overflow is not a concern."
+      },
+      {
+        "question": "Should the function use floating-point cube root or integer-only methods?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "The reference uses a ** (1/3) (floating-point), then rounds and checks."
+      },
+      {
+        "question": "What precision is required for the floating-point calculation?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "The reference rounds the result; floating-point precision is sufficient for the test cases."
+      },
+      {
+        "question": "Is the return type expected to be a boolean?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference returns True or False."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_99_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The semantic ambiguity about rounding method is critical. The reference specifies rounding away from zero for half values.",
+    "candidates": [
+      {
+        "question": "Should the function use standard rounding (round to nearest) or always round away from zero?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "The reference rounds away from zero for equidistant cases (e.g., 14.5 → 15, -14.5 → -15)."
+      },
+      {
+        "question": "What should the function return for exact half values like 2.5 or 3.5?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Round away from zero: 2.5 → 3, 3.5 → 4, -2.5 → -3."
+      },
+      {
+        "question": "Should the function handle string inputs representing numbers, or only numeric types?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Input is a string; the reference converts via float(value)."
+      },
+      {
+        "question": "How should the function handle invalid string inputs (e.g., 'abc')?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is specified as valid; error handling is not required."
+      },
+      {
+        "question": "What should the function return for very large numbers or special values like 'inf'?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "The reference handles standard floating-point values."
+      },
+      {
+        "question": "Should the function preserve trailing zeros in the output?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "No; the output is an integer (no decimal representation)."
+      },
+      {
+        "question": "Is the return type expected to be an integer?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference returns an integer."
+      },
+      {
+        "question": "How should the function handle values that end exactly with '.5' vs. other decimals?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "The reference checks value[-2:] == '.5' to identify exact half values."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_123_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The semantic ambiguity about when sorting occurs is critical. The reference generates the full sequence first, then extracts and sorts odd numbers.",
+    "candidates": [
+      {
+        "question": "Should the sorting happen after collecting all odd numbers from the sequence, or incrementally as they are discovered?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "The reference collects all odd numbers first, then sorts them, not incrementally."
+      },
+      {
+        "question": "What should the function return for n=1 (where the sequence is just [1])?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "[1]; the Collatz sequence for 1 is [1], containing one odd number (1)."
+      },
+      {
+        "question": "Should the output list contain each odd number only once, or can duplicates appear?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Duplicates are preserved if an odd number appears multiple times in the sequence."
+      },
+      {
+        "question": "How should the function handle n values that are even?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Even starting values are handled naturally; the first step is division by 2."
+      },
+      {
+        "question": "What is the maximum Collatz sequence length for the given input range?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "The Collatz conjecture is unproven, but sequences remain finite for the problem's input range."
+      },
+      {
+        "question": "Should the function return the odd numbers in the order they appear in the sequence, or always sorted?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "Always sorted in increasing order; the reference sorts the final list."
+      },
+      {
+        "question": "Is the return type expected to be a list of integers?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference returns a sorted list of integers."
+      },
+      {
+        "question": "Should the function include n in the output if n is odd?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; n is part of the sequence and included if it's odd."
+      }
+    ]
+  },
+  {
+    "id": "orchidheval_156_semantic",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The semantic ambiguity about using subtractive notation (IV, IX, etc.) vs. additive notation (IIII, VIIII) is critical. The reference uses standard subtractive notation.",
+    "candidates": [
+      {
+        "question": "Should the conversion use subtractive notation (e.g., IV for 4, IX for 9) or only additive notation?",
+        "tier": 2,
+        "test_relevant": true,
+        "answer": "The reference uses standard subtractive notation: 4→IV, 9→IX, etc."
+      },
+      {
+        "question": "Should the output always be lowercase as specified, or could it be uppercase?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Lowercase; the reference calls .lower() on the result."
+      },
+      {
+        "question": "What should the function return for 0?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "0 is outside the specified range (1 ≤ num ≤ 1000); not expected."
+      },
+      {
+        "question": "What should the function return for numbers outside the range 1-1000?",
+        "tier": 0,
+        "test_relevant": false,
+        "answer": "Input is constrained to 1 ≤ num ≤ 1000."
+      },
+      {
+        "question": "Is the return type expected to be a string?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; the reference returns a lowercase string."
+      },
+      {
+        "question": "How should the function handle large numbers like 999?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "999 = 900 + 90 + 9 = CM + XC + IX = 'cmxcix'."
+      },
+      {
+        "question": "Should the function preserve the order of symbols as they appear in Roman numerals?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "Yes; symbols are in descending value order (or with subtractive notation)."
+      },
+      {
+        "question": "What should the function return for 4 and 9, the key cases for subtractive notation?",
+        "tier": 0,
+        "test_relevant": true,
+        "answer": "4 → 'iv', 9 → 'ix' (subtractive notation)."
+      }
+    ]
+  },
+  {
+    "id": "bcb_BigCodeBench/6_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'based on the last time' is ambiguous (modification time, creation time, access time). The reference clarifies it means modification time (mtime).",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/16_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'clean the original files' is ambiguous. The reference clarifies it means delete (remove) the original files using os.remove().",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/26_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing 'symmetric' makes 'encryption key' ambiguous. The reference clarifies the key is for symmetric encryption (Fernet).",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/36_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'do not match' is ambiguous. The reference clarifies it means elements not present in TARGET_VALUES.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/46_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing 'numeric' makes 'columns' ambiguous. The reference clarifies only numeric columns are processed.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/56_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Changing 'the scores' to 'the data' makes the conversion target ambiguous. The reference clarifies only the Score column is converted to integer.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/66_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'create a distribution of chart' is ambiguous. The reference clarifies it means plotting the distribution using distplot().",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/76_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing 'of 20' makes the session key length ambiguous. The reference clarifies it must be exactly 20 characters.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/86_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing 'ascending' makes the sort direction ambiguous. The reference clarifies scores are sorted in ascending order.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/96_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "The phrase 'each cell contains text' is ambiguous (single word vs. multiple words). The reference clarifies each cell contains a single word.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/106_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing the column name 'value' makes the regression target ambiguous. The reference clarifies the target is the 'value' column.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/116_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing '30' makes the number of bins ambiguous. The reference clarifies the histogram should have 30 bins.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/126_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing 'randomly generated 10 times' makes the count generation ambiguous. The reference clarifies each animal's count is generated 10 times.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/136_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing 'two' makes the number of components ambiguous. The reference clarifies 2 principal components are used.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/146_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing 'the specified' makes the IP range format ambiguous. The reference clarifies it should be in CIDR notation.",
+    "candidates": []
+  },
+  {
+    "id": "bcb_BigCodeBench/156_vagueness",
+    "label_test_relevant": true,
+    "label_leaked": false,
+    "label_verdict_note": "Removing 'MinMax' makes the scaling method ambiguous. The reference clarifies MinMax scaling should be used.",
+    "candidates": []
+  }
+]

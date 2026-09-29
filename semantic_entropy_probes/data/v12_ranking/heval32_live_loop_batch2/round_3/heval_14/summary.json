@@ -1,0 +1,99 @@
+{
+  "round": 3,
+  "prompt_before": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. Not specified; combining characters and diacritics are treated as individual positions by the solution. \"\"\"",
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "What is the exact definition of 'code-point boundary' in Python's string model?",
+      "answer": "In Python, a 'code-point boundary' is simply a position between characters in a Python string; each position i corresponds to string[:i+1].",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. In Python, a 'code-point boundary' is simply a position between characters in a Python string; each position i corresponds to string[:i+1]. Not specified; combining characters and diacritics are treated as individual positions by the solution. \"\"\"",
+      "score": 1.1314964294433594
+    },
+    {
+      "idx": 5,
+      "question": "Should the function handle very long strings (e.g., strings with millions of characters) efficiently?",
+      "answer": "The solution handles long strings with a simple loop; efficiency is linear O(n) in string length.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. Not specified; combining characters and diacritics are treated as individual positions by the solution. The solution handles long strings with a simple loop; efficiency is linear O(n) in string length. \"\"\"",
+      "score": 0.9445433616638184
+    },
+    {
+      "idx": 10,
+      "question": "For grapheme clusters (sequences of code points that form a single visual character), should they be treated as single or multiple prefixes?",
+      "answer": "For grapheme clusters (like emoji with modifiers), Python treats each code point separately; they are not bundled into single prefixes.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. For grapheme clusters (like emoji with modifiers), Python treats each code point separately; they are not bundled into single prefixes. Not specified; combining characters and diacritics are treated as individual positions by the solution. \"\"\"",
+      "score": 0.9292268753051758
+    },
+    {
+      "idx": 7,
+      "question": "For a string like 'abc', should the prefixes be ['a', 'ab', 'abc'] (excluding empty) or ['', 'a', 'ab', 'abc'] (including empty)?",
+      "answer": "For a string like 'abc', the prefixes are ['a', 'ab', 'abc'], excluding the empty string.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. For a string like 'abc', the prefixes are ['a', 'ab', 'abc'], excluding the empty string. Not specified; combining characters and diacritics are treated as individual positions by the solution. \"\"\"",
+      "score": 0.4015054702758789
+    },
+    {
+      "idx": 3,
+      "question": "Should UTF-16 surrogate pairs or other multi-byte UTF-8 sequences be treated as single code points or split at byte boundaries?",
+      "answer": "UTF-16 surrogate pairs and multi-byte UTF-8 sequences are treated as single code points in Python's string model; slicing respects code-point boundaries.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. UTF-16 surrogate pairs and multi-byte UTF-8 sequences are treated as single code points in Python's string model; slicing respects code-point boundaries. Not specified; combining characters and diacritics are treated as individual positions by the solution. \"\"\"",
+      "score": 0.25613927841186523
+    },
+    {
+      "idx": 8,
+      "question": "What about zero-width characters or invisible Unicode characters\u2014should they count as code-point boundaries?",
+      "answer": "Zero-width characters and invisible Unicode characters are treated as code points; they would be included in prefixes if present.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. Not specified; combining characters and diacritics are treated as individual positions by the solution. Zero-width characters and invisible Unicode characters are treated as code points; they would be included in prefixes if present. \"\"\"",
+      "score": 0.22877836227416992
+    },
+    {
+      "idx": 6,
+      "question": "Are emoji and other high-code-point characters counted as single code points in the prefixes?",
+      "answer": "Emoji and other high-code-point characters are counted as single code points in Python strings; string slicing treats them as single characters.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. Emoji and other high-code-point characters are counted as single code points in Python strings; string slicing treats them as single characters. Not specified; combining characters and diacritics are treated as individual positions by the solution. \"\"\"",
+      "score": -0.5796403884887695
+    },
+    {
+      "idx": 0,
+      "question": "Should the list of prefixes include the empty prefix (empty string), or only non-empty prefixes?",
+      "answer": "The list of prefixes excludes the empty string; prefixes start from the first character.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. Not specified; combining characters and diacritics are treated as individual positions by the solution. The list of prefixes excludes the empty string; prefixes start from the first character. \"\"\"",
+      "score": -0.6673703193664551
+    },
+    {
+      "idx": 11,
+      "question": "What happens if the input string contains null characters (\\x00)?",
+      "answer": "The specification does not address null characters (\\x00); Python would include them as regular characters in the prefix list.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. Not specified; combining characters and diacritics are treated as individual positions by the solution. The specification does not address null characters (\\x00); Python would include them as regular characters in the prefix list. \"\"\"",
+      "score": -1.2254400253295898
+    },
+    {
+      "idx": 9,
+      "question": "Should the return type be a list of strings, or could it be any sequence type?",
+      "answer": "The return type is a list of strings.",
+      "prompt": "def all_prefixes(string: str) -> List[str]: \n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. Not specified; combining characters and diacritics are treated as individual positions by the solution. The return type is a list of strings. \"\"\"",
+      "score": -2.2940545082092285
+    },
+    {
+      "idx": 1,
+      "question": "What should the function return if the input string is empty\u2014a list with one empty string [] or []?",
+      "answer": "For an empty input string, the function returns an empty list [].",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. Not specified; combining characters and diacritics are treated as individual positions by the solution. For an empty input string, the function returns an empty list []. \"\"\"",
+      "score": -2.6067657470703125
+    },
+    {
+      "idx": 2,
+      "question": "For a string with combining diacritical marks (e.g., 'e' followed by a combining acute accent), how should the prefix boundaries be set?",
+      "answer": "The specification does not address combining diacritical marks; it assumes standard Python string indexing at code-point boundaries.",
+      "prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. The specification does not address combining diacritical marks; it assumes standard Python string indexing at code-point boundaries. \"\"\"",
+      "score": -3.858501434326172
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "What is the exact definition of 'code-point boundary' in Python's string model?",
+    "answer": "In Python, a 'code-point boundary' is simply a position between characters in a Python string; each position i corresponds to string[:i+1].",
+    "score": 1.1314964294433594
+  },
+  "next_prompt": "def all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of prefixes from shortest to longest of the input string, with prefixes cut at code-point boundaries, not grapheme boundaries, consistent with Python's standard string slicing. In Python, a 'code-point boundary' is simply a position between characters in a Python string; each position i corresponds to string[:i+1]. Not specified; combining characters and diacritics are treated as individual positions by the solution. \"\"\"",
+  "test_n_pass": 0,
+  "test_n_total": 3
+}

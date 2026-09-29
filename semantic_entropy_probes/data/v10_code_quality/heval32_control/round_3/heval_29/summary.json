@@ -1,0 +1,10 @@
+{
+  "round": 3,
+  "baseline_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: The prefix must be at the start of the string -- i.e. the string must start with the given prefix, not merely contain it anywhere.\n\nClarification: Yes -- str.startswith('') is always True for any string, so an empty prefix matches every string in the input list; nothing in the reference restricts the prefix from being empty.",
+  "question": "Is the prefix comparison case-sensitive?",
+  "answer": "Yes -- str.startswith is case-sensitive by default in the reference, and no case normalization is applied anywhere in the function.",
+  "next_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix.\n    \"\"\"\n\nClarification: The prefix must be at the start of the string -- i.e. the string must start with the given prefix, not merely contain it anywhere.\n\nClarification: Yes -- str.startswith('') is always True for any string, so an empty prefix matches every string in the input list; nothing in the reference restricts the prefix from being empty.\n\nClarification: Yes -- str.startswith is case-sensitive by default in the reference, and no case normalization is applied anywhere in the function.",
+  "code_prompt": "from typing import List\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings for ones that contain a given prefix at the start of the string. Note that str.startswith('') is always True for any string, so an empty prefix matches every string in the input list; nothing in the reference restricts the prefix from being empty. Also, str.startswith is case-sensitive by default in the reference, and no case normalization is applied anywhere in the function. \"\"\"",
+  "test_n_pass": 2,
+  "test_n_total": 2
+}

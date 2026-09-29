@@ -1,0 +1,117 @@
+{
+  "round": 1,
+  "baseline_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"",
+  "baseline_mean_p": 0.18672698736190796,
+  "candidates": [
+    {
+      "idx": 1,
+      "question": "What should the function do with tabs or other whitespace characters besides spaces?",
+      "answer": "Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.",
+      "p1": 0.08022943139076233,
+      "p2": 0.14004190266132355,
+      "mean_p": 0.11013566702604294,
+      "delta": -0.07659132033586502
+    },
+    {
+      "idx": 7,
+      "question": "What should the function do if the input is not a string?",
+      "answer": "Not applicable -- the function signature guarantees text is a string.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function signature guarantees text is a string.",
+      "p1": 0.10052581876516342,
+      "p2": 0.14075346291065216,
+      "mean_p": 0.12063964083790779,
+      "delta": -0.06608734652400017
+    },
+    {
+      "idx": 6,
+      "question": "Is the function expected to modify the original string or return a new string?",
+      "answer": "It returns a new string; the original input string is not modified (Python strings are immutable).",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: It returns a new string; the original input string is not modified (Python strings are immutable).",
+      "p1": 0.12465124577283859,
+      "p2": 0.20321165025234222,
+      "mean_p": 0.1639314480125904,
+      "delta": -0.02279553934931755
+    },
+    {
+      "idx": 2,
+      "question": "Should the function handle Unicode spaces or only ASCII spaces?",
+      "answer": "Only the ASCII space character \" \" is treated specially; other Unicode whitespace characters are not recognized as spaces by this function.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Only the ASCII space character \" \" is treated specially; other Unicode whitespace characters are not recognized as spaces by this function.",
+      "p1": 0.12273070216178894,
+      "p2": 0.20814597606658936,
+      "mean_p": 0.16543833911418915,
+      "delta": -0.02128864824771881
+    },
+    {
+      "idx": 0,
+      "question": "Does the function replace all spaces, including multiple consecutive spaces, with underscores?",
+      "answer": "Only runs of 1 or 2 consecutive spaces are replaced with underscores (one underscore per space); a run of MORE than 2 consecutive spaces is replaced with a single \"-\" instead, not underscores.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Only runs of 1 or 2 consecutive spaces are replaced with underscores (one underscore per space); a run of MORE than 2 consecutive spaces is replaced with a single \"-\" instead, not underscores.",
+      "p1": 0.18841975927352905,
+      "p2": 0.20014406740665436,
+      "mean_p": 0.1942819133400917,
+      "delta": 0.007554925978183746
+    },
+    {
+      "idx": 5,
+      "question": "How should the function handle cases where the text contains non-printable characters?",
+      "answer": "They are treated as ordinary non-space characters and left unchanged, same as any other non-space character.",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: They are treated as ordinary non-space characters and left unchanged, same as any other non-space character.",
+      "p1": 0.24635255336761475,
+      "p2": 0.366315633058548,
+      "mean_p": 0.30633409321308136,
+      "delta": 0.1196071058511734
+    },
+    {
+      "idx": 3,
+      "question": "What happens if the input text is empty or contains only spaces?",
+      "answer": "Empty input returns an empty string. Input of only spaces: 1-2 spaces become that many underscores; more than 2 spaces become a single \"-\".",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Empty input returns an empty string. Input of only spaces: 1-2 spaces become that many underscores; more than 2 spaces become a single \"-\".",
+      "p1": 0.2619975805282593,
+      "p2": 0.3648454546928406,
+      "mean_p": 0.3134215176105499,
+      "delta": 0.12669453024864197
+    },
+    {
+      "idx": 4,
+      "question": "Are leading and trailing spaces in the input text considered and replaced?",
+      "answer": "Yes, they are processed with the exact same rule as spaces anywhere else (1-2 -> underscores, >2 -> single dash), per the example fix_spaces(\" Example 2\") == \"_Example_2\".",
+      "prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Yes, they are processed with the exact same rule as spaces anywhere else (1-2 -> underscores, >2 -> single dash), per the example fix_spaces(\" Example 2\") == \"_Example_2\".",
+      "p1": 0.22773678600788116,
+      "p2": 0.4662015736103058,
+      "mean_p": 0.3469691798090935,
+      "delta": 0.16024219244718552
+    }
+  ],
+  "top3": [
+    {
+      "idx": 1,
+      "question": "What should the function do with tabs or other whitespace characters besides spaces?",
+      "answer": "Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.",
+      "delta": -0.07659132033586502
+    },
+    {
+      "idx": 7,
+      "question": "What should the function do if the input is not a string?",
+      "answer": "Not applicable -- the function signature guarantees text is a string.",
+      "delta": -0.06608734652400017
+    },
+    {
+      "idx": 6,
+      "question": "Is the function expected to modify the original string or return a new string?",
+      "answer": "It returns a new string; the original input string is not modified (Python strings are immutable).",
+      "delta": -0.02279553934931755
+    }
+  ],
+  "chosen": {
+    "idx": 1,
+    "question": "What should the function do with tabs or other whitespace characters besides spaces?",
+    "answer": "Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.",
+    "delta": -0.07659132033586502
+  },
+  "next_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores \n    \"\"\"\n\nClarification: Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.",
+  "code_prompt": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores. Not applicable -- the function specifically checks for the literal space character \" \"; other whitespace characters (tabs, newlines) are treated as ordinary non-space characters and passed through unchanged.\n    \"\"\"",
+  "test_n_pass": 3,
+  "test_n_total": 5
+}

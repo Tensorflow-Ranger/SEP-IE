@@ -1,0 +1,118 @@
+{
+  "round": 2,
+  "baseline_prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.",
+  "baseline_mean_p": 0.21588134765625,
+  "elicit_provider": "groq",
+  "candidates": [
+    {
+      "idx": 3,
+      "question": "What is the expected behavior for the integer 0, which consists of a single even digit?",
+      "answer": "Not a case that occurs -- input is guaranteed to be positive integers (starting at 1), so 0 is not a valid element.",
+      "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.\n\nClarification: Not a case that occurs -- input is guaranteed to be positive integers (starting at 1), so 0 is not a valid element.",
+      "p1": 0.18790611624717712,
+      "p2": 0.2504027187824249,
+      "mean_p": 0.21915441751480103,
+      "delta": 0.0032730698585510254
+    },
+    {
+      "idx": 5,
+      "question": "In what order should the returned list be sorted\u2014ascending numeric order, descending, or preserving the original order after filtering?",
+      "answer": "Ascending numeric order (per the sorted() call in the reference implementation; e.g. [15,33,1422,1] -> [1,15,33]).",
+      "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.\n\nClarification: Ascending numeric order (per the sorted() call in the reference implementation; e.g. [15,33,1422,1] -> [1,15,33]).",
+      "p1": 0.19567236304283142,
+      "p2": 0.2521670460700989,
+      "mean_p": 0.22391970455646515,
+      "delta": 0.008038356900215149
+    },
+    {
+      "idx": 2,
+      "question": "How should negative numbers be handled\u2014are the minus sign considered a digit, and are their absolute values examined for even digits?",
+      "answer": "Not applicable; input is guaranteed to consist of positive integers only (per the clear specification), negatives don't occur.",
+      "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.\n\nClarification: Not applicable; input is guaranteed to consist of positive integers only (per the clear specification), negatives don't occur.",
+      "p1": 0.19965368509292603,
+      "p2": 0.24908673763275146,
+      "mean_p": 0.22437021136283875,
+      "delta": 0.008488863706588745
+    },
+    {
+      "idx": 1,
+      "question": "Must the input list contain only integers, or should non\u2011integer elements (e.g., floats, strings) raise an error, be ignored, or be converted?",
+      "answer": "Not specified/tested; not a case that occurs -- input is guaranteed to be a list of positive integers.",
+      "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.\n\nClarification: Not specified/tested; not a case that occurs -- input is guaranteed to be a list of positive integers.",
+      "p1": 0.18999439477920532,
+      "p2": 0.2638493776321411,
+      "mean_p": 0.22692188620567322,
+      "delta": 0.011040538549423218
+    },
+    {
+      "idx": 0,
+      "question": "Should the function accept only lists, or also other iterable types such as tuples or generators?",
+      "answer": "Not specified/tested; guaranteed to be a list per the signature.",
+      "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.\n\nClarification: Not specified/tested; guaranteed to be a list per the signature.",
+      "p1": 0.20842140913009644,
+      "p2": 0.2516319453716278,
+      "mean_p": 0.23002667725086212,
+      "delta": 0.014145329594612122
+    },
+    {
+      "idx": 7,
+      "question": "Should the function raise a specific type of exception (e.g., TypeError, ValueError) for invalid input, and what should the error message be?",
+      "answer": "Not specified; invalid input doesn't occur since input is guaranteed to be positive integers.",
+      "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.\n\nClarification: Not specified; invalid input doesn't occur since input is guaranteed to be positive integers.",
+      "p1": 0.2709374725818634,
+      "p2": 0.31010374426841736,
+      "mean_p": 0.2905206084251404,
+      "delta": 0.07463926076889038
+    },
+    {
+      "idx": 6,
+      "question": "If the input list is empty or contains no numbers without even digits, should the function return an empty list or raise an exception?",
+      "answer": "Return an empty list (confirmed by test case: [152,323,1422,10] -> []).",
+      "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.\n\nClarification: Return an empty list (confirmed by test case: [152,323,1422,10] -> []).",
+      "p1": 0.31290096044540405,
+      "p2": 0.30497145652770996,
+      "mean_p": 0.308936208486557,
+      "delta": 0.093054860830307
+    },
+    {
+      "idx": 4,
+      "question": "Should duplicate numbers that meet the criteria appear multiple times in the output, or should the result contain each qualifying number only once?",
+      "answer": "Not explicitly tested, but the reference implementation appends every qualifying element without deduplication, so duplicates would appear multiple times in the output.",
+      "prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.\n\nClarification: Not explicitly tested, but the reference implementation appends every qualifying element without deduplication, so duplicates would appear multiple times in the output.",
+      "p1": 0.2883235514163971,
+      "p2": 0.33821240067481995,
+      "mean_p": 0.3132679760456085,
+      "delta": 0.09738662838935852
+    }
+  ],
+  "top3": [
+    {
+      "idx": 3,
+      "question": "What is the expected behavior for the integer 0, which consists of a single even digit?",
+      "answer": "Not a case that occurs -- input is guaranteed to be positive integers (starting at 1), so 0 is not a valid element.",
+      "delta": 0.0032730698585510254
+    },
+    {
+      "idx": 5,
+      "question": "In what order should the returned list be sorted\u2014ascending numeric order, descending, or preserving the original order after filtering?",
+      "answer": "Ascending numeric order (per the sorted() call in the reference implementation; e.g. [15,33,1422,1] -> [1,15,33]).",
+      "delta": 0.008038356900215149
+    },
+    {
+      "idx": 2,
+      "question": "How should negative numbers be handled\u2014are the minus sign considered a digit, and are their absolute values examined for even digits?",
+      "answer": "Not applicable; input is guaranteed to consist of positive integers only (per the clear specification), negatives don't occur.",
+      "delta": 0.008488863706588745
+    }
+  ],
+  "chosen": {
+    "idx": 3,
+    "question": "What is the expected behavior for the integer 0, which consists of a single even digit?",
+    "answer": "Not a case that occurs -- input is guaranteed to be positive integers (starting at 1), so 0 is not a valid element.",
+    "delta": 0.0032730698585510254
+  },
+  "next_prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x. return a sorted list of all \n    elements that hasn't any even digit.\n    \"\"\"\n\nClarification: Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included.\n\nClarification: Not a case that occurs -- input is guaranteed to be positive integers (starting at 1), so 0 is not a valid element.",
+  "code_prompt": "def unique_digits(x):\n    \"\"\"Given a list of integers x, return a sorted list of all \n    elements that hasn't any even digit. Yes -- if a number contains ANY even digit, the entire number is excluded; only numbers where every digit is odd are included. Not a case that occurs -- input is guaranteed to be positive integers (starting at 1), so 0 is not a valid element.\n    \"\"\"",
+  "test_n_pass": 4,
+  "test_n_total": 4
+}

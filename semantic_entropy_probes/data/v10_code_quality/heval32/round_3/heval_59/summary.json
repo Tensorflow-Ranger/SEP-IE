@@ -1,0 +1,117 @@
+{
+  "round": 3,
+  "baseline_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.",
+  "baseline_mean_p": 0.1444147825241089,
+  "candidates": [
+    {
+      "idx": 4,
+      "question": "How does the function determine the largest prime factor when there are multiple prime factors with the same value?",
+      "answer": "It's the numerically largest prime p such that n % p == 0, regardless of how many times p divides n.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.\n\nClarification: It's the numerically largest prime p such that n % p == 0, regardless of how many times p divides n.",
+      "p1": 0.10327418893575668,
+      "p2": 0.1634911745786667,
+      "mean_p": 0.13338268175721169,
+      "delta": -0.011032100766897202
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior when n is a product of multiple primes, including duplicates?",
+      "answer": "The largest prime among ALL primes dividing n is returned -- the largest prime factor, not merely 'a' large one.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.\n\nClarification: The largest prime among ALL primes dividing n is returned -- the largest prime factor, not merely 'a' large one.",
+      "p1": 0.11655983328819275,
+      "p2": 0.19056275486946106,
+      "mean_p": 0.1535612940788269,
+      "delta": 0.009146511554718018
+    },
+    {
+      "idx": 0,
+      "question": "Does the function handle negative values of n?",
+      "answer": "Not applicable -- per the clear specification, n is assumed to be > 1.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.\n\nClarification: Not applicable -- per the clear specification, n is assumed to be > 1.",
+      "p1": 0.13376344740390778,
+      "p2": 0.19246089458465576,
+      "mean_p": 0.16311217099428177,
+      "delta": 0.018697388470172882
+    },
+    {
+      "idx": 2,
+      "question": "How does the function handle the case where n has multiple prime factors of the same value?",
+      "answer": "Handled correctly: since the check is divisibility, not occurrence count, a repeated prime factor is found once and is still the largest if it's the biggest prime divisor.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.\n\nClarification: Handled correctly: since the check is divisibility, not occurrence count, a repeated prime factor is found once and is still the largest if it's the biggest prime divisor.",
+      "p1": 0.12687791883945465,
+      "p2": 0.20939704775810242,
+      "mean_p": 0.16813748329877853,
+      "delta": 0.023722700774669647
+    },
+    {
+      "idx": 1,
+      "question": "What happens if n is a perfect square of a prime number?",
+      "answer": "Handled correctly: that prime divides n and is found; if it's the only prime factor, it's returned as the largest.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.\n\nClarification: Handled correctly: that prime divides n and is found; if it's the only prime factor, it's returned as the largest.",
+      "p1": 0.14523206651210785,
+      "p2": 0.24027293920516968,
+      "mean_p": 0.19275250285863876,
+      "delta": 0.04833772033452988
+    },
+    {
+      "idx": 7,
+      "question": "What is the expected behavior when n is a very large number with multiple prime factors?",
+      "answer": "Not specified beyond correctness; the largest prime divisor is returned regardless of n's size.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.\n\nClarification: Not specified beyond correctness; the largest prime divisor is returned regardless of n's size.",
+      "p1": 0.17974622547626495,
+      "p2": 0.20754346251487732,
+      "mean_p": 0.19364484399557114,
+      "delta": 0.04923006147146225
+    },
+    {
+      "idx": 5,
+      "question": "What is the expected behavior when n is a power of a prime number?",
+      "answer": "The base prime itself is the only (and thus largest) prime factor.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.\n\nClarification: The base prime itself is the only (and thus largest) prime factor.",
+      "p1": 0.171298086643219,
+      "p2": 0.268092542886734,
+      "mean_p": 0.2196953147649765,
+      "delta": 0.07528053224086761
+    },
+    {
+      "idx": 6,
+      "question": "How does the function handle the case where n is a product of two large primes?",
+      "answer": "The larger of the two primes is returned.",
+      "prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.\n\nClarification: The larger of the two primes is returned.",
+      "p1": 0.2499849796295166,
+      "p2": 0.3151087462902069,
+      "mean_p": 0.28254686295986176,
+      "delta": 0.13813208043575287
+    }
+  ],
+  "top3": [
+    {
+      "idx": 4,
+      "question": "How does the function determine the largest prime factor when there are multiple prime factors with the same value?",
+      "answer": "It's the numerically largest prime p such that n % p == 0, regardless of how many times p divides n.",
+      "delta": -0.011032100766897202
+    },
+    {
+      "idx": 3,
+      "question": "What is the expected behavior when n is a product of multiple primes, including duplicates?",
+      "answer": "The largest prime among ALL primes dividing n is returned -- the largest prime factor, not merely 'a' large one.",
+      "delta": 0.009146511554718018
+    },
+    {
+      "idx": 0,
+      "question": "Does the function handle negative values of n?",
+      "answer": "Not applicable -- per the clear specification, n is assumed to be > 1.",
+      "delta": 0.018697388470172882
+    }
+  ],
+  "chosen": {
+    "idx": 4,
+    "question": "How does the function determine the largest prime factor when there are multiple prime factors with the same value?",
+    "answer": "It's the numerically largest prime p such that n % p == 0, regardless of how many times p divides n.",
+    "delta": -0.011032100766897202
+  },
+  "next_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime.\n    \"\"\"\n\nClarification: It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense.\n\nClarification: A single value: the largest prime factor itself, not a list.\n\nClarification: It's the numerically largest prime p such that n % p == 0, regardless of how many times p divides n.",
+  "code_prompt": "def largest_prime_factor(n: int):\n    \"\"\"Return a large prime factor of n. Assume n > 1 and is not a prime. It specifically means the LARGEST prime factor of n (the maximum j <= n such that j divides n and j is prime) -- not merely \"a prime factor that is large\" in some subjective sense. It's the numerically largest prime p such that n % p == 0, regardless of how many times p divides n. A single value: the largest prime factor itself, not a list.\"\"\"",
+  "test_n_pass": 5,
+  "test_n_total": 5
+}

@@ -1,0 +1,44 @@
+import sys
+import heapq
+
+def main():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    K = int(data[1])
+    A = list(map(int, data[2:2+N]))
+    B = list(map(int, data[2+N:2+2*N]))
+    C = list(map(int, data[2+2*N:2+3*N]))
+    
+    # Precompute all possible values of A_i * B_j + B_j * C_k + C_k * A_i
+    # To avoid O(N^3) time, we use a min-heap to keep track of the K smallest values
+    
+    heap = []
+    for i in range(N):
+        for j in range(N):
+            val = A[i] * B[j] + B[j] * C[0] + C[0] * A[i]
+            heapq.heappush(heap, val)
+    
+    # Now, we need to generate more values by varying k
+    # We use a priority queue to generate the next smallest values efficiently
+    
+    # We'll use a set to track visited (i, j, k) to avoid duplicates
+    visited = set()
+    visited.add((0, 0, 0))
+    heap = [(A[0] * B[0] + B[0] * C[0] + C[0] * A[0], 0, 0, 0)]
+    
+    for _ in range(K - 1):
+        val, i, j, k = heapq.heappop(heap)
+        for di, dj, dk in [(0, 0, 1), (0, 1, 0), (1, 0, 0)]:
+            ni, nj, nk = i + di, j + dj, k + dk
+            if 0 <= ni < N and 0 <= nj < N and 0 <= nk < N and (ni, nj, nk) not in visited:
+                visited.add((ni, nj, nk))
+                new_val = A[ni] * B[nj] + B[nj] * C[nk] + C[nk] * A[ni]
+                heapq.heappush(heap, (new_val, ni, nj, nk))
+    
+    print(heap[0][0])
+
+if __name__ == "__main__":
+    main()

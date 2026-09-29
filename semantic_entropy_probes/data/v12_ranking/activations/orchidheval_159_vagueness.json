@@ -1,0 +1,43 @@
+{
+  "id": "orchidheval_159_vagueness",
+  "questions": [
+    "Does \"need\" represent the additional carrots still required today, separate from what's already eaten?",
+    "Should \"total number of eaten carrots\" in the output include carrots eaten before this call plus this call's amount, or only this call's amount?",
+    "If there aren't enough remaining carrots to meet \"need,\" should the rabbit eat all of \"remaining\" and report the resulting totals?",
+    "Can \"number\", \"need\", or \"remaining\" be negative, and if so how should that be handled?",
+    "Are these three inputs guaranteed to be non-negative integers?",
+    "What should be returned if \"need\" is zero?",
+    "Should the second element of the returned array (carrots left) ever be negative?",
+    "Is there a canonical example elsewhere that resolves what \"the description does not otherwise specify\" refers to?"
+  ],
+  "answers": [
+    "Yes, 'need' is the additional amount still required today, separate from what's already been eaten.",
+    "It includes both what was already eaten (number) plus this meal's amount — i.e., number + actually eaten this round.",
+    "Yes, that's already stated in the prompt.",
+    "Not specified beyond what's given; assume non-negative.",
+    "Yes, assume non-negative integers.",
+    "Then no more eating is needed this round; totals reflect that.",
+    "No, it should never go negative — capped at 0 if 'need' exceeds remaining.",
+    "No, this ambiguity is genuinely unresolved by the given text."
+  ],
+  "inline_prompts": [
+    "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    Yes, 'need' is the additional amount still required today, separate from what's already been eaten.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+    "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    The description does not otherwise specify which interpretation should be used.\n    It includes both what was already eaten (number) plus this meal's amount — i.e., number + actually eaten this round.\n    \"\"\"",
+    "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    Yes, that's already stated in the prompt.\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+    "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    The description does not otherwise specify which interpretation should be used. Assume non-negative values for all inputs.\n    \"\"\"",
+    "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    Yes, assume non-negative integers.\n    \"\"\"",
+    "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    Then no more eating is needed this round; totals reflect that.\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+    "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    No, it should never go negative — capped at 0 if 'need' exceeds remaining.\n    The description does not otherwise specify which interpretation should be used.\n    \"\"\"",
+    "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    The description does not otherwise specify which interpretation should be used.\n    No, this ambiguity is genuinely unresolved by the given text.\n    \"\"\""
+  ],
+  "tiers": [
+    2,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "round": 2,
+  "prompt_before": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space).\n    \"\"\"",
+  "candidates": [
+    {
+      "idx": 5,
+      "question": "Should punctuation attached to the word \u201cI\u201d (e.g., \u201cI,\u201d or \u201cI!\u201d) prevent the sentence from being counted as a boredom?",
+      "answer": "Punctuation attached to the word 'I' (e.g., 'I,', 'I!') prevents that sentence from being counted as a boredom (the pattern checks for 'I ').",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space), with the clarification that punctuation attached to the word 'I' (e.g., 'I,', 'I!') prevents that sentence from being counted as a boredom (the pattern checks for 'I ').\n    \"\"\"",
+      "score": -1.2915849685668945
+    },
+    {
+      "idx": 4,
+      "question": "Must the word \u201cI\u201d be a standalone token (e.g., followed by a space or end of string), or can it be part of a longer word like \u201cI'm\u201d and still count as a boredom?",
+      "answer": "The word 'I' must be a standalone token starting the sentence, followed by a space; 'I'm' would not match 'I ' at the sentence start.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space), where the word 'I' must be a standalone token starting the sentence, followed by a space; 'I'm' would not match 'I ' at the sentence start.\n    \"\"\"",
+      "score": -1.6073030233383179
+    },
+    {
+      "idx": 7,
+      "question": "If the input string contains no delimiters, is the entire string treated as a single sentence for boredom detection?",
+      "answer": "If the input string contains no delimiters, the entire string is treated as a single sentence and checked for starting with 'I '.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space). If the input string contains no delimiters, the entire string is treated as a single sentence and checked for starting with 'I '.\n    \"\"\"",
+      "score": -2.5677571296691895
+    },
+    {
+      "idx": 6,
+      "question": "Are newline characters (`\\n`) considered part of a sentence, or do they act as additional delimiters?",
+      "answer": "Newline characters (\\n) are not treated as sentence delimiters in the solution; only '.', '?', and '!' delimit sentences.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space). Newline characters (\\n) are not treated as sentence delimiters in the solution; only '.', '?', and '!' delimit sentences.\n    \"\"\"",
+      "score": -2.718914031982422
+    },
+    {
+      "idx": 10,
+      "question": "Are Unicode punctuation marks that look like period, question mark, or exclamation mark (e.g., \u201c\uff0e\u201d, \u201c\uff1f\u201d, \u201c\uff01\u201d) considered valid sentence delimiters?",
+      "answer": "Unicode punctuation marks that look like period, question mark, or exclamation mark are not treated as delimiters; only ASCII '.', '?', '!' are recognized.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!' and Unicode punctuation marks that look like period, question mark, or exclamation mark are not treated as delimiters; only ASCII '.', '?', '!' are recognized. A boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space).\n    \"\"\"",
+      "score": -3.0745675563812256
+    },
+    {
+      "idx": 9,
+      "question": "How should quoted text that contains delimiters (e.g., \u201cHe said, \u2018Are you okay?\u2019\u201d) be handled\u2014do the inner delimiters split sentences?",
+      "answer": "Quoted text with delimiters inside should follow normal splitting rules; the delimiters split sentences regardless of quotes.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space). Quoted text with delimiters inside should follow normal splitting rules; the delimiters split sentences regardless of quotes.\n    \"\"\"",
+      "score": -4.530764579772949
+    },
+    {
+      "idx": 1,
+      "question": "How should consecutive sentence delimiters (e.g., \u201c...\u201d, \u201c?!\u201d, \u201c.!?\u201d) be treated when determining sentence boundaries?",
+      "answer": "Consecutive sentence delimiters (e.g., '...', '?!') should each be treated as separate delimiters, creating multiple sentence boundaries.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and consecutive sentence delimiters (e.g., '...', '?!') should each be treated as separate delimiters, creating multiple sentence boundaries. A boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space).\n    \"\"\"",
+      "score": -5.32086181640625
+    },
+    {
+      "idx": 2,
+      "question": "If a delimiter appears at the very beginning or end of the string, does it create an empty sentence that should be ignored or counted?",
+      "answer": "A delimiter at the very beginning or end of the string creates an empty sentence that should be ignored (not counted).",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space). A delimiter at the very beginning or end of the string creates an empty sentence that should be ignored (not counted).\n    \"\"\"",
+      "score": -5.441215991973877
+    },
+    {
+      "idx": 8,
+      "question": "Should the function return an integer count, a string representation of the count, or some other type (e.g., a list of booleans per sentence)?",
+      "answer": "The function should return an integer count of boredoms.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. The function should return an integer count of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space).\n    \"\"\"",
+      "score": -5.9058332443237305
+    },
+    {
+      "idx": 3,
+      "question": "Are leading or trailing whitespace characters around a sentence (including before the \u201cI \u201d) ignored when checking the start of the sentence?",
+      "answer": "Leading or trailing whitespace around a sentence is not explicitly handled; the regex split on '[.?!]\\s*' will handle following spaces.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space). Leading or trailing whitespace around a sentence is not explicitly handled; the regex split on '[.?!]\\s*' will handle following spaces.\n    \"\"\"",
+      "score": -5.97402286529541
+    },
+    {
+      "idx": 0,
+      "question": "Should sentences be considered case\u2011sensitive, i.e., must the leading word be exactly an uppercase \u201cI\u201d followed by a space, or are variations like \u201ci \u201d or \u201cI.\u201d also counted?",
+      "answer": "Sentences are case-sensitive; the leading word must be exactly an uppercase 'I' followed by a space to count as a boredom.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space) exactly.\n    \"\"\"",
+      "score": -6.094653606414795
+    },
+    {
+      "idx": 11,
+      "question": "If the input is not a string (e.g., `None` or a list), should the function raise an exception, coerce the input, or treat it as having zero boredoms?",
+      "answer": "If the input is not a string (e.g., None, a list), that is not part of the specification; the function assumes a valid string input.",
+      "prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space). If the input is not a string (e.g., None, a list), that is not part of the specification; the function assumes a valid string input.\n    \"\"\"",
+      "score": -6.4185872077941895
+    }
+  ],
+  "chosen": {
+    "idx": 5,
+    "question": "Should punctuation attached to the word \u201cI\u201d (e.g., \u201cI,\u201d or \u201cI!\u201d) prevent the sentence from being counted as a boredom?",
+    "answer": "Punctuation attached to the word 'I' (e.g., 'I,', 'I!') prevents that sentence from being counted as a boredom (the pattern checks for 'I ').",
+    "score": -1.2915849685668945
+  },
+  "next_prompt": "def is_bored(S):\n    \"\"\"\n    You'll be given a string of words, and your task is to count the number\n    of boredoms. Sentences are delimited by '.', '?' or '!', and a boredom is a sentence that starts with the word 'I ' (uppercase I followed by a space), with the clarification that punctuation attached to the word 'I' (e.g., 'I,', 'I!') prevents that sentence from being counted as a boredom (the pattern checks for 'I ').\n    \"\"\"",
+  "test_n_pass": 6,
+  "test_n_total": 6
+}
