@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_102_semantic",
+  "round_depth": 2,
+  "questions": [
+    "Should the function handle cases where x and y are the same positive integer but that integer is odd? The reference solution returns -1 for (7,7) but 546 for (546,546).",
+    "What should happen if x > y? The reference solution returns -1, but the docstring only mentions 'no such number' for the range [x,y].",
+    "Is the range [x, y] inclusive of both endpoints? The docstring says 'inclusive' but the reference solution treats y as inclusive when checking for evenness.",
+    "Should the function return the biggest even integer strictly between x and y, or can it be x or y if they are even?",
+    "What if x and y are both even but x > y? Should it return -1 because of invalid range, or check the reversed range?",
+    "Are x and y guaranteed to be integers? The prompt says 'positive numbers' but then clarifies 'positive integers'.",
+    "If there are multiple even numbers in the range, should we return the maximum one (as stated) or could there be other selection criteria?",
+    "What if the range contains only one number and it's odd? Should it return -1 or consider that as 'no such number'?"
+  ],
+  "answers": [
+    "Yes, if x and y are the same and that integer is odd, return -1; if even, return that integer.",
+    "If x > y, the function returns -1, as shown in the reference solution.",
+    "Yes, the range is inclusive of both endpoints, as the solution checks and returns y if even.",
+    "It can be x or y if they are even, as the solution returns y if even or y-1 otherwise.",
+    "It returns -1 because x > y, regardless of evenness, as per the reference solution.",
+    "Yes, x and y are positive integers, as implied by the examples and solution using modulo.",
+    "Return the maximum even integer in the range, as stated in the docstring and implemented.",
+    "It returns -1, as shown for (7,7) in the reference solution."
+  ],
+  "inline_prompts": [
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. Yes, if x and y are the same and that integer is odd, return -1; if even, return that integer.\"\"\"\n    x and y are positive integers, not general positive numbers.",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive integers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. If x > y, the function returns -1, as shown in the reference solution.\"\"\"\n    x and y are positive integers, not general positive numbers.",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n    \"\"\" x and y are positive integers, not general positive numbers. Yes, the range is inclusive of both endpoints, as the solution checks and returns y if even.",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. It can be x or y if they are even, as the solution returns y if even or y-1 otherwise.\"\"\"\n    x and y are positive integers, not general positive numbers.",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive integers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. It returns -1 because x > y, regardless of evenness, as per the reference solution.\n    \"\"\" x and y are positive integers, not general positive numbers.",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n    \"\"\" x and y are positive integers, not general positive numbers. Yes, x and y are positive integers, as implied by the examples and solution using modulo.",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. Return the maximum even integer in the range, as stated in the docstring and implemented.\"\"\"\n    x and y are positive integers, not general positive numbers.",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. It returns -1, as shown for (7,7) in the reference solution.\n    \"\"\" x and y are positive integers, not general positive numbers."
+  ]
+}

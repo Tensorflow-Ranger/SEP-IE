@@ -1,0 +1,14 @@
+{
+  "branch_idx": 470,
+  "id": "bcbexpand_BigCodeBench/969_semantic",
+  "questions": [
+    "Should the function raise TypeError if ANY column is non-numeric, or only if ALL columns are non-numeric? The prompt says 'contains non-numeric data types' but the reference solution checks that the number of numeric columns equals total columns, implying any non-numeric triggers error.",
+    "Does 'contains NaN values' mean any NaN in the entire DataFrame, or only in numeric columns? The reference solution checks .any() on the whole DataFrame, but the prompt only mentions numeric columns earlier.",
+    "Should the cumulative sum be computed along axis=0 (default) or axis=1? The prompt says 'for each numeric column' implying column-wise, but axis ambiguity exists.",
+    "What should happen if a column's cumulative sum becomes constant (e.g., all zeros after cumsum)? The clarification says output zeros, but does that apply only when the cumulative sum is all zeros, or also when it's any constant value? The reference solution uses MinMaxScaler which produces zeros for any constant input.",
+    "Should the output DataFrame have the same index as the input, or a default integer index? The reference solution uses pd.DataFrame(...) without specifying index, so it resets index.",
+    "Is the MinMaxScaler applied column-wise (per column) or globally across all columns? The prompt says 'each column's values as a separate series before normalization' implying per-column, but the reference solution fits scaler on entire df_cumsum matrix, which normalizes globally.",
+    "What feature_range should MinMaxScaler use? Default (0,1) or something else? The prompt does not specify.",
+    "Should the function accept a DataFrame with a single column? The prompt says 'each numeric column' but does not forbid single-column input."
+  ]
+}

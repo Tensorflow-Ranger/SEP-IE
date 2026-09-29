@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_115_semantic",
+  "round_depth": 0,
+  "questions": [
+    "Does 'efficiently use the buckets' mean we must minimize the total number of bucket lowerings across all wells?",
+    "Can we partially fill a bucket from one well and then move to another well without lowering it again, or must each lowering extract from a single well only?",
+    "Is the bucket capacity measured in units of water (each '1' in the grid), and does each bucket lowering extract up to that many units from a single well?",
+    "If a well has water units exceeding capacity, can we use multiple buckets simultaneously or must we lower the same bucket multiple times?",
+    "Should we consider any constraints on the order of emptying wells, e.g., must we finish one well before moving to another?",
+    "Are we allowed to skip wells with zero water, or must we lower buckets there anyway?",
+    "Does 'lower the buckets' count each individual bucket lowering per well, or can one lowering involve multiple buckets across wells?",
+    "Is the goal to minimize the maximum number of lowerings for any single well, or the total sum?"
+  ],
+  "answers": [
+    "Yes, the solution minimizes the total number of bucket lowerings by summing the ceiling of water per well divided by capacity.",
+    "Each lowering extracts from a single well only, as the solution treats each well independently.",
+    "Yes, capacity is in units of water, and each lowering extracts up to that many units from a single well.",
+    "You must lower the same bucket multiple times, as the solution uses the ceiling of water divided by capacity per well.",
+    "No, order does not matter; the total lowerings is the sum per well, independent of sequence.",
+    "You skip wells with zero water, as the ceiling of zero divided by capacity is zero lowerings.",
+    "It counts each individual bucket lowering per well, with no simultaneous lowering across wells.",
+    "The goal is to minimize the total sum of lowerings across all wells."
+  ],
+  "inline_prompts": [
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Yes, the solution minimizes the total number of bucket lowerings by summing the ceiling of water per well divided by capacity. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Each lowering extracts from a single well only, \n    as the solution treats each well independently.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Yes, capacity is in units of water, and each lowering extracts up to that many units from a single well.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. You must lower the same bucket multiple times, as the solution uses the ceiling of water divided by capacity per well. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Your task is to use the buckets to empty the wells. Output the number of times you need to lower the buckets. No, order does not matter; the total lowerings is the sum per well, independent of sequence.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. You skip wells with zero water, as the ceiling of zero divided by capacity is zero lowerings. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. It counts each individual bucket lowering per well, with no simultaneous lowering across wells.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. The goal is to minimize the total sum of lowerings across all wells.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\""
+  ]
+}

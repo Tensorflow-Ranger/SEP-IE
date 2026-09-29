@@ -1,0 +1,2702 @@
+[
+  {
+    "branch_idx": 3096,
+    "id": "bcbexpand_BigCodeBench/253_vagueness",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Should the wave function be a sine wave, or can it be any periodic function (e.g., cosine, combination)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different functions produce different plots."
+      },
+      {
+        "question": "What is the amplitude of the wave? Is it always 1 (as in sin), or should it also be randomized?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Amplitude changes the radial extent of the plot."
+      },
+      {
+        "question": "What frequency multiplier range should be used for the wave? The reference uses 1-10, but is that fixed?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Frequency changes the number of oscillations."
+      },
+      {
+        "question": "Should the radial label position be set in degrees (as implied) or radians? The clarification says degrees, but ax.set_rlabel_position expects degrees in polar plots.",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification explicitly states degrees, and matplotlib's set_rlabel_position uses degrees."
+      },
+      {
+        "question": "Is the wave function defined over exactly 0 to 2\u03c0, or should the range be configurable?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different ranges change the plotted segment."
+      },
+      {
+        "question": "How many points should be used for sampling the wave? The reference uses 1000, but is that required?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Number of points affects smoothness and performance."
+      },
+      {
+        "question": "Should the wave include a phase shift (horizontal translation)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Phase shift alters the wave's starting point."
+      },
+      {
+        "question": "Is the radial label position inclusive of 0 and 180? The clarification says 'between 0 and 180 degrees', but random.randint(0,180) includes both endpoints.",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Endpoint inclusion doesn't change functional output meaningfully; position is still within 0-180."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "What type of wave should be generated (e.g., sine, cosine, square, sawtooth, or any random wave shape)?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about wave type."
+      },
+      {
+        "question": "What should be the range of the x-values (angular coordinate) for plotting the wave?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Unspecified range affects wave appearance and periodicity."
+      },
+      {
+        "question": "What should be the number of points used to generate the wave (e.g., resolution)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different point counts change smoothness and plotting details."
+      },
+      {
+        "question": "Should the wave have a random frequency/amplitude, and if so, what are the allowed ranges?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Frequency/amplitude parameters alter wave shape and scale."
+      },
+      {
+        "question": "Should the radial label position be set in degrees (as implied) or radians?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification specifies degrees (0-180)."
+      },
+      {
+        "question": "Is the wave function meant to be periodic over the plotted angular range?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Periodicity affects wave continuity at boundaries."
+      },
+      {
+        "question": "Should the wave be plotted as a line, scatter points, or another style?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Plot style changes visual output and line existence."
+      },
+      {
+        "question": "Is there any requirement for the wave to be normalized or scaled to fit the polar plot radius?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Scaling affects whether wave is visible within plot limits."
+      }
+    ]
+  },
+  {
+    "branch_idx": 1103,
+    "id": "bcbexpand_BigCodeBench/729_semantic",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "What does 'replacing any duplicate strings in the list before saving' mean? Should duplicates be removed entirely, replaced with a placeholder, or replaced with a new random string?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt mentions replacing duplicates but the reference solution does not implement any duplicate handling, causing a mismatch in expected behavior."
+      },
+      {
+        "question": "If a filename is provided but the file already exists, should it be overwritten (as the clarification says for 'wb' mode) or should the function raise an error or avoid overwriting?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The clarification explicitly states it is overwritten, so this is already answered."
+      },
+      {
+        "question": "Should the function return the loaded list exactly as saved (including any duplicates if not handled) or the processed list after duplicate replacement?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The output description says 'loaded list of strings from the pickle file', but the prompt mentions replacing duplicates before saving, leading to ambiguity about what is returned."
+      },
+      {
+        "question": "What is the scope of 'unique filename' generation? Should it be globally unique (e.g., using UUID) or just random? The reference uses random characters, but collisions are possible.",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Different implementations of 'unique' could lead to different filenames, but the functional output (loaded_strings) should be the same if no collision occurs in tests."
+      },
+      {
+        "question": "Should the function clean up (remove) the generated pickle file after reading it back, or leave it on disk? The reference solution removes it, but the prompt does not specify.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Leaving vs. removing the file affects side effects, but not the returned loaded_strings for correct implementation."
+      },
+      {
+        "question": "Is the validation step meant to compare the saved and loaded data for consistency, or simply to load and return it? The prompt says 'read it back for validation' but does not specify what validation entails.",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Validation could imply checking for equality or other checks, but the output is just the loaded list, so functional impact on returned value is minimal."
+      },
+      {
+        "question": "What should happen if the list contains non-string objects? Should they be converted to strings, rejected, or handled as-is?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt says 'list of random strings', but if input contains non-strings, correct behavior is ambiguous and could affect output."
+      },
+      {
+        "question": "Should duplicate replacement occur based on exact string matching (case-sensitive) or case-insensitive? For example, are 'abc' and 'ABC' considered duplicates?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different definitions of duplicate would change which strings are replaced, affecting the saved and loaded list."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "What does 'replacing any duplicate strings in the list before saving' mean? Should duplicates be removed entirely (deduplicated) or replaced with new unique random strings?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about duplicate handling."
+      },
+      {
+        "question": "Should the function modify the input list in-place to remove/replace duplicates, or create a new list for saving while leaving the original unchanged?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity about side effects on input list."
+      },
+      {
+        "question": "If duplicates are replaced, what method should be used to generate replacement strings? Should they be random, or perhaps a placeholder like 'DUPLICATE'?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Method for generating replacements is unspecified."
+      },
+      {
+        "question": "Does 'replacing any duplicate strings' apply only to consecutive duplicates, or all duplicates in the list regardless of position?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Scope of duplicate detection is unclear."
+      },
+      {
+        "question": "Should the function validate that the loaded list matches the processed list (after duplicate handling) or the original input list?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Validation target is ambiguous."
+      },
+      {
+        "question": "What should happen if the provided filename already exists? The clarification says 'overwritten', but is that always desired, or should there be an error or rename?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification explicitly states overwritten in 'wb' mode."
+      },
+      {
+        "question": "Is the unique filename generation required to be random, or could it be based on timestamp or other scheme?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Implementation detail but output filename not part of return."
+      },
+      {
+        "question": "Should the function handle non-string elements in the input list, e.g., by raising an error or converting them?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Type validation for list elements is unspecified."
+      }
+    ]
+  },
+  {
+    "branch_idx": 3488,
+    "id": "ccb_amb_task_272",
+    "dataset_source": "clarifycodebench",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Is the goal to find the minimum number of insertions, or any number that works? The clarification says 'minimum', but is that definitive?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already explicitly answered by the appended clarification."
+      },
+      {
+        "question": "Can we insert characters only at the beginning, end, or between existing characters, or also replace existing characters?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Insertion positions affect possible minimal insertion counts."
+      },
+      {
+        "question": "Are we allowed to delete or reorder existing characters, or only insert?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Deletion/reordering would change the problem fundamentally."
+      },
+      {
+        "question": "Does the resulting string need to contain the original S as a subsequence (preserving order of original characters)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "If not, we could ignore original characters entirely."
+      },
+      {
+        "question": "If we must preserve S as a subsequence, can we insert characters between any positions, including before the first and after the last?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Boundary insertions affect minimal insertion strategy."
+      },
+      {
+        "question": "Should the output be the minimal number of insertions needed to achieve the pattern, assuming we can insert anywhere while preserving original order?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification already states minimum, and preservation is implied by 'insert'."
+      },
+      {
+        "question": "Is the pattern strictly alternating starting with 'i' at odd positions, or could it start with 'o' if we insert enough leading characters?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Pattern definition mandates odd positions as 'i', even as 'o', but starting index after insertions matters."
+      },
+      {
+        "question": "Does the length of the resulting string need to be minimal, or just even with the alternating pattern?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Minimal length vs. minimal insertions could differ if extra insertions are allowed."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Is the insertion allowed only at the beginning and end, or also between any existing characters?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Insertion positions affect achievable minimum."
+      },
+      {
+        "question": "Can we also delete characters from S, or only insert?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Prompt explicitly says 'insert zero or more characters'."
+      },
+      {
+        "question": "Do we need to preserve the relative order of the original characters in S when inserting?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "If reordering allowed, fewer insertions might suffice."
+      },
+      {
+        "question": "Should the output be the minimum number of insertions required to achieve the pattern, or any number that works?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about minimum vs any."
+      },
+      {
+        "question": "If multiple minimal insertion sequences exist, do we just output the count, or also a specific sequence?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Output is specified as a single number."
+      },
+      {
+        "question": "Is the target pattern strictly alternating starting with 'i' at odd positions, or could it start with 'o' at odd positions if that reduces insertions?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Condition explicitly states odd positions are 'i', even are 'o'."
+      },
+      {
+        "question": "Are we allowed to insert characters that are not 'i' or 'o'?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "String S consists only of 'i' and 'o', and target pattern uses only these."
+      },
+      {
+        "question": "Does 'insert zero or more characters at arbitrary positions' mean we can insert at the same position multiple times?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Multiple inserts at same position equivalent to sequential inserts, doesn't change minimal count."
+      }
+    ]
+  },
+  {
+    "branch_idx": 2319,
+    "id": "bcbexpand_BigCodeBench/208_semantic",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Should the random walk start at 0 (cumulative sum of steps) or at the first step value (i.e., the first element of steps)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different starting points change the walk values and thus statistics."
+      },
+      {
+        "question": "Is the seed parameter intended to seed the global random state (np.random.seed) only for the random number generation inside the function, or should it also affect any external random state after the function returns?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Implementation detail that doesn't affect output for given inputs, but affects external state."
+      },
+      {
+        "question": "Should the descriptive statistics be computed on the cumulative walk values or on the individual step values (-1 or 1)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already answered by reference solution and docstring: stats of generated sequence (walk)."
+      },
+      {
+        "question": "What should be the figure size for the plot? Is a specific size required or can it be default?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Plot size is a visual detail, not affecting correctness of returned data."
+      },
+      {
+        "question": "Should the plot include any labels for the x-axis and y-axis, or only the title 'Random Walk'?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Axis labels are visual, not affecting correctness of returned data."
+      },
+      {
+        "question": "Are the percentiles to be computed exactly as specified (5th, 25th, 50th, 75th, 95th) using linear interpolation or another method (e.g., nearest)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different interpolation methods can yield different percentile values."
+      },
+      {
+        "question": "Should the function reset the matplotlib figure state (e.g., plt.close) after plotting to avoid interfering with subsequent plots?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Side effect on global matplotlib state, not affecting returned data."
+      },
+      {
+        "question": "Is the 'count' statistic in the returned dictionary supposed to be the number of steps (elements) or the number of walk values (also elements)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already answered: count equals elements, as per reference solution."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the descriptive statistics be computed on the sequence of steps (-1, 1) or on the cumulative walk positions?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about which sequence to analyze."
+      },
+      {
+        "question": "What should be the x-axis values for the plot? Should it be step indices (0 to elements-1) or something else?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Plot labeling is unspecified but doesn't affect correctness of output values."
+      },
+      {
+        "question": "Should the percentiles be computed using linear interpolation, nearest, or another method? This can affect results for small datasets.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different percentile methods yield different numeric results."
+      },
+      {
+        "question": "What should the title of the plot be? The prompt says 'Random Walk' but is that required or just an example?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Title text doesn't affect functional output of statistics or plot data."
+      },
+      {
+        "question": "Should the plot include grid lines, axis labels, or any other styling beyond the line plot?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Styling details are not required for correctness of data or statistics."
+      },
+      {
+        "question": "Is the seed parameter intended to seed only the random steps, or also any other randomness in the function (e.g., if any random colors or styles were added)?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Only step generation uses randomness; styling is deterministic."
+      },
+      {
+        "question": "What should be the data type of the values in the statistics dictionary? Should they be Python int/float, or numpy types?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Type of numeric values doesn't affect correctness of computations."
+      },
+      {
+        "question": "Should the function close or show the plot, or just return the Axes object without displaying?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Returning Axes is specified; display behavior is not part of output correctness."
+      }
+    ]
+  },
+  {
+    "branch_idx": 2786,
+    "id": "ccb_amb_task_384",
+    "dataset_source": "clarifycodebench",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "When the game ends because S becomes empty, does the player who performed the last operation win immediately, or is there a check after the operation that S is empty? (i.e., does the operation that makes S empty count as a winning move?)",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The condition 'If S=, the game ends and the player who performed the last operation wins' is ambiguous about whether S becoming empty during the operation triggers the win."
+      },
+      {
+        "question": "Is the set S initially empty, and does the condition 'If S=' refer to S being empty at any point, or specifically after the operation? The clarification doesn't address this.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The win condition timing affects which player wins in edge cases where S becomes empty."
+      },
+      {
+        "question": "Does 'S=' mean S is the empty set? The notation is ambiguous; it might be a typo for 'S = {}' or 'S is empty'.",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Context makes it clear S is a set, and 'S=' is likely a shorthand for empty set, already resolved by reading."
+      },
+      {
+        "question": "Can a player choose an index i that is already in S? The operation says 'if i\u2209 S, add i to S', but it doesn't forbid choosing i \u2208 S.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Choosing an index already in S affects strategy and game progression."
+      },
+      {
+        "question": "Is the game guaranteed to end? The prompt says 'it can be proven that until a winner is determined... players can always make a move', but doesn't explicitly state the game always ends.",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The proof implies moves exist until a winner is determined, so game ends when S becomes empty."
+      },
+      {
+        "question": "What happens if after subtracting 1 from A_i, A_i becomes 0? Can that index still be chosen in future turns? The operation requires A_i \u2265 1 to choose i.",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification states A_i \u2265 1 includes A_i = 1, implying after subtraction to 0, it cannot be chosen."
+      },
+      {
+        "question": "Does the order of players matter if the game ends on the first move? For example, if initial S is empty and a move makes S non-empty, does the game continue?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The win condition triggers when S becomes empty, but initial S is empty, so ambiguity about first move."
+      },
+      {
+        "question": "Is the set S modified only when i\u2209 S, or is there any other way S changes? The operation description is clear, but could there be implicit removals?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The operation explicitly defines S modification; no other changes are mentioned."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Does the game end immediately when S becomes the full set {1,...,N}, or does it end at the start of the next turn?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about S= meaning full set and immediate end."
+      },
+      {
+        "question": "When S becomes full, does the player who made the move that made S full win, or does the game continue until a player cannot move?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about immediate win condition."
+      },
+      {
+        "question": "Is the condition for choosing i that A_i \u2265 1, or is there an additional constraint like i not in S?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about A_i condition being positive."
+      },
+      {
+        "question": "If A_i becomes 0 after subtraction, can that index be chosen again in a future turn?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Not addressed; affects move availability."
+      },
+      {
+        "question": "When S is full, does the game end even if there are still positive A_i values?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about game end condition."
+      },
+      {
+        "question": "Is the initial S empty, and does adding i to S occur only if i is not already in S, even if A_i is positive?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Clarifies S update rule, not in labeled ambiguity."
+      },
+      {
+        "question": "Do players have perfect information about the entire game state (A and S) when making optimal decisions?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Implied by optimal play; no functional divergence."
+      },
+      {
+        "question": "If multiple indices satisfy A_i \u2265 1, can a player choose any, or is there a priority order?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Not addressed; affects strategy under optimal play."
+      }
+    ]
+  },
+  {
+    "branch_idx": 1967,
+    "id": "bcbexpand_BigCodeBench/877_semantic",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Should the function raise a ValueError if n_components is less than 1 (e.g., 0 or negative), or is that considered valid?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "PCA with n_components <= 0 is invalid; behavior is unspecified."
+      },
+      {
+        "question": "If n_components is a float (e.g., 0.95) to specify variance, should it be supported, or must it be an integer?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "PCA supports float for variance; docstring mentions variance but signature suggests integer."
+      },
+      {
+        "question": "Should the output DataFrame have a default index (0,1,...) or preserve the original DataFrame's index?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Original index may be meaningful; canonical solution uses default index."
+      },
+      {
+        "question": "Should the output DataFrame's column names be numeric (0,1,...) or something like 'PC1', 'PC2'?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Column naming is cosmetic; does not affect numeric output values."
+      },
+      {
+        "question": "If the DataFrame contains NaN values after numeric conversion, should it raise an error or handle them?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Validation checks for non-numeric but not NaN; PCA may fail or produce NaN."
+      },
+      {
+        "question": "Should the function accept a single-column DataFrame? If so, what happens with n_components=1?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "PCA on single column is trivial but may raise error if n_components > columns."
+      },
+      {
+        "question": "Should the StandardScaler use with_mean=True and with_std=True (default) or other parameters?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different scaling parameters change PCA results."
+      },
+      {
+        "question": "If n_components equals the number of columns, should PCA still be performed (full decomposition)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Canonical solution allows n_components <= columns; full decomposition is valid."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the function allow n_components to be a float (0 < n_components < 1) representing the variance to retain, as per sklearn's PCA, or must it be an integer?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about variance-based component selection."
+      },
+      {
+        "question": "If n_components is greater than the number of rows (observations) but less than or equal to columns, should PCA be allowed? sklearn PCA can handle this, but the spec only mentions columns.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity about validation relative to rows vs columns."
+      },
+      {
+        "question": "Should the output DataFrame have column names (e.g., 'PC1', 'PC2') or just integer indices as shown in the example?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Column naming affects output format but not numerical results."
+      },
+      {
+        "question": "Should the function reset the index of the output DataFrame to match the input's index, or use a default range index?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Index handling affects DataFrame structure but not PCA values."
+      },
+      {
+        "question": "Is the StandardScaler supposed to be fitted on the entire input data (fit_transform) or should it be fitted separately (e.g., fit on training, transform on test)? The prompt implies scaling the provided data.",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already clear: scales the data using StandardScaler on the provided DataFrame."
+      },
+      {
+        "question": "Should the function handle NaN values in the input DataFrame, or is that covered by the non-numeric data error?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "NaN are numeric but could cause scaling/PCA issues; validation unclear."
+      },
+      {
+        "question": "Should the PCA be fitted with sklearn's default random state (undefined) or a specific seed for reproducibility?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Random state affects PCA results when solver is randomized."
+      },
+      {
+        "question": "Does 'preserving as much information as possible by default' mean that if n_components is not specified, it should automatically choose components to explain e.g., 95% variance, rather than using default n_components=2?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about default behavior vs variance threshold."
+      }
+    ]
+  },
+  {
+    "branch_idx": 1436,
+    "id": "orchidheval_60_lexical",
+    "dataset_source": "orchid_heval",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Should the function handle negative n? The docstring says 'sums digits from 1 to n', which for negative n could be interpreted as summing from 1 down to n (e.g., 1+0+(-1)+...?), or perhaps returning 0 or raising an error.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Negative input could produce different outputs or errors."
+      },
+      {
+        "question": "Is n inclusive? The docstring says 'from 1 to n', but the reference solution uses range(n+1), which includes n. However, if n is 0 or negative, does 'from 1 to n' imply an empty sum?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Inclusiveness affects output for non-positive n."
+      },
+      {
+        "question": "Does 'sums digits' mean summing the individual digits of numbers from 1 to n (e.g., for n=12, sum digits of 1,2,...,12) or summing the numbers themselves? The clarification says 'standard integer arithmetic', but 'digits' is ambiguous.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Interpretation changes the core computation."
+      },
+      {
+        "question": "What should be returned for n=0? The docstring says 'from 1 to n', which might imply an empty sum, possibly 0 or an error.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Output differs between 0 and error."
+      },
+      {
+        "question": "Is the input guaranteed to be an integer? The type hint says int, but should non-integer floats be handled by truncation or error?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Type hint and clarification already specify integer."
+      },
+      {
+        "question": "Should large n values be handled with overflow considerations? The clarification says 'standard integer arithmetic', but Python integers are unbounded, so this might be inert.",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Python's integer arithmetic is unbounded, so no functional divergence."
+      },
+      {
+        "question": "What is the expected behavior if n is a very large integer causing performance issues? The spec doesn't mention efficiency constraints.",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Performance doesn't affect correctness for valid inputs."
+      },
+      {
+        "question": "Does 'sums digits from 1 to n' imply that n must be positive? The reference tests only use positive numbers, but the docstring doesn't explicitly restrict it.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Assumption about domain affects output for non-positive n."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the function sum the numbers from 1 to n inclusive, or from 1 to n-1?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The phrase 'from 1 to n' is ambiguous about inclusivity of n."
+      },
+      {
+        "question": "What should be returned for n <= 0? The docstring only mentions digits/numbers from 1 to n.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Behavior for non-positive n is undefined and could cause errors or return 0."
+      },
+      {
+        "question": "Is the input n guaranteed to be a non-negative integer, or should the function handle negative integers?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Type hint is int, but domain constraints are not specified."
+      },
+      {
+        "question": "Does 'sums digits' mean summing the individual decimal digits of each number from 1 to n, or summing the numbers themselves?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about 'digits' vs. 'numbers'."
+      },
+      {
+        "question": "Should the function use integer arithmetic exclusively, or could floating-point be used for intermediate results?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification states standard integer arithmetic is assumed."
+      },
+      {
+        "question": "Is the function expected to handle large n values efficiently, or is a simple loop acceptable?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Performance expectations are unspecified but don't affect correctness for all valid inputs."
+      },
+      {
+        "question": "What is the maximum value of n that the function must support without overflow or error?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Implementation limits are unspecified but don't change output for inputs within Python's int range."
+      },
+      {
+        "question": "Should the function raise an exception if n is not an integer, or coerce the input?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Type hint indicates int, and Python runtime will enforce this."
+      }
+    ]
+  },
+  {
+    "branch_idx": 1368,
+    "id": "orchidheval_122_vagueness",
+    "dataset_source": "orchid_heval",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Does 'at most two digits' refer to the absolute value of the integer (e.g., -99 has two digits, -100 has three), and is the clarification 'Yes, via absolute value.' definitive for all cases?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already answered by appended clarification."
+      },
+      {
+        "question": "Should the function consider the first k elements of arr (as in reference) or any k elements (e.g., the k largest, smallest, or a random selection)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Prompt ambiguous; reference uses first k, but prompt only says 'from the k elements of arr'."
+      },
+      {
+        "question": "If k > len(arr), should the function sum over all elements (since only len(arr) elements exist) or raise an error/return something else?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Constraints in reference specify k <= len(arr)."
+      },
+      {
+        "question": "Are elements with exactly two digits (e.g., 10, -99) included, or only those with fewer than two digits?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "'At most two digits' includes one- and two-digit numbers per reference."
+      },
+      {
+        "question": "How should negative numbers be counted for digit length? For example, does -5 have one digit or two (including the minus sign)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification specifies absolute value resolves this."
+      },
+      {
+        "question": "Should the sum be returned as an integer (as implied) or could it be another type (e.g., float if large sums overflow)?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Return type is implied integer, but not explicitly stated; unlikely to cause output divergence for valid inputs."
+      },
+      {
+        "question": "If no elements among the first k have at most two digits, should the sum be 0 (as in reference) or None/other sentinel?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Reference returns 0, but prompt doesn't specify; output divergence possible only if alternative sentinel returned."
+      },
+      {
+        "question": "Does 'at most two digits' apply to the decimal representation in base-10, or could other bases be considered (e.g., binary)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Context implies base-10 from examples and reference."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Does 'at most two digits' refer to the absolute value of the integer, or to its literal representation (including negative sign)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already answered by clarification: 'Yes, via absolute value.'"
+      },
+      {
+        "question": "Which k elements of arr are considered? The first k, the last k, the largest k, the smallest k, or any arbitrary selection?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about which k elements to use."
+      },
+      {
+        "question": "For determining digit count, are leading zeros considered? For example, is 05 considered a two-digit number?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity in digit count definition for integers with leading zeros in string representation."
+      },
+      {
+        "question": "If k is greater than the length of arr, should the function sum over all elements or raise an error?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Constraint in reference evidence states k <= len(arr), so not applicable."
+      },
+      {
+        "question": "Should the sum include only elements with exactly two digits, or at most two digits (i.e., including single-digit and two-digit numbers)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Prompt explicitly says 'at most two digits', so unambiguous."
+      },
+      {
+        "question": "Is the digit count based on the integer's decimal representation without a sign, or does the negative sign count as a digit?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification specifies absolute value, so sign is ignored."
+      },
+      {
+        "question": "If an element is zero, does it have zero digits or one digit for the purpose of 'at most two digits'?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity in how zero is represented as a string for digit counting."
+      },
+      {
+        "question": "Should the function return an integer sum, or could it return a float if the sum overflows or underflows?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Ambiguity in return type, but all inputs are integers and sum is integer, so no output divergence for valid inputs."
+      }
+    ]
+  },
+  {
+    "branch_idx": 1106,
+    "id": "bcbexpand_BigCodeBench/736_vagueness",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "If the flattened list is empty (e.g., L = [] or L = [[]]), what should the function return?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Empty input not addressed; scipy.stats.mode may raise an error."
+      },
+      {
+        "question": "Should the function handle non-integer elements (e.g., floats, strings) or only integers as implied by the signature and tests?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Type of elements unspecified; scipy.stats.mode works on any comparable type."
+      },
+      {
+        "question": "If there are multiple modes with the same frequency, does the clarification 'smallest element' refer to the smallest by value or the first encountered in flattened order?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification explicitly states smallest element, and reference uses scipy.stats.mode which returns first mode; smallest is defined."
+      },
+      {
+        "question": "Is the nested list guaranteed to be rectangular (all sublists same length) or can sublists vary in length as shown in tests?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Tests show varying lengths; flattening handles any nested structure."
+      },
+      {
+        "question": "Should the function raise an error if the input contains non-list elements (e.g., a mix of lists and integers)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Input structure ambiguity; np.hstack may fail on non-list elements."
+      },
+      {
+        "question": "Does 'smallest element' mean the minimum value (e.g., -1 < 0) or the smallest absolute value or something else?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification and tests use standard numerical ordering (e.g., -1 is smallest)."
+      },
+      {
+        "question": "If all elements are unique (no mode), what should be returned? The smallest element or something else?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "scipy.stats.mode returns the smallest element when all frequencies are 1, but behavior is ambiguous for 'no mode'."
+      },
+      {
+        "question": "Should the function preserve the data type of the elements (e.g., return an int even if inputs are floats) or convert as needed?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Return type specified as int, but input type not restricted; conversion may affect output."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the function handle non-integer elements (e.g., floats, strings) in the nested list?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Type constraints not specified, could affect mode calculation."
+      },
+      {
+        "question": "If the nested list contains sublists that are empty, should they be ignored or cause an error?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Empty sublists affect flattening and mode computation."
+      },
+      {
+        "question": "Is the mode defined as the most frequent value across all flattened elements, or per sublist?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about scope of mode calculation."
+      },
+      {
+        "question": "If there are multiple modes with equal frequency, should the function return the smallest element as per clarification, or something else?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification explicitly states smallest element is returned."
+      },
+      {
+        "question": "Should the function raise an error if the input is not a list or contains non-list elements?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Input validation not specified, but doesn't change output for valid inputs."
+      },
+      {
+        "question": "Does 'smallest element' refer to numerical minimum or first in sorted order for non-numeric types?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity in ordering for non-integers affects return value."
+      },
+      {
+        "question": "Is the function expected to handle nested lists of arbitrary depth, or only one level of nesting?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Depth affects flattening approach and mode result."
+      },
+      {
+        "question": "Should the mode be computed using scipy.stats.mode with default parameters, or are there specific settings (e.g., axis, nan_policy)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different parameters could change mode calculation."
+      }
+    ]
+  },
+  {
+    "branch_idx": 2088,
+    "id": "ccb_amb_task_354",
+    "dataset_source": "clarifycodebench",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 1,
+    "old_candidates": [
+      {
+        "question": "What does 'do not intersect' mean precisely? Are intervals that touch at a single point (e.g., [1,3] and [3,5]) considered intersecting or not?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different definitions of interval intersection affect edge existence."
+      },
+      {
+        "question": "Are the intervals closed intervals as defined earlier? If so, does 'do not intersect' mean they are completely disjoint (no overlap, not even at endpoints)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Clarification says 'do not intersect' but doesn't specify endpoint handling."
+      },
+      {
+        "question": "Is the graph G static (edges defined once from given intervals) or can it change between queries?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already clear from problem statement: graph defined from given pairs, queries processed on same graph."
+      },
+      {
+        "question": "When computing path weight, if a vertex appears multiple times in a path (e.g., cycles), is its weight counted each time?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Definition says 'sum of weights of vertices on that path' but doesn't specify duplicates."
+      },
+      {
+        "question": "For the minimum possible weight path, are we allowed to revisit vertices (including endpoints) multiple times?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Affects whether we consider simple paths or any walks."
+      },
+      {
+        "question": "Is the graph guaranteed to be connected? If not, what should be output for disconnected vertices?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already addressed: output -1 if no path exists."
+      },
+      {
+        "question": "What is the time complexity expectation? Is there an intended solution approach?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Implementation detail, not functional ambiguity about output."
+      },
+      {
+        "question": "Are the intervals [L_i, R_i] inclusive of both endpoints as defined?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already explicitly defined in first sentence."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Are the intervals inclusive of both endpoints L_i and R_i? That is, does [L_i, R_i] include all integers from L_i to R_i inclusive?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already defined in the prompt as inclusive set of integers."
+      },
+      {
+        "question": "If there is no path between s_i and t_i, should we output -1 exactly as specified, or is there any other special value?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Output specification unambiguously says print -1 otherwise."
+      },
+      {
+        "question": "For the path weight, is the sum of vertex weights computed only once per vertex even if the path revisits a vertex?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Path definition doesn't forbid revisiting vertices; sum could differ if vertices counted multiple times."
+      },
+      {
+        "question": "Is the graph G simple (no self-loops, no multiple edges)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Edges defined only for i \u2260 j implicitly, and undirected edge condition is binary."
+      },
+      {
+        "question": "Can the intervals be empty (L_i > R_i)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Constraint ensures L_i \u2264 R_i."
+      },
+      {
+        "question": "For the edge condition, does 'do not intersect' mean they are disjoint (no common integer), or can they touch at endpoints? For example, intervals [1,2] and [2,3] share integer 2; do they intersect?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Intersection definition affects edge existence; touching endpoints could be considered intersecting."
+      },
+      {
+        "question": "Are the vertex weights W_i always positive, or can they be zero/negative?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Constraint says 1 \u2264 W_i \u2264 10^9."
+      },
+      {
+        "question": "Should the minimum path weight be computed over all simple paths (no repeated vertices) or over all possible walks (vertices can repeat)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Path definition ambiguous; revisiting vertices could reduce weight if negative weights allowed, but here weights are positive, so simple paths suffice, but still an ambiguity."
+      }
+    ]
+  },
+  {
+    "branch_idx": 3618,
+    "id": "orchidheval_68_lexical",
+    "dataset_source": "orchid_heval",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Does 'regular value' mean 'even value'? The prompt says 'regular' but the reference solution and examples treat it as 'even'. Which is correct?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The core selection criterion is ambiguous between 'regular' (undefined) and 'even' (implied by reference)."
+      },
+      {
+        "question": "If 'regular' means 'even', should 0 be considered an even number? The reference includes 0 as a valid pluckable node.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "0 is even, but its inclusion affects the smallest value selection."
+      },
+      {
+        "question": "Is the index zero-based or one-based? The examples show index 1 for the second element, suggesting one-based, but Python uses zero-based indexing.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Index representation directly changes the output list's second element."
+      },
+      {
+        "question": "If multiple nodes have the same smallest even value, should we return the smallest index among all nodes or only among those with that value? The prompt says 'smallest index' but the reference uses arr.index(min(evens)), which finds the first occurrence overall.",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Both interpretations lead to the same result because index is taken from the original array for the minimal value."
+      },
+      {
+        "question": "Should the function handle non-integer values? The prompt says 'non-negative integer nodes', but what if the array contains floats or other types?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The specification explicitly restricts to non-negative integers, so other types are out of scope."
+      },
+      {
+        "question": "If there are no even values, should we return an empty list or perhaps a default value? The prompt says 'return []'.",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already clearly answered by the prompt."
+      },
+      {
+        "question": "In case of an empty array, should we return []? The prompt includes this case explicitly.",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already clearly answered by the prompt."
+      },
+      {
+        "question": "Is the input guaranteed to be a list? The function signature expects arr, but could it be another iterable?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "The function uses len() and index(), which work on sequences; ambiguity doesn't affect output for valid inputs."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "What does 'regular value' mean? Does it refer to any integer, or only those meeting a specific condition (e.g., even, odd, divisible by something)?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about the undefined term 'regular'."
+      },
+      {
+        "question": "Should the index be 0-based or 1-based? The examples in the reference use 1-based, but Python conventionally uses 0-based indexing.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The reference examples show 1-based indices, but the prompt doesn't specify, leading to different outputs."
+      },
+      {
+        "question": "If there are multiple nodes with the same smallest value, but at different indices, do we return the smallest index among all nodes or only among those with the smallest value?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already unambiguously answered: return the node with smallest index among those with the smallest value."
+      },
+      {
+        "question": "Is the input array guaranteed to contain only non-negative integers, or could it have other types?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt says 'non-negative integer nodes', but doesn't specify handling of invalid inputs, which could cause errors."
+      },
+      {
+        "question": "What should be returned if the array is empty? The prompt says return [], but is that an empty list or None?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already unambiguously answered: return [] (an empty list)."
+      },
+      {
+        "question": "Does 'smallest regular value' refer to the smallest numerical value, or the smallest value after applying some transformation (e.g., absolute value)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The term 'regular' is ambiguous and could imply a transformation, affecting which value is selected."
+      },
+      {
+        "question": "Are duplicate values allowed in the array, and if so, how should they be handled for indexing?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already addressed by the rule to return the smallest index among nodes with the smallest value."
+      },
+      {
+        "question": "Should the function modify the input array (e.g., remove the plucked node) or just return the value and index?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "The prompt says 'pluck one of the nodes and return it', but doesn't specify mutating the array, so it's ambiguous but likely doesn't affect output."
+      }
+    ]
+  },
+  {
+    "branch_idx": 3196,
+    "id": "bcbexpand_BigCodeBench/497_semantic",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Does 'days are counted inclusively from the current day' mean that days_in_past=1 yields yesterday, or does it mean that days_in_past=0 yields today and days_in_past=1 yields yesterday (i.e., the typical non-inclusive interpretation)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The phrase 'inclusively from the current day' is ambiguous about whether the count includes the current day as day 0 or day 1."
+      },
+      {
+        "question": "Should the function use the system's local timezone (datetime.now() without pytz) or UTC (as in the reference solution)? The prompt says 'current system time's date in UTC', but the canonical solution uses pytz.UTC, which may not be available in all environments.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Timezone handling affects the date boundary and thus the weekday for some inputs."
+      },
+      {
+        "question": "Is the input 'days_in_past' required to be an integer, or should it also accept floats? The prompt says 'days', but timedelta accepts floats.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Float inputs could lead to partial days and different dates due to rounding."
+      },
+      {
+        "question": "What should happen if days_in_past is so large that the computed date is before the epoch or causes an overflow? Should there be a maximum allowed value?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Extreme values may cause errors or unexpected behavior in datetime."
+      },
+      {
+        "question": "Should the function raise a ValueError for non-numeric inputs, or let Python's type error propagate?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Type errors are inherent to Python; raising ValueError is for negative values only per spec."
+      },
+      {
+        "question": "Does 'full English name' imply the names should be capitalized exactly as in calendar.day_name (e.g., 'Monday')? The clarification mentions calendar.day_name, but is that a requirement or just an example?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification explicitly states 'canonical solution uses calendar.day_name', resolving this."
+      },
+      {
+        "question": "Should the function account for daylight saving time or leap seconds when subtracting days? The reference uses timedelta which does not.",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "timedelta(days=) is defined as 24-hour intervals, independent of DST/leap seconds; no ambiguity."
+      },
+      {
+        "question": "If days_in_past is zero, should the function return the weekday of the current moment in UTC, or the weekday of the start of the current day in UTC? The prompt says 'date that is 0 days ago', which implies the current date.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "datetime.now(pytz.UTC) includes time-of-day; if time is near midnight UTC, subtracting zero days could still cross a date boundary if rounding occurs."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Does 'days are counted inclusively from the current day' mean that days_in_past=1 refers to today (including current day) or yesterday (excluding current day)?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about inclusive counting interpretation."
+      },
+      {
+        "question": "Should the function use the system's local timezone or UTC as the base for 'today'? The prompt mentions UTC but does not specify if the current system time should be converted to UTC or if UTC is the reference timezone.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity in timezone handling affects the computed date for some inputs."
+      },
+      {
+        "question": "Is the input 'days_in_past' required to be an integer, or should it handle floating-point values (e.g., 1.5 days)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Type ambiguity could lead to different implementations (e.g., rounding vs error)."
+      },
+      {
+        "question": "What should happen if 'days_in_past' is zero? Does it return the weekday of today?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already answered by test case 3 which shows 0 days returns today."
+      },
+      {
+        "question": "Should the weekday name be capitalized exactly as in calendar.day_name (e.g., 'Monday') or in a different format (e.g., lowercase)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification specifies full English name as in calendar.day_name."
+      },
+      {
+        "question": "Does the function need to handle daylight saving time or leap seconds adjustments when subtracting days?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Timedelta subtraction in UTC avoids DST, but ambiguity exists if local time is considered."
+      },
+      {
+        "question": "Is the function expected to raise an error for non-integer inputs, or should it coerce them?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Type validation not specified beyond negative check."
+      },
+      {
+        "question": "Should the function use the current time at the moment of call, or is it acceptable to use a fixed time for testing/reproducibility?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity in whether 'current system time' is dynamic or can be mocked."
+      }
+    ]
+  },
+  {
+    "branch_idx": 1965,
+    "id": "bcbexpand_BigCodeBench/872_semantic",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "When handling uneven tuple lengths, the prompt says 'missing values are treated as zeros or ignored based on their position.' Does this mean missing values are filled with np.nan (as in the reference solution) or with 0, and does the choice affect the mean calculation (since np.nanmean ignores NaN)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Filling with NaN vs 0 changes the denominator in mean calculation if non-numeric values are ignored."
+      },
+      {
+        "question": "Are boolean values (True/False) considered numeric? They are instances of int in Python, but the prompt says 'numeric values' and the reference uses isinstance(val, (int, float)).",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Booleans are numeric in Python, so including them would change mean results."
+      },
+      {
+        "question": "What about complex numbers or other numeric types like numpy.int32? Should they be considered numeric?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different numeric type definitions change which values are included in the mean."
+      },
+      {
+        "question": "The prompt says 'non-numeric values are ignores' (ignored). Does this mean they are excluded from the mean calculation entirely, or treated as NaN in the column list?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification and reference solution show they are ignored (filtered out)."
+      },
+      {
+        "question": "If all values at a position are non-numeric, the mean is set to np.nan. What if there are no values at a position because all tuples are shorter than that position (i.e., missing due to uneven lengths)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Missing positions might be filled with NaN or not created, affecting output length and values."
+      },
+      {
+        "question": "Should the function handle nested tuples or lists within the tuples, or only flat tuples with atomic values?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Nested structures could be considered non-numeric or numeric depending on interpretation."
+      },
+      {
+        "question": "The output is a list of mean values for each numeric position. Does 'position' refer to the index across tuples after unzipping, and are positions counted from 0 even if all values at that position are non-numeric?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Reference solution and tests show positions correspond to tuple indices, with NaN for all-non-numeric."
+      },
+      {
+        "question": "What should happen if the input list contains non-tuple elements (e.g., lists or other iterables)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt specifies 'list of tuples', but implementation could vary if other iterables are provided."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "When tuples have different lengths, are missing values filled with zeros, NaN, or something else before processing?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about handling missing values."
+      },
+      {
+        "question": "Does 'ignored based on their position' mean that missing values are only ignored for certain positions (e.g., non-numeric ones) and treated as zeros for others?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about missing values treatment."
+      },
+      {
+        "question": "For numeric values, what types are considered numeric? Only int and float, or also numpy numeric types like np.int64?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different numeric type definitions affect which values are included in mean calculation."
+      },
+      {
+        "question": "If a position has a mix of numeric and non-numeric values, is the mean calculated only from the numeric ones, ignoring non-numeric, as stated?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already clarified that non-numeric values are ignored."
+      },
+      {
+        "question": "When all values at a position are non-numeric, the mean is set to np.nan. Is this np.nan a float NaN, and should it be returned as a Python float or numpy float?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Output type ambiguity but doesn't change numeric result values."
+      },
+      {
+        "question": "Should the function handle nested structures like tuples within tuples, or are all values assumed to be flat alphanumeric?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different interpretations affect what values are processed for means."
+      },
+      {
+        "question": "Is the mean calculated using numpy's nanmean, which ignores NaN values, or a custom mean that might treat NaN differently?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different mean functions could yield different results if NaN values are present."
+      },
+      {
+        "question": "If the input list contains non-tuple elements (e.g., lists or other types), should the function raise an error, convert them, or ignore them?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Behavior for invalid input types is unspecified and could affect outputs."
+      }
+    ]
+  },
+  {
+    "branch_idx": 303,
+    "id": "bcbexpand_BigCodeBench/593_semantic",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Should the time in each row be the same (the current time when the function starts) or should it increment by one hour for each row?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different time generation strategies produce different CSV content and plot x-axis values."
+      },
+      {
+        "question": "Should the plot show separate lines for each vehicle type or a single combined line of total vehicle count?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt mentions 'combined vehicle count' but the canonical solution plots separate lines."
+      },
+      {
+        "question": "What should happen if the output directory already exists? Should it overwrite existing files or append to them?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "File writing behavior differs between overwriting and appending, affecting output file content."
+      },
+      {
+        "question": "Should the function generate random data for each vehicle type independently, or should there be constraints (e.g., total per hour capped)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different data generation constraints produce different numerical values in the CSV and plot."
+      },
+      {
+        "question": "What should be the range of random values for each vehicle type? The canonical solution uses 0-50, but is this fixed?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already answered by canonical solution showing randint(0, 50)."
+      },
+      {
+        "question": "Should the plot's x-axis labels show all timestamps (potentially crowded) or a simplified representation?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different labeling strategies affect visual presentation and readability of the plot."
+      },
+      {
+        "question": "What should happen if hours is negative? Should it raise an error, return empty data, or handle it differently?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Negative input could produce different outputs (error vs empty file) or cause infinite loops."
+      },
+      {
+        "question": "Should the CSV file include a header row? The canonical solution does, but is this required?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already answered by canonical solution showing header row in data construction."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the line chart plot a single line representing the sum of all vehicle counts per time point, or multiple lines (one per vehicle type)?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about 'combined vehicle count data' interpretation."
+      },
+      {
+        "question": "What should the x-axis label 'Time' display? The full datetime string, hour increments, or something else?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Time format is specified, but axis labeling/tick representation is not defined."
+      },
+      {
+        "question": "Should the plot title be 'Traffic Data Over Time' or something else, or is it optional?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Title affects appearance but not correctness of data or axes object."
+      },
+      {
+        "question": "Is the random integer range for vehicle counts fixed as 0-50, or should it be configurable?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different ranges would change the generated data values."
+      },
+      {
+        "question": "Should the time for each row be exactly the same (current time at call) or increment per hour?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Increment vs. static time changes the 'Time' column data significantly."
+      },
+      {
+        "question": "If the CSV file already exists, should it be overwritten, appended to, or raise an error?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "File handling mode affects output file content and potential conflicts."
+      },
+      {
+        "question": "Should the plot include a legend when multiple lines are drawn?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Legend presence is a visual detail, not affecting correctness of returned axes."
+      },
+      {
+        "question": "What should happen if 'hours' is negative?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Parameter type implies positive int; generic validation not specified."
+      }
+    ]
+  },
+  {
+    "branch_idx": 253,
+    "id": "bcbexpand_BigCodeBench/511_semantic",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "What should happen if the column contains non-numeric values (e.g., strings)? The prompt says 'treating non-numeric values as either zero or their string length for numeric operations', but which one? Zero or string length?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different choices produce different numeric results."
+      },
+      {
+        "question": "Does the pie chart always use the 'Age' column for labels, regardless of which column is being analyzed for statistics?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt says 'using the Age column as labels', but the reference uses df['Age'] as labels, which could mismatch if data lacks an Age column."
+      },
+      {
+        "question": "What are the expected column names in the input data? The reference uses a fixed list ['Age', 'Salary', 'Experience'], but the prompt doesn't specify.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "If column names differ, the function may fail or produce incorrect results."
+      },
+      {
+        "question": "Should the pie chart's title always be 'Pie Chart of {column}' as in the reference, or is the title unspecified?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Title is cosmetic and doesn't affect correctness of returned statistics or axes object."
+      },
+      {
+        "question": "If the data list is non-empty but the specified column contains only non-numeric values (e.g., all strings), how should sum, mean, min, max be computed after applying the non-numeric handling rule?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The statistics will depend on whether zero or string length is used, and min/max may behave unexpectedly."
+      },
+      {
+        "question": "Is the input data guaranteed to be a list of lists, where each inner list has the same length corresponding to columns? What if inner lists have varying lengths?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Malformed data could cause pandas DataFrame construction to fail or produce NaN values."
+      },
+      {
+        "question": "Should the function raise an error if the given column name is not present in the data (e.g., 'InvalidColumn'), or should it handle it gracefully?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The reference doesn't show error handling; different implementations could crash or return default values."
+      },
+      {
+        "question": "Are the values in the 'Age' column guaranteed to be unique? If not, how should duplicate labels in the pie chart be handled?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Duplicate labels are allowed in pie charts; they don't affect the correctness of the returned statistics or axes object."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "What should happen if the column values contain non-numeric entries (e.g., strings)? Should they be replaced with zero or with the length of their string representation for sum/mean/min/max calculations?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about treating non-numeric values."
+      },
+      {
+        "question": "The clarification says the pie chart uses actual column values for slices. Does that mean the pie chart uses the original values (including non-numeric) or the transformed values (zero/string length) after handling non-numeric entries?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity about which data is visualized in the pie chart."
+      },
+      {
+        "question": "The function signature expects a column name and data list. Are the column names strictly 'Age', 'Salary', 'Experience' as per the original unambiguous version, or can any string be passed? What happens for an invalid column name?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Prompt doesn't specify valid columns or error handling for invalid ones."
+      },
+      {
+        "question": "The data is described as a list of lists where each inner list represents [Age, Salary, Experience]. Must the inner lists always have exactly three elements in that order?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity about data structure consistency and handling of malformed rows."
+      },
+      {
+        "question": "The pie chart uses the Age column as labels. Is the Age column always the first element of each inner list, and what if Age values are non-numeric or missing?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity about label source and handling of non-numeric/missing Age values."
+      },
+      {
+        "question": "For empty data, the sum is 0 and mean/min/max are NaN. Should the pie chart still be created for empty data, and if so, what should it display?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity about pie chart behavior when data is empty."
+      },
+      {
+        "question": "The clarification mentions percentages shown via autopct. What specific autopct format should be used (e.g., '%1.1f%%', '%1.0f%%', default)?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Different formats affect visual display but not numeric output of the function."
+      },
+      {
+        "question": "Should the function raise an exception if the data list is non-empty but all values in the specified column are non-numeric (or after transformation)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity about error handling for all-non-numeric columns in statistics calculation."
+      }
+    ]
+  },
+  {
+    "branch_idx": 2202,
+    "id": "bcb_BigCodeBench/117_semantic",
+    "dataset_source": "orchid_bcb",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Should the random seed be set globally for both Python's random.choice and numpy.random.randint, or only for one of them? The prompt says 'using the seed once for all random selections', but the reference solution sets both set_seed(seed) and np.random.seed(seed).",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different seeding strategies could produce different outputs for the same seed."
+      },
+      {
+        "question": "If name_list or gender_list is provided as an empty list, should the function raise an error, use a default, or proceed (potentially causing an error in random.choice)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Empty lists would cause runtime errors during random selection."
+      },
+      {
+        "question": "Should the function accept non-integer values for age_range or score_range (e.g., floats) and handle them, or assume they are integers?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Non-integer ranges would affect np.random.randint behavior."
+      },
+      {
+        "question": "Is the order of columns in the output DataFrame guaranteed to be exactly ['Name', 'Age', 'Gender', 'Score'] as listed, or could it vary?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Prompt explicitly states that order in output."
+      },
+      {
+        "question": "If age_range[0] > age_range[1] (invalid range), should the function raise an error, swap them, or produce no ages?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Invalid ranges would cause np.random.randint to raise ValueError."
+      },
+      {
+        "question": "Should the function ensure that the generated ages and scores are uniformly distributed across the inclusive range, or is any random distribution acceptable?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Ambiguity about distribution type, but np.random.randint is uniform; alternative distributions would change outputs."
+      },
+      {
+        "question": "Are duplicate names allowed across students, or should the function avoid repeats?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Prompt says 'selected randomly from the list', implying independent draws, allowing duplicates."
+      },
+      {
+        "question": "Should the function validate that name_list and gender_list contain only strings, or can they contain any type?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Non-string types could cause type errors or unexpected DataFrame contents."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the seed be set globally once (e.g., set_seed(seed); np.random.seed(seed)) at the start of the function, or should it be set separately for each random selection type (names, ages, genders, scores) to ensure independent reproducibility?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about 'using the seed once for all random selections'."
+      },
+      {
+        "question": "If name_list or gender_list is provided as an empty list, should the function raise an error, use a default list, or proceed and potentially cause an error during random selection?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Empty lists would cause selection errors; behavior is unspecified."
+      },
+      {
+        "question": "Should the random selection for names and genders be with replacement (allowing duplicates) or without replacement (ensuring uniqueness until the list is exhausted)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different selection methods affect output diversity."
+      },
+      {
+        "question": "Are the age_range and score_range tuples required to have the lower bound first and upper bound second, and should the function validate or swap them if reversed?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Reversed ranges could lead to errors or unexpected behavior."
+      },
+      {
+        "question": "Should the function ensure that the generated DataFrame has rows in a specific order (e.g., sorted by any column) or is the order of rows arbitrary as generated?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Row order does not affect correctness per specification; it's arbitrary."
+      },
+      {
+        "question": "If the seed is set globally, does it affect only the random operations within this function, or could it impact random state in the broader environment after the function call?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Side effects on global random state are inert for the function's output given the same seed."
+      },
+      {
+        "question": "Should the function handle non-integer inputs for num_of_students, seed, or range bounds (e.g., floats), and if so, how (e.g., rounding, truncation, error)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Non-integer inputs could cause type errors or unexpected behavior."
+      },
+      {
+        "question": "Is the random generation for ages and scores independent per student, or should they be correlated in any way (e.g., higher ages associated with higher scores)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Specification clearly states independent random generation; no correlation implied."
+      }
+    ]
+  },
+  {
+    "branch_idx": 2111,
+    "id": "ccb_amb_task_8",
+    "dataset_source": "clarifycodebench",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Is the operation allowed to choose the same bag for both A and B (i.e., moving stones from a bag to itself)?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Self-move does not change stone distribution, so it does not affect possible XOR outcomes."
+      },
+      {
+        "question": "Are we allowed to move stones from a bag that currently has zero stones, effectively choosing an empty bag as source?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Moving zero stones does not alter the state, so it does not create new XOR outcomes."
+      },
+      {
+        "question": "Does the order of bags matter for the XOR calculation, i.e., is B_1 \u2295 B_2 \u2295 ... \u2295 B_N computed based on the original indices regardless of which bags still have stones?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification explicitly states bag identity/order is preserved, so this is already answered."
+      },
+      {
+        "question": "Can we move stones from bag B to bag A in a later operation after moving from A to B earlier, effectively reversing or redistributing stones?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different sequences of moves could lead to different final stone distributions, affecting possible XOR values."
+      },
+      {
+        "question": "Is the goal to consider all possible sequences of operations (including infinite sequences) or only reachable final states after any finite number of operations?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "The problem states 'any number of times' and that the number of possible values is finite, implying all reachable final states."
+      },
+      {
+        "question": "Are we required to move all stones from the chosen source bag, or can we move only a subset?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The prompt says 'move all stones from bag A into bag B', so it's unambiguous."
+      },
+      {
+        "question": "Do we consider the XOR of the final stone counts across all N bags, even if some bags end up empty?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The definition of B_i includes final stone counts, which can be zero, and XOR is defined for non-negative integers."
+      },
+      {
+        "question": "Is the operation allowed to be performed on bags that have already been involved in previous moves, potentially creating intermediate states with more than one non-empty bag before final consolidation?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different intermediate redistributions could yield different final XOR outcomes not achievable by simple merging."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Does the operation require that bags A and B be distinct, or can we choose the same bag for both A and B (effectively a no-op)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Choosing same bag could affect reachable states if allowed."
+      },
+      {
+        "question": "Are we allowed to move stones from a bag to itself? The operation says 'choose two bags A and B' but does not explicitly forbid A = B.",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "If allowed, it's a no-op; doesn't change reachable configurations."
+      },
+      {
+        "question": "Is the order of bags in the XOR expression based on their original indices, or based on the final arrangement after possibly merging bags?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification states bag identity/order is preserved."
+      },
+      {
+        "question": "Can we move stones from a bag that ends up empty? That is, after moving all stones from bag A to bag B, bag A becomes empty (0 stones). Is that allowed, and does bag A remain in the list with 0 stones for the XOR?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Zero stones contribute to XOR; affects reachable XOR values."
+      },
+      {
+        "question": "Is the operation allowed to be performed on bags that are already empty? For example, if bag A is empty, can we still choose it as source?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Moving 0 stones doesn't change state; inert."
+      },
+      {
+        "question": "Does the XOR operation consider the final stone counts in all N bags, even if some are zero, or only the bags that still have stones?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification says final stone count of bag with original index i, so zeros included."
+      },
+      {
+        "question": "Are there any constraints on the number of operations (e.g., must be finite but unbounded)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Prompt says 'any number of times', so unbounded."
+      },
+      {
+        "question": "Is the initial configuration (with no operations) considered a valid final state for the XOR calculation?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about zero operations."
+      }
+    ]
+  },
+  {
+    "branch_idx": 2174,
+    "id": "orchidheval_79_vagueness",
+    "dataset_source": "orchid_heval",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "What is the expected output for negative decimal inputs?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt does not specify handling of negative numbers, and the reference solution uses bin() which raises no error but returns a signed representation."
+      },
+      {
+        "question": "Should the binary representation be for the absolute value of the decimal, or a two's complement/signed representation?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different interpretations for negative inputs lead to different output strings."
+      },
+      {
+        "question": "Is the input guaranteed to be an integer, or could it be a float?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt says 'number' but examples are integers; floats would require different conversion."
+      },
+      {
+        "question": "For decimal 0, should the binary part be '0' (as in the reference) or an empty string?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Some binary conversions might omit leading zeros, but '0' vs '' changes the output."
+      },
+      {
+        "question": "Are the 'db' characters always lowercase, or could they be uppercase?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The reference and examples show lowercase 'db', so it's unambiguous."
+      },
+      {
+        "question": "Should the function handle non-numeric inputs (e.g., strings) by converting or raise an error?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt does not specify input validation; different handling changes behavior."
+      },
+      {
+        "question": "Is the binary representation expected to be in standard base-2 without leading zeros (except for zero itself)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The reference uses bin()[2:], which strips '0b' and leading zeros, but it's not explicitly stated."
+      },
+      {
+        "question": "What is the maximum size of the decimal input that must be supported?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "While large numbers affect performance, correct conversion for any valid integer doesn't change output format."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the binary representation be the standard binary representation of the integer (e.g., bin(decimal)[2:]), or could it be a different format like binary-coded decimal or a fixed-width representation?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about 'some format' vs 'binary format'."
+      },
+      {
+        "question": "What should happen if the input decimal is negative? Should the function handle it, and if so, how (e.g., two's complement, sign-magnitude)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Not addressed; negative input could cause divergent outputs."
+      },
+      {
+        "question": "Should the input be interpreted as an integer, or could it be a floating-point number? If floating-point, how should the conversion be done?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Not specified; decimal could imply float, leading to different behavior."
+      },
+      {
+        "question": "Is the input guaranteed to be a non-negative integer? The prompt says 'a number in decimal form' but doesn't restrict it.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity about input domain affects implementation choices."
+      },
+      {
+        "question": "Should leading zeros be included in the binary representation (e.g., for 1, return 'db1db' or 'db01db' if a fixed width is assumed)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Not specified; different interpretations change output strings."
+      },
+      {
+        "question": "Are the 'db' characters always lowercase, or could they be uppercase ('DB')? The prompt says 'db' but doesn't explicitly forbid variation.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Case sensitivity could lead to different string outputs."
+      },
+      {
+        "question": "Should the function handle very large integers that might exceed typical integer limits in Python? If so, is there a maximum size?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Not addressed; large numbers might cause errors or require special handling."
+      },
+      {
+        "question": "Is the input provided as a string representing a decimal number, or as an actual integer type? The function signature uses 'decimal' parameter name but doesn't specify type.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Type ambiguity affects conversion logic (e.g., string vs int input)."
+      }
+    ]
+  },
+  {
+    "branch_idx": 1428,
+    "id": "orchidheval_50_vagueness",
+    "dataset_source": "orchid_heval",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Should the shift only apply to lowercase letters a-z, or should uppercase letters, digits, punctuation, and spaces also be shifted (or left unchanged)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The implementation only handles lowercase a-z, but the docstring doesn't specify."
+      },
+      {
+        "question": "If a character is not a lowercase letter, should the function raise an error, skip it, or apply some other transformation?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Non-lowercase inputs would cause incorrect output or errors."
+      },
+      {
+        "question": "Is the shift direction always forward in the alphabet (adding 5) for encoding, or could it be backward for some characters?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The reference solution and docstring clarify shift by 5."
+      },
+      {
+        "question": "Should the shift wrap around the alphabet (mod 26) as implemented, or should it stop at 'z' and not wrap?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The reference solution uses modulo 26."
+      },
+      {
+        "question": "Does 'some characters' mean only certain characters are shifted, or does it mean every character is shifted?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The clarification changed 'some' to 'every' in the reference."
+      },
+      {
+        "question": "If the input string is empty, should the output be an empty string?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Empty input would produce empty output, but behavior is consistent."
+      },
+      {
+        "question": "Should decode_shift assume the input was encoded exactly by encode_shift, or could it handle other shift amounts?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "The docstring specifies encoded with encode_shift, so shift amount is fixed."
+      },
+      {
+        "question": "Is the alphabet considered circular for both encoding and decoding, i.e., does 'a' shifted -5 become 'v'?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The reference solution uses modulo 26 for both."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Does the shift apply only to lowercase letters 'a'-'z', or should it also handle uppercase letters, digits, punctuation, or other characters?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The implementation uses ord('a') and mod 26, suggesting lowercase only, but the docstring doesn't specify."
+      },
+      {
+        "question": "Should the shift be applied to every character in the string, or only to some subset (e.g., alphabetic characters, vowels, consonants)?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about 'some characters' vs 'every character'."
+      },
+      {
+        "question": "If only some characters are shifted, what is the rule for selecting which characters to shift (e.g., based on position, character type, random)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The phrase 'some characters' is ambiguous without a selection rule."
+      },
+      {
+        "question": "Is the shift amount fixed at 5, or could it vary based on input or other factors?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The docstring and code explicitly state shifting by 5, so it's unambiguous."
+      },
+      {
+        "question": "Should the shift wrap around the alphabet (e.g., 'z' + 5 becomes 'e'), or should it stop at 'z' or produce an error?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The implementation uses modulo 26, which implies wrap-around, and is unambiguous."
+      },
+      {
+        "question": "What should happen if the input string is empty?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "The function would return an empty string, but the behavior isn't explicitly stated."
+      },
+      {
+        "question": "Does the decode_shift function assume the input was encoded by encode_shift, and if so, must it exactly reverse the encoding even if only 'some characters' were shifted?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The decode function's behavior depends on the encoding rule, which is ambiguous."
+      },
+      {
+        "question": "Are there any constraints on the input string length, or can it be arbitrarily long?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The clarification explicitly states 'No length constraint specified', so it's answered."
+      }
+    ]
+  },
+  {
+    "branch_idx": 2245,
+    "id": "bcb_BigCodeBench/98_semantic",
+    "dataset_source": "orchid_bcb",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "When multiple characters have the same frequency, how should they be ordered relative to each other?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different tie-breaking orders (e.g., alphabetical, arbitrary) produce different outputs."
+      },
+      {
+        "question": "Should the function use a deterministic random seed for reproducibility, or is it expected to produce different results on each call?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Seed choice affects output; tests set seed but spec doesn't require it."
+      },
+      {
+        "question": "Is the character set strictly ASCII lowercase letters (a-z), or could it include other characters from string.ascii_lowercase?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Prompt explicitly says ASCII lowercase characters, and reference uses string.ascii_lowercase."
+      },
+      {
+        "question": "If num_strings or string_length is negative, what should the function do?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "No evidence in spec or tests that negative inputs are valid; typical assumption is non-negative."
+      },
+      {
+        "question": "Should the output list include characters with zero frequency?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification explicitly says only characters that appear at least once."
+      },
+      {
+        "question": "If the input results in empty strings (e.g., string_length=0), should the function return an empty list or handle it differently?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Test for zero_length exists but is incomplete; behavior for empty strings is ambiguous."
+      },
+      {
+        "question": "Is the function expected to be case-sensitive, and should it handle uppercase or non-ASCII characters?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Prompt specifies ASCII lowercase only; no other characters are generated."
+      },
+      {
+        "question": "Should the function validate input types (e.g., ensure num_strings and string_length are integers)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "No evidence in spec or tests that type validation is required; typical Python assumes correct types."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the function count each character occurrence across all strings (global character counting) or count the number of strings that contain each character at least once (per-string presence)?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about statistical dimension."
+      },
+      {
+        "question": "If multiple characters have the same frequency, how should they be ordered in the output list?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Sorting tie-break not specified; different order changes output."
+      },
+      {
+        "question": "Is the random string generation with replacement (characters can repeat within a string) or without replacement?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarified as composed of ASCII lowercase characters; random.choices implies replacement."
+      },
+      {
+        "question": "Should the output include characters with zero frequency (all 26 letters) or only those that appear?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification explicitly states only characters that appear at least once."
+      },
+      {
+        "question": "What should happen if num_strings or string_length is negative?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Parameter validation not specified; negative input could cause errors."
+      },
+      {
+        "question": "Is the random seed expected to be set inside the function, or should the function rely on external seeding?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Affects reproducibility but not output correctness for given inputs."
+      },
+      {
+        "question": "Should the function handle non-integer inputs (e.g., floats) for num_strings or string_length?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Type validation not specified; different handling changes behavior."
+      },
+      {
+        "question": "Are the ASCII lowercase characters limited to 'a' through 'z', or could they include other ASCII lowercase like punctuation?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Specified as ASCII lowercase characters, typically 'a'-'z'."
+      }
+    ]
+  },
+  {
+    "branch_idx": 2774,
+    "id": "ccb_amb_task_36",
+    "dataset_source": "clarifycodebench",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Does 'length' refer to exactly k, at least k, or at most k?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity in whether we count strings with LCS length exactly k, at least k, or at most k."
+      },
+      {
+        "question": "Is the LCS computed between the entire string S and each length-M string, or between S and a prefix/suffix of the length-M string?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "LCS definition could be misinterpreted if M > N or strings are of different lengths."
+      },
+      {
+        "question": "Are we to output the count for each k from 0 to N inclusive, as implied by the notation, or from 0 to min(N, M)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "LCS length cannot exceed min(N, M), but output format suggests up to N."
+      },
+      {
+        "question": "Should the count be modulo 998244353 for each k individually, or only at the end after some summation?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Already clear: 'the number, modulo 998244353' applies to each k."
+      },
+      {
+        "question": "Is the LCS defined as the longest common subsequence in terms of characters, and if multiple LCS exist, do we consider their length uniquely?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Standard LCS length is a well-defined integer; no ambiguity."
+      },
+      {
+        "question": "Can the length-M strings contain any lowercase English letters, or are they restricted to letters appearing in S?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Prompt states '26^M lowercase English strings', so all letters allowed."
+      },
+      {
+        "question": "Should the output be space-separated as shown, or with newlines or other delimiters?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Output format is explicitly specified with spaces."
+      },
+      {
+        "question": "Is the input guaranteed to have exactly two lines, with S on the second line and no extra whitespace?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Input format is clearly defined; typical parsing assumptions apply."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Does 'has length' mean exactly k, at most k, or at least k? The phrase is incomplete.",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about exact vs at least k."
+      },
+      {
+        "question": "What is the modulo base? The problem says 'modulo 998244353', but is that applied to each count individually or to the final sum across all k?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Modulo application per answer is standard but not explicitly stated for each ans_i."
+      },
+      {
+        "question": "Should the output be space-separated values as shown, or is any whitespace acceptable?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Format is explicitly specified in output section."
+      },
+      {
+        "question": "Are we counting over all 26^M strings, including those that may have LCS length not equal to any k from 0 to N?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ambiguity in whether strings with LCS length > N are counted in ans_N or not."
+      },
+      {
+        "question": "Is the longest common subsequence defined as contiguous or non-contiguous? The term 'subsequence' typically means non-contiguous, but confirmation is needed.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "LCS standard is non-contiguous, but could be misinterpreted."
+      },
+      {
+        "question": "For k=0, do we count strings with no common subsequence (i.e., empty LCS) or strings whose LCS length is exactly 0?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Exact vs at least ambiguity applies to k=0 as well."
+      },
+      {
+        "question": "Are the strings of length M considered over the full alphabet of 26 lowercase letters, or only letters present in S?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Alphabet scope affects count of possible strings."
+      },
+      {
+        "question": "Should the answers be computed independently for each k, such that each string is counted in exactly one ans_k?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Partitioning of strings across k values is not explicitly stated."
+      }
+    ]
+  },
+  {
+    "branch_idx": 1592,
+    "id": "bcbexpand_BigCodeBench/1085_vagueness",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Should the function convert all text to lowercase before counting, or preserve case?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Case handling affects word grouping and output."
+      },
+      {
+        "question": "How should the function handle words separated by non-space whitespace (e.g., tabs, newlines)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Splitting method impacts word boundaries."
+      },
+      {
+        "question": "If there are ties in frequency among words beyond the top 10, which words should be included?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Tie-breaking affects which words appear in output."
+      },
+      {
+        "question": "Should the bar chart have a specific title, axis labels, or other formatting?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Formatting details don't change output data."
+      },
+      {
+        "question": "What should the order of tuples in the returned list be (e.g., descending frequency, alphabetical)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Order is part of output specification."
+      },
+      {
+        "question": "How should apostrophes inside words (like \"don't\") be handled after removing punctuation?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarification explicitly removes apostrophes."
+      },
+      {
+        "question": "Should the function handle non-ASCII punctuation or characters?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Character set affects word cleaning."
+      },
+      {
+        "question": "What should happen if there are fewer than 10 unique words in the text?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Output list length may vary."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the text be lowercased before counting words?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about lowercasing."
+      },
+      {
+        "question": "How should words be split? By any whitespace, or only spaces?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Splitting method affects word boundaries."
+      },
+      {
+        "question": "If there are ties in frequency among words, how should the top 10 be selected? Alphabetical, arbitrary, or preserve Counter's order?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Tie-breaking changes output list order."
+      },
+      {
+        "question": "What should happen if there are fewer than 10 unique words? Return all words or pad with something?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Output list length may vary."
+      },
+      {
+        "question": "Should the bar chart have specific labels, titles, or formatting?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Axes object details affect appearance but not correctness."
+      },
+      {
+        "question": "Should the function handle non-ASCII punctuation or only string.punctuation?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Punctuation definition affects word cleaning."
+      },
+      {
+        "question": "If the text contains digits, should they be removed or treated as part of words?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Digits may be considered punctuation or not."
+      },
+      {
+        "question": "Should apostrophes inside words (like contractions) be removed entirely, potentially merging words?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Clarification says remove all punctuation including apostrophes, but impact on word merging is unclear."
+      }
+    ]
+  },
+  {
+    "branch_idx": 965,
+    "id": "bcbexpand_BigCodeBench/424_semantic",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "When n_clusters > 1, should the function always save separate cluster images to disk, or only when a specific condition is met (e.g., a flag parameter)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt says 'saves each region as a separate image' but the reference solution does it unconditionally for n_clusters>1; no parameter controls this."
+      },
+      {
+        "question": "What should be the naming pattern and format (e.g., file extension, directory) for the saved cluster images?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The reference uses 'cluster_{i+1}.jpg' but the prompt doesn't specify naming or format, affecting output files."
+      },
+      {
+        "question": "If the image reading fails (e.g., corrupted file), should the function raise a ValueError as in the reference, or a different exception?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "The prompt only specifies FileNotFoundError and ValueError for n_clusters; the reference adds a ValueError for read failure, but exception type doesn't change output."
+      },
+      {
+        "question": "Should the function convert the image from BGR (OpenCV default) to RGB before processing, since the prompt mentions RGB format?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "cv2.imread reads in BGR order; the prompt says 'RGB image' and 'RGB format', which could imply a conversion affecting color results."
+      },
+      {
+        "question": "What should happen if n_clusters exceeds the number of distinct pixel colors or the number of pixels? The clarification says clustering may fail, but should the function handle this gracefully or let sklearn raise an exception?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The clarification notes clustering may fail; the function could pre-check or propagate sklearn's error, affecting behavior for large n_clusters."
+      },
+      {
+        "question": "Should the random_seed parameter be used to ensure reproducible clustering results, and if so, how should it be passed to KMeans?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The signature includes random_seed; the reference uses random_state=random_seed, but the prompt doesn't specify its usage, affecting reproducibility."
+      },
+      {
+        "question": "Are there any constraints on the image dimensions or file size that the function should handle, or should it process any valid image file?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The prompt doesn't impose constraints; this is a generic concern not specific to this function's ambiguity."
+      },
+      {
+        "question": "Should the function preserve the original image's data type (e.g., uint8) in the segmented output, or allow a different type?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The reference casts to uint8, but the prompt doesn't specify; output array type could differ affecting downstream use."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "When saving each region as a separate image, should each saved image be a binary mask (only showing pixels belonging to that cluster) or a full RGB image where the cluster's pixels are colored by their centroid and other pixels are set to a specific background color (e.g., white or black)?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about the interpretation of 'saves each region as a separate image'."
+      },
+      {
+        "question": "What should be the background color for the saved separate images when showing only one cluster? Is it white, black, transparent, or something else?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt does not specify the background color for saved cluster images, affecting output files."
+      },
+      {
+        "question": "What file format (e.g., JPEG, PNG) and naming convention (e.g., cluster_1.jpg) should be used for the saved separate images?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt does not specify the format or naming, which determines saved file properties."
+      },
+      {
+        "question": "Should the function save the separate images to the current working directory, or to a specific directory (e.g., same as input image)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt does not specify the output directory for saved images, affecting file locations."
+      },
+      {
+        "question": "If n_clusters exceeds the number of pixels, should the function raise an error (e.g., ValueError) or handle it gracefully (e.g., by limiting n_clusters to the number of pixels)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The clarification mentions clustering may fail, but does not specify error handling or behavior."
+      },
+      {
+        "question": "Should the function convert the image from BGR to RGB (since OpenCV reads as BGR) before processing and saving, or work directly in BGR?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt assumes RGB format but does not specify conversion, affecting color representation."
+      },
+      {
+        "question": "If the image has an alpha channel (RGBA), should the function handle it, ignore it, or raise an error?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "The prompt assumes RGB format but does not specify behavior for non-RGB images."
+      },
+      {
+        "question": "Should the random_seed parameter be used to initialize the KMeans random state, and if so, how exactly (e.g., random_state=random_seed)?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "The prompt specifies random_seed for K-means, and typical usage is clear for reproducibility."
+      }
+    ]
+  },
+  {
+    "branch_idx": 244,
+    "id": "bcbexpand_BigCodeBench/500_semantic",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "Should the function create the directory path to the filename if it doesn't exist, or assume the directory exists?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Directory creation affects file output path existence."
+      },
+      {
+        "question": "If a row's OrderedDict contains keys not in FIELDS, should they be ignored or cause an error?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Extra keys could be written or skipped, changing output."
+      },
+      {
+        "question": "What should happen if a row's OrderedDict is missing a key from FIELDS? The reference uses empty string, but is that required?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Clarified by reference solution using get with default empty string."
+      },
+      {
+        "question": "Should the Excel sheet have a specific name, or is any name acceptable?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Sheet name doesn't affect file content or path output."
+      },
+      {
+        "question": "Is the file format strictly .xls (Excel 97-2003) as implied by extension, or should it handle .xlsx or other formats?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different formats could affect file creation and compatibility."
+      },
+      {
+        "question": "Should the function overwrite an existing file with the same filename, or raise an error?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Overwrite behavior changes file system state."
+      },
+      {
+        "question": "Are the values in the OrderedDict restricted to specific data types (e.g., strings, integers), or should any type be written as-is?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Data type handling affects Excel cell content representation."
+      },
+      {
+        "question": "Should the function include any formatting (e.g., bold headers) or just plain data?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Formatting doesn't change data correctness or path output."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "Should the function write only the columns defined in FIELDS, ignoring any extra keys in the OrderedDicts, or should it include all keys present in the OrderedDicts as additional columns?",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches the labeled ambiguity about handling keys beyond FIELDS."
+      },
+      {
+        "question": "If extra keys beyond FIELDS are allowed, what should be the order of those extra columns relative to FIELDS?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Clarification says order is strictly FIELDS, but extra keys' placement is unspecified."
+      },
+      {
+        "question": "If an OrderedDict is missing a key from FIELDS, should the cell be left empty, filled with a default (like empty string), or raise an error?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Behavior for missing keys is not defined, affecting output."
+      },
+      {
+        "question": "Should the function create a sheet with a specific name (e.g., default 'persons') or use a default sheet name?",
+        "tier": 1,
+        "functionally_relevant": false,
+        "reason": "Sheet name doesn't affect data output, only internal structure."
+      },
+      {
+        "question": "If the filename does not include '.xls' extension, should the function add it, raise an error, or proceed as is?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Filename handling could affect output path and file creation."
+      },
+      {
+        "question": "Should the function overwrite an existing file with the same name, or raise an error if the file already exists?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "File existence behavior affects output and potential errors."
+      },
+      {
+        "question": "Are the values in OrderedDicts restricted to specific data types (e.g., strings, numbers), or can they be any Python object?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Data type restrictions affect how values are written to Excel."
+      },
+      {
+        "question": "Should the function include a header row with column names from FIELDS even when the data list is empty?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Header presence affects file content for empty data."
+      }
+    ]
+  },
+  {
+    "branch_idx": 3293,
+    "id": "bcbexpand_BigCodeBench/769_vagueness",
+    "dataset_source": "orchid_bcb_expand",
+    "had_reference_text": true,
+    "old_max_tier": 1,
+    "new_max_tier": 2,
+    "old_candidates": [
+      {
+        "question": "If there is a tie for the most common item, which one should be returned? The first encountered? Any arbitrary one? Should the function raise an error?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Ties cause different max behaviors; reference uses max which returns first encountered."
+      },
+      {
+        "question": "Is the input guaranteed to be non-empty? The clarification mentions an error for empty list, but should the function handle empty input by returning a default or raising?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Empty input leads to ValueError from max; behavior unspecified."
+      },
+      {
+        "question": "Are menu items always strings? Could they be other hashable types (integers, tuples)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Different types affect Counter and max; reference uses strings but spec doesn't restrict."
+      },
+      {
+        "question": "Does 'flatten the list' imply only one level of nesting, or could there be deeper nesting (e.g., [[['Pizza']]])?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Deeper nesting would break itertools.chain(*...); reference assumes one level."
+      },
+      {
+        "question": "Should the function treat menu items case-sensitively? For example, 'pizza' vs 'Pizza'.",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Case sensitivity changes counts; reference examples use capitalized but spec doesn't state."
+      },
+      {
+        "question": "Is the input always a list of lists, or could it be a list containing both items and sublists (mixed)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Mixed types would affect flattening; reference assumes all elements are lists."
+      },
+      {
+        "question": "If the nested lists are empty (e.g., [[], ['Pizza']]), should empty sublists be ignored?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Empty sublists produce no items; reference flattening includes them but yields no extra elements."
+      },
+      {
+        "question": "Should the function preserve the order of items in any way, or is order irrelevant beyond frequency?",
+        "tier": 0,
+        "functionally_relevant": false,
+        "reason": "Spec only requires most common item; order not mentioned and reference uses max which depends on iteration order."
+      }
+    ],
+    "new_candidates": [
+      {
+        "question": "If there are multiple items with the same highest frequency, which one should be returned? (e.g., tie-breaking behavior)",
+        "tier": 2,
+        "functionally_relevant": true,
+        "reason": "Matches labeled ambiguity about 'common' vs 'most common' and ties."
+      },
+      {
+        "question": "Should the function handle non-string menu items (e.g., integers, None) or assume all items are strings?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Type of menu items not specified; non-strings could affect flattening or Counter."
+      },
+      {
+        "question": "Is the input guaranteed to be non-empty and contain at least one menu item after flattening?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Empty input or all empty sublists could lead to errors in max."
+      },
+      {
+        "question": "How should nested lists deeper than two levels be handled? (e.g., [[['Pizza']]])",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Flattening method unspecified; deeper nesting may not be handled correctly."
+      },
+      {
+        "question": "Are menu items case-sensitive? (e.g., 'pizza' vs 'Pizza' considered same or different?)",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Case sensitivity affects counting and output."
+      },
+      {
+        "question": "Should the function ignore or include empty strings as menu items?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Empty strings could be present and affect frequency counts."
+      },
+      {
+        "question": "Is the output required to be a string even if the most common item is not a string (e.g., integer)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Return type specified as str but input type not enforced."
+      },
+      {
+        "question": "What should happen if the input contains sublists that are not lists (e.g., strings or other iterables)?",
+        "tier": 1,
+        "functionally_relevant": true,
+        "reason": "Flattening assumes list of lists; other types may break chain."
+      }
+    ]
+  }
+]

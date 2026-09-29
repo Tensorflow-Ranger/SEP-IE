@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_117_semantic",
+  "round_depth": 2,
+  "questions": [
+    "Are words defined as sequences separated by any whitespace, or only spaces? The prompt says 'spaces' in the note, but does that exclude tabs/newlines?",
+    "Should the function treat uppercase and lowercase letters identically for vowel/consonant classification?",
+    "What constitutes a 'word'? Does it include strings like 'a' or 'I'? Are non-alphabetic characters allowed?",
+    "Is 'y' always a consonant, even when it might function as a vowel in English (e.g., 'my', 'sky')?",
+    "Should the returned words preserve their original capitalization, or be normalized to lower/upper case?",
+    "If n is zero, should words with zero consonants (i.e., only vowels) be included?",
+    "What should happen if n is negative? Is n guaranteed to be a natural number as stated?",
+    "Are duplicate words handled? If the same word appears multiple times with exactly n consonants, should all occurrences be included?"
+  ],
+  "answers": [
+    "Words are separated by spaces, as the note says the input contains only letters and spaces, and the solution uses s.split() which splits on any whitespace by default, but the specification only guarantees spaces.",
+    "Yes, the solution converts letters to lowercase when checking for vowels, so uppercase and lowercase are treated identically.",
+    "Words are sequences of letters separated by spaces, including single-letter words like 'a' or 'I', and non-alphabetic characters are not allowed as per the note.",
+    "Yes, 'y' is always considered a consonant because the solution only checks for vowels 'a','e','i','o','u' in lowercase.",
+    "The returned words preserve their original capitalization, as the solution appends the original word without modification.",
+    "Yes, words with zero consonants should be included if n is zero, as the solution counts consonants and checks equality with n.",
+    "n is guaranteed to be a natural number as stated, so it is non-negative, and the function should handle it normally (e.g., n=0 works, negative n would not match any word).",
+    "Yes, all occurrences are included in order, as the solution iterates through each word and appends it if it matches."
+  ],
+  "inline_prompts": [
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Words are separated by spaces, as the note says the input contains only letters and spaces, and the solution uses s.split() which splits on any whitespace by default, but the specification only guarantees spaces.\n    If the string s is empty then the function should return an empty list.\n    \"\"\" Consonants are defined as letters that are not vowels (a, e, i, o, u), treating 'y' as a consonant.",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    \"\"\" Consonants are defined as letters that are not vowels (a, e, i, o, u), treating 'y' as a consonant. Yes, the solution converts letters to lowercase when checking for vowels, so uppercase and lowercase are treated identically.",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Words are sequences of letters separated by spaces, including single-letter words like 'a' or 'I', and non-alphabetic characters are not allowed as per the note.\n    If the string s is empty then the function should return an empty list.\n    \"\"\" Consonants are defined as letters that are not vowels (a, e, i, o, u), treating 'y' as a consonant.",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Yes, 'y' is always considered a consonant because the solution only checks for vowels 'a','e','i','o','u' in lowercase.\n    If the string s is empty then the function should return an empty list.\n    \"\"\" Consonants are defined as letters that are not vowels (a, e, i, o, u), treating 'y' as a consonant.",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. The returned words preserve their original capitalization, as the solution appends the original word without modification.\n    If the string s is empty then the function should return an empty list.\n    \"\"\" Consonants are defined as letters that are not vowels (a, e, i, o, u), treating 'y' as a consonant.",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. If the string s is empty then the function should return an empty list.\n    \"\"\" Consonants are defined as letters that are not vowels (a, e, i, o, u), treating 'y' as a consonant. Yes, words with zero consonants should be included if n is zero, as the solution counts consonants and checks equality with n.",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    \"\"\" Consonants are defined as letters that are not vowels (a, e, i, o, u), treating 'y' as a consonant.",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Yes, all occurrences are included in order, as the solution iterates through each word and appends it if it matches.\n    If the string s is empty then the function should return an empty list.\n    \"\"\" Consonants are defined as letters that are not vowels (a, e, i, o, u), treating 'y' as a consonant."
+  ]
+}

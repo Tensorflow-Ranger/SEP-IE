@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_102_vagueness",
+  "round_depth": 1,
+  "questions": [
+    "Are x and y guaranteed to be integers, or could they be floats? The prompt says 'positive numbers' but the reference solution uses modulo and integer arithmetic.",
+    "Should the function handle non-positive inputs (x or y <= 0)? The prompt says 'positive numbers', but is that a guarantee or a constraint?",
+    "If x and y are not integers, should the range [x, y] be interpreted as including all real numbers, and we look for the biggest even integer within that real interval?",
+    "Is the range [x, y] inclusive of both endpoints? The prompt says 'inclusive', but is that always true even if x > y?",
+    "When x > y, the reference solution returns -1. Is that the intended behavior, or should the function swap x and y to consider the range from min to max?",
+    "If there is an even integer in the range but it's not an integer bound (e.g., x=1.5, y=3.5, even integer 2), should it be returned?",
+    "Should the function return the biggest even integer strictly less than or equal to y, or could it be any even integer in the range even if not contiguous with y?",
+    "Is the function expected to handle very large numbers beyond typical integer limits, and if so, should performance or overflow be considered?"
+  ],
+  "answers": [
+    "x and y are guaranteed to be positive integers, as the solution uses integer operations and tests confirm integer inputs.",
+    "The function is only required to handle positive numbers as per the specification; non-positive inputs are not considered.",
+    "x and y are integers, so this scenario does not apply.",
+    "The range is inclusive only when x \u2264 y; if x > y, the function returns -1 as per the reference solution.",
+    "The intended behavior is to return -1 when x > y, not to swap them.",
+    "x and y are integers, so this scenario does not apply.",
+    "It returns the biggest even integer in the inclusive range [x, y], which is always the largest even \u2264 y if y is even, or y-1 if y is odd and x \u2264 y-1.",
+    "Not specified beyond what's given; assume standard behavior for Python integers (arbitrary precision)."
+  ],
+  "inline_prompts": [
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive integers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. The function is only required to handle positive numbers as per the specification; non-positive inputs are not considered.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive integers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. The range is inclusive only when x \u2264 y; if x > y, the function returns -1 as per the reference solution.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. The intended behavior is to return -1 when x > y, not to swap them.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive integers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. It returns the biggest even integer in the inclusive range [x, y], which is always the largest even \u2264 y if y is even, or y-1 if y is odd and x \u2264 y-1. If \n    there's no such number, then the function should return -1.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. Assume standard\n    behavior for Python integers (arbitrary precision).\"\"\""
+  ]
+}

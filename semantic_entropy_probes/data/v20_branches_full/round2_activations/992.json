@@ -1,0 +1,14 @@
+{
+  "branch_idx": 992,
+  "id": "bcbexpand_BigCodeBench/508_semantic",
+  "questions": [
+    "Should the function read files in binary mode ('rb') as implied by the reference solution, or is text mode acceptable? The prompt mentions 'same mode' but does not explicitly specify binary vs text.",
+    "Does 'same mode' refer only to the MD5 hash computation, or does it also imply the files should be opened with identical parameters (e.g., buffering, encoding)?",
+    "Is the function required to handle very large files that cannot fit into memory, or can it read the entire file at once as in the reference solution?",
+    "Should the function close the files explicitly if an error occurs during reading (e.g., permission error), or is the 'with' statement sufficient?",
+    "Are symbolic links to be followed? The clarification says opening a symbolic link reads the target's content, but does that mean the function must treat symlinks as their targets, or should it raise FileNotFoundError if the symlink itself is broken?",
+    "Should the function normalize paths (e.g., resolve '..' or '.') before checking existence, or use the paths as given?",
+    "Is the MD5 hash comparison case-sensitive? The reference uses hexdigest(), which produces lowercase hex, but the prompt doesn't specify.",
+    "Should the function raise FileNotFoundError immediately if either file is missing, or should it check both first and raise a single error mentioning both?"
+  ]
+}

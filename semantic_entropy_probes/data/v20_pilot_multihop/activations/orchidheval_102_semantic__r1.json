@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_102_semantic",
+  "round_depth": 1,
+  "questions": [
+    "Are x and y guaranteed to be integers, or could they be non-integer positive numbers (e.g., floats)?",
+    "Should the function handle the case where x and y are the same and that number is odd? (e.g., choose_num(7, 7))",
+    "If x > y, should the function return -1 immediately, or should it consider the range [y, x] instead?",
+    "Is the range inclusive of both x and y, or only inclusive of y?",
+    "Should the function return the biggest even integer strictly less than or equal to y, or could it be any even integer in the range even if not the maximum?",
+    "If x and y are both even and x > y, should it return -1 or consider the even numbers in [y, x]?",
+    "Are negative numbers or zero considered valid inputs, given the docstring says 'positive numbers'?",
+    "If x and y are non-integer floats, should the function round, floor, or ceil them to find even integers, or treat them as exact boundaries?"
+  ],
+  "answers": [
+    "The specification and tests use integers, so assume x and y are integers.",
+    "Yes, it should return -1, as shown in the test case for input (7, 7).",
+    "It should return -1 immediately, as per the solution and test case for (13, 12).",
+    "The range is inclusive of both x and y, as stated in the docstring.",
+    "It must return the biggest even integer in the inclusive range [x, y].",
+    "It should return -1 because x > y, regardless of parity.",
+    "The docstring specifies positive numbers, so assume inputs are positive integers.",
+    "Not specified beyond what's given; assume standard behavior that inputs are integers as per the problem context."
+  ],
+  "inline_prompts": [
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. The specification and tests use integers, so assume x and y are integers. \n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. Yes, it should return -1, as shown in the test case for input (7, 7).\"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. It should return -1 immediately, as per the solution and test case for (13, 12).\"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. The range is inclusive of both x and y, as stated in the docstring. If \n    there's no such number, then the function should return -1.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. It must return the biggest even integer in the inclusive range [x, y]. If \n    there's no such number, then the function should return -1.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1 because x > y, regardless of parity.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. The docstring\n    specifies positive numbers, so assume inputs are positive integers.\n    \"\"\"",
+    "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1. Assume standard\n    behavior that inputs are integers as per the problem context.\n    \"\"\""
+  ]
+}

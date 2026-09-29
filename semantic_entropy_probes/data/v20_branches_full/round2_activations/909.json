@@ -1,0 +1,14 @@
+{
+  "branch_idx": 909,
+  "id": "bcbexpand_BigCodeBench/299_vagueness",
+  "questions": [
+    "When subset_size > len(elements) or subset_size == 0, should the function return (1, []) or (1, Series([]))? The prompt says return a list, but the reference solution returns [] and later wraps top_sums in Series; the test case 4 expects list(sums) == [] but sums is a Series?",
+    "Should the product of sums be computed as an integer product (math.prod) even if sums are large, potentially causing overflow? Or should it use modular arithmetic or big integers? The reference uses math.prod, but Python ints are arbitrary precision, so maybe fine, but is that guaranteed?",
+    "If there are fewer than top_n subset sums (e.g., only one combination exists), should the returned Series have length top_n padded with something (like 0 or NaN) or just the available sums? The reference uses slicing which truncates.",
+    "Are duplicate subset sums considered distinct for the product? For example, if two subsets have the same sum, does that sum appear twice in the product? The reference includes all sums from combinations, so duplicates are included.",
+    "Should the top_n sums be returned in descending order (largest first) as in the reference, or ascending order? The prompt says 'top_n sums' which typically means largest, but not explicitly stated.",
+    "If elements contain non-numeric types (e.g., strings), should the function handle them? The prompt says tuple, but not restricted to numbers; the reference uses sum which fails on non-numerics.",
+    "Is the product of sums computed over subsets of exactly subset_size, or subsets of size up to subset_size? The prompt says 'subsets of a given size', so exactly that size.",
+    "Should the function raise an error if top_n is negative or zero? The reference uses slicing which works for zero or negative top_n (negative gives empty), but is that intended?"
+  ]
+}

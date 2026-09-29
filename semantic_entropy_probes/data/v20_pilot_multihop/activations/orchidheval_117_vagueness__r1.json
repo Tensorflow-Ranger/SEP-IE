@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_117_vagueness",
+  "round_depth": 1,
+  "questions": [
+    "Are 'y' and 'Y' considered consonants or vowels? (e.g., in 'Mary', 'y' might be a vowel sound, but the spec treats it as a consonant if not a,e,i,o,u)",
+    "Should words be split only on spaces, or on any whitespace (tabs, newlines)?",
+    "Is 'n' guaranteed to be a natural number (non-negative integer), and if n=0, should words with zero consonants be selected?",
+    "Should the function treat uppercase and lowercase letters identically for consonant counting?",
+    "If a word contains non-letter characters (like hyphens or apostrophes), should they be ignored, counted as consonants, or cause an error?",
+    "Should the returned words preserve their original capitalization, or be normalized to lower/upper case?",
+    "If the string has multiple consecutive spaces, should empty 'words' be considered?",
+    "Is the input string guaranteed to be ASCII, or should it handle Unicode letters (e.g., accented characters) and if so, are they consonants?"
+  ],
+  "answers": [
+    "Yes, 'y' and 'Y' are considered consonants because the specification defines consonants as letters not in the set ['a','e','i','o','u'] (case-insensitively).",
+    "Words are split only on spaces, as the solution uses s.split() which by default splits on any whitespace, including tabs and newlines.",
+    "Yes, n is a natural number (non-negative integer), and if n=0, words with zero consonants (e.g., words containing only vowels) should be selected.",
+    "Yes, the function treats uppercase and lowercase letters identically, as shown by converting each character to lowercase with .lower() before checking.",
+    "The specification states the input string contains only letters and spaces, so non-letter characters will not appear.",
+    "The returned words preserve their original capitalization, as the solution appends the original word without modification.",
+    "No, empty 'words' are not considered because s.split() without arguments splits on any whitespace and discards empty strings.",
+    "The specification does not explicitly guarantee ASCII, but the solution only checks for vowels among 'a','e','i','o','u', so any other Unicode letters (including accented ones) would be counted as consonants."
+  ],
+  "inline_prompts": [
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Note that 'y' and 'Y' \n    are considered consonants because the specification defines consonants as letters \n    not in the set ['a','e','i','o','u'] (case-insensitively). If the string s is empty \n    then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Words are split only on spaces, as the solution uses s.split() which by default splits on any whitespace, including tabs and newlines.\n    If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Yes, n is a natural number (non-negative integer), and if n=0, words with zero consonants (e.g., words containing only vowels) should be selected.\n    If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. The function treats uppercase and lowercase letters identically, as shown by converting each character to lowercase with .lower() before checking.\n    If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. The specification states \n    the input string contains only letters and spaces, so non-letter characters will not appear.\n    If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. The returned words preserve their original capitalization, as the solution appends the original word without modification.\n    If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Note that no empty \n    'words' are considered because s.split() without arguments splits on any \n    whitespace and discards empty strings.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. The specification does not explicitly guarantee ASCII, but the solution only checks for vowels among 'a','e','i','o','u', so any other Unicode letters (including accented ones) would be counted as consonants.\n    If the string s is empty then the function should return an empty list.\n    \"\"\""
+  ]
+}

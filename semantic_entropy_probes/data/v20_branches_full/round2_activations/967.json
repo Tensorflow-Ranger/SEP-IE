@@ -1,0 +1,14 @@
+{
+  "branch_idx": 967,
+  "id": "bcbexpand_BigCodeBench/441_semantic",
+  "questions": [
+    "What Einstein summation convention should be used? The prompt says 'based on the Einstein summation' but the reference uses 'ij,jkl->ik'. Is that the only allowed convention, or should the function infer it from shapes?",
+    "Should the visualization be a scatter plot of the result's columns (as clarified) or rows? The clarification says columns, but the reference plots columns 0,1,2 of each row, which is ambiguous if result shape is (N,3) \u2014 columns are the second axis.",
+    "Does the function need to handle both 'first or last axis' as mentioned in the first sentence, or is the Einstein summation fixed? The reference only implements one specific product.",
+    "Should the function raise an exception for non-numeric arrays, or attempt to compute? The reference raises TypeError for non-ndarray, but test_case_4 expects an exception for string arrays.",
+    "What should the title, labels, or styling of the 3D plot be? The prompt only says 'visualize the result in 3D'.",
+    "Is the result guaranteed to have shape (N,3)? The reference asserts that, but what if the tensor T's last two dimensions are not (3,3)?",
+    "Should the function close or show the plot? The reference returns the Axes object without showing, but the prompt doesn't specify.",
+    "What is the exact meaning of 'first or last axis' in the context of the Einstein summation? The reference uses a specific summation that contracts the second axis of P with the first of T, not clearly 'first or last'."
+  ]
+}

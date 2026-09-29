@@ -1,0 +1,14 @@
+{
+  "branch_idx": 559,
+  "id": "ccb_amb_task_31",
+  "questions": [
+    "If the three elements in a group are all different (i.e., one 0 and two 1s, or two 0s and one 1), the majority is clear. But what if a group has exactly one 0 and two 1s? The majority is 1, but is that the intended rule, or should we consider ties? The prompt says 'the value that appears most frequently', which implies a strict majority, but it's worth confirming that ties (three equal counts) are impossible with binary digits in groups of three.",
+    "The operation is applied recursively until a length-1 string A' is obtained. Is the goal to change the final single character A'_1, or to change the value obtained after applying the operation repeatedly to A? The prompt says 'change the value of A'_1', which is the result after all operations, so it's clear.",
+    "When counting changes, do we consider changes to individual bits in the original string A, or can we also consider changes to intermediate results during the recursive operation? The prompt says 'elements of A that must be changed', so it's original bits only.",
+    "The operation partitions into groups of 3 sequentially: first group is indices 1-3, then 4-6, etc. Is there any possibility of overlapping or non-sequential grouping? The prompt says 'for i=1,2,...,3^{n-1}, let C_i be ... among B_{3i-2}, B_{3i-1}, and B_{3i}', which defines sequential non-overlapping groups.",
+    "The goal is to change A'_1, which is the final majority value after all recursive operations. To compute the minimum changes, do we need to consider all possible ways to flip bits in A that lead to a different final majority, or is there a known combinatorial formula? This is about implementation approach, not ambiguity in the specification.",
+    "If N=1, then A has length 3 and A' is obtained directly by taking the majority of the three bits. The prompt says n\u22651, so this case is included. Is there any special handling for N=1? The operation is defined for n\u22651, so it applies.",
+    "The input format shows A as 'A_1 A_2 ... A_{3^N}' on one line, but are the characters separated by spaces or concatenated? The example isn't given, but typical problems might have spaces. This could affect parsing.",
+    "The output is 'the answer', which is an integer. Are there any constraints on the output format, like leading zeros or newlines? Typically just the integer, but unspecified."
+  ]
+}

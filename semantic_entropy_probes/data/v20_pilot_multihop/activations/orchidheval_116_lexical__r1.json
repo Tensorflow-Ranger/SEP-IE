@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_116_lexical",
+  "round_depth": 1,
+  "questions": [
+    "Should the function handle negative integers, given the docstring says 'non-negative integers' but the reference solution and tests include negative numbers?",
+    "For negative integers, how is the binary representation defined (e.g., two's complement, absolute value, or treat as positive)?",
+    "Is the sorting stable? When two numbers have equal popcount and decimal value, should their relative order be preserved?",
+    "Should the function modify the input array in-place or return a new sorted array?",
+    "How should zero be handled? Its binary representation '0' has zero ones, but is that counted from bin(0) which returns '0b0'?",
+    "For numbers with equal popcount, does 'sort based on decimal value' mean ascending or descending order?",
+    "Should the function handle floating-point numbers or only integers?",
+    "What is the expected behavior for very large integers (beyond typical integer range)?"
+  ],
+  "answers": [
+    "Yes, the function must handle negative integers as shown in the reference solution and tests.",
+    "The binary representation is defined by Python's bin(x), which for negative integers includes a minus sign and the binary of the absolute value (e.g., bin(-5) is '-0b101'), so count ones in that representation.",
+    "The sorting is not stable; the reference uses sorted(sorted(arr), ...), which sorts by decimal value first, then by popcount, so equal popcount and decimal value will have their order determined by the initial decimal sort.",
+    "It must return a new sorted array, as the reference solution returns the result of sorted().",
+    "Zero is handled by bin(0)[2:].count('1'), which counts zero ones, consistent with the reference.",
+    "It means ascending order, as shown by the reference using sorted(arr) for decimal value.",
+    "Only integers are handled, as the reference uses bin() which raises TypeError for non-integers.",
+    "It should handle arbitrarily large integers as Python's bin() and count work, with no specified limit beyond typical Python integer range."
+  ],
+  "inline_prompts": [
+    "def sort_array(arr):\n    \"\"\"\n    In this Kata, you have to sort an array of integers according to\n    number of ones in their binary representation in ascending order.\n    For similar number of ones, sort based on decimal value. Yes, the function must handle negative integers as shown in the reference solution and tests.\n\n    It must be implemented like this:\n    \"\"\"",
+    "def sort_array(arr):\n    \"\"\"\n    In this Kata, you have to sort an array of non-negative integers according to\n    number of ones in their binary representation in ascending order. The binary\n    representation is defined by Python's bin(x), which for negative integers\n    includes a minus sign and the binary of the absolute value (e.g., bin(-5) is\n    '-0b101'), so count ones in that representation. For similar number of ones,\n    sort based on decimal value.\n\n    It must be implemented like this:\n    \"\"\"",
+    "def sort_array(arr):\n    \"\"\"\n    In this Kata, you have to sort an array of non-negative integers according to\n    number of ones in their binary representation in ascending order. For similar\n    number of ones, sort based on decimal value. The sorting is not stable; the\n    reference uses sorted(sorted(arr), ...), which sorts by decimal value first,\n    then by popcount, so equal popcount and decimal value will have their order\n    determined by the initial decimal sort.\n\n    It must be implemented like this:\n    \"\"\"",
+    "def sort_array(arr):\n    \"\"\"\n    In this Kata, you have to sort an array of non-negative integers according to\n    number of ones in their binary representation in ascending order.\n    For similar number of ones, sort based on decimal value. It must return a new sorted array, as the reference solution returns the result of sorted(). \n\n    It must be implemented like this:\n    \"\"\"",
+    "def sort_array(arr):\n    \"\"\"\n    In this Kata, you have to sort an array of non-negative integers according to\n    number of ones in their binary representation in ascending order. Zero is handled by bin(0)[2:].count('1'), which counts zero ones, consistent with the reference. For similar number of ones, sort based on decimal value.\n\n    It must be implemented like this:\n    \"\"\"",
+    "def sort_array(arr):\n    \"\"\"\n    In this Kata, you have to sort an array of non-negative integers according to\n    number of ones in their binary representation in ascending order. It means\n    ascending order, as shown by the reference using sorted(arr) for decimal value.\n    For similar number of ones, sort based on decimal value.\n\n    It must be implemented like this:\n    \"\"\"",
+    "def sort_array(arr):\n    \"\"\"\n    In this Kata, you have to sort an array of non-negative integers according to\n    number of ones in their binary representation in ascending order. Only integers\n    are handled, as the reference uses bin() which raises TypeError for non-integers.\n    For similar number of ones, sort based on decimal value.\n\n    It must be implemented like this:\n    \"\"\"",
+    "def sort_array(arr):\n    \"\"\"\n    In this Kata, you have to sort an array of non-negative integers according to\n    number of ones in their binary representation in ascending order. It should\n    handle arbitrarily large integers as Python's bin() and count work, with no\n    specified limit beyond typical Python integer range. For similar number of ones,\n    sort based on decimal value.\n\n    It must be implemented like this:\n    \"\"\""
+  ]
+}

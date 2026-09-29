@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_103_lexical",
+  "round_depth": 0,
+  "questions": [
+    "Should the mean be computed as a simple arithmetic average, with the count including both endpoints as stated?",
+    "How should the mean be rounded when it falls exactly halfway between two integers \u2014 up, down, or to the nearest even?",
+    "Is the resulting binary conversion expected to use two's complement, or just the binary digits of a non-negative integer?",
+    "What should happen if n equals m \u2014 is the mean trivially that single number?",
+    "Is there an expected range limit for how large n and m can be?",
+    "Is the output format for the binary string expected to include a prefix like \"0b\", or just raw bits?",
+    "Does \"positive integers\" guarantee n and m are both >= 1, ruling out zero?",
+    "What should be returned if the mean computes to exactly 0?"
+  ],
+  "answers": [
+    "Yes, compute the average of integers from n through m inclusive.",
+    "The reference uses Python's round, which rounds to the nearest integer, with ties rounded to the nearest even integer.",
+    "It uses the binary digits of a non-negative integer, as the average of positive integers is positive.",
+    "Yes, the mean is that single number, as shown in the test case for (5,5).",
+    "Not specified beyond what's given; assume standard behavior for Python integers.",
+    "The output must include the \"0b\" prefix, as shown in the examples and tests.",
+    "Yes, positive integers means >=1, so zero is not allowed.",
+    "This cannot happen with positive integers n and m, so it's not addressed."
+  ],
+  "inline_prompts": [
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). Yes, compute the average of integers from n through m inclusive. \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\"",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). The reference uses Python's round, which rounds to the nearest integer, with ties rounded to the nearest even integer. Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\"",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). It uses the binary digits of a non-negative integer, as the average of positive integers is positive. \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\"",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). Yes, the mean is that single number, as shown in the test case for (5,5). \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\"",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). Round the answer to the nearest integer and convert that to binary. If n is greater than m, return -1. Not specified beyond what's given; assume standard behavior for Python integers.\"\"\"",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). \n    Round the answer to the nearest integer and convert that to binary, including the \"0b\" prefix. \n    If n is greater than m, return -1.\n    \"\"\"",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). Yes, positive integers means >=1, so zero is not allowed.\n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\"",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). This cannot happen with positive integers n and m, so it's not addressed. Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\""
+  ]
+}

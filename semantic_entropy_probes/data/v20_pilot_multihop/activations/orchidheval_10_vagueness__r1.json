@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_10_vagueness",
+  "round_depth": 1,
+  "questions": [
+    "Should the function treat the empty string as a palindrome and return it unchanged, or is there a special case?",
+    "Is the input guaranteed to be ASCII, or should it handle Unicode characters (including grapheme clusters, combining marks) correctly?",
+    "Should the algorithm consider single characters as palindromes, i.e., is a string of length 1 always a palindrome?",
+    "What is the expected behavior if the input string is already a palindrome? Should it return the input unchanged?",
+    "Does 'shortest palindrome' mean minimal length overall, or are we only allowed to append characters to the end (not insert anywhere)?",
+    "Is the algorithm required to be case-sensitive? Should 'Aba' be considered a palindrome?",
+    "Should the function preserve leading/trailing whitespace or treat it as part of the string for palindrome checking?",
+    "Are there any constraints on input length or performance expectations for the algorithm?"
+  ],
+  "answers": [
+    "The empty string is treated as a palindrome and returned unchanged, as shown in the reference solution.",
+    "Not specified beyond what's given; assume standard behavior (Unicode strings are handled as sequences of code points).",
+    "Yes, single characters are palindromes, as the reference solution's is_palindrome function returns True for them.",
+    "Yes, it returns the input unchanged, as seen in the test case for 'xyx'.",
+    "It means the shortest palindrome achievable by appending characters only to the end, as per the algorithm in the reference.",
+    "Yes, it is case-sensitive, as the is_palindrome function compares strings directly without case normalization.",
+    "Whitespace is treated as part of the string, as the function operates on the input string without trimming.",
+    "Not specified beyond what's given; assume standard behavior (no explicit constraints)."
+  ],
+  "inline_prompts": [
+    "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \n    \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix. The empty string is treated as a palindrome and returned unchanged, as shown in the reference solution.\n    \"\"\"",
+    "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \n    \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    Note: Not specified beyond what's given; assume standard behavior (Unicode strings are handled as sequences of code points).\n    \"\"\"",
+    "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \n    \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome. Yes, single characters are palindromes, as the reference solution's is_palindrome function returns True for them.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    \"\"\"",
+    "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \n    \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    Yes, it returns the input unchanged, as seen in the test case for 'xyx'.\n    \"\"\"",
+    "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \n    \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string. It means the shortest palindrome achievable by appending characters only to the end, as per the algorithm in the reference.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    \"\"\"",
+    "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \n    \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    Note: Yes, it is case-sensitive, as the is_palindrome function compares strings directly without case normalization.\n    \"\"\"",
+    "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \n    \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    Whitespace is treated as part of the string, as the function operates on the input string without trimming.\n    \"\"\"",
+    "def is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \n    \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    Assume standard behavior (no explicit constraints). \n    \"\"\""
+  ]
+}

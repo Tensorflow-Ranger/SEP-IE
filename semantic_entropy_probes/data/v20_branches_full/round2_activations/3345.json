@@ -1,0 +1,14 @@
+{
+  "branch_idx": 3345,
+  "id": "bcbexpand_BigCodeBench/887_semantic",
+  "questions": [
+    "What is the range of random integers? The prompt says 'random numbers' but the reference solution uses np.random.randint(0, 100). Is 0 inclusive and 100 exclusive, or some other range?",
+    "Should the function raise an error if any string in T1 cannot be converted to a non-negative integer? The reference test expects an exception for '2.45', but what about negative strings like '-12'? The example includes '-12' and it seems to be accepted (since sum includes -12).",
+    "Is T1 guaranteed to be a tuple of tuples of strings? Could it be a tuple of strings directly (a flat tuple)? The first example shows ('1', ('1', '3')) which is a tuple mixed with a string and a tuple, not a tuple of tuples.",
+    "What should happen if the sum of integers is zero? The clarification says empty tuples contribute zero, but if total_cols=0, the reference solution creates an empty DataFrame with 0 columns. Is that the intended behavior?",
+    "Is the seed parameter used to set both numpy's random seed and pandas' random state? The reference uses np.random.seed(seed). Should other random sources be seeded?",
+    "Should column names be exactly 'Col_1', 'Col_2', ... even if total_cols is zero? The reference uses f'Col_{i+1}', but with zero columns, no columns are created.",
+    "What if row_num is zero? The prompt says row_num defines number of rows, but the reference uses size=(row_num, total_cols). Should a zero-row DataFrame be allowed?",
+    "Should the function handle non-string elements in T1, like integers directly? The prompt says 'convert elements in T1 to integers', but examples are strings."
+  ]
+}

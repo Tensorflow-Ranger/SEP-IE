@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_108_lexical",
+  "round_depth": 2,
+  "questions": [
+    "For a negative number with multiple digits, are the non-first digits considered positive or absolute? (e.g., -123: digits -1, 2, 3 as given, but what about -100? digits -1, 0, 0 sum to -1?)",
+    "Should the sum of digits be computed for the integer as represented in base-10 without leading zeros, or should any string representation quirks (like '-0') be considered?",
+    "Is the input array guaranteed to contain only integers, or could it have other numeric types (e.g., floats) that need conversion?",
+    "For the number 0, the sum is explicitly 0, but what about negative zero or positive zero? Are they treated identically?",
+    "Should the function handle very large integers beyond typical Python int limits, or is it within standard integer range?",
+    "Are we counting elements where the sum of signed digits is strictly greater than 0, or greater than or equal to 0?",
+    "If the input array is empty, should the function return 0, or is that behavior unspecified?",
+    "For negative numbers, is the first digit's sign applied before or after converting the absolute value to digits? (e.g., -123: first digit is -1, but what about -10? digits -1 and 0 sum to -1?)"
+  ],
+  "answers": [
+    "Non-first digits are positive (their absolute values), so -100's signed digits are -1, 0, 0 summing to -1.",
+    "Compute from the integer's base-10 digits without leading zeros, and '-0' is treated as 0 (as shown in the test case).",
+    "The specification and tests only involve integers, so assume the input contains only integers.",
+    "Yes, they are treated identically as 0, as indicated by the test case with '-0'.",
+    "It should handle any Python integer, as the solution uses standard int operations.",
+    "Count strictly greater than 0, as per the specification and solution.",
+    "It should return 0, as shown in the specification and tests.",
+    "The first digit's sign is applied after converting the absolute value to digits, so -10's signed digits are -1 and 0 summing to -1."
+  ],
+  "inline_prompts": [
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3. Non-first digits are positive (their absolute values), so -100's signed digits are -1, 0, 0 summing to -1.\n    \"\"\" For the number 0, the sum of its signed digits is 0.",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    Compute from the integer's base-10 digits without leading zeros, and '-0' is treated as 0 (as shown in the test case).\n    \"\"\" For the number 0, the sum of its signed digits is 0.",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    \"\"\" For the number 0, the sum of its signed digits is 0.",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3. Yes, they are treated identically as 0, as indicated by the test case with '-0'.\n    \"\"\" For the number 0, the sum of its signed digits is 0.",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0. It should handle any Python integer, as the solution uses standard int operations. If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    \"\"\" For the number 0, the sum of its signed digits is 0.",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0. Count strictly greater than 0, as per the specification and solution.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    \"\"\" For the number 0, the sum of its signed digits is 0.",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    It should return 0, as shown in the specification and tests.\n    \"\"\" For the number 0, the sum of its signed digits is 0.",
+    "def count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3. The first digit's sign is applied after converting the absolute value to digits, so -10's signed digits are -1 and 0 summing to -1.\n    \"\"\" For the number 0, the sum of its signed digits is 0."
+  ]
+}

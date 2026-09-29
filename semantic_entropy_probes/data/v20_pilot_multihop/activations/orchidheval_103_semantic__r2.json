@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_103_semantic",
+  "round_depth": 2,
+  "questions": [
+    "Should the binary string be prefixed with '0b' as in Python's bin() output, or should it be a plain binary string without prefix?",
+    "For rounding, is the 'round half away from zero' rule applied to the exact average (which is always non-negative here), and does Python's round() behave that way by default?",
+    "Are n and m guaranteed to be positive integers, and if zero or negative inputs occur, should they be handled or assumed not to happen?",
+    "When n equals m, the average is n itself; rounding is trivial, but should the binary conversion still follow the same process?",
+    "Is the average computed as integer division or floating-point division before rounding?",
+    "Should the function return the binary string as a Python str type, or could it return an integer after rounding without conversion?",
+    "If the rounded average is zero, what binary representation should be returned? '0b0', '0', or something else?",
+    "Are there any constraints on the size of n and m that could affect performance or overflow in summation?"
+  ],
+  "answers": [
+    "The binary string must be prefixed with '0b' as in Python's bin() output, as shown in the examples and solution.",
+    "The solution uses Python's round() on the exact average (floating-point division), which rounds half to even by default, but the specification only requires rounding to the nearest integer without further detail.",
+    "The specification states n and m are positive integers, so zero or negative inputs are not considered and need not be handled.",
+    "Yes, the same process applies: compute the average (which is n), round it (trivially), and convert to binary with '0b' prefix, as shown in the test case for n=m=5.",
+    "The average is computed using floating-point division (summation/(m - n + 1)) before rounding, as in the solution.",
+    "It must return the binary string as a Python str type with '0b' prefix, or -1 for invalid input, as per the solution and examples.",
+    "It should return '0b0', following Python's bin(0) output, though no test case covers this; assume standard behavior.",
+    "No constraints are specified beyond positive integers; assume standard integer and floating-point handling without overflow issues."
+  ],
+  "inline_prompts": [
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). \n    Round the answer to the nearest integer and convert that to binary. The binary string must be prefixed with '0b' as in Python's bin() output, as shown in the examples and solution.\n    If n is greater than m, return -1.\n    \"\"\" Round half away from zero (i.e., round .5 up).",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). The solution uses Python's round() on the exact average (floating-point division), which rounds half to even by default, but the specification only requires rounding to the nearest integer without further detail. Round half away from zero (i.e., round .5 up).\n    \"\"\" If n is greater than m, return -1.",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). The specification states n and m are positive integers, so zero or negative inputs are not considered and need not be handled. Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\" Round half away from zero (i.e., round .5 up).",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\" Round half away from zero (i.e., round .5 up). Yes, the same process applies: compute the average (which is n), round it (trivially), and convert to binary with '0b' prefix, as shown in the test case for n=m=5.",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). The average is computed using floating-point division (summation/(m - n + 1)) before rounding. \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\" Round half away from zero (i.e., round .5 up).",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). \n    Round the answer to the nearest integer and convert that to binary. It must return the binary string as a Python str type with '0b' prefix, or -1 for invalid input, as per the solution and examples.\n    If n is greater than m, return -1.\n    \"\"\" Round half away from zero (i.e., round .5 up).",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). It should return '0b0', following Python's bin(0) output, though no test case covers this; assume standard behavior. Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\" Round half away from zero (i.e., round .5 up).",
+    "def rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    \"\"\" Round half away from zero (i.e., round .5 up). No constraints are specified beyond positive integers; assume standard integer and floating-point handling without overflow issues."
+  ]
+}

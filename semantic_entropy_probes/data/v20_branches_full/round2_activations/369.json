@@ -1,0 +1,14 @@
+{
+  "branch_idx": 369,
+  "id": "bcbexpand_BigCodeBench/763_semantic",
+  "questions": [
+    "Should the function calculate statistics across all dictionaries in the list (global aggregation) or within each dictionary individually (per-dictionary aggregation)? The prompt says 'across all dictionaries or within each dictionary' but the canonical solution aggregates globally.",
+    "If a key appears in some dictionaries but not others, should missing values be treated as zeros, omitted, or cause an error? The canonical solution only appends values when the key is present.",
+    "Should the CSV output file contain one row per key (as in the canonical solution) or one row per original dictionary? The prompt says 'write the results to a CSV file' but doesn't specify the row structure.",
+    "Are the input dictionaries guaranteed to have the same set of keys, or can they vary? The canonical solution handles varying keys, but the prompt doesn't specify.",
+    "Should the function handle nested dictionaries or lists within the values? The clarification says values are numeric, but doesn't forbid complex structures that might be numeric-like.",
+    "What should happen if the input JSON file is empty or contains an empty list? The canonical solution would return an empty dict and write a CSV with only a header, but the prompt doesn't specify.",
+    "Should the mean and median be computed as integers or floats? The canonical solution uses numpy which returns floats, but the prompt doesn't specify output numeric types.",
+    "Is the order of rows in the CSV output important (e.g., alphabetical by key, original appearance order)? The canonical solution uses dict.items() order (Python 3.7+ insertion order)."
+  ]
+}

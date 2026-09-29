@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_0_semantic",
+  "round_depth": 0,
+  "questions": [
+    "Should the function consider the distance between a number and itself (i.e., same index) as a candidate pair?",
+    "Does 'closer' mean strictly less than (<) the threshold, or less than or equal to (<=)?",
+    "Are we allowed to assume the list has at least two elements? If the list has fewer than two elements, should the function return False?",
+    "Should the function consider pairs (x, y) and (y, x) as distinct, or avoid double-counting?",
+    "Is the threshold always non-negative? If negative, should we treat it as always true or raise an error?",
+    "Does 'closer' refer to Euclidean distance or absolute difference? (Given numbers are floats, likely absolute difference, but not explicitly stated.)",
+    "Should the function handle NaN or infinity values in the list?",
+    "Is the list guaranteed to contain only floats, or could there be integers? (Type hint says List[float], so likely floats, but might be ambiguous for implementation.)"
+  ],
+  "answers": [
+    "No, the function explicitly checks idx != idx2, so it excludes same-index pairs.",
+    "Strictly less than (<), as shown by the condition distance < threshold in the solution.",
+    "The solution will return False for fewer than two elements because no pair with idx != idx2 exists.",
+    "The solution checks all pairs with idx != idx2, which includes both orders, but it returns True on first find, so double-counting does not affect correctness.",
+    "Not specified beyond what's given; assume standard behavior (negative threshold would cause no distance to be less than it, so likely always False).",
+    "Absolute difference, as shown by distance = abs(elem - elem2) in the solution.",
+    "Not specified beyond what's given; assume standard behavior (it will run but comparisons may behave as per Python's float rules).",
+    "The type hint is List[float], but integers are acceptable as they are a subset of floats in Python."
+  ],
+  "inline_prompts": [
+    "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold. Note that the function explicitly checks idx != idx2, so it excludes same-index pairs.\n    \"\"\"",
+    "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold, strictly less than (<), as shown by the condition distance < threshold in the solution.\n    \"\"\"",
+    "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold. The solution will return False for fewer than two elements because no pair with idx != idx2 exists.\n    \"\"\"",
+    "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold. The solution checks all pairs with idx != idx2, which includes both orders, but it returns True on first find, so double-counting does not affect correctness.\n    \"\"\"",
+    "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold. Not specified beyond what's given; assume standard behavior (negative threshold would cause no distance to be less than it, so likely always False).\n    \"\"\"",
+    "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold, where closeness is determined by absolute difference, as shown by\n    distance = abs(elem - elem2) in the solution.\n    \"\"\"",
+    "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold. Not specified beyond what's given; assume standard behavior (it will run but comparisons may behave as per Python's float rules).\n    \"\"\"",
+    "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold. The type hint is List[float], but integers are acceptable as they are a subset of floats in Python.\n    \"\"\""
+  ]
+}

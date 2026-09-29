@@ -1,0 +1,14 @@
+{
+  "branch_idx": 3414,
+  "id": "bcbexpand_BigCodeBench/975_semantic",
+  "questions": [
+    "Should the columns be shuffled after generating the random data, or before? The prompt says 'shuffled columns' but the reference solution shuffles the column names after data generation, which is ambiguous about whether the data stays aligned with the original column order before shuffling.",
+    "What should happen if 'rows' is zero? The prompt doesn't specify behavior for zero rows, and the reference solution would produce an empty DataFrame with zero rows but columns still present.",
+    "Are the column names required to be strings? The prompt lists default columns as strings, but the function signature doesn't enforce type, and the reference solution uses sorted() which works on any comparable type.",
+    "Should the random values be generated using numpy's default random generator, or any uniform generator? The clarification says uniformly distributed, but not which generator or distribution parameters beyond [0,1).",
+    "Is the seed applied globally (np.random.seed) or to a local random generator? The reference uses np.random.seed(seed), which affects global state, but an implementation could use a local RandomState without side effects.",
+    "When columns have duplicates, should they be removed before or after sorting? The prompt says columns should be unique and sorted, but order of operations isn't specified.",
+    "Should the function raise an error if 'rows' is not an integer? The prompt doesn't specify type validation, and the reference solution assumes integer rows.",
+    "What should happen if 'columns' is None? The default is a list, but a caller could pass None, which isn't handled in the prompt or reference."
+  ]
+}

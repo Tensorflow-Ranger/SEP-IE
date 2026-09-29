@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_115_lexical",
+  "round_depth": 1,
+  "questions": [
+    "Can a bucket be used to extract water from multiple wells in a single lowering, or must each lowering be dedicated to a single well?",
+    "If a bucket can extract from multiple wells in one lowering, can it partially fill from one well and then continue to another in the same trip?",
+    "Is the bucket lowered exactly once per well per trip, or can it be lowered multiple times per well per trip if capacity allows?",
+    "Does the bucket need to be fully filled to capacity on each lowering, or can it be partially filled?",
+    "Are there any constraints on the order in which wells are emptied or bucket lowerings are performed?",
+    "Should the output be an integer, and if so, is rounding always up as per the reference solution?",
+    "What if capacity is zero? Is that a valid input?",
+    "Is the grid guaranteed to be non-empty?"
+  ],
+  "answers": [
+    "Each lowering is dedicated to a single well, as the reference solution sums per well.",
+    "Not applicable because each lowering is per well.",
+    "It can be lowered multiple times per well as needed, with the number of lowerings per well being ceil(water in well / capacity).",
+    "It can be partially filled on the final lowering for a well if the remaining water is less than capacity.",
+    "No constraints on order; the total lowerings is independent of sequence.",
+    "Yes, the output is an integer, and rounding is always up per well.",
+    "Capacity is at least 1 per constraints, so zero is not a valid input.",
+    "Yes, grid length is at least 1 per constraints."
+  ],
+  "inline_prompts": [
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Each lowering is dedicated to a single well, as the reference solution sums per well.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Your task is to use the buckets to empty the wells. Output the number of times you need to lower the buckets. Not applicable because each lowering is per well.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. It can be lowered multiple times per well as needed, with the number of lowerings per well being ceil(water in well / capacity). \n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. It can be partially filled on the final lowering for a well if the remaining water is less than capacity. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. No constraints on order; the total lowerings is independent of sequence.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Yes, the output is an integer, and rounding is always up per well.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Capacity is at least 1 per constraints, so zero is not a valid input.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Yes, grid length is at least 1 per constraints.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\""
+  ]
+}

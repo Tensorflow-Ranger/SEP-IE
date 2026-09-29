@@ -1,0 +1,14 @@
+{
+  "branch_idx": 903,
+  "id": "bcbexpand_BigCodeBench/256_vagueness",
+  "questions": [
+    "What is the 'complete conventional string representation' of the datetime? The reference uses '%Y-%m-%d %H:%M:%S' but the prompt doesn't specify; is that canonical?",
+    "Should the datetime be assumed to be timezone-aware UTC, or should naive datetimes be accepted? The prompt says 'UTC datetime' but the reference uses tzinfo=pytz.UTC in tests.",
+    "Is the salt appended after the datetime string, or is the datetime string appended after the salt? The clarification says password is concatenated before the salted datetime string, but doesn't specify salt-datetime order.",
+    "Should the password be generated from exactly the set 'abcdefghijklmnopqrstuvwxyz0123456789' (lowercase alphanumeric) or could it include uppercase? The prompt says lowercase alphanumeric, but the reference uses that set.",
+    "What encoding should be used for the concatenated string before hashing? The reference uses UTF-8, but the prompt doesn't specify.",
+    "Should the seed parameter affect only the password generation, or also other random choices if any? The reference uses random.seed(seed) at start.",
+    "Is the JSON string output a plain string of the hash, or should it be a JSON object with a key? The prompt says 'hashed password encoded as a JSON string', reference uses json.dumps(hashed_password).",
+    "What should happen if password_length is zero or negative? The prompt doesn't specify, but the reference would generate empty password."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_115_vagueness",
+  "round_depth": 1,
+  "questions": [
+    "Can a bucket be used across multiple wells in a single lowering, or must each lowering be confined to a single well?",
+    "If a bucket is partially filled from a well, can it be topped up from another well in the same lowering?",
+    "Does the order of lowering buckets matter, e.g., can we optimize by choosing which well to empty first?",
+    "Is the bucket lowered exactly once per trip to a well, even if it could extract multiple units in one go due to capacity?",
+    "What if capacity is zero? Should we handle it as an error or assume capacity >= 1?",
+    "Should the output be an integer, and can we assume the sum of units per well fits in standard integer range?",
+    "If a well has zero water, do we still need to lower a bucket into it?",
+    "Can we lower multiple buckets into the same well simultaneously, counting as multiple lowerings?"
+  ],
+  "answers": [
+    "Each lowering is confined to a single well, as the solution sums per-well ceil(units/capacity).",
+    "No, because each lowering is per well, so topping up across wells in one lowering is not allowed.",
+    "No, order does not matter; the total lowerings is simply the sum over wells of ceil(units/capacity).",
+    "Yes, each lowering extracts up to capacity units from a single well, and multiple lowerings per well are needed if units exceed capacity.",
+    "The constraints specify 1 <= capacity <= 10, so capacity is at least 1.",
+    "Yes, the output is an integer, and the constraints imply sums fit in standard integer range.",
+    "No, wells with zero water require zero lowerings, as ceil(0/capacity) = 0.",
+    "No, lowerings are sequential per well, and simultaneous lowerings are not considered; each lowering extracts up to capacity units."
+  ],
+  "inline_prompts": [
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Each lowering is confined to a single well, as the solution sums per-well ceil(units/capacity). \n    Your task is to use the buckets to empty the wells. Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Your task is to use the buckets to empty the wells. \n    No, because each lowering is per well, so topping up across wells in one lowering is not allowed. Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. No, order does not matter; the total lowerings is simply the sum over wells of ceil(units/capacity).\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Yes, each lowering extracts up to capacity units from a single well, and multiple lowerings per well are needed if units exceed capacity. \n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. The constraints specify 1 <= capacity <= 10, so capacity is at least 1.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water.\n    Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets. Yes, the output is an integer, \n    and the constraints imply sums fit in standard integer range.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. No, wells with zero water require zero lowerings, as ceil(0/capacity) = 0. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity.\n    Your task is to use the buckets to empty the wells.\n    Output the number of times you need to lower the buckets.\n    \"\"\"",
+    "def max_fill(grid, capacity):\n    import math\n    \"\"\"\n    You are given a rectangular grid of wells. Each row represents a single well,\n    and each 1 in a row represents a single unit of water. Each well has a corresponding bucket that can be used to extract water from it, \n    and all buckets have the same capacity. Your task is to use the buckets to empty the wells. Output the number of times you need to lower the buckets. \n    No, lowerings are sequential per well, and simultaneous lowerings are not considered; each lowering extracts up to capacity units.\n    \"\"\""
+  ]
+}

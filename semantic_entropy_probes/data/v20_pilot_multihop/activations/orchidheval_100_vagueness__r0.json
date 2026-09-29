@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_100_vagueness",
+  "round_depth": 0,
+  "questions": [
+    "Does \"some odd number\" mean strictly the next odd number after the previous level, or could it be any odd number satisfying another rule?",
+    "Is there a unique deterministic choice implied by \"some\", or is any valid odd/even number acceptable?",
+    "Since n is now specified as strictly positive, should n=0 be considered invalid input requiring an error?",
+    "Should the progression from level to level strictly increase, and by how much?",
+    "What determines exactly which \"even number\" or \"odd number\" is chosen at each subsequent level?",
+    "Is the first level count always exactly n, with subsequent levels computed relative to it?",
+    "Should the output list always have exactly n elements?",
+    "Could \"some\" imply there are multiple valid correct outputs for the same input?"
+  ],
+  "answers": [
+    "It means the next odd number after the previous level's count.",
+    "The specification is deterministic: each level is the previous level plus 2.",
+    "The problem states n is positive, so n=0 is not a valid input.",
+    "Yes, it strictly increases by exactly 2 each level.",
+    "Each subsequent level is the previous level's count plus 2.",
+    "Yes, the first level has exactly n stones, and each next level is n + 2*i for i from 0 to n-1.",
+    "Yes, the output list always has exactly n elements, one per level.",
+    "No, the output is uniquely determined as shown in the solution."
+  ],
+  "inline_prompts": [
+    "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number after the previous level's count if n is odd.\n        - the next even number after the previous level's count if n is even.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1).\n    \"\"\"",
+    "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    The specification is deterministic: each level is the previous level plus 2.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1).\n    \"\"\"",
+    "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1).\n    The problem states n is positive, so n=0 is not a valid input.\n    \"\"\"",
+    "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    Yes, it strictly increases by exactly 2 each level. Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1).\n    \"\"\"",
+    "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    Each subsequent level is the previous level's count plus 2.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1).\n    \"\"\"",
+    "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has exactly n stones, and each next level is n + 2*i for i from 0 to n-1.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1).\n    \"\"\"",
+    "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1). Yes, the output list always has exactly n elements, one per level.\n    \"\"\"",
+    "def make_a_pile(n):\n    \"\"\"\n    Given a positive integer n, you have to make a pile of n levels of stones.\n    The first level has n stones.\n    The number of stones in the next level is:\n        - the next odd number if n is odd.\n        - the next even number if n is even.\n    Return the number of stones in each level in a list, where element at index\n    i represents the number of stones in the level (i+1). No, the output is uniquely determined as shown in the solution.\n    \"\"\""
+  ]
+}

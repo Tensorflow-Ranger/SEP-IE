@@ -1,0 +1,34 @@
+{
+  "id": "orchidheval_117_lexical",
+  "round_depth": 1,
+  "questions": [
+    "Are 'y' and 'Y' considered consonants or vowels? (e.g., in 'Mary', 'y' is sometimes a vowel)",
+    "Should words be split only on spaces, or on any whitespace (tabs, newlines)?",
+    "Is case sensitivity relevant? Should consonants be counted ignoring case (e.g., 'A' vs 'a')?",
+    "What constitutes a consonant? Only English alphabet letters? Are non-English letters (e.g., '\u00f1', '\u00e7') allowed?",
+    "If a word contains non-letter characters (like hyphens or apostrophes), should they be ignored or split differently?",
+    "Should the function preserve the original case of the words in the output list?",
+    "What should happen if n is zero? Are words with zero consonants (only vowels) included?",
+    "Are consecutive spaces considered as multiple word separators, leading to empty words?"
+  ],
+  "answers": [
+    "They are considered consonants, as the solution counts any letter not in the set ['a','e','i','o','u'] (case-insensitively) as a consonant.",
+    "Only spaces, as the solution uses s.split() which by default splits on any whitespace, but the specification states the input contains only letters and spaces.",
+    "Case is ignored, as the solution converts letters to lowercase when checking for vowels.",
+    "Only English alphabet letters are considered, as the solution checks against a fixed list of vowels and assumes all other letters are consonants.",
+    "This is not specified beyond what's given; assume standard behavior that such characters are not present as the input contains only letters and spaces.",
+    "Yes, the original case is preserved, as the solution appends the word as-is without modification.",
+    "Yes, words with zero consonants are included if n is zero, as the solution counts consonants and checks equality with n.",
+    "No, consecutive spaces do not create empty words, as s.split() without arguments splits on any whitespace and discards empty strings."
+  ],
+  "inline_prompts": [
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. They are considered consonants, as the solution counts any letter not in the set ['a','e','i','o','u'] (case-insensitively) as a consonant. If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Note that s.split() \n    splits on any whitespace, but the input contains only letters and spaces. If the \n    string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Case is ignored, as \n    the solution converts letters to lowercase when checking for vowels.\n    If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Only English alphabet letters are considered, as the solution checks against a fixed list of vowels and assumes all other letters are consonants.\n    If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. This is not specified \n    beyond what's given; assume standard behavior that such characters are not present \n    as the input contains only letters and spaces.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Yes, the original case is preserved, as the solution appends the word as-is without modification.\n    If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Yes, words with zero consonants are included if n is zero, as the solution counts consonants and checks equality with n.\n    If the string s is empty then the function should return an empty list.\n    \"\"\"",
+    "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s. Note that consecutive spaces do not create empty words, as s.split() without arguments splits on any whitespace and discards empty strings.\n    If the string s is empty then the function should return an empty list.\n    \"\"\""
+  ]
+}
