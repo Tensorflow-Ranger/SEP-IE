@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1770,
+  "id": "bcbexpand_BigCodeBench/466_vagueness",
+  "questions": [
+    "Should the custom JSONEncoder handle only Enum subclasses, or also any class that inherits from Enum? The clarification says 'any Enum', but does that include custom Enums defined elsewhere, or only the Color Enum defined in the code stub?",
+    "When an Enum is encountered, should it be serialized to its name (obj.name) or its value (obj.value)? The reference solution comments 'or obj.value, depending on the requirement', but the prompt and tests only show name serialization.",
+    "Should the custom JSONEncoder also handle other non-serializable types (e.g., datetime, custom classes) by falling back to the base default, or should it only handle Enums and let others raise TypeError?",
+    "Is the function expected to accept any Python object (including lists, tuples, sets, etc.) beyond dictionaries and Enums, or is it limited to dict and Enum as shown in examples?",
+    "Should the JSON output be formatted with any specific indentation or separators (e.g., compact vs. pretty-printed), or is the default json.dumps behavior sufficient?",
+    "If an Enum has a name that is not a valid JSON string (e.g., contains special characters or is numeric), should it still be serialized as a string, or should it be converted differently?",
+    "Should the function handle recursive structures (e.g., an object that contains itself indirectly) by letting json.dumps raise an exception, or should it attempt to break cycles?",
+    "Is the Color Enum definition part of the required code stub, or can it be omitted/modified as long as the function works for any Enum? The prompt includes it, but clarification says 'any Enum'."
+  ]
+}

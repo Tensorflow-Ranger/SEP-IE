@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1605,
+  "id": "bcbexpand_BigCodeBench/1099_semantic",
+  "questions": [
+    "Should the function count only the first occurrence of each stopword in the text after URL removal, or count all occurrences? The prompt says 'considering only their first occurrence in the text', but the reference solution counts all occurrences.",
+    "What constitutes a 'word' for tokenization? The reference uses regex \\b\\w+\\b, which includes underscores and digits; should stopword matching treat 'word123' or 'hello_world' as words?",
+    "Should the output list be sorted in any particular order (e.g., by frequency, appearance, alphabetical)? The reference returns items in arbitrary Counter order, but tests show specific order.",
+    "Are contractions like 'I'm' or possessives like 'Python's' handled? The tokenization splits on non-word characters, so 'Python's' becomes 'Python' and 's' \u2013 should 's' be matched as a stopword?",
+    "Should URLs be removed before or after considering first occurrences? If 'first occurrence' refers to original text, URL removal might shift positions.",
+    "Is the stopword list case-sensitive? The clarification says capitalization must match exactly, but does that apply to the entire matching process or just for direct equality?",
+    "What about stopwords that appear inside URLs? Should they be ignored because the URL is removed, or counted if part of the URL text?",
+    "Should the function handle empty text or text with only URLs? The reference returns empty list, but is that specified?"
+  ]
+}

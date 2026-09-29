@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1614,
+  "id": "bcbexpand_BigCodeBench/1121_vagueness",
+  "questions": [
+    "Should the function handle URLs that contain commas or other punctuation immediately after the URL (like in the test 'http://www.google.com, https:/')? The regex pattern '[^\\s,]+' stops at whitespace or comma, but the prompt says 'extracts all URLs from the provided string' without specifying delimiters.",
+    "What should happen if the domain extracted from a URL is empty (e.g., 'http://' with no host)? Should it be skipped, included with None, or cause an error?",
+    "Is the API key required to be valid, and if the API returns an error status (e.g., 'fail') due to invalid key or rate limiting, should the value be None or the full error response?",
+    "Should duplicate URLs/domains be processed multiple times or deduplicated? The prompt says 'extracts all URLs' and maps domains to data, but duplicates could lead to redundant API calls.",
+    "What is the expected behavior if the string contains no URLs? Should it return an empty dictionary or None?",
+    "Should the function handle URLs with ports, userinfo, or fragments, and if so, should the domain include them (e.g., 'example.com:8080' vs 'example.com')?",
+    "Is there a timeout or retry mechanism for the API requests? The prompt says 'If an API request fails, the corresponding value will be None', but does failure include timeouts?",
+    "Should the function validate the API_KEY parameter (e.g., non-empty string) before making requests, and if invalid, raise an exception or return empty dict?"
+  ]
+}

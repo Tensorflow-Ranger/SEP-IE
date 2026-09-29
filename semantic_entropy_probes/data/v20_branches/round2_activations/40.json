@@ -1,0 +1,14 @@
+{
+  "branch_idx": 40,
+  "id": "bcbexpand_BigCodeBench/1000_vagueness",
+  "questions": [
+    "What should happen if the URL points to a non-JSON file (e.g., HTML error page, binary file) or the JSON is malformed? Should it raise an exception, return an empty DataFrame, or something else?",
+    "Should the function handle JSON files that contain nested structures (e.g., lists within dictionaries) by flattening them, or should it raise an error? The clarification says 'assumes flat records' but doesn't specify behavior when they aren't flat.",
+    "What encoding should be used when reading the JSON file? The code uses json.load which defaults to UTF-8, but should it explicitly specify encoding or handle other encodings?",
+    "Should the function verify that the downloaded file actually exists before attempting to delete it, or is it acceptable to let os.remove raise an error if the file doesn't exist?",
+    "What should happen if the URL retrieval fails (e.g., network error, 404)? Should the function raise the exception from urlretrieve, catch it and return None, or something else?",
+    "Should the function handle JSON files that are empty or contain only whitespace? Should it return an empty DataFrame, raise an error, or something else?",
+    "Is the function expected to handle very large JSON files that might exceed memory limits, or can it assume the data fits in memory?",
+    "Should the DataFrame preserve the order of records as they appear in the JSON file, or is any ordering acceptable?"
+  ]
+}

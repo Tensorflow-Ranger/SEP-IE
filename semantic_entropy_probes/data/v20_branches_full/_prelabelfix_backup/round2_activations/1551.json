@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1551,
+  "id": "bcbexpand_BigCodeBench/1014_semantic",
+  "questions": [
+    "What constitutes a 'valid' API URL beyond being a string? Does it need to be a well-formed URL (e.g., with scheme), or is any string accepted and validation only occurs during the request?",
+    "What specific HTTP status codes should raise HTTPError? Only 4xx/5xx, or any non-200? The prompt says 'fails due to issues like network problems, invalid response', but response.raise_for_status() raises for 4xx/5xx; should network timeouts raise a different exception?",
+    "What is the expected structure of the JSON response? Should it be a list of objects, a dict, or any JSON that pd.DataFrame can accept? The reference solution assumes a list, but pd.DataFrame can accept dicts.",
+    "Should the function set a timeout for the request? The reference solution uses timeout=5, but the prompt doesn't specify; omitting it could lead to hanging.",
+    "What plot type and style should be used? The reference uses df.plot() with default settings, but the prompt doesn't specify; different plot types (line, bar, etc.) produce different visual outputs.",
+    "Should the function close matplotlib figures or manage plot display? The prompt says it 'plots the data', but doesn't specify if plt.show() is called or figures are closed.",
+    "What should happen if the JSON is valid but pd.DataFrame construction fails (e.g., due to incompatible data types)? Should it raise the resulting exception or handle it specially?",
+    "Is the function expected to handle authentication or custom headers? The prompt only mentions API URL; adding headers could be needed for some APIs."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1717,
+  "id": "bcbexpand_BigCodeBench/374_vagueness",
+  "questions": [
+    "Should the function process only .xlsx files, or also .xls, .xlsm, .xlsb, etc.? The prompt says 'Excel (.xlsx) files' but glob uses '*.xlsx'.",
+    "Should the function recursively search subdirectories, or only the top-level directory?",
+    "If a cell value is a string containing escaped backslashes and quotes (e.g., '\\\\\"'), should the regex pattern handle them? The regex uses (?<=(^|[^\\\\])(\\\\\\\\)*)\" which attempts to match quotes not preceded by an odd number of backslashes, but is this the intended escaping logic?",
+    "Should the function raise an exception if the directory does not exist, or return 0? The reference solution raises FileNotFoundError, but the prompt doesn't specify.",
+    "Should the function overwrite the original files, or save to a new location? The reference saves to the same filename, but the prompt doesn't specify.",
+    "Should the function process hidden files (starting with '.')? The glob pattern '*.xlsx' typically excludes hidden files on Unix.",
+    "Should the function handle cell values that are not strings but contain quotes when converted to string (e.g., numbers, dates, formulas)? The clarification says only string cell values, but does 'cell.value if it's a string' imply strict isinstance(cell.value, str)?",
+    "Should the function process all worksheets in a workbook, or only active/visible ones? The reference iterates over workbook.sheetnames."
+  ]
+}

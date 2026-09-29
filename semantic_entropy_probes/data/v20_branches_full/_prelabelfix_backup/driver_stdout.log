@@ -1,0 +1,24 @@
+[20:46:20] === v20c autonomous pipeline starting ===
+[20:46:20] --- stage 1: prepare round-2 branches (5-fold, offline) ---
+[20:46:20] RUN: /home/ubuntu/miniforge3/envs/cegds/bin/python -m scripts.v20c_prepare_branches_full
+[20:47:16] DONE (56s) exit=0: scripts.v20c_prepare_branches_full
+[20:47:16] --- stage 2: elicit round-2 candidates (Bedrock) ---
+[20:47:16] RUN: /home/ubuntu/miniforge3/envs/cegds/bin/python -m scripts.v20c_branch_elicit_r2
+[23:26:20] DONE (9545s) exit=0: scripts.v20c_branch_elicit_r2
+[23:26:20] --- stage 3: oracle-answer round-2 candidates (Bedrock) ---
+[23:26:20] RUN: /home/ubuntu/miniforge3/envs/cegds/bin/python -m scripts.v20c_branch_oracle_r2
+[03:11:08] DONE (13488s) exit=0: scripts.v20c_branch_oracle_r2
+[03:11:08] --- stage 4: extract round-2 activations (GPU) ---
+[03:11:08] RUN: /home/ubuntu/miniforge3/envs/cegds/bin/python -m scripts.v20c_extract_r2
+[03:36:57] DONE (1548s) exit=1: scripts.v20c_extract_r2
+[03:36:57] PIPELINE FAILED: scripts.v20c_extract_r2 failed with exit 1, see /home/ubuntu/SEP-IE/semantic_entropy_probes/data/v20_branches_full/driver.log
+[03:36:57] saved partial results: ['status']
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/ubuntu/SEP-IE/semantic_entropy_probes/scripts/v20c_driver.py", line 111, in <module>
+  File "/home/ubuntu/SEP-IE/semantic_entropy_probes/scripts/v20c_driver.py", line 78, in main
+    run("scripts.v20c_extract_r2", use_gpu_env=True)
+  File "/home/ubuntu/SEP-IE/semantic_entropy_probes/scripts/v20c_driver.py", line 52, in run
+    raise RuntimeError(f"{cmd} failed with exit {proc.returncode}, see {LOG_PATH}")
+RuntimeError: scripts.v20c_extract_r2 failed with exit 1, see /home/ubuntu/SEP-IE/semantic_entropy_probes/data/v20_branches_full/driver.log

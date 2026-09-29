@@ -1,0 +1,14 @@
+{
+  "branch_idx": 161,
+  "id": "bcbexpand_BigCodeBench/345_semantic",
+  "questions": [
+    "What should happen if df contains the specified columns but they are of non-numeric type? The prompt says raise TypeError for invalid data, but the reference solution does not check data types before calling sns.regplot, which would raise its own error. Should we manually check and raise TypeError, or let seaborn raise its error?",
+    "Should the function drop rows with NaN values before plotting, or rely on seaborn's default behavior (which drops them)? The test for missing data expects seaborn's default, but is that a requirement?",
+    "What regression line method should be used? Linear regression? Polynomial? The prompt only says 'regression line', but seaborn's regplot defaults to linear with confidence interval.",
+    "Should the function set any specific plot aesthetics (title, labels, grid, etc.) or return the default seaborn regplot axes?",
+    "What should happen if the DataFrame has only one row? The regression line requires at least two points; should it raise an error or plot something?",
+    "Should the function validate that col1 and col2 are strings? What if they are integers or other valid column identifiers?",
+    "What if the DataFrame contains duplicate column names? Should it raise an error or pick the first?",
+    "Should the function close or show the plot, or just return the axes object? The prompt says output axes object, but does it need to manage matplotlib state?"
+  ]
+}

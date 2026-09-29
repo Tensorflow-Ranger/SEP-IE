@@ -1,0 +1,14 @@
+{
+  "branch_idx": 1713,
+  "id": "bcbexpand_BigCodeBench/361_vagueness",
+  "questions": [
+    "Which columns should be summed? The prompt says 'certain columns' but the reference solution sums all numeric columns. Should the function sum all numeric columns, or only a subset (e.g., those specified elsewhere)?",
+    "Should the function handle Excel files with multiple data types (e.g., strings mixed with numbers in a column)? The prompt says 'only numerical data' but the reference uses numeric_only=True, which ignores non-numeric columns. Should non-numeric columns be ignored, raise an error, or be included with sum=0?",
+    "What should happen if the Excel file exists but is empty (no data rows)? The reference raises ValueError, but is that intended for all empty files, or only when the sheet is missing?",
+    "Should the CSV file be overwritten if it already exists? The reference overwrites, but the prompt doesn't specify behavior for existing CSV files.",
+    "What encoding should be used for the CSV file? The clarification says 'standard behavior (pandas default encoding)', but pandas default may vary by system. Should a specific encoding like utf-8 be enforced?",
+    "Should the function log or suppress warnings from pandas (e.g., for missing values or type conversions)? The prompt sets up logging but doesn't specify logging details beyond basic config.",
+    "What should happen if the Excel file contains only non-numeric columns? The reference would return an empty dict (since numeric_only=True), but is that correct, or should it raise an error?",
+    "Should the function handle missing values (NaN) in numeric columns? The reference uses df.sum() which skips NaN by default, but should NaN be treated as 0, skipped, or cause an error?"
+  ]
+}
