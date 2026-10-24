@@ -274,14 +274,13 @@ Collected from the paper draft and `FINDINGS.md` caveats:
 
 ## Size and storage
 
-The working tree is about 10GB and `.git` about 3.8GB, mostly cached
-activations (`*.npy`). The two largest files
-(`activations_combined/activations.npy`, `activations_ccb_heval/activations.npy`)
-exceed GitHub's 100MB limit and are gitignored, so regenerate them with
-`src/extract_activations.py`. Git LFS is not set up, although `.gitattributes`
-routes `*.npy` to it. A few small `.npy` files (`activations_lcbclean/`,
-`activations_shortform-*/`) are committed as 134-byte LFS pointer stubs rather
-than data, so regenerate those as well.
+Cached hidden-state activations (`activations*/` and the per-experiment
+`activations/`, `round2_activations/`, `heval32*_activations/` folders under
+`data/`) are gitignored and not part of the repo. They are large (several GB) and
+fully regenerable: `src/extract_activations.py` and the
+`scripts/v*_extract_activations.py` scripts rebuild them from the datasets in
+`data/`, and probe training reads them from there. Git LFS is not used. Results,
+labels, candidate pools and logs are tracked.
 
 ## Citing and licensing
 
