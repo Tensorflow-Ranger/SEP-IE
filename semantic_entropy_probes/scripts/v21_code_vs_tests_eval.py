@@ -89,7 +89,7 @@ CHUNK_DIR = ROOT / "data" / "v13_rejudge" / "chunks"
 RAW_HEVAL = ROOT / "data" / "raw" / "orchid_heval.jsonl"
 RAW_BCB = ROOT / "data" / "raw" / "orchid_bcb.jsonl"
 RAW_BCB_EXPAND = ROOT / "data" / "raw" / "orchid_bcb_expand.jsonl"
-CCB_JSONL = Path("/home/ubuntu/SEP-IE/ClarifyCodeBench/data/ClarifyCodeBench.jsonl")
+CCB_JSONL = ROOT.parent / "ClarifyCodeBench" / "data" / "ClarifyCodeBench.jsonl"  # git submodule at the repo root
 
 OUT_DIR = ROOT / "data" / "v21_code_vs_tests"
 OUT_DIR.mkdir(parents=True, exist_ok=True)

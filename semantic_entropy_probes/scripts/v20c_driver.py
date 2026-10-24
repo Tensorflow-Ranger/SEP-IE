@@ -18,6 +18,7 @@ Logs every stage's stdout to data/v20_branches_full/driver.log.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import time
@@ -27,7 +28,8 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "data" / "v20_branches_full"
 LOG_PATH = OUT_DIR / "driver.log"
 RESULTS_PATH = OUT_DIR / "FINAL_RESULTS.json"
-PY_CEGDS = "/home/ubuntu/miniforge3/envs/cegds/bin/python"
+# Interpreter of the GPU env (`cegds` conda env); override with CEGDS_PYTHON.
+PY_CEGDS = os.environ.get("CEGDS_PYTHON", str(Path.home() / "miniforge3/envs/cegds/bin/python"))
 PY_PLAIN = sys.executable
 
 OUT_DIR.mkdir(parents=True, exist_ok=True)

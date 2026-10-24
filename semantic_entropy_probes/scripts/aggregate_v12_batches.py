@@ -16,7 +16,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve()
-REPO = Path("/home/ubuntu/SEP-IE/semantic_entropy_probes")
+REPO = ROOT.parents[1]
 RANKING_DIR = REPO / "data" / "v12_ranking"
 
 HEVAL_BATCHES = [
